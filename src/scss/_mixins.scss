@@ -1,0 +1,39 @@
+@mixin vendor($property, $value, $vendors: webkit moz ms o) {
+  @each $vendor in $vendors {
+    -#{$vendor}-#{$property}: unquote($value);
+  }
+  #{$property}: unquote($value);
+}
+
+@mixin vendor-value($property, $value, $vendors: webkit moz ms o) {
+  @each $vendor in $vendors {
+    #{$property}: -#{$vendor}-#{$value};
+  }
+  #{$property}: $value;
+}
+
+@mixin border-radius($radius: 3px) {
+  @include vendor(border-radius, $radius);
+}
+
+@mixin box-sizing($sizing: content-box) {
+  @include vendor(box-sizing, $sizing, webkit moz);
+}
+
+@mixin media($width: 320px) {
+  @media only screen and (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin media-max($width: 320px) {
+  @media only screen and (max-width: $width - 1px) {
+    @content;
+  }
+}
+
+@mixin media-range($min: 320px, $max: 720px) {
+  @media only screen and (min-width: $min) and (max-width: $max - 1px) {
+    @content;
+  }
+}

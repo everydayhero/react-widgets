@@ -1,10 +1,10 @@
 {
   "author": "EverydayHero",
-  "name": "test",
+  "name": "Widgets",
   "version": "0.0.2",
-  "description": "Widgets",
+  "description": "Widgets are small Javascript components that integrate with EverydayHero's API. These include search components and components for showing leaderboard and fundraising totals for campaigns, charities, and networks. Unlike iframe snippets, using widgets allows you to customise the base-level styling to suit your needs.",
   "license": "MIT",
-  "main": "widgets.js",
+  "main": "src/widgets.js",
   "dependencies": {},
   "devDependencies": {
     "browserify": "~5.12.0",
@@ -13,14 +13,20 @@
     "react": "^0.11.2",
     "react-tools": "^0.11.2",
     "uglify-js": "^2.4.15",
-    "reactify": "^0.14.0"
+    "reactify": "^0.14.0",
+    "lodash": "^2.4.1",
+    "node-sass": "^0.9.6",
+    "watchify": "^1.0.6",
+    "es5-shim": "^4.0.3"
   },
   "scripts": {
     "setup": "npm install && npm run build && npm test",
-    "build": "npm run scripts",
-    "build-dev": "npm run scripts-dev",
-    "scripts": "NODE_ENV=production browserify ./src/widgets.js | uglifyjs -cm > ./public/scripts/widgets.js",
-    "scripts-dev": "NODE_ENV=development browserify ./src/widgets.js > ./public/scripts/widgets.js",
+    "build": "npm run scripts && npm run styles",
+    "build-dev": "npm run scripts-dev && npm run styles",
+    "scripts": "NODE_ENV=production browserify ./src/widgets.js -s edh.widgets | uglifyjs -cm > ./public/widgets.js",
+    "scripts-dev": "NODE_ENV=development browserify ./src/widgets.js -s edh.widgets > ./public/widgets.js",
+    "scripts-watch": "NODE_ENV=development watchify ./src/widgets.js -s edh.widgets -o ./public/widgets.js -v",
+    "styles": "NODE_ENV=production node_modules/.bin/node-sass ./src/widgets.scss -o ./public/widgets.css",
     "test": "NODE_ENV=development node_modules/.bin/jest"
   },
   "browserify": {

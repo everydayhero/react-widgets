@@ -1,0 +1,45 @@
+.SearchInput {
+  @extend %input-wrap;
+  color: white;
+}
+
+.SearchInput__input {
+  @extend %text-input;
+  position: relative;
+  color: $color-text;
+  padding-left: 28px;
+  font-size: $x-4;
+  height: 44px;
+
+  border: 0 solid #7ec774;
+  border-bottom-width: 5px;
+}
+
+.SearchInput__label {
+  @extend %text-input-label;
+  margin-left: $x-4;
+}
+
+.SearchInput__icon {
+  position: absolute;
+  top: 11px;
+  left: 9px;
+  z-index: 2;
+  font-size: $x-4;
+  color: $color-input-text-grey;
+}
+
+.SearchInput__progressSpinner {
+  position: absolute;
+  top: 11px;
+  right: 9px;
+  color: $color-primary-grey;
+  font-size: $x-4;
+  z-index: 2;
+
+  .Icon {
+    width: 15px;
+    height: 15px;
+    animation: spin 1s infinite linear;
+  }
+}

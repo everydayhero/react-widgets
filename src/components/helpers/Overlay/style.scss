@@ -1,0 +1,30 @@
+.Overlay {
+  @extend %widget-defaults;
+  position: fixed;
+  background: $color-search-background;
+  background: transparentize($color-search-background, 0.2);
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+}
+
+.Overlay__close {
+  position: absolute;
+  right: $x-9;
+  top: 38px;
+  display: block;
+  font-size: $x-9;
+  color: white;
+
+  @include media-max($breakpoint-xs) {
+    right: $x-3;
+    top: 16px;
+    font-size: 30px;
+  }
+}
+
+.Overlay-open {
+  overflow: hidden;
+}

@@ -5,8 +5,11 @@ require('es5-shim/es5-sham.js');
 
 var React = require('react');
 var CharitySearch = require('./components/search/CharitySearch');
-
 var addEventListener = require('./lib/addEventListener.js');
+var widgets = {
+  FundsRaised: require('./components/FundsRaised')
+}
+
 
 var CharitySearchInit = function(options) {
   var element = options.element || document.getElementById(options.elementId);
@@ -27,6 +30,11 @@ var CharitySearchInit = function(options) {
   });
 };
 
+var renderWidget = function(id, name, args) {
+  React.renderComponent(widgets[name](args), document.getElementById(id));
+}
+
 module.exports = {
-  CharitySearchInit: CharitySearchInit
+  CharitySearchInit: CharitySearchInit,
+  renderWidget: renderWidget
 };

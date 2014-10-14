@@ -22,6 +22,19 @@
   }
 }
 
+.CharitySearchResult__logo {
+  display: block;
+  float: left;
+  position: relative;
+  width: 34px;
+  height: 34px;
+
+  margin: {
+    right: 13px;
+    bottom: 13px;
+  };
+}
+
 .CharitySearchResult__content {
   @include box-sizing(border-box);
   overflow: hidden;

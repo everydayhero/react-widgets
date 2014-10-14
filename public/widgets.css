@@ -1,8 +1,8 @@
-.SearchResult:before, .Search__wrap:before, .CharitySearchResult:before, .SearchResult:after, .Search__wrap:after, .CharitySearchResult:after {
+.SearchResult:before, .SearchResults:before, .SearchResult:after, .SearchResults:after {
   content: " ";
   display: table; }
 
-.SearchResult:after, .Search__wrap:after, .CharitySearchResult:after {
+.SearchResult:after, .SearchResults:after {
   clear: both; }
 
 .SearchInput {
@@ -92,6 +92,35 @@
 
 .Overlay-open {
   overflow: hidden; }
+
+.Search__header {
+  padding-right: 78px;
+  border-color: snow;
+  color: snow; }
+  @media only screen and (max-width: 519px) {
+    .Search__header {
+      padding-right: 50px; } }
+
+.Search__body {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  top: 117px;
+  right: 0px;
+  padding: 36px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  transition: all 0.3s;
+  -webkit-overflow-scrolling: touch;
+  color: snow; }
+  @media only screen and (max-width: 519px) {
+    .Search__body {
+      top: 69px;
+      padding: 12px; } }
+
+@media only screen and (max-width: 519px) {
+  .Search__body--paginated {
+    margin-top: 54px; } }
 
 .SearchInput {
   color: white; }
@@ -227,6 +256,15 @@
     -o-transition: all 0.01s linear;
     transition: all 0.01s linear; }
 
+.SearchResults {
+  position: relative;
+  clear: both;
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 916px; }
+
 .CharitySearch__header {
   display: table;
   width: 100%; }
@@ -238,69 +276,6 @@
   @media only screen and (max-width: 519px) {
     .CharitySearch__input {
       display: block; } }
-
-.Search__header {
-  padding-right: 78px;
-  border-color: snow;
-  color: snow; }
-  @media only screen and (max-width: 519px) {
-    .Search__header {
-      padding-right: 50px; } }
-
-.Search__body {
-  position: absolute;
-  width: 100%;
-  bottom: 0px;
-  top: 117px;
-  right: 0px;
-  padding: 36px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  transition: all 0.3s;
-  -webkit-overflow-scrolling: touch;
-  color: snow; }
-  @media only screen and (max-width: 519px) {
-    .Search__body {
-      top: 69px;
-      padding: 12px; } }
-
-@media only screen and (max-width: 519px) {
-  .Search__body--paginated {
-    margin-top: 54px; } }
-
-.Search__wrap {
-  position: relative;
-  clear: both;
-  float: none;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  max-width: 916px; }
-
-.CharitySearchResult {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  background: white;
-  display: block;
-  margin-bottom: 4px;
-  padding: 13px; }
-  .CharitySearchResult:active {
-    -webkit-transform: scale(0.98);
-    -moz-transform: scale(0.98);
-    -ms-transform: scale(0.98);
-    -o-transform: scale(0.98);
-    transform: scale(0.98);
-    -webkit-transition: all 0.01s linear;
-    -moz-transition: all 0.01s linear;
-    -ms-transition: all 0.01s linear;
-    -o-transition: all 0.01s linear;
-    transition: all 0.01s linear; }
 
 .CharitySearchResult__avatar {
   -webkit-border-radius: 34px;
@@ -324,6 +299,15 @@
     text-align: center;
     top: 0;
     width: 34px; }
+
+.CharitySearchResult__logo {
+  display: block;
+  float: left;
+  position: relative;
+  width: 34px;
+  height: 34px;
+  margin-right: 13px;
+  margin-bottom: 13px; }
 
 .CharitySearchResult__content {
   -webkit-box-sizing: border-box;

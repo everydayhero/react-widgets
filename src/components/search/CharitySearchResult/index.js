@@ -12,10 +12,29 @@ module.exports = React.createClass({
   },
   render: function() {
     var location = this.location();
+    var logo;
+
+    if (this.props.result.logo_url) {
+      logo = (
+        <div className="CharitySearchResult__logo"
+          style={{
+            backgroundImage: 'url(' + this.props.result.logo_url + ')',
+            backgroundSize: 'contain',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat'
+          }} />
+        );
+    } else {
+      logo = (
+        <div className='CharitySearchResult__avatar'>
+          <Icon icon='heart-o' fixedWidth={true} />
+        </div>
+      );
+    }
 
     return this.transferPropsTo(
       <SearchResult>
-        <div className='CharitySearchResult__avatar'><Icon icon='heart-o' fixedWidth={true} /></div>
+        { logo }
         <div className='CharitySearchResult__content'>
           <div className='CharitySearchResult__header'>{this.props.result.name}</div>
           <p className='CharitySearchResult__description'>{this.props.result.description}</p>

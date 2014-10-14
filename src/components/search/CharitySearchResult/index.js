@@ -16,14 +16,10 @@ module.exports = React.createClass({
 
     if (this.props.result.logo_url) {
       logo = (
-        <div className="CharitySearchResult__logo"
-          style={{
-            backgroundImage: 'url(' + this.props.result.logo_url + ')',
-            backgroundSize: 'contain',
-            backgroundPosition: 'center center',
-            backgroundRepeat: 'no-repeat'
-          }} />
-        );
+        <div className="CharitySearchResult__logo">
+          <img src={ this.props.result.logo_url } />
+        </div>
+      );
     } else {
       logo = (
         <div className='CharitySearchResult__avatar'>

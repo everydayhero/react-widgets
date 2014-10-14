@@ -1,9 +1,8 @@
-var get = require('./get');
+var jsonp = require('jsonp');
 
 function getJSON(url, callback) {
-  get(url, function(data) {
-    var json = JSON.parse(data);
-    callback(json);
+  jsonp(url, {}, function(error, data) {
+    callback(error ? null : data);
   });
 }
 

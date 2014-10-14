@@ -10,6 +10,7 @@
   padding-left: 28px;
   font-size: $x-4;
   height: 44px;
+  line-height: 44px \0; /* ie8 fix */
 
   border: 0 solid #7ec774;
   border-bottom-width: 5px;

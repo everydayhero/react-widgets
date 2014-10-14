@@ -26,6 +26,7 @@
   display: block;
   float: left;
   position: relative;
+  text-align: center;
   width: 34px;
   height: 34px;
 
@@ -33,6 +34,14 @@
     right: 13px;
     bottom: 13px;
   };
+
+  img {
+    display: inline-block;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    border: none;
+  }
 }
 
 .CharitySearchResult__content {

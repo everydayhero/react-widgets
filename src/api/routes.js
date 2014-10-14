@@ -10,7 +10,7 @@ var routes = {
     uk: 'https://heroix.everydayhero.co.uk/charities/{id}/donate',
   },
   fundraise: 'https://give.everydayhero.com/{country}/{slug}/get-started',
-  charities: 'https://everydayhero.com/api/v2/search/charities'
+  charities: 'https://everydayhero.com/api/v2/search/charities.jsonp'
 };
 
 module.exports = function(path, params) {

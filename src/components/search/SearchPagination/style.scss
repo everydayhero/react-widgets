@@ -17,6 +17,7 @@
   display: inline-block;
   outline: none;
   -webkit-appearance: none;
+  cursor: pointer;
 
   @include border-radius(2px);
   @include box-sizing(border-box);
@@ -36,13 +37,13 @@
   @include vendor(transition, all 160ms ease-in-out);
   @include vendor(user-select, none);
 
-  &:hover:not([disabled]) {
-    cursor: pointer;
+  &:hover {
     border-color: $color-green;
     color: $color-green;
   }
 
-  &:disabled {
+  &[disabled="disabled"] {
+    cursor: default;
     border-color: gray;
     color: gray;
   }

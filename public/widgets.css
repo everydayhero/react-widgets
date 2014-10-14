@@ -131,6 +131,8 @@
   padding-left: 28px;
   font-size: 16px;
   height: 44px;
+  line-height: 44px \0;
+  /* ie8 fix */
   border: 0 solid #7ec774;
   border-bottom-width: 5px; }
 
@@ -173,6 +175,7 @@
   display: inline-block;
   outline: none;
   -webkit-appearance: none;
+  cursor: pointer;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
@@ -201,11 +204,11 @@
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none; }
-  .SearchPagination__button--right:hover:not([disabled]), .SearchPagination__button--left:hover:not([disabled]) {
-    cursor: pointer;
+  .SearchPagination__button--right:hover, .SearchPagination__button--left:hover {
     border-color: #00a044;
     color: #00a044; }
-  .SearchPagination__button--right:disabled, .SearchPagination__button--left:disabled {
+  .SearchPagination__button--right[disabled="disabled"], .SearchPagination__button--left[disabled="disabled"] {
+    cursor: default;
     border-color: gray;
     color: gray; }
   @media only screen and (min-width: 520px) {
@@ -304,10 +307,17 @@
   display: block;
   float: left;
   position: relative;
+  text-align: center;
   width: 34px;
   height: 34px;
   margin-right: 13px;
   margin-bottom: 13px; }
+  .CharitySearchResult__logo img {
+    display: inline-block;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    border: none; }
 
 .CharitySearchResult__content {
   -webkit-box-sizing: border-box;

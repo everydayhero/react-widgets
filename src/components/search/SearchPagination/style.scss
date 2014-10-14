@@ -42,7 +42,7 @@
     color: $color-green;
   }
 
-  &[disabled="disabled"] {
+  &[disabled] {
     cursor: default;
     border-color: gray;
     color: gray;

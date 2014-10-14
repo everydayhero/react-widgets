@@ -35,16 +35,3 @@
     margin-top: 54px;
   }
 }
-
-.Search__wrap {
-  @extend %clearfix;
-  position: relative;
-  clear: both;
-  float: none;
-  margin: {
-    left: auto;
-    right: auto;
-  };
-  width: 100%;
-  max-width: $x-229;
-}

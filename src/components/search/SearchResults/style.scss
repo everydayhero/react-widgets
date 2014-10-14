@@ -1,2 +1,12 @@
 .SearchResults {
+  @extend %clearfix;
+  position: relative;
+  clear: both;
+  float: none;
+  margin: {
+    left: auto;
+    right: auto;
+  };
+  width: 100%;
+  max-width: $x-229;
 }

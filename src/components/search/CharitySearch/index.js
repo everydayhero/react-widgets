@@ -183,9 +183,7 @@ module.exports = React.createClass({
           { header }
         </div>
         <div ref="scroll" className={ 'Search__body' + (this.state.totalPages > 1 ? ' Search__body--paginated' : '') }>
-          <div className="Search__wrap">
-            { results }
-          </div>
+          { results }
         </div>
       </ Overlay>
     );

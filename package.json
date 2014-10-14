@@ -27,11 +27,15 @@
     "scripts-dev": "NODE_ENV=development browserify ./src/widgets.js -s edh.widgets > ./public/widgets.js",
     "scripts-watch": "NODE_ENV=development watchify ./src/widgets.js -s edh.widgets -o ./public/widgets.js -v",
     "styles": "NODE_ENV=production node_modules/.bin/node-sass ./src/widgets.scss -o ./public/widgets.css",
-    "test": "NODE_ENV=development node_modules/.bin/jest"
+    "test": "jest"
   },
   "browserify": {
     "transform": [
       "reactify"
     ]
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/jest.js",
+    "unmockedModulePathPatterns": ["<rootDir>/node_modules/react"]
   }
 }

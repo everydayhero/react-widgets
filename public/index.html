@@ -10,13 +10,21 @@
 <body>
   <h1>Blah</h1>
 
-  <a id="CharitySearch">Donate to a Charity</a>
+  <a id="CharitySearchDonate">Donate to a Charity</a>
+
+  <a id="CharitySearchFundraise">Fundraise for a Charity</a>
 
   <script>
     edh.widgets.CharitySearchInit({
-      elementId: 'CharitySearch',
+      elementId: 'CharitySearchDonate',
       country: 'uk',
       action: 'donate'
+    });
+
+    edh.widgets.CharitySearchInit({
+      elementId: 'CharitySearchFundraise',
+      country: 'uk',
+      action: 'fundraise'
     });
   </script>
 

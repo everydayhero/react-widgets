@@ -1,0 +1,74 @@
+.SearchPagination {
+  display: table-cell;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding-left: 10px;
+
+  @include media-max($breakpoint-xs) {
+    display: block;
+    margin-top: 10px;
+
+    text-align: center;
+    padding-left: 0;
+  }
+}
+
+.SearchPagination__button--right, .SearchPagination__button--left {
+  display: inline-block;
+  outline: none;
+  -webkit-appearance: none;
+
+  @include border-radius(2px);
+  @include box-sizing(border-box);
+  border: 1px solid white;
+
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  margin-left: 10px;
+  padding: 0;
+
+  font-size: 13px;
+  text-align: center;
+  color: white;
+  background-color: transparent;
+
+  @include vendor(transition, all 160ms ease-in-out);
+  @include vendor(user-select, none);
+
+  &:hover:not([disabled]) {
+    cursor: pointer;
+    border-color: $color-green;
+    color: $color-green;
+  }
+
+  &:disabled {
+    border-color: gray;
+    color: gray;
+  }
+
+  @include media($breakpoint-xs) {
+    margin-left: 10px;
+  }
+}
+
+.SearchPagination__counter {
+  display: inline-block;
+  color: white;
+  position: relative;
+  bottom: auto;
+  right: auto;
+  margin: 13px 5px 13px 5px;
+  font-size: 12px;
+}
+
+@include media-max($breakpoint-xs) {
+  .SearchPagination__button--left {
+    margin-left: 0;
+    float: left;
+  }
+
+  .SearchPagination__button--right {
+    float: right;
+  }
+}

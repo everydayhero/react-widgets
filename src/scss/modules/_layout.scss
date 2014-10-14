@@ -1,0 +1,39 @@
+%widget-defaults, %widget-defaults * {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+
+  .Icon {
+    font-family: "FontAwesome";
+  }
+}
+
+%rule-bottom {
+  border: 0;
+  border-bottom: 1px;
+  border-style: solid;
+  border-color: $color-rule-grey;
+}
+
+%rule-top {
+  border: 0;
+  border-top: 1px;
+  border-style: solid;
+  border-color: $color-rule-grey;
+}
+
+%header {
+  width: 100%;
+  padding: $x-9;
+  vertical-align: middle;
+}
+
+@include media-max($breakpoint-xs) {
+  %header-s {
+    padding: $x-3;
+  }
+}
+

@@ -1,0 +1,71 @@
+.CharitySearchResult__avatar {
+  @include border-radius(34px);
+  background: $color-grey-light;
+  display: block;
+  float: left;
+  min-height: 34px;
+  position: relative;
+  margin: {
+    right: 13px;
+    bottom: 13px;
+  };
+  width: 34px;
+
+  .Icon {
+    height: 34px;
+    left: 0;
+    line-height: 34px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 34px;
+  }
+}
+
+.CharitySearchResult__logo {
+  display: block;
+  float: left;
+  position: relative;
+  width: 34px;
+  height: 34px;
+
+  margin: {
+    right: 13px;
+    bottom: 13px;
+  };
+}
+
+.CharitySearchResult__content {
+  @include box-sizing(border-box);
+  overflow: hidden;
+
+  * {
+    margin-bottom: 8px;
+  }
+}
+
+.CharitySearchResult__header {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.CharitySearchResult__footer {
+  @extend %uppercase;
+  @extend %font-size-12;
+}
+
+.CharitySearchResult__actions {
+  color: $color-grey;
+  line-height: 13px;
+  text-align: right;
+
+  a:hover & {
+    color: $color-green-light;
+  }
+
+  a:hover &:hover, a:focus & {
+    color: $color-green;
+  }
+}

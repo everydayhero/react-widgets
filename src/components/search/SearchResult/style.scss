@@ -1,0 +1,17 @@
+.SearchResult {
+  @extend %clearfix;
+  @include border-radius;
+  @include box-sizing(border-box);
+  background: white;
+  color: $color-grey-dark;
+  line-height: 16px;
+  font-size: 13px;
+  display: block;
+  margin-bottom: $x-1;
+  padding: $x-3;
+
+  &:active {
+    @include vendor(transform, scale(0.98));
+    @include vendor(transition, all 0.01s linear);
+  }
+}

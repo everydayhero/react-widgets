@@ -18,7 +18,7 @@ You can find the minified assets at the following locations:
 - `action`:      *required* action to perform on charity select, either 'donate', 'fundraise' or 'custom'
 - `callback`:    *optional* function called when action set to 'custom'.
 - `campaignUid`: *optional* string campaign uid to filter charity results.
-- `country`:     *optional* string country code of region, either 'au', 'nz', 'uk' or 'us'.
+- `country`:     *required* string country code of region, either 'au', 'nz', 'uk' or 'us'.
 - `i18n`:        *optional* object containing localised text. Default i18n is:
     {
       title: 'Search for a Charity',
@@ -37,14 +37,13 @@ You can find the minified assets at the following locations:
     <link href="//edh-widgets.s3.amazonaws.com/widgets.css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
-    <a href="#" data-edh-widget="CharitySearch" data-edh-widget-action="give">Support a Charity</a>
-
     <a href="#" id="CharitySearchExample">Support a Charity</a>
     <script>
-      $('#CharitySearchExample').click(function() {
-        CampaignSearch({action: 'give'});
+      edh.widgets.CharitySearchInit({
+        elementId: 'CharitySearch',
+        country: 'uk',
+        action: 'donate'
       });
-      // React.renderComponent(CampaignSearch({action: 'give'}), document.getElementById("CharitySearchExample"));
     </script>
   </body>
 </html>
@@ -57,4 +56,5 @@ $ npm run setup     # install global dependencies, node modules and build produc
 $ npm run build     # build production assets
 $ npm run build-dev # build un minified assets (for debugging)
 $ npm test          # run tests
+$ npm start         # run local server
 ```

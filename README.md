@@ -67,7 +67,7 @@ You can find the minified assets at the following locations:
     <link href="//edh-widgets.s3.amazonaws.com/widgets.css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
-    <a href="#" id="CharitySearchExample">Support a Charity</a>
+    <div id="FundsRaised">Loading...</div>
     <script>
       edh.widgets.renderWidget( 'FundsRaised', 'FundsRaised', {campaignUid: 'au-0'});
     </script>

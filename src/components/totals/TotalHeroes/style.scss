@@ -1,4 +1,4 @@
-.FundsRaised {
+.TotalHeroes {
 	@include border-radius(2px);
 	background: #555555;
 	color: #fff;
@@ -12,8 +12,8 @@
 	padding: $x-5 $x-2 $x-6;
 }
 
-.FundsRaised__total,
-.FundsRaised__loading {
+.TotalHeroes__total,
+.TotalHeroes__loading {
 	margin-bottom: $x-2;
 	font-size: 21px;
 }

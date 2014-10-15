@@ -2,8 +2,8 @@
 "use strict";
 
 var React     = require('react');
-var I18nMixin = require('../mixins/I18n');
-var pages	= require('../../api/pages');
+var I18nMixin = require('../../mixins/I18n');
+var pages	= require('../../../api/pages');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],

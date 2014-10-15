@@ -1,12 +1,12 @@
 /** @jsx React.DOM */
 "use strict";
 jest.autoMockOff();
-jest.mock('../../../api/pages');
+jest.mock('../../../../api/pages');
 
 describe('TotalHeroes', function() {
   var React                       = require('react/addons');
   var TotalHeroes                 = require('../');
-  var pages                       = require('../../../api/pages');
+  var pages                       = require('../../../../api/pages');
   var TestUtils                   = React.addons.TestUtils;
   var scryByClass                 = TestUtils.scryRenderedDOMComponentsWithClass;
   var scryByTag                   = TestUtils.scryRenderedDOMComponentsWithTag;

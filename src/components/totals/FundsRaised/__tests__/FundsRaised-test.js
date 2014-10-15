@@ -1,12 +1,12 @@
 /** @jsx React.DOM */
 "use strict";
 jest.autoMockOff();
-jest.mock('../../../api/campaigns');
+jest.mock('../../../../api/campaigns');
 
 describe('FundsRaised', function() {
   var React                       = require('react/addons');
   var FundsRaised                 = require('../');
-  var campaigns                   = require('../../../api/campaigns');
+  var campaigns                   = require('../../../../api/campaigns');
   var TestUtils                   = React.addons.TestUtils;
   var scryByClass                 = TestUtils.scryRenderedDOMComponentsWithClass;
   var scryByTag                   = TestUtils.scryRenderedDOMComponentsWithTag;

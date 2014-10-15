@@ -2,8 +2,8 @@
 "use strict";
 
 var React     = require('react');
-var I18nMixin = require('../mixins/I18n');
-var campaigns	= require('../../api/campaigns');
+var I18nMixin = require('../../mixins/I18n');
+var campaigns	= require('../../../api/campaigns');
 var numeral   = require('numeral');
 
 module.exports = React.createClass({

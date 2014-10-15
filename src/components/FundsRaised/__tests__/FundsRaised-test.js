@@ -35,7 +35,7 @@ describe('FundsRaised', function() {
     it('check for a default title', function(){
       var title = findByClass(element, 'FundsRaised__title');
 
-      expect(title.getDOMNode().textContent).toBe('Funds Raised');
+      expect(title.getDOMNode().textContent).toBe('Raised To Date');
     });
 
     it('check for a default loading', function(){
@@ -74,7 +74,5 @@ describe('FundsRaised', function() {
 
       expect(total.getDOMNode().textContent).toContain('£0.00');
     });
-
-
   });
 });

@@ -18,7 +18,7 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       defaultI18n: {
-        title: 'Funds Raised',
+        title: 'Raised To Date',
         symbol: '$'
       }
     }
@@ -63,8 +63,8 @@ module.exports = React.createClass({
 
     return (
 	    <div className={ "FundsRaised" }>
-	      <h2 className="FundsRaised__title">{ title }</h2>
         { this.renderTotal() }
+        <div className="FundsRaised__title">{ title }</div>
 	    </div>
     );
   }

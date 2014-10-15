@@ -1,19 +1,23 @@
 .TotalHeroes {
 	@include border-radius(2px);
-	background: #555555;
+	background: #555;
 	color: #fff;
-
 	font-family: "Lato", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	text-transform: uppercase;
 	text-align: center;
 	font-weight: bold;
-
 	padding: $x-5 $x-2 $x-6;
 }
 
-.TotalHeroes__total,
-.TotalHeroes__loading {
-	margin-bottom: $x-2;
+.TotalHeroes__total {
 	font-size: 21px;
+	margin-bottom: $x-2;
+}
+
+.TotalHeroes__loading {
+	display: block;
+	font-size: 21px;
+	line-height: 2;
+	margin:$x-1 0;
 }

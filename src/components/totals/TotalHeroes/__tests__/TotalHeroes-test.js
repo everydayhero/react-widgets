@@ -21,27 +21,27 @@ describe('TotalHeroes', function() {
       element = TestUtils.renderIntoDocument(totalHeroes);
     });
 
-    it('check that element is rendered', function(){
+    it('render something', function(){
       expect(element).not.toBeNull();
     });
 
-    it('check for a default total of pages', function(){
+    it('renders default total of pages', function(){
       element.setState({isLoading: false});
       var total = findByClass(element, 'TotalHeroes__total');
 
       expect(total.getDOMNode().textContent).toContain('0');
     });
 
-    it('check for a default title', function(){
+    it('renders a default title', function(){
+      element.setState({isLoading: false});
       var title = findByClass(element, 'TotalHeroes__title');
 
       expect(title.getDOMNode().textContent).toBe('Heroes');
     });
 
-    it('check for default loading text', function(){
-      var loading = findByClass(element, 'TotalHeroes__loading');
-
-      expect(loading.getDOMNode().textContent).toContain('Loading...');
+    it('shows a loading icon', function() {
+      element.setState({isLoading: true});
+      findByClass(element, 'TotalHeroes__loading');
     });
 
     it('check that a campaign id is present', function(){
@@ -61,13 +61,14 @@ describe('TotalHeroes', function() {
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
 
-    it('check for a default title', function(){
+    it('renders a custom title', function(){
+      element.setState({isLoading: false});
       var title = findByClass(element, 'TotalHeroes__title');
 
       expect(title.getDOMNode().textContent).toBe(translation.title);
     });
 
-    it('check for a default total', function(){
+    it('renders a default total', function(){
       element.setState({isLoading: false});
       var total = findByClass(element, 'TotalHeroes__total');
 

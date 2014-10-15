@@ -3,7 +3,9 @@
 
 var React     = require('react');
 var I18nMixin = require('../../mixins/I18n');
-var pages	= require('../../../api/pages');
+var pages	    = require('../../../api/pages');
+var Icon      = require('../../helpers/Icon');
+var numeral   = require('numeral');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -46,21 +48,25 @@ module.exports = React.createClass({
 
   renderTotal: function(){
     var totalHeroes = this.state.total;
+    var formattedTotal = numeral(totalHeroes).format('0,0');
+    var title = this.t('title');
 
     if(this.state.isLoading) {
-      return <div className="TotalHeroes__loading">Loading...</div>
+      return <Icon className="TotalHeroes__loading" icon="refresh" spin={ true }/>;
     } else {
-      return <div className="TotalHeroes__total">{ totalHeroes }</div>
+      return (
+        <div>
+          <div className="TotalHeroes__total">{ formattedTotal }</div>
+          <div className="TotalHeroes__title">{ title }</div>
+        </div>
+      )
     }
   },
 
   render: function() {
-    var title = this.t('title');
-
     return (
 	    <div className={ "TotalHeroes" }>
         { this.renderTotal() }
-        <div className="TotalHeroes__title">{ title }</div>
 	    </div>
     );
   }

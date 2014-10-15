@@ -1,19 +1,23 @@
 .FundsRaised {
 	@include border-radius(2px);
-	background: #555555;
+	background: #555;
 	color: #fff;
-
 	font-family: "Lato", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	text-transform: uppercase;
 	text-align: center;
 	font-weight: bold;
-
 	padding: $x-5 $x-2 $x-6;
 }
 
-.FundsRaised__total,
-.FundsRaised__loading {
-	margin-bottom: $x-2;
+.FundsRaised__total {
 	font-size: 21px;
+	margin-bottom: $x-2;
+}
+
+.FundsRaised__loading {
+	display: block;
+	font-size: 21px;
+	line-height: 2;
+	margin:$x-1 0;
 }

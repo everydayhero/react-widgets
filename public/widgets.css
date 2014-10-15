@@ -348,7 +348,7 @@
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   border-radius: 2px;
-  background: #555555;
+  background: #555;
   color: #fff;
   font-family: "Lato", Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -357,9 +357,15 @@
   font-weight: bold;
   padding: 20px 8px 24px; }
 
-.FundsRaised__total, .FundsRaised__loading {
-  margin-bottom: 8px;
-  font-size: 21px; }
+.FundsRaised__total {
+  font-size: 21px;
+  margin-bottom: 8px; }
+
+.FundsRaised__loading {
+  display: block;
+  font-size: 21px;
+  line-height: 2;
+  margin: 4px 0; }
 
 .TotalHeroes {
   -webkit-border-radius: 2px;
@@ -367,7 +373,7 @@
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   border-radius: 2px;
-  background: #555555;
+  background: #555;
   color: #fff;
   font-family: "Lato", Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -376,6 +382,12 @@
   font-weight: bold;
   padding: 20px 8px 24px; }
 
-.TotalHeroes__total, .TotalHeroes__loading {
-  margin-bottom: 8px;
-  font-size: 21px; }
+.TotalHeroes__total {
+  font-size: 21px;
+  margin-bottom: 8px; }
+
+.TotalHeroes__loading {
+  display: block;
+  font-size: 21px;
+  line-height: 2;
+  margin: 4px 0; }

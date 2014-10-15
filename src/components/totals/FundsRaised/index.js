@@ -4,6 +4,7 @@
 var React     = require('react');
 var I18nMixin = require('../../mixins/I18n');
 var campaigns	= require('../../../api/campaigns');
+var Icon      = require('../../helpers/Icon');
 var numeral   = require('numeral');
 
 module.exports = React.createClass({
@@ -50,21 +51,24 @@ module.exports = React.createClass({
     var symbol = this.t('symbol');
     var totalDollars = this.state.total/100;
     var formattedTotal = symbol + numeral(totalDollars).format('0.00 a');
+    var title = this.t('title');
 
     if(this.state.isLoading) {
-      return <div className="FundsRaised__loading">Loading...</div>
+      return <Icon className="FundsRaised__loading" icon="refresh" spin={ true }/>;
     } else {
-      return <div className="FundsRaised__total">{ formattedTotal }</div>
+      return (
+        <div>
+          <div className="FundsRaised__total">{ formattedTotal }</div>
+          <div className="FundsRaised__title">{ title }</div>
+        </div>
+      )
     }
   },
 
   render: function() {
-    var title = this.t('title');
-
     return (
 	    <div className={ "FundsRaised" }>
         { this.renderTotal() }
-        <div className="FundsRaised__title">{ title }</div>
 	    </div>
     );
   }

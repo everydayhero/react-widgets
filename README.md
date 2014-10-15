@@ -55,10 +55,13 @@ You can find the minified assets at the following locations:
 
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `i18n`:        *optional* object containing localised text. Default i18n is:
-    {
-      title: 'Funds Raised',
-      symbol: '$'
-    }
+
+```
+  {
+    title: 'Funds Raised',
+    symbol: '$'
+  }
+```
 
 ```html
 <html>
@@ -79,9 +82,12 @@ You can find the minified assets at the following locations:
 
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `i18n`:        *optional* object containing localised text. Default i18n is:
-    {
-      title: 'Heroes'
-    }
+
+```
+  {
+    title: 'Heroes'
+  }
+```
 
 ```html
 <html>

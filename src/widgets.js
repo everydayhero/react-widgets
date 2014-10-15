@@ -13,7 +13,9 @@ var CharitySearchInit = function(options) {
   element.href = '#';
 
   addEventListener(element, 'click', function(event) {
-    if (event) event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    };
 
     var div = document.createElement('div');
     document.body.appendChild(div);

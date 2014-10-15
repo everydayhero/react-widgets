@@ -6,10 +6,12 @@ module.exports = React.createClass({
   onPageLeft: function() {
     this.props.onChange(this.props.page - 1);
   },
+
   onPageRight: function() {
     this.props.onChange(this.props.page + 1);
   },
-  render: function () {
+
+  render: function() {
     if (this.props.totalPages <= 1) { return false; }
 
     var from = (this.props.page - 1) * this.props.pageSize + 1;

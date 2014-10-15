@@ -207,7 +207,7 @@
   .SearchPagination__button--right:hover, .SearchPagination__button--left:hover {
     border-color: #00a044;
     color: #00a044; }
-  .SearchPagination__button--right[disabled="disabled"], .SearchPagination__button--left[disabled="disabled"] {
+  .SearchPagination__button--right[disabled], .SearchPagination__button--left[disabled] {
     cursor: default;
     border-color: gray;
     color: gray; }

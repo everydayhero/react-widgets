@@ -7,9 +7,9 @@ var React = require('react');
 var CharitySearch = require('./components/search/CharitySearch');
 var addEventListener = require('./lib/addEventListener.js');
 var widgets = {
-  FundsRaised: require('./components/FundsRaised')
+  FundsRaised: require('./components/FundsRaised'),
+  TotalHeroes: require('./components/TotalHeroes')
 }
-
 
 var CharitySearchInit = function(options) {
   var element = options.element || document.getElementById(options.elementId);

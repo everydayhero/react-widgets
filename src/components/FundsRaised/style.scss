@@ -1,0 +1,18 @@
+.FundsRaised {
+	@include border-radius(2px);
+	background: #555555;
+	color: #fff;
+
+	font-family: "Lato", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	text-transform: uppercase;
+	text-align: center;
+	font-weight: bold;
+
+	padding: $x-5 $x-6 $x-6;
+}
+
+.FundsRaised__total {
+	margin-bottom: $x-2;
+	font-size: 21px;
+}

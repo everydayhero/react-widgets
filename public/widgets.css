@@ -341,3 +341,22 @@
     color: #7ec774; }
   a:hover .CharitySearchResult__actions:hover, a:focus .CharitySearchResult__actions {
     color: #00a044; }
+
+.FundsRaised {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  background: #555555;
+  color: #fff;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  padding: 20px 24px 24px; }
+
+.FundsRaised__total {
+  margin-bottom: 8px;
+  font-size: 21px; }

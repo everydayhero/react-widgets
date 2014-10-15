@@ -53,7 +53,7 @@ You can find the minified assets at the following locations:
 
 #### Funds Raised (Campaign)
 
-- `campaignUid`: *required* string campaign uid to filter charity results.
+- `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `i18n`:        *optional* object containing localised text. Default i18n is:
     {
       title: 'Funds Raised',
@@ -70,6 +70,29 @@ You can find the minified assets at the following locations:
     <div id="FundsRaised">Loading...</div>
     <script>
       edh.widgets.renderWidget( 'FundsRaised', 'FundsRaised', {campaignUid: 'au-0'});
+    </script>
+  </body>
+</html>
+```
+
+#### Total Heroes (Campaign)
+
+- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `i18n`:        *optional* object containing localised text. Default i18n is:
+    {
+      title: 'Heroes'
+    }
+
+```html
+<html>
+  <head>
+    <script src="//edh-widgets.s3.amazonaws.com/widgets.js"></script>
+    <link href="//edh-widgets.s3.amazonaws.com/widgets.css" media="all" rel="Stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="TotalHeroes">Loading...</div>
+    <script>
+      edh.widgets.renderWidget( 'TotalHeroes', 'TotalHeroes', {campaignUid: 'au-0'});
     </script>
   </body>
 </html>

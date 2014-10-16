@@ -7,6 +7,7 @@ var React = require('react');
 var CharitySearch = require('./components/search/CharitySearch');
 
 var addEventListener = require('./lib/addEventListener.js');
+var edh = {widgets: {}};
 
 var CharitySearchInit = function(options) {
   var element = options.element || document.getElementById(options.elementId);
@@ -29,6 +30,8 @@ var CharitySearchInit = function(options) {
   });
 };
 
-module.exports = {
+module.exports = edh.widgets = {
   CharitySearchInit: CharitySearchInit
 };
+
+global.edh = edh;

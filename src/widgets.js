@@ -10,13 +10,16 @@ var widgets = {
   FundsRaised: require('./components/totals/FundsRaised'),
   TotalHeroes: require('./components/totals/TotalHeroes')
 }
+var edh = {widgets: {}};
 
 var CharitySearchInit = function(options) {
   var element = options.element || document.getElementById(options.elementId);
   element.href = '#';
 
   addEventListener(element, 'click', function(event) {
-    if (event) event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    };
 
     var div = document.createElement('div');
     document.body.appendChild(div);
@@ -34,7 +37,9 @@ var renderWidget = function(id, name, args) {
   React.renderComponent(widgets[name](args), document.getElementById(id));
 }
 
-module.exports = {
+module.exports = edh.widgets = {
   CharitySearchInit: CharitySearchInit,
   renderWidget: renderWidget
 };
+
+global.edh = edh;

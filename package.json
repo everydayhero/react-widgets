@@ -9,9 +9,18 @@
     "compression": "~1.0.8",
     "express": "~4.4.5",
     "morgan": "~1.1.1",
-    "serve-static": "~1.1.0"
+    "serve-static": "~1.1.0",
+    "jsxcs": "0.0.2"
   },
   "devDependencies": {
+    "gulp": "^3.8.6",
+    "gulp-browserify": "^0.5.0",
+    "gulp-minify-css": "~0.3.6",
+    "gulp-sass": "~1.0.0",
+    "gulp-uglify": "^0.3.1",
+    "gulp-util": "^3.0.0",
+    "gulp-autoprefixer": "0.0.8",
+    "gulp-concat": "~2.2.0",
     "browserify": "~5.12.0",
     "uniq": "~1.0.1",
     "jest-cli": "^0.1.18",
@@ -28,13 +37,15 @@
   },
   "scripts": {
     "setup": "npm install && npm run build && npm test",
-    "build": "npm run scripts && npm run styles",
-    "build-dev": "npm run scripts-dev && npm run styles",
-    "scripts": "NODE_ENV=production browserify ./src/widgets.js -s edh.widgets | uglifyjs -cm > ./public/widgets.js",
-    "scripts-dev": "NODE_ENV=development browserify ./src/widgets.js -s edh.widgets > ./public/widgets.js",
-    "scripts-watch": "NODE_ENV=development watchify ./src/widgets.js -s edh.widgets -o ./public/widgets.js -v",
-    "styles": "NODE_ENV=production node_modules/.bin/node-sass ./src/widgets.scss -o ./public/widgets.css",
-    "test": "jest",
+    "build": "gulp",
+    "build-dev": "NODE_ENV=development gulp --debug",
+    "scripts": "gulp scripts",
+    "scripts-dev": "gulp scripts --debug",
+    "watch": "gulp watch",
+    "watch-dev": "gulp watch --debug",
+    "styles": "gulp styles",
+    "styles-dev": "gulp styles --debug",
+    "test": "jsxcs ./src/* --config=./config/jscs_config.json && jest",
     "start": "node server.js"
   },
   "browserify": {

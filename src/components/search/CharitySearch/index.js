@@ -128,7 +128,7 @@ module.exports = React.createClass({
       this.props.callback(result);
     } else {
       var redirect;
-      switch(this.props.action) {
+      switch (this.props.action) {
         case 'donate':
           redirect = routes('donate', { country: this.props.country, id: result.uid.split('-')[1] });
           break;

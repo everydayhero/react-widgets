@@ -1,2 +1,3 @@
 /node_modules
-/public/scripts/*.js
+/public/widgets.js
+/public/widgets.css

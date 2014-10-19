@@ -19,7 +19,7 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       defaultI18n: {
-        title: 'Charities'
+        title: 'Non Profits'
       }
     }
   },

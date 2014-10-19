@@ -36,7 +36,7 @@ describe('TotalCharities', function() {
       element.setState({isLoading: false});
       var title = findByClass(element, 'TotalCharities__title');
 
-      expect(title.getDOMNode().textContent).toBe('Charities');
+      expect(title.getDOMNode().textContent).toBe('Non Profits');
     });
 
     it('shows a loading icon', function() {

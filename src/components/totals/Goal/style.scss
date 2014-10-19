@@ -1,0 +1,7 @@
+.Goal {
+  @extend %tile;
+}
+
+.Goal__total {
+  @extend %tile-total;
+}

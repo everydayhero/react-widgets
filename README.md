@@ -130,6 +130,34 @@ You can find the minified assets at the following locations:
 </html>
 ```
 
+#### Total Charities (Campaign)
+
+- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `i18n`:        *optional* object containing localised text. Default i18n is:
+
+```
+  {
+    title: 'Goal',
+    symbol: '$',
+    goal: '0'
+  }
+```
+
+```html
+<html>
+  <head>
+    <script src="//edh-widgets.s3.amazonaws.com/widgets.js"></script>
+    <link href="//edh-widgets.s3.amazonaws.com/widgets.css" media="all" rel="Stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="TotalCharitiesExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget( 'GoalExample', 'Goal', {i18n: {goal: '50000', title: '2015 Goal'}});
+    </script>
+  </body>
+</html>
+```
+
 ## Commands
 
 ```sh

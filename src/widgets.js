@@ -9,7 +9,8 @@ var addEventListener = require('./lib/addEventListener.js');
 var widgets = {
   FundsRaised: require('./components/totals/FundsRaised'),
   TotalHeroes: require('./components/totals/TotalHeroes'),
-  TotalCharities: require('./components/totals/TotalCharities')
+  TotalCharities: require('./components/totals/TotalCharities'),
+  Goal: require('./components/totals/Goal')
 }
 var edh = {widgets: {}};
 

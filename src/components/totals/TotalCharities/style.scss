@@ -1,0 +1,11 @@
+.TotalCharities {
+  @extend %tile;
+}
+
+.TotalCharities__total {
+  @extend %tile-total;
+}
+
+.TotalCharities__loading {
+  @extend %tile-center-icon;
+}

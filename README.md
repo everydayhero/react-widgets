@@ -70,9 +70,9 @@ You can find the minified assets at the following locations:
     <link href="//edh-widgets.s3.amazonaws.com/widgets.css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
-    <div id="FundsRaised">Loading...</div>
+    <div id="FundsRaisedExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget( 'FundsRaised', 'FundsRaised', {campaignUid: 'au-0'});
+      edh.widgets.renderWidget( 'FundsRaisedExample', 'FundsRaised', {campaignUid: 'au-0'});
     </script>
   </body>
 </html>
@@ -96,9 +96,35 @@ You can find the minified assets at the following locations:
     <link href="//edh-widgets.s3.amazonaws.com/widgets.css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
-    <div id="TotalHeroes">Loading...</div>
+    <div id="TotalHeroesExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget( 'TotalHeroes', 'TotalHeroes', {campaignUid: 'au-0'});
+      edh.widgets.renderWidget( 'TotalHeroesExample', 'TotalHeroes', {campaignUid: 'au-0'});
+    </script>
+  </body>
+</html>
+```
+
+#### Total Charities (Campaign)
+
+- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `i18n`:        *optional* object containing localised text. Default i18n is:
+
+```
+  {
+    title: 'Charities'
+  }
+```
+
+```html
+<html>
+  <head>
+    <script src="//edh-widgets.s3.amazonaws.com/widgets.js"></script>
+    <link href="//edh-widgets.s3.amazonaws.com/widgets.css" media="all" rel="Stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="TotalCharitiesExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget( 'TotalCharitiesExample', 'TotalCharities', {campaignUid: 'au-0'});
     </script>
   </body>
 </html>

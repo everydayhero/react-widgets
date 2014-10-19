@@ -8,7 +8,8 @@ var CharitySearch = require('./components/search/CharitySearch');
 var addEventListener = require('./lib/addEventListener.js');
 var widgets = {
   FundsRaised: require('./components/totals/FundsRaised'),
-  TotalHeroes: require('./components/totals/TotalHeroes')
+  TotalHeroes: require('./components/totals/TotalHeroes'),
+  TotalCharities: require('./components/totals/TotalCharities')
 }
 var edh = {widgets: {}};
 

@@ -46,12 +46,12 @@ module.exports = React.createClass({
   	pages.find(this.props.campaignUid, this.onSuccess);
   },
 
-  renderTotal: function(){
+  renderTotal: function() {
     var totalHeroes = this.state.total;
     var formattedTotal = numeral(totalHeroes).format('0,0');
     var title = this.t('title');
 
-    if(this.state.isLoading) {
+    if (this.state.isLoading) {
       return <Icon className="TotalHeroes__loading" icon="refresh" spin={ true }/>;
     } else {
       return (

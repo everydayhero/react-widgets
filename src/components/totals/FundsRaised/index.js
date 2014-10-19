@@ -47,13 +47,13 @@ module.exports = React.createClass({
   	campaigns.find(this.props.campaignUid, this.onSuccess);
   },
 
-  renderTotal: function(){
+  renderTotal: function() {
     var symbol = this.t('symbol');
-    var totalDollars = this.state.total/100;
+    var totalDollars = this.state.total / 100;
     var formattedTotal = symbol + numeral(totalDollars).format('0.00 a');
     var title = this.t('title');
 
-    if(this.state.isLoading) {
+    if (this.state.isLoading) {
       return <Icon className="FundsRaised__loading" icon="refresh" spin={ true }/>;
     } else {
       return (

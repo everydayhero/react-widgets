@@ -16,23 +16,23 @@ describe('FundsRaised', function() {
     var fundsRaised;
     var element;
 
-    beforeEach(function(){
+    beforeEach(function() {
       fundsRaised = <FundsRaised campaignUid="au-0" />;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
 
-    it('renders something', function(){
+    it('renders something', function() {
       expect(element).not.toBeNull();
     });
 
-    it('renders a default total', function(){
+    it('renders a default total', function() {
       element.setState({isLoading: false});
       var total = findByClass(element, 'FundsRaised__total');
 
       expect(total.getDOMNode().textContent).toContain('$0.00');
     });
 
-    it('renders a default title', function(){
+    it('renders a default title', function() {
       element.setState({isLoading: false});
       var title = findByClass(element, 'FundsRaised__title');
 
@@ -44,7 +44,7 @@ describe('FundsRaised', function() {
       findByClass(element, 'FundsRaised__loading');
     });
 
-    it('handles a campaign id', function(){
+    it('handles a campaign id', function() {
       expect(campaigns.find).toBeCalledWith('au-0', element.onSuccess);
     });
   });
@@ -57,19 +57,19 @@ describe('FundsRaised', function() {
       symbol: '£'
     }
 
-    beforeEach(function(){
+    beforeEach(function() {
       fundsRaised = <FundsRaised i18n={ translation } />;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
 
-    it('renders a custom title', function(){
+    it('renders a custom title', function() {
       element.setState({isLoading: false});
       var title = findByClass(element, 'FundsRaised__title');
 
       expect(title.getDOMNode().textContent).toBe(translation.title);
     });
 
-    it('check for a default total', function(){
+    it('check for a default total', function() {
       element.setState({isLoading: false});
       var total = findByClass(element, 'FundsRaised__total');
 

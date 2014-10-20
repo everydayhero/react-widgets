@@ -7,5 +7,9 @@
 }
 
 .TotalCharities__loading {
-  @extend %tile-center-icon;
+  @extend %tile-loading-icon;
+}
+
+.TotalCharities__icon {
+  @extend %tile-icon;
 }

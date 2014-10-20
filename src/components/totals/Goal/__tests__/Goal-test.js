@@ -36,6 +36,12 @@ describe('Goal', function() {
 
       expect(title.getDOMNode().textContent).toBe('Goal');
     });
+
+    it('renders an icon by default', function() {
+      var icon = findByClass(element, 'Goal__icon');
+
+      expect(icon).not.toBeNull;
+    });
   });
 
   describe('component props', function() {
@@ -43,12 +49,11 @@ describe('Goal', function() {
     var element;
     var translation = {
       title: 'asdjasj',
-      symbol: '£',
-      goal: '50000'
+      symbol: '£'
     }
 
     beforeEach(function() {
-      goal = <Goal i18n={ translation } />;
+      goal = <Goal goal="5000000" i18n={ translation } />;
       element = TestUtils.renderIntoDocument(goal);
     });
 

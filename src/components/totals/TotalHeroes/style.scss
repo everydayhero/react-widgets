@@ -7,5 +7,9 @@
 }
 
 .TotalHeroes__loading {
-  @extend %tile-center-icon;
+  @extend %tile-loading-icon;
+}
+
+.TotalHeroes__icon {
+  @extend %tile-icon;
 }

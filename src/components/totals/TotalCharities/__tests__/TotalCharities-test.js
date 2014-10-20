@@ -39,6 +39,12 @@ describe('TotalCharities', function() {
       expect(title.getDOMNode().textContent).toBe('Non Profits');
     });
 
+    it('renders an icon by default', function() {
+      var icon = findByClass(element, 'TotalCharities__icon');
+
+      expect(icon).not.toBeNull;
+    });
+
     it('shows a loading icon', function() {
       element.setState({isLoading: true});
       findByClass(element, 'TotalCharities__loading');

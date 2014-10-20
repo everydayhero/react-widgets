@@ -39,6 +39,12 @@ describe('FundsRaised', function() {
       expect(title.getDOMNode().textContent).toBe('Raised To Date');
     });
 
+    it('renders an icon by default', function() {
+      var icon = findByClass(element, 'FundsRaised__icon');
+
+      expect(icon).not.toBeNull;
+    });
+
     it('renders a loading icon', function() {
       element.setState({isLoading: true});
       findByClass(element, 'FundsRaised__loading');
@@ -58,7 +64,7 @@ describe('FundsRaised', function() {
     }
 
     beforeEach(function() {
-      fundsRaised = <FundsRaised i18n={ translation } />;
+      fundsRaised = <FundsRaised i18n={ translation } renderIcon={ false } />;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
 

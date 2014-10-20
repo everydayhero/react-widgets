@@ -12,12 +12,14 @@ module.exports = React.createClass({
   displayName: "FundsRaised",
   propTypes: {
     campaignUid: React.PropTypes.string,
+    renderIcon: React.PropTypes.bool,
     i18n: React.PropTypes.object,
   },
 
   getDefaultProps: function() {
     return {
       campaignUid: '',
+      renderIcon: true,
       defaultI18n: {
         title: 'Raised To Date',
         symbol: '$'
@@ -65,9 +67,20 @@ module.exports = React.createClass({
     }
   },
 
+  renderIcon: function() {
+    var renderIcon = this.props.renderIcon;
+
+    if (renderIcon) {
+      return (
+        <Icon className="FundsRaised__icon" icon="money"/>
+      );
+    }
+  },
+
   render: function() {
     return (
 	    <div className={ "FundsRaised" }>
+        { this.renderIcon() }
         { this.renderTotal() }
 	    </div>
     );

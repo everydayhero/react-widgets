@@ -54,6 +54,7 @@ You can find the minified assets at the following locations:
 #### Funds Raised (Campaign)
 
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `renderIcon`: *optional* boolean. Set to `true` by default.
 - `i18n`:        *optional* object containing localised text. Default i18n is:
 
 ```
@@ -81,6 +82,7 @@ You can find the minified assets at the following locations:
 #### Total Heroes (Campaign)
 
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `renderIcon`: *optional* boolean. Set to `true` by default.
 - `i18n`:        *optional* object containing localised text. Default i18n is:
 
 ```
@@ -107,6 +109,7 @@ You can find the minified assets at the following locations:
 #### Total Charities (Campaign)
 
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `renderIcon`: *optional* boolean. Set to `true` by default.
 - `i18n`:        *optional* object containing localised text. Default i18n is:
 
 ```
@@ -130,16 +133,16 @@ You can find the minified assets at the following locations:
 </html>
 ```
 
-#### Total Charities (Campaign)
+#### Campaign Goal (Campaign)
 
-- `campaignUid`: *required* string campaign uid to filter results by campaign.
-- `i18n`:        *optional* object containing localised text. Default i18n is:
+- `goal`: *required* string. Set a goal in cents to be rendered as a dollar amount.
+- `renderIcon`: *optional* boolean. Set to `true` by default.
+- `i18n`:       *optional* object containing localised text. Default i18n is:
 
 ```
   {
     title: 'Goal',
-    symbol: '$',
-    goal: '0'
+    symbol: '$'
   }
 ```
 
@@ -152,7 +155,7 @@ You can find the minified assets at the following locations:
   <body>
     <div id="TotalCharitiesExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget( 'GoalExample', 'Goal', {i18n: {goal: '50000', title: '2015 Goal'}});
+      edh.widgets.renderWidget( 'GoalExample', 'Goal', {goal: '500000', i18n: {title: '2015 Goal'}});
     </script>
   </body>
 </html>

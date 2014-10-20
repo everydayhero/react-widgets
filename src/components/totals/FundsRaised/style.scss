@@ -7,5 +7,9 @@
 }
 
 .FundsRaised__loading {
-  @extend %tile-center-icon;
+  @extend %tile-loading-icon;
+}
+
+.FundsRaised__icon {
+  @extend %tile-icon;
 }

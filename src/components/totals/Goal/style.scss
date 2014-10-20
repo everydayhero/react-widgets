@@ -5,3 +5,7 @@
 .Goal__total {
   @extend %tile-total;
 }
+
+.Goal__icon {
+  @extend %tile-icon;
+}

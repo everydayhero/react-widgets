@@ -39,6 +39,12 @@ describe('TotalHeroes', function() {
       expect(title.getDOMNode().textContent).toBe('Heroes');
     });
 
+    it('renders an icon by default', function() {
+      var icon = findByClass(element, 'TotalHeroes__icon');
+
+      expect(icon).not.toBeNull;
+    });
+
     it('shows a loading icon', function() {
       element.setState({isLoading: true});
       findByClass(element, 'TotalHeroes__loading');

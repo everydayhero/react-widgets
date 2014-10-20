@@ -15,7 +15,13 @@
   margin-bottom: $x-2;
 }
 
-%tile-center-icon {
+%tile-icon {
+  display: block;
+  padding-bottom: 10px;
+  font-size: 30px;
+}
+
+%tile-loading-icon {
   display: block;
   font-size: 21px;
   line-height: 2;

@@ -1,0 +1,15 @@
+.TotalHeroes {
+  @extend %tile;
+}
+
+.TotalHeroes__total {
+  @extend %tile-total;
+}
+
+.TotalHeroes__loading {
+  @extend %tile-loading-icon;
+}
+
+.TotalHeroes__icon {
+  @extend %tile-icon;
+}

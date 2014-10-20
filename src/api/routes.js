@@ -11,7 +11,10 @@ var routes = {
   },
   fundraise: 'https://give.everydayhero.com/{country}/{slug}/get-started',
   charities: 'https://everydayhero.com/api/v2/search/charities.jsonp',
-  leaderboard: 'https://everydayhero.com/api/v2/campaigns/{id}/leaderboard.jsonp?type={type}&limit={limit}'
+
+  leaderboard: 'https://everydayhero.com/api/v2/campaigns/{id}/leaderboard.jsonp?type={type}&limit={limit}',
+  leaderboardPages: 'https://everydayhero.com/api/v2/pages.jsonp?ids={ids}',
+
   campaignCharities: 'https://everydayhero.com/api/v2/search/charities.jsonp?campaign_id={id}&page=1&page_size=1',
   pages:     'https://everydayhero.com/api/v2/search/pages.jsonp?campaign_id={id}&page=1&page_size=1',
   campaigns: 'https://everydayhero.com/api/v2/campaigns/{id}.jsonp'

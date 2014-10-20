@@ -14,6 +14,14 @@
 
   <a id="CharitySearchFundraise">Fundraise for a Charity</a>
 
+  <div id="FundsRaisedExample">Loading...</div>
+  <br />
+  <div id="TotalHeroesExample">Loading...</div>
+  <br />
+  <div id="TotalCharitiesExample">Loading...</div>
+  <br />
+  <div id="GoalExample">Loading...</div>
+
   <script>
     edh.widgets.CharitySearchInit({
       elementId: 'CharitySearchDonate',
@@ -21,11 +29,10 @@
       action: 'donate'
     });
 
-    edh.widgets.CharitySearchInit({
-      elementId: 'CharitySearchFundraise',
-      country: 'uk',
-      action: 'fundraise'
-    });
+    edh.widgets.renderWidget( 'FundsRaisedExample', 'FundsRaised', {campaignUid: 'au-0'});
+    edh.widgets.renderWidget( 'TotalHeroesExample', 'TotalHeroes', {campaignUid: 'au-0'});
+    edh.widgets.renderWidget( 'TotalCharitiesExample', 'TotalCharities', {campaignUid: 'au-0'});
+    edh.widgets.renderWidget( 'GoalExample', 'Goal', {goal: '5000000', i18n: {title: '2015 Goal'}});
   </script>
 
   <p>Lorem ipsum Occaecat anim elit exercitation dolor eu reprehenderit sint esse ex aute et sint nulla non dolor laborum sit amet velit cillum et deserunt Ut dolore nulla aliqua Ut elit cupidatat Ut mollit est labore anim velit Excepteur dolore ad consectetur occaecat in aute fugiat in deserunt Duis est anim reprehenderit sit voluptate sed cillum do sed enim amet occaecat consequat aute in quis do anim et incididunt esse id nostrud fugiat non sint elit veniam enim nostrud reprehenderit sunt ut consequat et enim sed laboris cillum fugiat esse in consectetur id magna nisi occaecat do officia Excepteur anim irure ullamco eu labore laborum officia quis ullamco aliqua qui proident aliquip in consequat exercitation ea incididunt ut velit amet consequat eu est cillum tempor commodo cupidatat esse velit sit exercitation mollit in officia do labore dolor dolor elit in nostrud sit ut nisi dolore in exercitation adipisicing in sunt non deserunt Excepteur consequat mollit ut.</p>

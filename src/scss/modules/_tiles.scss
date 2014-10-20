@@ -1,0 +1,29 @@
+%tile {
+  @include border-radius(2px);
+  background: #555;
+  color: #fff;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  padding: $x-5 $x-2 $x-6;
+}
+
+%tile-total {
+  font-size: 21px;
+  margin-bottom: $x-2;
+}
+
+%tile-icon {
+  display: block;
+  padding-bottom: 10px;
+  font-size: 30px;
+}
+
+%tile-loading-icon {
+  display: block;
+  font-size: 21px;
+  line-height: 2;
+  margin:$x-1 0;
+}

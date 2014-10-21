@@ -1,6 +1,6 @@
 {
   "author": "EverydayHero",
-  "name": "Widgets",
+  "name": "widgets",
   "version": "0.0.2",
   "description": "Widgets are small Javascript components that integrate with EverydayHero's API. These include search components and components for showing leaderboard and fundraising totals for campaigns, charities, and networks. Unlike iframe snippets, using widgets allows you to customise the base-level styling to suit your needs.",
   "license": "MIT",
@@ -21,6 +21,8 @@
     "gulp-util": "^3.0.0",
     "gulp-autoprefixer": "0.0.8",
     "gulp-concat": "~2.2.0",
+    "gulp-awspublish": "0.0.23",
+    "gulp-rename": "1.2.0",
     "browserify": "~5.12.0",
     "uniq": "~1.0.1",
     "jest-cli": "^0.1.18",
@@ -45,7 +47,8 @@
     "styles": "gulp styles",
     "styles-dev": "gulp styles --debug",
     "test": "jsxcs ./src/* --config=./config/jscs_config.json && jest",
-    "start": "node server.js"
+    "start": "node server.js",
+    "publish": "gulp publish"
   },
   "browserify": {
     "transform": [

@@ -28,7 +28,8 @@ module.exports = React.createClass({
       defaultI18n: {
         raisedTitle: 'Raised',
         membersTitle: 'Members',
-        symbol: '$'
+        symbol: '$',
+        heading: 'Leaderboard'
       }
     }
   },
@@ -100,9 +101,11 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var heading = this.t('heading');
+
     return (
       <div className="TeamLeaderboard">
-        <h3 className="TeamLeaderboard__heading">Leaderboards</h3>
+        <h3 className="TeamLeaderboard__heading">{ heading }</h3>
         <ol className="TeamLeaderboard__items">
           { this.renderLeaderboardItems() }
         </ol>

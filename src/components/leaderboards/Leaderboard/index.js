@@ -27,7 +27,8 @@ module.exports = React.createClass({
       limit: '5',
       defaultI18n: {
         raisedTitle: 'Raised',
-        membersTitle: 'Members'
+        membersTitle: 'Members',
+        symbol: '$'
       }
     }
   },
@@ -59,20 +60,22 @@ module.exports = React.createClass({
   },
 
   getPageData: function(page_data) {
+    var symbol = this.t('symbol');
+
     var leaderboard = _.map(this.state.teamPageIds, function(page_id, i) {
       var page = _.filter(page_data.pages, {id: page_id})[0];
 
       return {
         name: page.name,
         iso_code: page.amount.currency.iso_code,
-        amount: '$' + (page.amount.cents / 100)
+        amount:  symbol + numeral(page.amount.cents / 100).format('0,0.00')
       }
     });
 
-    this.getShitDone(leaderboard);
+    this.onComplete(leaderboard);
   },
 
-  getShitDone: function(data) {
+  onComplete: function(data) {
     this.setState({
       isLoading: false,
       boardData: data
@@ -91,9 +94,9 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <div className={ "Leaderboard" }>
+      <ol className={ "Leaderboard" }>
         { this.renderLeaderboardRow() }
-      </div>
+      </ol>
     );
   }
 });

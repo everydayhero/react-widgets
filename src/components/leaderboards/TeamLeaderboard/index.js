@@ -1,18 +1,18 @@
 /** @jsx React.DOM */
 "use strict";
 
-var _                 = require('lodash');
-var React             = require('react');
-var I18nMixin         = require('../../mixins/I18n');
-var leaderboard       = require('../../../api/leaderboard');
-var leaderboardPages  = require('../../../api/leaderboardPages');
-var Icon              = require('../../helpers/Icon');
-var LeaderboardRow    = require('../LeaderboardRow')
-var numeral           = require('numeral');
+var _                     = require('lodash');
+var React                 = require('react');
+var I18nMixin             = require('../../mixins/I18n');
+var leaderboard           = require('../../../api/leaderboard');
+var leaderboardPages      = require('../../../api/leaderboardPages');
+var Icon                  = require('../../helpers/Icon');
+var TeamLeaderboardItem   = require('../TeamLeaderboardItem')
+var numeral               = require('numeral');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
-  displayName: "Leaderboard",
+  displayName: "TeamLeaderboard",
   propTypes: {
     campaignUid: React.PropTypes.string,
     type: React.PropTypes.string,
@@ -23,8 +23,8 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       campaignUid: '',
-      type: 'individual',
-      limit: '5',
+      type: 'team',
+      limit: '10',
       defaultI18n: {
         raisedTitle: 'Raised',
         membersTitle: 'Members',
@@ -51,7 +51,7 @@ module.exports = React.createClass({
     leaderboard.find(props.campaignUid, props.type, props.limit, this.gotTeamPages);
   },
 
-  gotTeamPages: function(result, callback) {
+  gotTeamPages: function(result) {
     this.setState({
       teamPageIds: result.leaderboard.page_ids
     });
@@ -68,7 +68,8 @@ module.exports = React.createClass({
       return {
         name: page.name,
         iso_code: page.amount.currency.iso_code,
-        amount:  symbol + numeral(page.amount.cents / 100).format('0,0.00')
+        amount:  symbol + numeral(page.amount.cents / 100).format('0[.]00 a'),
+        totalMembers: page.team_member_uids.length
       }
     });
 
@@ -82,11 +83,17 @@ module.exports = React.createClass({
     });
   },
 
-  renderLeaderboardRow: function() {
+  renderLeaderboardItems: function() {
     if (this.state.boardData.length > 0) {
       return this.state.boardData.map(function(d,i) {
         return (
-          <LeaderboardRow name={ d.name } iso_code={ d.iso_code } amount={ d.amount } />
+          <TeamLeaderboardItem
+            name={ d.name }
+            iso_code={ d.iso_code }
+            amount={ d.amount }
+            totalMembers={ d.totalMembers }
+            raisedTitle={ this.t('raisedTitle') }
+            membersTitle={ this.t('membersTitle') } />
         )
       }, this);
     }
@@ -94,9 +101,12 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <ol className={ "Leaderboard" }>
-        { this.renderLeaderboardRow() }
-      </ol>
+      <div className="TeamLeaderboard">
+        <h3 className="TeamLeaderboard__heading">Leaderboards</h3>
+        <ol className="TeamLeaderboard__items">
+          { this.renderLeaderboardItems() }
+        </ol>
+      </div>
     );
   }
 });

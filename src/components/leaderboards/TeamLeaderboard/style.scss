@@ -1,0 +1,20 @@
+.TeamLeaderboard {
+  @extend %clearfix;
+  background:#555;
+  border-radius: $border-radius;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  color: #555;
+  font-size: 14px;
+
+  .TeamLeaderboard__heading {
+    color:#fff;
+    font-size: 24px;
+    margin: 30px 15px 15px;
+  }
+
+  .TeamLeaderboard__items {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+}

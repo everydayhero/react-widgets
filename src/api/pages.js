@@ -5,7 +5,7 @@ var routes = require('./routes');
 var getJSON = require('../lib/getJSON');
 
 module.exports = {
-  find: function(id, callback) {
-    getJSON(routes('pages', {id: id}), callback);
+  find: function(id, page_count, page_size, callback) {
+    getJSON(routes('pages', {id: id, page_count: page_count, page_size: page_size}), callback);
   }
 };

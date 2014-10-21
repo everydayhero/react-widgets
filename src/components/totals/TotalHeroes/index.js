@@ -12,6 +12,8 @@ module.exports = React.createClass({
   displayName: "TotalHeroes",
   propTypes: {
     campaignUid: React.PropTypes.string,
+    page_count: React.PropTypes.string,
+    page_size: React.PropTypes.string,
     renderIcon: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
@@ -19,6 +21,8 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       campaignUid: '',
+      page_count: '1',
+      page_size: '1',
       renderIcon: true,
       defaultI18n: {
         title: 'Heroes'
@@ -45,7 +49,9 @@ module.exports = React.createClass({
       isLoading: true
   	});
 
-  	pages.find(this.props.campaignUid, this.onSuccess);
+    var props = this.props;
+
+  	pages.find(props.campaignUid, props.page_count, props.page_size, this.onSuccess);
   },
 
   renderTotal: function() {

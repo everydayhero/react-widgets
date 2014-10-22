@@ -16,7 +16,8 @@ var routes = {
   leaderboardPages: 'https://everydayhero.com/api/v2/pages.jsonp?ids={ids}',
 
   campaignCharities: 'https://everydayhero.com/api/v2/search/charities.jsonp?campaign_id={id}&page=1&page_size=1',
-  pages:     'https://everydayhero.com/api/v2/search/pages.jsonp?campaign_id={id}&page={page_count}&page_size={page_size}',
+  pages: 'https://everydayhero.com/api/v2/search/pages.jsonp?campaign_id={id}&page={page_count}&page_size={page_size}',
+  staticPages: 'https://everydayhero.com/api/v2/pages.jsonp?campaign_id={id}&type={team}&limit={limit}&page={page}',
   campaigns: 'https://everydayhero.com/api/v2/campaigns/{id}.jsonp'
 };
 

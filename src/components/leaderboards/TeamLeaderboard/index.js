@@ -17,6 +17,7 @@ module.exports = React.createClass({
     campaignUid: React.PropTypes.string,
     type: React.PropTypes.string,
     limit: React.PropTypes.string,
+    pageSize: React.PropTypes.number,
     i18n: React.PropTypes.object
   },
 
@@ -24,7 +25,8 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       type: 'team',
-      limit: '10',
+      limit: '12',
+      pageSize: 4,
       defaultI18n: {
         raisedTitle: 'Raised',
         membersTitle: 'Members',
@@ -38,7 +40,9 @@ module.exports = React.createClass({
     return {
       isLoading: false,
       teamPageIds: [],
-      boardData: []
+      boardData: [],
+      pagedBoardData: [],
+      currentPage: 1,
     };
   },
 
@@ -61,7 +65,9 @@ module.exports = React.createClass({
   },
 
   getPageData: function(page_data) {
-    var symbol = this.t('symbol');
+    var symbol           = this.t('symbol');
+    var pageSize         = this.props.pageSize;
+    var pagedLeaderboard = [];
 
     var leaderboard = _.map(this.state.teamPageIds, function(page_id, i) {
       var page = _.filter(page_data.pages, {id: page_id})[0];
@@ -74,7 +80,11 @@ module.exports = React.createClass({
       }
     });
 
-    this.onComplete(leaderboard);
+    for (var i=0; i<leaderboard.length; i+=pageSize) {
+      pagedLeaderboard.push(leaderboard.slice(i,i+pageSize));
+    }
+
+    this.onComplete(pagedLeaderboard);
   },
 
   onComplete: function(data) {
@@ -85,19 +95,55 @@ module.exports = React.createClass({
   },
 
   renderLeaderboardItems: function() {
-    if (this.state.boardData.length > 0) {
-      return this.state.boardData.map(function(d,i) {
-        return (
-          <TeamLeaderboardItem
-            name={ d.name }
-            iso_code={ d.iso_code }
-            amount={ d.amount }
-            totalMembers={ d.totalMembers }
-            raisedTitle={ this.t('raisedTitle') }
-            membersTitle={ this.t('membersTitle') } />
-        )
-      }, this);
+
+    var currentPage = this.state.currentPage - 1;
+
+    if (!this.state.isLoading) {
+      if (this.state.boardData[currentPage].length > 0) {
+        return this.state.boardData[currentPage].map(function(d,i) {
+          return (
+            <TeamLeaderboardItem
+              name={ d.name }
+              iso_code={ d.iso_code }
+              amount={ d.amount }
+              totalMembers={ d.totalMembers }
+              raisedTitle={ this.t('raisedTitle') }
+              membersTitle={ this.t('membersTitle') } />
+          )
+        }, this);
+      }
+    } else {
+      return (
+        <Icon className="TeamLeaderboard__loading" icon="refresh" spin={ true }/>
+      );
     }
+  },
+
+  prevPage: function() {
+    if (this.state.currentPage > 1) {
+      this.setState({
+        currentPage: this.state.currentPage - 1
+      });
+    }
+  },
+
+  nextPage: function() {
+    var totalPages = parseInt(this.props.limit) / this.props.pageSize;
+
+    if (this.state.currentPage < totalPages) {
+      this.setState({
+        currentPage: this.state.currentPage + 1
+      });
+    }
+  },
+
+  renderControls: function() {
+    return (
+      <div className="TeamLeaderboard__controls">
+        <div onClick={ this.prevPage } className="TeamLeaderboard__prevBtn">Prev</div>
+        <div onClick={ this.nextPage } className="TeamLeaderboard__nextBtn">Next</div>
+      </div>
+    )
   },
 
   render: function() {
@@ -109,6 +155,7 @@ module.exports = React.createClass({
         <ol className="TeamLeaderboard__items">
           { this.renderLeaderboardItems() }
         </ol>
+        { this.renderControls() }
       </div>
     );
   }

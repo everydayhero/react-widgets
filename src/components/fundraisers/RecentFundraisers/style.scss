@@ -8,3 +8,7 @@
 .RecentFundraisers__heading {
   @extend %tile-heading;
 }
+
+.RecentFundraisers__empty-label {
+  padding:0 15px;
+}

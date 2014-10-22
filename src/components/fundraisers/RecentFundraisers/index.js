@@ -1,17 +1,20 @@
 /** @jsx React.DOM */
 "use strict";
 
-var React     = require('react');
-var I18nMixin = require('../../mixins/I18n');
-var pages     = require('../../../api/pages');
-var Icon      = require('../../helpers/Icon');
-var numeral   = require('numeral');
+var React             = require('react');
+var I18nMixin         = require('../../mixins/I18n');
+var pages             = require('../../../api/pages');
+var Icon              = require('../../helpers/Icon');
+var FundraiserImage   = require('../FundraiserImage')
+var numeral           = require('numeral');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
-  displayName: "TotalHeroes",
+  displayName: "RecentFundraisers",
   propTypes: {
     campaignUid: React.PropTypes.string,
+    page_count: React.PropTypes.string,
+    page_size: React.PropTypes.string,
     renderIcon: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
@@ -19,9 +22,11 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       campaignUid: '',
+      page_count: '1',
+      page_size: '6',
       renderIcon: true,
       defaultI18n: {
-        title: 'Heroes'
+        heading: 'Fundraisers'
       }
     }
   },
@@ -29,15 +34,9 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       isLoading: false,
-      total: 0
+      pageResults: [],
+      imgUrl: ''
     };
-  },
-
-  onSuccess: function(result) {
-    this.setState({
-      isLoading: false,
-      total: result.meta.pagination.count
-    });
   },
 
   componentWillMount: function() {
@@ -45,41 +44,37 @@ module.exports = React.createClass({
       isLoading: true
     });
 
-    pages.find(this.props.campaignUid, this.onSuccess);
+    var props = this.props;
+
+    pages.find(props.campaignUid, props.page_count, props.page_size, this.onSuccess);
   },
 
-  renderTotal: function() {
-    var totalHeroes = this.state.total;
-    var formattedTotal = numeral(totalHeroes).format('0,0');
-    var title = this.t('title');
+  onSuccess: function(result) {
+    this.setState({
+      isLoading: false,
+      pageResults: result.pages
+    });
 
-    if (this.state.isLoading) {
-      return <Icon className="TotalHeroes__loading" icon="refresh" spin={ true }/>;
-    } else {
+    console.log(this.state.pageResults);
+  },
+
+  renderFundraiserImage: function() {
+    return this.state.pageResults.map(function(d,i) {
       return (
-        <div>
-          <div className="TotalHeroes__total">{ formattedTotal }</div>
-          <div className="TotalHeroes__title">{ title }</div>
-        </div>
+        <FundraiserImage pageUrl={ d.url } imgSrc={ d.image.large_image_url } imgTitle={ d.name } imgAlt={ d.name } />
       )
-    }
-  },
-
-  renderIcon: function() {
-    var renderIcon = this.props.renderIcon;
-
-    if (renderIcon) {
-      return (
-        <Icon className="TotalHeroes__icon" icon="bolt"/>
-      );
-    }
+    });
   },
 
   render: function() {
+    var heading = this.t('heading');
+
     return (
-      <div className={ "TotalHeroes" }>
-        { this.renderIcon() }
-        { this.renderTotal() }
+      <div className="RecentFundraisers">
+        <h3 className="RecentFundraisers__heading">{ heading }</h3>
+        <div className="RecentFundraisers__content">
+          { this.renderFundraiserImage() }
+        </div>
       </div>
     );
   }

@@ -1,15 +1,14 @@
 .TeamLeaderboard {
   @extend %clearfix;
   background:#555;
-  border-radius: $border-radius;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-family: $sans-serif-fonts;
+  font-size: $default-font-size;
   color: #555;
   font-size: 14px;
 
   .TeamLeaderboard__heading {
+    @extend %tile-heading;
     color:#fff;
-    font-size: 24px;
-    margin: 30px 15px 15px;
   }
 
   .TeamLeaderboard__items {

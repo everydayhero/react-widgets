@@ -1,0 +1,10 @@
+.RecentFundraisers {
+  @extend %clearfix;
+  background: #EBEBEB;
+  font-family: $sans-serif-fonts;
+  border-radius: $border-radius;
+}
+
+.RecentFundraisers__heading {
+  @extend %tile-heading;
+}

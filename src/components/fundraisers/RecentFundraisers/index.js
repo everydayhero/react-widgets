@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 "use strict";
 
+var _                 = require('lodash');
 var React             = require('react');
 var I18nMixin         = require('../../mixins/I18n');
 var pages             = require('../../../api/pages');
@@ -24,9 +25,9 @@ module.exports = React.createClass({
       campaignUid: '',
       page_count: '1',
       page_size: '6',
-      renderIcon: true,
       defaultI18n: {
-        heading: 'Fundraisers'
+        heading: 'Fundraisers',
+        emptyLabel: 'No fundraisers to display.'
       }
     }
   },
@@ -35,7 +36,7 @@ module.exports = React.createClass({
     return {
       isLoading: false,
       pageResults: [],
-      imgUrl: ''
+      hasResults: false
     };
   },
 
@@ -54,14 +55,32 @@ module.exports = React.createClass({
       isLoading: false,
       pageResults: result.pages
     });
+
+    if (!_.isEmpty(this.state.pageResults)) {
+      this.setState({
+        hasResults: true
+      });
+    }
   },
 
   renderFundraiserImage: function() {
-    return this.state.pageResults.map(function(d,i) {
-      return (
-        <FundraiserImage pageUrl={ d.url } imgSrc={ d.image.large_image_url } imgTitle={ d.name } imgAlt={ d.name } />
-      )
-    });
+    var emptyLabel = this.t('emptyLabel');
+
+    if (this.state.isLoading) {
+      return <Icon className="RecentFundraisers__loading" icon="refresh" spin={ true }/>;
+    } else {
+      if (this.state.hasResults) {
+        return this.state.pageResults.map(function(d,i) {
+          return (
+            <FundraiserImage pageUrl={ d.url } imgSrc={ d.image.large_image_url } imgTitle={ d.name } imgAlt={ d.name } />
+          )
+        });
+      } else {
+        return (
+          <p className="RecentFundraisers__empty-label">{ emptyLabel }</p>
+        )
+      }
+    }
   },
 
   render: function() {
@@ -74,6 +93,6 @@ module.exports = React.createClass({
           { this.renderFundraiserImage() }
         </div>
       </div>
-    );
+    )
   }
 });

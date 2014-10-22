@@ -31,7 +31,7 @@ module.exports = React.createClass({
         raisedTitle: 'Raised',
         membersTitle: 'Members',
         symbol: '$',
-        heading: 'Leaderboard'
+        heading: 'Leaderboard > Top Teams'
       }
     }
   },
@@ -80,8 +80,8 @@ module.exports = React.createClass({
       }
     });
 
-    for (var i=0; i<leaderboard.length; i+=pageSize) {
-      pagedLeaderboard.push(leaderboard.slice(i,i+pageSize));
+    for (var i = 0; i < leaderboard.length; i += pageSize) {
+      pagedLeaderboard.push(leaderboard.slice(i,i + pageSize));
     }
 
     this.onComplete(pagedLeaderboard);
@@ -95,7 +95,6 @@ module.exports = React.createClass({
   },
 
   renderLeaderboardItems: function() {
-
     var currentPage = this.state.currentPage - 1;
 
     if (!this.state.isLoading) {
@@ -119,6 +118,19 @@ module.exports = React.createClass({
     }
   },
 
+  renderControls: function() {
+    return (
+      <div className="TeamLeaderboard__controls">
+        <div onClick={ this.prevPage } className="TeamLeaderboard__prevBtn">
+          <Icon className="TeamLeaderboard__icon" icon="caret-left"/>
+        </div>
+        <div onClick={ this.nextPage } className="TeamLeaderboard__nextBtn">
+          <Icon className="TeamLeaderboard__icon" icon="caret-right"/>
+        </div>
+      </div>
+    )
+  },
+
   prevPage: function() {
     if (this.state.currentPage > 1) {
       this.setState({
@@ -137,13 +149,30 @@ module.exports = React.createClass({
     }
   },
 
-  renderControls: function() {
-    return (
-      <div className="TeamLeaderboard__controls">
-        <div onClick={ this.prevPage } className="TeamLeaderboard__prevBtn">Prev</div>
-        <div onClick={ this.nextPage } className="TeamLeaderboard__nextBtn">Next</div>
-      </div>
-    )
+  switchPage: function(i) {
+    this.setState({
+      currentPage: i + 1
+    });
+  },
+
+  renderIndicators: function() {
+    if (!this.state.isLoading) {
+      return this.state.boardData.map(function(d,i) {
+
+        if (this.state.currentPage == i + 1) {
+          var iconClass = "circle";
+        } else {
+          var iconClass = "circle-o";
+        }
+
+        return (
+          <div onClick={ this.switchPage.bind(null,i) } className="TeamLeaderboard__indicator">
+            <Icon className="TeamLeaderboard__icon" icon={ iconClass } />
+          </div>
+        )
+
+      }, this);
+    }
   },
 
   render: function() {
@@ -155,7 +184,12 @@ module.exports = React.createClass({
         <ol className="TeamLeaderboard__items">
           { this.renderLeaderboardItems() }
         </ol>
-        { this.renderControls() }
+        <div className="TeamLeaderboard__controller">
+          <div className="TeamLeaderboard__indicators">
+            { this.renderIndicators() }
+          </div>
+          { this.renderControls() }
+        </div>
       </div>
     );
   }

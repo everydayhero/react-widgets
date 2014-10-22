@@ -54,8 +54,6 @@ module.exports = React.createClass({
       isLoading: false,
       pageResults: result.pages
     });
-
-    console.log(this.state.pageResults);
   },
 
   renderFundraiserImage: function() {

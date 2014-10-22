@@ -23,6 +23,7 @@ module.exports = React.createClass({
       campaignUid: '',
       page_count: '1',
       page_size: '1',
+      page_type: 'user',
       renderIcon: true,
       defaultI18n: {
         title: 'Heroes'
@@ -51,7 +52,7 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-  	pages.find(props.campaignUid, props.page_count, props.page_size, this.onSuccess);
+  	pages.find(props.campaignUid, props.page_count, props.page_size, props.page_type, this.onSuccess);
   },
 
   renderTotal: function() {

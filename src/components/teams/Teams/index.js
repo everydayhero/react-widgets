@@ -4,7 +4,7 @@
 var _                 = require('lodash');
 var React             = require('react');
 var I18nMixin         = require('../../mixins/I18n');
-var staticPages       = require('../../../api/staticPages');
+var pages             = require('../../../api/pages');
 var Icon              = require('../../helpers/Icon');
 var Team              = require('../Team');
 var numeral           = require('numeral');
@@ -23,9 +23,9 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       campaignUid: '',
+      page_count: '1',
+      page_size: '12',
       type: 'team',
-      limit: '12',
-      page: '1',
       defaultI18n: {
         heading: 'All Teams'
       }
@@ -47,7 +47,7 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    staticPages.find(props.campaignUid, props.type, props.limit, props.page, this.onSuccess);
+    pages.find(props.campaignUid, props.page_count, props.page_size, props.type, this.onSuccess);
   },
 
   onSuccess: function(result) {

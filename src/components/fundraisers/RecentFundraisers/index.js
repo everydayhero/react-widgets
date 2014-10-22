@@ -25,6 +25,7 @@ module.exports = React.createClass({
       campaignUid: '',
       page_count: '1',
       page_size: '6',
+      type: 'user',
       defaultI18n: {
         heading: 'Fundraisers',
         emptyLabel: 'No fundraisers to display.'
@@ -47,7 +48,7 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    pages.find(props.campaignUid, props.page_count, props.page_size, this.onSuccess);
+    pages.find(props.campaignUid, props.page_count, props.page_size, props.type, this.onSuccess);
   },
 
   onSuccess: function(result) {

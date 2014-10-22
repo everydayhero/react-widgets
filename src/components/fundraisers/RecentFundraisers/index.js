@@ -72,7 +72,7 @@ module.exports = React.createClass({
       if (this.state.hasResults) {
         return this.state.pageResults.map(function(d,i) {
           return (
-            <FundraiserImage pageUrl={ d.url } imgSrc={ d.image.large_image_url } imgTitle={ d.name } imgAlt={ d.name } />
+            <FundraiserImage pageUrl={ d.url } imgSrc={ d.image.large_image_url } imgTitle={ d.name } />
           )
         });
       } else {

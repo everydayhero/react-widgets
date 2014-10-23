@@ -1,0 +1,49 @@
+.MapUS {
+  @include box-sizing(border-box);
+  font-family: $sans-serif-fonts;
+  border-radius: $border-radius;
+  border:2px solid #555;
+  width: 605px;
+  height: 385px;
+  padding:15px;
+  position: relative;
+}
+
+.MapUS__heading {
+  @extend %tile-heading;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 1;
+}
+
+.MapUS__content {
+  @include vertical-align;
+  text-align: center;
+  width:500px;
+  margin: 15px auto 0;
+}
+
+.MapUS__legend {
+  position: absolute;
+  right:15px;
+  top:15px;
+  z-index: 1;
+  font-size: 13px;
+  line-height: 1;
+
+  .MapUS__legend-key {
+    background-color: #000;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border:1px solid #ccc;
+    vertical-align: bottom;
+    margin: 0 3px;
+  }
+}
+
+.MapUS__loading {
+  text-align: center;
+}

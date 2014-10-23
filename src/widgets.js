@@ -13,7 +13,8 @@ var widgets = {
   Goal: require('./components/totals/Goal'),
   Leaderboard: require('./components/leaderboards/TeamLeaderboard'),
   RecentFundraisers: require('./components/fundraisers/RecentFundraisers'),
-  Teams: require('./components/teams/Teams')
+  Teams: require('./components/teams/Teams'),
+  MapUS: require('./components/maps/MapUS')
 }
 var edh = {widgets: {}};
 

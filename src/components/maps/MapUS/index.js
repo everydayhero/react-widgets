@@ -92,8 +92,8 @@ module.exports = React.createClass({
         resolution: 'provinces',
         legend: 'none',
         enableRegionInteractivity: 'false',
-        sizeAxis: {minSize:5,  maxSize: 5},
-        colorAxis: {minValue: 1, maxValue:1,  colors: [this.props.color]},
+        sizeAxis: {minSize: 5,  maxSize: 5},
+        colorAxis: {minValue: 1, maxValue: 1,  colors: [this.props.color]},
         tooltip: {trigger: 'none'}
       };
 

@@ -17,6 +17,8 @@ module.exports = React.createClass({
     type: React.PropTypes.string,
     limit: React.PropTypes.string,
     page: React.PropTypes.string,
+    backgroundColor: React.PropTypes.string,
+    textColor: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
 
@@ -26,6 +28,8 @@ module.exports = React.createClass({
       page_count: '1',
       page_size: '12',
       type: 'team',
+      backgroundColor: '#EBEBEB',
+      textColor: '#333333',
       defaultI18n: {
         heading: 'All Teams'
       }
@@ -85,9 +89,13 @@ module.exports = React.createClass({
 
   render: function() {
     var heading = this.t('heading');
+    var customStyle = {
+      backgroundColor: this.props.backgroundColor,
+      color: this.props.textColor
+    }
 
     return (
-      <div className="Teams">
+      <div className="Teams" style={ customStyle }>
         <h3 className="Teams__heading">{ heading }</h3>
         <div className="Teams__content">
           { this.renderTeam() }

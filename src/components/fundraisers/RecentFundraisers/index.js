@@ -26,6 +26,8 @@ module.exports = React.createClass({
       page_count: '1',
       page_size: '6',
       type: 'user',
+      backgroundColor: '#EBEBEB',
+      textColor: '#333333',
       defaultI18n: {
         heading: 'Fundraisers',
         emptyLabel: 'No fundraisers to display.'
@@ -86,9 +88,13 @@ module.exports = React.createClass({
 
   render: function() {
     var heading = this.t('heading');
+    var customStyle = {
+      backgroundColor: this.props.backgroundColor,
+      color: this.props.textColor
+    }
 
     return (
-      <div className="RecentFundraisers">
+      <div className="RecentFundraisers" style={ customStyle }>
         <h3 className="RecentFundraisers__heading">{ heading }</h3>
         <div className="RecentFundraisers__content">
           { this.renderFundraiserImage() }

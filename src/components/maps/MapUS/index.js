@@ -16,6 +16,7 @@ module.exports = React.createClass({
     page_type: React.PropTypes.string,
     limit: React.PropTypes.string,
     page: React.PropTypes.string,
+    color: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
 

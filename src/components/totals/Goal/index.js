@@ -12,6 +12,8 @@ module.exports = React.createClass({
   propTypes: {
     goal: React.PropTypes.string,
     renderIcon: React.PropTypes.bool,
+    backgroundColor: React.PropTypes.string,
+    textColor: React.PropTypes.string,
     i18n: React.PropTypes.object,
   },
 
@@ -20,6 +22,8 @@ module.exports = React.createClass({
       campaignUid: '',
       renderIcon: true,
       goal: 0,
+      backgroundColor: '#555555',
+      textColor: '#FFFFFF',
       defaultI18n: {
         title: 'Goal',
         symbol: '$'
@@ -52,8 +56,13 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var customStyle = {
+      backgroundColor: this.props.backgroundColor,
+      color: this.props.textColor
+    }
+
     return (
-      <div className={ "Goal" }>
+      <div className={ "Goal" } style={ customStyle }>
         { this.renderIcon() }
         { this.renderTotal() }
       </div>

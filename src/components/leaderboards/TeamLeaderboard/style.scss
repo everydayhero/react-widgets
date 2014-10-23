@@ -8,7 +8,6 @@
 
   .TeamLeaderboard__heading {
     @extend %tile-heading;
-    color:#fff;
   }
 
   .TeamLeaderboard__items {
@@ -27,17 +26,13 @@
   .TeamLeaderboard__indicators {
     display: inline-block;
     vertical-align: middle;
-    margin-left: 10px;
+    margin-left: 5px;
   }
 
   .TeamLeaderboard__prevBtn,
   .TeamLeaderboard__nextBtn {
-    color:#fff;
-    background: #333;
-    border-radius: $border-radius;
     display: inline-block;
-    padding:5px 10px;
-    margin:0 0 0 5px;
+    padding:5px;
     cursor: pointer;
     font-size: 24px;
   }

@@ -18,6 +18,8 @@ module.exports = React.createClass({
     type: React.PropTypes.string,
     limit: React.PropTypes.string,
     pageSize: React.PropTypes.number,
+    backgroundColor: React.PropTypes.string,
+    textColor: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
 
@@ -27,6 +29,8 @@ module.exports = React.createClass({
       type: 'team',
       limit: '12',
       pageSize: 4,
+      backgroundColor: '#555555',
+      textColor: '#FFFFFF',
       defaultI18n: {
         raisedTitle: 'Raised',
         membersTitle: 'Members',
@@ -179,9 +183,13 @@ module.exports = React.createClass({
 
   render: function() {
     var heading = this.t('heading');
+    var customStyle = {
+      backgroundColor: this.props.backgroundColor,
+      color: this.props.textColor
+    }
 
     return (
-      <div className="TeamLeaderboard">
+      <div className="TeamLeaderboard" style={ customStyle }>
         <h3 className="TeamLeaderboard__heading">{ heading }</h3>
         <ol className="TeamLeaderboard__items">
           { this.renderLeaderboardItems() }

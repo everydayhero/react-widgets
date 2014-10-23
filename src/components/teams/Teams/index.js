@@ -72,7 +72,7 @@ module.exports = React.createClass({
       if (this.state.hasResults) {
         return this.state.pageResults.map(function(d,i) {
           return (
-            <Team pageUrl={ d.url } imgSrc="http://placehold.it/150x80" title={ d.name } />
+            <Team pageUrl={ d.url } imgSrc={ d.image.large_image_url } title={ d.name } />
           )
         });
       } else {

@@ -50,8 +50,8 @@ describe('TotalHeroes', function() {
       findByClass(element, 'TotalHeroes__loading');
     });
 
-    it('checks that find function works with compaign id, page count and page size', function() {
-      expect(pages.find).toBeCalledWith('au-0','1','1', element.onSuccess);
+    it('checks that find function works with default props', function() {
+      expect(pages.find).toBeCalledWith('au-0','1','1','user', element.onSuccess);
     });
   });
 

@@ -76,7 +76,8 @@ module.exports = React.createClass({
         name: page.name,
         iso_code: page.amount.currency.iso_code,
         amount:  symbol + numeral(page.amount.cents / 100).format('0[.]00 a'),
-        totalMembers: page.team_member_uids.length
+        totalMembers: page.team_member_uids.length,
+        imgSrc: page.image.large_image_url
       }
     });
 
@@ -106,6 +107,7 @@ module.exports = React.createClass({
               iso_code={ d.iso_code }
               amount={ d.amount }
               totalMembers={ d.totalMembers }
+              imgSrc={ d.imgSrc }
               raisedTitle={ this.t('raisedTitle') }
               membersTitle={ this.t('membersTitle') } />
           )

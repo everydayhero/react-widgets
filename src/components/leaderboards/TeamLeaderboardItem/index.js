@@ -11,7 +11,7 @@ module.exports = React.createClass({
     return (
       <li className="TeamLeaderboard__items-item">
         <div className="TeamLeaderboard__items-image">
-          <img src="http://placehold.it/230x230" />
+          <img src={ this.props.imgSrc } />
         </div>
         <div className="TeamLeaderboard__items-content">
           <div className="TeamLeaderboard__items-name">{ this.props.name }</div>

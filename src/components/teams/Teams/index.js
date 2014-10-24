@@ -31,7 +31,8 @@ module.exports = React.createClass({
       backgroundColor: '#EBEBEB',
       textColor: '#333333',
       defaultI18n: {
-        heading: 'All Teams'
+        heading: 'Teams',
+        emptyLabel: 'No teams to display.'
       }
     }
   },
@@ -39,8 +40,8 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       isLoading: false,
-      pageResults: [],
-      hasResults: false
+      hasResults: false,
+      pageResults: []
     };
   },
 

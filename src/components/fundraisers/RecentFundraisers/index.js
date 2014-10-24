@@ -38,8 +38,8 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       isLoading: false,
-      pageResults: [],
-      hasResults: false
+      hasResults: false,
+      pageResults: []
     };
   },
 

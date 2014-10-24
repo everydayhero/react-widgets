@@ -6,10 +6,7 @@ jest.mock('../../../../api/pages');
 describe('MapUS', function() {
   var React                       = require('react/addons');
   var MapUS                       = require('../');
-  var pages                       = require('../../../../api/pages');
   var TestUtils                   = React.addons.TestUtils;
-  var scryByClass                 = TestUtils.scryRenderedDOMComponentsWithClass;
-  var scryByTag                   = TestUtils.scryRenderedDOMComponentsWithTag;
   var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {

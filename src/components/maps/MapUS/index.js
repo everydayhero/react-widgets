@@ -6,7 +6,6 @@ var React        = require('react');
 var I18nMixin    = require('../../mixins/I18n');
 var staticPages  = require('../../../api/staticPages');
 var Icon         = require('../../helpers/Icon');
-var numeral      = require('numeral');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -31,7 +30,7 @@ module.exports = React.createClass({
         heading: 'Program Reach',
         legend: 'Heroes'
       }
-    }
+    };
   },
 
   getInitialState: function() {
@@ -57,7 +56,7 @@ module.exports = React.createClass({
 
       return {
         location: page.coordinate
-      }
+      };
     });
 
     this.onSuccess(locations);
@@ -77,7 +76,7 @@ module.exports = React.createClass({
           data.addColumn('number', 'Value');
 
       if (!this.state.isLoading) {
-        _.each(this.state.pointData, function(d,i) {
+        _.each(this.state.pointData, function(d) {
           if (d.location) {
             data.addRows([
               [d.location.lat,d.location.lon,0]
@@ -106,7 +105,7 @@ module.exports = React.createClass({
 
     var s = document.createElement('script');
     s.src = 'https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["geochart"],"callback":"drawMarkersMap"}]}';
-    document.head.appendChild( s );
+    document.head.appendChild(s);
 
   },
 

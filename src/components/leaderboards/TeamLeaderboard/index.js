@@ -37,7 +37,7 @@ module.exports = React.createClass({
         symbol: '$',
         heading: 'Leaderboard > Top Teams'
       }
-    }
+    };
   },
 
   getInitialState: function() {
@@ -46,7 +46,7 @@ module.exports = React.createClass({
       teamPageIds: [],
       boardData: [],
       pagedBoardData: [],
-      currentPage: 1,
+      currentPage: 1
     };
   },
 
@@ -57,10 +57,10 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    leaderboard.find(props.campaignUid, props.type, props.limit, this.gotTeamPages);
+    leaderboard.find(props.campaignUid, props.type, props.limit, this.hasTeamPages);
   },
 
-  gotTeamPages: function(result) {
+  hasTeamPages: function(result) {
     this.setState({
       teamPageIds: result.leaderboard.page_ids
     });
@@ -73,7 +73,7 @@ module.exports = React.createClass({
     var pageSize         = this.props.pageSize;
     var pagedLeaderboard = [];
 
-    var leaderboard = _.map(this.state.teamPageIds, function(page_id, i) {
+    var leaderboard = _.map(this.state.teamPageIds, function(page_id) {
       var page = _.filter(page_data.pages, {id: page_id})[0];
 
       return {
@@ -102,7 +102,11 @@ module.exports = React.createClass({
   renderLeaderboardItems: function() {
     var currentPage = this.state.currentPage - 1;
 
-    if (!this.state.isLoading) {
+    if (this.state.isLoading) {
+      return (
+        <Icon className="TeamLeaderboard__loading" icon="refresh" spin={ true }/>
+      );
+    } else {
       if (this.state.boardData[currentPage].length > 0) {
         return this.state.boardData[currentPage].map(function(d,i) {
           return (
@@ -117,24 +121,7 @@ module.exports = React.createClass({
           )
         }, this);
       }
-    } else {
-      return (
-        <Icon className="TeamLeaderboard__loading" icon="refresh" spin={ true }/>
-      );
     }
-  },
-
-  renderControls: function() {
-    return (
-      <div className="TeamLeaderboard__controls">
-        <div onClick={ this.prevPage } className="TeamLeaderboard__prevBtn">
-          <Icon className="TeamLeaderboard__icon" icon="caret-left"/>
-        </div>
-        <div onClick={ this.nextPage } className="TeamLeaderboard__nextBtn">
-          <Icon className="TeamLeaderboard__icon" icon="caret-right"/>
-        </div>
-      </div>
-    )
   },
 
   prevPage: function() {
@@ -198,7 +185,14 @@ module.exports = React.createClass({
           <div className="TeamLeaderboard__indicators">
             { this.renderIndicators() }
           </div>
-          { this.renderControls() }
+          <div className="TeamLeaderboard__controls">
+            <div onClick={ this.prevPage } className="TeamLeaderboard__prevBtn">
+              <Icon className="TeamLeaderboard__icon" icon="caret-left"/>
+            </div>
+            <div onClick={ this.nextPage } className="TeamLeaderboard__nextBtn">
+              <Icon className="TeamLeaderboard__icon" icon="caret-right"/>
+            </div>
+          </div>
         </div>
       </div>
     );

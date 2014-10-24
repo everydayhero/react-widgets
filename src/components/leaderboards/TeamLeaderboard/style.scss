@@ -1,6 +1,6 @@
 .TeamLeaderboard {
   @extend %clearfix;
-  background:#555;
+  background: #555;
   font-family: $sans-serif-fonts;
   font-size: $default-font-size;
   color: #fff;
@@ -17,9 +17,9 @@
   }
 
   .TeamLeaderboard__controller {
-    clear:both;
+    clear: both;
     text-align: right;
-    margin:15px 15px;
+    margin: 15px 15px;
   }
 
   .TeamLeaderboard__controls,
@@ -32,16 +32,16 @@
   .TeamLeaderboard__prevBtn,
   .TeamLeaderboard__nextBtn {
     display: inline-block;
-    padding:5px;
+    padding: 5px;
     cursor: pointer;
     font-size: 24px;
   }
 
   .TeamLeaderboard__indicator {
     display: inline-block;
-    padding:3px;
+    padding: 3px;
     margin: 0 2px 0 0;
-    cursor:pointer;
+    cursor: pointer;
   }
 
   .TeamLeaderboard__loading {

@@ -2,10 +2,10 @@
   @include box-sizing(border-box);
   font-family: $sans-serif-fonts;
   border-radius: $border-radius;
-  border:2px solid #555;
+  border: 2px solid $color-grey-dark;
   width: 605px;
   height: 405px;
-  padding:15px;
+  padding: 15px;
   position: relative;
 }
 
@@ -20,14 +20,14 @@
 .MapUS__content {
   @include vertical-align;
   text-align: center;
-  width:500px;
+  width: 500px;
   margin: 15px auto 0;
 }
 
 .MapUS__legend {
   position: absolute;
-  right:15px;
-  top:15px;
+  right: 15px;
+  top: 15px;
   z-index: 1;
   font-size: 13px;
   line-height: 1;
@@ -38,7 +38,7 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    border:1px solid #ccc;
+    border: 1px solid #ccc;
     vertical-align: bottom;
     margin: 0 3px;
   }

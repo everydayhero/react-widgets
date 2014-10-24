@@ -4,7 +4,7 @@ Widgets are small Javascript components that integrate with EverydayHero's API. 
 
 ## Location
 
-You can find the minified assets at the following locations:
+You can find the latest minified assets at the following locations:
 
 - `//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js`
 - `//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css`

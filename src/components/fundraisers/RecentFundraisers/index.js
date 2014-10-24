@@ -7,7 +7,6 @@ var I18nMixin         = require('../../mixins/I18n');
 var pages             = require('../../../api/pages');
 var Icon              = require('../../helpers/Icon');
 var FundraiserImage   = require('../FundraiserImage');
-var numeral           = require('numeral');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],

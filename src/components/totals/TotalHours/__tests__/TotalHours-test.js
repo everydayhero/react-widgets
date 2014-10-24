@@ -8,7 +8,6 @@ describe('TotalDistance', function() {
   var TotalHours               = require('../');
   var campaigns                   = require('../../../../api/campaigns');
   var TestUtils                   = React.addons.TestUtils;
-  var scryByClass                 = TestUtils.scryRenderedDOMComponentsWithClass;
   var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {

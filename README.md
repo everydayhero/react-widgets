@@ -33,8 +33,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//edh-widgets.s3.amazonaws.com/widgets.js"></script>
-    <link href="//edh-widgets.s3.amazonaws.com/widgets.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <a href="#" id="CharitySearchExample">Support a Charity</a>
@@ -67,8 +67,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//edh-widgets.s3.amazonaws.com/widgets.js"></script>
-    <link href="//edh-widgets.s3.amazonaws.com/widgets.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="FundsRaisedExample">Loading...</div>
@@ -94,8 +94,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//edh-widgets.s3.amazonaws.com/widgets.js"></script>
-    <link href="//edh-widgets.s3.amazonaws.com/widgets.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="TotalHeroesExample">Loading...</div>
@@ -121,8 +121,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//edh-widgets.s3.amazonaws.com/widgets.js"></script>
-    <link href="//edh-widgets.s3.amazonaws.com/widgets.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="TotalCharitiesExample">Loading...</div>
@@ -149,8 +149,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//edh-widgets.s3.amazonaws.com/widgets.js"></script>
-    <link href="//edh-widgets.s3.amazonaws.com/widgets.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="TotalCharitiesExample">Loading...</div>

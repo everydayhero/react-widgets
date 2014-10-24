@@ -56,13 +56,15 @@ module.exports = React.createClass({
     this.setState({
       isLoading: false,
       pageResults: result.pages
-    });
+    },
 
-    if (!_.isEmpty(this.state.pageResults)) {
-      this.setState({
-        hasResults: true
-      });
-    }
+    function() {
+      if (!_.isEmpty(this.state.pageResults)) {
+        this.setState({
+          hasResults: true
+        });
+      }
+    }.bind(this));
   },
 
   renderFundraiserImage: function() {
@@ -72,7 +74,7 @@ module.exports = React.createClass({
       return <Icon className="RecentFundraisers__loading" icon="refresh" spin={ true }/>;
     } else {
       if (this.state.hasResults) {
-        return this.state.pageResults.map(function(d,i) {
+        return this.state.pageResults.map(function(d) {
           return (
             <FundraiserImage pageUrl={ d.url } imgSrc={ d.image.large_image_url } imgTitle={ d.name } />
           )
@@ -90,7 +92,7 @@ module.exports = React.createClass({
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
-    }
+    };
 
     return (
       <div className="RecentFundraisers" style={ customStyle }>

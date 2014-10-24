@@ -101,7 +101,6 @@ describe('CharitySearchModal', function() {
   });
 
   it('updates isSearching accordingly', function() {
-    var query = { country: 'xy', searchTerm: 'foo', campaignUid: '', page: 1, pageSize: 10 };
     var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy" />;
     var element = TestUtils.renderIntoDocument(charitySearchModal);
     var input = findByTag(element, 'input');

@@ -102,7 +102,6 @@ describe('PageSearchModal', function() {
   });
 
   it('updates isSearching accordingly', function() {
-    var query = { country: 'xy', searchTerm: 'foo', campaignUid: '', page: 1, pageSize: 10 };
     var pageSearchModal = <PageSearchModal autoFocus={ false } action="donate" country="xy" />;
     var element = TestUtils.renderIntoDocument(pageSearchModal);
     var input = findByTag(element, 'input');

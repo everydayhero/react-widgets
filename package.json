@@ -56,7 +56,7 @@
   },
   "browserify": {
     "transform": [
-      ["reactify", {"es6": true}]
+      "reactify"
     ]
   },
   "jest": {

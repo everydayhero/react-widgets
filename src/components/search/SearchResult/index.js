@@ -13,11 +13,10 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <a
+      <a href="#"
         className="SearchResult"
         key={ this.props.result.id }
-        onClick={ this.clickHandler }
-        href="#" >
+        onClick={ this.clickHandler }>
         { this.props.children }
       </a>
     )

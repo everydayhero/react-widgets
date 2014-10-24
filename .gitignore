@@ -1,4 +1,4 @@
 /node_modules
-/public/scripts/*.js
-/public/widgets.js
-/public/widgets.css
+/public/widgets-*.js
+/public/widgets-*.css
+.awspublish-shared-scripts

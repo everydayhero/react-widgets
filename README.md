@@ -6,8 +6,8 @@ Widgets are small Javascript components that integrate with EverydayHero's API. 
 
 You can find the minified assets at the following locations:
 
-- `//edh-widgets.s3.amazonaws.com/widgets.js`
-- `//edh-widgets.s3.amazonaws.com/widgets.css`
+- `//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js`
+- `//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css`
 
 ## Available Widgets
 
@@ -173,7 +173,17 @@ $ npm run styles      # build production styles
 $ npm run styles-dev  # build un minified styles (for debugging)
 $ npm run watch       # watch assests and build production
 $ npm run watch-dev   # watch assests and build un minified assets (for debugging)
+$ npm run publish     # publish build files to S3 bucket (AWS_KEY and AWS_SECRET environment variables must be set)
+
 $ npm test            # run tests
 $ npm start           # run local server
 $ node_modules/.bin/jest ./__test__/path.js # run an indivdual test file
 ```
+
+## Publishing updates
+
+* Non-breaking changes and bug fixes are a minor revision – e.g. 0.0.(2)
+* Breaking changes, css and template re-factors are major revisions – 0.(2).0
+* API updates and large additions/changes are major versions – e.g. (1).0.0
+
+The version number should be updated in the `package.json` before publishing.

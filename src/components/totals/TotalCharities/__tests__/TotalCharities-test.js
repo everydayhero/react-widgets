@@ -8,7 +8,6 @@ describe('TotalCharities', function() {
   var TotalCharities              = require('../');
   var campaignCharities           = require('../../../../api/campaignCharities');
   var TestUtils                   = React.addons.TestUtils;
-  var scryByClass                 = TestUtils.scryRenderedDOMComponentsWithClass;
   var scryByTag                   = TestUtils.scryRenderedDOMComponentsWithTag;
   var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
 

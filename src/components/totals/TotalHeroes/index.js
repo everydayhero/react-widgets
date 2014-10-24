@@ -3,7 +3,7 @@
 
 var React     = require('react');
 var I18nMixin = require('../../mixins/I18n');
-var pages	    = require('../../../api/pages');
+var pages     = require('../../../api/pages');
 var Icon      = require('../../helpers/Icon');
 var numeral   = require('numeral');
 
@@ -27,12 +27,12 @@ module.exports = React.createClass({
       page_size: '1',
       page_type: 'user',
       renderIcon: true,
-      backgroundColor: '#555555',
+      backgroundColor: '#525252',
       textColor: '#FFFFFF',
       defaultI18n: {
         title: 'Heroes'
       }
-    }
+    };
   },
 
   getInitialState: function() {
@@ -50,13 +50,13 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-  	this.setState({
+    this.setState({
       isLoading: true
-  	});
+    });
 
     var props = this.props;
 
-  	pages.find(props.campaignUid, props.page_count, props.page_size, props.page_type, this.onSuccess);
+    pages.find(props.campaignUid, props.page_count, props.page_size, props.page_type, this.onSuccess);
   },
 
   renderTotal: function() {
@@ -72,7 +72,7 @@ module.exports = React.createClass({
           <div className="TotalHeroes__total">{ formattedTotal }</div>
           <div className="TotalHeroes__title">{ title }</div>
         </div>
-      )
+      );
     }
   },
 
@@ -80,9 +80,7 @@ module.exports = React.createClass({
     var renderIcon = this.props.renderIcon;
 
     if (renderIcon) {
-      return (
-        <Icon className="TotalHeroes__icon" icon="bolt"/>
-      );
+      return <Icon className="TotalHeroes__icon" icon="bolt"/>;
     }
   },
 
@@ -93,10 +91,10 @@ module.exports = React.createClass({
     }
 
     return (
-	    <div className={ "TotalHeroes" } style={ customStyle }>
+      <div className="TotalHeroes" style={ customStyle }>
         { this.renderIcon() }
         { this.renderTotal() }
-	    </div>
+      </div>
     );
   }
 });

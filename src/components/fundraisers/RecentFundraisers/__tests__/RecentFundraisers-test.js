@@ -34,14 +34,14 @@ describe('RecentFundraisers', function() {
     });
 
     it('renders a default heading', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       var heading = findByClass(element, 'RecentFundraisers__heading');
 
       expect(heading.getDOMNode().textContent).toBe('Fundraisers');
     });
 
     it('renders a loading icon', function() {
-      element.setState({isLoading: true});
+      element.setState({ isLoading: true });
       findByClass(element, 'RecentFundraisers__loading');
     });
 
@@ -56,7 +56,7 @@ describe('RecentFundraisers', function() {
     var translation = {
       heading: 'headings are cool',
       emptyLabel: 'empty labels are not cool'
-    }
+    };
 
     beforeEach(function() {
       recentFundraisers = <RecentFundraisers i18n={ translation } />;

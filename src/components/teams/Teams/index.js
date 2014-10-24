@@ -7,7 +7,6 @@ var I18nMixin         = require('../../mixins/I18n');
 var pages             = require('../../../api/pages');
 var Icon              = require('../../helpers/Icon');
 var Team              = require('../Team');
-var numeral           = require('numeral');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -59,13 +58,15 @@ module.exports = React.createClass({
     this.setState({
       isLoading: false,
       pageResults: result.pages
-    });
+    },
 
-    if (!_.isEmpty(this.state.pageResults)) {
-      this.setState({
-        hasResults: true
-      });
-    }
+    function() {
+      if (!_.isEmpty(this.state.pageResults)) {
+        this.setState({
+          hasResults: true
+        });
+      }
+    }.bind(this));
   },
 
   renderTeam: function() {

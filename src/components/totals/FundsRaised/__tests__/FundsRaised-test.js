@@ -8,8 +8,6 @@ describe('FundsRaised', function() {
   var FundsRaised                 = require('../');
   var campaigns                   = require('../../../../api/campaigns');
   var TestUtils                   = React.addons.TestUtils;
-  var scryByClass                 = TestUtils.scryRenderedDOMComponentsWithClass;
-  var scryByTag                   = TestUtils.scryRenderedDOMComponentsWithTag;
   var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
@@ -61,7 +59,7 @@ describe('FundsRaised', function() {
     var translation = {
       title: 'asdjasj',
       symbol: '£'
-    }
+    };
 
     beforeEach(function() {
       fundsRaised = <FundsRaised i18n={ translation } renderIcon={ false } />;
@@ -69,7 +67,7 @@ describe('FundsRaised', function() {
     });
 
     it('renders a custom title', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       var title = findByClass(element, 'FundsRaised__title');
 
       expect(title.getDOMNode().textContent).toBe(translation.title);

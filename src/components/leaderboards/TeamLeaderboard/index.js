@@ -29,7 +29,7 @@ module.exports = React.createClass({
       type: 'team',
       limit: '12',
       pageSize: 4,
-      backgroundColor: '#555555',
+      backgroundColor: '#525252',
       textColor: '#FFFFFF',
       defaultI18n: {
         raisedTitle: 'Raised',

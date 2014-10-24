@@ -22,13 +22,13 @@ module.exports = React.createClass({
       campaignUid: '',
       renderIcon: true,
       goal: 0,
-      backgroundColor: '#555555',
+      backgroundColor: '#525252',
       textColor: '#FFFFFF',
       defaultI18n: {
         title: 'Goal',
         symbol: '$'
       }
-    }
+    };
   },
 
   renderTotal: function() {
@@ -42,7 +42,7 @@ module.exports = React.createClass({
         <div className="Goal__total">{ formattedTotal }</div>
         <div className="Goal__title">{ title }</div>
       </div>
-    )
+    );
   },
 
   renderIcon: function() {
@@ -62,7 +62,7 @@ module.exports = React.createClass({
     }
 
     return (
-      <div className={ "Goal" } style={ customStyle }>
+      <div className="Goal" style={ customStyle }>
         { this.renderIcon() }
         { this.renderTotal() }
       </div>

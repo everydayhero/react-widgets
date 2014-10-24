@@ -3,7 +3,7 @@
 
 var React     = require('react');
 var I18nMixin = require('../../mixins/I18n');
-var campaigns	= require('../../../api/campaigns');
+var campaigns = require('../../../api/campaigns');
 var Icon      = require('../../helpers/Icon');
 var numeral   = require('numeral');
 
@@ -22,13 +22,13 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       renderIcon: true,
-      backgroundColor: '#555555',
+      backgroundColor: '#525252',
       textColor: '#FFFFFF',
       defaultI18n: {
         title: 'Raised To Date',
         symbol: '$'
       }
-    }
+    };
   },
 
   getInitialState: function() {
@@ -46,11 +46,11 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-  	this.setState({
+    this.setState({
       isLoading: true
-  	});
+    });
 
-  	campaigns.find(this.props.campaignUid, this.onSuccess);
+    campaigns.find(this.props.campaignUid, this.onSuccess);
   },
 
   renderTotal: function() {
@@ -67,7 +67,7 @@ module.exports = React.createClass({
           <div className="FundsRaised__total">{ formattedTotal }</div>
           <div className="FundsRaised__title">{ title }</div>
         </div>
-      )
+      );
     }
   },
 
@@ -75,9 +75,7 @@ module.exports = React.createClass({
     var renderIcon = this.props.renderIcon;
 
     if (renderIcon) {
-      return (
-        <Icon className="FundsRaised__icon" icon="money"/>
-      );
+      return <Icon className="FundsRaised__icon" icon="money"/>
     }
   },
 
@@ -85,13 +83,13 @@ module.exports = React.createClass({
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
-    }
+    };
 
     return (
-	    <div className={ "FundsRaised" } style={ customStyle }>
+      <div className={ "FundsRaised" } style={ customStyle }>
         { this.renderIcon() }
         { this.renderTotal() }
-	    </div>
+      </div>
     );
   }
 });

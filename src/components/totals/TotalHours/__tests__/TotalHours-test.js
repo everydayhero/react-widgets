@@ -9,7 +9,6 @@ describe('TotalDistance', function() {
   var campaigns                   = require('../../../../api/campaigns');
   var TestUtils                   = React.addons.TestUtils;
   var scryByClass                 = TestUtils.scryRenderedDOMComponentsWithClass;
-  var scryByTag                   = TestUtils.scryRenderedDOMComponentsWithTag;
   var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {

@@ -22,12 +22,12 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       renderIcon: true,
-      backgroundColor: '#555555',
+      backgroundColor: '#525252',
       textColor: '#FFFFFF',
       defaultI18n: {
         title: 'Non Profits'
       }
-    }
+    };
   },
 
   getInitialState: function() {

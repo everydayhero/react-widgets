@@ -23,13 +23,13 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       renderIcon: true,
-      backgroundColor: '#555555',
+      backgroundColor: '#525252',
       textColor: '#FFFFFF',
       defaultI18n: {
         title: 'Hours',
         emptyLabel: 'No data to display.'
       }
-    }
+    };
   },
 
   getInitialState: function() {
@@ -83,9 +83,7 @@ module.exports = React.createClass({
           </div>
         )
       } else {
-        return (
-          <p className="TotalHours__empty-label">{ emptyLabel }</p>
-        )
+        return <p className="TotalHours__empty-label">{ emptyLabel }</p>;
       }
     }
   },
@@ -94,9 +92,7 @@ module.exports = React.createClass({
     var renderIcon = this.props.renderIcon;
 
     if (renderIcon) {
-      return (
-        <Icon className="TotalHours__icon" icon="clock-o"/>
-      );
+      return <Icon className="TotalHours__icon" icon="clock-o"/>;
     }
   },
 
@@ -104,7 +100,7 @@ module.exports = React.createClass({
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
-    }
+    };
 
     return (
       <div className={ "TotalHours" } style={ customStyle }>

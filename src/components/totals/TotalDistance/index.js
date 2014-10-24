@@ -23,14 +23,14 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       renderIcon: true,
-      backgroundColor: '#555555',
+      backgroundColor: '#525252',
       textColor: '#FFFFFF',
       unit: 'miles',
       defaultI18n: {
         title: 'Miles',
         emptyLabel: 'No data to display.'
       }
-    }
+    };
   },
 
   getInitialState: function() {
@@ -101,9 +101,7 @@ module.exports = React.createClass({
     var renderIcon = this.props.renderIcon;
 
     if (renderIcon) {
-      return (
-        <Icon className="TotalDistance__icon" icon="angle-double-right"/>
-      );
+      return <Icon className="TotalDistance__icon" icon="angle-double-right"/>;
     }
   },
 

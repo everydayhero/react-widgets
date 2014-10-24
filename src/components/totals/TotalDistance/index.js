@@ -50,8 +50,6 @@ module.exports = React.createClass({
   },
 
   onSuccess: function(result) {
-
-
     var fitnessResults = result.campaign.fitness_activity_overview.run;
 
     if (typeof fitnessResults === 'undefined'){

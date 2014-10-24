@@ -4,6 +4,8 @@
 var React = require('react');
 
 module.exports = React.createClass({
+  displayName: 'SearchResult',
+
   clickHandler: function(event) {
     event.preventDefault();
     this.props.onSelect(this.props.result);

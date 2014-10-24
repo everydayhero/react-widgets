@@ -2,22 +2,18 @@
 "use strict";
 jest.autoMockOff();
 
-var React     = require('react/addons');
-var Result    = require('../');
-var TestUtils = React.addons.TestUtils;
-var findByTag = TestUtils.findRenderedDOMComponentWithTag;
+var React       = require('react/addons');
+var Result      = require('../');
+var TestUtils   = React.addons.TestUtils;
+var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
-describe('it renders a result', function() {
-  var results = [{title: 'title text', description: 'description text'}];
+describe('SearchResult', function() {
+  it('renders a result', function() {
+    var result = { id: '1' };
+    var searchResult = <Result result={ result }>foo</Result>;
+    var component = TestUtils.renderIntoDocument(searchResult);
+    var element = findByClass(component, 'SearchResult');
 
-  it('renders a results', function() {
-    var result = {
-      id: '1',
-      name: 'foo'
-    }
-    var searchResults = <Result result={ result }/>;
-    var component = TestUtils.renderIntoDocument(searchResults);
-    var element = findByTag(component, 'span');
     expect(element.getDOMNode().textContent).toBe('foo');
   });
 });

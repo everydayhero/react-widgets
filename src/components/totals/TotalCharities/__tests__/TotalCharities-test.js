@@ -1,12 +1,12 @@
 /** @jsx React.DOM */
 "use strict";
 jest.autoMockOff();
-jest.mock('../../../../api/campaignCharities');
+jest.mock('../../../../api/charities');
 
 describe('TotalCharities', function() {
   var React                       = require('react/addons');
   var TotalCharities              = require('../');
-  var campaignCharities           = require('../../../../api/campaignCharities');
+  var charities                   = require('../../../../api/charities');
   var TestUtils                   = React.addons.TestUtils;
   var scryByTag                   = TestUtils.scryRenderedDOMComponentsWithTag;
   var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
@@ -50,7 +50,7 @@ describe('TotalCharities', function() {
     });
 
     it('check that a campaign id is present', function() {
-      expect(campaignCharities.find).toBeCalledWith('au-0', element.onSuccess);
+      expect(charities.findByCampaign).toBeCalledWith('au-0', 1, 1, element.onSuccess);
     });
   });
 

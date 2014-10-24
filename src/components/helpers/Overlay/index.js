@@ -10,14 +10,20 @@ var $ = {
 };
 
 module.exports = React.createClass({
+  displayName: 'Overlay',
+
+  propTypes: {
+    onClose: React.PropTypes.func
+  },
+
   keyHandler: function(event) {
     if (event.key === 'Escape') {
-      this.props.onClose();
+      this.onClose(event);
     }
   },
 
-  onClose: function(e) {
-    e.preventDefault();
+  onClose: function(event) {
+    event.preventDefault();
     if (this.props.onClose) {
       this.props.onClose();
     }
@@ -32,10 +38,13 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var closeButton = this.props.onClose &&
+      <a href="#" className="Overlay__close" onClick={ this.onClose }><Icon icon="close" /></a>;
+
     return (
       <div className='Overlay' onKeyDown={ this.keyHandler }>
-        <a href="#" className="Overlay__close" onClick={ this.onClose }><Icon icon="close" /></a>
-        { this.props.children || null }
+        { closeButton }
+        { this.props.children }
       </div>
     );
   }

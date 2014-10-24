@@ -1,33 +1,19 @@
 /** @jsx React.DOM */
 "use strict";
-
 jest.autoMockOff();
 
+var React            = require('react/addons');
+var SearchPagination = require('../');
+var TestUtils        = React.addons.TestUtils;
+var findByClass      = TestUtils.findRenderedDOMComponentWithClass;
+
 describe('SearchPagination', function() {
-  var React            = require('react/addons');
-  var SearchPagination = require('../SearchPagination');
-  var TestUtils        = React.addons.TestUtils;
-  var findByClass      = TestUtils.findRenderedDOMComponentWithClass;
-
   it('renders the page details', function() {
-     var data = [{
-      id: 1
-    },
-    {
-      id: 2
-    }];
-
     var element = TestUtils.renderIntoDocument(
-        <SearchPagination
-          results={data}
-          totalPages={2}
-          page={2}
-          pageSize={10}
-          count={12} />
-      );
+      <SearchPagination count={12} page={2} pageSize={10} totalPages={2} />
+    );
 
     var details = findByClass(element, 'SearchPagination__counter');
-    expect(details.getDOMNode().textContent).toBe('10 - 12 of 12');
+    expect(details.getDOMNode().textContent).toBe('11 - 12 of 12');
   });
-
 });

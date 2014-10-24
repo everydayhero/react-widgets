@@ -1,10 +1,36 @@
 "use strict";
 
+var _ = require('lodash');
 var routes = require('./routes');
 var getJSON = require('../lib/getJSON');
+var campaigns = require('./campaigns');
 
 module.exports = {
-  find: function(id, page_count, page_size, type, callback) {
-    getJSON(routes('pages', {id: id, page_count: page_count, page_size: page_size, type: type}), callback);
+  find: function(pageId, callback) {
+    return getJSON(routes('page', { pageId: pageId }), callback);
+  },
+
+  findByIds: function(pageIds, callback) {
+    return getJSON(routes('pages', { pageIds: pageIds }), callback);
+  },
+
+  findByCampaign: function(campaignUid, type, limit, page, callback) {
+    var params = {
+      campaignUid: campaignUid,
+      type: type,
+      page: page,
+      limit: limit
+    };
+    return getJSON(routes('pages', params), callback);
+  },
+
+  search: function(params, callback) {
+    params = _.merge({ page: 1, pageSize: 10 }, params);
+    return getJSON(routes('searchPages', params), callback);
+  },
+
+  isGivePage: function(page) {
+    return page.campaign.uid &&
+      page.campaign.uid == campaigns.giveCampaignUid(page.country_code);
   }
 };

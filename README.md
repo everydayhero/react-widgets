@@ -22,40 +22,83 @@ You can view the deployed example html file at:
 
 ### Search
 
-#### CharitySearch
+#### CharitySearchModal
 
-- `action`:      *required* action to perform on charity select, either 'donate', 'fundraise' or 'custom'
-- `callback`:    *optional* function called when action set to 'custom'.
-- `campaignUid`: *optional* string campaign uid to filter charity results.
-- `country`:     *required* string country code of region, either 'au', 'nz', 'uk' or 'us'.
-- `i18n`:        *optional* object containing localised text. Default i18n is:
+##### Options
+
+- `action`:       *required* action to perform on charity select, either 'donate', 'fundraise' or 'custom'.
+                  *Note: 'donate' action is currently not supported for country 'us'.*
+- `onSelect`:     *optional* function called when action set to 'custom'.
+- `campaignUid`:  *optional* string campaign uid to filter charity results.
+- `campaignSlug`: *optional* string campaign slug for given campaign uid for fundraise action.
+- `country`:      *required* string country code of region, either 'au', 'nz', 'uk' or 'us'.
+- `i18n`:         *optional* object containing localised text. Default i18n is:
+
   ```js
-    {
-      title: 'Search for a Charity',
-      donateAction: 'Give to this Charity',
-      fundraiseAction: 'Fundraise for this Charity',
-      customAction: 'Select',
-      emptylabel: 'No results'
-    }
+  {
+    title: 'Search for a Charity',
+    donateAction: 'Give to this Charity',
+    fundraiseAction: 'Fundraise for this Charity',
+    customAction: 'Select',
+    emptylabel: 'No results'
+  }
   ```
 
-*Note: 'donate' action is currently not supported for country 'us'.*
+##### Example
 
 ```html
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <meta charset="UTF-8">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
-    <a href="#" id="CharitySearchExample">Support a Charity</a>
+    <a id="CharitySearchExample">Support a Charity</a>
     <script>
-      edh.widgets.CharitySearchInit({
-        elementId: 'CharitySearch',
-        country: 'uk',
-        action: 'donate'
-      });
+      edh.widgets.initModal('CharitySearchExample', 'CharitySearch', { country: 'uk', action: 'donate' });
+    </script>
+  </body>
+</html>
+```
+
+#### PageSearchModal
+
+##### Options
+
+- `element`:      *required* target link element or element ID to show search modal on click.
+- `onSelect`:     *optional* function called on selecting a result. Default redirects to supporter page.
+- `campaignUid`:  *optional* string campaign uid to filter page results.
+- `country`:      *required* string country code of region, either 'au', 'nz', 'uk' or 'us'.
+- `i18n`:         *optional* object containing localised text. Default i18n is:
+
+  ```js
+  {
+    title: 'Search for a Supporter',
+    selectAction: 'Support',
+    emptylabel: 'No results'
+  }
+  ```
+
+##### Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+  </head>
+  <body>
+    <a id="PageSearchExample">Support a friend</a>
+    <script>
+      edh.widgets.initModal('PageSearchExample', 'PageSearch', { country: 'uk' });
     </script>
   </body>
 </html>
@@ -67,6 +110,8 @@ You can view the deployed example html file at:
 
 Displays the total funds raised for a single specified campaign as a dollar amount.
 
+##### Options
+
 - `campaignUid`: *required* string. Campaign uid.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
@@ -74,18 +119,22 @@ Displays the total funds raised for a single specified campaign as a dollar amou
 - `i18n`:        *optional* object containing localised text. Default i18n is:
 
   ```js
-    {
-      title: 'Raised to Date',
-      symbol: '$'
-    }
+  {
+    title: 'Raised to Date',
+    symbol: '$'
+  }
   ```
 
+##### Example
+
 ```html
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <meta charset="UTF-8">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
     <div id="FundsRaisedExample">Loading...</div>
@@ -100,6 +149,8 @@ Displays the total funds raised for a single specified campaign as a dollar amou
 
 Displays the total number of fundraisers (that have a page) for a single specified campaign.
 
+##### Options
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
@@ -107,17 +158,21 @@ Displays the total number of fundraisers (that have a page) for a single specifi
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
-    {
-      title: 'Heroes'
-    }
+  {
+    title: 'Heroes'
+  }
   ```
 
+##### Example
+
 ```html
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <meta charset="UTF-8">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
     <div id="TotalHeroesExample">Loading...</div>
@@ -132,6 +187,8 @@ Displays the total number of fundraisers (that have a page) for a single specifi
 
 Displays the total number of charities associated with a single specified campaign.
 
+##### Options
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
@@ -140,17 +197,21 @@ Displays the total number of charities associated with a single specified campai
 - `i18n`:        *optional* object containing localised text. Default i18n is:
 
   ```js
-    {
-      title: 'Charities'
-    }
+  {
+    title: 'Charities'
+  }
   ```
 
+##### Example
+
 ```html
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <meta charset="UTF-8">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
     <div id="TotalCharitiesExample">Loading...</div>
@@ -165,6 +226,8 @@ Displays the total number of charities associated with a single specified campai
 
 Set a goal in cents to display as a campaign goal.
 
+##### Options
+
 - `goal`: *required* number. Set a goal in **cents** to be rendered as a dollar amount.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
@@ -172,18 +235,22 @@ Set a goal in cents to display as a campaign goal.
 - `i18n`:       *optional* object containing localised text. Default i18n is:
 
   ```js
-    {
-      title: 'Goal',
-      symbol: '$'
-    }
+  {
+    title: 'Goal',
+    symbol: '$'
+  }
   ```
 
+##### Example
+
 ```html
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <meta charset="UTF-8">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
     <div id="GoalExample">Loading...</div>
@@ -198,6 +265,8 @@ Set a goal in cents to display as a campaign goal.
 
 Displays the total recorded distance that fundraisers have run for a single specified campaign in either **kilometers** or **miles**.
 
+##### Options
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `unit`: *optional* string. Can be set to either `'km'` or `'miles'`. Converts input to whichever is defined. Set to `'miles'` by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
@@ -206,18 +275,22 @@ Displays the total recorded distance that fundraisers have run for a single spec
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
-    {
-      title: 'Miles',
-      emptyLabel: 'No data to display.'
-    }
+  {
+    title: 'Miles',
+    emptyLabel: 'No data to display.'
+  }
   ```
 
+##### Example
+
 ```html
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <meta charset="UTF-8">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
     <div id="TotalDistanceExample">Loading...</div>
@@ -232,6 +305,8 @@ Displays the total recorded distance that fundraisers have run for a single spec
 
 Displays the total recorded time that fundraisers have run for a single specified campaign in **hours**.
 
+##### Options
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
@@ -239,18 +314,22 @@ Displays the total recorded time that fundraisers have run for a single specifie
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
-    {
-      title: 'Hours',
-      emptyLabel: 'No data to display.'
-    }
+  {
+    title: 'Hours',
+    emptyLabel: 'No data to display.'
+  }
   ```
 
+##### Example
+
 ```html
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <meta charset="UTF-8">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
     <div id="TotalHoursExample">Loading...</div>
@@ -268,24 +347,30 @@ Displays the total recorded time that fundraisers have run for a single specifie
 
 Displays a set of fundraiser profile images (that have a page) for a single specified campaign.
 
+##### Options
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
 - `textColor`: *optional* string. Set to `'#333333'` by default.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
-    {
-      heading: 'Fundraisers',
-      emptyLabel: 'No fundraisers to display.'
-    }
+  {
+    heading: 'Fundraisers',
+    emptyLabel: 'No fundraisers to display.'
+  }
   ```
 
+##### Example
+
 ```html
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <meta charset="UTF-8">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
     <div id="RecentFundraisersExample">Loading...</div>
@@ -302,6 +387,8 @@ Displays a set of fundraiser profile images (that have a page) for a single spec
 
 Displays a team leaderboard sorted by funds raised (highest first) for a single specified campaign.
 
+##### Options
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `limit`: *optional* string. Set to `'12'` by default. Determines how many results are returned.
 - `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
@@ -309,20 +396,24 @@ Displays a team leaderboard sorted by funds raised (highest first) for a single 
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
-    {
-      raisedTitle: 'Raised',
-      membersTitle: 'Members',
-      symbol: '$',
-      heading: 'Leaderboard > Top Teams'
-    }
+  {
+    raisedTitle: 'Raised',
+    membersTitle: 'Members',
+    symbol: '$',
+    heading: 'Leaderboard > Top Teams'
+  }
   ```
 
+##### Example
+
 ```html
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <meta charset="UTF-8">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
     <div id="LeaderboardExample">Loading...</div>
@@ -340,6 +431,8 @@ Displays a team leaderboard sorted by funds raised (highest first) for a single 
 
 Displays an SVG map. Each point represents a fundraiser (that has created a page).
 
+##### Options
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `region`: *required* string. Set the region/country to display using a region code, e.g. `'US'`.
 - `limit`: *optional* string. Set to `'100'` by default. Determines how many results are returned. **Note:** Returns geo-location data from returned user generated pages. Some pages may not have this data available.
@@ -347,18 +440,22 @@ Displays an SVG map. Each point represents a fundraiser (that has created a page
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
-    {
-      heading: 'Program Reach',
-      legend: 'Heroes'
-    }
+  {
+    heading: 'Program Reach',
+    legend: 'Heroes'
+  }
   ```
 
+##### Example
+
 ```html
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <meta charset="UTF-8">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
     <div id="MapExample">Loading...</div>
@@ -369,11 +466,14 @@ Displays an SVG map. Each point represents a fundraiser (that has created a page
 </html>
 ```
 
+
 ### Teams
 
 #### Teams (Campaign)
 
 Displays a set of teams for a single specified campaign.
+
+##### Options
 
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `page_size`: *optional* string. Set to `'12'` by default. Determines how many results are returned.
@@ -382,18 +482,22 @@ Displays a set of teams for a single specified campaign.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
-    {
-      heading: 'Teams',
-      emptyLabel: 'No teams to display.'
-    }
+  {
+    heading: 'Teams',
+    emptyLabel: 'No teams to display.'
+  }
   ```
 
+##### Example
+
 ```html
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <meta charset="UTF-8">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
     <div id="TeamsExample">Loading...</div>
@@ -440,7 +544,6 @@ Displays a call to action box with links to the *getting started* and *sign in* 
   </body>
 </html>
 ```
-
 
 
 ## Commands

@@ -5,7 +5,7 @@ var _                     = require('lodash');
 var React                 = require('react');
 var I18nMixin             = require('../../mixins/I18n');
 var leaderboard           = require('../../../api/leaderboard');
-var leaderboardPages      = require('../../../api/leaderboardPages');
+var pages                 = require('../../../api/pages');
 var Icon                  = require('../../helpers/Icon');
 var TeamLeaderboardItem   = require('../TeamLeaderboardItem')
 var numeral               = require('numeral');
@@ -65,7 +65,7 @@ module.exports = React.createClass({
       teamPageIds: result.leaderboard.page_ids
     });
 
-    leaderboardPages.find(this.state.teamPageIds, this.getPageData);
+    pages.findByIds(this.state.teamPageIds, this.getPageData);
   },
 
   getPageData: function(page_data) {

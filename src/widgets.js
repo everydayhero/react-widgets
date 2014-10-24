@@ -1,10 +1,11 @@
+/** @jsx */
 "use strict";
 
 require('es5-shim');
 require('es5-shim/es5-sham.js');
 
+var _ = require('lodash');
 var React = require('react');
-var CharitySearch = require('./components/search/CharitySearch');
 var addEventListener = require('./lib/addEventListener.js');
 var widgets = {
   FundsRaised: require('./components/totals/FundsRaised'),
@@ -17,38 +18,80 @@ var widgets = {
   Map: require('./components/maps/Map'),
   TotalDistance: require('./components/totals/TotalDistance'),
   TotalHours: require('./components/totals/TotalHours'),
-  CallToActionBox: require('./components/callstoaction/CallToActionBox')
-}
-var edh = {widgets: {}};
+  CallToActionBox: require('./components/callstoaction/CallToActionBox'),
+};
+var modals = {
+  CharitySearch: require('./components/search/CharitySearchModal'),
+  PageSearch: require('./components/search/PageSearchModal'),
+};
+var edh = {};
 
-var CharitySearchInit = function(options) {
-  var element = options.element || document.getElementById(options.elementId);
+function getElement(element) {
+  if (!element) {
+    console.error('"element" is required.');
+  } else if (_.isString(element)) {
+    var elementId = element;
+    element = document.getElementById(elementId);
+    if (!element) {
+      console.error('Could not find element with id "' + elementId + '".');
+    }
+  }
+
+  return element;
+};
+
+function showModal(name, options) {
+  var modal = modals[name];
+  if (!modal) {
+    console.error('Invalid modal name "' + name + '".');
+    return;
+  }
+
+  var div = document.createElement('div');
+  document.body.appendChild(div);
+
+  options.onClose = function() {
+    React.unmountComponentAtNode(div);
+    document.body.removeChild(div);
+  }
+
+  React.renderComponent(modal(options), div);
+};
+
+function initModal(element, name, options) {
+  element = getElement(element);
+  if (!element) {
+    return;
+  }
   element.href = '#';
 
   addEventListener(element, 'click', function(event) {
     if (event) {
       event.preventDefault();
-    };
-
-    var div = document.createElement('div');
-    document.body.appendChild(div);
-
-    options.onClose = function() {
-      React.unmountComponentAtNode(div);
-      document.body.removeChild(div);
     }
-
-    React.renderComponent(CharitySearch(options), div);
+    showModal(name, options);
   });
 };
 
-var renderWidget = function(id, name, args) {
-  React.renderComponent(widgets[name](args), document.getElementById(id));
+function renderWidget(element, name, options) {
+  element = getElement(element);
+  if (!element) {
+    return;
+  }
+
+  var widget = widgets[name];
+  if (!widget) {
+    console.error('Invalid widget name "' + name + '".');
+    return;
+  }
+
+  React.renderComponent(widget(options), element);
 }
 
 module.exports = edh.widgets = {
-  CharitySearchInit: CharitySearchInit,
-  renderWidget: renderWidget
+  renderWidget: renderWidget,
+  showModal: showModal,
+  initModal: initModal,
 };
 
 global.edh = edh;

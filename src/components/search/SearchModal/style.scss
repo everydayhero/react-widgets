@@ -1,7 +1,8 @@
-.Search__header {
+.SearchModal__header {
   @extend %header;
   @extend %header-s;
   @extend %rule-bottom;
+  display: table;
   padding-right: 78px;
   border-color: snow;
   color: snow;
@@ -11,7 +12,17 @@
   }
 }
 
-.Search__body {
+.SearchModal__input {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+
+  @include media-max($breakpoint-xs) {
+    display: block;
+  }
+}
+
+.SearchModal__body {
   position: absolute;
   width: 100%;
   bottom: 0px;
@@ -30,7 +41,7 @@
   }
 }
 
-.Search__body--paginated {
+.SearchModal__body--paginated {
   @include media-max($breakpoint-xs) {
     margin-top: 54px;
   }

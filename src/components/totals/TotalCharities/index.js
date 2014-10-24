@@ -3,7 +3,7 @@
 
 var React             = require('react');
 var I18nMixin         = require('../../mixins/I18n');
-var campaignCharities = require('../../../api/campaignCharities');
+var charities         = require('../../../api/charities');
 var Icon              = require('../../helpers/Icon');
 var numeral           = require('numeral');
 
@@ -40,7 +40,7 @@ module.exports = React.createClass({
   onSuccess: function(result) {
     this.setState({
       isLoading: false,
-      total: result.meta.pagination.count
+      total: result.meta.count
     });
   },
 
@@ -49,7 +49,7 @@ module.exports = React.createClass({
       isLoading: true
     });
 
-    campaignCharities.find(this.props.campaignUid, this.onSuccess);
+    charities.findByCampaign(this.props.campaignUid, 1, 1, this.onSuccess);
   },
 
   renderTotal: function() {

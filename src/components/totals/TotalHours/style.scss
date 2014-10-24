@@ -1,0 +1,27 @@
+.TotalHours {
+  @extend %tile;
+  padding: 55px 8px 55px;
+}
+
+.TotalHours__total {
+  @extend %tile-total;
+}
+
+.TotalHours__loading {
+  @extend %tile-loading-icon;
+}
+
+.TotalHours__icon {
+  @extend %tile-icon;
+  font-size: 60px;
+  padding: 0;
+  margin-right: 15px;
+}
+
+.TotalHours__content,
+.TotalHours__icon,
+.TotalHours__empty-label,
+.TotalHours__loading {
+  display: inline-block;
+  vertical-align: middle;
+}

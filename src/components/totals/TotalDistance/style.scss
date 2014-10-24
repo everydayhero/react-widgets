@@ -1,0 +1,27 @@
+.TotalDistance {
+  @extend %tile;
+  padding: 55px 8px 55px;
+}
+
+.TotalDistance__total {
+  @extend %tile-total;
+}
+
+.TotalDistance__loading {
+  @extend %tile-loading-icon;
+}
+
+.TotalDistance__icon {
+  @extend %tile-icon;
+  font-size: 60px;
+  padding: 0;
+  margin-right: 15px;
+}
+
+.TotalDistance__content,
+.TotalDistance__icon,
+.TotalDistance__empty-label,
+.TotalDistance__loading {
+  display: inline-block;
+  vertical-align: middle;
+}

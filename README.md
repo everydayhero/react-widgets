@@ -324,7 +324,7 @@ You can find the minified assets at the following locations:
   <body>
     <div id="MapExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('MapExample', 'Map', { campaignUid: 'us-0' });
+      edh.widgets.renderWidget('MapExample', 'Map', { campaignUid: 'us-0', region: 'US' });
     </script>
   </body>
 </html>

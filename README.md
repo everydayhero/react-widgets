@@ -4,10 +4,23 @@ Widgets are small Javascript components that integrate with EverydayHero's API. 
 
 ## Location
 
+
+
 You can find the minified assets at the following locations:
 
-- `//shared-scripts.s3.amazonaws.com/widgets-0.0.2.js`
-- `//shared-scripts.s3.amazonaws.com/widgets-0.0.2.css`
+- `//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js`
+- `//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css`
+
+To view the uncached version of deployed files go to:
+
+- `https://shared-scripts.s3.amazonaws.com/widgets-[0.0.0].js`
+- `https://shared-scripts.s3.amazonaws.com/widgets-[0.0.0].css`
+
+You can view the deployed example html file at:
+
+- `https://shared-scripts.s3.amazonaws.com/widgets-[0.0.0].html`
+
+
 
 ## Available Widgets
 
@@ -33,8 +46,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.js"></script>
-    <link href="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <a href="#" id="CharitySearchExample">Support a Charity</a>
@@ -69,8 +82,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.js"></script>
-    <link href="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="FundsRaisedExample">Loading...</div>
@@ -98,8 +111,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.js"></script>
-    <link href="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="TotalHeroesExample">Loading...</div>
@@ -128,8 +141,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.js"></script>
-    <link href="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="TotalCharitiesExample">Loading...</div>
@@ -158,8 +171,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.js"></script>
-    <link href="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="GoalExample">Loading...</div>
@@ -189,8 +202,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.js"></script>
-    <link href="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="TotalDistanceExample">Loading...</div>
@@ -219,8 +232,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.js"></script>
-    <link href="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="TotalHoursExample">Loading...</div>
@@ -251,8 +264,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.js"></script>
-    <link href="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="RecentFundraisersExample">Loading...</div>
@@ -285,8 +298,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.js"></script>
-    <link href="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="LeaderboardExample">Loading...</div>
@@ -318,8 +331,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.js"></script>
-    <link href="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="MapExample">Loading...</div>
@@ -350,8 +363,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.js"></script>
-    <link href="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="TeamsExample">Loading...</div>

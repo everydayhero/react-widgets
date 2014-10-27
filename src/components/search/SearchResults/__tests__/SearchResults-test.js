@@ -21,6 +21,15 @@ describe('SearchResults', function() {
     expect(resultElements.length).toBe(results.length);
   });
 
+  it('uses renderComponent to render each result', function() {
+    var component = jest.genMockFunction();
+    var searchResults = <SearchResults results={ results } resultComponent={ component }/>;
+    var element = TestUtils.renderIntoDocument(searchResults);
+    var resultElements = scryByClass(element, 'SearchResult');
+
+    expect(component.mock.calls.length).toEqual(results.length);
+  });
+
   it('shows "no results" when empty', function() {
     var searchResults = <SearchResults results={ [] }/>;
     var element = TestUtils.renderIntoDocument(searchResults);

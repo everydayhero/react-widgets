@@ -4,8 +4,6 @@ Widgets are small Javascript components that integrate with EverydayHero's API. 
 
 ## Location
 
-
-
 You can find the minified assets at the following locations:
 
 - `//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js`
@@ -19,8 +17,6 @@ To view the uncached version of deployed files go to:
 You can view the deployed example html file at:
 
 - `https://shared-scripts.s3.amazonaws.com/widgets-[0.0.0].html`
-
-
 
 ## Available Widgets
 

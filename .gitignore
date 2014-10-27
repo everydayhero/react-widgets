@@ -4,3 +4,4 @@
 /public/widgets-*.html
 .awspublish-shared-scripts
 .DS_Store
+npm-debug.log

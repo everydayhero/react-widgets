@@ -1,0 +1,69 @@
+#!/usr/bin/env node
+
+var wget    = require('wget');
+var spinner = require('simple-spinner');
+
+var pkg  = require('../package.json');
+
+var options = {
+  protocol: 'https',
+  host: 'shared-scripts.s3.amazonaws.com',
+  path: '/widgets-' + pkg.version + '.js',
+  method: 'GET'
+};
+
+var start = function() {
+  console.log('checking for version ' + pkg.version + ' ....');
+  spinner.start();
+}
+
+var fail = function(err) {
+  spinner.stop();
+  console.log('Error - Unable to check version:', err);
+
+  process.exit(1);
+}
+
+var versionNotFound = function() {
+  spinner.stop();
+  console.log('OK to publish');
+
+  process.exit(0);
+}
+
+var versionExists = function() {
+  spinner.stop();
+  console.log('Error: Version ' + pkg.version + ' already exists - please increment version number');
+
+  process.exit(1);
+}
+
+start();
+
+var req = wget.request(options, function(res) {
+  var content = '';
+
+  if (res.statusCode === 200) {
+    res.on('error', function(err) {
+      fail(err);
+    });
+
+    res.on('data', function(chunk, foo) {
+      versionExists();
+      req.end();
+    });
+
+    res.on('end', function() {
+      versionExists();
+    });
+  } else if(res.statusCode === 403) {
+    versionNotFound();
+  } else {
+    fail(res.statusCode)
+  }
+});
+
+req.end();
+req.on('error', function(err) {
+  fail('Network error');
+});

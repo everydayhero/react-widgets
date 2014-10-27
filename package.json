@@ -8,9 +8,11 @@
   "dependencies": {
     "compression": "~1.0.8",
     "express": "~4.4.5",
+    "jsxcs": "0.0.2",
     "morgan": "~1.1.1",
     "serve-static": "~1.1.0",
-    "jsxcs": "0.0.2"
+    "simple-spinner": "0.0.2",
+    "wget": "0.0.1"
   },
   "devDependencies": {
     "gulp": "^3.8.6",
@@ -50,7 +52,7 @@
     "styles-dev": "gulp styles --debug",
     "test": "jsxcs ./src/* --config=./config/jscs_config.json && jest",
     "start": "node server.js",
-    "publish": "gulp && gulp publish"
+    "publish": "bin/version-check && gulp && gulp publish"
   },
   "browserify": {
     "transform": [

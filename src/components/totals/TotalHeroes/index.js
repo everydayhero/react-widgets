@@ -66,14 +66,14 @@ module.exports = React.createClass({
 
     if (this.state.isLoading) {
       return <Icon className="TotalHeroes__loading" icon="refresh" spin={ true }/>;
-    } else {
-      return (
-        <div>
-          <div className="TotalHeroes__total">{ formattedTotal }</div>
-          <div className="TotalHeroes__title">{ title }</div>
-        </div>
-      );
     }
+
+    return (
+      <div>
+        <div className="TotalHeroes__total">{ formattedTotal }</div>
+        <div className="TotalHeroes__title">{ title }</div>
+      </div>
+    );
   },
 
   renderIcon: function() {

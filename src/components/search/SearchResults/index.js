@@ -12,8 +12,15 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
 
   propTypes: {
-    results: React.PropTypes.array,
-    resultComponent: React.PropTypes.func,
+    results: React.PropTypes.arrayOf(React.PropTypes.object),
+    resultComponent: function(props, propName, componentName) {
+      if (!props[propName]) {
+        return new Error('Required prop `' + propName + '` was not specified in `' + componentName + '`.');
+      }
+      if (!React.isValidClass(props[propName])) {
+        return new Error('Invalid prop `' + propName + '` supplied to `' + componentName + '`, expected React Component class.');
+      }
+    },
     onSelect: React.PropTypes.func,
     selectAction: React.PropTypes.string
   },
@@ -39,9 +46,12 @@ module.exports = React.createClass({
     var selectAction = props.selectAction || this.t('selectAction');
 
     return _.map(this.props.results || [], function(result) {
-      var key = 'Result' + result.id;
       return (
-        <Result key={ key } onSelect={ props.onSelect } selectAction={ selectAction } result={ result } />
+        <Result
+          key={ result.id }
+          onSelect={ props.onSelect }
+          result={ result }
+          selectAction={ selectAction } />
       );
     });
   },

@@ -10,6 +10,7 @@ module.exports = React.createClass({
   displayName: 'CharitySearchResult',
 
   propTypes: {
+    onSelect: React.PropTypes.func.isRequired,
     result: React.PropTypes.object.isRequired,
     selectAction: React.PropTypes.string.isRequired
   },
@@ -38,8 +39,8 @@ module.exports = React.createClass({
       );
     }
 
-    return this.transferPropsTo(
-      <SearchResult>
+    return (
+      <SearchResult onSelect={ props.onSelect } result={ charity }>
         { logo }
         <div className='CharitySearchResult__content'>
           <div className='CharitySearchResult__header'>{ charity.name }</div>

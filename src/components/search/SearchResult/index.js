@@ -6,6 +6,11 @@ var React = require('react');
 module.exports = React.createClass({
   displayName: 'SearchResult',
 
+  propTypes: {
+    onSelect: React.PropTypes.func.isRequired,
+    result: React.PropTypes.object.isRequired
+  },
+
   clickHandler: function(event) {
     event.preventDefault();
     this.props.onSelect(this.props.result);
@@ -19,6 +24,6 @@ module.exports = React.createClass({
         onClick={ this.clickHandler }>
         { this.props.children }
       </a>
-    )
+    );
   }
 });

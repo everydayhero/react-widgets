@@ -10,13 +10,19 @@ var pages                       = require('../../../api/pages');
 module.exports = React.createClass({
   displayName: 'PageSearchResult',
 
+  propTypes: {
+    onSelect: React.PropTypes.func.isRequired,
+    result: React.PropTypes.object.isRequired,
+    selectAction: React.PropTypes.string.isRequired
+  },
+
   render: function() {
     var props = this.props;
     var page = props.result;
     var campaignName = !pages.isGivePage(page) && page.campaign.name;
 
-    return this.transferPropsTo(
-      <SearchResult>
+    return (
+      <SearchResult onSelect={ props.onSelect } result={ page }>
         <div className='PageSearchResult__avatar'>
           <img src={ page.image.small_image_url } />
         </div>

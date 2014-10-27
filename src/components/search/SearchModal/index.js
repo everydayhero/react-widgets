@@ -22,7 +22,8 @@ module.exports = React.createClass({
     onPageChange: React.PropTypes.func.isRequired,
     onSelect: React.PropTypes.func.isRequired,
     pagination: React.PropTypes.object,
-    results: React.PropTypes.array,
+    results: React.PropTypes.arrayOf(React.PropTypes.object),
+    resultComponent: SearchResults.propTypes.resultComponent,
     selectAction: React.PropTypes.string
   },
 
@@ -56,12 +57,13 @@ module.exports = React.createClass({
     var pagination = false;
     if (props.pagination && props.pagination.totalPages > 1) {
       bodyClasses = bodyClasses + ' SearchModal__body--paginated';
-      pagination = <SearchPagination
-        onChange={ props.onPageChange }
-        count={ props.pagination.count }
-        page={ props.pagination.page }
-        pageSize={ props.pagination.pageSize }
-        totalPages={ props.pagination.totalPages } />;
+      pagination =
+        <SearchPagination
+          onChange={ props.onPageChange }
+          count={ props.pagination.count }
+          page={ props.pagination.page }
+          pageSize={ props.pagination.pageSize }
+          totalPages={ props.pagination.totalPages } />;
     }
 
     var results =

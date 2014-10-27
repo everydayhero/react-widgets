@@ -1,0 +1,48 @@
+.Map {
+  @include box-sizing(border-box);
+  font-family: $sans-serif-fonts;
+  border-radius: $border-radius;
+  border: 2px solid $color-grey-dark;
+  width: 605px;
+  height: 405px;
+  padding: 15px;
+  position: relative;
+}
+
+.Map__heading {
+  @extend %tile-heading;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 1;
+}
+
+.Map__content {
+  text-align: center;
+  width: 500px;
+  margin: 60px auto 0;
+}
+
+.Map__legend {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  z-index: 1;
+  font-size: 13px;
+  line-height: 1;
+
+  .Map__legend-key {
+    background-color: #000;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    vertical-align: bottom;
+    margin: 0 3px;
+  }
+}
+
+.Map__loading {
+  text-align: center;
+}

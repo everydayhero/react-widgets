@@ -1,0 +1,50 @@
+.TeamLeaderboard {
+  @extend %clearfix;
+  background: #555;
+  font-family: $sans-serif-fonts;
+  font-size: $default-font-size;
+  color: #fff;
+  font-size: 14px;
+
+  .TeamLeaderboard__heading {
+    @extend %tile-heading;
+  }
+
+  .TeamLeaderboard__items {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .TeamLeaderboard__controller {
+    clear: both;
+    text-align: right;
+    margin: 15px 15px;
+  }
+
+  .TeamLeaderboard__controls,
+  .TeamLeaderboard__indicators {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+
+  .TeamLeaderboard__prevBtn,
+  .TeamLeaderboard__nextBtn {
+    display: inline-block;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 24px;
+  }
+
+  .TeamLeaderboard__indicator {
+    display: inline-block;
+    padding: 3px;
+    margin: 0 2px 0 0;
+    cursor: pointer;
+  }
+
+  .TeamLeaderboard__loading {
+    @extend %tile-loading-icon;
+  }
+}

@@ -33,8 +33,8 @@ You can find the minified assets at the following locations:
 ```html
 <html>
   <head>
-    <script src="//edh-widgets.s3.amazonaws.com/widgets.js"></script>
-    <link href="//edh-widgets.s3.amazonaws.com/widgets.css" media="all" rel="Stylesheet" type="text/css" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <a href="#" id="CharitySearchExample">Support a Charity</a>
@@ -44,6 +44,118 @@ You can find the minified assets at the following locations:
         country: 'uk',
         action: 'donate'
       });
+    </script>
+  </body>
+</html>
+```
+
+### Totals
+
+#### Funds Raised (Campaign)
+
+- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `renderIcon`: *optional* boolean. Set to `true` by default.
+- `i18n`:        *optional* object containing localised text. Default i18n is:
+
+```
+  {
+    title: 'Funds Raised',
+    symbol: '$'
+  }
+```
+
+```html
+<html>
+  <head>
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="FundsRaisedExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget( 'FundsRaisedExample', 'FundsRaised', {campaignUid: 'au-0'});
+    </script>
+  </body>
+</html>
+```
+
+#### Total Heroes (Campaign)
+
+- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `renderIcon`: *optional* boolean. Set to `true` by default.
+- `i18n`:        *optional* object containing localised text. Default i18n is:
+
+```
+  {
+    title: 'Heroes'
+  }
+```
+
+```html
+<html>
+  <head>
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="TotalHeroesExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget( 'TotalHeroesExample', 'TotalHeroes', {campaignUid: 'au-0'});
+    </script>
+  </body>
+</html>
+```
+
+#### Total Charities (Campaign)
+
+- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `renderIcon`: *optional* boolean. Set to `true` by default.
+- `i18n`:        *optional* object containing localised text. Default i18n is:
+
+```
+  {
+    title: 'Charities'
+  }
+```
+
+```html
+<html>
+  <head>
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="TotalCharitiesExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget( 'TotalCharitiesExample', 'TotalCharities', {campaignUid: 'au-0'});
+    </script>
+  </body>
+</html>
+```
+
+#### Campaign Goal (Campaign)
+
+- `goal`: *required* string. Set a goal in cents to be rendered as a dollar amount.
+- `renderIcon`: *optional* boolean. Set to `true` by default.
+- `i18n`:       *optional* object containing localised text. Default i18n is:
+
+```
+  {
+    title: 'Goal',
+    symbol: '$'
+  }
+```
+
+```html
+<html>
+  <head>
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="TotalCharitiesExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget( 'GoalExample', 'Goal', {goal: '500000', i18n: {title: '2015 Goal'}});
     </script>
   </body>
 </html>

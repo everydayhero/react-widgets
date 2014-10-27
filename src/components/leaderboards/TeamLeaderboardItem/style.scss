@@ -1,0 +1,60 @@
+.TeamLeaderboard__items-item {
+  display: block;
+  background: #fff;
+  color: #555;
+  border-radius: $border-radius;
+  margin: 15px 0 15px 15px;
+  width: 214px;
+  float: left;
+}
+
+.TeamLeaderboard__items-content {
+  padding: 15px;
+}
+
+.TeamLeaderboard__items-name {
+  border: 1px solid #555;
+  border-width: 1px 0;
+  padding: 10px 0;
+  margin: 0 0 15px;
+  font-weight: bold;
+  line-height: 1.2em;
+  height: 2.4em;
+  text-align: center;
+}
+
+.TeamLeaderboard__items-image {
+  padding: 15px 15px 0;
+
+  img {
+    max-width:100%;
+  }
+}
+
+.TeamLeaderboard__items-stats {
+  @extend %clearfix;
+
+  .TeamLeaderboard__items-stat {
+    @include box-sizing(border-box);
+    font-weight: bold;
+    font-size: 16px;
+    float: left;
+    width: 92px;
+    padding: 10px;
+    height: 85px;
+    text-align: center
+  }
+
+  .TeamLeaderboard__items-stat-content {
+    margin-top: 15px;
+  }
+
+  .TeamLeaderboard__items-stat-title {
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+
+  .TeamLeaderboard__items-stat:first-child {
+    border-right: 1px solid #555;
+  }
+}

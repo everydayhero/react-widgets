@@ -1,0 +1,15 @@
+.FundsRaised {
+  @extend %tile;
+}
+
+.FundsRaised__total {
+  @extend %tile-total;
+}
+
+.FundsRaised__loading {
+  @extend %tile-loading-icon;
+}
+
+.FundsRaised__icon {
+  @extend %tile-icon;
+}

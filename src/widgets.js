@@ -5,8 +5,19 @@ require('es5-shim/es5-sham.js');
 
 var React = require('react');
 var CharitySearch = require('./components/search/CharitySearch');
-
 var addEventListener = require('./lib/addEventListener.js');
+var widgets = {
+  FundsRaised: require('./components/totals/FundsRaised'),
+  TotalHeroes: require('./components/totals/TotalHeroes'),
+  TotalCharities: require('./components/totals/TotalCharities'),
+  Goal: require('./components/totals/Goal'),
+  Leaderboard: require('./components/leaderboards/TeamLeaderboard'),
+  RecentFundraisers: require('./components/fundraisers/RecentFundraisers'),
+  Teams: require('./components/teams/Teams'),
+  Map: require('./components/maps/Map'),
+  TotalDistance: require('./components/totals/TotalDistance'),
+  TotalHours: require('./components/totals/TotalHours')
+}
 var edh = {widgets: {}};
 
 var CharitySearchInit = function(options) {
@@ -30,8 +41,13 @@ var CharitySearchInit = function(options) {
   });
 };
 
+var renderWidget = function(id, name, args) {
+  React.renderComponent(widgets[name](args), document.getElementById(id));
+}
+
 module.exports = edh.widgets = {
-  CharitySearchInit: CharitySearchInit
+  CharitySearchInit: CharitySearchInit,
+  renderWidget: renderWidget
 };
 
 global.edh = edh;

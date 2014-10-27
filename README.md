@@ -9,6 +9,15 @@ You can find the minified assets at the following locations:
 - `//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js`
 - `//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css`
 
+To view the uncached version of deployed files go to:
+
+- `https://shared-scripts.s3.amazonaws.com/widgets-[0.0.0].js`
+- `https://shared-scripts.s3.amazonaws.com/widgets-[0.0.0].css`
+
+You can view the deployed example html file at:
+
+- `https://shared-scripts.s3.amazonaws.com/widgets-[0.0.0].html`
+
 ## Available Widgets
 
 ### Search

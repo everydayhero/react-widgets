@@ -14,6 +14,9 @@ var minifyCss    = require('gulp-minify-css');
 var browserify   = require('gulp-browserify');
 var uglify       = require('gulp-uglify');
 
+// html
+var inject       = require("gulp-inject");
+
 var debug        = !!gutil.env.debug;
 
 if (debug) {
@@ -48,8 +51,23 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('public'));
 });
 
-gulp.task('build', [ 'styles', 'scripts' ], function() {});
-gulp.task('default', [ 'styles', 'scripts' ], function() {});
+gulp.task('default', [ 'styles', 'scripts' ], function() {
+  var sources = gulp.src([
+      'public/widgets-' + pkg.version + '.*'
+    ], { read: false });
+
+  return gulp
+    .src('src/index.html')
+    .pipe(inject(sources, {
+      transform: function(filepath, file, i, length) {
+        // remove `/public` from the filepath
+        filepath = '/' + filepath.split('/').slice(2).join('/');
+        return inject.transform(filepath, file, i, length);
+      }
+    }))
+    .pipe(rename('widgets-' + pkg.version + '.html'))
+    .pipe(gulp.dest('public'));
+});
 
 gulp.task('watch', function() {
   gulp.watch('src/**/*.scss', [ 'styles' ]);
@@ -75,6 +93,5 @@ gulp.task('publish', function() {
   return gulp.src('./public/widgets-' + pkg.version + '.*')
     .pipe(awspublish.gzip())
     .pipe(publisher.publish(headers))
-    .pipe(publisher.cache())
     .pipe(awspublish.reporter());
 });

@@ -9,6 +9,15 @@
   @extend %tile-heading;
 }
 
+.RecentFundraisers__content {
+  text-align: center;
+}
+
+.RecentFundraisers__loading {
+  padding: 0 15px 15px;
+  display: inline-block;
+}
+
 .RecentFundraisers__empty-label {
   padding:0 15px;
 }

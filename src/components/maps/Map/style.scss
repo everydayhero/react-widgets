@@ -1,4 +1,4 @@
-.MapUS {
+.Map {
   @include box-sizing(border-box);
   font-family: $sans-serif-fonts;
   border-radius: $border-radius;
@@ -9,7 +9,7 @@
   position: relative;
 }
 
-.MapUS__heading {
+.Map__heading {
   @extend %tile-heading;
   position: absolute;
   top: 15px;
@@ -17,14 +17,13 @@
   z-index: 1;
 }
 
-.MapUS__content {
-  @include vertical-align;
+.Map__content {
   text-align: center;
   width: 500px;
-  margin: 15px auto 0;
+  margin: 60px auto 0;
 }
 
-.MapUS__legend {
+.Map__legend {
   position: absolute;
   right: 15px;
   top: 15px;
@@ -32,7 +31,7 @@
   font-size: 13px;
   line-height: 1;
 
-  .MapUS__legend-key {
+  .Map__legend-key {
     background-color: #000;
     display: inline-block;
     width: 10px;
@@ -44,6 +43,6 @@
   }
 }
 
-.MapUS__loading {
+.Map__loading {
   text-align: center;
 }

@@ -52,16 +52,16 @@ module.exports = React.createClass({
   onSuccess: function(result) {
     var fitnessResults = result.campaign.fitness_activity_overview.run;
 
-    if (typeof fitnessResults === 'undefined'){
-      this.setState({
-        isLoading: false,
-        hasResults: false
-      });
-    } else {
+    if (fitnessResults){
       this.setState({
         isLoading: false,
         hasResults: true,
         total: fitnessResults.distance_in_meters
+      });
+    } else {
+      this.setState({
+        isLoading: false,
+        hasResults: false
       });
     }
   },
@@ -81,20 +81,18 @@ module.exports = React.createClass({
 
     if (this.state.isLoading) {
       return <Icon className="TotalDistance__loading" icon="refresh" spin={ true }/>;
-    } else {
-      if (this.state.hasResults) {
-        return (
-          <div className="TotalDistance__content">
-            <div className="TotalDistance__total">{ formattedTotal }</div>
-            <div className="TotalDistance__title">{ title }</div>
-          </div>
-        )
-      } else {
-        return (
-          <p className="TotalDistance__empty-label">{ emptyLabel }</p>
-        )
-      }
     }
+
+    if (this.state.hasResults) {
+      return (
+        <div className="TotalDistance__content">
+          <div className="TotalDistance__total">{ formattedTotal }</div>
+          <div className="TotalDistance__title">{ title }</div>
+        </div>
+      );
+    }
+
+    return <p className="TotalDistance__empty-label">{ emptyLabel }</p>;
   },
 
   renderIcon: function() {

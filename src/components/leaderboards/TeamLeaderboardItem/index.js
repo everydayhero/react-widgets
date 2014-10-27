@@ -15,7 +15,7 @@ module.exports = React.createClass({
         <div className="TeamLeaderboard__items-content">
           <div className="TeamLeaderboard__items-name">{ this.props.name }</div>
           <div className="TeamLeaderboard__items-stats">
-            <div className="TeamLeaderboard__items-stat TeamLeaderboard__items-stat--members">
+            <div className="TeamLeaderboard__items-stat">
               <div className="TeamLeaderboard__items-stat-content">
                 { this.props.totalMembers }
                 <div className="TeamLeaderboard__items-stat-title">
@@ -23,7 +23,7 @@ module.exports = React.createClass({
                 </div>
               </div>
             </div>
-            <div className="TeamLeaderboard__items-stat TeamLeaderboard__items-stat--total">
+            <div className="TeamLeaderboard__items-stat">
               <div className="TeamLeaderboard__items-stat-content">
                 { this.props.amount }
                 <div className="TeamLeaderboard__items-stat-title">

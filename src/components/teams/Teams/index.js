@@ -74,19 +74,17 @@ module.exports = React.createClass({
 
     if (this.state.isLoading) {
       return <Icon className="Teams__loading" icon="refresh" spin={ true }/>;
-    } else {
-      if (this.state.hasResults) {
-        return this.state.pageResults.map(function(d,i) {
-          return (
-            <Team pageUrl={ d.url } imgSrc={ d.image.large_image_url } title={ d.name } />
-          )
-        });
-      } else {
-        return (
-          <p className="Teams__empty-label">{ emptyLabel }</p>
-        )
-      }
     }
+
+    if (this.state.hasResults) {
+      return this.state.pageResults.map(function(d) {
+        return (
+          <Team key={ d.id } pageUrl={ d.url } imgSrc={ d.image.large_image_url } title={ d.name } />
+        );
+      });
+    }
+
+    return <p className="Teams__empty-label">{ emptyLabel }</p>;
   },
 
   render: function() {

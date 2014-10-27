@@ -9,9 +9,10 @@ var Icon         = require('../../helpers/Icon');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
-  displayName: "MapUS",
+  displayName: "Map",
   propTypes: {
-    campaignUid: React.PropTypes.string,
+    campaignUid: React.PropTypes.string.isRequired,
+    region: React.PropTypes.string.isRequired,
     page_type: React.PropTypes.string,
     limit: React.PropTypes.string,
     page: React.PropTypes.string,
@@ -22,10 +23,11 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       campaignUid: '',
+      region: '',
       page_type: 'individual',
       limit: '100',
       page: '1',
-      color: '#555',
+      color: '#525252',
       defaultI18n: {
         heading: 'Program Reach',
         legend: 'Heroes'
@@ -86,14 +88,14 @@ module.exports = React.createClass({
       }
 
       var options = {
-        region: 'US',
+        region: this.props.region,
         displayMode: 'markers',
         resolution: 'provinces',
         legend: 'none',
         enableRegionInteractivity: 'false',
-        sizeAxis: {minSize: 5,  maxSize: 5},
-        colorAxis: {minValue: 1, maxValue: 1,  colors: [this.props.color]},
-        tooltip: {trigger: 'none'}
+        sizeAxis: { minSize: 5,  maxSize: 5 },
+        colorAxis: { minValue: 1, maxValue: 1,  colors: [this.props.color] },
+        tooltip: { trigger: 'none' }
       };
 
       var chart = new google.visualization.GeoChart(
@@ -105,15 +107,14 @@ module.exports = React.createClass({
 
     var s = document.createElement('script');
     s.src = 'https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["geochart"],"callback":"drawMarkersMap"}]}';
-    document.head.appendChild(s);
-
+    document.getElementsByTagName('head')[0].appendChild(s);
   },
 
   renderMap: function() {
     if (this.state.isLoading) {
-      return <Icon className="MapUS__loading" icon="refresh" spin={ true }/>;
+      return <Icon className="Map__loading" icon="refresh" spin={ true }/>;
     } else {
-      return <div className="MapUS__map" id="map"></div>
+      return <div className="Map__map" id="map"></div>
     }
   },
 
@@ -125,12 +126,12 @@ module.exports = React.createClass({
     }
 
     return (
-      <div className={ "MapUS" }>
-        <h3 className="MapUS__heading">{ heading }</h3>
-        <div className="MapUS__legend">
-          <p><span className="MapUS__legend-key" style={ keyStyle }></span>  { legend }</p>
+      <div className={ "Map" }>
+        <h3 className="Map__heading">{ heading }</h3>
+        <div className="Map__legend">
+          <p><span className="Map__legend-key" style={ keyStyle }></span>  { legend }</p>
         </div>
-        <div className="MapUS__content">
+        <div className="Map__content">
           { this.renderMap() }
         </div>
       </div>

@@ -108,7 +108,7 @@ module.exports = React.createClass({
       );
     } else {
       if (this.state.boardData[currentPage].length > 0) {
-        return this.state.boardData[currentPage].map(function(d,i) {
+        return this.state.boardData[currentPage].map(function(d) {
           return (
             <TeamLeaderboardItem
               name={ d.name }

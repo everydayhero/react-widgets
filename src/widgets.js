@@ -14,7 +14,7 @@ var widgets = {
   Leaderboard: require('./components/leaderboards/TeamLeaderboard'),
   RecentFundraisers: require('./components/fundraisers/RecentFundraisers'),
   Teams: require('./components/teams/Teams'),
-  MapUS: require('./components/maps/MapUS'),
+  Map: require('./components/maps/Map'),
   TotalDistance: require('./components/totals/TotalDistance'),
   TotalHours: require('./components/totals/TotalHours')
 }

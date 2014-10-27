@@ -3,19 +3,19 @@
 jest.autoMockOff();
 jest.mock('../../../../api/pages');
 
-describe('MapUS', function() {
+describe('Map', function() {
   var React                       = require('react/addons');
-  var MapUS                       = require('../');
+  var Map                       = require('../');
   var TestUtils                   = React.addons.TestUtils;
   var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
-    var mapUS;
+    var map;
     var element;
 
     beforeEach(function() {
-      mapUS = <MapUS campaignUid="au-0" />;
-      element = TestUtils.renderIntoDocument(mapUS);
+      map = <Map campaignUid="au-0" />;
+      element = TestUtils.renderIntoDocument(map);
     });
 
     it('renders something', function() {

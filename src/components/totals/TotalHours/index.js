@@ -51,41 +51,41 @@ module.exports = React.createClass({
   onSuccess: function(result) {
     var fitnessResults = result.campaign.fitness_activity_overview.run;
 
-    if (typeof fitnessResults === 'undefined'){
-      this.setState({
-        isLoading: false,
-        hasResults: false
-      });
-    } else {
+    if (fitnessResults){
       this.setState({
         isLoading: false,
         hasResults: true,
         total: fitnessResults.duration_in_seconds
+      });
+    } else {
+      this.setState({
+        isLoading: false,
+        hasResults: false
       });
     }
   },
 
   renderTotal: function() {
     var symbol         = this.t('symbol');
-    var totalHrs       = this.state.total / 100;
+    var totalHrs       = this.state.total * 0.000277778;
     var formattedTotal = numeral(totalHrs).format('0,0[.]00');
     var title          = this.t('title');
     var emptyLabel     = this.t('emptyLabel');
 
     if (this.state.isLoading) {
       return <Icon className="TotalHours__loading" icon="refresh" spin={ true }/>;
-    } else {
-      if (this.state.hasResults) {
-        return (
-          <div className="TotalHours__content">
-            <div className="TotalHours__total">{ formattedTotal }</div>
-            <div className="TotalHours__title">{ title }</div>
-          </div>
-        )
-      } else {
-        return <p className="TotalHours__empty-label">{ emptyLabel }</p>;
-      }
     }
+
+    if (this.state.hasResults) {
+      return (
+        <div className="TotalHours__content">
+          <div className="TotalHours__total">{ formattedTotal }</div>
+          <div className="TotalHours__title">{ title }</div>
+        </div>
+      );
+    }
+
+    return <p className="TotalHours__empty-label">{ emptyLabel }</p>;
   },
 
   renderIcon: function() {

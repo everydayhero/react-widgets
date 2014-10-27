@@ -162,7 +162,7 @@ You can find the minified assets at the following locations:
     <link href="//shared-scripts.s3.amazonaws.com/widgets-0.0.2.css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
-    <div id="TotalCharitiesExample">Loading...</div>
+    <div id="GoalExample">Loading...</div>
     <script>
       edh.widgets.renderWidget( 'GoalExample', 'Goal', {goal: 500000, i18n: {title: '2015 Goal'}});
     </script>

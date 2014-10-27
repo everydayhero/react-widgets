@@ -7,7 +7,9 @@
   left: 0px;
   height: 100%;
   width: 100%;
-  z-index: 5;
+  z-index: 1000;
+
+  @include vendor(transform, translateZ(200px));
 }
 
 .Overlay__close {

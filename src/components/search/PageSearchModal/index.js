@@ -111,10 +111,6 @@ module.exports = React.createClass({
     this.props.onClose();
   },
 
-  selectAction: function() {
-    return this.t(this.props.action + 'Action');
-  },
-
   render: function() {
     return (
       <SearchModal
@@ -127,8 +123,7 @@ module.exports = React.createClass({
         onSelect={ this.selectHandler }
         pagination={ this.state.pagination }
         results={ this.state.results }
-        resultComponent={ PageSearchResult }
-        selectAction={ this.selectAction() } />
+        resultComponent={ PageSearchResult } />
     );
   }
 });

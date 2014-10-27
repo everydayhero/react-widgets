@@ -39,8 +39,8 @@ You can view the deployed example html file at:
     title: 'Search for a Charity',
     donateAction: 'Give to this Charity',
     fundraiseAction: 'Fundraise for this Charity',
-    customAction: 'Select',
-    emptylabel: 'No results'
+    selectAction: 'Select',
+    emptyLabel: 'No results'
   }
   ```
 
@@ -78,7 +78,7 @@ You can view the deployed example html file at:
   {
     title: 'Search for a Supporter',
     selectAction: 'Support',
-    emptylabel: 'No results'
+    emptyLabel: 'No results'
   }
   ```
 

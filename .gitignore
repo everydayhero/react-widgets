@@ -1,4 +1,6 @@
 /node_modules
 /public/widgets-*.js
 /public/widgets-*.css
+/public/widgets-*.html
 .awspublish-shared-scripts
+.DS_Store

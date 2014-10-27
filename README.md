@@ -30,7 +30,7 @@ You can view the deployed example html file at:
                   *Note: 'donate' action is currently not supported for country 'us'.*
 - `onSelect`:     *optional* function called when action set to 'custom'.
 - `campaignUid`:  *optional* string campaign uid to filter charity results.
-- `campaignSlug`: *optional* string campaign slug for given campaign uid for fundraise action.
+- `campaignSlug`: *optional* string campaign slug for given campaign uid.
 - `country`:      *required* string country code of region, either 'au', 'nz', 'uk' or 'us'.
 - `i18n`:         *optional* object containing localised text. Default i18n is:
 
@@ -71,6 +71,7 @@ You can view the deployed example html file at:
 - `element`:      *required* target link element or element ID to show search modal on click.
 - `onSelect`:     *optional* function called on selecting a result. Default redirects to supporter page.
 - `campaignUid`:  *optional* string campaign uid to filter page results.
+- `charityUid`:   *optional* string charity uid to filter page results.
 - `country`:      *required* string country code of region, either 'au', 'nz', 'uk' or 'us'.
 - `i18n`:         *optional* object containing localised text. Default i18n is:
 

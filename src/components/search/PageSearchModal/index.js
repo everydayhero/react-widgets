@@ -26,6 +26,7 @@ module.exports = React.createClass({
     return {
       autoFocus: true,
       campaignUid: '',
+      charityUid: '',
       defaultI18n: {
         title: 'Search for a Supporter',
         selectAction: 'Support'
@@ -48,10 +49,6 @@ module.exports = React.createClass({
     };
   },
 
-  getCampaignUid: function() {
-    return this.props.campaignUid;
-  },
-
   pageChanged: function(page) {
     this.search(this.state.searchTerm, page);
   },
@@ -72,7 +69,8 @@ module.exports = React.createClass({
     var cancelRequest = pages.search({
       country: this.props.country,
       searchTerm: searchTerm,
-      campaignUid: this.getCampaignUid(),
+      campaignUid: this.props.campaignUid,
+      charityUid: this.props.charityUid,
       page: page || 1,
       pageSize: this.props.pageSize
     }, this.updateResults);

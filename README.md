@@ -4,7 +4,7 @@ Widgets are small Javascript components that integrate with EverydayHero's API. 
 
 ## Location
 
-You can find the latest minified assets at the following locations:
+You can find the minified assets at the following locations:
 
 - `//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js`
 - `//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css`
@@ -73,6 +73,7 @@ You can view the deployed example html file at:
 - `campaignUid`:  *optional* string campaign uid to filter page results.
 - `charityUid`:   *optional* string charity uid to filter page results.
 - `country`:      *required* string country code of region, either 'au', 'nz', 'uk' or 'us'.
+- `pageType`:     *optional* string type of page either 'user', 'team' or 'all' (default).
 - `i18n`:         *optional* object containing localised text. Default i18n is:
 
   ```js

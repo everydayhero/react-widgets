@@ -19,7 +19,8 @@ module.exports = React.createClass({
     country: React.PropTypes.oneOf(['au', 'nz', 'uk', 'us']).isRequired,
     i18n: React.PropTypes.object,
     onClose: React.PropTypes.func.isRequired,
-    onSelect: React.PropTypes.func
+    onSelect: React.PropTypes.func,
+    pageType: React.PropTypes.oneOf(['all', 'team', 'user']),
   },
 
   getDefaultProps: function() {
@@ -31,7 +32,8 @@ module.exports = React.createClass({
         title: 'Search for a Supporter',
         selectAction: 'Support'
       },
-      pageSize: 10
+      pageSize: 10,
+      pageType: 'all',
     }
   },
 
@@ -72,7 +74,8 @@ module.exports = React.createClass({
       campaignUid: this.props.campaignUid,
       charityUid: this.props.charityUid,
       page: page || 1,
-      pageSize: this.props.pageSize
+      pageSize: this.props.pageSize,
+      pageType: this.props.pageType,
     }, this.updateResults);
 
     this.setState({

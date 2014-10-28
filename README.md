@@ -68,7 +68,6 @@ You can view the deployed example html file at:
 
 ##### Options
 
-- `element`:      *required* target link element or element ID to show search modal on click.
 - `onSelect`:     *optional* function called on selecting a result. Default redirects to supporter page.
 - `campaignUid`:  *optional* string campaign uid to filter page results.
 - `charityUid`:   *optional* string charity uid to filter page results.

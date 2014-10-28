@@ -48,7 +48,6 @@ module.exports = React.createClass({
     this.setState({
       isLoading: true
     });
-
     charities.findByCampaign(this.props.campaignUid, 1, 1, this.onSuccess);
   },
 

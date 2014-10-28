@@ -14,7 +14,7 @@ var routes = {
   campaign:             'https://everydayhero.com/api/v2/campaigns/{campaignUid}.jsonp',
   campaignLeaderboard:  'https://everydayhero.com/api/v2/campaigns/{campaignUid}/leaderboard.jsonp?type={type}&limit={limit}',
   charity:              'https://everydayhero.com/api/v2/charities/{charityUid}.jsonp',
-  charities:            'https://everydayhero.com/api/v2/charities.jsonp?campaign_ids={campaignUid}',
+  charities:            'https://everydayhero.com/api/v2/charities.jsonp?campaign_ids={campaignUid}&page={page}&limit={limit}',
   page:                 'https://everydayhero.com/api/v2/pages/{pageId}.jsonp',
   pages:                'https://everydayhero.com/api/v2/pages.jsonp?ids={pageIds}&campaign_id={campaignUid}&type={type}&page={page}&limit={limit}',
 
@@ -36,5 +36,5 @@ module.exports = function(path, params) {
     return value == null ? '' : encodeURIComponent(value);
   });
 
-  return route && format(route, params).replace(/\{.+?\}/g, '');
+  return route && format(route, params).replace(/\{.+?\}/g, '').replace(/\w+=(&|$)/g, '');
 };

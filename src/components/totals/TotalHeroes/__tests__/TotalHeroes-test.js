@@ -49,7 +49,7 @@ describe('TotalHeroes', function() {
     });
 
     it('checks that find function works with default props', function() {
-      expect(pages.findByCampaign).toBeCalledWith('au-0','1','1','user', element.onSuccess);
+      expect(pages.findByCampaign).toBeCalledWith('au-0', '1', '1', 'user', element.onSuccess);
     });
   });
 

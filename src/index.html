@@ -34,7 +34,7 @@
     }
 
     .panel .title {
-      padding:15px;
+      padding: 15px;
       margin: 0;
       font-size: 24px;
     }
@@ -46,10 +46,10 @@
       text-align: center;
     }
 
-      #TotalDistanceExample,
-      #TotalHoursExample {
-        padding: 0 15px 15px;
-      }
+    #TotalDistanceExample,
+    #TotalHoursExample {
+      padding: 0 15px 15px;
+    }
 
     .main-content {
       width: 66.66%;
@@ -58,7 +58,7 @@
     .main-metric {
       box-sizing: border-box;
       float: left;
-      padding: 15px;
+      padding: 0 15px 15px;
       width: 25%;
     }
 
@@ -87,6 +87,21 @@
         width: 100%;
       }
     }
+
+    a.modal {
+      display: inline-block;
+      margin: 0 0 15px 15px;
+      color: #525252;
+      font-family: "Lato", Helvetica, Arial, sans-serif;
+      font-size: 18px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    a.modal:hover {
+      color: #00a044;
+    }
   </style>
 </head>
 <body>
@@ -94,13 +109,15 @@
 
   <div class="clearfix">
     <div class="main-content pull-left">
-      <div class="panel">
-        <a id="CharitySearchDonate">Donate to a Charity</a>
-        <a id="CharitySearchFundraise">Fundraise for a Charity</a>
-        <a id="PageSearchExample">Support a Friend</a>
+      <div class="panel clearfix">
+        <h3 class="title">Search</h3>
+        <a id="CharitySearchDonate" class="modal"><i class="Icon fa fa-money fa-fw"></i> Donate to a Charity</a>
+        <a id="CharitySearchFundraise" class="modal"><i class="Icon fa fa-bolt fa-fw"></i> Fundraise for a Charity</a>
+        <a id="PageSearchExample" class="modal"><i class="Icon fa fa-heart fa-fw"></i> Support a Friend</a>
       </div>
 
       <div class="panel clearfix">
+        <h3 class="title">Metrics</h3>
         <div id="FundsRaisedExample" class="main-metric">Loading...</div>
         <div id="TotalHeroesExample" class="main-metric">Loading...</div>
         <div id="TotalCharitiesExample" class="main-metric">Loading...</div>

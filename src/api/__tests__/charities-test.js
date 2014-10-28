@@ -18,18 +18,24 @@ describe('charities', function() {
     us: { country_code: 'us', uid: 'us-123', slug: 'bar' },
   }
 
-  it('donateUrl', function() {
-    expect(charities.donateUrl(data.au)).toBe('https://heroix.everydayhero.com.au/charities/123/donate');
-    expect(charities.donateUrl(data.uk)).toBe('https://heroix.everydayhero.co.uk/charities/123/donate');
-    expect(charities.donateUrl(data.nz)).toBe('https://heroix.everydayhero.co.nz/charities/123/donate');
-    expect(charities.donateUrl(data.us)).toBeUndefined();
+  it('donateUrl defaults to give campaign', function() {
+    expect(charities.donateUrl(data['au']))
+      .toBe('https://give.everydayhero.com/au/bar/donate');
   });
 
-  it('fundraiseUrl', function() {
-    for (var country in data) {
-      expect(charities.fundraiseUrl('foo', data[country]))
-        .toBe('https://foo.everydayhero.com/' + country + '/bar/get-started');
-    }
+  it('donateUrl accepts campaign slug', function() {
+    expect(charities.donateUrl(data['nz'], 'foo'))
+      .toBe('https://foo.everydayhero.com/nz/bar/donate');
+  });
+
+  it('fundraiseUrl defaults to give campaign', function() {
+    expect(charities.fundraiseUrl(data['uk']))
+      .toBe('https://give.everydayhero.com/uk/bar/get-started');
+  });
+
+  it('fundraiseUrl accepts campaign slug', function() {
+    expect(charities.fundraiseUrl(data['us'], 'foo'))
+      .toBe('https://foo.everydayhero.com/us/bar/get-started');
   });
 
   it('search searches for charities', function() {

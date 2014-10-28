@@ -2,11 +2,12 @@
 
 var _ = require('lodash');
 var routes = require('./routes');
+var campaigns = require('./campaigns');
 var getJSON = require('../lib/getJSON');
 
 module.exports = {
   find: function(charityUid, callback) {
-    return getJSON(routes('charity', { charityUid: charityUid }), callback);
+    return getJSON(routes.get('charity', { charityUid: charityUid }), callback);
   },
 
   findByCampaign: function(campaignUid, limit, page, callback) {
@@ -15,25 +16,26 @@ module.exports = {
       page: page,
       limit: limit
     };
-    return getJSON(routes('charities', params), callback);
+    return getJSON(routes.get('charities', params), callback);
   },
 
   search: function(params, callback) {
     params = _.merge({ page: 1, pageSize: 10 }, params);
-    return getJSON(routes('searchCharities', params), callback);
+    return getJSON(routes.get('searchCharities', params), callback);
   },
 
-  donateUrl: function(charity) {
-    return routes('donate', {
+  donateUrl: function(charity, campaignSlug) {
+    return routes.get('donate', {
       country: charity.country_code,
-      charityId: charity.uid.split('-')[1]
+      campaignSlug: campaignSlug || campaigns.giveCampaignSlug(),
+      charitySlug: charity.slug
     });
   },
 
-  fundraiseUrl: function(campaignSlug, charity) {
-    return routes('fundraise', {
+  fundraiseUrl: function(charity, campaignSlug) {
+    return routes.get('fundraise', {
       country: charity.country_code,
-      campaignSlug: campaignSlug,
+      campaignSlug: campaignSlug || campaigns.giveCampaignSlug(),
       charitySlug: charity.slug
     });
   }

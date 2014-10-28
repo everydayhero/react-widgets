@@ -28,7 +28,7 @@ module.exports = React.createClass({
     return {
       autoFocus: true,
       campaignUid: '',
-      campaignSlug: 'give',
+      campaignSlug: null,
       defaultI18n: {
         title: 'Search for a Charity',
         donateAction: 'Give to this Charity',
@@ -114,15 +114,7 @@ module.exports = React.createClass({
     if (this.props.action == 'custom') {
       this.props.onSelect(charity);
     } else {
-      var redirect;
-      switch (this.props.action) {
-        case 'donate':
-          redirect = charities.donateUrl(charity);
-          break;
-        case 'fundraise':
-          redirect = charities.fundraiseUrl(this.props.campaignSlug, charity);
-          break;
-      }
+      var redirect = charities[this.props.action + 'Url'](charity, this.props.campaignSlug);
       document.location = redirect;
     }
     this.props.onClose();

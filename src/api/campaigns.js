@@ -13,15 +13,19 @@ var giveCampaignUids = {
 
 module.exports = {
   find: function(campaignUid, callback) {
-    return getJSON(routes('campaign', { campaignUid: campaignUid }), callback);
+    return getJSON(routes.get('campaign', { campaignUid: campaignUid }), callback);
   },
 
   search: function(params, callback) {
     params = _.merge({ page: 1, pageSize: 10 }, params);
-    return getJSON(routes('searchCampaigns', params), callback);
+    return getJSON(routes.get('searchCampaigns', params), callback);
   },
 
   giveCampaignUid: function(country) {
     return giveCampaignUids[country];
+  },
+
+  giveCampaignSlug: function() {
+    return 'give';
   }
 };

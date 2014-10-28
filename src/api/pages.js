@@ -7,11 +7,11 @@ var campaigns = require('./campaigns');
 
 module.exports = {
   find: function(pageId, callback) {
-    return getJSON(routes('page', { pageId: pageId }), callback);
+    return getJSON(routes.get('page', { pageId: pageId }), callback);
   },
 
   findByIds: function(pageIds, callback) {
-    return getJSON(routes('pages', { pageIds: pageIds }), callback);
+    return getJSON(routes.get('pages', { pageIds: pageIds }), callback);
   },
 
   findByCampaign: function(campaignUid, type, limit, page, callback) {
@@ -21,12 +21,12 @@ module.exports = {
       page: page,
       limit: limit
     };
-    return getJSON(routes('pages', params), callback);
+    return getJSON(routes.get('pages', params), callback);
   },
 
   search: function(params, callback) {
     params = _.merge({ page: 1, pageSize: 10 }, params);
-    return getJSON(routes('searchPages', params), callback);
+    return getJSON(routes.get('searchPages', params), callback);
   },
 
   isGivePage: function(page) {

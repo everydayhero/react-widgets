@@ -129,7 +129,7 @@ describe('CharitySearchModal', function() {
     var resultElements = scryByClass(element, 'SearchResult');
     TestUtils.Simulate.click(resultElements[0]);
 
-    expect(charities.fundraiseUrl).lastCalledWith('give', charity);
+    expect(charities.fundraiseUrl).lastCalledWith(charity, null);
     expect(document.location).toEqual(fundraise_url);
   });
 
@@ -145,7 +145,7 @@ describe('CharitySearchModal', function() {
     var resultElements = scryByClass(element, 'SearchResult');
     TestUtils.Simulate.click(resultElements[0]);
 
-    expect(charities.donateUrl).lastCalledWith(charity);
+    expect(charities.donateUrl).lastCalledWith(charity, null);
     expect(document.location).toEqual(donate_url);
   });
 

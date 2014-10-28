@@ -2,10 +2,11 @@
 "use strict";
 
 require('es5-shim');
-require('es5-shim/es5-sham.js');
+require('es5-shim/es5-sham');
 
 var _ = require('lodash');
 var React = require('react');
+var routes = require('./api/routes');
 var addEventListener = require('./lib/addEventListener.js');
 var widgets = {
   FundsRaised: require('./components/totals/FundsRaised'),
@@ -89,6 +90,7 @@ function renderWidget(element, name, options) {
 }
 
 module.exports = edh.widgets = {
+  setBaseUrl: routes.setBaseUrl,
   renderWidget: renderWidget,
   showModal: showModal,
   initModal: initModal,

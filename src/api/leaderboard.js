@@ -11,6 +11,6 @@ module.exports = {
       limit: limit
     };
 
-    return getJSON(routes('campaignLeaderboard', params), callback);
+    return getJSON(routes.get('campaignLeaderboard', params), callback);
   }
 };

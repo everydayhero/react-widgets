@@ -1,24 +1,35 @@
 .Team {
-  background: #fff;
-  border: 1px solid #555;
-  border-radius: $border-radius;
+  @include box-sizing(border-box);
   float: left;
-  margin: 15px 0 15px 15px;
-  padding: 2px;
-  width: 132px;
-  color: $color-grey-dark;
-  font-size: 13px;
-  text-align: center;
+  padding: 15px;
+  width: 16.66%;
   text-decoration: none;
+
+  @include media-max($breakpoint-xl) {
+    width: 33.33%;
+  }
+
+  @include media-max($breakpoint-xs) {
+    width: 50%;
+  }
+
+  .Team__skin {
+    border-radius: $border-radius;
+    color: $color-grey-dark;
+    font-size: 13px;
+    text-align: center;
+    padding: 2px;
+    background: #fff;
+  }
 
   img {
     width:100%;
   }
 
   p {
-    border-top: 1px solid #EBEBEB;
+    border-top: 1px solid $color-grey-light;
     line-height: 1.4;
-    height: 3.6em;
+    height: 52px;
     margin: 5px 0;
     padding: 5px 3px;
   }

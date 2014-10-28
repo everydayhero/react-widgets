@@ -9,8 +9,10 @@ module.exports = React.createClass({
   render: function() {
     return (
       <a href={ this.props.pageUrl } title={ this.props.title } className="Team">
-        <img src={ this.props.imgSrc } alt={ this.props.title } />
-        <p>{ this.props.title }</p>
+        <div className="Team__skin">
+          <img src={ this.props.imgSrc } alt={ this.props.title } />
+          <p>{ this.props.title }</p>
+        </div>
       </a>
     )
   }

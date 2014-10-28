@@ -43,6 +43,7 @@ You can view the deployed example html file at:
 <html>
   <head>
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
@@ -79,12 +80,13 @@ You can view the deployed example html file at:
 <html>
   <head>
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="FundsRaisedExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget( 'FundsRaisedExample', 'FundsRaised', {campaignUid: 'au-0'});
+      edh.widgets.renderWidget('FundsRaisedExample', 'FundsRaised', { campaignUid: 'us-0' });
     </script>
   </body>
 </html>
@@ -108,12 +110,13 @@ You can view the deployed example html file at:
 <html>
   <head>
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="TotalHeroesExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget( 'TotalHeroesExample', 'TotalHeroes', {campaignUid: 'au-0'});
+      edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', { campaignUid: 'us-0' });
     </script>
   </body>
 </html>
@@ -138,12 +141,13 @@ You can view the deployed example html file at:
 <html>
   <head>
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="TotalCharitiesExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget( 'TotalCharitiesExample', 'TotalCharities', {campaignUid: 'au-0'});
+      edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUid: 'us-0' });
     </script>
   </body>
 </html>
@@ -168,12 +172,13 @@ You can view the deployed example html file at:
 <html>
   <head>
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
     <div id="GoalExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget( 'GoalExample', 'Goal', {goal: 500000, i18n: {title: '2015 Goal'}});
+      edh.widgets.renderWidget('GoalExample', 'Goal', { goal: 500000, i18n: { title: '2015 Goal' } });
     </script>
   </body>
 </html>
@@ -199,6 +204,7 @@ You can view the deployed example html file at:
 <html>
   <head>
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
@@ -229,6 +235,7 @@ You can view the deployed example html file at:
 <html>
   <head>
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
@@ -243,7 +250,7 @@ You can view the deployed example html file at:
 
 ### Fundraisers
 
-#### Total Hours (Campaign)
+#### Recent Fundraisers (Campaign)
 
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
@@ -261,6 +268,7 @@ You can view the deployed example html file at:
 <html>
   <head>
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
@@ -295,6 +303,7 @@ You can view the deployed example html file at:
 <html>
   <head>
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
@@ -328,6 +337,7 @@ You can view the deployed example html file at:
 <html>
   <head>
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>
@@ -360,6 +370,7 @@ You can view the deployed example html file at:
 <html>
   <head>
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
   </head>
   <body>

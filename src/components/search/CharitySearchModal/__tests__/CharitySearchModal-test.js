@@ -71,7 +71,7 @@ describe('CharitySearchModal', function() {
     var input = findByTag(element, 'input');
     TestUtils.Simulate.change(input, { target: { value: 'foo' } });
 
-    expect(charities.search).lastCalledWith(query, jasmine.any(Function));
+    expect(charities.search).lastCalledWith(query, element.updateResults);
   });
 
   it('searches for more charities on page change', function() {
@@ -87,7 +87,7 @@ describe('CharitySearchModal', function() {
     TestUtils.Simulate.click(nextPageButton);
 
     expect(charities.search.mock.calls.length).toEqual(2);
-    expect(charities.search).lastCalledWith(query, jasmine.any(Function));
+    expect(charities.search).lastCalledWith(query, element.updateResults);
   });
 
   it('uses default "give" campaign uid when action is "fundraise"', function() {
@@ -97,7 +97,7 @@ describe('CharitySearchModal', function() {
     var input = findByTag(element, 'input');
     TestUtils.Simulate.change(input, { target: { value: 'foo' } });
 
-    expect(charities.search).lastCalledWith(query, jasmine.any(Function));
+    expect(charities.search).lastCalledWith(query, element.updateResults);
   });
 
   it('updates isSearching accordingly', function() {

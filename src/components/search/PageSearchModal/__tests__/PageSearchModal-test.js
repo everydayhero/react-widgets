@@ -82,7 +82,7 @@ describe('PageSearchModal', function() {
     var input = findByTag(element, 'input');
     TestUtils.Simulate.change(input, { target: { value: 'foo' } });
 
-    expect(pages.search).lastCalledWith(query, jasmine.any(Function));
+    expect(pages.search).lastCalledWith(query, element.updateResults);
   });
 
   it('searches for more pages on page change', function() {
@@ -98,7 +98,7 @@ describe('PageSearchModal', function() {
     TestUtils.Simulate.click(nextPageButton);
 
     expect(pages.search.mock.calls.length).toEqual(2);
-    expect(pages.search).lastCalledWith(query, jasmine.any(Function));
+    expect(pages.search).lastCalledWith(query, element.updateResults);
   });
 
   it('updates isSearching accordingly', function() {

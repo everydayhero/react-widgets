@@ -18,6 +18,38 @@ describe('charities', function() {
     us: { country_code: 'us', uid: 'us-123', slug: 'bar' },
   }
 
+  it('find', function() {
+    var callback = jest.genMockFunction();
+    charities.find('xy-12', callback);
+
+    expect(getJSON).lastCalledWith(
+      'https://everydayhero.com/api/v2/charities/xy-12.jsonp', callback);
+    expect(callback).toBeCalledWith(results);
+  });
+
+  it('findByCampaign', function() {
+    var callback = jest.genMockFunction();
+    charities.findByCampaign('xy-12', 7, 2, callback);
+
+    expect(getJSON).lastCalledWith(
+      'https://everydayhero.com/api/v2/charities.jsonp?campaign_ids=xy-12&page=2&limit=7',
+      callback
+    );
+    expect(callback).toBeCalledWith(results);
+  });
+
+  it('search searches for charities', function() {
+    var query = { searchTerm: 'bar', country: 'xy', campaignUid: [12, 42], page: 2, pageSize: 7 };
+    var callback = jest.genMockFunction();
+    charities.search(query, callback);
+
+    expect(getJSON).toBeCalledWith(
+      'https://everydayhero.com/api/v2/search/charities.jsonp?q=bar&country_code=xy&campaign_id=12,42&page=2&page_size=7',
+      callback
+    );
+    expect(callback).toBeCalledWith(results);
+  });
+
   it('donateUrl defaults to give campaign', function() {
     expect(charities.donateUrl(data['au']))
       .toBe('https://give.everydayhero.com/au/bar/donate');
@@ -36,18 +68,5 @@ describe('charities', function() {
   it('fundraiseUrl accepts campaign slug', function() {
     expect(charities.fundraiseUrl(data['us'], 'foo'))
       .toBe('https://foo.everydayhero.com/us/bar/get-started');
-  });
-
-  it('search searches for charities', function() {
-    var query = { searchTerm: 'bar', country: 'xy', campaignUid: [12, 42], page: 2, pageSize: 7 };
-    var callback = jest.genMockFunction();
-
-    charities.search(query, callback);
-
-    expect(getJSON).toBeCalledWith(
-      'https://everydayhero.com/api/v2/search/charities.jsonp?q=bar&country_code=xy&campaign_id=12,42&page=2&page_size=7',
-      jasmine.any(Function)
-    );
-    expect(callback).toBeCalledWith(results);
   });
 });

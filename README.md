@@ -18,23 +18,37 @@ You can view the deployed example html file at:
 
 - `https://shared-scripts.s3.amazonaws.com/widgets-[0.0.0].html`
 
-## Available Widgets
+## Modal Widgets
+
+Modal widgets cover the entire page while they are visible. There are two methods of triggering modal widgets, `initModal` will show the modal widget when the target element is clicked and `showModal` will show the modal widget immediately:
+
+```javascript
+edh.widgets.initModal(element, name, options)
+```
+- `element` is an html dom element or element ID of a link or button,
+- `name` is the name of desired modal widget, and
+- `options` depends on the type of widget (see below).
+
+```javascript
+edh.widgets.showModal(name, options)
+```
+- `name` is the name of desired modal widget, and
+- `options` depends on the type of widget (see below).
 
 ### Search
 
-#### CharitySearchModal
+#### CharitySearch
 
 The charity search modal widget allows you to search for a charity by name to donate, fundraise, or perform a custom action. By default, it searches for all charities in a given country, but can also be restricted to charities part of a given campaign.
 
 ##### Options
 
-- `action`:       *required* action to perform on charity select, either 'donate', 'fundraise' or 'custom'.
-                  *Note: 'donate' action is currently not supported for country 'us'.*
-- `onSelect`:     *optional* function called when action set to 'custom'.
-- `campaignUid`:  *optional* string campaign uid to filter charity results.
+- `action`: *required* action to perform on charity select, either 'donate', 'fundraise' or 'custom'. *Note: 'donate' action is currently not supported for country 'us'.*
+- `onSelect`: *optional* function called on selecting a result when action set to 'custom'.
+- `campaignUid`: *optional* string campaign uid to filter charity results.
 - `campaignSlug`: *optional* string campaign slug for given campaign uid.
-- `country`:      *required* string country code of region, either 'au', 'nz', 'uk' or 'us'.
-- `i18n`:         *optional* object containing localised text. Default i18n is:
+- `country`: *required* string country code of region, either 'au', 'nz', 'uk' or 'us'.
+- `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
   {
@@ -66,18 +80,18 @@ The charity search modal widget allows you to search for a charity by name to do
 </html>
 ```
 
-#### PageSearchModal
+#### PageSearch
 
 The supporter page search modal widget allows you to search for a supporter page by name to visit or perform a custom action. By default, it searches for all pages in a given country, but can also be restricted to pages part of a given campaign or charity.
 
 ##### Options
 
-- `onSelect`:     *optional* function called on selecting a result. Default redirects to supporter page.
-- `campaignUid`:  *optional* string campaign uid to filter page results.
-- `charityUid`:   *optional* string charity uid to filter page results.
-- `country`:      *required* string country code of region, either 'au', 'nz', 'uk' or 'us'.
-- `pageType`:     *optional* string type of page either 'user', 'team' or 'all' (default).
-- `i18n`:         *optional* object containing localised text. Default i18n is:
+- `onSelect`: *optional* function called on selecting a result. Default redirects to supporter page.
+- `campaignUid`: *optional* string campaign uid to filter page results.
+- `charityUid`: *optional* string charity uid to filter page results.
+- `country`: *required* string country code of region, either 'au', 'nz', 'uk' or 'us'.
+- `pageType`: *optional* string type of page either 'user', 'team' or 'all' (default).
+- `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
   {
@@ -109,6 +123,17 @@ The supporter page search modal widget allows you to search for a supporter page
 </html>
 ```
 
+## Inline Widgets
+
+Inline widgets are rendered into a target html dom element by using `renderWidget`:
+
+```javascript
+edh.widgets.renderWidget(element, name, options)
+```
+- `element` is an html dom element or element ID of a div element,
+- `name` is the name of desired inline widget, and
+- `options` depends on the type of widget (see below).
+
 ### Totals
 
 #### Funds Raised (Campaign)
@@ -121,7 +146,7 @@ Displays the total funds raised for a single specified campaign as a dollar amou
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
-- `i18n`:        *optional* object containing localised text. Default i18n is:
+- `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
   {
@@ -199,7 +224,7 @@ Displays the total number of charities associated with a single specified campai
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
-- `i18n`:        *optional* object containing localised text. Default i18n is:
+- `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
   {
@@ -237,7 +262,7 @@ Set a goal in cents to display as a campaign goal.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
-- `i18n`:       *optional* object containing localised text. Default i18n is:
+- `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
   {

@@ -20,13 +20,12 @@ var baseRoutes = {
   searchCharities:      '{baseUrl}/api/v2/search/charities.jsonp?q={searchTerm}&country_code={country}&campaign_id={campaignUid}&page={page}&page_size={pageSize}',
   searchPages:          '{baseUrl}/api/v2/search/pages.jsonp?q={searchTerm}&country_code={country}&campaign_id={campaignUid}&charity_id={charityUid}&type={type}&page={page}&page_size={pageSize}',
 };
-
 var routes = {};
 
 function getRoute(name, params) {
   var route = routes[name];
-  if (_.isObject(route)) {
-    route = route[params.country];
+  if (!route) {
+    return;
   }
 
   params = _.mapValues(params, function(value) {
@@ -36,7 +35,10 @@ function getRoute(name, params) {
     return value == null ? '' : encodeURIComponent(value);
   });
 
-  return route && format(route, params).replace(/\{.+?\}/g, '').replace(/\w+=(&|$)/g, '');
+  route = format(route, params, true);
+  route = route.replace(/\w+=(&|$)/g, '').replace(/(\?|&)$/, '');  // removed empty query params
+
+  return route;
 }
 
 function setBaseUrl(baseUrl) {

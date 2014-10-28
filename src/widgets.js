@@ -16,7 +16,8 @@ var widgets = {
   Teams: require('./components/teams/Teams'),
   Map: require('./components/maps/Map'),
   TotalDistance: require('./components/totals/TotalDistance'),
-  TotalHours: require('./components/totals/TotalHours')
+  TotalHours: require('./components/totals/TotalHours'),
+  CallToActionBox: require('./components/callstoaction/CallToActionBox')
 }
 var edh = {widgets: {}};
 

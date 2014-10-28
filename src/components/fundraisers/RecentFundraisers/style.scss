@@ -1,6 +1,6 @@
 .RecentFundraisers {
   @extend %clearfix;
-  background: #EBEBEB;
+  background: $color-grey-light;
   font-family: $sans-serif-fonts;
   border-radius: $border-radius;
 }
@@ -19,5 +19,5 @@
 }
 
 .RecentFundraisers__empty-label {
-  padding:0 15px;
+  padding: 0 15px;
 }

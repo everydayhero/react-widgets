@@ -10,8 +10,7 @@
   <!-- endinject -->
   <style type="text/css">
     body {
-      width: 930px;
-      margin: 10px auto;
+      padding: 30px;
       font-family: "Lato", Helvetica, Arial, sans-serif;
     }
 
@@ -41,10 +40,12 @@
     }
 
     .effort {
-      margin-left: 15px;
-      width: 310px;
+      box-sizing: border-box;
+      padding-left: 15px;
+      width: 33.33%;
       text-align: center;
     }
+
       #TotalDistanceExample,
       #TotalHoursExample {
         padding: 0 15px 15px;
@@ -64,6 +65,21 @@
     #RecentFundraisersExample,
     #TeamsExample {
       margin-bottom: 15px;
+    }
+
+    #MapExample {
+      width: 66.66%;
+    }
+
+    @media only screen and (max-width: 919px) {
+      #MapExample {
+        width: 100%;
+      }
+
+      .effort {
+        width: 100%;
+        padding: 15px 0 0;
+      }
     }
   </style>
 </head>

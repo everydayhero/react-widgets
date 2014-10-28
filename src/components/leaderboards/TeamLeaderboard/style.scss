@@ -1,16 +1,16 @@
 .TeamLeaderboard {
   @extend %clearfix;
-  background: #555;
+  background: $color-grey-dark;
   font-family: $sans-serif-fonts;
   font-size: $default-font-size;
   color: #fff;
-  font-size: 14px;
 
   .TeamLeaderboard__heading {
     @extend %tile-heading;
   }
 
   .TeamLeaderboard__items {
+    @extend %clearfix;
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -34,7 +34,7 @@
     display: inline-block;
     padding: 5px;
     cursor: pointer;
-    font-size: 24px;
+    font-size: $x-6;
   }
 
   .TeamLeaderboard__indicator {

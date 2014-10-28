@@ -1,16 +1,19 @@
 .CallToActionBox {
-  font-family: "Lato", Helvetica, Arial, sans-serif;
-  background: #555;
+  font-family: $sans-serif-fonts;
+  background: $color-grey-dark;
   border-radius: 2px;
   color: #FFF;
   text-align: center;
 
   hr {
-    border: 1px solid #959595;
     border-width: 1px 0 0;
+    border-style: solid;
+    border-color: inherit;
     height: 1px;
     padding: 0;
     margin: 0 15px 15px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    opacity: 0.5;
   }
 
   p {
@@ -27,6 +30,7 @@
 }
 
 .CallToActionBox__link {
-  color: #fff;
+  color: inherit;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   opacity: 0.5;
 }

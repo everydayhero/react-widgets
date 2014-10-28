@@ -24,6 +24,8 @@ You can view the deployed example html file at:
 
 #### CharitySearchModal
 
+The charity search modal widget allows you to search for a charity by name to donate, fundraise, or perform a custom action. By default, it searches for all charities in a given country, but can also be restricted to charities part of a given campaign.
+
 ##### Options
 
 - `action`:       *required* action to perform on charity select, either 'donate', 'fundraise' or 'custom'.
@@ -65,6 +67,8 @@ You can view the deployed example html file at:
 ```
 
 #### PageSearchModal
+
+The supporter page search modal widget allows you to search for a supporter page by name to visit or perform a custom action. By default, it searches for all pages in a given country, but can also be restricted to pages part of a given campaign or charity.
 
 ##### Options
 

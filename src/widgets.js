@@ -92,8 +92,8 @@ function renderWidget(element, name, options) {
 module.exports = edh.widgets = {
   setBaseUrl: routes.setBaseUrl,
   renderWidget: renderWidget,
-  showModal: showModal,
   initModal: initModal,
+  showModal: showModal,
 };
 
 global.edh = edh;

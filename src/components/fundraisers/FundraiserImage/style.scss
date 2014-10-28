@@ -1,12 +1,22 @@
 .FundraiserImage {
+  @include box-sizing(border-box);
   display: block;
-  width: 137px;
+  width: 16.66%;
   float: left;
-  margin: 15px 0 15px 15px;
+  padding: 15px;
+
+  @include media-max($breakpoint-xl) {
+    width: 25%;
+  }
+
+  @include media-max($breakpoint-l) {
+    width: 33.33%;
+  }
 
   img {
+    @include box-sizing(border-box);
     border-radius: 50%;
     border: 10px solid #fff;
-    width: 122px;
+    width: 100%;
   }
 }

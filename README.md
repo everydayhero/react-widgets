@@ -382,6 +382,41 @@ You can view the deployed example html file at:
 </html>
 ```
 
+### Calls to Action
+
+#### Call To Action Box
+
+- `campaignUid`: *required* string. Campaign uid to automatically insert 'sign in' and 'get started links'.
+- `registrationUrl`: *required* string. Pass a URL to your registration page.
+- `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
+- `textColor`: *optional* string. Set to `'#333333'` by default.
+- `i18n`: *optional* object containing localised text. Default i18n is:
+
+  ```js
+    {
+      title: 'Get Involved',
+      registerLabel: 'Register Now',
+      getStartedLabel: 'Start Fundraising',
+      signInLabel: 'Sign in'
+    }
+  ```
+
+```html
+<html>
+  <head>
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="CallToActionBoxExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('CallToActionBoxExample', 'CallToActionBox', { campaignUid: 'us-0', registrationUrl: 'https://your-registration-url.com/' });
+    </script>
+  </body>
+</html>
+```
+
 
 
 ## Commands

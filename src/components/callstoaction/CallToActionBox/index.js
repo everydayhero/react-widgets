@@ -15,7 +15,7 @@ module.exports = React.createClass({
     registrationUrl: React.PropTypes.string.isRequired,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
-    i18n: React.PropTypes.object,
+    i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
@@ -27,7 +27,8 @@ module.exports = React.createClass({
       defaultI18n: {
         title: 'Get Involved',
         registerLabel: 'Register Now',
-        getStartedLabel: 'Start Fundraising'
+        getStartedLabel: 'Start Fundraising',
+        signInLabel: 'Sign in'
       }
     };
   },
@@ -69,6 +70,7 @@ module.exports = React.createClass({
     var title           = this.t('title');
     var registerLabel   = this.t('registerLabel');
     var getStartedLabel = this.t('getStartedLabel');
+    var signInLabel     = this.t('signInLabel');
 
     if (this.state.isLoading) {
       return <Icon className="CallToActionBox__loading" icon="refresh" spin={ true }/>;
@@ -79,7 +81,7 @@ module.exports = React.createClass({
         <div className="CallToActionBox__title">{ title }</div>
         <CallToActionButton btnUrl={ registrationUrl } btnLabel={ registerLabel } />
         <hr />
-        <p>Already Registered? <a href={ signInUrl } className="CallToActionBox__link">Sign in</a></p>
+        <p>Already Registered? <a href={ signInUrl } className="CallToActionBox__link">{ signInLabel }</a></p>
         <CallToActionButton btnUrl={ getStartedUrl } btnLabel={ getStartedLabel } />
       </div>
     );

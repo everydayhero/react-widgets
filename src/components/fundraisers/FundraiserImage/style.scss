@@ -13,10 +13,18 @@
     width: 33.33%;
   }
 
+  @include media-max($breakpoint-xs) {
+    width: 50%;
+  }
+
   img {
     @include box-sizing(border-box);
     border-radius: 50%;
     border: 10px solid #fff;
     width: 100%;
+
+    @include media-max($breakpoint-xs) {
+      border-width: 5px;
+    }
   }
 }

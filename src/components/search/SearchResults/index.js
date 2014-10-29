@@ -1,10 +1,11 @@
 /** @jsx React.DOM */
 "use strict";
 
-var _             = require('lodash');
-var React         = require('react');
-var SearchResult  = require('../SearchResult');
-var I18nMixin     = require('../../mixins/I18n');
+var _              = require('lodash');
+var React          = require('react');
+var SearchResult   = require('../SearchResult');
+var I18nMixin      = require('../../mixins/I18n');
+var componentClass = require('../../proptypes/componentClass');
 
 module.exports = React.createClass({
   displayName: 'SearchResults',
@@ -13,14 +14,7 @@ module.exports = React.createClass({
 
   propTypes: {
     results: React.PropTypes.arrayOf(React.PropTypes.object),
-    resultComponent: function(props, propName, componentName) {
-      if (!props[propName]) {
-        return new Error('Required prop `' + propName + '` was not specified in `' + componentName + '`.');
-      }
-      if (!React.isValidClass(props[propName])) {
-        return new Error('Invalid prop `' + propName + '` supplied to `' + componentName + '`, expected React Component class.');
-      }
-    },
+    resultComponent: componentClass.isRequired,
     onSelect: React.PropTypes.func,
     selectAction: React.PropTypes.string
   },

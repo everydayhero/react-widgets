@@ -29,6 +29,7 @@ You can view the deployed example html file at:
 - `campaignUid`: *optional* string campaign uid to filter charity results.
 - `country`:     *required* string country code of region, either 'au', 'nz', 'uk' or 'us'.
 - `i18n`:        *optional* object containing localised text. Default i18n is:
+  ```js
     {
       title: 'Search for a Charity',
       donateAction: 'Give to this Charity',
@@ -36,6 +37,7 @@ You can view the deployed example html file at:
       customAction: 'Select',
       emptylabel: 'No results'
     }
+  ```
 
 *Note: 'donate' action is currently not supported for country 'us'.*
 
@@ -63,18 +65,20 @@ You can view the deployed example html file at:
 
 #### Funds Raised (Campaign)
 
-- `campaignUid`: *required* string campaign uid to filter results by campaign.
+Displays the total funds raised for a single specified campaign as a dollar amount.
+
+- `campaignUid`: *required* string. Campaign uid.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `i18n`:        *optional* object containing localised text. Default i18n is:
 
-```
-  {
-    title: 'Raised to Date',
-    symbol: '$'
-  }
-```
+  ```js
+    {
+      title: 'Raised to Date',
+      symbol: '$'
+    }
+  ```
 
 ```html
 <html>
@@ -94,17 +98,19 @@ You can view the deployed example html file at:
 
 #### Total Heroes (Campaign)
 
+Displays the total number of fundraisers (that have a page) for a single specified campaign.
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
-```
-  {
-    title: 'Heroes'
-  }
-```
+  ```js
+    {
+      title: 'Heroes'
+    }
+  ```
 
 ```html
 <html>
@@ -124,6 +130,8 @@ You can view the deployed example html file at:
 
 #### Total Charities (Campaign)
 
+Displays the total number of charities associated with a single specified campaign.
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
@@ -131,11 +139,11 @@ You can view the deployed example html file at:
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `i18n`:        *optional* object containing localised text. Default i18n is:
 
-```
-  {
-    title: 'Charities'
-  }
-```
+  ```js
+    {
+      title: 'Charities'
+    }
+  ```
 
 ```html
 <html>
@@ -155,18 +163,20 @@ You can view the deployed example html file at:
 
 #### Campaign Goal (Campaign)
 
+Set a goal in cents to display as a campaign goal.
+
 - `goal`: *required* number. Set a goal in **cents** to be rendered as a dollar amount.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `i18n`:       *optional* object containing localised text. Default i18n is:
 
-```
-  {
-    title: 'Goal',
-    symbol: '$'
-  }
-```
+  ```js
+    {
+      title: 'Goal',
+      symbol: '$'
+    }
+  ```
 
 ```html
 <html>
@@ -186,6 +196,8 @@ You can view the deployed example html file at:
 
 #### Total Distance (Campaign)
 
+Displays the total recorded distance that fundraisers have run for a single specified campaign in either **kilometers** or **miles**.
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `unit`: *optional* string. Can be set to either `'km'` or `'miles'`. Converts input to whichever is defined. Set to `'miles'` by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
@@ -193,12 +205,12 @@ You can view the deployed example html file at:
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
-```
-  {
-    title: 'Miles',
-    emptyLabel: 'No data to display.'
-  }
-```
+  ```js
+    {
+      title: 'Miles',
+      emptyLabel: 'No data to display.'
+    }
+  ```
 
 ```html
 <html>
@@ -218,18 +230,20 @@ You can view the deployed example html file at:
 
 #### Total Hours (Campaign)
 
+Displays the total recorded time that fundraisers have run for a single specified campaign in **hours**.
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
-```
-  {
-    title: 'Hours',
-    emptyLabel: 'No data to display.'
-  }
-```
+  ```js
+    {
+      title: 'Hours',
+      emptyLabel: 'No data to display.'
+    }
+  ```
 
 ```html
 <html>
@@ -252,17 +266,19 @@ You can view the deployed example html file at:
 
 #### Recent Fundraisers (Campaign)
 
+Displays a set of fundraiser profile images (that have a page) for a single specified campaign.
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
 - `textColor`: *optional* string. Set to `'#333333'` by default.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
-```
-  {
-    heading: 'Fundraisers',
-    emptyLabel: 'No fundraisers to display.'
-  }
-```
+  ```js
+    {
+      heading: 'Fundraisers',
+      emptyLabel: 'No fundraisers to display.'
+    }
+  ```
 
 ```html
 <html>
@@ -284,20 +300,22 @@ You can view the deployed example html file at:
 
 #### Team Leaderboard (Campaign)
 
+Displays a team leaderboard sorted by funds raised (highest first) for a single specified campaign.
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `limit`: *optional* string. Set to `'12'` by default. Determines how many results are returned.
 - `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
 - `textColor`: *optional* string. Set to `'#333333'` by default.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
-```
-  {
-    raisedTitle: 'Raised',
-    membersTitle: 'Members',
-    symbol: '$',
-    heading: 'Leaderboard > Top Teams'
-  }
-```
+  ```js
+    {
+      raisedTitle: 'Raised',
+      membersTitle: 'Members',
+      symbol: '$',
+      heading: 'Leaderboard > Top Teams'
+    }
+  ```
 
 ```html
 <html>
@@ -320,18 +338,20 @@ You can view the deployed example html file at:
 
 #### Map (Campaign)
 
+Displays an SVG map. Each point represents a fundraiser (that has created a page).
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `region`: *required* string. Set the region/country to display using a region code, e.g. `'US'`.
 - `limit`: *optional* string. Set to `'100'` by default. Determines how many results are returned. **Note:** Returns geo-location data from returned user generated pages. Some pages may not have this data available.
 - `color`: *optional* string. Set to `'#525252'` by default.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
-```
-  {
-    heading: 'Program Reach',
-    legend: 'Heroes'
-  }
-```
+  ```js
+    {
+      heading: 'Program Reach',
+      legend: 'Heroes'
+    }
+  ```
 
 ```html
 <html>
@@ -353,18 +373,20 @@ You can view the deployed example html file at:
 
 #### Teams (Campaign)
 
+Displays a set of teams for a single specified campaign.
+
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `page_size`: *optional* string. Set to `'12'` by default. Determines how many results are returned.
 - `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
 - `textColor`: *optional* string. Set to `'#333333'` by default.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
-```
-  {
-    heading: 'Teams',
-    emptyLabel: 'No teams to display.'
-  }
-```
+  ```js
+    {
+      heading: 'Teams',
+      emptyLabel: 'No teams to display.'
+    }
+  ```
 
 ```html
 <html>
@@ -386,10 +408,12 @@ You can view the deployed example html file at:
 
 #### Call To Action Box
 
+Displays a call to action box with links to the *getting started* and *sign in* page for the specified campaign. A registration URL must also be provided.
+
 - `campaignUid`: *required* string. Campaign uid to automatically insert 'sign in' and 'get started links'.
 - `registrationUrl`: *required* string. Pass a URL to your registration page.
-- `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
-- `textColor`: *optional* string. Set to `'#333333'` by default.
+- `backgroundColor`: *optional* string. Set to `'#525252'` by default.
+- `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js

@@ -16,11 +16,6 @@
   border-bottom-width: 5px;
 }
 
-.SearchInput__label {
-  @extend %text-input-label;
-  margin-left: $x-4;
-}
-
 .SearchInput__icon {
   position: absolute;
   top: 11px;

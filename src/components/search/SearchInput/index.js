@@ -8,15 +8,13 @@ var Icon          = require('../../helpers/Icon');
 module.exports = React.createClass({
   displayName: 'SearchInput',
 
-  getInitialState: function() {
-    return {
-      hasValue: false
-    }
+  propTypes: {
+    autoFocus: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
     return {
-      autoFocus: true
+      autoFocus: false
     }
   },
 
@@ -36,20 +34,18 @@ module.exports = React.createClass({
   },
 
   onChange: function(e) {
-    var value = e.target.value;
+    this.delayedChange(e.target.value);
+  },
 
-    this.setState({
-      hasValue: (value !== '')
-    });
-
+  delayedChange: _.debounce(function(value) {
     if (this.props.onChange) {
       this.props.onChange(value);
     }
-  },
+  }, 500),
 
   progressSpinner: function() {
-    if (this.props.isQueryInProgress) {
-      return <Icon className="SearchInput__progressSpinner" icon="refresh" spin={ true }/>;
+    if (this.props.isSearching) {
+      return <Icon className="SearchInput__progressSpinner" icon="refresh" spin={ true } />;
     } else {
       return null;
     }
@@ -63,15 +59,15 @@ module.exports = React.createClass({
 
     return (
       <div className={ classes }>
-        <Icon icon="search"  className="SearchInput__icon"/>
+        <Icon icon="search"  className="SearchInput__icon" />
         { this.progressSpinner() }
         <input
           id={ this.props.id }
+          className="SearchInput__input"
+          ref="input"
           type="text"
           onChange={ this.onChange }
-          ref="input"
-          placeholder={ this.props.label }
-          className="SearchInput__input"/>
+          placeholder={ this.props.label } />
       </div>
     );
   }

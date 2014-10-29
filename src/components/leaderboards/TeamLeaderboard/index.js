@@ -5,7 +5,7 @@ var _                     = require('lodash');
 var React                 = require('react');
 var I18nMixin             = require('../../mixins/I18n');
 var leaderboard           = require('../../../api/leaderboard');
-var leaderboardPages      = require('../../../api/leaderboardPages');
+var pages                 = require('../../../api/pages');
 var Icon                  = require('../../helpers/Icon');
 var TeamLeaderboardItem   = require('../TeamLeaderboardItem')
 var numeral               = require('numeral');
@@ -65,7 +65,7 @@ module.exports = React.createClass({
       teamPageIds: result.leaderboard.page_ids
     });
 
-    leaderboardPages.find(this.state.teamPageIds, this.getPageData);
+    pages.findByIds(this.state.teamPageIds, this.getPageData);
   },
 
   getPageData: function(page_data) {
@@ -77,6 +77,7 @@ module.exports = React.createClass({
       var page = _.filter(page_data.pages, {id: page_id})[0];
 
       return {
+        id: page.id,
         name: page.name,
         iso_code: page.amount.currency.iso_code,
         amount:  symbol + numeral(page.amount.cents / 100).format('0[.]00 a'),
@@ -107,20 +108,19 @@ module.exports = React.createClass({
         <Icon className="TeamLeaderboard__loading" icon="refresh" spin={ true }/>
       );
     } else {
-      if (this.state.boardData[currentPage].length > 0) {
-        return this.state.boardData[currentPage].map(function(d) {
-          return (
-            <TeamLeaderboardItem
-              name={ d.name }
-              iso_code={ d.iso_code }
-              amount={ d.amount }
-              totalMembers={ d.totalMembers }
-              imgSrc={ d.imgSrc }
-              raisedTitle={ this.t('raisedTitle') }
-              membersTitle={ this.t('membersTitle') } />
-          )
-        }, this);
-      }
+      return this.state.boardData[currentPage].map(function(d) {
+        return (
+          <TeamLeaderboardItem
+            key={ d.id }
+            name={ d.name }
+            iso_code={ d.iso_code }
+            amount={ d.amount }
+            totalMembers={ d.totalMembers }
+            imgSrc={ d.imgSrc }
+            raisedTitle={ this.t('raisedTitle') }
+            membersTitle={ this.t('membersTitle') } />
+        )
+      }, this);
     }
   },
 
@@ -150,7 +150,7 @@ module.exports = React.createClass({
 
   renderIndicators: function() {
     if (!this.state.isLoading) {
-      return this.state.boardData.map(function(d,i) {
+      return this.state.boardData.map(function(d, i) {
 
         if (this.state.currentPage == i + 1) {
           var iconClass = "circle";
@@ -159,7 +159,7 @@ module.exports = React.createClass({
         }
 
         return (
-          <div onClick={ this.switchPage.bind(null,i) } className="TeamLeaderboard__indicator">
+          <div key={ i } onClick={ this.switchPage.bind(null,i) } className="TeamLeaderboard__indicator">
             <Icon className="TeamLeaderboard__icon" icon={ iconClass } />
           </div>
         )

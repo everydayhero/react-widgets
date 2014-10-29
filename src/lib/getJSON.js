@@ -1,7 +1,7 @@
 var jsonp = require('jsonp');
 
 function getJSON(url, callback) {
-  jsonp(url, {}, function(error, data) {
+  return jsonp(url, {}, function(error, data) {
     callback(error ? null : data);
   });
 }

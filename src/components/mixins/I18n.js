@@ -4,11 +4,15 @@ var _      = require('lodash');
 var format = require('../../lib/format');
 
 module.exports = {
-  t: function(key, params) {
-    var i18n = this.props.defaultI18n;
+  getI18n: function() {
+    var i18n = this.props.defaultI18n || {};
     if (this.props.i18n) {
       i18n = _.merge({}, i18n, this.props.i18n);
     }
-    return format(i18n[key], params);
+    return i18n;
+  },
+
+  t: function(key, params) {
+    return format(this.getI18n()[key], params);
   }
 };

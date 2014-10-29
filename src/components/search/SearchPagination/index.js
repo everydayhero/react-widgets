@@ -1,8 +1,28 @@
 /** @jsx React.DOM */
+"use strict";
+
 var React = require('react');
 var Icon = require('../../helpers/Icon');
 
 module.exports = React.createClass({
+  displayName: 'SearchPagination',
+
+  propTypes: {
+    count: React.PropTypes.number,
+    page: React.PropTypes.number,
+    pageSize: React.PropTypes.number,
+    totalPages: React.PropTypes.number
+  },
+
+  getDefaultProps: function() {
+    return {
+      count: 0,
+      page: 0,
+      pageSize: 0,
+      totalPages: 0
+    };
+  },
+
   onPageLeft: function() {
     this.props.onChange(this.props.page - 1);
   },

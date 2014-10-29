@@ -45,7 +45,7 @@ module.exports = React.createClass({
   onSuccess: function(result) {
     this.setState({
       isLoading: false,
-      total: result.meta.pagination.count
+      total: result.meta.count
     });
   },
 
@@ -56,7 +56,7 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    pages.find(props.campaignUid, props.page_count, props.page_size, props.page_type, this.onSuccess);
+    pages.findByCampaign(props.campaignUid, props.page_count, props.page_size, props.page_type, this.onSuccess);
   },
 
   renderTotal: function() {

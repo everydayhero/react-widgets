@@ -37,7 +37,7 @@
     "node-sass": "^0.9.6",
     "watchify": "^1.0.6",
     "es5-shim": "^4.0.3",
-    "jsonp": "0.0.4",
+    "jsonp": "webmodules/jsonp",
     "numeral": "1.5.3"
   },
   "scripts": {
@@ -60,7 +60,7 @@
     ]
   },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/jest.js",
+    "scriptPreprocessor": "<rootDir>/config/jest_preprocessor.js",
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react"
     ]

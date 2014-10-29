@@ -4,7 +4,7 @@
 var _            = require('lodash');
 var React        = require('react');
 var I18nMixin    = require('../../mixins/I18n');
-var staticPages  = require('../../../api/staticPages');
+var pages        = require('../../../api/pages');
 var Icon         = require('../../helpers/Icon');
 
 module.exports = React.createClass({
@@ -49,7 +49,7 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    staticPages.find(props.campaignUid, props.page_type, props.limit, props.page, this.processData);
+    pages.findByCampaign(props.campaignUid, props.page_type, props.limit, props.page, this.processData);
   },
 
   processData: function(page_data) {

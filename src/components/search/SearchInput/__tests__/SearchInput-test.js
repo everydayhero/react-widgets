@@ -2,56 +2,76 @@
 "use strict";
 jest.autoMockOff();
 
-var React                  = require('react/addons');
-var TestUtils              = React.addons.TestUtils;
-var SearchInput            = require('../');
-var findByClass            = TestUtils.findRenderedDOMComponentWithClass;
+var _           = require('lodash');
+_.debounce      = require('../../../../lib/debounce'); // testable version of debounce
+
+var React       = require('react/addons');
+var SearchInput = require('../');
+var TestUtils   = React.addons.TestUtils;
+var findByClass = TestUtils.findRenderedDOMComponentWithClass;
+var findByTag   = TestUtils.findRenderedDOMComponentWithTag;
 
 describe('SearchInput', function() {
-   it('renders default label', function() {
-      var componenet = <SearchInput autoFocus={ false }/>;
-      var element = TestUtils.renderIntoDocument(componenet);
-
-      findByClass(element, 'SearchInput__label');
-  });
-
-  it('renders an optional label', function() {
-      var componenet = <SearchInput autoFocus={ false } label="foo"/>;
-      var element = TestUtils.renderIntoDocument(componenet);
-      var label = findByClass(element, 'SearchInput__label');
-
-      expect(label.getDOMNode().textContent).toBe('foo')
-  });
-
-  it('does not render a label if input has a value', function() {
-      var componenet = <SearchInput autoFocus={ false } label="foo"/>;
-      var element = TestUtils.renderIntoDocument(componenet);
-      var elementFound = true;
-      element.setState({
-        hasValue: true
-      });
-
-      try {
-        findByClass(element, 'SearchInput__label');
-      } catch(error) {
-        elementFound = false;
-      }
-
-      expect(elementFound).toBe(false);
-  });
-
   it('allows custom className', function() {
-      var componenet = <SearchInput autoFocus={ false } className="foo"/>;
-      var element = TestUtils.renderIntoDocument(componenet);
+    var component = <SearchInput className="foo" />;
+    var element = TestUtils.renderIntoDocument(component);
 
-      findByClass(element, 'foo');
+    findByClass(element, 'foo');
+  });
+
+  it('allows an optional placeholder', function() {
+    var component = <SearchInput label="foo" />;
+    var element = TestUtils.renderIntoDocument(component);
+    var input = findByClass(element, 'SearchInput__input');
+
+    expect(input.getDOMNode().getAttribute('placeholder')).toBe('foo')
   });
 
   it('show processing twirler when QueryInProgress', function() {
-      var componenet = <SearchInput autoFocus={ false } isQueryInProgress={ true } />;
-      var element = TestUtils.renderIntoDocument(componenet);
+    var component = <SearchInput isSearching={ true } />;
+    var element = TestUtils.renderIntoDocument(component);
 
-      findByClass(element, 'SearchInput__progressSpinner');
+    findByClass(element, 'SearchInput__progressSpinner');
   });
 
+  it('auto focuses on autoFocus', function() {
+    var component = <SearchInput autoFocus={ true } />;
+    var element = TestUtils.renderIntoDocument(component);
+    var input = findByTag(element, 'input');
+
+    expect(input.getDOMNode()).toBe(document.activeElement);
+
+    // teardown: must unfocus elements or other tests fail
+    input.getDOMNode().blur();
+  });
+
+  it('calls onChange on change', function() {
+    var callback = jest.genMockFunction();
+    var component = <SearchInput onChange={ callback } />;
+    var element = TestUtils.renderIntoDocument(component);
+    var input = findByTag(element, 'input');
+    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
+
+    expect(callback).not.toBeCalled();
+
+    jest.runAllTimers();
+
+    expect(callback).toBeCalledWith('foo');
+  });
+
+  it('debounces input changes', function() {
+    var callback = jest.genMockFunction();
+    var component = <SearchInput onChange={ callback } />;
+    var element = TestUtils.renderIntoDocument(component);
+    var input = findByTag(element, 'input');
+    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
+    TestUtils.Simulate.change(input, { target: { value: 'bar' } });
+
+    expect(callback).not.toBeCalled();
+
+    jest.runAllTimers();
+
+    expect(callback.mock.calls.length).toEqual(1);
+    expect(callback).toBeCalledWith('bar');
+  });
 });

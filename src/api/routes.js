@@ -2,29 +2,66 @@
 
 var _ = require('lodash');
 var format = require('../lib/format');
+var parseUrl = require('../lib/parseUrl');
 
-var routes = {
-  donate: {
-    au: 'https://heroix.everydayhero.com.au/charities/{id}/donate',
-    nz: 'https://heroix.everydayhero.co.nz/charities/{id}/donate',
-    uk: 'https://heroix.everydayhero.co.uk/charities/{id}/donate',
-  },
-  fundraise: 'https://give.everydayhero.com/{country}/{slug}/get-started',
-  charities: 'https://everydayhero.com/api/v2/search/charities.jsonp',
+var defaultBaseUrl = 'https://everydayhero.com';
+var baseRoutes = {
+  donate:               '{protocol}://{campaignSlug}.{hostname}/{country}/{charitySlug}/donate',
+  fundraise:            '{protocol}://{campaignSlug}.{hostname}/{country}/{charitySlug}/get-started',
 
-  leaderboard: 'https://everydayhero.com/api/v2/campaigns/{id}/leaderboard.jsonp?type={type}&limit={limit}',
-  leaderboardPages: 'https://everydayhero.com/api/v2/pages.jsonp?ids={ids}',
+  campaign:             '{baseUrl}/api/v2/campaigns/{campaignUid}.jsonp',
+  campaignLeaderboard:  '{baseUrl}/api/v2/campaigns/{campaignUid}/leaderboard.jsonp?type={type}&limit={limit}',
+  charity:              '{baseUrl}/api/v2/charities/{charityUid}.jsonp',
+  charities:            '{baseUrl}/api/v2/charities.jsonp?campaign_ids={campaignUid}&page={page}&limit={limit}',
+  page:                 '{baseUrl}/api/v2/pages/{pageId}.jsonp',
+  pages:                '{baseUrl}/api/v2/pages.jsonp?ids={pageIds}&campaign_id={campaignUid}&type={type}&page={page}&limit={limit}',
 
-  campaignCharities: 'https://everydayhero.com/api/v2/search/charities.jsonp?campaign_id={id}&page=1&page_size=1',
-  pages: 'https://everydayhero.com/api/v2/search/pages.jsonp?campaign_id={id}&page={page_count}&page_size={page_size}&type={type}',
-  staticPages: 'https://everydayhero.com/api/v2/pages.jsonp?campaign_id={id}&type={type}&limit={limit}&page={page}',
-  campaigns: 'https://everydayhero.com/api/v2/campaigns/{id}.jsonp'
+  searchCampaigns:      '{baseUrl}/api/v2/search/campaigns.jsonp?q={searchTerm}&country_code={country}&page={page}&page_size={pageSize}',
+  searchCharities:      '{baseUrl}/api/v2/search/charities.jsonp?q={searchTerm}&country_code={country}&campaign_id={campaignUid}&page={page}&page_size={pageSize}',
+  searchPages:          '{baseUrl}/api/v2/search/pages.jsonp?q={searchTerm}&country_code={country}&campaign_id={campaignUid}&charity_id={charityUid}&type={type}&page={page}&page_size={pageSize}',
 };
+var routes = {};
 
-module.exports = function(path, params) {
-  var route = routes[path];
-  if (_.isObject(route)) {
-    route = route[params.country];
+function getRoute(name, params) {
+  var route = routes[name];
+  if (!route) {
+    return;
   }
-  return format(route, params);
+
+  params = _.mapValues(params, function(value) {
+    if (_.isArray(value)) {
+      return value.join(',');
+    }
+    return value == null ? '' : encodeURIComponent(value);
+  });
+
+  route = format(route, params, true);
+  route = route.replace(/\w+=(&|$)/g, '').replace(/(\?|&)$/, '');  // removed empty query params
+
+  return route;
+}
+
+function setBaseUrl(baseUrl) {
+  var splitUrl = parseUrl(baseUrl);
+  if (!splitUrl) {
+    console.error('Invalid base URL "' + baseUrl + '", expected URL such as "http://server.com" or "http://localhost:3000".');
+    return false;
+  }
+
+  var params = {
+    protocol: splitUrl.protocol,
+    hostname: splitUrl.hostname,
+    baseUrl: baseUrl
+  };
+
+  routes = _.mapValues(baseRoutes, function(url) {
+    return format(url, params);
+  });
+}
+
+setBaseUrl(defaultBaseUrl);
+
+module.exports = {
+  get: getRoute,
+  setBaseUrl: setBaseUrl
 };

@@ -4,7 +4,13 @@ var routes = require('./routes');
 var getJSON = require('../lib/getJSON');
 
 module.exports = {
-  find: function(id, type, limit, callback) {
-    getJSON(routes('leaderboard', {id: id, type: type, limit: limit}), callback);
+  find: function(campaignUid, type, limit, callback) {
+    var params = {
+      campaignUid: campaignUid,
+      type: type,
+      limit: limit
+    };
+
+    return getJSON(routes.get('campaignLeaderboard', params), callback);
   }
 };

@@ -4,6 +4,13 @@
 var React = require('react');
 
 module.exports = React.createClass({
+  displayName: 'SearchResult',
+
+  propTypes: {
+    onSelect: React.PropTypes.func.isRequired,
+    result: React.PropTypes.object.isRequired
+  },
+
   clickHandler: function(event) {
     event.preventDefault();
     this.props.onSelect(this.props.result);
@@ -11,13 +18,12 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <a
+      <a href="#"
         className="SearchResult"
         key={ this.props.result.id }
-        onClick={ this.clickHandler }
-        href="#" >
+        onClick={ this.clickHandler }>
         { this.props.children }
       </a>
-    )
+    );
   }
 });

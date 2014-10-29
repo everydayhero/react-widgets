@@ -1,0 +1,36 @@
+.CallToActionBox {
+  font-family: $sans-serif-fonts;
+  background: $color-grey-dark;
+  border-radius: 2px;
+  color: #FFF;
+  text-align: center;
+
+  hr {
+    border-width: 1px 0 0;
+    border-style: solid;
+    border-color: inherit;
+    height: 1px;
+    padding: 0;
+    margin: 0 15px 15px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    opacity: 0.5;
+  }
+
+  p {
+    padding: 0;
+    margin: 0 0 15px;
+  }
+}
+
+.CallToActionBox__title {
+  font-size: 24px;
+  padding: 15px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.CallToActionBox__link {
+  color: inherit;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  opacity: 0.5;
+}

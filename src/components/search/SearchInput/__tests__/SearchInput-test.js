@@ -3,7 +3,7 @@
 jest.autoMockOff();
 
 var _           = require('lodash');
-_.debounce      = require('../../../../lib/debounce'); // testable version of debounce
+_.debounce      = require('../../../../test/helpers/debounce'); // testable version of debounce
 
 var React       = require('react/addons');
 var SearchInput = require('../');

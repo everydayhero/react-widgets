@@ -1,3 +1,5 @@
+// testable version of debounce as lodash.debounce() enforces wait time
+
 function debounce(func, wait, immediate) {
   var timeout;
   return function() {

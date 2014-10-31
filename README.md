@@ -47,7 +47,7 @@ The charity search modal widget allows you to search for a charity by name to do
 - `onSelect`: *optional* function called on selecting a result when action set to 'custom'.
 - `campaignUid`: *optional* string campaign uid to filter charity results.
 - `campaignSlug`: *optional* string campaign slug for given campaign uid.
-- `country`: *required* string country code of region, either 'au', 'nz', 'uk' or 'us'.
+- `country`: *optional* string country code of region, either 'au', 'nz', 'uk' or 'us'.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -89,7 +89,7 @@ The supporter page search modal widget allows you to search for a supporter page
 - `onSelect`: *optional* function called on selecting a result. Default redirects to supporter page.
 - `campaignUid`: *optional* string campaign uid to filter page results.
 - `charityUid`: *optional* string charity uid to filter page results.
-- `country`: *required* string country code of region, either 'au', 'nz', 'uk' or 'us'.
+- `country`: *optional* string country code of region, either 'au', 'nz', 'uk' or 'us'.
 - `pageType`: *optional* string type of page either 'user', 'team' or 'all' (default).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 

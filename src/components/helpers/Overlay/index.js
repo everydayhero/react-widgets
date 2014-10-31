@@ -39,7 +39,7 @@ module.exports = React.createClass({
 
   render: function() {
     var closeButton = this.props.onClose &&
-      <a href="#" className="Overlay__close" onClick={ this.onClose }><Icon icon="close" /></a>;
+      <a href="#" className="Overlay__close" onClick={ this.onClose }><Icon icon="times" /></a>;
 
     return (
       <div className='Overlay' onKeyDown={ this.keyHandler }>

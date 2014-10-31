@@ -4,6 +4,8 @@ var concat       = require('gulp-concat');
 var awspublish   = require('gulp-awspublish');
 var rename       = require('gulp-rename');
 var pkg          = require('./package.json');
+var request      = require('superagent');
+var fs            = require('fs');
 
 // stylesheets
 var sass         = require('gulp-sass');
@@ -51,7 +53,11 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('public'));
 });
 
-gulp.task('default', [ 'styles', 'scripts' ], function() {
+gulp.task('markdown', function() {
+  return processMarkdown();
+});
+
+gulp.task('default', [ 'styles', 'scripts', 'markdown' ], function() {
   var sources = gulp.src([
       'public/widgets-' + pkg.version + '.*'
     ], { read: false });
@@ -95,3 +101,23 @@ gulp.task('publish', function() {
     .pipe(publisher.publish(headers))
     .pipe(awspublish.reporter());
 });
+
+function processMarkdown() {
+  var markdown = fs.readFileSync('README.md', 'utf8');
+  var template = fs.readFileSync('./src/README-template.html', 'utf8');
+
+  function end(error, res){
+    var templateArray = template.split('{{content}}');
+    var readme = templateArray[0] + res.text + templateArray[1];
+    fs.writeFile('./public/README-' + pkg.version + '.html', readme , "utf8", function (err) {
+      if (err) { throw err};
+    });
+  };
+
+  request.post('https://api.github.com/markdown')
+         .send({
+            "text": markdown,
+            "mode": "markdown",
+          })
+         .end(end);
+}

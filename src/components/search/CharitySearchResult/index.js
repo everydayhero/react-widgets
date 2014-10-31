@@ -6,6 +6,10 @@ var React         = require('react');
 var SearchResult  = require('../SearchResult');
 var Icon          = require('../../helpers/Icon');
 
+function normaliseForComparison(string) {
+  return string.replace(/^\s+|\s+$|[^ \w]|_/gm, '').replace(/\s{2,}/g, ' ').toLowerCase();
+}
+
 module.exports = React.createClass({
   displayName: 'CharitySearchResult',
 
@@ -19,12 +23,24 @@ module.exports = React.createClass({
     return _.compact([this.props.result.locality, this.props.result.region]).join(', ');
   },
 
+  showMerchantName: function() {
+    var name         = normaliseForComparison(this.props.result.name || ''),
+        merchantName = normaliseForComparison(this.props.result.merchant_name || '');
+
+    return merchantName && !name.match(merchantName);
+  },
+
   render: function() {
     var props = this.props;
     var charity = props.result;
     var location = this.location();
-    var logo;
+    var header = [ charity.name ];
 
+    if (this.showMerchantName()) {
+      header.push(<span className="merchant-name">{ charity.merchant_name }</span>);
+    }
+
+    var logo;
     if (charity.logo_url) {
       logo = (
         <div className="CharitySearchResult__logo">
@@ -43,7 +59,7 @@ module.exports = React.createClass({
       <SearchResult onSelect={ props.onSelect } result={ charity }>
         { logo }
         <div className='CharitySearchResult__content'>
-          <div className='CharitySearchResult__header'>{ charity.name }</div>
+          <div className='CharitySearchResult__header'>{ header }</div>
           <p className='CharitySearchResult__description'>{ charity.description }</p>
           <div className='CharitySearchResult__footer'>{ location }</div>
         </div>

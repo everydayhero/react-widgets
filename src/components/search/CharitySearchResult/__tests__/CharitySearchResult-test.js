@@ -11,6 +11,7 @@ var scryByClass         = TestUtils.scryRenderedDOMComponentsWithClass;
 describe('it renders a charity result', function() {
   var result = {
     name: 'Foo',
+    merchant_name: 'Bar',
     description: 'Blah blah blah',
     locality: 'Brisbane',
     region: 'Queensland'
@@ -25,9 +26,28 @@ describe('it renders a charity result', function() {
     var footer       = findByClass(component, 'CharitySearchResult__footer');
 
     expect(element).toBeDefined();
-    expect(header.getDOMNode().textContent).toBe(result.name);
+    expect(header.getDOMNode().textContent).toContain(result.name);
+    expect(header.getDOMNode().textContent).toContain(result.merchant_name);
     expect(description.getDOMNode().textContent).toBe(result.description);
     expect(footer.getDOMNode().textContent).toBe(result.locality + ', ' + result.region);
+  });
+
+  it('does not render merchant name if contained in name', function() {
+    var result = { name: 'Foo Bar', merchant_name: 'Bar' };
+    var searchResult = <CharitySearchResult result={ result } />;
+    var component = TestUtils.renderIntoDocument(searchResult);
+    var header = findByClass(component, 'CharitySearchResult__header');
+
+    expect(header.getDOMNode().textContent).toBe(result.name);
+  });
+
+  it('does not render merchant name ignores case and punctuation', function() {
+    var result = { name: '{Foo}?', merchant_name: '<fOO>!' };
+    var searchResult = <CharitySearchResult result={ result } />;
+    var component = TestUtils.renderIntoDocument(searchResult);
+    var header = findByClass(component, 'CharitySearchResult__header');
+
+    expect(header.getDOMNode().textContent).toBe(result.name);
   });
 
   it('includes charity logo if exist', function() {

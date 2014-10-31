@@ -16,7 +16,7 @@ module.exports = React.createClass({
   propTypes: {
     autoFocus: React.PropTypes.bool,
     campaignUid: React.PropTypes.string,
-    country: React.PropTypes.oneOf(['au', 'nz', 'uk', 'us']).isRequired,
+    country: React.PropTypes.oneOf(['au', 'nz', 'uk', 'us']),
     i18n: React.PropTypes.object,
     onClose: React.PropTypes.func.isRequired,
     onSelect: React.PropTypes.func,

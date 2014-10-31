@@ -58,6 +58,12 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+
+  .merchant-name {
+    display: block;
+    font-size: 11px;
+    color: $color-grey;
+  }
 }
 
 .CharitySearchResult__footer {

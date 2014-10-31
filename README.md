@@ -56,7 +56,7 @@ The charity search modal widget allows you to search for a charity by name to do
     donateAction: 'Give to this Charity',
     fundraiseAction: 'Fundraise for this Charity',
     selectAction: 'Select',
-    emptyLabel: 'No results'
+    emptyLabel: "We couldn't find any matching Charities."
   }
   ```
 
@@ -95,9 +95,10 @@ The supporter page search modal widget allows you to search for a supporter page
 
   ```js
   {
-    title: 'Search for a Supporter',
+    title: 'Search for a Supporter Pages',
     selectAction: 'Support',
     emptyLabel: 'No results'
+    emptyLabel: "We couldn't find any matching Supporter Pages."
   }
   ```
 

@@ -18,6 +18,7 @@
   top: 36px;
   display: block;
   font-size: $x-9;
+  line-height:$x-9;
   color: white;
 
   @include media-max($breakpoint-xs) {

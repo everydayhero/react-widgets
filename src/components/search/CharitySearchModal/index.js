@@ -32,7 +32,8 @@ module.exports = React.createClass({
       defaultI18n: {
         title: 'Search for a Charity',
         donateAction: 'Give to this Charity',
-        fundraiseAction: 'Fundraise for this Charity'
+        fundraiseAction: 'Fundraise for this Charity',
+        emptyLabel: "We couldn't find any matching Charities."
       },
       pageSize: 10
     }

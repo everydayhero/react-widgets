@@ -29,8 +29,9 @@ module.exports = React.createClass({
       campaignUid: '',
       charityUid: '',
       defaultI18n: {
-        title: 'Search for a Supporter',
-        selectAction: 'Support'
+        title: 'Search for a Supporter Page',
+        selectAction: 'Support',
+        emptyLabel: "We couldn't find any matching Supporter Pages."
       },
       pageSize: 10,
       pageType: 'all',

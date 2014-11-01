@@ -1,21 +1,19 @@
 /** @jsx React.DOM */
 "use strict";
 jest.autoMockOff();
-jest.mock('../../../../api/pages');
 
-describe('Leaderboard', function() {
+describe('TeamLeaderboardItem', function() {
   var React                       = require('react/addons');
-  var Leaderboard                 = require('../');
-  var pages                       = require('../../../../api/pages');
+  var TeamLeaderboardItem         = require('../');
   var TestUtils                   = React.addons.TestUtils;
 
   describe('component defaults', function() {
-    var leaderboard;
+    var teamLeaderboardItem;
     var element;
 
     beforeEach(function() {
-      leaderboard = <Leaderboard campaignUid="au-0" />;
-      element = TestUtils.renderIntoDocument(leaderboard);
+      teamLeaderboardItem = <TeamLeaderboardItem campaignUid="au-0" />;
+      element = TestUtils.renderIntoDocument(teamLeaderboardItem);
     });
 
     it('renders something', function() {

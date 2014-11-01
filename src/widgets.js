@@ -13,7 +13,7 @@ var widgets = {
   TotalHeroes: require('./components/totals/TotalHeroes'),
   TotalCharities: require('./components/totals/TotalCharities'),
   Goal: require('./components/totals/Goal'),
-  Leaderboard: require('./components/leaderboards/TeamLeaderboard'),
+  Leaderboard: require('./components/leaderboards/Leaderboard'),
   RecentFundraisers: require('./components/fundraisers/RecentFundraisers'),
   Teams: require('./components/teams/Teams'),
   Map: require('./components/maps/Map'),

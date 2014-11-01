@@ -7,14 +7,15 @@ var I18nMixin             = require('../../mixins/I18n');
 var leaderboard           = require('../../../api/leaderboard');
 var pages                 = require('../../../api/pages');
 var Icon                  = require('../../helpers/Icon');
-var TeamLeaderboardItem   = require('../TeamLeaderboardItem')
+var TeamLeaderboardItem   = require('../TeamLeaderboardItem');
+var LeaderboardItem       = require('../LeaderboardItem');
 var numeral               = require('numeral');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
-  displayName: "TeamLeaderboard",
+  displayName: "Leaderboard",
   propTypes: {
-    campaignUid: React.PropTypes.string,
+    campaignUid: React.PropTypes.string.isRequired,
     type: React.PropTypes.string,
     limit: React.PropTypes.string,
     pageSize: React.PropTypes.number,
@@ -26,16 +27,16 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       campaignUid: '',
-      type: 'team',
-      limit: '12',
-      pageSize: 4,
+      type: 'individual',
+      limit: '24',
+      pageSize: 12,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
       defaultI18n: {
         raisedTitle: 'Raised',
         membersTitle: 'Members',
         symbol: '$',
-        heading: 'Leaderboard > Top Teams'
+        heading: 'Leaderboard > Top Individuals'
       }
     };
   },
@@ -82,7 +83,8 @@ module.exports = React.createClass({
         iso_code: page.amount.currency.iso_code,
         amount:  symbol + numeral(page.amount.cents / 100).format('0[.]00 a'),
         totalMembers: page.team_member_uids.length,
-        imgSrc: page.image.large_image_url
+        imgSrc: page.image.large_image_url,
+        smallImgSrc: page.image.small_image_url
       }
     });
 
@@ -102,13 +104,18 @@ module.exports = React.createClass({
 
   renderLeaderboardItems: function() {
     var currentPage = this.state.currentPage - 1;
+    var rank = 0;
 
     if (this.state.isLoading) {
       return (
-        <Icon className="TeamLeaderboard__loading" icon="refresh" spin={ true }/>
+        <Icon className="Leaderboard__loading" icon="refresh" spin={ true }/>
       );
-    } else {
-      return this.state.boardData[currentPage].map(function(d) {
+    }
+
+    return this.state.boardData[currentPage].map(function(d,i) {
+      rank = numeral(i + 1 + (currentPage * this.props.pageSize)).format('0o');
+
+      if (this.props.type === 'team') {
         return (
           <TeamLeaderboardItem
             key={ d.id }
@@ -119,9 +126,20 @@ module.exports = React.createClass({
             imgSrc={ d.imgSrc }
             raisedTitle={ this.t('raisedTitle') }
             membersTitle={ this.t('membersTitle') } />
-        )
-      }, this);
-    }
+        );
+      }
+
+      return (
+        <LeaderboardItem
+          key={ d.id }
+          rank={ rank }
+          name={ d.name }
+          iso_code={ d.iso_code }
+          amount={ d.amount }
+          imgSrc={ d.smallImgSrc } />
+      );
+
+    }, this);
   },
 
   prevPage: function() {
@@ -159,8 +177,8 @@ module.exports = React.createClass({
         }
 
         return (
-          <div key={ i } onClick={ this.switchPage.bind(null,i) } className="TeamLeaderboard__indicator">
-            <Icon className="TeamLeaderboard__icon" icon={ iconClass } />
+          <div key={ i } onClick={ this.switchPage.bind(null,i) } className="Leaderboard__indicator">
+            <Icon className="Leaderboard__icon" icon={ iconClass } />
           </div>
         )
 
@@ -176,21 +194,21 @@ module.exports = React.createClass({
     }
 
     return (
-      <div className="TeamLeaderboard" style={ customStyle }>
-        <h3 className="TeamLeaderboard__heading">{ heading }</h3>
-        <ol className="TeamLeaderboard__items">
+      <div className="Leaderboard" style={ customStyle }>
+        <h3 className="Leaderboard__heading">{ heading }</h3>
+        <ol className="Leaderboard__items">
           { this.renderLeaderboardItems() }
         </ol>
-        <div className="TeamLeaderboard__controller">
-          <div className="TeamLeaderboard__indicators">
+        <div className="Leaderboard__controller">
+          <div className="Leaderboard__indicators">
             { this.renderIndicators() }
           </div>
-          <div className="TeamLeaderboard__controls">
-            <div onClick={ this.prevPage } className="TeamLeaderboard__prevBtn">
-              <Icon className="TeamLeaderboard__icon" icon="caret-left"/>
+          <div className="Leaderboard__controls">
+            <div onClick={ this.prevPage } className="Leaderboard__prevBtn">
+              <Icon className="Leaderboard__icon" icon="caret-left"/>
             </div>
-            <div onClick={ this.nextPage } className="TeamLeaderboard__nextBtn">
-              <Icon className="TeamLeaderboard__icon" icon="caret-right"/>
+            <div onClick={ this.nextPage } className="Leaderboard__nextBtn">
+              <Icon className="Leaderboard__icon" icon="caret-right"/>
             </div>
           </div>
         </div>

@@ -16,7 +16,7 @@ module.exports = React.createClass({
   displayName: "Leaderboard",
   propTypes: {
     campaignUid: React.PropTypes.string.isRequired,
-    type: React.PropTypes.string,
+    type: React.PropTypes.oneOf(['team', 'individual']),
     limit: React.PropTypes.string,
     pageSize: React.PropTypes.number,
     backgroundColor: React.PropTypes.string,

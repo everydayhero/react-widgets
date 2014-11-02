@@ -1,7 +1,5 @@
 /node_modules
-/public/widgets-*.js
-/public/widgets-*.css
-/public/widgets-*.html
+/public/
 .awspublish-shared-scripts
 .DS_Store
 npm-debug.log

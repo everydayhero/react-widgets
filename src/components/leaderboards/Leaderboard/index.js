@@ -35,6 +35,7 @@ module.exports = React.createClass({
       defaultI18n: {
         raisedTitle: 'Raised',
         membersTitle: 'Members',
+        rankTitle: 'Ranked',
         symbol: '$',
         heading: 'Leaderboard > Top Individuals'
       }
@@ -133,6 +134,7 @@ module.exports = React.createClass({
         <LeaderboardItem
           key={ d.id }
           rank={ rank }
+          rankTitle={ this.t('rankTitle') }
           name={ d.name }
           iso_code={ d.iso_code }
           amount={ d.amount }

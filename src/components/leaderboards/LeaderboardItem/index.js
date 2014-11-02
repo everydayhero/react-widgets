@@ -19,7 +19,7 @@ module.exports = React.createClass({
                 { this.props.name }
               </div>
               <div className="LeaderboardItem__rank">
-                Ranked { this.props.rank }
+                { this.props.rankTitle + ' ' + this.props.rank }
               </div>
             </div>
             <div className="LeaderboardItem__amount">

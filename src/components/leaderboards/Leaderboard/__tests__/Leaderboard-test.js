@@ -47,6 +47,5 @@ describe('Leaderboard', function() {
 
       expect(heading.getDOMNode().textContent).toBe(translation.heading);
     });
-
   });
 });

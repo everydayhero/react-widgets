@@ -414,13 +414,14 @@ Displays a set of fundraiser profile images (that have a page) for a single spec
 
 ### Leaderboards
 
-#### Team Leaderboard (Campaign)
+#### Leaderboard (Campaign)
 
-Displays a team leaderboard sorted by funds raised (highest first) for a single specified campaign.
+Displays a leaderboard sorted by funds raised (highest first) for a single specified campaign. Can be set to show leaderboards for teams or individuals.
 
 ##### Options
 
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `type`: *optional* string. Set a type of either `'team'` or `'individual'`. Set to `'individual'` by default.
 - `limit`: *optional* string. Set to `'12'` by default. Determines how many results are returned.
 - `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
 - `textColor`: *optional* string. Set to `'#333333'` by default.
@@ -430,10 +431,12 @@ Displays a team leaderboard sorted by funds raised (highest first) for a single 
   {
     raisedTitle: 'Raised',
     membersTitle: 'Members',
+    rankTitle: 'Ranked',
     symbol: '$',
-    heading: 'Leaderboard > Top Teams'
+    heading: 'Leaderboard > Top Individuals'
   }
-  ```
+  `
+  ``
 
 ##### Example
 

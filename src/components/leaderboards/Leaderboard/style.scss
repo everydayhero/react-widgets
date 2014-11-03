@@ -1,50 +1,50 @@
-.TeamLeaderboard {
+.Leaderboard {
   @extend %clearfix;
   background: $color-grey-dark;
   font-family: $sans-serif-fonts;
   font-size: $default-font-size;
   color: #fff;
 
-  .TeamLeaderboard__heading {
+  .Leaderboard__heading {
     @extend %tile-heading;
   }
 
-  .TeamLeaderboard__items {
+  .Leaderboard__items {
     @extend %clearfix;
     list-style-type: none;
     padding: 0;
     margin: 0;
   }
 
-  .TeamLeaderboard__controller {
+  .Leaderboard__controller {
     clear: both;
     text-align: right;
     margin: 15px 15px;
   }
 
-  .TeamLeaderboard__controls,
-  .TeamLeaderboard__indicators {
+  .Leaderboard__controls,
+  .Leaderboard__indicators {
     display: inline-block;
     vertical-align: middle;
     margin-left: 5px;
   }
 
-  .TeamLeaderboard__prevBtn,
-  .TeamLeaderboard__nextBtn {
+  .Leaderboard__prevBtn,
+  .Leaderboard__nextBtn {
     display: inline-block;
     padding: 5px;
     cursor: pointer;
     font-size: $x-6;
   }
 
-  .TeamLeaderboard__indicator {
+  .Leaderboard__indicator {
     display: inline-block;
     padding: 3px;
     margin: 0 2px 0 0;
     cursor: pointer;
   }
 
-  .TeamLeaderboard__loading {
+  .Leaderboard__loading {
     @extend %tile-loading-icon;
   }
 }

@@ -51,7 +51,7 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    pages.findByCampaign(props.campaignUid, props.page_count, props.page_size, props.type, this.onSuccess);
+    pages.findByCampaign(props.campaignUid, props.type, props.page_size, props.page_count, this.onSuccess);
   },
 
   onSuccess: function(result) {

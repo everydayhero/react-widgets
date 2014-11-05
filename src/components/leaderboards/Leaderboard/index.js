@@ -17,7 +17,7 @@ module.exports = React.createClass({
   propTypes: {
     campaignUid: React.PropTypes.string.isRequired,
     type: React.PropTypes.oneOf(['team', 'individual']),
-    limit: React.PropTypes.string,
+    limit: React.PropTypes.number,
     pageSize: React.PropTypes.number,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -28,7 +28,7 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       type: 'individual',
-      limit: '24',
+      limit: 24,
       pageSize: 12,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
@@ -153,7 +153,7 @@ module.exports = React.createClass({
   },
 
   nextPage: function() {
-    var totalPages = parseInt(this.props.limit) / this.props.pageSize;
+    var totalPages = this.props.limit / this.props.pageSize;
 
     if (this.state.currentPage < totalPages) {
       this.setState({
@@ -189,18 +189,17 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var heading = this.t('heading');
+    var limit       = this.props.limit;
+    var pageSize    = this.props.pageSize;
+    var heading     = this.t('heading');
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
     }
+    var pageControls;
 
-    return (
-      <div className="Leaderboard" style={ customStyle }>
-        <h3 className="Leaderboard__heading">{ heading }</h3>
-        <ol className="Leaderboard__items">
-          { this.renderLeaderboardItems() }
-        </ol>
+    if (limit > pageSize) {
+      pageControls = (
         <div className="Leaderboard__controller">
           <div className="Leaderboard__indicators">
             { this.renderIndicators() }
@@ -214,6 +213,18 @@ module.exports = React.createClass({
             </div>
           </div>
         </div>
+      )
+    }
+
+    return (
+      <div className="Leaderboard" style={ customStyle }>
+        <h3 className="Leaderboard__heading">{ heading }</h3>
+        <ol className="Leaderboard__items">
+          { this.renderLeaderboardItems() }
+        </ol>
+
+        { pageControls }
+
       </div>
     );
   }

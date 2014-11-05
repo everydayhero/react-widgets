@@ -1,7 +1,7 @@
 .LeaderboardItem {
   @include box-sizing(border-box);
   display: block;
-  padding: 15px 10px 0;
+  padding: 0 10px 15px;
   width: 33.33%;
   float: left;
   position: relative;

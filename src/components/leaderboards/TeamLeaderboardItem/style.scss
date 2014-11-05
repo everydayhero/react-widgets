@@ -1,7 +1,7 @@
 .TeamLeaderboard__items-item {
   @include box-sizing(border-box);
   display: block;
-  padding: 15px 10px 0;
+  padding: 0 10px 15px;
   width: 25%;
   float: left;
 

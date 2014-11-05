@@ -4,7 +4,7 @@
 var _                 = require('lodash');
 var React             = require('react');
 var I18nMixin         = require('../../mixins/I18n');
-var pages             = require('../../../api/pages');
+var charities         = require('../../../api/charities');
 var Icon              = require('../../helpers/Icon');
 var Charity           = require('../Charity');
 
@@ -47,25 +47,27 @@ module.exports = React.createClass({
       isLoading: true
     });
 
-    var props = this.props;
+    var props       = this.props; // TODO: Potentially remove.
+    var charityUids = this.props.charityUids;
+    var charityData = [];
 
 
-    console.log(charityUids.length);
 
     // for each charityuid within our array
+    _.each(charityUids, function(charityUid) {
 
-    // _.each(charityUids, function(i){
-    //   charities.find(props.charityUid[i], this.onSuccess);
-    // });
-
+      console.log(charityUid);
 
       // request this individual charity data
+      charities.find(charityUid, function(data) {
+        console.log(data);
+      });
 
       // create a new object with just the shit we need
 
       // push this object to an array where we store out data
 
-
+    });
 
     /**
      *  TODO: Raise issue to have a way to bundle

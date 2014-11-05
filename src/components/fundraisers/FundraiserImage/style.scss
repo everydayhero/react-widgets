@@ -3,7 +3,7 @@
   display: block;
   width: 16.66%;
   float: left;
-  padding: 15px;
+  padding: 0 15px 15px;
 
   @include media-max($breakpoint-xl) {
     width: 25%;

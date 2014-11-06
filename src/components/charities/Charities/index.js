@@ -28,7 +28,7 @@ module.exports = React.createClass({
       backgroundColor: '#EBEBEB',
       textColor: '#333333',
       defaultI18n: {
-        heading: 'Fundraisers',
+        heading: 'Promoted Charities',
         emptyLabel: 'No charities to display.'
       }
     };
@@ -52,22 +52,13 @@ module.exports = React.createClass({
     var charityData = [];
 
 
-
     // for each charityuid within our array
     _.each(charityUids, function(charityUid) {
 
-      console.log(charityUid);
+      // request this individual charity data, pass to onSuccess to process
+      charities.find(charityUid, this.onSuccess);
 
-      // request this individual charity data
-      charities.find(charityUid, function(data) {
-        console.log(data);
-      });
-
-      // create a new object with just the shit we need
-
-      // push this object to an array where we store out data
-
-    });
+    }, this);
 
     /**
      *  TODO: Raise issue to have a way to bundle
@@ -76,18 +67,35 @@ module.exports = React.createClass({
   },
 
   onSuccess: function(result) {
-    this.setState({
-      isLoading: false,
-      results: result.pages
-    },
+    var charityObj  = [];
 
-    function() {
-      if (!_.isEmpty(this.state.results)) {
-        this.setState({
-          hasResults: true
-        });
+    // Push new custom objects in to an array
+
+    charityObj.push(
+      {
+        name: result.charity.name,
+        description: result.charity.description,
+        url: result.charity.url,
+        logo_url: result.charity.logo_url
       }
-    }.bind(this));
+    );
+
+    console.log(result);
+    console.log(charityObj);
+
+
+    // this.setState({
+    //   isLoading: false,
+    //   results: result.pages
+    // },
+
+    // function() {
+    //   if (!_.isEmpty(this.state.results)) {
+    //     this.setState({
+    //       hasResults: true
+    //     });
+    //   }
+    // }.bind(this));
   },
 
   renderCharity: function() {

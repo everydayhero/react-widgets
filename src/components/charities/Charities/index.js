@@ -47,55 +47,49 @@ module.exports = React.createClass({
       isLoading: true
     });
 
-    var props       = this.props; // TODO: Potentially remove.
     var charityUids = this.props.charityUids;
     var charityData = [];
-
-
-    // for each charityuid within our array
-    _.each(charityUids, function(charityUid) {
-
-      // request this individual charity data, pass to onSuccess to process
-      charities.find(charityUid, this.onSuccess);
-
-    }, this);
 
     /**
      *  TODO: Raise issue to have a way to bundle
      *        multiple charity ids in to one request.
      */
+
+    var done = _.after(charityUids.length, function() {
+      this.onSuccess(charityData);
+    }).bind(this);
+
+    _.each(charityUids, function(charityUid) {
+      charities.find(charityUid, function(result) {
+
+        charityData.push(
+          {
+            id:          result.charity.id,
+            name:        result.charity.name,
+            description: result.charity.description,
+            url:         result.charity.url,
+            logo_url:    result.charity.logo_url
+          }
+        );
+
+        done();
+      });
+    });
   },
 
-  onSuccess: function(result) {
-    var charityObj  = [];
+  onSuccess: function(data) {
+    this.setState({
+      isLoading: false,
+      results: data
+    },
 
-    // Push new custom objects in to an array
-
-    charityObj.push(
-      {
-        name: result.charity.name,
-        description: result.charity.description,
-        url: result.charity.url,
-        logo_url: result.charity.logo_url
+    function() {
+      if (!_.isEmpty(this.state.results)) {
+        this.setState({
+          hasResults: true
+        });
       }
-    );
-
-    console.log(result);
-    console.log(charityObj);
-
-
-    // this.setState({
-    //   isLoading: false,
-    //   results: result.pages
-    // },
-
-    // function() {
-    //   if (!_.isEmpty(this.state.results)) {
-    //     this.setState({
-    //       hasResults: true
-    //     });
-    //   }
-    // }.bind(this));
+    }.bind(this));
   },
 
   renderCharity: function() {
@@ -103,17 +97,23 @@ module.exports = React.createClass({
 
     if (this.state.isLoading) {
       return <Icon className="Charity__loading" icon="refresh" spin={ true }/>;
-    } else {
-      if (this.state.hasResults) {
-        return this.state.results.map(function(d) {
-          return <Charity key={ d.id } pageUrl={ d.url } imgSrc={ d.image.large_image_url } imgTitle={ d.name } />
-        });
-      } else {
-        return (
-          <p className="Charity__empty-label">{ emptyLabel }</p>
-        )
-      }
     }
+
+    if (this.state.hasResults) {
+      return this.state.results.map(function(d) {
+        return <Charity
+                  key={ d.id }
+                  url={ d.url }
+                  logo_url={ d.logo_url }
+                  name={ d.name }
+                  description={ d.description } />
+      });
+    }
+
+    return (
+      <p className="Charity__empty-label">{ emptyLabel }</p>
+    );
+
   },
 
   render: function() {
@@ -126,9 +126,6 @@ module.exports = React.createClass({
     return (
       <div className="Charity" style={ customStyle }>
         <h3 className="Charity__heading">{ heading }</h3>
-
-        // RENDER TAB COMPONENT
-
         <div className="Charity__content">
           { this.renderCharity() }
         </div>

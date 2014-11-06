@@ -422,7 +422,8 @@ Displays a leaderboard sorted by funds raised (highest first) for a single speci
 
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `type`: *optional* string. Set a type of either `'team'` or `'individual'`. Set to `'individual'` by default.
-- `limit`: *optional* string. Set to `'12'` by default. Determines how many results are returned.
+- `limit`: *optional* number. Set to `24` by default. Determines how many results are returned in total.
+- `pageSize`: *optional* number. Set to `12` by default. Determines how many results to show per page.
 - `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
 - `textColor`: *optional* string. Set to `'#333333'` by default.
 - `i18n`: *optional* object containing localised text. Default i18n is:

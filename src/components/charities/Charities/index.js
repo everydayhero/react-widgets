@@ -6,6 +6,7 @@ var React             = require('react');
 var I18nMixin         = require('../../mixins/I18n');
 var charities         = require('../../../api/charities');
 var Icon              = require('../../helpers/Icon');
+var TabsContainer     = require('../../helpers/TabsContainer');
 var Charity           = require('../Charity');
 
 module.exports = React.createClass({
@@ -13,8 +14,6 @@ module.exports = React.createClass({
   displayName: "Charities",
   propTypes: {
     tabs: React.PropTypes.array.isRequired,
-    page_count: React.PropTypes.string,
-    page_size: React.PropTypes.string,
     renderIcon: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
@@ -22,9 +21,6 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       tabs: [],
-      page_count: '1',
-      page_size: '6',
-      type: 'user',
       backgroundColor: '#EBEBEB',
       textColor: '#333333',
       defaultI18n: {
@@ -65,7 +61,6 @@ module.exports = React.createClass({
     var tabLength   = 0;
     var charityData = [];
 
-    // Feels icky
     _.each(tabs, function(tab, i) {
       tabLength += tabs[i].charityUids.length;
     });
@@ -74,9 +69,8 @@ module.exports = React.createClass({
       this.onSuccess(charityData);
     }).bind(this);
 
-    // Nested loop also feels icky
+    // Nested loop feels icky
     _.each(tabs, function(tab) {
-
       _.each(tab.charityUids, function(charityUid) {
         charities.find(charityUid, function(result) {
 
@@ -99,8 +93,6 @@ module.exports = React.createClass({
   },
 
   onSuccess: function(data) {
-    console.log(data);
-
     this.setState({
       isLoading: false,
       results: data
@@ -124,12 +116,7 @@ module.exports = React.createClass({
 
     if (this.state.hasResults) {
       return this.state.results.map(function(d) {
-        return <Charity
-                  key={ d.id }
-                  url={ d.url }
-                  logo_url={ d.logo_url }
-                  name={ d.name }
-                  description={ d.description } />
+        return <Charity key={ d.id } url={ d.url } logo_url={ d.logo_url } name={ d.name } description={ d.description } />;
       });
     }
 
@@ -139,6 +126,7 @@ module.exports = React.createClass({
 
   },
 
+
   render: function() {
     var heading = this.t('heading');
     var customStyle = {
@@ -146,13 +134,34 @@ module.exports = React.createClass({
       color: this.props.textColor
     };
 
+
+
+    var tabModel = [];
+
+    this.state.results.map(function(d) {
+      tabModel.push({
+        tabLabel: d.category,
+        tabContent: d.id
+      });
+    });
+
+    console.log(tabModel);
+
+
+
+
+
     return (
       <div className="Charities" style={ customStyle }>
         <h3 className="Charities__heading">{ heading }</h3>
         <div className="Charities__content">
           { this.renderCharity() }
+
+          // TODO: Get this shit working
+          <TabsContainer labels={ this.props.tabLabels } contents={ this.props.tabContents } />
+
         </div>
       </div>
-    )
+    );
   }
 });

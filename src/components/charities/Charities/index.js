@@ -12,7 +12,7 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "Charities",
   propTypes: {
-    charityUids: React.PropTypes.array.isRequired,
+    tabs: React.PropTypes.array.isRequired,
     page_count: React.PropTypes.string,
     page_size: React.PropTypes.string,
     renderIcon: React.PropTypes.bool,
@@ -21,7 +21,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      charityUids: [],
+      tabs: [],
       page_count: '1',
       page_size: '6',
       type: 'user',
@@ -43,12 +43,6 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    this.setState({
-      isLoading: true
-    });
-
-    var charityUids = this.props.charityUids;
-    var charityData = [];
 
     /**
      *  TODO: Make sure objects are returned in the
@@ -63,29 +57,50 @@ module.exports = React.createClass({
      *        requests coming back as 403's.
      */
 
-    var done = _.after(charityUids.length, function() {
+    this.setState({
+      isLoading: true
+    });
+
+    var tabs        = this.props.tabs;
+    var tabLength   = 0;
+    var charityData = [];
+
+    // Feels icky
+    _.each(tabs, function(tab, i) {
+      tabLength += tabs[i].charityUids.length;
+    });
+
+    var done = _.after(tabLength, function() {
       this.onSuccess(charityData);
     }).bind(this);
 
-    _.each(charityUids, function(charityUid) {
-      charities.find(charityUid, function(result) {
+    // Nested loop also feels icky
+    _.each(tabs, function(tab) {
 
-        charityData.push(
-          {
-            id:          result.charity.id,
-            name:        result.charity.name,
-            description: result.charity.description,
-            url:         result.charity.url,
-            logo_url:    result.charity.logo_url
-          }
-        );
+      _.each(tab.charityUids, function(charityUid) {
+        charities.find(charityUid, function(result) {
 
-        done();
+          charityData.push(
+            {
+              category:    tab.category,
+              id:          result.charity.id,
+              name:        result.charity.name,
+              description: result.charity.description,
+              url:         result.charity.url,
+              logo_url:    result.charity.logo_url
+            }
+          );
+
+          done();
+        });
       });
-    });
+
+    }, this);
   },
 
   onSuccess: function(data) {
+    console.log(data);
+
     this.setState({
       isLoading: false,
       results: data

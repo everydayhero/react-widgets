@@ -74,6 +74,7 @@
     #RecentFundraisersExample,
     #TeamsExample,
     #MapExample,
+    #CharitiesExample,
     .effort,
     .main-content .panel {
       margin-top: 15px;
@@ -184,7 +185,35 @@
 
     edh.widgets.renderWidget('RecentFundraisersExample', 'RecentFundraisers', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TeamsExample', 'Teams', { campaignUid: 'us-22' });
-    edh.widgets.renderWidget('CharitiesExample', 'Charities', { charityUids:['au-3395','au-31','au-494', 'au-11', 'au-3982', 'au-1558'] });
+    edh.widgets.renderWidget('CharitiesExample', 'Charities', {
+      tabs: [
+        {
+          category: 'abc123',
+          charityUids: [
+            'au-3395',
+            'au-31',
+            'au-494',
+            'au-11',
+            'au-3982',
+            'au-1558',
+            'au-28',
+            'au-27',
+            'au-3328',
+            'au-3121',
+            'au-1555',
+            'au-41',
+            'au-42'
+          ]
+        },
+        {
+          category: 'xyz456',
+          charityUids: [
+            'au-12',
+            'au-87'
+          ]
+        }
+      ]
+    });
 
 
     edh.widgets.renderWidget('MapExample', 'Map', { campaignUid: 'us-22', region:'US' });

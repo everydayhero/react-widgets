@@ -1,0 +1,15 @@
+.Charities {
+  @extend %clearfix;
+  background: $color-grey-dark;
+  font-family: $sans-serif-fonts;
+  font-size: $default-font-size;
+  color: #fff;
+
+  .Charities__heading {
+    @extend %tile-heading;
+  }
+
+  .Charities__loading {
+    @extend %tile-loading-icon;
+  }
+}

@@ -51,8 +51,16 @@ module.exports = React.createClass({
     var charityData = [];
 
     /**
+     *  TODO: Make sure objects are returned in the
+     *        order in which they are passed.
+     *
+     *
      *  TODO: Raise issue to have a way to bundle
      *        multiple charity ids in to one request.
+     *
+     *
+     *  TODO: Raise issue regarding missing.gif image
+     *        requests coming back as 403's.
      */
 
     var done = _.after(charityUids.length, function() {
@@ -96,7 +104,7 @@ module.exports = React.createClass({
     var emptyLabel = this.t('emptyLabel');
 
     if (this.state.isLoading) {
-      return <Icon className="Charity__loading" icon="refresh" spin={ true }/>;
+      return <Icon className="Charities__loading" icon="refresh" spin={ true }/>;
     }
 
     if (this.state.hasResults) {
@@ -111,7 +119,7 @@ module.exports = React.createClass({
     }
 
     return (
-      <p className="Charity__empty-label">{ emptyLabel }</p>
+      <p className="Charities__empty-label">{ emptyLabel }</p>
     );
 
   },
@@ -124,9 +132,9 @@ module.exports = React.createClass({
     };
 
     return (
-      <div className="Charity" style={ customStyle }>
-        <h3 className="Charity__heading">{ heading }</h3>
-        <div className="Charity__content">
+      <div className="Charities" style={ customStyle }>
+        <h3 className="Charities__heading">{ heading }</h3>
+        <div className="Charities__content">
           { this.renderCharity() }
         </div>
       </div>

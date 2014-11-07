@@ -10,18 +10,10 @@ module.exports = React.createClass({
     return (
       <li className="Charity">
         <div className="Charity__skin">
-          <div className="Charity__image">
-            <img src={ this.props.logo_url } />
-          </div>
           <div className="Charity__content">
-            <div className="Charity__details">
-              <div className="Charity__name">
-                { this.props.name }
-              </div>
-              <div className="Charity__desc">
-                { this.props.description }
-              </div>
-            </div>
+            <a href={ this.props.url } className="Charity__image" title={ this.props.name }>
+              <img src={ this.props.logo_url } alt={ this.props.name } />
+            </a>
           </div>
         </div>
       </li>

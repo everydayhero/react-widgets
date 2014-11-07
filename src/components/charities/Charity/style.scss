@@ -1,0 +1,92 @@
+.Charity {
+  @include box-sizing(border-box);
+  display: block;
+  width: 16.666%;
+  padding: 15px 10px 0;
+  margin-bottom: 15px;
+  overflow: hidden;
+
+  float: left;
+  position: relative;
+
+  @include media-max($breakpoint-xl) {
+    width: 25%;
+  }
+
+  @include media-max($breakpoint-s) {
+    width: 33.33%;
+  }
+}
+
+.Charity__skin {
+  @extend %clearfix;
+  background: #fff;
+  color: $color-grey-dark;
+  border-radius: $border-radius;
+
+  // Keeps square ratio for the container
+  // regardless of container width.
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+}
+
+.Charity__content {
+  @include box-sizing(border-box);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 25px 25px 0;
+
+  @include media-max($breakpoint-s) {
+    padding: 15px 15px 0;
+  }
+
+  // Used for vertical centering image
+  &:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+  }
+}
+
+
+.Charity__image {
+  @include box-sizing(border-box);
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+
+  @include media-max($breakpoint-l) {
+
+  }
+
+  @include media-max($breakpoint-xl) {
+
+  }
+
+  img {
+    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.Charity__amount {
+  @include box-sizing(border-box);
+  display: inline-block;
+  width: 50%;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px;
+  text-align: right;
+
+  @include media-max($breakpoint-l) {
+    padding: 0;
+  }
+}

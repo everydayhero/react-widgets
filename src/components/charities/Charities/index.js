@@ -57,9 +57,12 @@ module.exports = React.createClass({
       isLoading: true
     });
 
-    var tabs        = this.props.tabs;
-    var tabLength   = 0;
-    var charityData = [];
+    var tabs         = this.props.tabs;
+    var tabLength    = 0;
+    var charityData  = [];
+    var tabContent   = { contents: [] };
+    var tabNum       = 0;
+    var tabIteration = 0;
 
     _.each(tabs, function(tab, i) {
       tabLength += tabs[i].charityUids.length;
@@ -69,12 +72,27 @@ module.exports = React.createClass({
       this.onSuccess(charityData);
     }).bind(this);
 
-    // Nested loop feels icky
-    _.each(tabs, function(tab) {
+    _.each(tabs, function(tab, i) {
+
+      charityData.push({ tabName: tab.category });
+
       _.each(tab.charityUids, function(charityUid) {
+
         charities.find(charityUid, function(result) {
 
-          charityData.push(
+          if (tabIteration == tabs[tabNum].charityUids.length) {
+
+            tabNum = tabNum + 1;
+            tabIteration = 0;
+
+            while(tabContent.contents.length > 0) {
+              tabContent.contents.pop();
+            }
+          }
+
+          tabIteration = tabIteration + 1;
+
+          tabContent.contents.push(
             {
               category:    tab.category,
               id:          result.charity.id,
@@ -85,11 +103,15 @@ module.exports = React.createClass({
             }
           );
 
+          // TODO: Move in to done callback
+          console.log(_.merge(charityData[i], tabContent));
+
           done();
         });
       });
 
     }, this);
+
   },
 
   onSuccess: function(data) {
@@ -105,6 +127,10 @@ module.exports = React.createClass({
         });
       }
     }.bind(this));
+
+
+    // console.log(this.state.results);
+
   },
 
   renderCharity: function() {
@@ -126,30 +152,12 @@ module.exports = React.createClass({
 
   },
 
-
   render: function() {
     var heading = this.t('heading');
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
     };
-
-
-
-    var tabModel = [];
-
-    this.state.results.map(function(d) {
-      tabModel.push({
-        tabLabel: d.category,
-        tabContent: d.id
-      });
-    });
-
-    console.log(tabModel);
-
-
-
-
 
     return (
       <div className="Charities" style={ customStyle }>

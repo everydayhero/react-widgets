@@ -1,9 +1,10 @@
 /** @jsx React.DOM */
 "use strict";
 
-var _     = require('lodash');
-var React = require('react');
-var Tab   = require('../Tab');
+var _            = require('lodash');
+var React        = require('react');
+var Tab          = require('../Tab');
+var TabContent   = require('../Tab');
 
 module.exports = React.createClass({
   displayName: "TabsContainer",

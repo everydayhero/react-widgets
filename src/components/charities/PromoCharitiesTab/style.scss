@@ -1,0 +1,17 @@
+.PromoCharitiesTab {
+  float: left;
+  display: block;
+  padding: 10px 20px;
+  margin: 0 5px 0;
+  background: $color-grey-darker;
+  color:#fff;
+  border-radius: 2px 2px 0 0;
+  cursor: pointer;
+  font-weight: bold;
+
+  &.active {
+    background: $color-grey-light;
+    color: $color-grey-darker;
+    cursor: default;
+  }
+}

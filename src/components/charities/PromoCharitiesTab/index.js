@@ -4,7 +4,7 @@
 var React = require('react');
 
 module.exports = React.createClass({
-  displayName: "Tab",
+  displayName: "PromoCharitiesTab",
 
   handleClick: function() {
     this.props.onClick(this.props.index)
@@ -12,8 +12,9 @@ module.exports = React.createClass({
 
   render: function() {
     var active = this.props.active ? " active" : '';
+
     return (
-      <div onClick={ this.handleClick } className={ "Tab" + active }>{ this.props.label }</div>
-    )
+      <div onClick={ this.handleClick } className={ "PromoCharitiesTab" + active }>{ this.props.label }</div>
+    );
   }
 });

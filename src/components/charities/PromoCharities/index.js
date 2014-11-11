@@ -1,17 +1,16 @@
 /** @jsx React.DOM */
 "use strict";
 
-var _                 = require('lodash');
-var React             = require('react');
-var I18nMixin         = require('../../mixins/I18n');
-var charities         = require('../../../api/charities');
-var Icon              = require('../../helpers/Icon');
-var TabsContainer     = require('../../helpers/TabsContainer');
-var Charity           = require('../Charity');
+var _                  = require('lodash');
+var React              = require('react');
+var I18nMixin          = require('../../mixins/I18n');
+var charities          = require('../../../api/charities');
+var Icon               = require('../../helpers/Icon');
+var PromoCharitiesTabs = require('../PromoCharitiesTabs');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
-  displayName: "Charities",
+  displayName: "PromoCharities",
   propTypes: {
     tabs: React.PropTypes.array.isRequired,
     renderIcon: React.PropTypes.bool,
@@ -25,6 +24,7 @@ module.exports = React.createClass({
       textColor: '#333333',
       defaultI18n: {
         heading: 'Promoted Charities',
+        subheading: 'Choose a tab below to view promoted charities within each category.',
         emptyLabel: 'No charities to display.'
       }
     };
@@ -47,6 +47,7 @@ module.exports = React.createClass({
      *
      *  TODO: Raise issue to have a way to bundle
      *        multiple charity ids in to one request.
+     *        This one is very important!
      *
      *
      *  TODO: Raise issue regarding missing.gif image
@@ -72,6 +73,7 @@ module.exports = React.createClass({
       this.onSuccess(charityData);
     }).bind(this);
 
+
     _.each(tabs, function(tab, i) {
 
       charityData.push({ tabName: tab.category });
@@ -81,7 +83,6 @@ module.exports = React.createClass({
         charities.find(charityUid, function(result) {
 
           if (tabIteration == tabs[tabNum].charityUids.length) {
-
             tabNum = tabNum + 1;
             tabIteration = 0;
 
@@ -103,15 +104,13 @@ module.exports = React.createClass({
             }
           );
 
-          // TODO: Move in to done callback
-          console.log(_.merge(charityData[i], tabContent));
+          _.merge(charityData[i], tabContent);
 
           done();
         });
       });
 
     }, this);
-
   },
 
   onSuccess: function(data) {
@@ -129,45 +128,34 @@ module.exports = React.createClass({
     }.bind(this));
 
 
-    // console.log(this.state.results);
-
   },
 
   renderCharity: function() {
     var emptyLabel = this.t('emptyLabel');
 
     if (this.state.isLoading) {
-      return <Icon className="Charities__loading" icon="refresh" spin={ true }/>;
+      return <Icon className="PromoCharities__loading" icon="refresh" spin={ true }/>;
     }
 
     if (this.state.hasResults) {
-      return this.state.results.map(function(d) {
-        return <Charity key={ d.id } url={ d.url } logo_url={ d.logo_url } name={ d.name } description={ d.description } />;
-      });
+      return <PromoCharitiesTabs data={ this.state.results } />;
     }
 
-    return (
-      <p className="Charities__empty-label">{ emptyLabel }</p>
-    );
-
+    return <p className="PromoCharities__empty-label">{ emptyLabel }</p>;
   },
 
   render: function() {
     var heading = this.t('heading');
-    var customStyle = {
-      backgroundColor: this.props.backgroundColor,
-      color: this.props.textColor
-    };
+    var subheading = this.t('subheading');
 
     return (
-      <div className="Charities" style={ customStyle }>
-        <h3 className="Charities__heading">{ heading }</h3>
-        <div className="Charities__content">
+      <div className="PromoCharities">
+        <div className="PromoCharities__head">
+          <h3 className="PromoCharities__heading">{ heading }</h3>
+          <p className="PromoCharities__subheading">{ subheading }</p>
+        </div>
+        <div className="PromoCharities__content">
           { this.renderCharity() }
-
-          // TODO: Get this shit working
-          <TabsContainer labels={ this.props.tabLabels } contents={ this.props.tabContents } />
-
         </div>
       </div>
     );

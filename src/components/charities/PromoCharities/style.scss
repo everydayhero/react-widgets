@@ -1,0 +1,25 @@
+.PromoCharities {
+  @extend %clearfix;
+  background: $color-grey-dark;
+  font-family: $sans-serif-fonts;
+  font-size: $default-font-size;
+  border-radius: $border-radius $border-radius 0 0;
+  color: #fff;
+
+  .PromoCharities__loading {
+    @extend %tile-loading-icon;
+  }
+}
+
+.PromoCharities__head {
+  text-align: center;
+  padding: 15px 15px 30px;
+
+  .PromoCharities__heading {
+    @extend %tile-heading;
+  }
+
+  .PromoCharities__subheading {
+    margin: 0;
+  }
+}

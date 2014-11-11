@@ -1,0 +1,9 @@
+.PromoCharitiesTabs {
+  display: block;
+  background: $color-grey-dark;
+}
+
+.PromoCharitiesTabs__tab-row {
+  @extend %clearfix;
+  padding-top: 5px;
+}

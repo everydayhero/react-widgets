@@ -1,11 +1,27 @@
-.Charity {
+.PromoCharitiesContent {
+  @extend %clearfix;
+  display: none;
+  padding: 5px 10px;
+  background: $color-grey-light;
+  color: $color-grey-darker;
+
+  &.active {
+    display: block;
+  }
+}
+
+.PromoCharitiesContent__charities {
+  margin: 0;
+  padding: 0;
+}
+
+.PromoCharitiesContent__charity {
   @include box-sizing(border-box);
   display: block;
   width: 16.666%;
   padding: 15px 10px 0;
   margin-bottom: 15px;
   overflow: hidden;
-
   float: left;
   position: relative;
 
@@ -18,7 +34,7 @@
   }
 }
 
-.Charity__skin {
+.PromoCharitiesContent__charity-skin {
   @extend %clearfix;
   background: #fff;
   color: $color-grey-dark;
@@ -33,7 +49,7 @@
   }
 }
 
-.Charity__content {
+.PromoCharitiesContent__content {
   @include box-sizing(border-box);
   position: absolute;
   top: 0;
@@ -56,37 +72,23 @@
 }
 
 
-.Charity__image {
+.PromoCharitiesContent__image {
   @include box-sizing(border-box);
   display: inline-block;
   vertical-align: middle;
   width: 100%;
 
   @include media-max($breakpoint-l) {
-
+    // TODO
   }
 
   @include media-max($breakpoint-xl) {
-
+    // TODO
   }
 
   img {
     width: 100%;
     display: inline-block;
     vertical-align: middle;
-  }
-}
-
-.Charity__amount {
-  @include box-sizing(border-box);
-  display: inline-block;
-  width: 50%;
-  font-weight: bold;
-  font-size: 16px;
-  padding: 10px;
-  text-align: right;
-
-  @include media-max($breakpoint-l) {
-    padding: 0;
   }
 }

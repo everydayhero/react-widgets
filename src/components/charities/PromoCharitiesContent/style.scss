@@ -13,24 +13,33 @@
 .PromoCharitiesContent__charities {
   margin: 0;
   padding: 0;
-}
 
-.PromoCharitiesContent__charity {
-  @include box-sizing(border-box);
-  display: block;
-  width: 16.666%;
-  padding: 15px 10px 0;
-  margin-bottom: 15px;
-  overflow: hidden;
-  float: left;
-  position: relative;
+  .PromoCharitiesContent__charity {
+    @include box-sizing(border-box);
+    display: block;
+    width: 16.666%;
+    padding: 15px 10px 0;
+    margin-bottom: 15px;
+    overflow: hidden;
+    float: left;
+    position: relative;
+    transition: opacity 0.24s linear;
 
-  @include media-max($breakpoint-xl) {
-    width: 25%;
+    @include media-max($breakpoint-xl) {
+      width: 25%;
+    }
+
+    @include media-max($breakpoint-s) {
+      width: 33.33%;
+    }
   }
 
-  @include media-max($breakpoint-s) {
-    width: 33.33%;
+  &:hover .PromoCharitiesContent__charity {
+    opacity: 0.6;
+  }
+
+  &:hover .PromoCharitiesContent__charity:hover {
+    opacity: 1;
   }
 }
 
@@ -77,10 +86,4 @@
   display: inline-block;
   vertical-align: middle;
   width: 100%;
-
-  img {
-    width: 100%;
-    display: inline-block;
-    vertical-align: middle;
-  }
 }

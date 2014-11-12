@@ -9,15 +9,13 @@ module.exports = React.createClass({
   renderCharity: function() {
     return this.props.content.map(function(d, i) {
       return (
-        <div className="PromoCharitiesContent__charity">
+        <a href={ d.url } className="PromoCharitiesContent__charity" title={ d.name }>
           <div className="PromoCharitiesContent__charity-skin">
             <div className="PromoCharitiesContent__content">
-              <a href={ d.url } className="PromoCharitiesContent__image" title={ d.name }>
-                <img src={ d.logo_url } alt={ d.name } />
-              </a>
+              <img className="PromoCharitiesContent__image" src={ d.logo_url } alt={ d.name } />
             </div>
           </div>
-        </div>
+        </a>
       );
     }, this);
   },

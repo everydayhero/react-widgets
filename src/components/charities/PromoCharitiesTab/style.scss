@@ -3,10 +3,14 @@
   padding: 10px 20px;
   margin: 0 5px 0;
   background: $color-grey-darker;
-  color:#fff;
+  color: #fff;
   border-radius: $border-radius $border-radius 0 0;
   cursor: pointer;
   font-weight: bold;
+
+  &:hover {
+    background: darken($color-grey-darker, 5%);
+  }
 
   &.active {
     background: $color-grey-light;

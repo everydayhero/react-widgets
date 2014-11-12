@@ -1,6 +1,5 @@
 .PromoCharitiesTab {
-  float: left;
-  display: block;
+  display: inline-block;
   padding: 10px 20px;
   margin: 0 5px 0;
   background: $color-grey-darker;
@@ -13,5 +12,9 @@
     background: $color-grey-light;
     color: $color-grey-darker;
     cursor: default;
+  }
+
+  @include media-max($breakpoint-s) {
+    margin: 0;
   }
 }

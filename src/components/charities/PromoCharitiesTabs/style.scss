@@ -6,4 +6,16 @@
 .PromoCharitiesTabs__tab-row {
   @extend %clearfix;
   padding-top: 5px;
+
+  @include media-max($breakpoint-s) {
+    display: none;
+  }
+}
+
+.PromoCharitiesTabs__accordion {
+  display: none;
+
+  @include media-max($breakpoint-s) {
+    display: block;
+  }
 }

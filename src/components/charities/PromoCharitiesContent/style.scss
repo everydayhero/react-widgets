@@ -74,6 +74,7 @@
 
 .PromoCharitiesContent__image {
   @include box-sizing(border-box);
+  color: $color-grey-darker;
   display: inline-block;
   vertical-align: middle;
   width: 100%;

@@ -9,7 +9,7 @@ module.exports = React.createClass({
   renderCharity: function() {
     return this.props.content.map(function(d, i) {
       return (
-        <li className="PromoCharitiesContent__charity">
+        <div className="PromoCharitiesContent__charity">
           <div className="PromoCharitiesContent__charity-skin">
             <div className="PromoCharitiesContent__content">
               <a href={ d.url } className="PromoCharitiesContent__image" title={ d.name }>
@@ -17,7 +17,7 @@ module.exports = React.createClass({
               </a>
             </div>
           </div>
-        </li>
+        </div>
       );
     }, this);
   },
@@ -27,9 +27,9 @@ module.exports = React.createClass({
 
     return (
       <div className={ "PromoCharitiesContent" + active }>
-        <ul className="PromoCharitiesContent__charities">
+        <div className="PromoCharitiesContent__charities">
           { this.renderCharity() }
-        </ul>
+        </div>
       </div>
     );
   }

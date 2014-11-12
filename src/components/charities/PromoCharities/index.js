@@ -13,15 +13,12 @@ module.exports = React.createClass({
   displayName: "PromoCharities",
   propTypes: {
     tabs: React.PropTypes.array.isRequired,
-    renderIcon: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
     return {
       tabs: [],
-      backgroundColor: '#EBEBEB',
-      textColor: '#333333',
       defaultI18n: {
         heading: 'Promoted Charities',
         subheading: 'Choose a tab below to view promoted charities within each category.',

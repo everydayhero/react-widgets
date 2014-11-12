@@ -7,6 +7,10 @@
   cursor: pointer;
   font-weight: bold;
 
+  &:hover {
+    background: darken($color-grey-darker, 5%);
+  }
+
   &.active {
     background: $color-grey-light;
     color: $color-grey-darker;
@@ -24,7 +28,7 @@
 
   .PromoCharitiesDrawer__icon {
     display: inline-block;
-    text-align: center;
     vertical-align: middle;
+    text-align: center;
   }
 }

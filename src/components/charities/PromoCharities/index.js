@@ -39,21 +39,6 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-
-    /**
-     *  TODO: Make sure objects are returned in the
-     *        order in which they are passed.
-     *
-     *
-     *  TODO: Raise issue to have a way to bundle
-     *        multiple charity ids in to one request.
-     *        This one is very important!
-     *
-     *
-     *  TODO: Raise issue regarding missing.gif image
-     *        requests coming back as 403's.
-     */
-
     this.setState({
       isLoading: true
     });
@@ -126,8 +111,6 @@ module.exports = React.createClass({
         });
       }
     }.bind(this));
-
-
   },
 
   renderCharity: function() {

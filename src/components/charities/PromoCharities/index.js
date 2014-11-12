@@ -46,9 +46,6 @@ module.exports = React.createClass({
     var tabs         = this.props.tabs;
     var tabLength    = 0;
     var charityData  = [];
-    var tabContent   = { contents: [] };
-    var tabNum       = 0;
-    var tabIteration = 0;
 
     _.each(tabs, function(tab, i) {
       tabLength += tabs[i].charityUids.length;
@@ -58,27 +55,19 @@ module.exports = React.createClass({
       this.onSuccess(charityData);
     }).bind(this);
 
-
     _.each(tabs, function(tab, i) {
 
-      charityData.push({ tabName: tab.category });
+      charityData.push(
+        {
+          tabName: tab.category,
+          contents: []
+        }
+      );
 
       _.each(tab.charityUids, function(charityUid) {
-
         charities.find(charityUid, function(result) {
 
-          if (tabIteration == tabs[tabNum].charityUids.length) {
-            tabNum = tabNum + 1;
-            tabIteration = 0;
-
-            while(tabContent.contents.length > 0) {
-              tabContent.contents.pop();
-            }
-          }
-
-          tabIteration = tabIteration + 1;
-
-          tabContent.contents.push(
+          charityData[i].contents.push(
             {
               category:    tab.category,
               id:          result.charity.id,
@@ -89,12 +78,9 @@ module.exports = React.createClass({
             }
           );
 
-          _.merge(charityData[i], tabContent);
-
           done();
         });
       });
-
     }, this);
   },
 

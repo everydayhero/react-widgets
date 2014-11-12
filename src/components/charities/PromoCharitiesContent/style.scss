@@ -40,8 +40,7 @@
   color: $color-grey-dark;
   border-radius: $border-radius;
 
-  // Keeps square ratio for the container
-  // regardless of container width.
+  // Keeps square ratio for the container regardless of container width.
   &:before {
     content: '';
     display: block;
@@ -78,14 +77,6 @@
   display: inline-block;
   vertical-align: middle;
   width: 100%;
-
-  @include media-max($breakpoint-l) {
-    // TODO
-  }
-
-  @include media-max($breakpoint-xl) {
-    // TODO
-  }
 
   img {
     width: 100%;

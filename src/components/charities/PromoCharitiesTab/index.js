@@ -7,7 +7,7 @@ module.exports = React.createClass({
   displayName: "PromoCharitiesTab",
 
   handleClick: function() {
-    this.props.onClick(this.props.index)
+    this.props.onClick(this.props.index);
   },
 
   render: function() {

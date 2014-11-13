@@ -67,12 +67,14 @@ module.exports = React.createClass({
 
           charityData[i].contents.push(
             {
-              category:    tab.category,
-              id:          result.charity.id,
-              name:        result.charity.name,
-              description: result.charity.description,
-              url:         result.charity.url,
-              logo_url:    result.charity.logo_url
+              category:     tab.category,
+              id:           result.charity.id,
+              name:         result.charity.name,
+              description:  result.charity.description,
+              url:          result.charity.url,
+              logo_url:     result.charity.logo_url,
+              slug:         result.charity.slug,
+              country_code: result.charity.country_code
             }
           );
 

@@ -61,6 +61,10 @@ module.exports = React.createClass({
     return campaign;
   },
 
+  componentDidMount: function() {
+    this.search('', 1);
+  },
+
   pageChanged: function(page) {
     this.search(this.state.searchTerm, page);
   },
@@ -70,10 +74,6 @@ module.exports = React.createClass({
   },
 
   search: function(searchTerm, page) {
-    if (!searchTerm) {
-      return this.updateResults(null);
-    }
-
     if (this.state.cancelRequest) {
       this.state.cancelRequest();
     }

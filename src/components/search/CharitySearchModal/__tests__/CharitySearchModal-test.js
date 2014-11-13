@@ -55,13 +55,27 @@ describe('CharitySearchModal', function() {
 
     var charitySearchModal = <CharitySearchModal autoFocus={ false } />;
     var element = TestUtils.renderIntoDocument(charitySearchModal);
-    var input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
-
     var resultElements = scryByClass(element, 'SearchResult');
+
     expect(resultElements.length).toEqual(1);
     expect(resultElements[0].getDOMNode().textContent).toContain(charity.name);
     expect(resultElements[0].getDOMNode().textContent).toContain(charity.description);
+  });
+
+  it('search for all charities by default', function() {
+    var query = { country: 'xy', searchTerm: '', campaignUid: '', page: 1, pageSize: 10 };
+    var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy"/>;
+    var element = TestUtils.renderIntoDocument(charitySearchModal);
+
+    expect(charities.search).lastCalledWith(query, element.updateResults);
+  });
+
+  it('searches for charities within campaign', function() {
+    var query = { country: 'xy', searchTerm: '', campaignUid: 'xy-123', page: 1, pageSize: 10 };
+    var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy" campaignUid="xy-123" />;
+    var element = TestUtils.renderIntoDocument(charitySearchModal);
+
+    expect(charities.search).lastCalledWith(query, element.updateResults);
   });
 
   it('searches for charities on input change', function() {
@@ -71,18 +85,16 @@ describe('CharitySearchModal', function() {
     var input = findByTag(element, 'input');
     TestUtils.Simulate.change(input, { target: { value: 'foo' } });
 
+    expect(charities.search.mock.calls.length).toEqual(2);
     expect(charities.search).lastCalledWith(query, element.updateResults);
   });
 
   it('searches for more charities on page change', function() {
     charities.search.mockImplementation(function(query, callback) { callback(response); });
 
-    var query = { country: 'xy', searchTerm: 'foo', campaignUid: '', page: 2, pageSize: 10 };
+    var query = { country: 'xy', searchTerm: '', campaignUid: '', page: 2, pageSize: 10 };
     var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy" />;
     var element = TestUtils.renderIntoDocument(charitySearchModal);
-    var input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
-
     var nextPageButton = findByClass(element, 'SearchPagination__button--right');
     TestUtils.Simulate.click(nextPageButton);
 
@@ -91,11 +103,9 @@ describe('CharitySearchModal', function() {
   });
 
   it('uses default "give" campaign uid when action is "fundraise"', function() {
-    var query = { country: 'au', searchTerm: 'foo', campaignUid: 'au-0', page: 1, pageSize: 10 };
+    var query = { country: 'au', searchTerm: '', campaignUid: 'au-0', page: 1, pageSize: 10 };
     var charitySearchModal = <CharitySearchModal autoFocus={ false } action="fundraise" country="au" />;
     var element = TestUtils.renderIntoDocument(charitySearchModal);
-    var input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
 
     expect(charities.search).lastCalledWith(query, element.updateResults);
   });
@@ -103,11 +113,6 @@ describe('CharitySearchModal', function() {
   it('updates isSearching accordingly', function() {
     var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy" />;
     var element = TestUtils.renderIntoDocument(charitySearchModal);
-    var input = findByTag(element, 'input');
-
-    expect(element.state.isSearching).toBeFalsy();
-
-    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
 
     expect(element.state.isSearching).toBeTruthy();
 
@@ -115,6 +120,11 @@ describe('CharitySearchModal', function() {
     searchCallback(response);
 
     expect(element.state.isSearching).toBeFalsy();
+
+    var input = findByTag(element, 'input');
+    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
+
+    expect(element.state.isSearching).toBeTruthy();
   });
 
   it('redirects to charity fundraise url on charity select', function() {

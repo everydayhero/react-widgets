@@ -12,6 +12,7 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "PromoCharities",
   propTypes: {
+    action: React.PropTypes.oneOf(['donate', 'fundraise', 'custom']).isRequired,
     tabs: React.PropTypes.array.isRequired,
     i18n: React.PropTypes.object
   },
@@ -96,6 +97,15 @@ module.exports = React.createClass({
     }.bind(this));
   },
 
+  selectHandler: function(charity) {
+    if (this.props.action == 'custom') {
+      this.props.onSelect(charity);
+    } else {
+      var redirect = charities[this.props.action + 'Url'](charity, this.props.campaignSlug);
+      document.location = redirect;
+    }
+  },
+
   renderCharity: function() {
     var emptyLabel = this.t('emptyLabel');
 
@@ -104,7 +114,7 @@ module.exports = React.createClass({
     }
 
     if (this.state.hasResults) {
-      return <PromoCharitiesTabs data={ this.state.results } />;
+      return <PromoCharitiesTabs data={ this.state.results } onSelect={ this.selectHandler } />;
     }
 
     return <p className="PromoCharities__empty-label">{ emptyLabel }</p>;

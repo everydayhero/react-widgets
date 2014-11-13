@@ -5,7 +5,7 @@ var _                     = require('lodash');
 var React                 = require('react');
 var PromoCharitiesTab     = require('../PromoCharitiesTab');
 var PromoCharitiesDrawer  = require('../PromoCharitiesDrawer');
-var PromoCharitiesContent = require('../PromoCharitiesContent');
+var PromoCharitiesResults = require('../PromoCharitiesResults');
 
 module.exports = React.createClass({
   displayName: "PromoCharitiesTabs",
@@ -35,10 +35,11 @@ module.exports = React.createClass({
               index={ i }
               active={ this.state.current === i } />
           </div>
-          <PromoCharitiesContent
+          <PromoCharitiesResults
             content={ d.contents }
             index={ i }
-            active={ this.state.current === i } />
+            active={ this.state.current === i }
+            onSelect={ this.props.onSelect } />
         </div>
       );
     }, this);

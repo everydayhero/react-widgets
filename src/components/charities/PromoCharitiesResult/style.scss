@@ -1,0 +1,63 @@
+.PromoCharitiesResult {
+  @include box-sizing(border-box);
+  display: block;
+  width: 16.666%;
+  padding: 15px 10px 0;
+  margin-bottom: 15px;
+  overflow: hidden;
+  float: left;
+  position: relative;
+  transition: opacity 0.24s linear;
+
+  @include media-max($breakpoint-xl) {
+    width: 25%;
+  }
+
+  @include media-max($breakpoint-s) {
+    width: 33.33%;
+  }
+}
+
+.PromoCharitiesResult__skin {
+  @extend %clearfix;
+  background: #fff;
+  color: $color-grey-dark;
+  border-radius: $border-radius;
+
+  // Keeps square ratio for the container regardless of container width.
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+}
+
+.PromoCharitiesResult__content {
+  @include box-sizing(border-box);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 25px 25px 0;
+
+  @include media-max($breakpoint-s) {
+    padding: 15px 15px 0;
+  }
+
+  // Used for vertical centering image
+  &:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+  }
+}
+
+.PromoCharitiesResult__image {
+  @include box-sizing(border-box);
+  color: $color-grey-darker;
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+}

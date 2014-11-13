@@ -10,6 +10,11 @@
   margin-bottom: $x-1;
   padding: $x-3;
 
+  &:focus, &:hover {
+    color: $color-grey-dark;
+    text-decoration: none;
+  }
+
   &:active {
     @include vendor(transform, scale(0.98));
     @include vendor(transition, all 0.01s linear);

@@ -22,6 +22,7 @@
   left: 9px;
   z-index: 2;
   font-size: $x-4;
+  line-height: $x-4;
   color: $color-input-text-grey;
 }
 
@@ -31,6 +32,7 @@
   right: 9px;
   color: $color-primary-grey;
   font-size: $x-4;
+  line-height: $x-4;
   z-index: 2;
 
   .Icon {

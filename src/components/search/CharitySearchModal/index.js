@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 "use strict";
 
+var _                           = require('lodash');
 var React                       = require('react');
 var SearchModal                 = require('../SearchModal');
 var CharitySearchResult         = require('../CharitySearchResult');
@@ -21,7 +22,8 @@ module.exports = React.createClass({
     country: React.PropTypes.oneOf(['au', 'nz', 'uk', 'us']),
     i18n: React.PropTypes.object,
     onClose: React.PropTypes.func.isRequired,
-    onSelect: React.PropTypes.func
+    onSelect: React.PropTypes.func,
+    promotedCharityUids: React.PropTypes.arrayOf(React.PropTypes.string)
   },
 
   getDefaultProps: function() {
@@ -35,7 +37,8 @@ module.exports = React.createClass({
         fundraiseAction: 'Fundraise for this Charity',
         emptyLabel: "We couldn't find any matching Charities."
       },
-      pageSize: 10
+      pageSize: 10,
+      promotedCharityUids: null
     }
   },
 
@@ -62,7 +65,20 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    this.search('', 1);
+    if (this.props.promotedCharityUids) {
+      this.loadPromotedCharities();
+    } else {
+      this.search('', 1);
+    }
+  },
+
+  loadPromotedCharities: function() {
+    charities.findByUids(this.props.promotedCharityUids, this.updatePromotedCharities);
+  },
+
+  updatePromotedCharities: function(response) {
+    var promotedCharities = _.isEmpty(response.charities) ? null : response.charities;
+    this.setState({ promotedCharities: promotedCharities });
   },
 
   pageChanged: function(page) {
@@ -76,6 +92,11 @@ module.exports = React.createClass({
   search: function(searchTerm, page) {
     if (this.state.cancelRequest) {
       this.state.cancelRequest();
+    }
+
+    if (!searchTerm && this.props.promotedCharityUids) {
+      this.updateResults(null);
+      return;
     }
 
     var cancelRequest = charities.search({
@@ -126,6 +147,8 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var results = this.state.results || this.state.promotedCharities;
+
     return (
       <SearchModal
         autoFocus={ this.props.autoFocus }
@@ -136,7 +159,7 @@ module.exports = React.createClass({
         onPageChange={ this.pageChanged }
         onSelect={ this.selectHandler }
         pagination={ this.state.pagination }
-        results={ this.state.results }
+        results={ results }
         resultComponent={ CharitySearchResult }
         selectAction={ this.selectAction() } />
     );

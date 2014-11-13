@@ -15,18 +15,25 @@ var SearchModal        = require('../../SearchModal');
 var findByClass        = TestUtils.findRenderedDOMComponentWithClass;
 var findByType         = TestUtils.findRenderedComponentWithType;
 var scryByClass        = TestUtils.scryRenderedDOMComponentsWithClass;
-var findByTag          = TestUtils.findRenderedDOMComponentWithTag
+var findByTag          = TestUtils.findRenderedDOMComponentWithTag;
 
 var charity = {
-  id: 12,
-  uid: 'au-12',
+  uid: 'xy-12',
   slug: 'foo',
   name: 'Foo',
-  description: 'Bar',
-  country_code: 'au'
+  description: 'Fooy',
+  country_code: 'xy'
 };
 
-var response = {
+var charity2 = {
+  uid: 'xy-42',
+  slug: 'bar',
+  name: 'Bar',
+  description: 'Bary',
+  country_code: 'xy'
+};
+
+var searchResponse = {
   charities: [charity],
   meta: {
     pagination: {
@@ -37,9 +44,14 @@ var response = {
   }
 };
 
+var findByUidsResponse = {
+  charities: [charity2]
+};
+
 describe('CharitySearchModal', function() {
   beforeEach(function() {
     charities.search.mockClear();
+    charities.findByUids.mockClear();
   });
 
   it('renders a SearchModal', function() {
@@ -51,7 +63,7 @@ describe('CharitySearchModal', function() {
   });
 
   it('renders search results', function() {
-    charities.search.mockImplementation(function(query, callback) { callback(response); });
+    charities.search.mockImplementation(function(query, callback) { callback(searchResponse); });
 
     var charitySearchModal = <CharitySearchModal autoFocus={ false } />;
     var element = TestUtils.renderIntoDocument(charitySearchModal);
@@ -62,7 +74,7 @@ describe('CharitySearchModal', function() {
     expect(resultElements[0].getDOMNode().textContent).toContain(charity.description);
   });
 
-  it('search for all charities by default', function() {
+  it('search for all charities when search is empty', function() {
     var query = { country: 'xy', searchTerm: '', campaignUid: '', page: 1, pageSize: 10 };
     var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy"/>;
     var element = TestUtils.renderIntoDocument(charitySearchModal);
@@ -90,7 +102,7 @@ describe('CharitySearchModal', function() {
   });
 
   it('searches for more charities on page change', function() {
-    charities.search.mockImplementation(function(query, callback) { callback(response); });
+    charities.search.mockImplementation(function(query, callback) { callback(searchResponse); });
 
     var query = { country: 'xy', searchTerm: '', campaignUid: '', page: 2, pageSize: 10 };
     var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy" />;
@@ -117,7 +129,7 @@ describe('CharitySearchModal', function() {
     expect(element.state.isSearching).toBeTruthy();
 
     var searchCallback = charities.search.mock.calls[0][1];
-    searchCallback(response);
+    searchCallback(searchResponse);
 
     expect(element.state.isSearching).toBeFalsy();
 
@@ -183,5 +195,44 @@ describe('CharitySearchModal', function() {
     TestUtils.Simulate.click(resultElements[0]);
 
     expect(onClose).toBeCalled();
+  });
+
+  it('loads promoted charities when provided', function() {
+    var charityUids = ['xy-123', 'xy-456'];
+    var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy" promotedCharityUids={ charityUids }/>;
+    var element = TestUtils.renderIntoDocument(charitySearchModal);
+
+    expect(charities.findByUids).lastCalledWith(charityUids, element.updatePromotedCharities);
+  });
+
+  it('shows promoted charities when search is empty', function() {
+    charities.findByUids.mockImplementation(function(charityUids, callback) { callback(findByUidsResponse); });
+
+    var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy" promotedCharityUids={ ['xy-42'] }/>;
+    var element = TestUtils.renderIntoDocument(charitySearchModal);
+    var resultElements = scryByClass(element, 'SearchResult');
+
+    expect(resultElements.length).toEqual(1);
+    expect(resultElements[0].getDOMNode().textContent).toContain(charity2.name);
+    expect(resultElements[0].getDOMNode().textContent).toContain(charity2.description);
+  });
+
+  it('not show promoted charities when search is not empty', function() {
+    charities.findByUids.mockImplementation(function(charityUids, callback) { callback(findByUidsResponse); });
+    charities.search.mockImplementation(function(query, callback) { callback(searchResponse); });
+
+    var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy" promotedCharityUids={ ['xy-42'] }/>;
+    var element = TestUtils.renderIntoDocument(charitySearchModal);
+    var resultElements = scryByClass(element, 'SearchResult');
+
+    expect(resultElements.length).toEqual(1);
+    expect(resultElements[0].getDOMNode().textContent).toContain(charity2.name);
+
+    var input = findByTag(element, 'input');
+    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
+    resultElements = scryByClass(element, 'SearchResult');
+
+    expect(resultElements.length).toEqual(1);
+    expect(resultElements[0].getDOMNode().textContent).toContain(charity.name);
   });
 });

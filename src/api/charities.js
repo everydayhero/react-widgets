@@ -10,6 +10,15 @@ module.exports = {
     return getJSON(routes.get('charity', { charityUid: charityUid }), callback);
   },
 
+  findByUids: function(charityUids, callback) {
+    return getJSON(routes.get('charities', { charityUids: charityUids }), function(response) {
+      _.each(response.charities, function(charity) {
+        charity.uid = charity.id;
+      });
+      callback(response);
+    });
+  },
+
   findByCampaign: function(campaignUid, limit, page, callback) {
     var params = {
       campaignUid: campaignUid,

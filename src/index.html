@@ -170,15 +170,7 @@
   </div>
 
   <script>
-    edh.widgets.initModal('CharitySearchDonate', 'CharitySearch', {
-      country: 'uk',
-      action: 'custom',
-      onSelect: function(charity) {
-        console.log(charity);
-      }
-    });
-
-
+    edh.widgets.initModal('CharitySearchDonate', 'CharitySearch', { country: 'uk', action: 'fundraise' });
 
     edh.widgets.initModal('CharitySearchFundraise', 'CharitySearch', { country: 'uk', action: 'fundraise' });
     edh.widgets.initModal('PageSearchExample', 'PageSearch', { country: 'uk' });
@@ -196,10 +188,7 @@
     edh.widgets.renderWidget('TeamsExample', 'Teams', { campaignUid: 'us-22' });
 
     edh.widgets.renderWidget('CharitiesExample', 'PromoCharities', {
-      action: 'custom',
-      onSelect: function(charity) {
-        console.log(charity.url);
-      },
+      action: 'fundraise',
       tabs: [
         {
           category: 'Helping People',

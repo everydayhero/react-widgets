@@ -14,7 +14,9 @@ module.exports = React.createClass({
     var active = this.props.active ? " active" : '';
 
     return (
-      <div onClick={ this.handleClick } className={ "PromoCharitiesTab" + active }>{ this.props.label }</div>
+      <div onClick={ this.handleClick } className={ "PromoCharitiesTab" + active }>
+        { this.props.label }
+      </div>
     );
   }
 });

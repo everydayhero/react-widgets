@@ -108,7 +108,7 @@ module.exports = React.createClass({
     }
   },
 
-  renderCharity: function() {
+  renderTabs: function() {
     var emptyLabel = this.t('emptyLabel');
 
     if (this.state.isLoading) {
@@ -123,17 +123,23 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var heading = this.t('heading');
+    var heading    = this.t('heading');
     var subheading = this.t('subheading');
+
+    var renderSubheading = function() {
+      if (subheading) {
+        return <p className="PromoCharities__subheading">{ subheading }</p>;
+      }
+    };
 
     return (
       <div className="PromoCharities">
         <div className="PromoCharities__head">
           <h3 className="PromoCharities__heading">{ heading }</h3>
-          <p className="PromoCharities__subheading">{ subheading }</p>
+          { renderSubheading() }
         </div>
         <div className="PromoCharities__content">
-          { this.renderCharity() }
+          { this.renderTabs() }
         </div>
       </div>
     );

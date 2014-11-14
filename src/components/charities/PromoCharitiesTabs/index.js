@@ -10,7 +10,7 @@ var PromoCharitiesResults = require('../PromoCharitiesResults');
 module.exports = React.createClass({
   displayName: "PromoCharitiesTabs",
 
-  getInitialState: function () {
+  getInitialState: function() {
     return { current: 0 };
   },
 

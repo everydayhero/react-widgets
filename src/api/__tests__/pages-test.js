@@ -23,6 +23,7 @@ describe('pages', function() {
   it('findByIds', function() {
     var callback = jest.genMockFunction();
     pages.findByIds(['123', '456'], callback);
+
     expect(getJSON).lastCalledWith(
       'https://everydayhero.com/api/v2/pages.jsonp?ids=123,456', callback);
     expect(callback).toBeCalledWith(results);

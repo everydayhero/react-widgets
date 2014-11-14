@@ -16,7 +16,7 @@ describe('charities', function() {
     nz: { country_code: 'nz', uid: 'gb-123', slug: 'bar' },
     uk: { country_code: 'uk', uid: 'gb-123', slug: 'bar' },
     us: { country_code: 'us', uid: 'us-123', slug: 'bar' },
-  }
+  };
 
   it('find', function() {
     var callback = jest.genMockFunction();
@@ -24,6 +24,15 @@ describe('charities', function() {
 
     expect(getJSON).lastCalledWith(
       'https://everydayhero.com/api/v2/charities/xy-12.jsonp', callback);
+    expect(callback).toBeCalledWith(results);
+  });
+
+  it('findByUids', function() {
+    var callback = jest.genMockFunction();
+    charities.findByUids(['xy-123', 'xy-456'], callback);
+
+    expect(getJSON).lastCalledWith(
+      'https://everydayhero.com/api/v2/charities.jsonp?ids=xy-123,xy-456', callback);
     expect(callback).toBeCalledWith(results);
   });
 

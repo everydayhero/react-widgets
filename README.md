@@ -48,6 +48,7 @@ The charity search modal widget allows you to search for a charity by name to do
 - `campaignUid`: *optional* string campaign uid to filter charity results.
 - `campaignSlug`: *optional* string campaign slug for given campaign uid.
 - `country`: *optional* string country code of region, either 'au', 'nz', 'uk' or 'us'.
+- `promotedCharityUids`: *optional* array of charity uids for charities to show by default for empty query.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js

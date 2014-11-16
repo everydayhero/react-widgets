@@ -24,7 +24,6 @@
   color: $color-grey-dark;
   border-radius: $border-radius;
 
-  // Keeps square ratio for the container regardless of container width.
   &:before {
     content: '';
     display: block;
@@ -40,12 +39,12 @@
   bottom: 0;
   right: 0;
   padding: 25px 25px 0;
+  text-align: center;
 
   @include media-max($breakpoint-s) {
     padding: 15px 15px 0;
   }
 
-  // Used for vertical centering image
   &:before {
     content: '';
     display: inline-block;
@@ -59,5 +58,5 @@
   color: $color-grey-darker;
   display: inline-block;
   vertical-align: middle;
-  width: 100%;
+  max-width: 100%;
 }

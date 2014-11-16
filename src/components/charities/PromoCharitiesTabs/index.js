@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 "use strict";
 
-var _                     = require('lodash');
 var React                 = require('react');
 var PromoCharitiesTab     = require('../PromoCharitiesTab');
 var PromoCharitiesDrawer  = require('../PromoCharitiesDrawer');

@@ -8,7 +8,6 @@ var TestUtils         = React.addons.TestUtils;
 var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
 
 describe('PromoCharitiesTab', function() {
-
   it('renders a tab', function() {
     var promoCharitiesTab = <PromoCharitiesTab label="test tab name" />;
     var component = TestUtils.renderIntoDocument(promoCharitiesTab);

@@ -64,7 +64,7 @@ describe('PromoCharities', function() {
     };
 
     beforeEach(function() {
-      promoCharities = <PromoCharities action="fundraise" tabs={ tabsData } i18n={ translation } />;;
+      promoCharities = <PromoCharities action="fundraise" tabs={ tabsData } i18n={ translation } />;
       element = TestUtils.renderIntoDocument(promoCharities);
     });
 

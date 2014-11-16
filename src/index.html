@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Widgets Example</title>
+  <title>Widgets Examples</title>
   <!-- inject:js -->
   <!-- endinject -->
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -170,23 +170,17 @@
   </div>
 
   <script>
-    edh.widgets.initModal('CharitySearchDonate', 'CharitySearch', { country: 'uk', action: 'fundraise' });
-
+    edh.widgets.initModal('CharitySearchDonate', 'CharitySearch', { country: 'uk', action: 'donate' });
     edh.widgets.initModal('CharitySearchFundraise', 'CharitySearch', { country: 'uk', action: 'fundraise' });
     edh.widgets.initModal('PageSearchExample', 'PageSearch', { country: 'uk' });
-
     edh.widgets.renderWidget('FundsRaisedExample','FundsRaised', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('GoalExample', 'Goal', { goal: '5000000', i18n: { title: '2015 Goal' } });
-
     edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-22' });
-
     edh.widgets.renderWidget('TeamLeaderboardExample', 'Leaderboard', { campaignUid: 'us-22', type: 'team', limit: 16, pageSize: 4, i18n: { heading: 'Leaderboard > Top Teams' } });
-
     edh.widgets.renderWidget('RecentFundraisersExample', 'RecentFundraisers', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TeamsExample', 'Teams', { campaignUid: 'us-22' });
-
     edh.widgets.renderWidget('CharitiesExample', 'PromoCharities', {
       action: 'fundraise',
       tabs: [
@@ -238,7 +232,6 @@
         }
       ]
     });
-
     edh.widgets.renderWidget('MapExample', 'Map', { campaignUid: 'us-22', region:'US' });
     edh.widgets.renderWidget('TotalDistanceExample', 'TotalDistance', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUid: 'us-22' });

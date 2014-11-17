@@ -85,7 +85,7 @@ module.exports = React.createClass({
         amount:  symbol + numeral(page.amount.cents / 100).format('0[.]00 a'),
         totalMembers: page.team_member_uids.length,
         imgSrc: page.image.large_image_url,
-        smallImgSrc: page.image.small_image_url
+        medImgSrc: page.image.medium_image_url
       }
     });
 
@@ -108,9 +108,7 @@ module.exports = React.createClass({
     var rank = 0;
 
     if (this.state.isLoading) {
-      return (
-        <Icon className="Leaderboard__loading" icon="refresh" spin={ true }/>
-      );
+      return <Icon className="Leaderboard__loading" icon="refresh" spin={ true } />;
     }
 
     return this.state.boardData[currentPage].map(function(d,i) {
@@ -138,7 +136,7 @@ module.exports = React.createClass({
           name={ d.name }
           iso_code={ d.iso_code }
           amount={ d.amount }
-          imgSrc={ d.smallImgSrc } />
+          imgSrc={ d.medImgSrc } />
       );
 
     }, this);
@@ -182,7 +180,7 @@ module.exports = React.createClass({
           <div key={ i } onClick={ this.switchPage.bind(null,i) } className="Leaderboard__indicator">
             <Icon className="Leaderboard__icon" icon={ iconClass } />
           </div>
-        )
+        );
 
       }, this);
     }
@@ -213,7 +211,7 @@ module.exports = React.createClass({
             </div>
           </div>
         </div>
-      )
+      );
     }
 
     return (
@@ -222,9 +220,7 @@ module.exports = React.createClass({
         <ol className="Leaderboard__items">
           { this.renderLeaderboardItems() }
         </ol>
-
         { pageControls }
-
       </div>
     );
   }

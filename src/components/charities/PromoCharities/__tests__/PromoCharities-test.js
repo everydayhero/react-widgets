@@ -31,7 +31,7 @@ describe('PromoCharities', function() {
       });
 
       var emptyLabel = findByClass(element, 'PromoCharities__empty-label');
-      expect(emptyLabel.getDOMNode().textContent).toContain('No charities to display.');
+      expect(emptyLabel.getDOMNode().textContent).toContain('Oops! There\'s currently no promoted charities to display.');
     });
 
     it('renders a default heading and subheading', function() {

@@ -45,8 +45,8 @@ describe('RecentFundraisers', function() {
       findByClass(element, 'RecentFundraisers__loading');
     });
 
-    it('renders if handed default campaign id, page count and page size', function() {
-      expect(pages.findByCampaign).toBeCalledWith('au-0','1','6','user', element.onSuccess);
+    it('renders if handed default campaign id, page type, count and size', function() {
+      expect(pages.findByCampaign).toBeCalledWith('au-0','user','6','1', element.onSuccess);
     });
   });
 

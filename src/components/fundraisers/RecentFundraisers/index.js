@@ -22,7 +22,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       campaignUid: '',
-      page_count: '1',
+      page: '1',
       page_size: '6',
       type: 'user',
       backgroundColor: '#EBEBEB',
@@ -49,7 +49,7 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    pages.findByCampaign(props.campaignUid, props.page_count, props.page_size, props.type, this.onSuccess);
+    pages.findByCampaign(props.campaignUid, props.type, props.page_size, props.page, this.onSuccess);
   },
 
   onSuccess: function(result) {
@@ -71,7 +71,7 @@ module.exports = React.createClass({
     var emptyLabel = this.t('emptyLabel');
 
     if (this.state.isLoading) {
-      return <Icon className="RecentFundraisers__loading" icon="refresh" spin={ true }/>;
+      return <Icon className="RecentFundraisers__loading" icon="refresh" spin={ true } />;
     } else {
       if (this.state.hasResults) {
         return this.state.pageResults.map(function(d) {

@@ -13,8 +13,8 @@ module.exports = React.createClass({
   displayName: "RecentFundraisers",
   propTypes: {
     campaignUid: React.PropTypes.string,
-    page_count: React.PropTypes.string,
-    page_size: React.PropTypes.string,
+    page: React.PropTypes.string,
+    pageSize: React.PropTypes.string,
     renderIcon: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
@@ -22,8 +22,8 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       campaignUid: '',
-      page_count: '1',
-      page_size: '6',
+      page: '1',
+      pageSize: '6',
       type: 'user',
       backgroundColor: '#EBEBEB',
       textColor: '#333333',
@@ -49,7 +49,7 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    pages.findByCampaign(props.campaignUid, props.page_count, props.page_size, props.type, this.onSuccess);
+    pages.findByCampaign(props.campaignUid, props.type, props.pageSize, props.page, this.onSuccess);
   },
 
   onSuccess: function(result) {
@@ -71,7 +71,7 @@ module.exports = React.createClass({
     var emptyLabel = this.t('emptyLabel');
 
     if (this.state.isLoading) {
-      return <Icon className="RecentFundraisers__loading" icon="refresh" spin={ true }/>;
+      return <Icon className="RecentFundraisers__loading" icon="refresh" spin={ true } />;
     } else {
       if (this.state.hasResults) {
         return this.state.pageResults.map(function(d) {

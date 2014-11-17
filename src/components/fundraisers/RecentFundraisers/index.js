@@ -13,7 +13,7 @@ module.exports = React.createClass({
   displayName: "RecentFundraisers",
   propTypes: {
     campaignUid: React.PropTypes.string,
-    page_count: React.PropTypes.string,
+    page: React.PropTypes.string,
     pageSize: React.PropTypes.string,
     renderIcon: React.PropTypes.bool,
     i18n: React.PropTypes.object

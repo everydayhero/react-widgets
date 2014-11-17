@@ -14,7 +14,7 @@ module.exports = React.createClass({
   propTypes: {
     campaignUid: React.PropTypes.string,
     page_count: React.PropTypes.string,
-    page_size: React.PropTypes.string,
+    pageSize: React.PropTypes.string,
     renderIcon: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
@@ -23,7 +23,7 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       page: '1',
-      page_size: '6',
+      pageSize: '6',
       type: 'user',
       backgroundColor: '#EBEBEB',
       textColor: '#333333',
@@ -49,7 +49,7 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    pages.findByCampaign(props.campaignUid, props.type, props.page_size, props.page, this.onSuccess);
+    pages.findByCampaign(props.campaignUid, props.type, props.pageSize, props.page, this.onSuccess);
   },
 
   onSuccess: function(result) {

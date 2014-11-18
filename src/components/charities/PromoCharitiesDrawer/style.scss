@@ -16,19 +16,19 @@
     color: $color-grey-darker;
     cursor: default;
   }
+}
 
-  .PromoCharitiesDrawer__label {
-    display: inline-block;
-    width: 95%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: middle;
-  }
+.PromoCharitiesDrawer__label {
+  display: inline-block;
+  width: 95%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
 
-  .PromoCharitiesDrawer__icon {
-    display: inline-block;
-    vertical-align: middle;
-    text-align: center;
-  }
+.PromoCharitiesDrawer__icon {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
 }

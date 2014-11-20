@@ -3,8 +3,8 @@
   position: fixed;
   background: $color-search-background;
   background: transparentize($color-search-background, 0.2);
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
   z-index: 1000;
@@ -30,4 +30,7 @@
 
 .Overlay-open {
   overflow: hidden;
+  position: fixed;
+  top: 0;
+  bottom: 0;
 }

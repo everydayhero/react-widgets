@@ -33,12 +33,18 @@ describe('PromoCharitiesResults', function() {
   ];
 
   it('renders all charities results', function() {
-    var promoCharitiesResults = <PromoCharitiesResults content={ contents }/>;
+    var promoCharitiesResults = <PromoCharitiesResults content={ contents } loaded={ true }/>;
     var element = TestUtils.renderIntoDocument(promoCharitiesResults);
     var resultsElement = findByClass(element, 'PromoCharitiesResults');
     var resultElements = scryByClass(element, 'PromoCharitiesResult');
 
     expect(resultsElement).toBeDefined();
     expect(resultElements.length).toBe(contents.length);
+  });
+
+  it('renders a loading icon', function() {
+    var promoCharitiesResults = <PromoCharitiesResults content={ contents } loaded={ false }/>;
+    var element = TestUtils.renderIntoDocument(promoCharitiesResults);
+    findByClass(element, 'PromoCharitiesResults__loading');
   });
 });

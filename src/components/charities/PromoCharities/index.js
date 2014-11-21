@@ -21,8 +21,7 @@ module.exports = React.createClass({
       tabs: [],
       defaultI18n: {
         heading: 'Promoted Charities',
-        subheading: 'Choose a tab below to view promoted charities within each category.',
-        emptyLabel: 'Oops! There\'s currently no promoted charities to display.'
+        subheading: 'Choose a tab below to view promoted charities within each category.'
       }
     };
   },

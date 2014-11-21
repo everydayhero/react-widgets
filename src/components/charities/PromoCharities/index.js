@@ -5,7 +5,6 @@ var _                  = require('lodash');
 var React              = require('react');
 var I18nMixin          = require('../../mixins/I18n');
 var charities          = require('../../../api/charities');
-var Icon               = require('../../helpers/Icon');
 var PromoCharitiesTabs = require('../PromoCharitiesTabs');
 
 module.exports = React.createClass({
@@ -30,73 +29,44 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
+      isLoaded: false,
       isLoading: false,
-      hasResults: false,
       results: []
     };
   },
 
   componentWillMount: function() {
-    this.setState({
-      isLoading: true
-    });
+    var tabs = _.map(this.props.tabs, function(tab, tabIndex) {
+      var data = {
+        isLoading: true,
+        tabName: tab.category,
+        contents: []
+      };
 
-    var tabs         = this.props.tabs;
-    var tabLength    = 0;
-    var charityData  = [];
+      charities.findByUids(tab.charityUids, function(responses) {
+        this.tabLoaded(tabIndex, responses.charities)
+      }.bind(this));
 
-    _.each(tabs, function(tab, i) {
-      tabLength += tabs[i].charityUids.length;
-    });
-
-    var done = _.after(tabLength, function() {
-      this.onSuccess(charityData);
-    }).bind(this);
-
-    _.each(tabs, function(tab, i) {
-
-      charityData.push(
-        {
-          tabName: tab.category,
-          contents: []
-        }
-      );
-
-      _.each(tab.charityUids, function(charityUid) {
-        charities.find(charityUid, function(result) {
-
-          charityData[i].contents.push(
-            {
-              category:     tab.category,
-              id:           result.charity.id,
-              name:         result.charity.name,
-              description:  result.charity.description,
-              url:          result.charity.url,
-              logo_url:     result.charity.logo_url,
-              slug:         result.charity.slug,
-              country_code: result.charity.country_code
-            }
-          );
-
-          done();
-        });
-      });
+      return data;
     }, this);
+
+    this.setState({
+      isLoading: true,
+      tabs: tabs
+    });
   },
 
-  onSuccess: function(data) {
-    this.setState({
-      isLoading: false,
-      results: data
-    },
+  tabLoaded: function(tabIndex, charities) {
+    var tabs = this.state.tabs;
+    var tab  = tabs[tabIndex];
 
-    function() {
-      if (!_.isEmpty(this.state.results)) {
-        this.setState({
-          hasResults: true
-        });
-      }
-    }.bind(this));
+    tab.isLoaded = true;
+    tab.contents = charities;
+
+    this.setState({
+      isLoaded: _.every(tabs, 'isLoaded'),
+      tabs: tabs
+    });
   },
 
   selectHandler: function(charity) {
@@ -108,23 +78,10 @@ module.exports = React.createClass({
     }
   },
 
-  renderTabs: function() {
-    var emptyLabel = this.t('emptyLabel');
-
-    if (this.state.isLoading) {
-      return <Icon className="PromoCharities__loading" icon="refresh" spin={ true } />;
-    }
-
-    if (this.state.hasResults) {
-      return <PromoCharitiesTabs data={ this.state.results } onSelect={ this.selectHandler } />;
-    }
-
-    return <p className="PromoCharities__empty-label">{ emptyLabel }</p>;
-  },
-
   render: function() {
     var heading    = this.t('heading');
     var subheading = this.t('subheading');
+    var emptyLabel = this.t('emptyLabel');
 
     var renderSubheading = function() {
       if (subheading) {
@@ -139,7 +96,10 @@ module.exports = React.createClass({
           { renderSubheading() }
         </div>
         <div className="PromoCharities__content">
-          { this.renderTabs() }
+          <PromoCharitiesTabs
+            data={ this.state.tabs }
+            loaded={ this.state.isLoaded }
+            onSelect={ this.selectHandler } />
         </div>
       </div>
     );

@@ -22,3 +22,7 @@
     opacity: 1;
   }
 }
+
+.PromoCharitiesResults__loading {
+  @extend %tile-loading-icon;
+}

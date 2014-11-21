@@ -2,17 +2,20 @@
 "use strict";
 
 var React                = require('react');
+var Icon                 = require('../../helpers/Icon');
 var PromoCharitiesResult = require('../PromoCharitiesResult');
 
 module.exports = React.createClass({
   displayName: "PromoCharitiesResults",
 
   renderCharityResults: function() {
-    return this.props.content.map(function(d, i) {
-      return (
-        <PromoCharitiesResult key={ d.id } result={ d } onSelect={ this.props.onSelect } />
-      );
-    }, this);
+    if (this.props.loaded) {
+      return this.props.content.map(function(d, i) {
+        return <PromoCharitiesResult key={ d.id } result={ d } onSelect={ this.props.onSelect } />;
+      }, this);
+    }
+
+    return <Icon className="PromoCharitiesResults__loading" icon="refresh" spin={ true } />;
   },
 
   render: function() {

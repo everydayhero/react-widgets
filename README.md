@@ -388,8 +388,7 @@ Displays promoted charities that are passed in as a list of tabs and charity ids
   ```js
   {
     heading: 'Promoted Charities',
-    subheading: 'Choose a tab below to view promoted charities within each category.',
-    emptyLabel: 'Oops! There\'s currently no promoted charities to display.'
+    subheading: 'Choose a tab below to view promoted charities within each category.'
   }
   ```
 

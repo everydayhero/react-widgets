@@ -20,6 +20,7 @@ var widgets = {
   TotalDistance: require('./components/totals/TotalDistance'),
   TotalHours: require('./components/totals/TotalHours'),
   CallToActionBox: require('./components/callstoaction/CallToActionBox'),
+  PromoCharities: require('./components/charities/PromoCharities')
 };
 var modals = {
   CharitySearch: require('./components/search/CharitySearchModal'),

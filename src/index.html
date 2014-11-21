@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Widgets Example</title>
+  <title>Widgets Examples</title>
   <!-- inject:js -->
   <!-- endinject -->
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -79,6 +79,7 @@
     #RecentFundraisersExample,
     #TeamsExample,
     #MapExample,
+    #CharitiesExample,
     .effort,
     .main-content .panel {
       margin-top: 15px;
@@ -160,6 +161,8 @@
   <div id="RecentFundraisersExample">Loading...</div>
   <div id="TeamsExample">Loading...</div>
 
+  <div id="CharitiesExample">Loading...</div>
+
   <div class="clearfix">
     <div id="MapExample" class="pull-left">Loading...</div>
     <div class="effort pull-left">
@@ -175,18 +178,65 @@
     edh.widgets.initModal('CharitySearchDonate', 'CharitySearch', { country: 'uk', action: 'donate' });
     edh.widgets.initModal('CharitySearchFundraise', 'CharitySearch', { country: 'uk', action: 'fundraise' });
     edh.widgets.initModal('PageSearchExample', 'PageSearch', { country: 'uk' });
-
     edh.widgets.renderWidget('FundsRaisedExample','FundsRaised', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('GoalExample', 'Goal', { goal: '5000000', i18n: { title: '2015 Goal' } });
-
     edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-22' });
-
     edh.widgets.renderWidget('TeamLeaderboardExample', 'Leaderboard', { campaignUid: 'us-22', type: 'team', limit: 16, pageSize: 4, i18n: { heading: 'Leaderboard > Top Teams' } });
-
     edh.widgets.renderWidget('RecentFundraisersExample', 'RecentFundraisers', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TeamsExample', 'Teams', { campaignUid: 'us-22' });
+    edh.widgets.renderWidget('CharitiesExample', 'PromoCharities', {
+      action: 'fundraise',
+      tabs: [
+        {
+          category: 'Helping People',
+          charityUids: [
+            'au-3395',
+            'au-24',
+            'au-494',
+            'au-13',
+            'au-1558',
+            'au-28',
+            'au-27',
+            'au-9',
+            'au-3121',
+            'au-1555',
+            'au-167',
+            'au-42'
+          ]
+        },
+        {
+          category: 'Helping Animals',
+          charityUids: [
+            'au-522',
+            'au-1661',
+            'au-914',
+            'au-408',
+            'au-853',
+            'au-666',
+            'au-3778',
+            'au-1900',
+            'au-196',
+            'au-1184',
+            'au-241',
+            'au-1546'
+          ]
+        },
+        {
+          category: 'Helping Environment',
+          charityUids: [
+            'au-1546',
+            'au-389',
+            'au-937',
+            'au-303',
+            'au-311',
+            'au-1923',
+            'au-4033'
+          ]
+        }
+      ]
+    });
     edh.widgets.renderWidget('MapExample', 'Map', { campaignUid: 'us-22', region:'US' });
     edh.widgets.renderWidget('TotalDistanceExample', 'TotalDistance', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUid: 'us-22' });

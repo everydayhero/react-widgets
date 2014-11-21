@@ -44,7 +44,7 @@ The charity search modal widget allows you to search for a charity by name to do
 ##### Options
 
 - `action`: *required* action to perform on charity select, either 'donate', 'fundraise' or 'custom'. *Note: 'donate' action is currently not supported for country 'us'.*
-- `onSelect`: *optional* function called on selecting a result when action set to 'custom'.
+- `onSelect`: *optional* function called on selecting a result when `action` set to 'custom'.
 - `campaignUid`: *optional* string campaign uid to filter charity results.
 - `campaignSlug`: *optional* string campaign slug for given campaign uid.
 - `country`: *optional* string country code of region, either 'au', 'nz', 'uk' or 'us'.
@@ -372,6 +372,111 @@ Displays the total recorded time that fundraisers have run for a single specifie
 </html>
 ```
 
+### Charities
+
+#### Promoted Charities
+
+Displays promoted charities that are passed in as a list of tabs and charity ids.
+
+##### Options
+
+- `tabs`: *required* array, contains objects. Each object requires a 'category' and a 'charityUids' array.
+- `action`: *required* string. Defines action to perform on charity select. Must be specified as either 'donate', 'fundraise' or 'custom'. *Note: 'donate' action is currently not supported for country 'us'.*
+- `onSelect`: *optional* function called on selecting a result when `action` set to 'custom'.
+- `i18n`: *optional* object containing localised text. Default i18n is:
+
+  ```js
+  {
+    heading: 'Promoted Charities',
+    subheading: 'Choose a tab below to view promoted charities within each category.'
+  }
+  ```
+
+##### Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="CharitiesExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('CharitiesExample', 'PromoCharities', {
+        action: 'fundraise',
+        tabs: [
+          {
+            category: 'Helping People',
+            charityUids: [
+              'au-3395',
+              'au-24',
+              'au-494'
+            ]
+          },
+          {
+            category: 'Helping Animals',
+            charityUids: [
+              'au-522',
+              'au-1661',
+              'au-914'
+            ]
+          },
+          {
+            category: 'Helping Environment',
+            charityUids: [
+              'au-1546',
+              'au-389',
+              'au-937'
+            ]
+          }
+        ]
+      });
+    </script>
+  </body>
+</html>
+```
+
+##### Example with a custom `onSelect` function.
+
+```js
+edh.widgets.renderWidget('CharitiesExample', 'PromoCharities', {
+  action: 'custom',
+  onSelect: function(charity) {
+    console.log(charity);
+  },
+  tabs: [
+    {
+      category: 'Helping People',
+      charityUids: [
+        'au-3395',
+        'au-24',
+        'au-494'
+      ]
+    },
+    {
+      category: 'Helping Animals',
+      charityUids: [
+        'au-522',
+        'au-1661',
+        'au-914'
+      ]
+    },
+    {
+      category: 'Helping Environment',
+      charityUids: [
+        'au-1546',
+        'au-389',
+        'au-937'
+      ]
+    }
+  ]
+});
+```
+
 
 ### Fundraisers
 
@@ -437,8 +542,7 @@ Displays a leaderboard sorted by funds raised (highest first) for a single speci
     symbol: '$',
     heading: 'Leaderboard > Top Individuals'
   }
-  `
-  ``
+  ```
 
 ##### Example
 

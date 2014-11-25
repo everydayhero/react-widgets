@@ -1,7 +1,7 @@
 "use strict";
 
-var _      = require('lodash');
-var format = require('../../lib/format');
+var _    = require('lodash');
+var i18n = require('../../lib/i18n');
 
 module.exports = {
   getI18n: function() {
@@ -13,6 +13,6 @@ module.exports = {
   },
 
   t: function(key, params) {
-    return format(this.getI18n()[key], params);
+    return i18n.t(this.getI18n(), key, params);
   }
 };

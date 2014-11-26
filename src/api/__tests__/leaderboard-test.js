@@ -1,11 +1,10 @@
-/** @jsx React.DOM */
 "use strict";
 jest.autoMockOff();
 
-jest.mock('../../lib/getJSON');
-var getJSON = require('../../lib/getJSON');
+jest.mock('../../lib/getJSONP');
+var getJSONP = require('../../lib/getJSONP');
 var results = { };
-getJSON.mockImplementation(function(_, callback) { callback(results); });
+getJSONP.mockImplementation(function(_, callback) { callback(results); });
 
 var routes = require('../routes');
 var leaderboard = require('../leaderboard');
@@ -15,7 +14,7 @@ describe('leaderboard', function() {
     var callback = jest.genMockFunction();
     leaderboard.find('xy-123', 'foo', 12, callback);
 
-    expect(getJSON).lastCalledWith(
+    expect(getJSONP).lastCalledWith(
       'https://everydayhero.com/api/v2/campaigns/xy-123/leaderboard.jsonp?type=foo&limit=12',
       callback
     );

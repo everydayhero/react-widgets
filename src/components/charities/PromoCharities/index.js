@@ -43,7 +43,7 @@ module.exports = React.createClass({
       };
 
       charities.findByUids(tab.charityUids, function(responses) {
-        this.tabLoaded(tabIndex, responses.charities)
+        this.tabLoaded(tabIndex, responses.charities);
       }.bind(this));
 
       return data;

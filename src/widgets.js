@@ -20,7 +20,8 @@ var widgets = {
   TotalDistance: require('./components/totals/TotalDistance'),
   TotalHours: require('./components/totals/TotalHours'),
   CallToActionBox: require('./components/callstoaction/CallToActionBox'),
-  PromoCharities: require('./components/charities/PromoCharities')
+  PromoCharities: require('./components/charities/PromoCharities'),
+  AddressLookup: require('./components/address/AddressLookup')
 };
 var modals = {
   CharitySearch: require('./components/search/CharitySearchModal'),
@@ -40,7 +41,7 @@ function getElement(element) {
   }
 
   return element;
-};
+}
 
 function showModal(name, options) {
   var modal = modals[name];
@@ -55,10 +56,10 @@ function showModal(name, options) {
   options.onClose = function() {
     React.unmountComponentAtNode(div);
     document.body.removeChild(div);
-  }
+  };
 
-  React.renderComponent(modal(options), div);
-};
+  React.render(modal(options), div);
+}
 
 function initModal(element, name, options) {
   element = getElement(element);
@@ -73,7 +74,7 @@ function initModal(element, name, options) {
     }
     showModal(name, options);
   });
-};
+}
 
 function renderWidget(element, name, options) {
   element = getElement(element);
@@ -87,7 +88,7 @@ function renderWidget(element, name, options) {
     return;
   }
 
-  React.renderComponent(widget(options), element);
+  React.render(widget(options), element);
 }
 
 module.exports = edh.widgets = {

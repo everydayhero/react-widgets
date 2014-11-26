@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 
 var _                           = require('lodash');
@@ -39,7 +38,7 @@ module.exports = React.createClass({
       },
       pageSize: 10,
       promotedCharityUids: null
-    }
+    };
   },
 
   getInitialState: function() {

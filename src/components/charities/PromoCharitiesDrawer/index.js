@@ -8,7 +8,7 @@ module.exports = React.createClass({
   displayName: "PromoCharitiesDrawer",
 
   handleClick: function() {
-    this.props.onClick(this.props.index)
+    this.props.onClick(this.props.index);
   },
 
   renderIcon: function() {

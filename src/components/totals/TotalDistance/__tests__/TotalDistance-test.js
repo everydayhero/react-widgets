@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
@@ -27,7 +26,7 @@ describe('TotalDistance', function() {
     it('renders an icon by default', function() {
       var icon = findByClass(element, 'TotalDistance__icon');
 
-      expect(icon).not.toBeNull;
+      expect(icon).not.toBeNull();
     });
 
     it('renders a loading icon', function() {
@@ -45,7 +44,7 @@ describe('TotalDistance', function() {
     var element;
     var translation = {
       title: 'Hours'
-    }
+    };
 
     beforeEach(function() {
       totalDistance = <TotalDistance i18n={ translation } renderIcon={ false } />;

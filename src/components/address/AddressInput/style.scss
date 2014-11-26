@@ -1,0 +1,72 @@
+.AddressInput {
+  transition: all 160ms ease-out;
+  position: relative;
+  display: inline-block;
+  background: #fff;
+  border-radius: 2px;
+  line-height: 24px;
+  letter-spacing: inherit;
+  padding: 13px 8px 0;
+  border-bottom: 1px solid #fff;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  margin-bottom: 8px;
+}
+
+.AddressInput__Label {
+  transition: all 40ms ease-out;
+  position: absolute;
+  line-height: inherit;
+  top: 8px;
+  letter-spacing: inherit;
+  color: $color-green-light;
+  white-space: nowrap;
+}
+
+.AddressInput__Field {
+  width: 100%;
+  line-height: inherit;
+  display: block;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+.AddressInput--Focused {
+  border-bottom-color: $color-green-light;
+}
+
+.AddressInput--Focused .AddressInput__Field {
+  border: none;
+  outline: 0;
+}
+
+.AddressInput--Displaced .AddressInput__Label {
+  font-size: 10px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  top: 3px;
+}
+
+.AddressInput--Error {
+  border-bottom-color: $color-error;
+}
+
+.AddressInput--Error .AddressInput__Label {
+  color: $color-error;
+}
+
+.AddressInput--PadRight { padding-right: 110px; }
+
+.AddressInput--Full { width: 100%; }
+.AddressInput--Wide { width: 63%; }
+.AddressInput--Half { width: 49%; }
+.AddressInput--Narrow { width: 35%; }
+
+.AddressInput--Wide + .AddressInput--Narrow {
+  margin-left: 2%;
+}

@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 
 var React             = require('react');
@@ -64,7 +63,7 @@ module.exports = React.createClass({
           <div className="TotalCharities__total">{ formattedTotal }</div>
           <div className="TotalCharities__title">{ title }</div>
         </div>
-      )
+      );
     }
   },
 
@@ -82,7 +81,7 @@ module.exports = React.createClass({
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
-    }
+    };
 
     return (
       <div className={ "TotalCharities" } style={ customStyle }>

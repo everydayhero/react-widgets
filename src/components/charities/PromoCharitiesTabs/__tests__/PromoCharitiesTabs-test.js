@@ -12,7 +12,7 @@ describe('PromoCharitiesTabs', function() {
   var scryByClass        = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('PromoCharitiesTabs', function() {
-    var promoCharities;
+    var promoCharitiesTabs;
     var element;
     var charityData = {
       category:     'test category',
@@ -23,7 +23,7 @@ describe('PromoCharitiesTabs', function() {
       logo_url:     'http://placehold.it/100x100',
       slug:         'test-slug',
       country_code: 'au'
-    }
+    };
 
     var tabsData = [{tabName: 'Tab One', contents: [charityData]}, {tabName: 'Tab Two', contents: [charityData]}];
 

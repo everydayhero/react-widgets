@@ -1,3 +1,5 @@
+"use strict";
+
 var format = require('./format');
 var separator = '.';
 

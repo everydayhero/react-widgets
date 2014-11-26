@@ -1,3 +1,5 @@
+"use strict";
+
 function addClass(el, className) {
   if (el.classList) {
     el.classList.add(className);

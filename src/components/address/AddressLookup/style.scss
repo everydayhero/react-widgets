@@ -1,0 +1,53 @@
+.AddressLookup {
+  box-sizing: border-box;
+  max-width: 500px;
+  margin: 0 auto 8px;
+  color: $color-grey-dark;
+  overflow: auto;
+  position: relative;
+  text-align: left;
+  font-family: 'Lato';
+}
+
+.AddressLookup * {
+  box-sizing: border-box;
+}
+
+.AddressLookup__List {
+  background-color: #fff;
+  margin-top: -8px;
+  padding-top: 8px;
+  margin-bottom: 8px;
+}
+
+.AddressLookup__Error {
+  border-radius: 0 0 2px 2px;
+  padding: 5px 8px;
+  margin: -8px 8px 8px;
+  background-color: $color-error;
+  color: #fff;
+  font-size: 13px;
+}
+
+.AddressLookup__Manual {
+  transition: all 80ms ease-out;
+  border-radius: 2px;
+  float: right;
+  padding: 5px 13px;
+  background-color: #fff;
+  color: $color-grey-dark;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  font-weight: bold;
+  margin: 0 8px 8px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.AddressLookup__Manual:hover,
+.AddressLookup__Manual:focus {
+  background-color: $color-green-light;
+  color: #fff;
+  outline: none;
+}

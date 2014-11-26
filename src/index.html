@@ -33,6 +33,11 @@
       float: left;
     }
 
+    .pad-x {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
     .panel {
       background: #ebebeb;
       border-radius: 2px;
@@ -166,6 +171,12 @@
   <div class="clearfix">
     <div id="MapExample" class="pull-left">Loading...</div>
     <div class="effort pull-left">
+      <div class="panel pad-x">
+        <h3 class="title">Forms</h3>
+        <div id="AddressLookupExample">Loading...</div>
+      </div>
+    </div>
+    <div class="effort pull-left">
       <div class="panel">
         <h3 class="title">Collective Effort</h3>
         <div id="TotalDistanceExample">Loading...</div>
@@ -240,6 +251,7 @@
     edh.widgets.renderWidget('MapExample', 'Map', { campaignUid: 'us-22', region:'US' });
     edh.widgets.renderWidget('TotalDistanceExample', 'TotalDistance', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUid: 'us-22' });
+    edh.widgets.renderWidget('AddressLookupExample', 'AddressLookup', { country: 'GB' });
     edh.widgets.renderWidget('CallToActionBoxExample', 'CallToActionBox', { campaignUid: 'us-22', registrationUrl: 'https://your-registration-url.com/' });
   </script>
 </body>

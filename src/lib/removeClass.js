@@ -1,3 +1,5 @@
+"use strict";
+
 function removeClass(el, className) {
   if (el.classList) {
     el.classList.remove(className);

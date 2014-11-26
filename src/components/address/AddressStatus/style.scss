@@ -1,0 +1,25 @@
+.AddressStatus {
+  transition: all 240ms ease-out;
+  position: relative;
+  z-index: 2;
+  float: right;
+  margin-left: -40px;
+  width: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  left: -110px;
+  color: #fff;
+  opacity: 0;
+}
+
+.AddressStatus--Loading,
+.AddressStatus--Error,
+.AddressStatus--Success {
+  left: -74px;
+  opacity: 1;
+}
+
+.AddressStatus--Loading { color: $color-grey; }
+.AddressStatus--Error { color: $color-error; }
+.AddressStatus--Success { color: $color-green; }

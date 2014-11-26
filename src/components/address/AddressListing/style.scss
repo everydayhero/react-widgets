@@ -1,0 +1,27 @@
+.AddressListing {
+  transition: all 80ms ease-out;
+  background-color: #fff;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+
+.AddressListing--Focused {
+  background-color: rgba(126,199,116,0.1);
+}
+
+.AddressListing + .AddressListing {
+  border-top: 1px solid #eee;
+}
+
+.AddressListing__Primary {
+  transition: all 80ms ease-out;
+  font-size: 13px;
+}
+
+.AddressListing__Secondary {
+  transition: all 80ms ease-out;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}

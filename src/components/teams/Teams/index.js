@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 
 var _                 = require('lodash');
@@ -33,7 +32,7 @@ module.exports = React.createClass({
         heading: 'Teams',
         emptyLabel: 'No teams to display.'
       }
-    }
+    };
   },
 
   getInitialState: function() {
@@ -92,7 +91,7 @@ module.exports = React.createClass({
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
-    }
+    };
 
     return (
       <div className="Teams" style={ customStyle }>
@@ -101,6 +100,6 @@ module.exports = React.createClass({
           { this.renderTeam() }
         </div>
       </div>
-    )
+    );
   }
 });

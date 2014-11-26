@@ -19,7 +19,7 @@ module.exports = React.createClass({
 
   renderTabs: function() {
     return this.props.data.map(function(d, i) {
-      return <PromoCharitiesTab onClick={ this.switchTab } label={ d.tabName } index={ i } active={ this.state.current === i } />
+      return <PromoCharitiesTab onClick={ this.switchTab } label={ d.tabName } index={ i } active={ this.state.current === i } />;
     }, this);
   },
 

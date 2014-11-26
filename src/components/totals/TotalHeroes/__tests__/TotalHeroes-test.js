@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 jest.autoMockOff();
 jest.mock('../../../../api/pages');
@@ -40,7 +39,7 @@ describe('TotalHeroes', function() {
     it('renders an icon by default', function() {
       var icon = findByClass(element, 'TotalHeroes__icon');
 
-      expect(icon).not.toBeNull;
+      expect(icon).not.toBeNull();
     });
 
     it('shows a loading icon', function() {
@@ -58,7 +57,7 @@ describe('TotalHeroes', function() {
     var element;
     var translation = {
       title: 'blahblah'
-    }
+    };
 
     beforeEach(function() {
       totalHeroes = <TotalHeroes i18n={ translation } />;

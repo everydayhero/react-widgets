@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 
 var _                     = require('lodash');
@@ -86,7 +85,7 @@ module.exports = React.createClass({
         totalMembers: page.team_member_uids.length,
         imgSrc: page.image.large_image_url,
         medImgSrc: page.image.medium_image_url
-      }
+      };
     });
 
     for (var i = 0; i < leaderboard.length; i += pageSize) {
@@ -169,11 +168,12 @@ module.exports = React.createClass({
   renderIndicators: function() {
     if (!this.state.isLoading) {
       return this.state.boardData.map(function(d, i) {
+        var iconClass;
 
         if (this.state.currentPage == i + 1) {
-          var iconClass = "circle";
+          iconClass = "circle";
         } else {
-          var iconClass = "circle-o";
+          iconClass = "circle-o";
         }
 
         return (
@@ -193,7 +193,7 @@ module.exports = React.createClass({
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
-    }
+    };
     var pageControls;
 
     if (limit > pageSize) {

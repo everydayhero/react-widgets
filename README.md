@@ -607,6 +607,51 @@ Displays an SVG map. Each point represents a fundraiser (that has created a page
 ```
 
 
+### Forms
+
+#### Address Lookup
+
+Displays a form input field and country selector, which allows users to lookup their address by fuzzy matching through the Google Places API, or via United Kingdom postcode through the PostCode Anywhere API. Once they find their address, it is broken down into parts for editing and database accuracy.
+
+##### Options
+
+- `country`: *optional* two-digit capitalized country ISO code (AU, GB, US, NZ, IE, etc). Default is 'US'.
+- `output`: *optional* function to get user's final selected address.
+- `i18n`: *optional* object containing localised text. Default i18n is:
+
+  ```js
+  {
+    inputLabel: 'Address Lookup',
+    inputLabelGB: 'Postcode Lookup',
+    manualEntryButton: 'Enter Manually',
+    error: {
+      empty: "Sorry, we couldn't find that address",
+      '500': "Something went wrong, please try again"
+    }
+  }
+  ```
+
+##### Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="AddressLookupExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('AddressLookupExample', 'AddressLookup', { country: 'GB' });
+    </script>
+  </body>
+</html>
+```
+
+
 ### Teams
 
 #### Teams (Campaign)

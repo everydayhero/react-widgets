@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 
 var _                 = require('lodash');
@@ -75,12 +74,12 @@ module.exports = React.createClass({
     } else {
       if (this.state.hasResults) {
         return this.state.pageResults.map(function(d) {
-          return <FundraiserImage key={ d.id } pageUrl={ d.url } imgSrc={ d.image.large_image_url } imgTitle={ d.name } />
+          return <FundraiserImage key={ d.id } pageUrl={ d.url } imgSrc={ d.image.large_image_url } imgTitle={ d.name } />;
         });
       } else {
         return (
           <p className="RecentFundraisers__empty-label">{ emptyLabel }</p>
-        )
+        );
       }
     }
   },
@@ -99,6 +98,6 @@ module.exports = React.createClass({
           { this.renderFundraiserImage() }
         </div>
       </div>
-    )
+    );
   }
 });

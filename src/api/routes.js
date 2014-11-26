@@ -19,6 +19,9 @@ var baseRoutes = {
   searchCampaigns:      '{baseUrl}/api/v2/search/campaigns.jsonp?q={searchTerm}&country_code={country}&page={page}&page_size={pageSize}',
   searchCharities:      '{baseUrl}/api/v2/search/charities.jsonp?q={searchTerm}&country_code={country}&campaign_id={campaignUid}&page={page}&page_size={pageSize}',
   searchPages:          '{baseUrl}/api/v2/search/pages.jsonp?q={searchTerm}&country_code={country}&campaign_id={campaignUid}&charity_id={charityUid}&type={type}&page={page}&page_size={pageSize}',
+
+  address:              '{baseUrl}/api/v2/addresses/{country}/{id}.jsonp',
+  searchAddresses:      '{baseUrl}/api/v2/addresses.jsonp?country_code={country}&q={searchTerm}'
 };
 var routes = {};
 
@@ -32,7 +35,7 @@ function getRoute(name, params) {
     if (_.isArray(value)) {
       return value.join(',');
     }
-    return value == null ? '' : encodeURIComponent(value);
+    return value === null ? '' : encodeURIComponent(value);
   });
 
   route = format(route, params, true);

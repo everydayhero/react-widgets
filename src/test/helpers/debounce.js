@@ -1,3 +1,4 @@
+"use strict";
 // testable version of debounce as lodash.debounce() enforces wait time
 
 function debounce(func, wait, immediate) {
@@ -11,12 +12,12 @@ function debounce(func, wait, immediate) {
       }
     };
     var callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
+    window.clearTimeout(timeout);
+    timeout = window.setTimeout(later, wait);
     if (callNow) {
       func.apply(context, args);
     }
   };
-};
+}
 
 module.exports = debounce;

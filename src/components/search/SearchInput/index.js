@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 
 var _             = require('lodash');
@@ -15,7 +14,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       autoFocus: false
-    }
+    };
   },
 
   componentDidMount: function() {

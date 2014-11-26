@@ -53,6 +53,7 @@
     "styles": "gulp styles",
     "styles-dev": "gulp styles --debug",
     "test": "jsxcs ./src/* --config=./config/jscs_config.json && jest",
+    "test-debug": "node --debug-brk --harmony ./node_modules/.bin/jest --runInBand",
     "start": "node server.js",
     "publish": "bin/version-check && gulp && gulp publish"
   },

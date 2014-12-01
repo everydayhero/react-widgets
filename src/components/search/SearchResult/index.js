@@ -7,7 +7,7 @@ module.exports = React.createClass({
   displayName: 'SearchResult',
 
   propTypes: {
-    onSelect: React.PropTypes.func.isRequired,
+    onSelect: React.PropTypes.func,
     result: React.PropTypes.object.isRequired
   },
 
@@ -17,12 +17,15 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var props = this.props;
+    var url = props.onSelect ? '#' : props.url;
+    var clickHandler = props.onSelect && this.clickHandler;
+
     return (
-      <a href="#"
+      <a href={ url }
         className="SearchResult"
-        key={ this.props.result.id }
-        onClick={ this.clickHandler }>
-        { this.props.children }
+        onClick={ clickHandler }>
+        { props.children }
       </a>
     );
   }

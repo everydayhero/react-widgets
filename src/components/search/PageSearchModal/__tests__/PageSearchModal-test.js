@@ -34,7 +34,7 @@ var page = {
   image: {
     small_image_url: 'http://blah.com/avatar.png'
   },
-  url: 'http://page.url'
+  url: 'http://page.url/'
 };
 
 var response = {
@@ -71,6 +71,7 @@ describe('PageSearchModal', function() {
 
     var resultElements = scryByClass(element, 'SearchResult');
     expect(resultElements.length).toEqual(1);
+    expect(resultElements[0].getDOMNode().href).toBe(page.url);
     expect(resultElements[0].getDOMNode().textContent).toContain(page.name);
     expect(resultElements[0].getDOMNode().textContent).toContain(page.charity.name);
   });
@@ -118,18 +119,6 @@ describe('PageSearchModal', function() {
     expect(element.state.isSearching).toBeFalsy();
   });
 
-  it('redirects to page url on page select', function() {
-    var onClose = jest.genMockFunction();
-    var pageSearchModal = <PageSearchModal autoFocus={ false } onClose={ onClose } />;
-    var element = TestUtils.renderIntoDocument(pageSearchModal);
-    element.setState({ results: [page] });
-
-    var resultElements = scryByClass(element, 'SearchResult');
-    TestUtils.Simulate.click(resultElements[0]);
-
-    expect(document.location).toEqual(page.url);
-  });
-
   it('allows custom callback on page select', function() {
     var onClose = jest.genMockFunction();
     var callback = jest.genMockFunction();
@@ -143,7 +132,7 @@ describe('PageSearchModal', function() {
     expect(callback).lastCalledWith(page);
   });
 
-  it('calls onClose on result select', function() {
+  it('calls onClose on page select', function() {
     var onClose = jest.genMockFunction();
     var callback = jest.genMockFunction();
     var pageSearchModal = <PageSearchModal autoFocus={ false } onClose={ onClose } onSelect={ callback } />;

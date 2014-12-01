@@ -20,19 +20,22 @@ module.exports = React.createClass({
   },
 
   location: function() {
-    return _.compact([this.props.result.locality, this.props.result.region]).join(', ');
+    var charity = this.props.result.charity;
+    return _.compact([charity.locality, charity.region]).join(', ');
   },
 
   showMerchantName: function() {
-    var name         = normaliseForComparison(this.props.result.name || ''),
-        merchantName = normaliseForComparison(this.props.result.merchant_name || '');
+    var charity      = this.props.result.charity;
+    var name         = normaliseForComparison(charity.name || '');
+    var merchantName = normaliseForComparison(charity.merchant_name || '');
 
     return merchantName && !name.match(merchantName);
   },
 
   render: function() {
     var props = this.props;
-    var charity = props.result;
+    var result = props.result;
+    var charity = result.charity;
     var location = this.location();
     var header = [ charity.name ];
 
@@ -56,7 +59,7 @@ module.exports = React.createClass({
     }
 
     return (
-      <SearchResult onSelect={ props.onSelect } result={ charity }>
+      <SearchResult url={ result.url } onSelect={ props.onSelect } result={ result.charity }>
         { logo }
         <div className='CharitySearchResult__content'>
           <div className='CharitySearchResult__header'>{ header }</div>

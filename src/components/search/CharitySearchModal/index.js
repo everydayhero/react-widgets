@@ -6,8 +6,8 @@ var React                       = require('react');
 var SearchModal                 = require('../SearchModal');
 var CharitySearchResult         = require('../CharitySearchResult');
 var I18nMixin                   = require('../../mixins/I18n');
-var charities                   = require('../../../api/charities');
-var campaigns                   = require('../../../api/campaigns');
+var charitiesAPI                = require('../../../api/charities');
+var campaignsAPI                = require('../../../api/campaigns');
 
 module.exports = React.createClass({
   displayName: 'CharitySearchModal',
@@ -59,7 +59,7 @@ module.exports = React.createClass({
   getCampaignUid: function() {
     var campaign = this.props.campaignUid;
     if (!campaign && this.props.action == 'fundraise') {
-      campaign = campaigns.giveCampaignUid(this.props.country);
+      campaign = campaignsAPI.giveCampaignUid(this.props.country);
     }
     return campaign;
   },
@@ -73,7 +73,7 @@ module.exports = React.createClass({
   },
 
   loadPromotedCharities: function() {
-    charities.findByUids(this.props.promotedCharityUids, this.updatePromotedCharities);
+    charitiesAPI.findByUids(this.props.promotedCharityUids, this.updatePromotedCharities);
   },
 
   updatePromotedCharities: function(response) {
@@ -99,7 +99,7 @@ module.exports = React.createClass({
       return;
     }
 
-    var cancelRequest = charities.search({
+    var cancelRequest = charitiesAPI.search({
       country: this.props.country,
       searchTerm: searchTerm,
       campaignUid: this.getCampaignUid(),
@@ -132,12 +132,13 @@ module.exports = React.createClass({
     }
   },
 
-  selectHandler: function(charity) {
-    if (this.props.action == 'custom') {
-      this.props.onSelect(charity);
-    } else {
-      var redirect = charities[this.props.action + 'Url'](charity, this.props.campaignSlug);
-      document.location = redirect;
+  hasCustomHandler: function() {
+    return this.props.action == 'custom';
+  },
+
+  customHandler: function(result) {
+    if (this.props.onSelect) {
+      this.props.onSelect(result);
     }
     this.props.onClose();
   },
@@ -146,9 +147,21 @@ module.exports = React.createClass({
     return this.t(this.props.action + 'Action');
   },
 
-  render: function() {
+  getResults: function() {
+    var props = this.props;
     var results = this.state.results || this.state.promotedCharities;
+    var resultUrl = charitiesAPI[props.action + 'Url'];
 
+    return results && results.map(function(charity) {
+      return {
+        id: charity.id,
+        charity: charity,
+        url: resultUrl && resultUrl(charity, props.campaignSlug)
+      };
+    });
+  },
+
+  render: function() {
     return (
       <SearchModal
         autoFocus={ this.props.autoFocus }
@@ -157,9 +170,9 @@ module.exports = React.createClass({
         onClose={ this.props.onClose }
         onInputChange={ this.inputChanged }
         onPageChange={ this.pageChanged }
-        onSelect={ this.selectHandler }
+        onSelect={ this.hasCustomHandler() && this.customHandler }
         pagination={ this.state.pagination }
-        results={ results }
+        results={ this.getResults() }
         resultComponent={ CharitySearchResult }
         selectAction={ this.selectAction() } />
     );

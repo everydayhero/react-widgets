@@ -4,6 +4,10 @@ jest.autoMockOff();
 
 jest.mock('../../../../api/charities');
 var charities = require('../../../../api/charities');
+var donateUrl = 'http://donate.url/';
+var fundraiseUrl = 'http://fundraise.url/';
+charities.donateUrl.mockReturnValue(donateUrl);
+charities.fundraiseUrl.mockReturnValue(fundraiseUrl);
 
 var _ = require('lodash');
 _.debounce = function(callback) { return callback; }
@@ -139,39 +143,31 @@ describe('CharitySearchModal', function() {
     expect(element.state.isSearching).toBeTruthy();
   });
 
-  it('redirects to charity fundraise url on charity select', function() {
-    var fundraise_url = 'http://fundraise.url';
-    charities.fundraiseUrl.mockReturnValueOnce(fundraise_url);
-
+  it('links to fundraise url for fundraise action', function() {
     var onClose = jest.genMockFunction();
     var charitySearchModal = <CharitySearchModal autoFocus={ false } action="fundraise" onClose={ onClose } />;
     var element = TestUtils.renderIntoDocument(charitySearchModal);
     element.setState({ results: [charity] });
 
     var resultElements = scryByClass(element, 'SearchResult');
-    TestUtils.Simulate.click(resultElements[0]);
 
     expect(charities.fundraiseUrl).lastCalledWith(charity, null);
-    expect(document.location).toEqual(fundraise_url);
+    expect(resultElements[0].getDOMNode().href).toBe(fundraiseUrl);
   });
 
-  it('redirects to charity donate url on charity select', function() {
-    var donate_url = 'http://donate.url';
-    charities.donateUrl.mockReturnValueOnce(donate_url);
-
+  it('links to donate url for donate action', function() {
     var onClose = jest.genMockFunction();
     var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" onClose={ onClose } />;
     var element = TestUtils.renderIntoDocument(charitySearchModal);
     element.setState({ results: [charity] });
 
     var resultElements = scryByClass(element, 'SearchResult');
-    TestUtils.Simulate.click(resultElements[0]);
 
     expect(charities.donateUrl).lastCalledWith(charity, null);
-    expect(document.location).toEqual(donate_url);
+    expect(resultElements[0].getDOMNode().href).toBe(donateUrl);
   });
 
-  it('allows custom callback on charity select', function() {
+  it('calls custom onSelect callback on charity select', function() {
     var onClose = jest.genMockFunction();
     var callback = jest.genMockFunction();
     var charitySearchModal = <CharitySearchModal autoFocus={ false } action="custom" onClose={ onClose } onSelect={ callback } />;
@@ -184,7 +180,7 @@ describe('CharitySearchModal', function() {
     expect(callback).lastCalledWith(charity);
   });
 
-  it('calls onClose on result select', function() {
+  it('calls onClose on charity select when onSelect callback given', function() {
     var onClose = jest.genMockFunction();
     var callback = jest.genMockFunction();
     var charitySearchModal = <CharitySearchModal autoFocus={ false } action="custom" onClose={ onClose } onSelect={ callback } />;

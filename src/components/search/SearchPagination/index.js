@@ -30,6 +30,17 @@ module.exports = React.createClass({
     this.props.onChange(this.props.page + 1);
   },
 
+  getCount: function() {
+    var count = this.props.count;
+    if (count >= 1000000) {
+      return Math.floor(count / 1000000) + 'M+';
+    }
+    if (count >= 1000) {
+      return Math.floor(count / 1000) + 'K+';
+    }
+    return count;
+  },
+
   render: function() {
     if (this.props.totalPages <= 1) { return false; }
 
@@ -43,7 +54,7 @@ module.exports = React.createClass({
       <div className='SearchPagination'>
         <div className="SearchPagination__counter">
           <span className="SearchPagination__current">{ from } - { to } </span>
-          <span className="SearchPagination__count">of { this.props.count }</span>
+          <span className="SearchPagination__count">of { this.getCount() }</span>
         </div>
         <button className='SearchPagination__button--left' onClick={ this.onPageLeft } disabled={ isFirstPage }>
           <Icon icon="chevron-left"/>

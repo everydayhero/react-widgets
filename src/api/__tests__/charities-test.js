@@ -1,11 +1,10 @@
-/** @jsx React.DOM */
 "use strict";
 jest.autoMockOff();
 
-jest.mock('../../lib/getJSON');
-var getJSON = require('../../lib/getJSON');
+jest.mock('../../lib/getJSONP');
+var getJSONP = require('../../lib/getJSONP');
 var results = { results: [], meta: {} };
-getJSON.mockImplementation(function(_, callback) { callback(results); });
+getJSONP.mockImplementation(function(_, callback) { callback(results); });
 
 var routes = require('../routes');
 var charities = require('../charities');
@@ -22,7 +21,7 @@ describe('charities', function() {
     var callback = jest.genMockFunction();
     charities.find('xy-12', callback);
 
-    expect(getJSON).lastCalledWith(
+    expect(getJSONP).lastCalledWith(
       'https://everydayhero.com/api/v2/charities/xy-12.jsonp', callback);
     expect(callback).toBeCalledWith(results);
   });
@@ -31,7 +30,7 @@ describe('charities', function() {
     var callback = jest.genMockFunction();
     charities.findByUids(['xy-123', 'xy-456'], callback);
 
-    expect(getJSON).lastCalledWith(
+    expect(getJSONP).lastCalledWith(
       'https://everydayhero.com/api/v2/charities.jsonp?ids=xy-123,xy-456', callback);
     expect(callback).toBeCalledWith(results);
   });
@@ -40,7 +39,7 @@ describe('charities', function() {
     var callback = jest.genMockFunction();
     charities.findByCampaign('xy-12', 7, 2, callback);
 
-    expect(getJSON).lastCalledWith(
+    expect(getJSONP).lastCalledWith(
       'https://everydayhero.com/api/v2/charities.jsonp?campaign_ids=xy-12&page=2&limit=7',
       callback
     );
@@ -52,7 +51,7 @@ describe('charities', function() {
     var callback = jest.genMockFunction();
     charities.search(query, callback);
 
-    expect(getJSON).toBeCalledWith(
+    expect(getJSONP).toBeCalledWith(
       'https://everydayhero.com/api/v2/search/charities.jsonp?q=bar&country_code=xy&campaign_id=12,42&page=2&page_size=7',
       callback
     );
@@ -60,22 +59,22 @@ describe('charities', function() {
   });
 
   it('donateUrl defaults to give campaign', function() {
-    expect(charities.donateUrl(data['au']))
+    expect(charities.donateUrl(data.au))
       .toBe('https://give.everydayhero.com/au/bar/donate');
   });
 
   it('donateUrl accepts campaign slug', function() {
-    expect(charities.donateUrl(data['nz'], 'foo'))
+    expect(charities.donateUrl(data.nz, 'foo'))
       .toBe('https://foo.everydayhero.com/nz/bar/donate');
   });
 
   it('fundraiseUrl defaults to give campaign', function() {
-    expect(charities.fundraiseUrl(data['uk']))
+    expect(charities.fundraiseUrl(data.uk))
       .toBe('https://give.everydayhero.com/uk/bar/get-started');
   });
 
   it('fundraiseUrl accepts campaign slug', function() {
-    expect(charities.fundraiseUrl(data['us'], 'foo'))
+    expect(charities.fundraiseUrl(data.us, 'foo'))
       .toBe('https://foo.everydayhero.com/us/bar/get-started');
   });
 });

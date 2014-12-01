@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
@@ -40,7 +39,7 @@ describe('FundsRaised', function() {
     it('renders an icon by default', function() {
       var icon = findByClass(element, 'FundsRaised__icon');
 
-      expect(icon).not.toBeNull;
+      expect(icon).not.toBeNull();
     });
 
     it('renders a loading icon', function() {

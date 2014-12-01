@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 
 var React                       = require('react');
@@ -35,7 +34,7 @@ module.exports = React.createClass({
       },
       pageSize: 10,
       pageType: 'all',
-    }
+    };
   },
 
   getInitialState: function() {

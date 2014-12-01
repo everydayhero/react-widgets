@@ -1,0 +1,32 @@
+.CountrySelectItem__Flag {
+  margin-left: 0;
+  margin-right: 13px;
+}
+
+.CountrySelectItem {
+  transition: all 80ms ease-out;
+  text-align: left;
+  background-color: #fff;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.CountrySelectItem + .CountrySelectItem {
+  border-top: 1px solid #eee;
+}
+
+.CountrySelectItem--Focused {
+  background-color: rgba(126,199,116,0.1);
+}
+
+.CountrySelectItem__Flag {
+  display: inline-block;
+  margin-left: 5px;
+  margin-bottom: -3px;
+  width: 30px;
+  height: 15px;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}

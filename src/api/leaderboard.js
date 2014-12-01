@@ -1,7 +1,7 @@
 "use strict";
 
 var routes = require('./routes');
-var getJSON = require('../lib/getJSON');
+var getJSONP = require('../lib/getJSONP');
 
 module.exports = {
   find: function(campaignUid, type, limit, callback) {
@@ -11,6 +11,6 @@ module.exports = {
       limit: limit
     };
 
-    return getJSON(routes.get('campaignLeaderboard', params), callback);
+    return getJSONP(routes.get('campaignLeaderboard', params), callback);
   }
 };

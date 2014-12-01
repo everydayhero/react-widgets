@@ -1,11 +1,10 @@
-/** @jsx React.DOM */
 "use strict";
 jest.autoMockOff();
 
-jest.mock('../../lib/getJSON');
-var getJSON = require('../../lib/getJSON');
+jest.mock('../../lib/getJSONP');
+var getJSONP = require('../../lib/getJSONP');
 var results = { results: [], meta: {} };
-getJSON.mockImplementation(function(_, callback) { callback(results); });
+getJSONP.mockImplementation(function(_, callback) { callback(results); });
 
 var routes = require('../routes');
 var campaigns = require('../campaigns');
@@ -15,7 +14,7 @@ describe('campaigns', function() {
     var callback = jest.genMockFunction();
     campaigns.find('xy-12', callback);
 
-    expect(getJSON).lastCalledWith(
+    expect(getJSONP).lastCalledWith(
       'https://everydayhero.com/api/v2/campaigns/xy-12.jsonp', callback);
     expect(callback).toBeCalledWith(results);
   });
@@ -25,7 +24,7 @@ describe('campaigns', function() {
     var callback = jest.genMockFunction();
     campaigns.search(query, callback);
 
-    expect(getJSON).toBeCalledWith(
+    expect(getJSONP).toBeCalledWith(
       'https://everydayhero.com/api/v2/search/campaigns.jsonp?q=bar&country_code=xy&page=2&page_size=7',
       callback
     );

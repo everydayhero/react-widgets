@@ -1,5 +1,11 @@
+"use strict";
+
 function ready(f) {
-  document.readyState == 'complete' ? f() : setTimeout(ready.bind(null, f), 9);
+  if (document.readyState == 'complete') {
+    f();
+  } else {
+    setTimeout(ready.bind(null, f), 9);
+  }
 }
 
 module.exports = ready;

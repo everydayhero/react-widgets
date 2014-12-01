@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 jest.autoMockOff();
 
@@ -6,7 +5,7 @@ jest.mock('../../../../api/pages');
 var pages = require('../../../../api/pages');
 
 var _ = require('lodash');
-_.debounce = function(callback) { return callback; }
+_.debounce = function(callback) { return callback; };
 
 var React              = require('react/addons');
 var TestUtils          = React.addons.TestUtils;
@@ -15,7 +14,7 @@ var SearchModal        = require('../../SearchModal');
 var findByClass        = TestUtils.findRenderedDOMComponentWithClass;
 var findByType         = TestUtils.findRenderedComponentWithType;
 var scryByClass        = TestUtils.scryRenderedDOMComponentsWithClass;
-var findByTag          = TestUtils.findRenderedDOMComponentWithTag
+var findByTag          = TestUtils.findRenderedDOMComponentWithTag;
 
 var page = {
   id: 12,

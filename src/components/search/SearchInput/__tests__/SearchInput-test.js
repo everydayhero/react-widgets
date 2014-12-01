@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 jest.autoMockOff();
 
@@ -24,7 +23,7 @@ describe('SearchInput', function() {
     var element = TestUtils.renderIntoDocument(component);
     var input = findByClass(element, 'SearchInput__input');
 
-    expect(input.getDOMNode().getAttribute('placeholder')).toBe('foo')
+    expect(input.getDOMNode().getAttribute('placeholder')).toBe('foo');
   });
 
   it('show processing twirler when QueryInProgress', function() {

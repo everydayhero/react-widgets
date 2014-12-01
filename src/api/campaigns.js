@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var routes = require('./routes');
-var getJSON = require('../lib/getJSON');
+var getJSONP = require('../lib/getJSONP');
 
 var giveCampaignUids = {
   'au': 'au-0',
@@ -13,12 +13,12 @@ var giveCampaignUids = {
 
 module.exports = {
   find: function(campaignUid, callback) {
-    return getJSON(routes.get('campaign', { campaignUid: campaignUid }), callback);
+    return getJSONP(routes.get('campaign', { campaignUid: campaignUid }), callback);
   },
 
   search: function(params, callback) {
     params = _.merge({ page: 1, pageSize: 10 }, params);
-    return getJSON(routes.get('searchCampaigns', params), callback);
+    return getJSONP(routes.get('searchCampaigns', params), callback);
   },
 
   giveCampaignUid: function(country) {

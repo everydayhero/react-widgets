@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 
 var React         = require('react');
@@ -14,6 +13,6 @@ module.exports = React.createClass({
           <p>{ this.props.title }</p>
         </div>
       </a>
-    )
+    );
   }
 });

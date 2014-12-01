@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 jest.autoMockOff();
 
@@ -6,7 +5,7 @@ jest.mock('../../../../api/charities');
 var charities = require('../../../../api/charities');
 
 var _ = require('lodash');
-_.debounce = function(callback) { return callback; }
+_.debounce = function(callback) { return callback; };
 
 var React              = require('react/addons');
 var TestUtils          = React.addons.TestUtils;

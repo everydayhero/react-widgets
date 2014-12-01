@@ -1,3 +1,5 @@
+"use strict";
+
 function addEventListener(el, eventName, handler) {
   if (el.addEventListener) {
     el.addEventListener(eventName, handler);

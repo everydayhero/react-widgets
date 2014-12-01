@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 
 var React     = require('react');
@@ -75,7 +74,7 @@ module.exports = React.createClass({
     var renderIcon = this.props.renderIcon;
 
     if (renderIcon) {
-      return <Icon className="FundsRaised__icon" icon="money"/>
+      return <Icon className="FundsRaised__icon" icon="money"/>;
     }
   },
 

@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 
 var React     = require('react');
@@ -72,11 +71,12 @@ module.exports = React.createClass({
     var totalKms   = this.state.total / 100;
     var totalMiles = totalKms * 0.621371192;
     var emptyLabel = this.t('emptyLabel');
+    var formattedTotal;
 
     if (this.props.unit === 'km') {
-      var formattedTotal = numeral(totalKms).format('0,0[.]00');
+      formattedTotal = numeral(totalKms).format('0,0[.]00');
     } else {
-      var formattedTotal = numeral(totalMiles).format('0,0[.]00');
+      formattedTotal = numeral(totalMiles).format('0,0[.]00');
     }
 
     if (this.state.isLoading) {
@@ -107,7 +107,7 @@ module.exports = React.createClass({
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
-    }
+    };
 
     return (
       <div className={ "TotalDistance" } style={ customStyle }>

@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 jest.autoMockOff();
 
@@ -38,7 +37,7 @@ describe('Goal', function() {
     it('renders an icon by default', function() {
       var icon = findByClass(element, 'Goal__icon');
 
-      expect(icon).not.toBeNull;
+      expect(icon).not.toBeNull();
     });
   });
 
@@ -48,7 +47,7 @@ describe('Goal', function() {
     var translation = {
       title: 'asdjasj',
       symbol: '£'
-    }
+    };
 
     beforeEach(function() {
       goal = <Goal goal="5000000" i18n={ translation } />;

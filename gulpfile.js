@@ -5,7 +5,7 @@ var awspublish   = require('gulp-awspublish');
 var rename       = require('gulp-rename');
 var pkg          = require('./package.json');
 var request      = require('superagent');
-var fs            = require('fs');
+var fs           = require('fs');
 
 // stylesheets
 var sass         = require('gulp-sass');
@@ -15,6 +15,9 @@ var minifyCss    = require('gulp-minify-css');
 // javascripts
 var browserify   = require('gulp-browserify');
 var uglify       = require('gulp-uglify');
+var react        = require('gulp-react');
+var jshint       = require('gulp-jshint');
+var stylish      = require('jshint-stylish');
 
 // html
 var inject       = require("gulp-inject");
@@ -42,7 +45,23 @@ gulp.task('styles', function() {
     .pipe(gulp.dest('public'));
 });
 
-gulp.task('scripts', function() {
+gulp.task('lint', function() {
+  var jshintConfig = require('./package').jshintConfig;
+
+  jshintConfig.lookup = false;
+
+  return gulp
+    .src([ 'src/**/*.js' ])
+    .pipe(react())
+    .on('error', function(e) {
+      // Need better logging here
+      console.log(e)
+    })
+    .pipe(jshint(jshintConfig))
+    .pipe(jshint.reporter(stylish))
+});
+
+gulp.task('scripts', [ 'lint' ], function() {
   var processor = debug ? gutil.noop : uglify;
 
   return gulp

@@ -1,0 +1,51 @@
+.CountrySelect {
+  float: right;
+  position: relative;
+  z-index: 1;
+  margin: 8px 8px;
+  margin-left: -100px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.CountrySelect--Open {
+  width: 100%;
+  margin: 0;
+}
+
+.CountrySelect__Toggle {
+  transition: all 80ms ease-out;
+  padding: 5px 8px;
+  cursor: pointer;
+  background-color: #eee;
+  line-height: 15px;
+  text-align: right;
+  font-size: 12px;
+}
+
+.CountrySelect__Toggle:hover,
+.CountrySelect__Toggle:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.CountrySelect__List {
+  border-radius: 2px;
+  background-color: #fff;
+  max-height: 300px;
+  overflow-y: scroll;
+  padding-top: 5px;
+  margin-top: -8px;
+  margin-bottom: 8px;
+}
+
+.CountrySelect__Flag {
+  display: inline-block;
+  margin-left: 5px;
+  margin-bottom: -3px;
+  width: 30px;
+  height: 15px;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}

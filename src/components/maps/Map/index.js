@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 
 var _            = require('lodash');
@@ -71,6 +70,7 @@ module.exports = React.createClass({
     });
 
     window.drawMarkersMap = (function() {
+      var google = window.google;
 
       var data = new google.visualization.DataTable();
           data.addColumn('number', 'Lat');
@@ -114,7 +114,7 @@ module.exports = React.createClass({
     if (this.state.isLoading) {
       return <Icon className="Map__loading" icon="refresh" spin={ true }/>;
     } else {
-      return <div className="Map__map" id="map"></div>
+      return <div className="Map__map" id="map"></div>;
     }
   },
 
@@ -123,7 +123,7 @@ module.exports = React.createClass({
     var legend = this.t('legend');
     var keyStyle = {
       backgroundColor: this.props.color
-    }
+    };
 
     return (
       <div className={ "Map" }>

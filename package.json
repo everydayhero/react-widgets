@@ -40,7 +40,7 @@
     "node-sass": "^0.9.6",
     "numeral": "1.5.3",
     "react": "^0.12.1",
-    "react-page-objects": "~0.1.0",
+    "react-page-objects": "^0.1.2",
     "react-tools": "^0.12.1",
     "reactify": "^0.17.1",
     "uglify-js": "^2.4.15",

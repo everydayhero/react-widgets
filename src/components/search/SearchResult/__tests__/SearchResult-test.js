@@ -17,7 +17,17 @@ describe('SearchResult', function() {
     expect(element.getDOMNode().textContent).toBe('foo');
   });
 
-  it('calls onSelect on click', function() {
+  it('links to given url if onSelect callback not given', function() {
+    var callback = jest.genMockFunction();
+    var url = 'http://blah.com/';
+    var searchResult = <Result result={ result } url={ url } />;
+    var component = TestUtils.renderIntoDocument(searchResult);
+    var element = findByClass(component, 'SearchResult');
+
+    expect(element.getDOMNode().href).toBe(url);
+  });
+
+  it('calls onSelect callback on click if given', function() {
     var callback = jest.genMockFunction();
     var searchResult = <Result result={ result } onSelect={ callback } />;
     var component = TestUtils.renderIntoDocument(searchResult);

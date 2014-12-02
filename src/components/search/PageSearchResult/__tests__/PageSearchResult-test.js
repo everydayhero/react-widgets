@@ -10,6 +10,7 @@ var findByTag        = TestUtils.findRenderedDOMComponentWithTag;
 describe('it renders a result', function() {
   var result = {
     name: 'Foo',
+    url: 'http://foo.com/',
     charity: {
       name: 'Bar'
     },
@@ -31,6 +32,7 @@ describe('it renders a result', function() {
     var avatar       = findByTag(component, 'img');
 
     expect(element).toBeDefined();
+    expect(element.getDOMNode().href).toBe(result.url);
     expect(avatar.getDOMNode().getAttribute('src')).toBe(result.image.small_image_url);
     expect(header.getDOMNode().textContent).toBe(result.name);
     expect(description.getDOMNode().textContent).toBe(result.charity.name);

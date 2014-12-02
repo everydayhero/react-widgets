@@ -21,7 +21,7 @@ module.exports = React.createClass({
     var campaignName = !pages.isGivePage(page) && page.campaign.name;
 
     return (
-      <SearchResult onSelect={ props.onSelect } result={ page }>
+      <SearchResult url={ page.url } onSelect={ props.onSelect } result={ page }>
         <div className='PageSearchResult__avatar'>
           <img src={ page.image.small_image_url } />
         </div>

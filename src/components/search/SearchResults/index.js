@@ -12,9 +12,9 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
 
   propTypes: {
+    onSelect: React.PropTypes.func,
     results: React.PropTypes.arrayOf(React.PropTypes.object),
     resultComponent: componentClass.isRequired,
-    onSelect: React.PropTypes.func,
     selectAction: React.PropTypes.string
   },
 

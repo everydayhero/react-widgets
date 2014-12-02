@@ -103,12 +103,8 @@ module.exports = React.createClass({
     }
   },
 
-  selectHandler: function(result) {
-    if (this.props.onSelect) {
-      this.props.onSelect(result);
-    } else {
-      document.location = result.url;
-    }
+  customHandler: function(result) {
+    this.props.onSelect(result);
     this.props.onClose();
   },
 
@@ -121,7 +117,7 @@ module.exports = React.createClass({
         onClose={ this.props.onClose }
         onInputChange={ this.inputChanged }
         onPageChange={ this.pageChanged }
-        onSelect={ this.selectHandler }
+        onSelect={ this.props.onSelect && this.customHandler }
         pagination={ this.state.pagination }
         results={ this.state.results }
         resultComponent={ PageSearchResult } />

@@ -1,0 +1,40 @@
+.AmountRadio {
+  transition: all 80ms ease-out;
+  position: relative;
+  overflow: hidden;
+  background-color:$color-grey-light;
+  float: left;
+  margin-right: 1%;
+  text-align: center;
+  line-height: 20px;
+  letter-spacing: 0.16em;
+  border-radius: 2px;
+  width: 17%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 3px;
+  padding-right: 3px;
+  cursor: pointer;
+  color: $color-grey-dark;
+}
+
+.AmountRadio:hover {
+  background-color: rgba(126,199,116,0.1);
+}
+
+.AmountRadio input {
+  position: absolute;
+  left: 0;
+  top: -100%;
+}
+.AmountRadio--Selected,
+.AmountRadio--Selected:hover {
+  background-color: $color-green-light;
+  color: white;
+}
+
+.AmountRadio:nth-child(1) { width: 16%; }
+
+.AmountRadio:nth-child(3) { width: 18%; }
+
+.AmountRadio:nth-child(4) { width: 19%; }

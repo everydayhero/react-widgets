@@ -652,6 +652,38 @@ Displays a form input field and country selector, which allows users to lookup t
 ```
 
 
+#### Amount
+
+Displays a radio group and input field, which allows users to choose from four predefined values, or input a custom value. Will default to the second predefined value on load, and when custom value is 0.
+
+##### Options
+
+- `name`: *optional* string to identify the radio group and input in a form. Default is 'Amount'.
+- `amounts`: *optional* array of exactly four predefined numbers (not strings). Default is [500, 700, 1500, 3000].
+- `output`: *optional* function to get selected amount.
+- `currency`: *optional* string of currency symbol. Default is '$'.
+
+##### Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="AmountExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('AmountExample', 'Amount', { name: 'target_value' });
+    </script>
+  </body>
+</html>
+```
+
+
+
 ### Teams
 
 #### Teams (Campaign)

@@ -21,7 +21,8 @@ var widgets = {
   TotalHours: require('./components/totals/TotalHours'),
   CallToActionBox: require('./components/callstoaction/CallToActionBox'),
   PromoCharities: require('./components/charities/PromoCharities'),
-  AddressLookup: require('./components/address/AddressLookup')
+  AddressLookup: require('./components/address/AddressLookup'),
+  Amount: require('./components/amount/Amount')
 };
 var modals = {
   CharitySearch: require('./components/search/CharitySearchModal'),

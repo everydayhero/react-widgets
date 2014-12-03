@@ -1,0 +1,13 @@
+.Amount {
+  white-space: nowrap;
+  margin-bottom: $x-2;
+  padding: 5px;
+  font-size: $x-4;
+  overflow: hidden;
+}
+
+.Amount * {
+  box-sizing: border-box;
+  font-family: 'Lato';
+  font-weight: 300;
+}

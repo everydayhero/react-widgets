@@ -3,7 +3,7 @@
 var React             = require('react/addons');
 var I18nMixin         = require('../../mixins/I18n');
 var _                 = require('lodash');
-var AddressInput      = require('../AddressInput');
+var Input             = require('../../forms/Input');
 var CountrySelect     = require('../CountrySelect');
 var AddressStatus     = require('../AddressStatus');
 var AddressListing    = require('../AddressListing');
@@ -16,6 +16,7 @@ module.exports = React.createClass({
   displayName: "AddressLookup",
 
   propTypes: {
+    required: React.PropTypes.bool,
     output: React.PropTypes.func,
     country: React.PropTypes.string,
     i18n: React.PropTypes.object
@@ -23,6 +24,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
+      required: false,
       output: function() {},
       country: 'US',
       defaultI18n: {
@@ -134,7 +136,7 @@ module.exports = React.createClass({
       addressList: null,
       custom: {
         street_address: '',
-        street_address_2: '',
+        extended_address: '',
         locality: '',
         postal_code: '',
         region: '',
@@ -214,16 +216,18 @@ module.exports = React.createClass({
 
   renderInput: function(bool) {
     return bool && (
-      <AddressInput
+      <Input
         key={ this.t('inputLabel') }
         ref={ 'lookup' }
-        id={ 'lookup' }
-        label={ this.state.country === 'GB' ? this.t('inputLabelGB') : this.t('inputLabel') }
+        required={ this.props.required }
+        i18n={{
+          name: 'lookup',
+          label: this.state.country === 'GB' ? this.t('inputLabelGB') : this.t('inputLabel')
+        }}
         value={ this.state.input }
-        error={ !!this.state.error }
-        padRight={ true }
-        focusOnMount={ this.state.focusOnMount }
-        onChange={ this.setInput } />
+        validate={ function() { return !this.state.error; } }
+        autoFocus={ this.state.focusOnMount }
+        output={ this.setInput } />
     );
   },
 
@@ -254,6 +258,7 @@ module.exports = React.createClass({
   renderAddress: function(address) {
     return address && (
       <AddressBreakdown
+        required={ this.props.required }
         address={ address }
         region={ this.state.country }
         onChange={ this.setCustom }>

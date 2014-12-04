@@ -2,7 +2,7 @@
 
 var React     = require('react/addons');
 var I18nMixin = require('../../mixins/I18n');
-var AddressInput     = require('../AddressInput');
+var Input     = require('../../forms/Input');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -21,7 +21,7 @@ module.exports = React.createClass({
       region: 'US',
       defaultI18n: {
         street_address: 'Address',
-        street_address_2: 'Address 2',
+        extended_address: 'Address 2',
         locality: 'Suburb',
         region: 'State',
         postal_code: 'Postcode',
@@ -56,53 +56,76 @@ module.exports = React.createClass({
     var iso = this.props.region;
     return (
       <div className="Address__Breakdown">
-        <AddressInput
-          focusOnMount={ true }
+        <Input
+          required={ this.props.required }
+          autoFocus={ true }
           ref={ 'street_address' }
           key={ 'street_address' }
-          id={ 'street_address' }
-          label={ this.t('street_address', { scope: iso }) }
+          i18n={{
+            name: 'street_address',
+            label: this.t('street_address', { scope: iso })
+          }}
           value={ address.street_address }
-          onChange={ this.props.onChange('street_address') } />
-        <AddressInput
-          key={ "street_address_2" }
-          ref={ 'street_address_2' }
-          id={ 'street_address_2' }
-          label={ this.t('street_address_2', { scope: iso }) }
-          value={ address.street_address_2 }
-          onChange={ this.props.onChange('street_address_2') } />
-        <AddressInput
+          spacing={ 'tight' }
+          output={ this.props.onChange('street_address') } />
+        <Input
+          key={ "extended_address" }
+          ref={ 'extended_address' }
+          i18n={{
+            name: 'extended_address',
+            label: this.t('extended_address', { scope: iso })
+          }}
+          value={ address.extended_address }
+          spacing={ 'tight' }
+          output={ this.props.onChange('extended_address') } />
+        <Input
+          required={ this.props.required }
           key={ "locality" }
           ref={ 'locality' }
-          id={ 'locality' }
-          label={ this.t('locality', { scope: iso }) }
+          i18n={{
+            name: 'locality',
+            label: this.t('locality', { scope: iso })
+          }}
           value={ address.locality }
           width={ "wide" }
-          onChange={ this.props.onChange('locality') } />
-        <AddressInput
+          spacing={ 'tight' }
+          output={ this.props.onChange('locality') } />
+        <Input
+          required={ this.props.required }
           key={ 'region' }
           ref={ 'region' }
-          id={ 'region' }
-          label={ this.t('region', { scope: iso }) }
+          i18n={{
+            name: 'region',
+            label: this.t('region', { scope: iso })
+          }}
           value={ address.region }
           width={ "narrow" }
-          onChange={ this.props.onChange('region') } />
-        <AddressInput
+          spacing={ 'tight' }
+          output={ this.props.onChange('region') } />
+        <Input
+          required={ this.props.required }
           key={ "country_name" }
           ref={ 'country_name' }
-          id={ 'country_name' }
-          label={ this.t('country_name', { scope: iso }) }
+          i18n={{
+            name: 'country_name',
+            label: this.t('country_name', { scope: iso })
+          }}
           value={ address.country_name }
           width={ "wide" }
-          onChange={ this.props.onChange('country_name') } />
-        <AddressInput
+          spacing={ 'tight' }
+          output={ this.props.onChange('country_name') } />
+        <Input
+          required={ this.props.required }
           key={ "postal_code" }
           ref={ 'postal_code' }
-          id={ 'postal_code' }
-          label={ this.t('postal_code', { scope: iso })}
+          i18n={{
+            name: 'postal_code',
+            label: this.t('postal_code', { scope: iso })
+          }}
           value={ address.postal_code }
           width={ "narrow" }
-          onChange={ this.props.onChange('postal_code') } />
+          spacing={ 'tight' }
+          output={ this.props.onChange('postal_code') } />
         { this.props.children }
       </div>
     );

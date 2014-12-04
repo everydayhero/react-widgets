@@ -615,6 +615,7 @@ Displays a form input field and country selector, which allows users to lookup t
 
 ##### Options
 
+- `required`: *optional* sets the address field as being required. Defaults to 'false'.
 - `country`: *optional* two-digit capitalized country ISO code (AU, GB, US, NZ, IE, etc). Default is 'US'.
 - `output`: *optional* function to get user's final selected address.
 - `i18n`: *optional* object containing localised text. Default i18n is:
@@ -677,6 +678,86 @@ Displays a radio group and input field, which allows users to choose from four p
     <div id="AmountExample">Loading...</div>
     <script>
       edh.widgets.renderWidget('AmountExample', 'Amount', { name: 'target_value' });
+    </script>
+  </body>
+</html>
+```
+
+
+#### Input
+
+Displays an input field which can accept input masking, asynchronous validation, modal activation, layout modification, default values, and various input relevant properties.
+
+##### Options
+
+- `readOnly`: *optional* boolean to prevent users from altering the input by typing. Best used with a modal attached. Default is 'false'.
+- `disabled`: *optional* boolean to prevent users from changing the input, and displays as disabled. Default is 'false'.
+- `autoFocus`: *optional* boolean to determine if the input should gain focus as soon as it is loaded. Should only be true for one input on the page. Default is 'false'.
+- `required`: *optional* boolean to trigger optional validation methods and ensure the input isn't left blank. Default is 'false'.
+- `mask`: *optional* function to modify user input as it is entered. Default is 'null'. Is passed the current input string. Example:
+  ```javascript
+  function mask(input) {
+   var maskedString = input; // masking logic here
+   return maskedString;
+  }
+  ```
+- `validate`: *optional* function to validate the user input when the field loses focus. Is passed the current input string and a callback to set valid state. Default is 'null'. Example:
+  ```javascript
+  function validate(input, callback) {
+   var boolean = !!input; // validation logic here
+   return callback(boolean);
+  }
+  ```
+- `output`: *optional* function to catch input changes as they are made. Default is 'null'. Is passed the current input string. Example:
+  ```javascript
+  function output(input) {
+    // act on changes within the input here
+  }
+  ```
+- `modal`: *optional* function executed when field gains focus. Best used to open a modal or reveal additional UI for the field. Default is 'null'. Is passed an object containing the input dom element, the current input string, and a callback to alter the value. Example:
+  ```javascript
+  function modal(object) {
+    // you can animate the modal opening from object.element
+    // you can use object.value for modal's initial value
+    // you can set the new value of the input from object.callback(value)
+  }
+  ```
+- `type`: *optional* string defining the html input type. Default is 'text'.
+- `icon`: *optional* string to specify an icon to appear to the right. Valid strings are Font Awesome icon names (without the 'fa-' prefix). Default is 'null'.
+- `width`: *optional* string to specify the width of the field. Valid options are: "full", "wide", "half", and "narrow". Default is "full".
+- `spacing`: *optional* string to specify the vertical spacing beneath each input. Valid options are: "", "loose", and "tight". Default is "".
+- `value`: *optional* string for input's initial value. Default is "".
+- `i18n`: *required* object containing localised text. Valid i18n is:
+  ```javascript
+  {
+    name: 'input', //becomes the input's ID
+    label: 'Input', //visible label for the input
+    hint: 'What is this input for?', //visible hint when input is focused
+    error: "Please don't leave this blank" //message to display if not valid
+  }
+  ```
+Default i18n is:
+  ```javascript
+  {
+    name: 'input',
+    label: 'Input'
+  }
+  ```
+
+##### Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="InputExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('InputExample', 'Input', { i18n: { name: 'input_example', label: 'Example Input', hint: 'Enter some text', error: 'Please enter some text' } });
     </script>
   </body>
 </html>

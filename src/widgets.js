@@ -22,7 +22,8 @@ var widgets = {
   CallToActionBox: require('./components/callstoaction/CallToActionBox'),
   PromoCharities: require('./components/charities/PromoCharities'),
   AddressLookup: require('./components/address/AddressLookup'),
-  Amount: require('./components/amount/Amount')
+  Amount: require('./components/amount/Amount'),
+  Input: require('./components/forms/Input')
 };
 var modals = {
   CharitySearch: require('./components/search/CharitySearchModal'),

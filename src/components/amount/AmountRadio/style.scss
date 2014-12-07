@@ -6,14 +6,11 @@
   float: left;
   margin-right: 1%;
   text-align: center;
-  line-height: 20px;
+  line-height: 44px;
+  max-height: 44px;
   letter-spacing: 0.16em;
   border-radius: 2px;
   width: 17%;
-  padding-top: 5%;
-  padding-bottom: 5%;
-  padding-left: 3px;
-  padding-right: 3px;
   cursor: pointer;
   color: $color-grey-dark;
 }

@@ -1,7 +1,5 @@
 .AddressLookup {
   box-sizing: border-box;
-  max-width: 500px;
-  margin: 0 auto 8px;
   color: $color-grey-dark;
   overflow: auto;
   position: relative;
@@ -15,7 +13,7 @@
 
 .AddressLookup__List {
   background-color: #fff;
-  margin-top: -8px;
+  margin-top: -20px;
   padding-top: 8px;
   margin-bottom: 8px;
 }

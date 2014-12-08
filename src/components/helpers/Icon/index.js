@@ -15,12 +15,13 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var spin = this.props.icon === "circle-o-notch" || this.props.icon === "spinner" || this.props.icon === "refresh" || this.props.spin;
     var classes = _.compact([
       'Icon',
       this.props.type && ('Icon--' + this.props.type),
       'fa',
       this.props.fixedWidth && 'fa-fw',
-      this.props.spin && 'fa-spin',
+      spin && 'fa-spin',
       'fa-' + (this.props.icon || 'rocket')
     ]).join(' ');
 

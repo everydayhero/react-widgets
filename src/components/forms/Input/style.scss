@@ -1,0 +1,112 @@
+.Input {
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+  padding-bottom: $x-5;
+  font-family: "Lato";
+}
+
+.Input * {
+  box-sizing: border-box;
+}
+
+.Input__label {
+  position: relative;
+  transition: all 80ms ease-out;
+  display: block;
+  width: 100%;
+  border-radius: 2px;
+  background-color: white;
+  border-bottom: 1px solid $color-grey-dark;
+  padding: $x-1 $x-2;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 9px;
+  line-height: 9px;
+  color: $color-grey-dark;
+}
+
+.Input__input {
+  font-family: "Lato";
+  display: block;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+  color: $color-grey-dark;
+  text-transform: none;
+  letter-spacing: 0.05em;
+  line-height: $x-6;
+}
+
+.Input__message {
+  transition: opacity 80ms ease-out;
+  border-radius: 0 0 2px 2px;
+  color: $color-grey;
+  font-size: $x-3;
+  font-weight: 300;
+  line-height: $x-3;
+  letter-spacing: 0.05em;
+  padding: $x-1 $x-2;
+  margin-bottom: -$x-2;
+  opacity: 0;
+}
+
+.Input__icon {
+  position: absolute;
+  right: $x-2;
+  top: 50%;
+  margin-top: -$x-3;
+  line-height: $x-6;
+  font-size: 14px;
+}
+
+.Input--error .Input__label {
+  border-bottom-color: $color-error;
+  color: $color-error;
+}
+.Input--error .Input__message {
+  opacity: 1;
+  color: white;
+  background-color: $color-error;
+  margin: 0 $x-2;
+}
+.Input--error .Input__icon {
+  color: $color-error;
+}
+
+.Input--hasValue .Input__label {
+  border-bottom-color: $color-grey;
+  color: $color-grey;
+}
+
+.Input--valid .Input__icon {
+  color: $color-green-light;
+}
+
+.Input--disabled .Input__label {
+  border-bottom-color: $color-grey;
+  color: $color-grey;
+}
+.Input--disabled .Input__input {
+  color: $color-grey;
+}
+
+.Input-focused .Input__label {
+  border-bottom-color: $color-green-light;
+  color: $color-green-light;
+}
+.Input--focused .Input__message {
+  opacity: 1;
+}
+
+.Input--full { width: 100%; }
+.Input--wide { width: 63%; }
+.Input--half { width: 49%; }
+.Input--narrow { width: 35%; }
+
+.Input--wide + .Input--narrow { margin-left: 2%; }
+
+.Input--tight { padding-bottom: $x-2; }
+.Input--loose { padding-bottom: $x-9; }

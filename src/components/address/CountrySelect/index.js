@@ -1,12 +1,12 @@
 "use strict";
 
-var React                 = require('react/addons');
-var cx                    = require('react/lib/cx');
-var _                     = require('lodash');
-var countries             = require('./countries');
-var AddressInput          = require('../AddressInput');
-var CountrySelectItem     = require('../CountrySelectItem/');
-var imageURL              = '/images/flags/';
+var React             = require('react/addons');
+var cx                = require('react/lib/cx');
+var _                 = require('lodash');
+var countries         = require('./countries');
+var Input             = require('../../forms/Input');
+var CountrySelectItem = require('../CountrySelectItem/');
+var imageURL          = '/images/flags/';
 
 module.exports = React.createClass({
   displayName: "CountrySelect",
@@ -120,14 +120,16 @@ module.exports = React.createClass({
 
   renderInput: function(bool) {
     return bool && (
-      <AddressInput
-        focusOnMount={ true }
+      <Input
+        autoFocus={ true }
         ref={ 'countryFilter' }
         key={ "countryFilter" }
-        id={ "countryFilter" }
-        label={ "Find Country" }
+        i18n={{
+          name: 'countryFilter',
+          label: "Find Country"
+        }}
         value={ this.state.filter }
-        onChange={ this.setFilter } />
+        output={ this.setFilter } />
     );
   },
 

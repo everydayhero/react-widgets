@@ -16,7 +16,7 @@ var addressSearchResult = {addresses: [
 ]};
 var addressFindResult = {address: {
   street_address: '1 Place Pl',
-  street_address_2: '',
+  extended_address: '',
   locality: 'Sydney',
   postal_code: '2000',
   region: 'New South Wales',
@@ -42,7 +42,7 @@ describe('AddressLookup', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup />);
     var countrySelect = findByClass(element, 'CountrySelect__Toggle').getDOMNode();
     TestUtils.Simulate.click(countrySelect);
-    var input = findByClass(element, 'AddressInput__Field').getDOMNode();
+    var input = findByClass(element, 'Input__input').getDOMNode();
     TestUtils.Simulate.change(input, { target: { value: "king" } });
     var country = findByClass(element, 'CountrySelectItem--Focused').getDOMNode();
     TestUtils.Simulate.click(country);
@@ -51,7 +51,7 @@ describe('AddressLookup', function() {
 
   it('returns a list of addresses', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup />);
-    var input = findByClass(element, 'AddressInput__Field').getDOMNode();
+    var input = findByClass(element, 'Input__input').getDOMNode();
     TestUtils.Simulate.change(input, { target: { value: "TestAddress" } });
     expect(address.search).lastCalledWith('TestAddress', 'US', jasmine.any(Function));
 

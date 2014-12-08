@@ -1,7 +1,0 @@
-{
-    "preset": "jquery",
-    "requireMultipleVarDecl": null,
-    "validateQuoteMarks": null,
-    "requireSpacesInsideObjectBrackets": null,
-    "requireSpacesInsideArrayBrackets": null
-}

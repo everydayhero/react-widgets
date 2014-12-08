@@ -1,4 +1,3 @@
-/** @jsx */
 "use strict";
 
 require('es5-shim');
@@ -29,7 +28,6 @@ var modals = {
   CharitySearch: require('./components/search/CharitySearchModal'),
   PageSearch: require('./components/search/PageSearchModal'),
 };
-var edh = {};
 
 function getElement(element) {
   if (!element) {
@@ -60,7 +58,7 @@ function showModal(name, options) {
     document.body.removeChild(div);
   };
 
-  React.render(modal(options), div);
+  React.render(React.createFactory(modal)(options), div);
 }
 
 function initModal(element, name, options) {
@@ -90,14 +88,12 @@ function renderWidget(element, name, options) {
     return;
   }
 
-  React.render(widget(options), element);
+  React.render(React.createFactory(widget)(options), element);
 }
 
-module.exports = edh.widgets = {
+module.exports = {
   setBaseUrl: routes.setBaseUrl,
   renderWidget: renderWidget,
   initModal: initModal,
   showModal: showModal,
 };
-
-global.edh = edh;

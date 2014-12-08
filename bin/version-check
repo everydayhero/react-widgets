@@ -2,8 +2,7 @@
 
 var wget    = require('wget');
 var spinner = require('simple-spinner');
-
-var pkg  = require('../package.json');
+var pkg     = require('../package');
 
 var options = {
   protocol: 'https',

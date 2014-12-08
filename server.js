@@ -1,3 +1,5 @@
+'use strict';
+
 var express     = require('express')
 var app         = express();
 var compression = require('compression');
@@ -8,12 +10,12 @@ var port        = Number(5000);
 var pkg         = require('./package.json');
 
 
-app.use(morgan());
+app.use(morgan('tiny'));
 app.use(compression());
 
 function sendStaticFile(name) {
   return function (_, res) {
-    res.sendfile(staticPath + name);
+    res.sendFile(staticPath + name);
   };
 }
 

@@ -1,9 +1,11 @@
+'use strict';
+
 var gulp         = require('gulp');
 var gutil        = require('gulp-util');
 var concat       = require('gulp-concat');
 var awspublish   = require('gulp-awspublish');
 var rename       = require('gulp-rename');
-var pkg          = require('./package.json');
+var pkg          = require('./package');
 var request      = require('superagent');
 var fs           = require('fs');
 
@@ -13,11 +15,13 @@ var autoprefixer = require('gulp-autoprefixer');
 var minifyCss    = require('gulp-minify-css');
 
 // javascripts
-var browserify   = require('gulp-browserify');
+var browserify   = require('browserify');
 var uglify       = require('gulp-uglify');
 var react        = require('gulp-react');
 var jshint       = require('gulp-jshint');
 var stylish      = require('jshint-stylish');
+var buffer       = require('vinyl-buffer');
+var source       = require('vinyl-source-stream');
 
 // html
 var inject       = require("gulp-inject");
@@ -27,6 +31,15 @@ var debug        = !!gutil.env.debug;
 if (debug) {
   process.env.NODE_ENV = 'development';
 }
+
+gulp.task('default', [ 'styles', 'scripts', 'examples', 'markdown' ]);
+
+gulp.task('watch', function() {
+  gulp.watch('src/**/*.scss', [ 'styles' ]);
+  gulp.watch('src/**/*.js', [ 'scripts' ]);
+  gulp.watch('src/index.html', [ 'examples' ]);
+  gulp.watch(['README.md', 'src/README-template.html'], [ 'markdown' ]);
+});
 
 gulp.task('styles', function() {
   var processor = debug ? gutil.noop : minifyCss;
@@ -45,38 +58,36 @@ gulp.task('styles', function() {
     .pipe(gulp.dest('public'));
 });
 
-gulp.task('lint', function() {
-  var jshintConfig = require('./package').jshintConfig;
-
-  jshintConfig.lookup = false;
+gulp.task('jshint', function() {
+  var jshintConfig = pkg.jshintConfig;
 
   return gulp
     .src([ 'src/**/*.js' ])
     .pipe(react())
-    .on('error', function(e) {
-      // Need better logging here
-      console.log(e)
-    })
+    .on('error', console.log.bind(console))
     .pipe(jshint(jshintConfig))
     .pipe(jshint.reporter(stylish))
 });
 
-gulp.task('scripts', [ 'lint' ], function() {
+gulp.task('scripts', [ 'jshint' ], function() {
   var processor = debug ? gutil.noop : uglify;
 
-  return gulp
-    .src([ 'src/widgets.js' ], { read: false })
-    .pipe(browserify())
+  var bundler = browserify({
+    entries: ['./src/widgets.js'],
+    standalone: 'edh.widgets',
+    debug: debug
+  });
+
+  return bundler
+    .bundle()
+    .on('error', console.log.bind(console))
+    .pipe(source('widgets-' + pkg.version + '.js'))
+    .pipe(buffer())
     .pipe(processor())
-    .pipe(rename('widgets-' + pkg.version + '.js'))
     .pipe(gulp.dest('public'));
 });
 
-gulp.task('markdown', function() {
-  return processMarkdown();
-});
-
-gulp.task('default', [ 'styles', 'scripts', 'markdown' ], function() {
+gulp.task('examples', function() {
   var sources = gulp.src([
       'public/widgets-' + pkg.version + '.*'
     ], { read: false });
@@ -93,12 +104,6 @@ gulp.task('default', [ 'styles', 'scripts', 'markdown' ], function() {
     .pipe(rename('widgets-' + pkg.version + '.html'))
     .pipe(gulp.dest('public'));
 });
-
-gulp.task('watch', function() {
-  gulp.watch('src/**/*.scss', [ 'styles' ]);
-  gulp.watch('src/**/*.js', [ 'scripts' ]);
-});
-
 
 gulp.task('publish', function() {
   if (!process.env.AWS_KEY || !process.env.AWS_SECRET) {
@@ -119,6 +124,10 @@ gulp.task('publish', function() {
     .pipe(awspublish.gzip())
     .pipe(publisher.publish(headers))
     .pipe(awspublish.reporter());
+});
+
+gulp.task('markdown', function() {
+  return processMarkdown();
 });
 
 function processMarkdown() {

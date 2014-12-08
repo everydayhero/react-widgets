@@ -80,6 +80,7 @@ module.exports = React.createClass({
       return {
         id: page.id,
         name: page.name,
+        url: page.url,
         iso_code: page.amount.currency.iso_code,
         amount:  symbol + numeral(page.amount.cents / 100).format('0[.]00 a'),
         totalMembers: page.team_member_uids.length,
@@ -118,6 +119,7 @@ module.exports = React.createClass({
           <TeamLeaderboardItem
             key={ d.id }
             name={ d.name }
+            url={ d.url }
             iso_code={ d.iso_code }
             amount={ d.amount }
             totalMembers={ d.totalMembers }
@@ -133,6 +135,7 @@ module.exports = React.createClass({
           rank={ rank }
           rankTitle={ this.t('rankTitle') }
           name={ d.name }
+          url={ d.url }
           iso_code={ d.iso_code }
           amount={ d.amount }
           imgSrc={ d.medImgSrc } />

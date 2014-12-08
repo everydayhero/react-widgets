@@ -9,9 +9,9 @@ module.exports = React.createClass({
     return (
       <li className="TeamLeaderboard__items-item">
         <div className="TeamLeaderboard__items-skin">
-          <div className="TeamLeaderboard__items-image">
+          <a href={ this.props.url } className="TeamLeaderboard__items-image">
             <img src={ this.props.imgSrc } />
-          </div>
+          </a>
           <div className="TeamLeaderboard__items-content">
             <div className="TeamLeaderboard__items-name">{ this.props.name }</div>
             <div className="TeamLeaderboard__items-stats">

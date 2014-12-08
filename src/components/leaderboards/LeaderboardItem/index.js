@@ -9,9 +9,9 @@ module.exports = React.createClass({
     return (
       <li className="LeaderboardItem">
         <div className="LeaderboardItem__skin">
-          <div className="LeaderboardItem__image">
+          <a href={ this.props.url } className="LeaderboardItem__image">
             <img src={ this.props.imgSrc } />
-          </div>
+          </a>
           <div className="LeaderboardItem__content">
             <div className="LeaderboardItem__details">
               <div className="LeaderboardItem__name">

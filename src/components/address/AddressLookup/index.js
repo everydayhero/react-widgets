@@ -233,7 +233,7 @@ module.exports = React.createClass({
 
   renderList: function(bool) {
     return bool && (
-      <div className="AddressLookup__List">
+      <div className="AddressLookup__list">
         { this.renderListing() }
       </div>
     );
@@ -241,7 +241,7 @@ module.exports = React.createClass({
 
   renderError: function(bool) {
     return bool && (
-      <div className="AddressLookup__Error">
+      <div className="AddressLookup__error">
         { this.state.error }
       </div>
     );
@@ -249,7 +249,7 @@ module.exports = React.createClass({
 
   renderManualButton: function(bool) {
     return bool && (
-      <div className="AddressLookup__Manual" tabIndex='0' onClick={ this.setManualEntry } onKeyPress={ this.setManualEntry }>
+      <div className="AddressLookup__manual" tabIndex='0' onClick={ this.setManualEntry } onKeyPress={ this.setManualEntry }>
         { this.t('manualEntryButton') }
       </div>
     );

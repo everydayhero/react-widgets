@@ -111,9 +111,9 @@ module.exports = React.createClass({
   renderToggle: function(bool) {
     var flag = { backgroundImage: "url('" + imageURL + this.props.selected.toLowerCase() + ".png')" };
     return bool && (
-      <div className="CountrySelect__Toggle" onKeyPress={ this.props.onOpen } onClick={ this.props.onOpen } tabIndex="0">
+      <div className="CountrySelect__toggle" onKeyPress={ this.props.onOpen } onClick={ this.props.onOpen } tabIndex="0">
         { this.props.selected }
-        <div className="CountrySelect__Flag" style={ flag }></div>
+        <div className="CountrySelect__flag" style={ flag }></div>
       </div>
     );
   },
@@ -135,7 +135,7 @@ module.exports = React.createClass({
 
   renderCountryList: function(bool) {
     return bool && (
-      <div className="CountrySelect__List">
+      <div className="CountrySelect__list">
         { this.renderCountries() }
       </div>
     );
@@ -144,7 +144,7 @@ module.exports = React.createClass({
   render: function() {
     var classes = cx({
       'CountrySelect': true,
-      'CountrySelect--Open': this.props.open
+      'CountrySelect--open': this.props.open
     });
     return (
       <div className={ classes }>

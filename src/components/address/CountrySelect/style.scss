@@ -8,12 +8,12 @@
   overflow: hidden;
 }
 
-.CountrySelect--Open {
+.CountrySelect--open {
   width: 100%;
   margin: 0;
 }
 
-.CountrySelect__Toggle {
+.CountrySelect__toggle {
   transition: all 80ms ease-out;
   padding: 5px 8px;
   cursor: pointer;
@@ -23,13 +23,13 @@
   font-size: 12px;
 }
 
-.CountrySelect__Toggle:hover,
-.CountrySelect__Toggle:focus {
+.CountrySelect__toggle:hover,
+.CountrySelect__toggle:focus {
   background-color: #ddd;
   outline: none;
 }
 
-.CountrySelect__List {
+.CountrySelect__list {
   border-radius: 2px;
   background-color: #fff;
   max-height: 300px;
@@ -39,7 +39,7 @@
   margin-bottom: 8px;
 }
 
-.CountrySelect__Flag {
+.CountrySelect__flag {
   display: inline-block;
   margin-left: 5px;
   margin-bottom: -3px;

@@ -33,7 +33,7 @@ module.exports = React.createClass({
   render: function() {
     var classes = cx({
       'AmountRadio': true,
-      'AmountRadio--Selected': this.props.selected === this.props.amount
+      'AmountRadio--selected': this.props.selected === this.props.amount
     });
 
     return (

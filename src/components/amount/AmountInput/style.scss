@@ -27,7 +27,7 @@
   outline: none;
 }
 
-.AmountInput__Symbol {
+.AmountInput__symbol {
   transition: all 80ms ease-out;
   position: absolute;
   left: -20px;
@@ -38,23 +38,23 @@
   color: $color-green-light;
 }
 
-.AmountInput--Focused input {
+.AmountInput--focused input {
   padding-top: 3px;
   border-bottom: 3px solid $color-green-light;
 }
 
-.AmountInput--Focused .AmountInput__Symbol,
-.AmountInput--Selected .AmountInput__Symbol {
+.AmountInput--focused .AmountInput__symbol,
+.AmountInput--selected .AmountInput__symbol {
   left: 8px;
 }
 
-.AmountInput--Selected input {
+.AmountInput--selected input {
   padding-top: 1px;
   border-bottom: 1px solid $color-green-light;
   background-color: $color-green-light;
   color: white;
 }
 
-.AmountInput--Selected .AmountInput__Symbol {
+.AmountInput--selected .AmountInput__symbol {
   color: white;
 }

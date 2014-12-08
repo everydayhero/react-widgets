@@ -44,13 +44,13 @@ module.exports = React.createClass({
   render: function() {
     var classes = cx({
       'AmountInput': true,
-      'AmountInput--Selected': !!this.props.amount,
-      'AmountInput--Focused': this.state.focused
+      'AmountInput--selected': !!this.props.amount,
+      'AmountInput--focused': this.state.focused
     });
 
     return (
       <label className={ classes } onTouchStart={ this.setTouch }>
-        <span className="AmountInput__Symbol">{ this.props.symbol }</span>
+        <span className="AmountInput__symbol">{ this.props.symbol }</span>
         <input ref="input" id={ this.props.name } type={ this.state.type } onChange={ this.handleChange } value={ this.props.amount } onFocus={ this.toggleFocus } onBlur={ this.toggleFocus } />
       </label>
     );

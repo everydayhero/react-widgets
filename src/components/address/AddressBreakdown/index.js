@@ -55,7 +55,7 @@ module.exports = React.createClass({
     var address = this.props.address;
     var iso = this.props.region;
     return (
-      <div className="Address__Breakdown">
+      <div className="AddressBreakdown">
         <Input
           required={ this.props.required }
           autoFocus={ true }

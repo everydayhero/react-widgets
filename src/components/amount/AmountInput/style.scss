@@ -3,9 +3,7 @@
   float: left;
   position: relative;
   width: 26%;
-  height: 20px;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  height: 44px;
   overflow: hidden;
 }
 
@@ -19,10 +17,12 @@
   bottom: 0;
   padding-left: 24px;
   font-size: 16px;
+  line-height: 44px;
   letter-spacing: 0.16em;
   color: $color-grey-dark;
   font-family: Lato;
-  border: 1px solid $color-grey-light;
+  border: none;
+  border-bottom: 1px solid $color-grey-dark;
   border-radius: 2px;
   outline: none;
 }
@@ -31,9 +31,8 @@
   transition: all 80ms ease-out;
   position: absolute;
   left: -20px;
-  top: 50%;
-  margin-top: -20px;
-  line-height: 40px;
+  top: 0;
+  line-height: 44px;
   font-size: 20px;
   z-index: 1;
   color: $color-green-light;
@@ -50,6 +49,8 @@
 }
 
 .AmountInput--Selected input {
+  padding-top: 1px;
+  border-bottom: 1px solid $color-green-light;
   background-color: $color-green-light;
   color: white;
 }

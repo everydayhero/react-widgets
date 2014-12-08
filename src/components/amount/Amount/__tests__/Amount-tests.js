@@ -11,7 +11,7 @@ var findByProp = require('../../../../test/helpers/scryRenderedDOMComponentsWith
 describe('Amount', function() {
   it('loads with a selected default', function() {
     var element = TestUtils.renderIntoDocument(<Amount />);
-    var selected = findByClass(element, 'AmountRadio--Selected');
+    var selected = findByClass(element, 'AmountRadio--selected');
     expect(selected).toBeDefined();
   });
 
@@ -22,7 +22,7 @@ describe('Amount', function() {
     expect(element.state.preset).toBe(1500);
     expect(element.state.custom).toBe(null);
 
-    var selected = findByClass(element, 'AmountRadio--Selected').getDOMNode();
+    var selected = findByClass(element, 'AmountRadio--selected').getDOMNode();
     expect(selected.textContent).toContain('1500');
   });
 
@@ -33,7 +33,7 @@ describe('Amount', function() {
     expect(element.state.custom).toBe(123);
     expect(element.state.preset).toBe(null);
 
-    var selected = findByClass(element, 'AmountInput--Selected');
+    var selected = findByClass(element, 'AmountInput--selected');
     expect(selected).toBeDefined();
   });
 

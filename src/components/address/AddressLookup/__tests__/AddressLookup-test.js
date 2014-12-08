@@ -31,20 +31,20 @@ describe('AddressLookup', function() {
 
   it('allows you to select a country', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup />);
-    var countrySelect = findByClass(element, 'CountrySelect__Toggle').getDOMNode();
+    var countrySelect = findByClass(element, 'CountrySelect__toggle').getDOMNode();
     TestUtils.Simulate.click(countrySelect);
-    var country = findByClass(element, 'CountrySelectItem--Focused').getDOMNode();
+    var country = findByClass(element, 'CountrySelectItem--focused').getDOMNode();
     TestUtils.Simulate.click(country);
     expect(element.state.country).toBe('AF');
   });
 
   it('allows you to filter and select a country', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup />);
-    var countrySelect = findByClass(element, 'CountrySelect__Toggle').getDOMNode();
+    var countrySelect = findByClass(element, 'CountrySelect__toggle').getDOMNode();
     TestUtils.Simulate.click(countrySelect);
     var input = findByClass(element, 'Input__input').getDOMNode();
     TestUtils.Simulate.change(input, { target: { value: "king" } });
-    var country = findByClass(element, 'CountrySelectItem--Focused').getDOMNode();
+    var country = findByClass(element, 'CountrySelectItem--focused').getDOMNode();
     TestUtils.Simulate.click(country);
     expect(element.state.country).toBe('GB');
   });
@@ -59,14 +59,14 @@ describe('AddressLookup', function() {
     callback(addressSearchResult);
     expect(element.state.addressList).toBe(addressSearchResult.addresses);
 
-    var listItem = findByClass(element, 'AddressListing__Primary').getDOMNode();
+    var listItem = findByClass(element, 'AddressListing__details').getDOMNode();
     expect(listItem.textContent).toContain('TestAddressListing');
   });
 
   it('breaks down a selected address', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup />);
     element.setList(addressSearchResult);
-    var listItem = findByClass(element, 'AddressListing--Focused').getDOMNode();
+    var listItem = findByClass(element, 'AddressListing--focused').getDOMNode();
     TestUtils.Simulate.click(listItem);
     expect(address.find).lastCalledWith('123', 'US', jasmine.any(Function));
 
@@ -74,7 +74,7 @@ describe('AddressLookup', function() {
     callback(addressFindResult);
     expect(element.state.address).toBe(addressFindResult.address);
 
-    var breakdown = findByClass(element, 'Address__Breakdown');
+    var breakdown = findByClass(element, 'AddressBreakdown');
     var streetAddress = findByProp(breakdown, 'id', 'street_address').getDOMNode();
     var locality = findByProp(breakdown, 'id', 'locality').getDOMNode();
     expect(streetAddress.value).toBe('1 Place Pl');

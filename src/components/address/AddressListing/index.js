@@ -35,11 +35,11 @@ module.exports = React.createClass({
   render: function() {
     var classes = cx({
       'AddressListing': true,
-      'AddressListing--Focused': this.props.focused
+      'AddressListing--focused': this.props.focused
     });
     return (
       <div className={ classes } onMouseEnter={ this.handleMouseEnter } onClick={ this.handleClick } >
-        <div className="AddressListing__Primary">{ this.props.label }</div>
+        <div className="AddressListing__details">{ this.props.label }</div>
       </div>
     );
   }

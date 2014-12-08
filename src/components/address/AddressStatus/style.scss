@@ -13,13 +13,13 @@
   opacity: 0;
 }
 
-.AddressStatus--Loading,
-.AddressStatus--Error,
-.AddressStatus--Success {
+.AddressStatus--loading,
+.AddressStatus--error,
+.AddressStatus--success {
   left: -74px;
   opacity: 1;
 }
 
-.AddressStatus--Loading { color: $color-grey; }
-.AddressStatus--Error { color: $color-error; }
-.AddressStatus--Success { color: $color-green; }
+.AddressStatus--loading { color: $color-grey; }
+.AddressStatus--error { color: $color-error; }
+.AddressStatus--success { color: $color-green; }

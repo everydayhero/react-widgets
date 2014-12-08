@@ -34,11 +34,11 @@ module.exports = React.createClass({
     var flag = { backgroundImage: "url('" + this.props.flag + this.props.country.iso.toLowerCase() + ".png')" };
     var classes = cx({
       'CountrySelectItem': true,
-      'CountrySelectItem--Focused': this.props.focused
+      'CountrySelectItem--focused': this.props.focused
     });
     return (
       <div className={ classes } onMouseEnter={ this.handleMouse } onClick={ this.handleClick }>
-        <div className="CountrySelectItem__Flag" style={ flag }></div>
+        <div className="CountrySelectItem__flag" style={ flag }></div>
         { this.props.country.name }
       </div>
     );

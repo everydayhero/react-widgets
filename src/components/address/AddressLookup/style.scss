@@ -11,14 +11,14 @@
   box-sizing: border-box;
 }
 
-.AddressLookup__List {
+.AddressLookup__list {
   background-color: #fff;
   margin-top: -20px;
   padding-top: 8px;
   margin-bottom: 8px;
 }
 
-.AddressLookup__Error {
+.AddressLookup__error {
   border-radius: 0 0 2px 2px;
   padding: 5px 8px;
   margin: -8px 8px 8px;
@@ -27,7 +27,7 @@
   font-size: 13px;
 }
 
-.AddressLookup__Manual {
+.AddressLookup__manual {
   transition: all 80ms ease-out;
   border-radius: 2px;
   float: right;
@@ -43,8 +43,8 @@
   text-align: center;
 }
 
-.AddressLookup__Manual:hover,
-.AddressLookup__Manual:focus {
+.AddressLookup__manual:hover,
+.AddressLookup__manual:focus {
   background-color: $color-green-light;
   color: #fff;
   outline: none;

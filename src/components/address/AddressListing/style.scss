@@ -5,7 +5,7 @@
   cursor: pointer;
 }
 
-.AddressListing--Focused {
+.AddressListing--focused {
   background-color: rgba(126,199,116,0.1);
 }
 
@@ -13,15 +13,7 @@
   border-top: 1px solid #eee;
 }
 
-.AddressListing__Primary {
+.AddressListing__details {
   transition: all 80ms ease-out;
   font-size: 13px;
-}
-
-.AddressListing__Secondary {
-  transition: all 80ms ease-out;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  opacity: 0.7;
 }

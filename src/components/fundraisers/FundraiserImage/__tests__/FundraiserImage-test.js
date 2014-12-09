@@ -30,7 +30,7 @@ describe('FundraiserImage', function() {
     };
 
     beforeEach(function() {
-      fundraiserImage = <FundraiserImage campaignUid="au-0" imgTitle={ props.imgTitle }  pageUrl={ props.pageUrl } />;
+      fundraiserImage = <FundraiserImage imgTitle={ props.imgTitle }  pageUrl={ props.pageUrl } />;
       element = TestUtils.renderIntoDocument(fundraiserImage);
     });
 

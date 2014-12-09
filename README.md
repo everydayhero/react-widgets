@@ -96,9 +96,8 @@ The supporter page search modal widget allows you to search for a supporter page
 
   ```js
   {
-    title: 'Search for a Supporter Pages',
+    title: 'Search for a Supporter Page',
     selectAction: 'Support',
-    emptyLabel: 'No results'
     emptyLabel: "We couldn't find any matching Supporter Pages."
   }
   ```

@@ -24,5 +24,20 @@ describe('LeaderboardItem', function() {
       var elementImg = findByClass(element, 'LeaderboardItem__image');
       expect(elementImg).not.toBeNull();
     });
+
+    it('renders funds raised', function() {
+      var elementFunds = findByClass(element, 'LeaderboardItem__amount');
+      expect(elementFunds).not.toBeNull();
+    });
+
+    it('renders a name', function() {
+      var elementName = findByClass(element, 'LeaderboardItem__name');
+      expect(elementName).not.toBeNull();
+    });
+
+    it('renders a rank', function() {
+      var elementRank = findByClass(element, 'LeaderboardItem__rank');
+      expect(elementRank).not.toBeNull();
+    });
   });
 });

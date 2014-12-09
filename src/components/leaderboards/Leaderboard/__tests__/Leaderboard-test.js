@@ -3,11 +3,12 @@ jest.autoMockOff();
 jest.mock('../../../../api/pages');
 
 describe('Leaderboard', function() {
-  var React                       = require('react/addons');
-  var Leaderboard                 = require('../');
-  var pages                       = require('../../../../api/pages');
-  var TestUtils                   = React.addons.TestUtils;
-  var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
+  var React       = require('react/addons');
+  var Leaderboard = require('../');
+  var pages       = require('../../../../api/pages');
+  var TestUtils   = React.addons.TestUtils;
+  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('component defaults', function() {
     var leaderboard;
@@ -27,17 +28,22 @@ describe('Leaderboard', function() {
 
       expect(heading.getDOMNode().textContent).toBe('Leaderboard > Top Individuals');
     });
+
+    it('renders a loading icon', function() {
+      element.setState({ isLoading: true });
+      findByClass(element, 'Leaderboard__loading');
+    });
   });
 
   describe('component props', function() {
     var leaderboard;
     var element;
     var translation = {
-      heading: 'Top Individuals'
+      heading: 'Top Teams'
     };
 
     beforeEach(function() {
-      leaderboard = <Leaderboard campaignUid="au-0" i18n={ translation } />;
+      leaderboard = <Leaderboard campaignUid="au-0" i18n={ translation } type="team" />;
       element = TestUtils.renderIntoDocument(leaderboard);
     });
 

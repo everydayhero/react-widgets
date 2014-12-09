@@ -35,9 +35,10 @@ module.exports = React.createClass({
       'AmountRadio': true,
       'AmountRadio--selected': this.props.selected === this.props.amount
     });
+    var order = ' AmountRadio--' + (this.props.index + 1);
 
     return (
-      <label className={ classes } onClick={ this.handleClick }>
+      <label className={ classes + order } onClick={ this.handleClick }>
         { this.props.amount }
         <input ref="radio" type="radio" name={ this.props.name } id={ this.props.amount } />
       </label>

@@ -1,8 +1,3 @@
-.CountrySelectItem__flag {
-  margin-left: 0;
-  margin-right: 13px;
-}
-
 .CountrySelectItem {
   transition: all 80ms ease-out;
   text-align: left;
@@ -21,12 +16,7 @@
 }
 
 .CountrySelectItem__flag {
-  display: inline-block;
+  margin-right: 13px;
   margin-left: 5px;
-  margin-bottom: -3px;
-  width: 30px;
-  height: 15px;
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
+  vertical-align: top;
 }

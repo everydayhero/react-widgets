@@ -3,7 +3,7 @@
   width: 100%;
   text-align: left;
   padding-bottom: $x-5;
-  font-family: "Lato";
+  font-family: $sans-serif-fonts;
 }
 
 .Input * {
@@ -28,7 +28,7 @@
 }
 
 .Input__input {
-  font-family: "Lato";
+  font-family: $sans-serif-fonts;
   display: block;
   width: 100%;
   border: none;

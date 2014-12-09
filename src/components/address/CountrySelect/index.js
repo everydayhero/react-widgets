@@ -5,8 +5,8 @@ var cx                = require('react/lib/cx');
 var _                 = require('lodash');
 var countries         = require('./countries');
 var Input             = require('../../forms/Input');
-var CountrySelectItem = require('../CountrySelectItem/');
-var imageURL          = '/images/flags/';
+var CountrySelectItem = require('../CountrySelectItem');
+var FlagIcon          = require('../../helpers/FlagIcon');
 
 module.exports = React.createClass({
   displayName: "CountrySelect",
@@ -98,7 +98,6 @@ module.exports = React.createClass({
     var countries = this.state.filteredList || this.state.countries;
     return _.map(countries, function(d, i) {
       return <CountrySelectItem
-        flag={ imageURL }
         key={ d.name + i }
         index={ i }
         focused={ i === this.state.fauxFocus }
@@ -109,11 +108,10 @@ module.exports = React.createClass({
   },
 
   renderToggle: function(bool) {
-    var flag = { backgroundImage: "url('" + imageURL + this.props.selected.toLowerCase() + ".png')" };
     return bool && (
       <div className="CountrySelect__toggle" onKeyPress={ this.props.onOpen } onClick={ this.props.onOpen } tabIndex="0">
         { this.props.selected }
-        <div className="CountrySelect__flag" style={ flag }></div>
+        <FlagIcon className="CountrySelect__flag" country={ this.props.selected } />
       </div>
     );
   },

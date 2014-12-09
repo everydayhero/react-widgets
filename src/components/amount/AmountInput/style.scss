@@ -3,7 +3,7 @@
   float: left;
   position: relative;
   width: 26%;
-  height: 44px;
+  height: 31px;
   overflow: hidden;
 }
 
@@ -17,7 +17,7 @@
   bottom: 0;
   padding-left: 24px;
   font-size: 16px;
-  line-height: 44px;
+  line-height: 31px;
   letter-spacing: 0.16em;
   color: $color-grey-dark;
   font-family: Lato;
@@ -32,8 +32,8 @@
   position: absolute;
   left: -20px;
   top: 0;
-  line-height: 44px;
-  font-size: 20px;
+  line-height: 32px;
+  font-size: 14px;
   z-index: 1;
   color: $color-green-light;
 }

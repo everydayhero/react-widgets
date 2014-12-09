@@ -29,7 +29,9 @@ module.exports = React.createClass({
 
   handleChange: function(e) {
     var val = parseInt(e.target.value, 10);
-    if (!val || val <= 0) return this.props.onChange(0);
+    if (!val || val <= 0) {
+      return this.props.onChange(0);
+    }
     this.props.onChange(val);
   },
 

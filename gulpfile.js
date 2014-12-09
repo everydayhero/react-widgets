@@ -87,9 +87,10 @@ gulp.task('scripts', [ 'jshint' ], function() {
     .pipe(gulp.dest('public'));
 });
 
-gulp.task('examples', function() {
+gulp.task('examples', [ 'styles', 'scripts' ], function() {
   var sources = gulp.src([
-      'public/widgets-' + pkg.version + '.*'
+      'public/widgets-' + pkg.version + '.css',
+      'public/widgets-' + pkg.version + '.js'
     ], { read: false });
 
   return gulp

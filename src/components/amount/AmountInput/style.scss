@@ -21,7 +21,7 @@
   letter-spacing: 0.16em;
   color: $color-grey-dark;
   font-family: Lato;
-  border: none;
+  border: 1px solid $color-grey-light;
   border-bottom: 1px solid $color-grey-dark;
   border-radius: 2px;
   outline: none;
@@ -39,8 +39,7 @@
 }
 
 .AmountInput--focused input {
-  padding-top: 3px;
-  border-bottom: 3px solid $color-green-light;
+  border-bottom-color:$color-green-light;
 }
 
 .AmountInput--focused .AmountInput__symbol,
@@ -49,8 +48,7 @@
 }
 
 .AmountInput--selected input {
-  padding-top: 1px;
-  border-bottom: 1px solid $color-green-light;
+  border-color: $color-green-light;
   background-color: $color-green-light;
   color: white;
 }

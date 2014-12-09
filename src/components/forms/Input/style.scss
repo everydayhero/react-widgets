@@ -17,8 +17,9 @@
   width: 100%;
   border-radius: 2px;
   background-color: white;
+  border: 1px solid $color-grey-light;
   border-bottom: 1px solid $color-grey-dark;
-  padding: $x-1 $x-2;
+  padding: $x-1 $x-2 0;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-size: 9px;
@@ -37,7 +38,7 @@
   color: $color-grey-dark;
   text-transform: none;
   letter-spacing: 0.05em;
-  line-height: $x-6;
+  line-height: 27px;
 }
 
 .Input__message {

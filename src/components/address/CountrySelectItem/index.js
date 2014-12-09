@@ -1,13 +1,13 @@
 "use strict";
 
 var React = require('react/addons');
+var FlagIcon = require('../../helpers/FlagIcon');
 var cx = require('react/lib/cx');
 
 module.exports = React.createClass({
   displayName: "CountrySelectItem",
 
   propTypes: {
-    flag: React.PropTypes.string,
     focused: React.PropTypes.bool,
     country: React.PropTypes.shape({ name: React.PropTypes.string, iso: React.PropTypes.string }),
     onMouseEnter: React.PropTypes.func,
@@ -16,7 +16,6 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      flag: '',
       focused: false,
       country: { name: 'Country Missing', iso: 'XX' }
     };
@@ -31,14 +30,13 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var flag = { backgroundImage: "url('" + this.props.flag + this.props.country.iso.toLowerCase() + ".png')" };
     var classes = cx({
       'CountrySelectItem': true,
       'CountrySelectItem--focused': this.props.focused
     });
     return (
       <div className={ classes } onMouseEnter={ this.handleMouse } onClick={ this.handleClick }>
-        <div className="CountrySelectItem__flag" style={ flag }></div>
+        <FlagIcon className="CountrySelectItem__flag" country={ this.props.country.iso } />
         { this.props.country.name }
       </div>
     );

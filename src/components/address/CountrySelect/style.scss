@@ -18,7 +18,7 @@
   padding: 5px 8px;
   cursor: pointer;
   background-color: #eee;
-  line-height: 15px;
+  line-height: 12px;
   text-align: right;
   font-size: 12px;
 }
@@ -40,12 +40,6 @@
 }
 
 .CountrySelect__flag {
-  display: inline-block;
-  margin-left: 5px;
-  margin-bottom: -3px;
-  width: 30px;
-  height: 15px;
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
+  vertical-align: top;
+  margin: -2px 0 -2px 5px;
 }

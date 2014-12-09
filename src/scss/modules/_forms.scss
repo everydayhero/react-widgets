@@ -39,7 +39,7 @@
   letter-spacing: 0.10em;
   padding: 0 $x-3;
   width: 100%;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-family: $sans-serif-fonts;
 
   &:focus {
     box-shadow: inset 0 1px 2px -1px rgba(black, 0.5);
@@ -61,7 +61,7 @@
   @extend %text-input;
   padding: $x-3;
   min-height: $x-36;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-family: $sans-serif-fonts;
 }
 
 %placeholder {

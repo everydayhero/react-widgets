@@ -3,11 +3,11 @@ jest.autoMockOff();
 jest.mock('../../../../api/pages');
 
 describe('RecentFundraisers', function() {
-  var React                       = require('react/addons');
-  var RecentFundraisers           = require('../');
-  var pages                       = require('../../../../api/pages');
-  var TestUtils                   = React.addons.TestUtils;
-  var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
+  var React             = require('react/addons');
+  var RecentFundraisers = require('../');
+  var pages             = require('../../../../api/pages');
+  var TestUtils         = React.addons.TestUtils;
+  var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
     var recentFundraisers;

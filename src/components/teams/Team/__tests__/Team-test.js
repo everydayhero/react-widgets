@@ -1,19 +1,19 @@
 "use strict";
 jest.autoMockOff();
 
-describe('FundraiserImage', function() {
-  var React           = require('react/addons');
-  var FundraiserImage = require('../');
-  var TestUtils       = React.addons.TestUtils;
-  var findByTag       = TestUtils.findRenderedDOMComponentWithTag;
+describe('Team', function() {
+  var React     = require('react/addons');
+  var Team      = require('../');
+  var TestUtils = React.addons.TestUtils;
+  var findByTag = TestUtils.findRenderedDOMComponentWithTag;
 
   describe('component defaults', function() {
-    var fundraiserImage;
+    var team;
     var element;
 
     beforeEach(function() {
-      fundraiserImage = <FundraiserImage />;
-      element = TestUtils.renderIntoDocument(fundraiserImage);
+      team = <Team />;
+      element = TestUtils.renderIntoDocument(team);
     });
 
     it('renders something', function() {
@@ -22,16 +22,16 @@ describe('FundraiserImage', function() {
   });
 
   describe('component with custom props', function() {
-    var fundraiserImage;
+    var team;
     var element;
     var props = {
       pageUrl: "http://everydayhero.com/us",
-      imgTitle: "Wonderful Person"
+      title: "Wonderful Team"
     };
 
     beforeEach(function() {
-      fundraiserImage = <FundraiserImage imgTitle={ props.imgTitle }  pageUrl={ props.pageUrl } />;
-      element = TestUtils.renderIntoDocument(fundraiserImage);
+      team = <Team title={ props.title }  pageUrl={ props.pageUrl } />;
+      element = TestUtils.renderIntoDocument(team);
     });
 
     it('renders something', function() {
@@ -45,7 +45,7 @@ describe('FundraiserImage', function() {
 
     it('renders an image with alt tag including custom title prop', function() {
       var image = findByTag(element, 'img').getDOMNode();
-      expect(image.alt).toBe(props.imgTitle);
+      expect(image.alt).toBe(props.title);
     });
   });
 });

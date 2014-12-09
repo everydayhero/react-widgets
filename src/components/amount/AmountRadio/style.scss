@@ -6,11 +6,10 @@
   float: left;
   margin-right: 1%;
   text-align: center;
-  line-height: 44px;
-  max-height: 44px;
+  line-height: 31px;
+  max-height: 31px;
   letter-spacing: 0.16em;
   border-radius: 2px;
-  width: 17%;
   cursor: pointer;
   color: $color-grey-dark;
 }
@@ -30,8 +29,7 @@
   color: white;
 }
 
-.AmountRadio:nth-child(1) { width: 16%; }
-
-.AmountRadio:nth-child(3) { width: 18%; }
-
-.AmountRadio:nth-child(4) { width: 19%; }
+.AmountRadio--1 { width: 16%; }
+.AmountRadio--2 { width: 17%; }
+.AmountRadio--3 { width: 18%; }
+.AmountRadio--4 { width: 19%; }

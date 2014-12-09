@@ -10,3 +10,14 @@
   font-family: 'Lato';
   font-weight: 300;
 }
+
+.Amount__label {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  padding: 0 8px 4px;
+  text-align: left;
+  font-size: 9px;
+  line-height: 9px;
+  color: $color-grey-dark;
+}

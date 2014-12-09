@@ -10,9 +10,12 @@ var findByProp = require('../../../../test/helpers/scryRenderedDOMComponentsWith
 
 describe('Amount', function() {
   it('loads with a selected default', function() {
-    var element = TestUtils.renderIntoDocument(<Amount />);
+    var element = TestUtils.renderIntoDocument(<Amount label="testLabel" />);
     var selected = findByClass(element, 'AmountRadio--selected');
     expect(selected).toBeDefined();
+
+    var label = findByClass(element, 'Amount__label').getDOMNode();
+    expect(label.textContent).toContain('testLabel');
   });
 
   it('allows you to select a preset', function() {

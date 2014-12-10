@@ -8,11 +8,14 @@
   "dependencies": {
     "compression": "~1.2.1",
     "express": "~4.10.4",
-    "morgan": "~1.5.0"
+    "jsonp": "webmodules/jsonp",
+    "lodash": "~2.4.1",
+    "morgan": "~1.5.0",
+    "numeral": "~1.5.3",
+    "react": "~0.12.1"
   },
   "devDependencies": {
     "browserify": "~6.3.3",
-    "envify": "~3.2.0",
     "es5-shim": "~4.0.5",
     "gulp": "~3.8.10",
     "gulp-autoprefixer": "~2.0.0",
@@ -28,10 +31,6 @@
     "gulp-util": "~3.0.1",
     "jest-cli": "~0.1.18",
     "jshint-stylish": "~1.0.0",
-    "jsonp": "webmodules/jsonp",
-    "lodash": "~2.4.1",
-    "numeral": "~1.5.3",
-    "react": "~0.12.1",
     "react-page-objects": "~0.1.2",
     "react-tools": "~0.12.1",
     "reactify": "~0.17.1",
@@ -85,8 +84,7 @@
   },
   "browserify": {
     "transform": [
-      "reactify",
-      "envify"
+      "reactify"
     ]
   },
   "jest": {

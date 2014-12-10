@@ -6,7 +6,6 @@ var SearchPagination            = require('../SearchPagination');
 var SearchResults               = require('../SearchResults');
 var I18nMixin                   = require('../../mixins/I18n');
 var Overlay                     = require('../../helpers/Overlay');
-var componentClass              = require('../../proptypes/componentClass');
 
 module.exports = React.createClass({
   displayName: 'SearchModal',
@@ -23,7 +22,7 @@ module.exports = React.createClass({
     onSelect: React.PropTypes.func,
     pagination: React.PropTypes.object,
     results: React.PropTypes.arrayOf(React.PropTypes.object),
-    resultComponent: componentClass.isRequired,
+    resultComponent: React.PropTypes.func.isRequired,
     selectAction: React.PropTypes.string
   },
 

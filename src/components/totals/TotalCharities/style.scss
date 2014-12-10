@@ -1,15 +1,15 @@
 .TotalCharities {
-  @extend %tile;
+  @extend %widget-tile;
 }
 
 .TotalCharities__total {
-  @extend %tile-total;
+  @extend %widget-tile-total;
 }
 
 .TotalCharities__loading {
-  @extend %tile-loading-icon;
+  @extend %widget-tile-loading-icon;
 }
 
 .TotalCharities__icon {
-  @extend %tile-icon;
+  @extend %widget-tile-icon;
 }

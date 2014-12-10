@@ -1,5 +1,5 @@
 .PromoCharitiesResult {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   display: block;
   width: 16.666%;
   padding: 15px 10px 0;
@@ -32,7 +32,7 @@
 }
 
 .PromoCharitiesResult__content {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   position: absolute;
   top: 0;
   left: 0;
@@ -54,7 +54,7 @@
 }
 
 .PromoCharitiesResult__image {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   color: $color-grey-darker;
   display: inline-block;
   vertical-align: middle;

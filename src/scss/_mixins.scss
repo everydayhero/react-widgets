@@ -12,14 +12,6 @@
   #{$property}: $value;
 }
 
-@mixin border-radius($radius: 3px) {
-  @include vendor(border-radius, $radius);
-}
-
-@mixin box-sizing($sizing: content-box) {
-  @include vendor(box-sizing, $sizing, webkit moz);
-}
-
 @mixin media($width: 320px) {
   @media only screen and (min-width: $width) {
     @content;

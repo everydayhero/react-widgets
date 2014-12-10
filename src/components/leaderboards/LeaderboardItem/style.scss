@@ -1,5 +1,5 @@
 .LeaderboardItem {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   display: block;
   padding: 0 10px 15px;
   width: 33.33%;
@@ -24,7 +24,7 @@
 }
 
 .LeaderboardItem__content {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   padding: 15px;
   float: left;
   width: 75%;
@@ -43,7 +43,7 @@
   float: left;
 
   .LeaderboardItem__name {
-    @include box-sizing(border-box);
+    box-sizing: border-box;
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
@@ -60,7 +60,7 @@
 }
 
 .LeaderboardItem__image {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   padding: 15px;
   text-align: center;
   float: left;
@@ -85,7 +85,7 @@
 }
 
 .LeaderboardItem__amount {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   display: inline-block;
   width: 50%;
   font-weight: bold;

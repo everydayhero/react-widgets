@@ -10,7 +10,7 @@ module.exports = React.createClass({
   displayName: 'PageSearchResult',
 
   propTypes: {
-    onSelect: React.PropTypes.func.isRequired,
+    onSelect: React.PropTypes.func,
     result: React.PropTypes.object.isRequired,
     selectAction: React.PropTypes.string.isRequired
   },

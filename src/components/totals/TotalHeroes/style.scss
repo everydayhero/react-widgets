@@ -1,15 +1,15 @@
 .TotalHeroes {
-  @extend %tile;
+  @extend %widget-tile;
 }
 
 .TotalHeroes__total {
-  @extend %tile-total;
+  @extend %widget-tile-total;
 }
 
 .TotalHeroes__loading {
-  @extend %tile-loading-icon;
+  @extend %widget-tile-loading-icon;
 }
 
 .TotalHeroes__icon {
-  @extend %tile-icon;
+  @extend %widget-tile-icon;
 }

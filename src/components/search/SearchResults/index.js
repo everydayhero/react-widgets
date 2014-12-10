@@ -4,7 +4,6 @@ var _              = require('lodash');
 var React          = require('react');
 var SearchResult   = require('../SearchResult');
 var I18nMixin      = require('../../mixins/I18n');
-var componentClass = require('../../proptypes/componentClass');
 
 module.exports = React.createClass({
   displayName: 'SearchResults',
@@ -14,7 +13,7 @@ module.exports = React.createClass({
   propTypes: {
     onSelect: React.PropTypes.func,
     results: React.PropTypes.arrayOf(React.PropTypes.object),
-    resultComponent: componentClass.isRequired,
+    resultComponent: React.PropTypes.func.isRequired,
     selectAction: React.PropTypes.string
   },
 

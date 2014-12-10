@@ -11,28 +11,28 @@
   font-family: $sans-serif-fonts;
 }
 
-%rule-bottom {
+%widget-rule-bottom {
   border: 0;
   border-bottom: 1px;
   border-style: solid;
   border-color: $color-rule-grey;
 }
 
-%rule-top {
+%widget-rule-top {
   border: 0;
   border-top: 1px;
   border-style: solid;
   border-color: $color-rule-grey;
 }
 
-%header {
+%widget-header {
   width: 100%;
   padding: $x-9;
   vertical-align: middle;
 }
 
 @include media-max($breakpoint-xs) {
-  %header-s {
+  %widget-header-s {
     padding: $x-3;
   }
 }

@@ -1,5 +1,5 @@
-%tile {
-  @include border-radius(2px);
+%widget-tile {
+  border-radius: $border-radius;
   background: #555;
   color: #fff;
   font-family: $sans-serif-fonts;
@@ -10,23 +10,23 @@
   padding: $x-5 $x-2 $x-6;
 }
 
-%tile-heading {
+%widget-tile-heading {
   font-size: 24px;
   margin: 15px;
 }
 
-%tile-total {
+%widget-tile-total {
   font-size: 21px;
   margin-bottom: $x-2;
 }
 
-%tile-icon {
+%widget-tile-icon {
   display: block;
   padding-bottom: 10px;
   font-size: 30px;
 }
 
-%tile-loading-icon {
+%widget-tile-loading-icon {
   display: block;
   font-size: 21px;
   line-height: 2;

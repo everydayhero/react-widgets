@@ -1,19 +1,19 @@
-%form {
+%widget-form {
   max-width: 400px;
   box-sizing: border-box;
 }
 
-%form-centered {
+%widget-form-centered {
   margin: $x-36 auto;
 }
 
-%input-wrap {
+%widget-input-wrap {
   border: none;
   display: block;
   position: relative;
 }
 
-%text-input-label {
+%widget-text-input-label {
   position: absolute;
   color: $color-label-grey;
   cursor: text;
@@ -26,9 +26,9 @@
   pointer-events:none;
 }
 
-%text-input {
+%widget-text-input {
   background: $color-input-background;
-  border-radius: $radius-input-border;
+  border-radius: 5px;
   border-style: solid;
   border-width: 1px;
   border-color: $color-input-text-grey;
@@ -46,26 +46,26 @@
   }
 }
 
-%form-header {
+%widget-form-header {
   margin-top: $x-6;
   padding-bottom: $x-3;
 }
 
-%form-instruction {
+%widget-form-instruction {
   padding-bottom: $x-3;
   font-size: $x-4;
 }
 
-%text-area {
-  @extend %input-wrap;
-  @extend %text-input;
+%widget-text-area {
+  @extend %widget-input-wrap;
+  @extend %widget-text-input;
   padding: $x-3;
   min-height: $x-36;
   font-family: $sans-serif-fonts;
 }
 
-%placeholder {
-  @extend %text-input-label;
+%widget-placeholder {
+  @extend %widget-text-input-label;
   padding: 0 $x-4;
   color: $color-label-grey;
 }

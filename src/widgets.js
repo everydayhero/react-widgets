@@ -6,7 +6,8 @@ require('es5-shim/es5-sham');
 var _ = require('lodash');
 var React = require('react');
 var routes = require('./api/routes');
-var addEventListener = require('./lib/addEventListener.js');
+var addEventListener = require('./lib/addEventListener');
+var renderModal = require('./lib/renderModal');
 var widgets = {
   FundsRaised: require('./components/totals/FundsRaised'),
   TotalHeroes: require('./components/totals/TotalHeroes'),
@@ -50,15 +51,7 @@ function showModal(name, options) {
     return;
   }
 
-  var div = document.createElement('div');
-  document.body.appendChild(div);
-
-  options.onClose = function() {
-    React.unmountComponentAtNode(div);
-    document.body.removeChild(div);
-  };
-
-  React.render(React.createFactory(modal)(options), div);
+  renderModal(modal, options);
 }
 
 function initModal(element, name, options) {

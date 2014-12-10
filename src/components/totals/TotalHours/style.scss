@@ -1,18 +1,18 @@
 .TotalHours {
-  @extend %tile;
+  @extend %widget-tile;
   padding: 45px 8px;
 }
 
 .TotalHours__total {
-  @extend %tile-total;
+  @extend %widget-tile-total;
 }
 
 .TotalHours__loading {
-  @extend %tile-loading-icon;
+  @extend %widget-tile-loading-icon;
 }
 
 .TotalHours__icon {
-  @extend %tile-icon;
+  @extend %widget-tile-icon;
   font-size: 60px;
   padding: 0;
   margin-right: 15px;

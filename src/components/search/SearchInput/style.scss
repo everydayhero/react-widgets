@@ -1,10 +1,10 @@
 .SearchInput {
-  @extend %input-wrap;
+  @extend %widget-input-wrap;
   color: white;
 }
 
 .SearchInput__input {
-  @extend %text-input;
+  @extend %widget-text-input;
   position: relative;
   color: $color-text;
   padding-left: 28px;

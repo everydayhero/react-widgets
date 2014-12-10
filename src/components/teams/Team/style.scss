@@ -1,5 +1,5 @@
 .Team {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   float: left;
   padding: 0 15px 15px;
   width: 16.66%;

@@ -15,7 +15,7 @@
   transition: all 80ms ease-out;
   display: block;
   width: 100%;
-  border-radius: 2px;
+  border-radius: $border-radius;
   background-color: white;
   border: 1px solid $color-grey-light;
   border-bottom: 1px solid $color-grey-dark;
@@ -43,7 +43,7 @@
 
 .Input__message {
   transition: opacity 80ms ease-out;
-  border-radius: 0 0 2px 2px;
+  border-radius: 0 0 $border-radius $border-radius;
   color: $color-grey;
   font-size: $x-3;
   font-weight: 300;

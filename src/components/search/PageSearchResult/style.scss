@@ -21,7 +21,7 @@
 }
 
 .PageSearchResult__content {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   overflow: hidden;
 
   * {
@@ -37,8 +37,8 @@
 }
 
 .PageSearchResult__footer {
-  @extend %uppercase;
-  @extend %font-size-12;
+  text-transform: uppercase;
+  font-size: 12px;
 }
 
 .PageSearchResult__actions {

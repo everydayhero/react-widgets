@@ -1,5 +1,5 @@
 .Map {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   font-family: $sans-serif-fonts;
   border-radius: $border-radius;
   border: 2px solid $color-grey-dark;
@@ -8,7 +8,7 @@
 }
 
 .Map__heading {
-  @extend %tile-heading;
+  @extend %widget-tile-heading;
   position: absolute;
   top: 15px;
   left: 15px;

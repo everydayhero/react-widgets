@@ -6,7 +6,7 @@
   color: #fff;
 
   .Leaderboard__heading {
-    @extend %tile-heading;
+    @extend %widget-tile-heading;
   }
 
   .Leaderboard__items {
@@ -45,6 +45,6 @@
   }
 
   .Leaderboard__loading {
-    @extend %tile-loading-icon;
+    @extend %widget-tile-loading-icon;
   }
 }

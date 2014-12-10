@@ -1,5 +1,5 @@
 .TeamLeaderboard__items-item {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   display: block;
   padding: 0 10px 15px;
   width: 25%;
@@ -22,7 +22,7 @@
 }
 
 .TeamLeaderboard__items-content {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   padding: 15px;
 
   @include media-max($breakpoint-l) {
@@ -43,7 +43,7 @@
 }
 
 .TeamLeaderboard__items-image {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   display: block;
   padding: 15px 15px 0;
   text-align: center;
@@ -64,7 +64,7 @@
   @extend %clearfix;
 
   .TeamLeaderboard__items-stat {
-    @include box-sizing(border-box);
+    box-sizing: border-box;
     font-weight: bold;
     font-size: 16px;
     float: left;

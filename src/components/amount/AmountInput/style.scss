@@ -23,7 +23,7 @@
   font-family: $sans-serif-fonts;
   border: 1px solid $color-grey-light;
   border-bottom: 1px solid $color-grey-dark;
-  border-radius: 2px;
+  border-radius: $border-radius;
   outline: none;
 }
 

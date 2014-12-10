@@ -1,7 +1,7 @@
 .SearchResult {
   @extend %clearfix;
-  @include border-radius;
-  @include box-sizing(border-box);
+  border-radius: 3px;
+  box-sizing: border-box;
   background: white;
   color: $color-grey-dark;
   line-height: 16px;

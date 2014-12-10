@@ -32,17 +32,32 @@ if (debug) {
   process.env.NODE_ENV = 'development';
 }
 
-gulp.task('default', [ 'styles', 'scripts', 'examples', 'markdown' ]);
+gulp.task('default', [ 'assets', 'styles', 'scripts', 'examples', 'markdown' ]);
 
 gulp.task('watch', function() {
+  gulp.watch('src/images/*', [ 'assets' ]);
   gulp.watch('src/**/*.scss', [ 'styles' ]);
   gulp.watch('src/**/*.js', [ 'scripts' ]);
   gulp.watch('src/index.html', [ 'examples' ]);
   gulp.watch(['README.md', 'src/README-template.html'], [ 'markdown' ]);
 });
 
+gulp.task('assets', [ 'images' ]);
+
+gulp.task('images', function() {
+  return gulp
+    .src('src/images/*', {base: 'src/images'})
+    .pipe(rename({
+      prefix: 'widgets-',
+      suffix: '-' + pkg.version
+    }))
+    .pipe(gulp.dest('public'));
+});
+
 gulp.task('styles', function() {
   var processor = debug ? gutil.noop : minifyCss;
+
+  fs.writeFileSync('src/scss/_version.scss', '$version: "' + pkg.version + '";');
 
   return gulp
     .src([ 'src/widgets.scss' ])

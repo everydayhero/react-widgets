@@ -36,11 +36,8 @@ module.exports = React.createClass({
     var result = props.result;
     var charity = result.charity;
     var location = this.location();
-    var header = [ charity.name ];
-
-    if (this.showMerchantName()) {
-      header.push(<span className="merchant-name">{ charity.merchant_name }</span>);
-    }
+    var merchantName = this.showMerchantName() &&
+      <span className="merchant-name">{ charity.merchant_name }</span>;
 
     var logo;
     if (charity.logo_url) {
@@ -61,7 +58,7 @@ module.exports = React.createClass({
       <SearchResult url={ result.url } onSelect={ props.onSelect } result={ result.charity }>
         { logo }
         <div className='CharitySearchResult__content'>
-          <div className='CharitySearchResult__header'>{ header }</div>
+          <div className='CharitySearchResult__header'>{ charity.name }{ merchantName }</div>
           <p className='CharitySearchResult__description'>{ charity.description }</p>
           <div className='CharitySearchResult__footer'>{ location }</div>
         </div>

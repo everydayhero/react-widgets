@@ -108,9 +108,10 @@ module.exports = React.createClass({
   },
 
   renderToggle: function(bool) {
+    var iso = this.props.selected === 'GB' ? 'UK' : this.props.selected;
     return bool && (
       <div className="CountrySelect__toggle" onKeyPress={ this.props.onOpen } onClick={ this.props.onOpen } tabIndex="0">
-        { this.props.selected }
+        { iso }
         <FlagIcon className="CountrySelect__flag" country={ this.props.selected } />
       </div>
     );

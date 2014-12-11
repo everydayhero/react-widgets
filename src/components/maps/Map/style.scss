@@ -1,14 +1,14 @@
 .Map {
   box-sizing: border-box;
-  font-family: $sans-serif-fonts;
-  border-radius: $border-radius;
-  border: 2px solid $color-grey-dark;
+  font-family: $ehw-sans-serif-fonts;
+  border-radius: $ehw-border-radius;
+  border: 2px solid $ehw-grey-dark;
   padding: 15px;
   position: relative;
 }
 
 .Map__heading {
-  @extend %widget-tile-heading;
+  @extend %ehw-tile-heading;
   position: absolute;
   top: 15px;
   left: 15px;

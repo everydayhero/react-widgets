@@ -1,18 +1,18 @@
 .TotalDistance {
-  @extend %widget-tile;
+  @extend %ehw-tile;
   padding: 45px 8px;
 }
 
 .TotalDistance__total {
-  @extend %widget-tile-total;
+  @extend %ehw-tile-total;
 }
 
 .TotalDistance__loading {
-  @extend %widget-tile-loading-icon;
+  @extend %ehw-tile-loading-icon;
 }
 
 .TotalDistance__icon {
-  @extend %widget-tile-icon;
+  @extend %ehw-tile-icon;
   font-size: 60px;
   padding: 0;
   margin-right: 15px;

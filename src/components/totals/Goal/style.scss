@@ -1,11 +1,11 @@
 .Goal {
-  @extend %widget-tile;
+  @extend %ehw-tile;
 }
 
 .Goal__total {
-  @extend %widget-tile-total;
+  @extend %ehw-tile-total;
 }
 
 .Goal__icon {
-  @extend %widget-tile-icon;
+  @extend %ehw-tile-icon;
 }

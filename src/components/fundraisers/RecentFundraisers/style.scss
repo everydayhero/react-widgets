@@ -1,12 +1,12 @@
 .RecentFundraisers {
   @extend %clearfix;
-  background: $color-grey-light;
-  font-family: $sans-serif-fonts;
-  border-radius: $border-radius;
+  background: $ehw-grey-light;
+  font-family: $ehw-sans-serif-fonts;
+  border-radius: $ehw-border-radius;
 }
 
 .RecentFundraisers__heading {
-  @extend %widget-tile-heading;
+  @extend %ehw-tile-heading;
 }
 
 .RecentFundraisers__content {

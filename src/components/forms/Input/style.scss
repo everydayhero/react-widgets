@@ -3,7 +3,7 @@
   width: 100%;
   text-align: left;
   padding-bottom: $x-5;
-  font-family: $sans-serif-fonts;
+  font-family: $ehw-sans-serif-fonts;
 }
 
 .Input * {
@@ -15,27 +15,27 @@
   transition: all 80ms ease-out;
   display: block;
   width: 100%;
-  border-radius: $border-radius;
+  border-radius: $ehw-border-radius;
   background-color: white;
-  border: 1px solid $color-grey-light;
-  border-bottom: 1px solid $color-grey-dark;
+  border: 1px solid $ehw-grey-light;
+  border-bottom: 1px solid $ehw-grey-dark;
   padding: $x-1 $x-2 0;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-size: 9px;
   line-height: 9px;
-  color: $color-grey-dark;
+  color: $ehw-grey-dark;
 }
 
 .Input__input {
-  font-family: $sans-serif-fonts;
+  font-family: $ehw-sans-serif-fonts;
   display: block;
   width: 100%;
   border: none;
   outline: none;
   background: transparent;
   font-size: 15px;
-  color: $color-grey-dark;
+  color: $ehw-grey-dark;
   text-transform: none;
   letter-spacing: 0.05em;
   line-height: 27px;
@@ -43,8 +43,8 @@
 
 .Input__message {
   transition: opacity 80ms ease-out;
-  border-radius: 0 0 $border-radius $border-radius;
-  color: $color-grey;
+  border-radius: 0 0 $ehw-border-radius $ehw-border-radius;
+  color: $ehw-grey;
   font-size: $x-3;
   font-weight: 300;
   line-height: $x-3;
@@ -64,39 +64,39 @@
 }
 
 .Input--error .Input__label {
-  border-bottom-color: $color-error;
-  color: $color-error;
+  border-bottom-color: $ehw-color-error;
+  color: $ehw-color-error;
 }
 .Input--error .Input__message {
   opacity: 1;
   color: white;
-  background-color: $color-error;
+  background-color: $ehw-color-error;
   margin: 0 $x-2;
 }
 .Input--error .Input__icon {
-  color: $color-error;
+  color: $ehw-color-error;
 }
 
 .Input--hasValue .Input__label {
-  border-bottom-color: $color-grey;
-  color: $color-grey;
+  border-bottom-color: $ehw-grey;
+  color: $ehw-grey;
 }
 
 .Input--valid .Input__icon {
-  color: $color-green-light;
+  color: $ehw-green-light;
 }
 
 .Input--disabled .Input__label {
-  border-bottom-color: $color-grey;
-  color: $color-grey;
+  border-bottom-color: $ehw-grey;
+  color: $ehw-grey;
 }
 .Input--disabled .Input__input {
-  color: $color-grey;
+  color: $ehw-grey;
 }
 
 .Input--focused .Input__label {
-  border-bottom-color: $color-green-light;
-  color: $color-green-light;
+  border-bottom-color: $ehw-green-light;
+  color: $ehw-green-light;
 }
 .Input--focused .Input__message {
   opacity: 1;

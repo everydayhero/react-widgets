@@ -42,15 +42,15 @@
 }
 
 .PageSearchResult__actions {
-  color: $color-grey;
+  color: $ehw-grey;
   line-height: 13px;
   text-align: right;
 
   a:hover & {
-    color: $color-green-light;
+    color: $ehw-green-light;
   }
 
   a:hover &:hover, a:focus & {
-    color: $color-green;
+    color: $ehw-green;
   }
 }

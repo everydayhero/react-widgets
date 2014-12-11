@@ -1,34 +1,21 @@
 @import "version";
 
 // type
-$sans-serif-fonts: "Lato", Helvetica, Arial, sans-serif;
-$default-font-size: 14px;
+$ehw-sans-serif-fonts: "Lato", Helvetica, Arial, sans-serif;
+$ehw-default-font-size: 14px;
 
 // colors
-$color-grey: #b3b3b3;
-$color-grey-dark: #525252;
-$color-grey-darker: #333;
-$color-grey-light: #eee;
+$ehw-grey: #b3b3b3;
+$ehw-grey-dark: #525252;
+$ehw-grey-darker: #333;
+$ehw-grey-light: #eee;
+$ehw-green-light: #7ec774;
+$ehw-green: #00a044;
+$ehw-green-dark: #0A5E0D;
+$ehw-color-error: #ff6347;
 
-$color-green-light: #7ec774;
-$color-green: #00a044;
-$color-green-dark: #0A5E0D;
-
-// buttons
-$color-primary-grey: #666666;
-
-// layout
-$color-rule-grey: #dbdbdb;
-$color-text: #505050;
-$color-search-background: #333333;
-
-// forms
-$color-input-background: #f2f2f2;
-$color-label-grey: $color-grey;
-$color-input-text-grey: $color-grey;
-
-// status
-$color-error: #ff6347;
+//borders
+$ehw-border-radius: 2px;
 
 //x-heights
 $x-1: 4px;
@@ -49,9 +36,6 @@ $x-128: 512px;
 $x-144: 576px;
 $x-180: 720px;
 $x-229: 916px;
-
-//borders
-$border-radius: 2px;
 
 //breakpoints
 $breakpoint-xxxxs: 220px;

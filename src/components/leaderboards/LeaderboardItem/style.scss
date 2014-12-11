@@ -19,8 +19,8 @@
 .LeaderboardItem__skin {
   @extend %clearfix;
   background: #fff;
-  color: $color-grey-dark;
-  border-radius: $border-radius;
+  color: $ehw-grey-dark;
+  border-radius: $ehw-border-radius;
 }
 
 .LeaderboardItem__content {
@@ -55,7 +55,7 @@
 
   .LeaderboardItem__rank {
     font-size: 12px;
-    color: $color-grey;
+    color: $ehw-grey;
   }
 }
 

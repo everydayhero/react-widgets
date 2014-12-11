@@ -19,11 +19,11 @@
   font-size: 16px;
   line-height: 31px;
   letter-spacing: 0.16em;
-  color: $color-grey-dark;
-  font-family: $sans-serif-fonts;
-  border: 1px solid $color-grey-light;
-  border-bottom: 1px solid $color-grey-dark;
-  border-radius: $border-radius;
+  color: $ehw-grey-dark;
+  font-family: $ehw-sans-serif-fonts;
+  border: 1px solid $ehw-grey-light;
+  border-bottom: 1px solid $ehw-grey-dark;
+  border-radius: $ehw-border-radius;
   outline: none;
 }
 
@@ -35,11 +35,11 @@
   line-height: 32px;
   font-size: 14px;
   z-index: 1;
-  color: $color-green-light;
+  color: $ehw-green-light;
 }
 
 .AmountInput--focused input {
-  border-bottom-color: $color-green-light;
+  border-bottom-color: $ehw-green-light;
 }
 
 .AmountInput--focused .AmountInput__symbol,
@@ -48,8 +48,8 @@
 }
 
 .AmountInput--selected input {
-  border-color: $color-green-light;
-  background-color: $color-green-light;
+  border-color: $ehw-green-light;
+  background-color: $ehw-green-light;
   color: white;
 }
 

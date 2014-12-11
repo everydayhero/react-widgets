@@ -1,7 +1,7 @@
 .SearchModal__header {
-  @extend %widget-header;
-  @extend %widget-header-s;
-  @extend %widget-rule-bottom;
+  @extend %ehw-header;
+  @extend %ehw-header-s;
+  @extend %ehw-rule-bottom;
   display: table;
   padding-right: 78px;
   border-color: snow;

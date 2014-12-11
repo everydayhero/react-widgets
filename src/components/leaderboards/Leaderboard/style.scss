@@ -1,12 +1,12 @@
 .Leaderboard {
   @extend %clearfix;
-  background: $color-grey-dark;
-  font-family: $sans-serif-fonts;
-  font-size: $default-font-size;
+  background: $ehw-grey-dark;
+  font-family: $ehw-sans-serif-fonts;
+  font-size: $ehw-default-font-size;
   color: #fff;
 
   .Leaderboard__heading {
-    @extend %widget-tile-heading;
+    @extend %ehw-tile-heading;
   }
 
   .Leaderboard__items {
@@ -45,6 +45,6 @@
   }
 
   .Leaderboard__loading {
-    @extend %widget-tile-loading-icon;
+    @extend %ehw-tile-loading-icon;
   }
 }

@@ -1,10 +1,10 @@
 .AddressLookup {
   box-sizing: border-box;
-  color: $color-grey-dark;
+  color: $ehw-grey-dark;
   overflow: auto;
   position: relative;
   text-align: left;
-  font-family: $sans-serif-fonts;
+  font-family: $ehw-sans-serif-fonts;
 }
 
 .AddressLookup * {
@@ -19,21 +19,21 @@
 }
 
 .AddressLookup__error {
-  border-radius: 0 0 $border-radius $border-radius;
+  border-radius: 0 0 $ehw-border-radius $ehw-border-radius;
   padding: 5px 8px;
   margin: -8px 8px 8px;
-  background-color: $color-error;
+  background-color: $ehw-color-error;
   color: #fff;
   font-size: 13px;
 }
 
 .AddressLookup__manual {
   transition: all 80ms ease-out;
-  border-radius: $border-radius;
+  border-radius: $ehw-border-radius;
   float: right;
   padding: 5px 13px;
   background-color: #fff;
-  color: $color-grey-dark;
+  color: $ehw-grey-dark;
   text-transform: uppercase;
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -45,7 +45,7 @@
 
 .AddressLookup__manual:hover,
 .AddressLookup__manual:focus {
-  background-color: $color-green-light;
+  background-color: $ehw-green-light;
   color: #fff;
   outline: none;
 }

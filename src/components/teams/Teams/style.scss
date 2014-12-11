@@ -1,11 +1,11 @@
 .Teams {
   @extend %clearfix;
-  font-family: $sans-serif-fonts;
-  border-radius: $border-radius;
+  font-family: $ehw-sans-serif-fonts;
+  border-radius: $ehw-border-radius;
 }
 
 .Teams__heading {
-  @extend %widget-tile-heading;
+  @extend %ehw-tile-heading;
 }
 
 .Teams__content {

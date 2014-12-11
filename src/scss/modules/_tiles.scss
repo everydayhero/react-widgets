@@ -1,32 +1,32 @@
-%widget-tile {
-  border-radius: $border-radius;
+%ehw-tile {
+  border-radius: $ehw-border-radius;
   background: #555;
   color: #fff;
-  font-family: $sans-serif-fonts;
-  font-size: $default-font-size;
+  font-family: $ehw-sans-serif-fonts;
+  font-size: $ehw-default-font-size;
   text-transform: uppercase;
   text-align: center;
   font-weight: bold;
   padding: $x-5 $x-2 $x-6;
 }
 
-%widget-tile-heading {
+%ehw-tile-heading {
   font-size: 24px;
   margin: 15px;
 }
 
-%widget-tile-total {
+%ehw-tile-total {
   font-size: 21px;
   margin-bottom: $x-2;
 }
 
-%widget-tile-icon {
+%ehw-tile-icon {
   display: block;
   padding-bottom: 10px;
   font-size: 30px;
 }
 
-%widget-tile-loading-icon {
+%ehw-tile-loading-icon {
   display: block;
   font-size: 21px;
   line-height: 2;

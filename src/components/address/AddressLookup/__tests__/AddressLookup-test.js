@@ -49,6 +49,15 @@ describe('AddressLookup', function() {
     expect(element.state.country).toBe('GB');
   });
 
+  it('accepts an existing address', function() {
+    var element = TestUtils.renderIntoDocument(<AddressLookup address={ addressFindResult.address } />);
+    var breakdown = findByClass(element, 'AddressBreakdown');
+    var streetAddress = findByProp(breakdown, 'id', 'street_address').getDOMNode();
+    var locality = findByProp(breakdown, 'id', 'locality').getDOMNode();
+    expect(streetAddress.value).toBe('1 Place Pl');
+    expect(locality.value).toBe('Sydney');
+  });
+
   it('returns a list of addresses', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup />);
     var input = findByClass(element, 'Input__input').getDOMNode();

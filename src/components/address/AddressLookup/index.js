@@ -19,6 +19,8 @@ module.exports = React.createClass({
     required: React.PropTypes.bool,
     output: React.PropTypes.func,
     country: React.PropTypes.string,
+    address: React.PropTypes.object,
+    paf_valid: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
 
@@ -27,6 +29,8 @@ module.exports = React.createClass({
       required: false,
       output: function() {},
       country: 'US',
+      address: null,
+      paf_valid: false,
       defaultI18n: {
         inputLabel: 'Address Lookup',
         inputLabelGB: 'Postcode Lookup',
@@ -46,7 +50,7 @@ module.exports = React.createClass({
       country: this.props.country,
       input: '',
       addressList: null,
-      address: null,
+      address: this.props.address,
       custom: null,
       loading: false,
       error: null,
@@ -262,7 +266,7 @@ module.exports = React.createClass({
         address={ address }
         region={ this.state.country }
         onChange={ this.setCustom }>
-        { this.state.country === "GB" && <input type="hidden" name="PAF_validated" value={ !this.state.custom } /> }
+        { this.state.country === "GB" && <input type="hidden" name="PAF_validated" value={ this.props.paf_valid || !this.state.custom } /> }
       </AddressBreakdown>
     );
   },

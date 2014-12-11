@@ -136,7 +136,7 @@ gulp.task('publish', function() {
      'Cache-Control': 'max-age=315360000, no-transform, public'
    };
 
-  return gulp.src(['./public/widgets-' + pkg.version + '.*', './public/README-' + pkg.version + '.html'])
+  return gulp.src(['./public/widgets-*' + pkg.version + '.*', './public/README-' + pkg.version + '.html'])
     .pipe(awspublish.gzip())
     .pipe(publisher.publish(headers))
     .pipe(awspublish.reporter());

@@ -174,6 +174,7 @@ module.exports = React.createClass({
             ref="input"
             type={ this.props.type }
             id={ this.t('name') }
+            name={ this.t('name') }
             value={ this.state.value }
             disabled={ this.props.disabled }
             onChange={ enabled && this.handleChange }

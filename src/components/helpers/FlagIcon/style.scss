@@ -5,7 +5,7 @@
 
 .flag {
   display: inline-block;
-  background: url( "widgets-flags-" + $ehw-version + ".png" ) no-repeat;
+  background: image-url( "widgets-flags" + $ehw-version + ".png" ) no-repeat;
   width: 24px;
   height: 16px;
 }

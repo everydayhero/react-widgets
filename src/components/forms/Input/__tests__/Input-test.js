@@ -5,6 +5,7 @@ var React = require('react/addons');
 var TestUtils   = React.addons.TestUtils;
 var Input = require('../');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
+var findByProp = require('../../../../test/helpers/scryRenderedDOMComponentsWithProp').findRenderedDOMComponentWithProp;
 
 describe('Input', function() {
   it('renders an input', function() {
@@ -17,6 +18,9 @@ describe('Input', function() {
     var element = TestUtils.renderIntoDocument(<Input icon="bolt" i18n={ i18n } width="half" />);
     var input = findByClass(element, 'Input__input');
     expect(input).toBeDefined();
+
+    var inputWithName = findByProp(element, 'name', 'test_input');
+    expect(inputWithName).toBeDefined();
 
     var label = findByClass(element, 'Input__label').getDOMNode();
     expect(label.textContent).toContain('Test Input');

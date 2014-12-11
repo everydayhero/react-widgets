@@ -53,7 +53,7 @@ module.exports = React.createClass({
     return (
       <label className={ classes } onTouchStart={ this.setTouch }>
         <span className="AmountInput__symbol">{ this.props.symbol }</span>
-        <input ref="input" id={ this.props.name } type={ this.state.type } onChange={ this.handleChange } value={ this.props.amount } onFocus={ this.toggleFocus } onBlur={ this.toggleFocus } />
+        <input ref="input" id={ this.props.name } name={ this.props.name } type={ this.state.type } onChange={ this.handleChange } value={ this.props.amount } onFocus={ this.toggleFocus } onBlur={ this.toggleFocus } />
       </label>
     );
   }

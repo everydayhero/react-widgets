@@ -14,8 +14,8 @@
   }
 
   .Team__skin {
-    border-radius: $border-radius;
-    color: $color-grey-dark;
+    border-radius: $ehw-border-radius;
+    color: $ehw-grey-dark;
     font-size: 13px;
     text-align: center;
     padding: 2px;
@@ -28,7 +28,7 @@
   }
 
   p {
-    border-top: 1px solid $color-grey-light;
+    border-top: 1px solid $ehw-grey-light;
     line-height: 1.4;
     height: 52px;
     margin: 5px 0;

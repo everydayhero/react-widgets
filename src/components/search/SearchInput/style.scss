@@ -1,12 +1,12 @@
 .SearchInput {
-  @extend %widget-input-wrap;
+  @extend %ehw-input-wrap;
   color: white;
 }
 
 .SearchInput__input {
-  @extend %widget-text-input;
+  @extend %ehw-text-input;
   position: relative;
-  color: $color-text;
+  color: $ehw-grey-dark;
   padding-left: 28px;
   font-size: $x-4;
   height: 44px;
@@ -23,14 +23,14 @@
   z-index: 2;
   font-size: $x-4;
   line-height: $x-4;
-  color: $color-input-text-grey;
+  color: $ehw-grey;
 }
 
 .SearchInput__progressSpinner {
   position: absolute;
   top: 11px;
   right: 9px;
-  color: $color-primary-grey;
+  color: $ehw-grey-dark;
   font-size: $x-4;
   line-height: $x-4;
   z-index: 2;

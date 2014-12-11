@@ -1,15 +1,15 @@
 .FundsRaised {
-  @extend %widget-tile;
+  @extend %ehw-tile;
 }
 
 .FundsRaised__total {
-  @extend %widget-tile-total;
+  @extend %ehw-tile-total;
 }
 
 .FundsRaised__loading {
-  @extend %widget-tile-loading-icon;
+  @extend %ehw-tile-loading-icon;
 }
 
 .FundsRaised__icon {
-  @extend %widget-tile-icon;
+  @extend %ehw-tile-icon;
 }

@@ -4,7 +4,7 @@
   z-index: 1;
   margin: 8px 8px;
   margin-left: -100px;
-  border-radius: $border-radius;
+  border-radius: $ehw-border-radius;
   overflow: hidden;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .CountrySelect__list {
-  border-radius: $border-radius;
+  border-radius: $ehw-border-radius;
   background-color: #fff;
   max-height: 300px;
   overflow-y: scroll;

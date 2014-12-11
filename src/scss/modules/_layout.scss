@@ -1,38 +1,38 @@
-%widget-defaults {
+%ehw-defaults {
   line-height: normal;
 }
 
-%widget-defaults, %widget-defaults * {
+%ehw-defaults, %ehw-defaults * {
   margin: 0;
   padding: 0;
   outline: 0;
   text-decoration: none;
   box-sizing: border-box;
-  font-family: $sans-serif-fonts;
+  font-family: $ehw-sans-serif-fonts;
 }
 
-%widget-rule-bottom {
+%ehw-rule-bottom {
   border: 0;
   border-bottom: 1px;
   border-style: solid;
-  border-color: $color-rule-grey;
+  border-color: white;
 }
 
-%widget-rule-top {
+%ehw-rule-top {
   border: 0;
   border-top: 1px;
   border-style: solid;
-  border-color: $color-rule-grey;
+  border-color: white;
 }
 
-%widget-header {
+%ehw-header {
   width: 100%;
   padding: $x-9;
   vertical-align: middle;
 }
 
 @include media-max($breakpoint-xs) {
-  %widget-header-s {
+  %ehw-header-s {
     padding: $x-3;
   }
 }

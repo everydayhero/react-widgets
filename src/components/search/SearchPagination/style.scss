@@ -20,7 +20,7 @@
   cursor: pointer;
 
   box-sizing: border-box;
-  border-radius: $border-radius;
+  border-radius: $ehw-border-radius;
   border: 1px solid white;
 
   width: 44px;
@@ -38,8 +38,8 @@
   @include vendor(user-select, none);
 
   &:hover {
-    border-color: $color-green;
-    color: $color-green;
+    border-color: $ehw-green;
+    color: $ehw-green;
   }
 
   &[disabled] {

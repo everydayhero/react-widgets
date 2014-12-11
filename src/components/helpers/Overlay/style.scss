@@ -1,8 +1,8 @@
 .Overlay {
-  @extend %widget-defaults;
+  @extend %ehw-defaults;
   position: fixed;
-  background: $color-search-background;
-  background: transparentize($color-search-background, 0.2);
+  background: #333;
+  background: transparentize(#333, 0.2);
   top: 0;
   left: 0;
   height: 100%;

@@ -21,8 +21,8 @@
 .PromoCharitiesResult__skin {
   @extend %clearfix;
   background: #fff;
-  color: $color-grey-dark;
-  border-radius: $border-radius;
+  color: $ehw-grey-dark;
+  border-radius: $ehw-border-radius;
 
   &:before {
     content: '';
@@ -55,7 +55,7 @@
 
 .PromoCharitiesResult__image {
   box-sizing: border-box;
-  color: $color-grey-darker;
+  color: $ehw-grey-darker;
   display: inline-block;
   vertical-align: middle;
   max-width: 100%;

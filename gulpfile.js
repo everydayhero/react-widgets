@@ -48,7 +48,6 @@ gulp.task('images', function() {
   return gulp
     .src('src/images/*', {base: 'src/images'})
     .pipe(rename({
-      prefix: 'widgets-',
       suffix: '-' + pkg.version
     }))
     .pipe(gulp.dest('public'));
@@ -57,15 +56,14 @@ gulp.task('images', function() {
 gulp.task('styles', function() {
   var processor = debug ? gutil.noop : minifyCss;
 
-  fs.writeFileSync('src/scss/_version.scss', '$version: "' + pkg.version + '";');
+  fs.writeFileSync('src/scss/_version.scss', '$ehw-version: "-' + pkg.version + '";');
 
   return gulp
     .src([ 'src/widgets.scss' ])
     .pipe(sass({
       sourceMap: 'scss',
       sourceComments: 'normal',
-      precision: 10,
-      imagePath: 'images'
+      precision: 10
     }))
     .pipe(autoprefixer())
     .pipe(processor())

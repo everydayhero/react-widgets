@@ -1,6 +1,6 @@
 .CharitySearchResult__avatar {
   border-radius: 34px;
-  background: $color-grey-light;
+  background: $ehw-grey-light;
   display: block;
   float: left;
   min-height: 34px;
@@ -62,7 +62,7 @@
   .merchant-name {
     display: block;
     font-size: 11px;
-    color: $color-grey;
+    color: $ehw-grey;
   }
 }
 
@@ -72,15 +72,15 @@
 }
 
 .CharitySearchResult__actions {
-  color: $color-grey;
+  color: $ehw-grey;
   line-height: 13px;
   text-align: right;
 
   a:hover & {
-    color: $color-green-light;
+    color: $ehw-green-light;
   }
 
   a:hover &:hover, a:focus & {
-    color: $color-green;
+    color: $ehw-green;
   }
 }

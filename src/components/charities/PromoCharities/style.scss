@@ -1,9 +1,9 @@
 .PromoCharities {
   @extend %clearfix;
-  background: $color-grey-dark;
-  font-family: $sans-serif-fonts;
-  font-size: $default-font-size;
-  border-radius: $border-radius $border-radius 0 0;
+  background: $ehw-grey-dark;
+  font-family: $ehw-sans-serif-fonts;
+  font-size: $ehw-default-font-size;
+  border-radius: $ehw-border-radius $ehw-border-radius 0 0;
   color: #fff;
 }
 
@@ -22,5 +22,5 @@
 
 .PromoCharities__empty-label {
   text-align: center;
-  color: lighten($color-grey-dark, 40%);
+  color: lighten($ehw-grey-dark, 40%);
 }

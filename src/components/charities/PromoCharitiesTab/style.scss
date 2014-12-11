@@ -2,19 +2,19 @@
   display: inline-block;
   padding: 10px 20px;
   margin: 0 5px 0;
-  background: $color-grey-darker;
+  background: $ehw-grey-darker;
   color: #fff;
-  border-radius: $border-radius $border-radius 0 0;
+  border-radius: $ehw-border-radius $ehw-border-radius 0 0;
   cursor: pointer;
   font-weight: bold;
 
   &:hover {
-    background: darken($color-grey-darker, 5%);
+    background: darken($ehw-grey-darker, 5%);
   }
 
   &.active {
-    background: $color-grey-light;
-    color: $color-grey-darker;
+    background: $ehw-grey-light;
+    color: $ehw-grey-darker;
     cursor: default;
   }
 

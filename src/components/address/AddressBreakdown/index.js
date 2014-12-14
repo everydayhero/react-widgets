@@ -11,6 +11,7 @@ module.exports = React.createClass({
 
   propTypes: {
     address: React.PropTypes.object,
+    prefix: React.PropTypes.string,
     region: React.PropTypes.string,
     onChange: React.PropTypes.func
   },
@@ -18,6 +19,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       address: null,
+      prefix: '',
       region: 'US',
       defaultI18n: {
         street_address: 'Address',
@@ -62,7 +64,7 @@ module.exports = React.createClass({
           ref={ 'street_address' }
           key={ 'street_address' }
           i18n={{
-            name: 'street_address',
+            name: this.props.prefix + 'street_address',
             label: this.t('street_address', { scope: iso })
           }}
           value={ address.street_address }
@@ -72,7 +74,7 @@ module.exports = React.createClass({
           key={ "extended_address" }
           ref={ 'extended_address' }
           i18n={{
-            name: 'extended_address',
+            name: this.props.prefix + 'extended_address',
             label: this.t('extended_address', { scope: iso })
           }}
           value={ address.extended_address }
@@ -83,7 +85,7 @@ module.exports = React.createClass({
           key={ "locality" }
           ref={ 'locality' }
           i18n={{
-            name: 'locality',
+            name: this.props.prefix + 'locality',
             label: this.t('locality', { scope: iso })
           }}
           value={ address.locality }
@@ -95,7 +97,7 @@ module.exports = React.createClass({
           key={ 'region' }
           ref={ 'region' }
           i18n={{
-            name: 'region',
+            name: this.props.prefix + 'region',
             label: this.t('region', { scope: iso })
           }}
           value={ address.region }
@@ -107,7 +109,7 @@ module.exports = React.createClass({
           key={ "country_name" }
           ref={ 'country_name' }
           i18n={{
-            name: 'country_name',
+            name: this.props.prefix + 'country_name',
             label: this.t('country_name', { scope: iso })
           }}
           value={ address.country_name }
@@ -119,7 +121,7 @@ module.exports = React.createClass({
           key={ "postal_code" }
           ref={ 'postal_code' }
           i18n={{
-            name: 'postal_code',
+            name: this.props.prefix + 'postal_code',
             label: this.t('postal_code', { scope: iso })
           }}
           value={ address.postal_code }

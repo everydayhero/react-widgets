@@ -58,6 +58,15 @@ describe('AddressLookup', function() {
     expect(locality.value).toBe('Sydney');
   });
 
+  it('can be uniquely prefixed', function() {
+    var element = TestUtils.renderIntoDocument(<AddressLookup prefix={ 'testPrefix-' } address={ addressFindResult.address } />);
+    var breakdown = findByClass(element, 'AddressBreakdown');
+    var streetAddress = findByProp(breakdown, 'name', 'testPrefix-street_address').getDOMNode();
+    var locality = findByProp(breakdown, 'name', 'testPrefix-locality').getDOMNode();
+    expect(streetAddress.value).toBe('1 Place Pl');
+    expect(locality.value).toBe('Sydney');
+  });
+
   it('returns a list of addresses', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup />);
     var input = findByClass(element, 'Input__input').getDOMNode();

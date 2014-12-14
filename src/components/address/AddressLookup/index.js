@@ -18,6 +18,7 @@ module.exports = React.createClass({
   propTypes: {
     required: React.PropTypes.bool,
     output: React.PropTypes.func,
+    prefix: React.PropTypes.string,
     country: React.PropTypes.string,
     address: React.PropTypes.object,
     paf_valid: React.PropTypes.bool,
@@ -29,6 +30,7 @@ module.exports = React.createClass({
       required: false,
       output: function() {},
       country: 'US',
+      prefix: '',
       address: null,
       paf_valid: false,
       defaultI18n: {
@@ -211,6 +213,7 @@ module.exports = React.createClass({
     return bool && (
       <CountrySelect
         ref="countrySelect"
+        prefix={ this.props.prefix }
         selected={ this.state.country }
         open={ this.state.choosingCountry }
         onOpen={ this.chooseCountry }
@@ -225,7 +228,7 @@ module.exports = React.createClass({
         ref={ 'lookup' }
         required={ this.props.required }
         i18n={{
-          name: 'lookup',
+          name: this.props.prefix + 'lookup',
           label: this.state.country === 'GB' ? this.t('inputLabelGB') : this.t('inputLabel')
         }}
         value={ this.state.input }
@@ -262,6 +265,7 @@ module.exports = React.createClass({
   renderAddress: function(address) {
     return address && (
       <AddressBreakdown
+        prefix={ this.props.prefix }
         required={ this.props.required }
         address={ address }
         region={ this.state.country }

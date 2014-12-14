@@ -12,6 +12,7 @@ module.exports = React.createClass({
   displayName: "CountrySelect",
 
   propTypes: {
+    prefix: React.PropTypes.string,
     selected: React.PropTypes.string,
     open: React.PropTypes.bool,
     onOpen: React.PropTypes.func,
@@ -20,6 +21,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
+      prefix: '',
       selected: 'US',
       open: false
     };
@@ -124,7 +126,7 @@ module.exports = React.createClass({
         ref={ 'countryFilter' }
         key={ "countryFilter" }
         i18n={{
-          name: 'countryFilter',
+          name: this.props.prefix + 'countryFilter',
           label: "Find Country"
         }}
         value={ this.state.filter }

@@ -615,6 +615,7 @@ Displays a form input field and country selector, which allows users to lookup t
 ##### Options
 
 - `required`: *optional* sets the address field as being required. Defaults to 'false'.
+- `prefix`: *optional* string to add a unique identifier to the input elements, for use when multiple AddressLookup widgets appear on the same page / post to the same form. Defaults to ''.
 - `country`: *optional* two-digit capitalized country ISO code (AU, GB, US, NZ, IE, etc). Default is 'US'.
 - `address`: *optional* object containing a pre-existing address to display. If provided, lookup functionality is not available. Use when user address already provided or when page reloads on form validation. Default is 'null'. Takes the form:
   ```js

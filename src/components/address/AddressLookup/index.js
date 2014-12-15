@@ -270,7 +270,7 @@ module.exports = React.createClass({
         address={ address }
         region={ this.state.country }
         onChange={ this.setCustom }>
-        { this.state.country === "GB" && <input type="hidden" name="PAF_validated" value={ this.props.paf_valid || !this.state.custom } /> }
+        { this.state.country === "GB" && <input type="hidden" name={ this.props.prefix + "PAF_validated" } value={ this.props.paf_valid || !this.state.custom } /> }
       </AddressBreakdown>
     );
   },

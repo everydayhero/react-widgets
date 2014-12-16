@@ -82,7 +82,8 @@ module.exports = React.createClass({
         name: page.name,
         url: page.url,
         iso_code: page.amount.currency.iso_code,
-        amount:  symbol + numeral(page.amount.cents / 100).format('0[.]00 a'),
+        amount:  page.amount.cents,
+        amountFormatted: symbol + numeral(page.amount.cents / 100).format('0[.]00 a'),
         totalMembers: page.team_member_uids.length,
         imgSrc: page.image.large_image_url,
         medImgSrc: page.image.medium_image_url
@@ -104,15 +105,33 @@ module.exports = React.createClass({
   },
 
   renderLeaderboardItems: function() {
-    var currentPage = this.state.currentPage - 1;
-    var rank = 0;
+    var boardData     = this.state.boardData;
+    var currentPage   = this.state.currentPage - 1;
+    var rank          = 0;
+    var rankBuffer    = 0;
+    var formattedRank = '';
+    var prevObj;
 
     if (this.state.isLoading) {
       return <Icon className="Leaderboard__loading" icon="refresh" spin={ true } />;
     }
 
-    return this.state.boardData[currentPage].map(function(d,i) {
-      rank = numeral(i + 1 + (currentPage * this.props.pageSize)).format('0o');
+    return boardData[currentPage].map(function(d,i) {
+
+      prevObj = this.state.boardData[currentPage][i - 1];
+
+      if (prevObj) {
+        if (d.amount < prevObj.amount) {
+          rank = rank + rankBuffer + 1;
+          rankBuffer = 0;
+        } else {
+          rankBuffer = rankBuffer + 1;
+        }
+      } else {
+        rank = 1;
+      }
+
+      formattedRank = numeral(rank + (currentPage * this.props.pageSize)).format('0o');
 
       if (this.props.type === 'team') {
         return (
@@ -121,7 +140,7 @@ module.exports = React.createClass({
             name={ d.name }
             url={ d.url }
             iso_code={ d.iso_code }
-            amount={ d.amount }
+            amount={ d.amountFormatted }
             totalMembers={ d.totalMembers }
             imgSrc={ d.imgSrc }
             raisedTitle={ this.t('raisedTitle') }
@@ -132,7 +151,7 @@ module.exports = React.createClass({
       return (
         <LeaderboardItem
           key={ d.id }
-          rank={ rank }
+          rank={ formattedRank }
           rankTitle={ this.t('rankTitle') }
           name={ d.name }
           url={ d.url }

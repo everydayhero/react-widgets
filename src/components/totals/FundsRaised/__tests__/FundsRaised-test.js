@@ -14,7 +14,7 @@ describe('FundsRaised', function() {
     var element;
 
     beforeEach(function() {
-      fundsRaised = <FundsRaised campaignUid="au-0" />;
+      fundsRaised = <FundsRaised campaignUid={ ["au-0"] } />;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
 
@@ -47,8 +47,8 @@ describe('FundsRaised', function() {
       findByClass(element, 'FundsRaised__loading');
     });
 
-    it('handles a campaign id', function() {
-      expect(campaigns.find).toBeCalledWith('au-0', element.onSuccess);
+    it('handles a multiple campaign ids', function() {
+      expect(campaigns.find).toBeCalledWith(['au-0', 'au-22'], element.onSuccess);
     });
   });
 

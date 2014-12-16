@@ -1,5 +1,6 @@
 "use strict";
 
+var _         = require('lodash');
 var React     = require('react');
 var I18nMixin = require('../../mixins/I18n');
 var campaigns = require('../../../api/campaigns');
@@ -10,7 +11,7 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "TotalDistance",
   propTypes: {
-    campaignUid: React.PropTypes.string,
+    campaignUids: React.PropTypes.array,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -20,7 +21,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      campaignUid: '',
+      campaignUids: [],
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
@@ -35,7 +36,6 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       isLoading: false,
-      hasResults: false,
       total: 0
     };
   },
@@ -45,7 +45,9 @@ module.exports = React.createClass({
       isLoading: true
     });
 
-    campaigns.find(this.props.campaignUid, this.onSuccess);
+    _.each(this.props.campaignUids, function(campaignUid) {
+      campaigns.find(campaignUid, this.onSuccess);
+    }, this);
   },
 
   onSuccess: function(result) {
@@ -54,14 +56,10 @@ module.exports = React.createClass({
     if (fitnessResults){
       this.setState({
         isLoading: false,
-        hasResults: true,
-        total: fitnessResults.distance_in_meters
+        total: this.state.total + fitnessResults.distance_in_meters
       });
     } else {
-      this.setState({
-        isLoading: false,
-        hasResults: false
-      });
+      this.setState({ isLoading: false });
     }
   },
 
@@ -83,7 +81,7 @@ module.exports = React.createClass({
       return <Icon className="TotalDistance__loading" icon="refresh" spin={ true }/>;
     }
 
-    if (this.state.hasResults) {
+    if (this.state.total) {
       return (
         <div className="TotalDistance__content">
           <div className="TotalDistance__total">{ formattedTotal }</div>

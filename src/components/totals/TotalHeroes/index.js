@@ -1,5 +1,6 @@
 "use strict";
 
+var _         = require('lodash');
 var React     = require('react');
 var I18nMixin = require('../../mixins/I18n');
 var pages     = require('../../../api/pages');
@@ -10,9 +11,9 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "TotalHeroes",
   propTypes: {
-    campaignUid: React.PropTypes.string,
-    page_count: React.PropTypes.string,
-    page_size: React.PropTypes.string,
+    campaignUids: React.PropTypes.array,
+    page_count: React.PropTypes.number,
+    page_size: React.PropTypes.number,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -21,9 +22,9 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      campaignUid: '',
-      page_count: '1',
-      page_size: '1',
+      campaignUids: [],
+      pageCount: 1,
+      pageSize: 1,
       page_type: 'user',
       renderIcon: true,
       backgroundColor: '#525252',
@@ -44,7 +45,7 @@ module.exports = React.createClass({
   onSuccess: function(result) {
     this.setState({
       isLoading: false,
-      total: result.meta.count
+      total: this.state.total + result.meta.count
     });
   },
 
@@ -55,7 +56,9 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    pages.findByCampaign(props.campaignUid, props.page_count, props.page_size, props.page_type, this.onSuccess);
+    _.each(props.campaignUids, function(campaignUid) {
+      pages.findByCampaign(campaignUid, props.page_count, props.page_size, props.page_type, this.onSuccess);
+    }, this);
   },
 
   renderTotal: function() {

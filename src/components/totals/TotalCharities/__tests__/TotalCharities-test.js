@@ -15,7 +15,7 @@ describe('TotalCharities', function() {
     var element;
 
     beforeEach(function() {
-      totalCharities = <TotalCharities campaignUid="au-0" />;
+      totalCharities = <TotalCharities campaignUids={ ["au-0"] } />;
       element = TestUtils.renderIntoDocument(totalCharities);
     });
 
@@ -49,7 +49,7 @@ describe('TotalCharities', function() {
     });
 
     it('check that a campaign id is present', function() {
-      expect(charities.findByCampaign).toBeCalledWith('au-0', 1, 1, element.onSuccess);
+      expect(charities.findByCampaign).toBeCalledWith(['au-0'], 1, 1, element.onSuccess);
     });
   });
 

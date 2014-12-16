@@ -110,7 +110,7 @@ module.exports = React.createClass({
     var rank          = 0;
     var rankBuffer    = 0;
     var formattedRank = '';
-    var prevObj;
+    var prevItem;
 
     if (this.state.isLoading) {
       return <Icon className="Leaderboard__loading" icon="refresh" spin={ true } />;
@@ -118,10 +118,10 @@ module.exports = React.createClass({
 
     return boardData[currentPage].map(function(d,i) {
 
-      prevObj = this.state.boardData[currentPage][i - 1];
+      prevItem = this.state.boardData[currentPage][i - 1];
 
-      if (prevObj) {
-        if (d.amount < prevObj.amount) {
+      if (prevItem) {
+        if (d.amount < prevItem.amount) {
           rank = rank + rankBuffer + 1;
           rankBuffer = 0;
         } else {

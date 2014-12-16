@@ -232,7 +232,6 @@ module.exports = React.createClass({
           label: this.state.country === 'GB' ? this.t('inputLabelGB') : this.t('inputLabel')
         }}
         value={ this.state.input }
-        validate={ function() { return !this.state.error; } }
         autoFocus={ this.state.focusOnMount }
         output={ this.setInput } />
     );

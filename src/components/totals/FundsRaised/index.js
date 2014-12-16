@@ -20,7 +20,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      campaignUids: '',
+      campaignUids: [],
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',

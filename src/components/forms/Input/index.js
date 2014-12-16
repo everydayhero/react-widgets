@@ -170,6 +170,7 @@ module.exports = React.createClass({
         <label className="Input__label" htmlFor={ this.t('name') }>
           { this.t('label') }
           <input
+            autocomplete="false"
             className="Input__input"
             ref="input"
             type={ this.props.type }

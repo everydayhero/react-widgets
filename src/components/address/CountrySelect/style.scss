@@ -1,7 +1,7 @@
 .CountrySelect {
   float: right;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   margin: 8px 8px;
   margin-left: -100px;
   border-radius: $ehw-border-radius;
@@ -15,7 +15,7 @@
 
 .CountrySelect__toggle {
   transition: all 80ms ease-out;
-  padding: 5px 8px;
+  padding: 4px 8px;
   cursor: pointer;
   background-color: #eee;
   line-height: 18px;
@@ -25,7 +25,8 @@
 
 .CountrySelect__toggle:hover,
 .CountrySelect__toggle:focus {
-  background-color: #ddd;
+  background-color: $ehw-green-light;
+  color: white;
   outline: none;
 }
 

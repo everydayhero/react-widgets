@@ -1,5 +1,7 @@
 .Input {
   display: inline-block;
+  position: relative;
+  z-index: 1;
   width: 100%;
   text-align: left;
   padding-bottom: $x-5;
@@ -42,11 +44,13 @@
 }
 
 .Input__message {
-  transition: opacity 80ms ease-out;
+  transition: all 240ms ease-out;
+  position: relative;
+  z-index: -1;
+  top: -30px;
   border-radius: 0 0 $ehw-border-radius $ehw-border-radius;
   color: $ehw-grey;
   font-size: $x-3;
-  font-weight: 300;
   line-height: $x-3;
   letter-spacing: 0.05em;
   padding: $x-1 $x-2;
@@ -69,6 +73,7 @@
 }
 .Input--error .Input__message {
   opacity: 1;
+  top: 0;
   color: white;
   background-color: $ehw-color-error;
   margin: 0 $x-2;
@@ -100,6 +105,7 @@
 }
 .Input--focused .Input__message {
   opacity: 1;
+  top: 0;
 }
 
 .Input--full { width: 100%; }

@@ -34,7 +34,6 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       isLoading: false,
-      hasResults: false,
       total: 0
     };
   },

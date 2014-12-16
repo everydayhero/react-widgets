@@ -3,12 +3,38 @@ jest.autoMockOff();
 jest.mock('../../../../api/pages');
 
 describe('Leaderboard', function() {
-  var React       = require('react/addons');
-  var Leaderboard = require('../');
-  var pages       = require('../../../../api/pages');
-  var TestUtils   = React.addons.TestUtils;
-  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+  var React           = require('react/addons');
+  var Leaderboard     = require('../');
+  var LeaderboardItem = require('../../LeaderboardItem/');
+  var pages           = require('../../../../api/pages');
+  var TestUtils       = React.addons.TestUtils;
+  var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
+  var scryByClass     = TestUtils.scryRenderedDOMComponentsWithClass;
+
+  var leaderboardResults = [
+    {
+      id: 123,
+      name: "John Smith",
+      url: "http://everydayhero.com.au",
+      iso_code: "$",
+      amount:  10000,
+      amountFormatted: "$100.00",
+      totalMembers: 10,
+      imgSrc: "http://placehold.it/300x300",
+      medImgSrc: "http://placehold.it/200x200"
+    },
+    {
+      id: 124,
+      name: "Jane Doe",
+      url: "http://everydayhero.com.au",
+      iso_code: "$",
+      amount:  10000,
+      amountFormatted: "$100.00",
+      totalMembers: 20,
+      imgSrc: "http://placehold.it/300x300",
+      medImgSrc: "http://placehold.it/200x200"
+    }
+  ];
 
   describe('component defaults', function() {
     var leaderboard;
@@ -52,5 +78,20 @@ describe('Leaderboard', function() {
 
       expect(heading.getDOMNode().textContent).toBe(translation.heading);
     });
+  });
+
+  describe('standard competition ranking system', function() {
+    beforeEach(function() {
+      //
+    });
+
+    it('gives results with the same amount the same rank', function() {
+      //
+    });
+
+    it('leaves a gap to compensate for items with the same rank', function(){
+      //
+    });
+
   });
 });

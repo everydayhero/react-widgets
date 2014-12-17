@@ -108,7 +108,7 @@ module.exports = React.createClass({
     var rank = 0;
 
     if (this.state.isLoading) {
-      return <Icon className="Leaderboard__loading" icon="refresh" spin={ true } />;
+      return <Icon className="Leaderboard__loading" icon="refresh" />;
     }
 
     return this.state.boardData[currentPage].map(function(d,i) {

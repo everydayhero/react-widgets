@@ -72,7 +72,7 @@ module.exports = React.createClass({
     var signInLabel     = this.t('signInLabel');
 
     if (this.state.isLoading) {
-      return <Icon className="CallToActionBox__loading" icon="refresh" spin={ true }/>;
+      return <Icon className="CallToActionBox__loading" icon="refresh" />;
     }
 
     return (

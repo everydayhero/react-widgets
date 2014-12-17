@@ -15,7 +15,7 @@ module.exports = React.createClass({
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
-    i18n: React.PropTypes.object,
+    i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {

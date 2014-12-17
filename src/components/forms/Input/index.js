@@ -89,7 +89,11 @@ module.exports = React.createClass({
     if (this.props.disabled) {
       return false;
     }
-    this.setState({ value: value });
+    this.setState({
+      valid: false,
+      error: false,
+      value: value
+    }, this.handleBlur);
   },
 
   handleFocus: function() {
@@ -170,7 +174,7 @@ module.exports = React.createClass({
         <label className="Input__label" htmlFor={ this.t('name') }>
           { this.t('label') }
           <input
-            autocomplete="false"
+            autoComplete="off"
             className="Input__input"
             ref="input"
             type={ this.props.type }

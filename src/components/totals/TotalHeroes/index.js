@@ -12,8 +12,8 @@ module.exports = React.createClass({
   displayName: "TotalHeroes",
   propTypes: {
     campaignUids: React.PropTypes.array,
-    page_count: React.PropTypes.number,
-    page_size: React.PropTypes.number,
+    pageCount: React.PropTypes.number,
+    pageSize: React.PropTypes.number,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -25,7 +25,7 @@ module.exports = React.createClass({
       campaignUids: [],
       pageCount: 1,
       pageSize: 1,
-      page_type: 'user',
+      pageType: 'user',
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
@@ -57,7 +57,7 @@ module.exports = React.createClass({
     var props = this.props;
 
     _.each(props.campaignUids, function(campaignUid) {
-      pages.findByCampaign(campaignUid, props.page_count, props.page_size, props.page_type, this.onSuccess);
+      pages.findByCampaign(campaignUid, props.pageCount, props.pageSize, props.pageType, this.onSuccess);
     }, this);
   },
 

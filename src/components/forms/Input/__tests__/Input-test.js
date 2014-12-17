@@ -36,7 +36,7 @@ describe('Input', function() {
     var error = findByClass(element, 'Input__message').getDOMNode();
     expect(error.textContent).toContain('This input errored correctly');
 
-    var errorIcon = findByClass(element, 'fa-exclamation-circle');
+    var errorIcon = findByClass(element, 'fa-times');
     expect(errorIcon).toBeDefined();
   });
 

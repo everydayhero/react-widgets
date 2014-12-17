@@ -23,8 +23,8 @@ module.exports = React.createClass({
   render: function() {
     var classes = cx({
       'AddressStatus fa': true,
-      'AddressStatus--error fa-exclamation-circle': this.props.error,
-      'AddressStatus--loading fa-circle-o-notch fa-spin': this.props.loading,
+      'AddressStatus--error fa-times': this.props.error,
+      'AddressStatus--loading fa-refresh fa-spin': this.props.loading,
       'AddressStatus--success fa-chevron-down': this.props.success
     });
     return <i className={ classes }></i>;

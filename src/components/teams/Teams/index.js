@@ -72,7 +72,7 @@ module.exports = React.createClass({
     var emptyLabel = this.t('emptyLabel');
 
     if (this.state.isLoading) {
-      return <Icon className="Teams__loading" icon="refresh" spin={ true }/>;
+      return <Icon className="Teams__loading" icon="refresh" />;
     }
 
     if (this.state.hasResults) {

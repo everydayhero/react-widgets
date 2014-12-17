@@ -2,6 +2,7 @@
 
 var React = require('react/addons');
 var cx = require('react/lib/cx');
+var Icon = require('../../helpers/Icon');
 
 module.exports = React.createClass({
   displayName: "AddressStatus",
@@ -20,13 +21,25 @@ module.exports = React.createClass({
     };
   },
 
+  getStatus: function() {
+    var status =
+        this.props.error ? 'error' :
+        this.props.loading ? 'loading' :
+        this.props.success ? 'success' :
+        false;
+
+    return status;
+  },
+
   render: function() {
-    var classes = cx({
-      'AddressStatus fa': true,
-      'AddressStatus--error fa-times': this.props.error,
-      'AddressStatus--loading fa-refresh fa-spin': this.props.loading,
-      'AddressStatus--success fa-chevron-down': this.props.success
-    });
-    return <i className={ classes }></i>;
+    var status = this.getStatus();
+    var classes = "AddressStatus AddressStatus--" + status;
+    var icons = {
+      error: 'times',
+      loading: 'refresh',
+      success: 'chevron-down'
+    };
+
+    return status && <Icon className={ classes } icon={ icons[status] } />;
   }
 });

@@ -112,7 +112,7 @@ module.exports = React.createClass({
 
   renderMap: function() {
     if (this.state.isLoading) {
-      return <Icon className="Map__loading" icon="refresh" spin={ true }/>;
+      return <Icon className="Map__loading" icon="refresh" />;
     } else {
       return <div className="Map__map" id="map"></div>;
     }

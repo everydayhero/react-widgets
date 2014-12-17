@@ -80,7 +80,7 @@ module.exports = React.createClass({
     }
 
     if (this.state.isLoading) {
-      return <Icon className="TotalDistance__loading" icon="refresh" spin={ true }/>;
+      return <Icon className="TotalDistance__loading" icon="refresh" />;
     }
 
     if (this.state.hasResults) {

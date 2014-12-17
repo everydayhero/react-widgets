@@ -44,7 +44,7 @@ module.exports = React.createClass({
 
   progressSpinner: function() {
     if (this.props.isSearching) {
-      return <Icon className="SearchInput__progressSpinner" icon="refresh" spin={ true } />;
+      return <Icon className="SearchInput__progressSpinner" icon="refresh" />;
     } else {
       return null;
     }

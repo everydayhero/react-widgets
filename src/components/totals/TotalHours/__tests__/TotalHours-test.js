@@ -3,18 +3,19 @@ jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
 
 describe('TotalDistance', function() {
-  var React                       = require('react/addons');
-  var TotalHours               = require('../');
-  var campaigns                   = require('../../../../api/campaigns');
-  var TestUtils                   = React.addons.TestUtils;
-  var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
+  var React       = require('react/addons');
+  var TotalHours  = require('../');
+  var campaigns   = require('../../../../api/campaigns');
+  var TestUtils   = React.addons.TestUtils;
+  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
     var totalHours;
     var element;
 
     beforeEach(function() {
-      totalHours = <TotalHours campaignUid="au-0" />;
+      campaigns.find.mockClear();
+      totalHours = <TotalHours campaignUids={ ["us-22", "us-24"] } />;
       element = TestUtils.renderIntoDocument(totalHours);
     });
 
@@ -34,7 +35,10 @@ describe('TotalDistance', function() {
     });
 
     it('handles a campaign id', function() {
-      expect(campaigns.find).toBeCalledWith('au-0', element.onSuccess);
+      expect(campaigns.find.mock.calls.length).toEqual(2);
+
+      expect(campaigns.find).toBeCalledWith("us-22", element.onSuccess);
+      expect(campaigns.find).toBeCalledWith("us-24", element.onSuccess);
     });
   });
 
@@ -53,7 +57,7 @@ describe('TotalDistance', function() {
     it('renders a custom title', function() {
       element.setState({
         isLoading: false,
-        hasResults: true
+        total: 123
       });
       var title = findByClass(element, 'TotalHours__title');
 

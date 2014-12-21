@@ -10,7 +10,7 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "TotalCharities",
   propTypes: {
-    campaignUid: React.PropTypes.string,
+    campaignUids: React.PropTypes.array,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -19,7 +19,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      campaignUid: '',
+      campaignUids: [],
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
@@ -47,7 +47,7 @@ module.exports = React.createClass({
     this.setState({
       isLoading: true
     });
-    charities.findByCampaign(this.props.campaignUid, 1, 1, this.onSuccess);
+    charities.findByCampaign(this.props.campaignUids, 1, 1, this.onSuccess);
   },
 
   renderTotal: function() {

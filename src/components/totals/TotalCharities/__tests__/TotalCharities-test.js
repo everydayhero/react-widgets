@@ -3,19 +3,19 @@ jest.autoMockOff();
 jest.mock('../../../../api/charities');
 
 describe('TotalCharities', function() {
-  var React                       = require('react/addons');
-  var TotalCharities              = require('../');
-  var charities                   = require('../../../../api/charities');
-  var TestUtils                   = React.addons.TestUtils;
-  var scryByTag                   = TestUtils.scryRenderedDOMComponentsWithTag;
-  var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
+  var React          = require('react/addons');
+  var TotalCharities = require('../');
+  var charities      = require('../../../../api/charities');
+  var TestUtils      = React.addons.TestUtils;
+  var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
     var totalCharities;
     var element;
 
     beforeEach(function() {
-      totalCharities = <TotalCharities campaignUid="au-0" />;
+      charities.findByCampaign.mockClear();
+      totalCharities = <TotalCharities campaignUids={ ["us-22", "us-24"] } />;
       element = TestUtils.renderIntoDocument(totalCharities);
     });
 
@@ -24,14 +24,14 @@ describe('TotalCharities', function() {
     });
 
     it('renders default total charities', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       var total = findByClass(element, 'TotalCharities__total');
 
       expect(total.getDOMNode().textContent).toContain('0');
     });
 
     it('renders a default title', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       var title = findByClass(element, 'TotalCharities__title');
 
       expect(title.getDOMNode().textContent).toBe('Non Profits');
@@ -44,12 +44,13 @@ describe('TotalCharities', function() {
     });
 
     it('shows a loading icon', function() {
-      element.setState({isLoading: true});
+      element.setState({ isLoading: true });
       findByClass(element, 'TotalCharities__loading');
     });
 
     it('check that a campaign id is present', function() {
-      expect(charities.findByCampaign).toBeCalledWith('au-0', 1, 1, element.onSuccess);
+      expect(charities.findByCampaign.mock.calls.length).toEqual(1);
+      expect(charities.findByCampaign).toBeCalledWith(["us-22", "us-24"], 1, 1, element.onSuccess);
     });
   });
 
@@ -66,14 +67,14 @@ describe('TotalCharities', function() {
     });
 
     it('renders a custom title', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       var title = findByClass(element, 'TotalCharities__title');
 
       expect(title.getDOMNode().textContent).toBe(translation.title);
     });
 
     it('renders a default total', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       var total = findByClass(element, 'TotalCharities__total');
 
       expect(total.getDOMNode().textContent).toContain('0');

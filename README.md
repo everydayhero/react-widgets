@@ -139,11 +139,11 @@ edh.widgets.renderWidget(element, name, options)
 
 #### Funds Raised (Campaign)
 
-Displays the total funds raised for a single specified campaign as a dollar amount.
+Displays the total funds raised for specified campaigns as a dollar amount. Either a single or multiple campaign uids can be provided to scope this widget.
 
 ##### Options
 
-- `campaignUid`: *required* string. Campaign uid.
+- `campaignUids`: *required* array of campaign uids.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
@@ -170,7 +170,7 @@ Displays the total funds raised for a single specified campaign as a dollar amou
   <body>
     <div id="FundsRaisedExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('FundsRaisedExample', 'FundsRaised', { campaignUid: 'us-0' });
+      edh.widgets.renderWidget('FundsRaisedExample', 'FundsRaised', { campaignUids: ['us-0'] });
     </script>
   </body>
 </html>
@@ -178,11 +178,11 @@ Displays the total funds raised for a single specified campaign as a dollar amou
 
 #### Total Heroes (Campaign)
 
-Displays the total number of fundraisers (that have a page) for a single specified campaign.
+Displays the total number of fundraisers (that have an everydayhero page) for specified campaigns. Either a single or multiple campaign uids can be provided to scope this widget.
 
 ##### Options
 
-- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `campaignUids`: *required* array of campaign uids.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
@@ -208,7 +208,7 @@ Displays the total number of fundraisers (that have a page) for a single specifi
   <body>
     <div id="TotalHeroesExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', { campaignUid: 'us-0' });
+      edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', { campaignUids: ['us-0'] });
     </script>
   </body>
 </html>
@@ -216,11 +216,11 @@ Displays the total number of fundraisers (that have a page) for a single specifi
 
 #### Total Charities (Campaign)
 
-Displays the total number of charities associated with a single specified campaign.
+Displays the total number of charities associated with specified campaigns. Either a single or multiple campaign uids can be provided to scope this widget.
 
 ##### Options
 
-- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `campaignUids`: *required* array of campaign uids.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
@@ -247,7 +247,7 @@ Displays the total number of charities associated with a single specified campai
   <body>
     <div id="TotalCharitiesExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUid: 'us-0' });
+      edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUids: ['us-0'] });
     </script>
   </body>
 </html>
@@ -294,11 +294,11 @@ Set a goal in cents to display as a campaign goal.
 
 #### Total Distance (Campaign)
 
-Displays the total recorded distance that fundraisers have run for a single specified campaign in either **kilometers** or **miles**.
+Displays the total recorded distance that fundraisers have run for specified campaigns. The result can be displayed as either **kilometers** or **miles**. Either a single or multiple campaign uids can be provided to scope this widget.
 
 ##### Options
 
-- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `campaignUids`: *required* array of campaign uids.
 - `unit`: *optional* string. Can be set to either `'km'` or `'miles'`. Converts input to whichever is defined. Set to `'miles'` by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
@@ -326,7 +326,7 @@ Displays the total recorded distance that fundraisers have run for a single spec
   <body>
     <div id="TotalDistanceExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('TotalDistanceExample', 'TotalDistance', { campaignUid: 'us-0' });
+      edh.widgets.renderWidget('TotalDistanceExample', 'TotalDistance', { campaignUids: ['us-0'] });
     </script>
   </body>
 </html>
@@ -334,11 +334,11 @@ Displays the total recorded distance that fundraisers have run for a single spec
 
 #### Total Hours (Campaign)
 
-Displays the total recorded time that fundraisers have run for a single specified campaign in **hours**.
+Displays the total recorded time that fundraisers have run for specified campaigns in **hours**. Either a single or multiple campaign uids can be provided to scope this widget.
 
 ##### Options
 
-- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `campaignUids`: *required* array of campaign uids.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
@@ -365,7 +365,7 @@ Displays the total recorded time that fundraisers have run for a single specifie
   <body>
     <div id="TotalHoursExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUid: 'us-0' });
+      edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUids: ['us-0'] });
     </script>
   </body>
 </html>

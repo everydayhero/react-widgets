@@ -14,7 +14,8 @@ describe('FundsRaised', function() {
     var element;
 
     beforeEach(function() {
-      fundsRaised = <FundsRaised campaignUid="au-0" />;
+      campaigns.find.mockClear();
+      fundsRaised = <FundsRaised campaignUids={ ["us-22", "us-24"] } />;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
 
@@ -47,8 +48,11 @@ describe('FundsRaised', function() {
       findByClass(element, 'FundsRaised__loading');
     });
 
-    it('handles a campaign id', function() {
-      expect(campaigns.find).toBeCalledWith('au-0', element.onSuccess);
+    it('handles a multiple campaign ids', function() {
+      expect(campaigns.find.mock.calls.length).toEqual(2);
+
+      expect(campaigns.find).toBeCalledWith("us-22", element.onSuccess);
+      expect(campaigns.find).toBeCalledWith("us-24", element.onSuccess);
     });
   });
 

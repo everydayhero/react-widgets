@@ -1,5 +1,6 @@
 "use strict";
 
+var _         = require('lodash');
 var React     = require('react');
 var I18nMixin = require('../../mixins/I18n');
 var campaigns = require('../../../api/campaigns');
@@ -10,7 +11,7 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "FundsRaised",
   propTypes: {
-    campaignUid: React.PropTypes.string,
+    campaignUids: React.PropTypes.array,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -19,7 +20,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      campaignUid: '',
+      campaignUids: [],
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
@@ -40,7 +41,7 @@ module.exports = React.createClass({
   onSuccess: function(result) {
     this.setState({
       isLoading: false,
-      total: result.campaign.funds_raised.cents
+      total: this.state.total + result.campaign.funds_raised.cents
     });
   },
 
@@ -49,7 +50,9 @@ module.exports = React.createClass({
       isLoading: true
     });
 
-    campaigns.find(this.props.campaignUid, this.onSuccess);
+    _.each(this.props.campaignUids, function(campaignUid) {
+      campaigns.find(campaignUid, this.onSuccess);
+    }, this);
   },
 
   renderTotal: function() {

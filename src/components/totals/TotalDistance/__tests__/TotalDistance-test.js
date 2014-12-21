@@ -3,19 +3,20 @@ jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
 
 describe('TotalDistance', function() {
-  var React                       = require('react/addons');
-  var TotalDistance               = require('../');
-  var campaigns                   = require('../../../../api/campaigns');
-  var TestUtils                   = React.addons.TestUtils;
-  var scryByClass                 = TestUtils.scryRenderedDOMComponentsWithClass;
-  var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
+  var React         = require('react/addons');
+  var TotalDistance = require('../');
+  var campaigns     = require('../../../../api/campaigns');
+  var TestUtils     = React.addons.TestUtils;
+  var scryByClass   = TestUtils.scryRenderedDOMComponentsWithClass;
+  var findByClass   = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
     var totalDistance;
     var element;
 
     beforeEach(function() {
-      totalDistance = <TotalDistance campaignUid="au-0" />;
+      campaigns.find.mockClear();
+      totalDistance = <TotalDistance campaignUids={ ["us-22", "us-24"] } />;
       element = TestUtils.renderIntoDocument(totalDistance);
     });
 
@@ -35,7 +36,10 @@ describe('TotalDistance', function() {
     });
 
     it('handles a campaign id', function() {
-      expect(campaigns.find).toBeCalledWith('au-0', element.onSuccess);
+      expect(campaigns.find.mock.calls.length).toEqual(2);
+
+      expect(campaigns.find).toBeCalledWith("us-22", element.onSuccess);
+      expect(campaigns.find).toBeCalledWith("us-24", element.onSuccess);
     });
   });
 
@@ -54,10 +58,9 @@ describe('TotalDistance', function() {
     it('renders a custom title', function() {
       element.setState({
         isLoading: false,
-        hasResults: true
+        total: 123
       });
       var title = findByClass(element, 'TotalDistance__title');
-
       expect(title.getDOMNode().textContent).toBe(translation.title);
     });
   });

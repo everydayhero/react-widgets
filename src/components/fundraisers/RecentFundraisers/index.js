@@ -23,7 +23,7 @@ module.exports = React.createClass({
       campaignUid: '',
       page: '1',
       pageSize: '6',
-      type: 'user',
+      type: 'individual',
       backgroundColor: '#EBEBEB',
       textColor: '#333333',
       defaultI18n: {

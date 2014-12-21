@@ -14,7 +14,7 @@ module.exports = React.createClass({
       }, this);
     }
 
-    return <Icon className="PromoCharitiesResults__loading" icon="refresh" spin={ true } />;
+    return <Icon className="PromoCharitiesResults__loading" icon="refresh" />;
   },
 
   render: function() {

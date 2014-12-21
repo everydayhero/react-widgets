@@ -56,7 +56,7 @@ module.exports = React.createClass({
     var title = this.t('title');
 
     if (this.state.isLoading) {
-      return <Icon className="TotalCharities__loading" icon="refresh" spin={ true }/>;
+      return <Icon className="TotalCharities__loading" icon="refresh" />;
     } else {
       return (
         <div>

@@ -10,14 +10,16 @@ var routes = require('../routes');
 var leaderboard = require('../leaderboard');
 
 describe('leaderboard', function() {
-  it('find', function() {
-    var callback = jest.genMockFunction();
-    leaderboard.find('xy-123', 'foo', 12, callback);
+  describe('find', function() {
+    it('gets leaderboard by campaign uid', function() {
+      var callback = jest.genMockFunction();
+      leaderboard.find('xy-123', 'foo', 12, callback);
 
-    expect(getJSONP).lastCalledWith(
-      'https://everydayhero.com/api/v2/campaigns/xy-123/leaderboard.jsonp?type=foo&limit=12',
-      callback
-    );
-    expect(callback).toBeCalledWith(results);
+      expect(getJSONP).lastCalledWith(
+        'https://everydayhero.com/api/v2/campaigns/xy-123/leaderboard.jsonp?type=foo&limit=12',
+        callback
+      );
+      expect(callback).toBeCalledWith(results);
+    });
   });
 });

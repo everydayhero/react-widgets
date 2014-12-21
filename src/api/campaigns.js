@@ -16,6 +16,15 @@ module.exports = {
     return getJSONP(routes.get('campaign', { campaignUid: campaignUid }), callback);
   },
 
+  findByUids: function(campaignUids, callback) {
+    if (_.isEmpty(campaignUids)) {
+      _.defer(callback, { campaigns: [] });
+      return;
+    };
+
+    return getJSONP(routes.get('campaigns', { campaignUids: campaignUids }), callback);
+  },
+
   search: function(params, callback) {
     params = _.merge({ page: 1, pageSize: 10 }, params);
     return getJSONP(routes.get('searchCampaigns', params), callback);

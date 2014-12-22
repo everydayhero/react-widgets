@@ -11,6 +11,11 @@ module.exports = {
   },
 
   findByUids: function(charityUids, callback) {
+    if (_.isEmpty(charityUids)) {
+      _.defer(callback, { charities: [] });
+      return;
+    };
+
     return getJSONP(routes.get('charities', { charityUids: charityUids }), function(response) {
       _.each(response.charities, function(charity) {
         charity.uid = charity.id;

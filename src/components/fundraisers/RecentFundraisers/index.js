@@ -23,7 +23,7 @@ module.exports = React.createClass({
       campaignUid: '',
       page: '1',
       pageSize: '6',
-      type: 'user',
+      type: 'individual',
       backgroundColor: '#EBEBEB',
       textColor: '#333333',
       defaultI18n: {
@@ -70,7 +70,7 @@ module.exports = React.createClass({
     var emptyLabel = this.t('emptyLabel');
 
     if (this.state.isLoading) {
-      return <Icon className="RecentFundraisers__loading" icon="refresh" spin={ true } />;
+      return <Icon className="RecentFundraisers__loading" icon="refresh" />;
     } else {
       if (this.state.hasResults) {
         return this.state.pageResults.map(function(d) {

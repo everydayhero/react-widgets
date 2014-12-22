@@ -130,12 +130,12 @@ module.exports = React.createClass({
   },
 
   renderIcon: function() {
-    var icon = this.state.waiting ? 'circle-o-notch'
+    var icon = this.state.waiting ? 'refresh'
                : this.state.valid ? 'check'
-               : this.state.error ? 'exclamation-circle'
-               : this.props.disabled ? 'ban'
+               : this.state.error ? 'times'
+               : this.props.disabled ? 'minus'
                : this.props.icon ? this.props.icon
-               : (this.props.required && !this.state.value) ? 'angle-left'
+               : (this.props.required && !this.state.value) ? 'caret-left'
                : false;
     return icon && <Icon icon={ icon } className="Input__icon" fixedWidth={ true } />;
   },
@@ -170,6 +170,7 @@ module.exports = React.createClass({
         <label className="Input__label" htmlFor={ this.t('name') }>
           { this.t('label') }
           <input
+            autocomplete="false"
             className="Input__input"
             ref="input"
             type={ this.props.type }

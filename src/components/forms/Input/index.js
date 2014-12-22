@@ -14,6 +14,7 @@ module.exports = React.createClass({
     readOnly: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     autoFocus: React.PropTypes.bool,
+    autoComplete: React.PropTypes.bool,
     required: React.PropTypes.bool,
     mask: React.PropTypes.func,
     validate: React.PropTypes.func,
@@ -32,6 +33,7 @@ module.exports = React.createClass({
       readOnly: false,
       disabled: false,
       autoFocus: false,
+      autoComplete: false,
       required: false,
       mask: null,
       validate: null,
@@ -62,6 +64,9 @@ module.exports = React.createClass({
   componentDidMount: function() {
     if (this.props.autoFocus) {
       this.refs.input.getDOMNode().focus();
+    }
+    if (this.props.value && !this.props.disabled) {
+      this.validate();
     }
   },
 
@@ -174,7 +179,7 @@ module.exports = React.createClass({
         <label className="Input__label" htmlFor={ this.t('name') }>
           { this.t('label') }
           <input
-            autoComplete="off"
+            autoComplete={ this.props.autoComplete ? 'on' : 'off' }
             className="Input__input"
             ref="input"
             type={ this.props.type }

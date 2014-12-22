@@ -3,6 +3,7 @@ jest.autoMockOff();
 jest.mock('../../../../api/pages');
 
 describe('Leaderboard', function() {
+  var _               = require('lodash');
   var React           = require('react/addons');
   var Leaderboard     = require('../');
   var LeaderboardItem = require('../../LeaderboardItem/');
@@ -10,31 +11,6 @@ describe('Leaderboard', function() {
   var TestUtils       = React.addons.TestUtils;
   var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
   var scryByClass     = TestUtils.scryRenderedDOMComponentsWithClass;
-
-  var leaderboardResults = [
-    {
-      id: 123,
-      name: "John Smith",
-      url: "http://everydayhero.com.au",
-      iso_code: "$",
-      amount:  10000,
-      amountFormatted: "$100.00",
-      totalMembers: 10,
-      imgSrc: "http://placehold.it/300x300",
-      medImgSrc: "http://placehold.it/200x200"
-    },
-    {
-      id: 124,
-      name: "Jane Doe",
-      url: "http://everydayhero.com.au",
-      iso_code: "$",
-      amount:  10000,
-      amountFormatted: "$100.00",
-      totalMembers: 20,
-      imgSrc: "http://placehold.it/300x300",
-      medImgSrc: "http://placehold.it/200x200"
-    }
-  ];
 
   describe('component defaults', function() {
     var leaderboard;
@@ -75,23 +51,50 @@ describe('Leaderboard', function() {
 
     it('renders a custom heading', function() {
       var heading = findByClass(element, 'Leaderboard__heading');
-
       expect(heading.getDOMNode().textContent).toBe(translation.heading);
     });
   });
 
   describe('standard competition ranking system', function() {
+    var element;
+    var data;
+
     beforeEach(function() {
-      //
+      element = TestUtils.renderIntoDocument(<Leaderboard />);
+    });
+
+    it('assigns rank in order of amount', function(){
+      data = [
+        { id: 1, amount: 1100 },
+        { id: 2, amount: 1000 },
+        { id: 3, amount: 900 }
+      ];
+
+      element.rankLeaderboard(data);
+      expect(_.pluck(data, 'rank')).toEqual([1, 2, 3]);
     });
 
     it('gives results with the same amount the same rank', function() {
-      //
+      data = [
+        { id: 1, amount: 1000 },
+        { id: 2, amount: 1000 }
+      ];
+
+      element.rankLeaderboard(data);
+      expect(_.pluck(data, 'rank')).toEqual([1, 1]);
     });
 
     it('leaves a gap to compensate for items with the same rank', function(){
-      //
-    });
+      data = [
+        { id: 1, amount: 1100 },
+        { id: 2, amount: 1000 },
+        { id: 3, amount: 1000 },
+        { id: 4, amount: 1000 },
+        { id: 5, amount: 900 }
+      ];
 
+      element.rankLeaderboard(data);
+      expect(_.pluck(data, 'rank')).toEqual([1, 2, 2, 2, 5]);
+    });
   });
 });

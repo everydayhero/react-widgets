@@ -52,93 +52,94 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
+    this.loadLeaderboard();
+  },
+
+  loadLeaderboard: function() {
     this.setState({
       isLoading: true
     });
 
     var props = this.props;
 
-    leaderboard.find(props.campaignUid, props.type, props.limit, this.hasTeamPages);
+    leaderboard.find(props.campaignUid, props.type, props.limit, this.loadPages);
   },
 
-  hasTeamPages: function(result) {
+  loadPages: function(result) {
+    var pageIds = result.leaderboard.page_ids;
+
     this.setState({
-      pageIds: result.leaderboard.page_ids
+      pageIds: pageIds
     });
 
-    pages.findByIds(this.state.pageIds, this.transformPageData);
+    pages.findByIds(pageIds, this.processLeaderboard);
   },
 
-  transformPageData: function(pageData) {
-    var symbol           = this.t('symbol');
-    var pageSize         = this.props.pageSize;
-    var pagedLeaderboard = [];
-    var rank             = 0;
-    var rankBuffer       = 0;
-    var formattedRank    = '';
-    var currentItem;
-    var prevItem;
-
+  processLeaderboard: function(pageData) {
     var leaderboard = _.map(this.state.pageIds, function(pageId, i) {
-      var page = _.filter(pageData.pages, {id: pageId})[0];
-
-      return {
-        id: page.id,
-        name: page.name,
-        url: page.url,
-        iso_code: page.amount.currency.iso_code,
-        amount:  page.amount.cents,
-        amountFormatted: symbol + numeral(page.amount.cents / 100).format('0[.]00 a'),
-        totalMembers: page.team_member_uids.length,
-        imgSrc: page.image.large_image_url,
-        medImgSrc: page.image.medium_image_url
-      };
+      var page = _.find(pageData.pages, {id: pageId});
+      return this.processPage(page);
     });
+
+    this.rankLeaderboard(leaderboard);
+
+    this.setState({
+      isLoading: false,
+      boardData: this.paginateLeaderboard(leaderboard)
+    });
+  },
+
+  processPage: function(page) {
+    return {
+      id: page.id,
+      name: page.name,
+      url: page.url,
+      iso_code: page.amount.currency.iso_code,
+      amount:  page.amount.cents,
+      totalMembers: page.team_member_uids.length,
+      imgSrc: page.image.large_image_url,
+      medImgSrc: page.image.medium_image_url
+    };
+  },
+
+  rankLeaderboard: function(leaderboard) {
+    var rank = 1;
+    var prevItem = null;
 
     _.forEach(leaderboard, function(item, i) {
-      currentItem = leaderboard[i];
-      prevItem = leaderboard[i - 1];
-
-      if (prevItem) {
-        if (currentItem.amount < prevItem.amount) {
-          rank = rank + rankBuffer + 1;
-          rankBuffer = 0;
-        } else {
-          rankBuffer = rankBuffer + 1;
-        }
-      } else {
-        rank = 1;
+      if (prevItem && item.amount != prevItem.amount) {
+        rank = i + 1;
       }
 
-      currentItem.rank = rank;
-      currentItem.formattedRank = numeral(rank).format('0o');
+      item.rank = rank;
+      item.formattedRank = numeral(rank).format('0o');
+      prevItem = item;
     });
+  },
+
+  paginateLeaderboard: function(leaderboard) {
+    var pageSize         = this.props.pageSize;
+    var pagedLeaderboard = [];
 
     for (var i = 0; i < leaderboard.length; i += pageSize) {
       pagedLeaderboard.push(leaderboard.slice(i,i + pageSize));
     }
 
-    console.log(pageData);
-
-    this.onComplete(pagedLeaderboard);
-  },
-
-  onComplete: function(data) {
-    this.setState({
-      isLoading: false,
-      boardData: data
-    });
+    return pagedLeaderboard;
   },
 
   renderLeaderboardItems: function() {
     var boardData   = this.state.boardData;
     var currentPage = this.state.currentPage - 1;
+    var symbol      = this.t('symbol');
 
     if (this.state.isLoading) {
       return <Icon className="Leaderboard__loading" icon="refresh" />;
     }
 
     return boardData[currentPage].map(function(d,i) {
+      var formattedAmount = symbol + numeral(d.amount / 100).format('0[.]00 a');
+
       if (this.props.type === 'team') {
         return (
           <TeamLeaderboardItem
@@ -146,7 +147,7 @@ module.exports = React.createClass({
             name={ d.name }
             url={ d.url }
             iso_code={ d.iso_code }
-            amount={ d.amountFormatted }
+            amount={ formattedAmount }
             totalMembers={ d.totalMembers }
             imgSrc={ d.imgSrc }
             raisedTitle={ this.t('raisedTitle') }
@@ -162,7 +163,7 @@ module.exports = React.createClass({
           name={ d.name }
           url={ d.url }
           iso_code={ d.iso_code }
-          amount={ d.amount }
+          amount={ formattedAmount }
           imgSrc={ d.medImgSrc } />
       );
 

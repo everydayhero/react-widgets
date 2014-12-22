@@ -94,7 +94,7 @@ module.exports = React.createClass({
       id: page.id,
       name: page.name,
       url: page.url,
-      iso_code: page.amount.currency.iso_code,
+      isoCode: page.amount.currency.iso_code,
       amount:  page.amount.cents,
       totalMembers: page.team_member_uids.length,
       imgSrc: page.image.large_image_url,
@@ -112,7 +112,6 @@ module.exports = React.createClass({
       }
 
       item.rank = rank;
-      item.formattedRank = numeral(rank).format('0o');
       prevItem = item;
     });
   },
@@ -139,6 +138,7 @@ module.exports = React.createClass({
 
     return boardData[currentPage].map(function(d,i) {
       var formattedAmount = symbol + numeral(d.amount / 100).format('0[.]00 a');
+      var formattedRank = numeral(d.rank).format('0o');
 
       if (this.props.type === 'team') {
         return (
@@ -146,7 +146,7 @@ module.exports = React.createClass({
             key={ d.id }
             name={ d.name }
             url={ d.url }
-            iso_code={ d.iso_code }
+            isoCode={ d.isoCode }
             amount={ formattedAmount }
             totalMembers={ d.totalMembers }
             imgSrc={ d.imgSrc }
@@ -158,11 +158,11 @@ module.exports = React.createClass({
       return (
         <LeaderboardItem
           key={ d.id }
-          rank={ d.formattedRank }
+          rank={ formattedRank }
           rankTitle={ this.t('rankTitle') }
           name={ d.name }
           url={ d.url }
-          iso_code={ d.iso_code }
+          isoCode={ d.isoCode }
           amount={ formattedAmount }
           imgSrc={ d.medImgSrc } />
       );

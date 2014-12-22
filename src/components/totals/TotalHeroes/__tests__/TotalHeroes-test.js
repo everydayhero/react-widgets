@@ -15,7 +15,7 @@ describe('TotalHeroes', function() {
 
     beforeEach(function() {
       pages.findByCampaign.mockClear();
-      totalHeroes = <TotalHeroes campaignUids={ ["us-22", "us-24"] } />;
+      totalHeroes = <TotalHeroes campaignUid="us-22" />;
       element = TestUtils.renderIntoDocument(totalHeroes);
     });
 
@@ -48,11 +48,26 @@ describe('TotalHeroes', function() {
       findByClass(element, 'TotalHeroes__loading');
     });
 
-    it('checks that find function works with default props', function() {
-      expect(pages.findByCampaign.mock.calls.length).toEqual(2);
+    it('checks that find function works with 1 campaign uid', function() {
+      expect(pages.findByCampaign.mock.calls.length).toEqual(1);
+      expect(pages.findByCampaign).toBeCalledWith("us-22", 'individual', 1, 1, element.onSuccess);
+    });
+  });
 
-      expect(pages.findByCampaign).toBeCalledWith("us-22", 1, 1, 'user', element.onSuccess);
-      expect(pages.findByCampaign).toBeCalledWith("us-24", 1, 1, 'user', element.onSuccess);
+  describe('working with multiple uids', function() {
+    var totalHeroes;
+    var element;
+
+    beforeEach(function() {
+      pages.findByCampaign.mockClear();
+      totalHeroes = <TotalHeroes campaignUids={ ["us-22", "us-24"] } />;
+      element = TestUtils.renderIntoDocument(totalHeroes);
+    });
+
+    it('runs findByCampaign function for each uid provided', function() {
+      expect(pages.findByCampaign.mock.calls.length).toEqual(2);
+      expect(pages.findByCampaign).toBeCalledWith("us-22", 'individual', 1, 1, element.onSuccess);
+      expect(pages.findByCampaign).toBeCalledWith("us-24", 'individual', 1, 1, element.onSuccess);
     });
   });
 

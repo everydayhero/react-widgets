@@ -11,6 +11,7 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "TotalHeroes",
   propTypes: {
+    campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
     pageCount: React.PropTypes.number,
     pageSize: React.PropTypes.number,
@@ -22,10 +23,11 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
+      campaignUid: '',
       campaignUids: [],
       pageCount: 1,
       pageSize: 1,
-      pageType: 'user',
+      pageType: 'individual',
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
@@ -54,11 +56,17 @@ module.exports = React.createClass({
       isLoading: true
     });
 
-    var props = this.props;
+    var props        = this.props;
+    var campaignUid  = props.campaignUid;
+    var campaignUids = props.campaignUids;
 
-    _.each(props.campaignUids, function(campaignUid) {
-      pages.findByCampaign(campaignUid, props.pageCount, props.pageSize, props.pageType, this.onSuccess);
-    }, this);
+    if (campaignUids.length) {
+      _.each(props.campaignUids, function(campaignUid) {
+        pages.findByCampaign(campaignUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess);
+      }, this);
+    } else {
+      pages.findByCampaign(campaignUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess);
+    }
   },
 
   renderTotal: function() {

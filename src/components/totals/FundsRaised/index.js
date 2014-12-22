@@ -11,6 +11,7 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "FundsRaised",
   propTypes: {
+    campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
@@ -20,6 +21,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
+      campaignUid: '',
       campaignUids: [],
       renderIcon: true,
       backgroundColor: '#525252',
@@ -39,6 +41,8 @@ module.exports = React.createClass({
   },
 
   onSuccess: function(result) {
+    console.log(result);
+
     this.setState({
       isLoading: false,
       total: this.state.total + result.campaign.funds_raised.cents
@@ -50,9 +54,14 @@ module.exports = React.createClass({
       isLoading: true
     });
 
-    _.each(this.props.campaignUids, function(campaignUid) {
+    var campaignUid  = this.props.campaignUid;
+    var campaignUids = this.props.campaignUids;
+
+    if (campaignUids.length) {
+      campaigns.findByUids(campaignUids, this.onSuccess);
+    } else {
       campaigns.find(campaignUid, this.onSuccess);
-    }, this);
+    }
   },
 
   renderTotal: function() {

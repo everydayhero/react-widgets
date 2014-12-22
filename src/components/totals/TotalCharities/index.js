@@ -1,15 +1,16 @@
 "use strict";
 
-var React             = require('react');
-var I18nMixin         = require('../../mixins/I18n');
-var charities         = require('../../../api/charities');
-var Icon              = require('../../helpers/Icon');
-var numeral           = require('numeral');
+var React     = require('react');
+var I18nMixin = require('../../mixins/I18n');
+var charities = require('../../../api/charities');
+var Icon      = require('../../helpers/Icon');
+var numeral   = require('numeral');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "TotalCharities",
   propTypes: {
+    campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
@@ -19,6 +20,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
+      campaignUid: '',
       campaignUids: [],
       renderIcon: true,
       backgroundColor: '#525252',

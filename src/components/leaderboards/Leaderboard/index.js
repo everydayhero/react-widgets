@@ -1,14 +1,14 @@
 "use strict";
 
-var _                     = require('lodash');
-var React                 = require('react');
-var I18nMixin             = require('../../mixins/I18n');
-var leaderboard           = require('../../../api/leaderboard');
-var pages                 = require('../../../api/pages');
-var Icon                  = require('../../helpers/Icon');
-var TeamLeaderboardItem   = require('../TeamLeaderboardItem');
-var LeaderboardItem       = require('../LeaderboardItem');
-var numeral               = require('numeral');
+var _                   = require('lodash');
+var React               = require('react');
+var I18nMixin           = require('../../mixins/I18n');
+var leaderboard         = require('../../../api/leaderboard');
+var pages               = require('../../../api/pages');
+var Icon                = require('../../helpers/Icon');
+var TeamLeaderboardItem = require('../TeamLeaderboardItem');
+var LeaderboardItem     = require('../LeaderboardItem');
+var numeral             = require('numeral');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -44,7 +44,7 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       isLoading: false,
-      teamPageIds: [],
+      pageIds: [],
       boardData: [],
       pagedBoardData: [],
       currentPage: 1
@@ -63,19 +63,24 @@ module.exports = React.createClass({
 
   hasTeamPages: function(result) {
     this.setState({
-      teamPageIds: result.leaderboard.page_ids
+      pageIds: result.leaderboard.page_ids
     });
 
-    pages.findByIds(this.state.teamPageIds, this.getPageData);
+    pages.findByIds(this.state.pageIds, this.transformPageData);
   },
 
-  getPageData: function(page_data) {
+  transformPageData: function(pageData) {
     var symbol           = this.t('symbol');
     var pageSize         = this.props.pageSize;
     var pagedLeaderboard = [];
+    var rank             = 0;
+    var rankBuffer       = 0;
+    var formattedRank    = '';
+    var currentItem;
+    var prevItem;
 
-    var leaderboard = _.map(this.state.teamPageIds, function(page_id) {
-      var page = _.filter(page_data.pages, {id: page_id})[0];
+    var leaderboard = _.map(this.state.pageIds, function(pageId, i) {
+      var page = _.filter(pageData.pages, {id: pageId})[0];
 
       return {
         id: page.id,
@@ -90,9 +95,30 @@ module.exports = React.createClass({
       };
     });
 
+    _.forEach(leaderboard, function(item, i) {
+      currentItem = leaderboard[i];
+      prevItem = leaderboard[i - 1];
+
+      if (prevItem) {
+        if (currentItem.amount < prevItem.amount) {
+          rank = rank + rankBuffer + 1;
+          rankBuffer = 0;
+        } else {
+          rankBuffer = rankBuffer + 1;
+        }
+      } else {
+        rank = 1;
+      }
+
+      currentItem.rank = rank;
+      currentItem.formattedRank = numeral(rank).format('0o');
+    });
+
     for (var i = 0; i < leaderboard.length; i += pageSize) {
       pagedLeaderboard.push(leaderboard.slice(i,i + pageSize));
     }
+
+    console.log(pageData);
 
     this.onComplete(pagedLeaderboard);
   },
@@ -105,34 +131,14 @@ module.exports = React.createClass({
   },
 
   renderLeaderboardItems: function() {
-    var boardData     = this.state.boardData;
-    var currentPage   = this.state.currentPage - 1;
-    var rank          = 0;
-    var rankBuffer    = 0;
-    var formattedRank = '';
-    var prevItem;
+    var boardData   = this.state.boardData;
+    var currentPage = this.state.currentPage - 1;
 
     if (this.state.isLoading) {
       return <Icon className="Leaderboard__loading" icon="refresh" />;
     }
 
     return boardData[currentPage].map(function(d,i) {
-
-      prevItem = this.state.boardData[currentPage][i - 1];
-
-      if (prevItem) {
-        if (d.amount < prevItem.amount) {
-          rank = rank + rankBuffer + 1;
-          rankBuffer = 0;
-        } else {
-          rankBuffer = rankBuffer + 1;
-        }
-      } else {
-        rank = 1;
-      }
-
-      formattedRank = numeral(rank + (currentPage * this.props.pageSize)).format('0o');
-
       if (this.props.type === 'team') {
         return (
           <TeamLeaderboardItem
@@ -151,7 +157,7 @@ module.exports = React.createClass({
       return (
         <LeaderboardItem
           key={ d.id }
-          rank={ formattedRank }
+          rank={ d.formattedRank }
           rankTitle={ this.t('rankTitle') }
           name={ d.name }
           url={ d.url }

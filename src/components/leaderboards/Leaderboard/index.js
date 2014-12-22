@@ -79,7 +79,7 @@ module.exports = React.createClass({
     var leaderboard = _.map(this.state.pageIds, function(pageId, i) {
       var page = _.find(pageData.pages, {id: pageId});
       return this.processPage(page);
-    });
+    }, this);
 
     this.rankLeaderboard(leaderboard);
 

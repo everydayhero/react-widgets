@@ -1,15 +1,17 @@
 "use strict";
 
-var React             = require('react/addons');
-var I18nMixin         = require('../../mixins/I18n');
-var _                 = require('lodash');
-var Input             = require('../../forms/Input');
-var CountrySelect     = require('../CountrySelect');
-var countryList       = require('../CountrySelect/countries');
-var AddressStatus     = require('../AddressStatus');
-var AddressListing    = require('../AddressListing');
-var AddressBreakdown  = require('../AddressBreakdown');
-var addressAPI        = require('../../../api/address');
+var React               = require('react/addons');
+var I18nMixin           = require('../../mixins/I18n');
+var _                   = require('lodash');
+var Input               = require('../../forms/Input');
+var CountrySelect       = require('../CountrySelect');
+var countryList         = require('../CountrySelect/countries');
+var AddressStatus       = require('../AddressStatus');
+var AddressListing      = require('../AddressListing');
+var AddressBreakdown    = require('../AddressBreakdown');
+var addressAPI          = require('../../../api/address');
+var addEventListener    = require('../../../lib/addEventListener');
+var removeEventListener = require('../../../lib/removeEventListener');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -62,8 +64,12 @@ module.exports = React.createClass({
   },
 
   componentWillUpdate: function(nextProps, nextState) {
-    if (nextState.addressList) window.addEventListener('keydown', this.keyHandler);
-    if (!nextState.addressList) window.removeEventListener('keydown', this.keyHandler);
+    if (nextState.addressList) addEventListener(window, 'keydown', this.keyHandler);
+    if (!nextState.addressList) removeEventListener(window, 'keydown', this.keyHandler);
+  },
+
+  componentWillUnmount: function() {
+    removeEventListener(window, 'keydown', this.keyHandler);
   },
 
   keyHandler: function(e) {

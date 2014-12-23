@@ -1,14 +1,14 @@
 "use strict";
 
-var _                     = require('lodash');
-var React                 = require('react');
-var I18nMixin             = require('../../mixins/I18n');
-var leaderboard           = require('../../../api/leaderboard');
-var pages                 = require('../../../api/pages');
-var Icon                  = require('../../helpers/Icon');
-var TeamLeaderboardItem   = require('../TeamLeaderboardItem');
-var LeaderboardItem       = require('../LeaderboardItem');
-var numeral               = require('numeral');
+var _                   = require('lodash');
+var React               = require('react');
+var I18nMixin           = require('../../mixins/I18n');
+var leaderboard         = require('../../../api/leaderboard');
+var pages               = require('../../../api/pages');
+var Icon                = require('../../helpers/Icon');
+var TeamLeaderboardItem = require('../TeamLeaderboardItem');
+var LeaderboardItem     = require('../LeaderboardItem');
+var numeral             = require('numeral');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -44,7 +44,7 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       isLoading: false,
-      teamPageIds: [],
+      pageIds: [],
       boardData: [],
       pagedBoardData: [],
       currentPage: 1
@@ -52,67 +52,93 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
+    this.loadLeaderboard();
+  },
+
+  loadLeaderboard: function() {
     this.setState({
       isLoading: true
     });
 
     var props = this.props;
 
-    leaderboard.find(props.campaignUid, props.type, props.limit, this.hasTeamPages);
+    leaderboard.find(props.campaignUid, props.type, props.limit, this.loadPages);
   },
 
-  hasTeamPages: function(result) {
+  loadPages: function(result) {
+    var pageIds = result.leaderboard.page_ids;
+
     this.setState({
-      teamPageIds: result.leaderboard.page_ids
+      pageIds: pageIds
     });
 
-    pages.findByIds(this.state.teamPageIds, this.getPageData);
+    pages.findByIds(pageIds, this.processLeaderboard);
   },
 
-  getPageData: function(page_data) {
-    var symbol           = this.t('symbol');
+  processLeaderboard: function(pageData) {
+    var leaderboard = _.map(this.state.pageIds, function(pageId, i) {
+      var page = _.find(pageData.pages, {id: pageId});
+      return this.processPage(page);
+    }, this);
+
+    this.rankLeaderboard(leaderboard);
+
+    this.setState({
+      isLoading: false,
+      boardData: this.paginateLeaderboard(leaderboard)
+    });
+  },
+
+  processPage: function(page) {
+    return {
+      id: page.id,
+      name: page.name,
+      url: page.url,
+      isoCode: page.amount.currency.iso_code,
+      amount:  page.amount.cents,
+      totalMembers: page.team_member_uids.length,
+      imgSrc: page.image.large_image_url,
+      medImgSrc: page.image.medium_image_url
+    };
+  },
+
+  rankLeaderboard: function(leaderboard) {
+    var rank = 1;
+    var prevItem = null;
+
+    _.forEach(leaderboard, function(item, i) {
+      if (prevItem && item.amount != prevItem.amount) {
+        rank = i + 1;
+      }
+
+      item.rank = rank;
+      prevItem = item;
+    });
+  },
+
+  paginateLeaderboard: function(leaderboard) {
     var pageSize         = this.props.pageSize;
     var pagedLeaderboard = [];
-
-    var leaderboard = _.map(this.state.teamPageIds, function(page_id) {
-      var page = _.filter(page_data.pages, {id: page_id})[0];
-
-      return {
-        id: page.id,
-        name: page.name,
-        url: page.url,
-        iso_code: page.amount.currency.iso_code,
-        amount:  symbol + numeral(page.amount.cents / 100).format('0[.]00 a'),
-        totalMembers: page.team_member_uids.length,
-        imgSrc: page.image.large_image_url,
-        medImgSrc: page.image.medium_image_url
-      };
-    });
 
     for (var i = 0; i < leaderboard.length; i += pageSize) {
       pagedLeaderboard.push(leaderboard.slice(i,i + pageSize));
     }
 
-    this.onComplete(pagedLeaderboard);
-  },
-
-  onComplete: function(data) {
-    this.setState({
-      isLoading: false,
-      boardData: data
-    });
+    return pagedLeaderboard;
   },
 
   renderLeaderboardItems: function() {
+    var boardData   = this.state.boardData;
     var currentPage = this.state.currentPage - 1;
-    var rank = 0;
+    var symbol      = this.t('symbol');
 
     if (this.state.isLoading) {
       return <Icon className="Leaderboard__loading" icon="refresh" />;
     }
 
-    return this.state.boardData[currentPage].map(function(d,i) {
-      rank = numeral(i + 1 + (currentPage * this.props.pageSize)).format('0o');
+    return boardData[currentPage].map(function(d,i) {
+      var formattedAmount = symbol + numeral(d.amount / 100).format('0[.]00 a');
+      var formattedRank = numeral(d.rank).format('0o');
 
       if (this.props.type === 'team') {
         return (
@@ -120,8 +146,8 @@ module.exports = React.createClass({
             key={ d.id }
             name={ d.name }
             url={ d.url }
-            iso_code={ d.iso_code }
-            amount={ d.amount }
+            isoCode={ d.isoCode }
+            amount={ formattedAmount }
             totalMembers={ d.totalMembers }
             imgSrc={ d.imgSrc }
             raisedTitle={ this.t('raisedTitle') }
@@ -132,12 +158,12 @@ module.exports = React.createClass({
       return (
         <LeaderboardItem
           key={ d.id }
-          rank={ rank }
+          rank={ formattedRank }
           rankTitle={ this.t('rankTitle') }
           name={ d.name }
           url={ d.url }
-          iso_code={ d.iso_code }
-          amount={ d.amount }
+          isoCode={ d.isoCode }
+          amount={ formattedAmount }
           imgSrc={ d.medImgSrc } />
       );
 

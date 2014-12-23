@@ -3,12 +3,14 @@ jest.autoMockOff();
 jest.mock('../../../../api/pages');
 
 describe('Leaderboard', function() {
-  var React       = require('react/addons');
-  var Leaderboard = require('../');
-  var pages       = require('../../../../api/pages');
-  var TestUtils   = React.addons.TestUtils;
-  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+  var _               = require('lodash');
+  var React           = require('react/addons');
+  var Leaderboard     = require('../');
+  var LeaderboardItem = require('../../LeaderboardItem/');
+  var pages           = require('../../../../api/pages');
+  var TestUtils       = React.addons.TestUtils;
+  var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
+  var scryByClass     = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('component defaults', function() {
     var leaderboard;
@@ -49,8 +51,50 @@ describe('Leaderboard', function() {
 
     it('renders a custom heading', function() {
       var heading = findByClass(element, 'Leaderboard__heading');
-
       expect(heading.getDOMNode().textContent).toBe(translation.heading);
+    });
+  });
+
+  describe('standard competition ranking system', function() {
+    var element;
+    var data;
+
+    beforeEach(function() {
+      element = TestUtils.renderIntoDocument(<Leaderboard />);
+    });
+
+    it('assigns rank in order of amount', function(){
+      data = [
+        { id: 1, amount: 1100 },
+        { id: 2, amount: 1000 },
+        { id: 3, amount: 900 }
+      ];
+
+      element.rankLeaderboard(data);
+      expect(_.pluck(data, 'rank')).toEqual([1, 2, 3]);
+    });
+
+    it('gives results with the same amount the same rank', function() {
+      data = [
+        { id: 1, amount: 1000 },
+        { id: 2, amount: 1000 }
+      ];
+
+      element.rankLeaderboard(data);
+      expect(_.pluck(data, 'rank')).toEqual([1, 1]);
+    });
+
+    it('leaves a gap to compensate for items with the same rank', function(){
+      data = [
+        { id: 1, amount: 1100 },
+        { id: 2, amount: 1000 },
+        { id: 3, amount: 1000 },
+        { id: 4, amount: 1000 },
+        { id: 5, amount: 900 }
+      ];
+
+      element.rankLeaderboard(data);
+      expect(_.pluck(data, 'rank')).toEqual([1, 2, 2, 2, 5]);
     });
   });
 });

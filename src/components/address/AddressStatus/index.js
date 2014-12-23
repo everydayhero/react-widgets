@@ -1,7 +1,6 @@
 "use strict";
 
 var React = require('react/addons');
-var cx = require('react/lib/cx');
 var Icon = require('../../helpers/Icon');
 
 module.exports = React.createClass({
@@ -22,13 +21,10 @@ module.exports = React.createClass({
   },
 
   getStatus: function() {
-    var status =
-        this.props.error ? 'error' :
-        this.props.loading ? 'loading' :
-        this.props.success ? 'success' :
-        false;
-
-    return status;
+    return this.props.error ? 'error'
+           : this.props.loading ? 'loading'
+           : this.props.success ? 'success'
+           : false;
   },
 
   render: function() {

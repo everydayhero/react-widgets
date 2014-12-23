@@ -128,7 +128,7 @@ module.exports = React.createClass({
           width={ "narrow" }
           spacing={ 'tight' }
           output={ this.props.onChange('postal_code') } />
-        { this.props.children }
+          <input type="hidden" name={ this.props.prefix + "paf_validated" } value={ address.paf_valid } />
       </div>
     );
   }

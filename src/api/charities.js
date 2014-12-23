@@ -14,7 +14,7 @@ module.exports = {
     if (_.isEmpty(charityUids)) {
       _.defer(callback, { charities: [] });
       return;
-    };
+    }
 
     return getJSONP(routes.get('charities', { charityUids: charityUids }), function(response) {
       _.each(response.charities, function(charity) {

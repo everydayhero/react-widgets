@@ -52,7 +52,7 @@ describe('charities', function() {
 
       it('does not fetch', function() {
         expect(getJSONP).not.toBeCalled();
-      })
+      });
 
       it('defers callback with empty results', function() {
         expect(callback).not.toBeCalled();
@@ -60,7 +60,7 @@ describe('charities', function() {
         jest.runOnlyPendingTimers();
 
         expect(callback).toBeCalledWith({ charities: [] });
-      })
+      });
     });
   });
 

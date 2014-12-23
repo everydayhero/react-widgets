@@ -5,6 +5,7 @@ var I18nMixin         = require('../../mixins/I18n');
 var _                 = require('lodash');
 var Input             = require('../../forms/Input');
 var CountrySelect     = require('../CountrySelect');
+var countryList       = require('../CountrySelect/countries');
 var AddressStatus     = require('../AddressStatus');
 var AddressListing    = require('../AddressListing');
 var AddressBreakdown  = require('../AddressBreakdown');
@@ -21,7 +22,6 @@ module.exports = React.createClass({
     prefix: React.PropTypes.string,
     country: React.PropTypes.string,
     address: React.PropTypes.object,
-    paf_valid: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
 
@@ -32,7 +32,6 @@ module.exports = React.createClass({
       country: 'US',
       prefix: '',
       address: null,
-      paf_valid: false,
       defaultI18n: {
         inputLabel: 'Address Lookup',
         inputLabelGB: 'Postcode Lookup',
@@ -49,7 +48,7 @@ module.exports = React.createClass({
     return {
       focusOnMount: false,
       choosingCountry: false,
-      country: this.props.country,
+      country: this.props.country === 'UK' ? 'GB' : this.props.country,
       input: '',
       addressList: null,
       address: this.props.address,
@@ -130,6 +129,7 @@ module.exports = React.createClass({
     return function(value) {
       var custom = this.state.custom || _.clone(this.state.address);
       custom[key] = value;
+      custom.paf_valid = false;
       this.setState({
         custom: (_.isEqual(custom, this.state.address)) ? null : custom
       }, this.output);
@@ -137,6 +137,7 @@ module.exports = React.createClass({
   },
 
   setManualEntry: function() {
+    var country = _.find(countryList, { iso: this.state.country });
     this.setState({
       error: null,
       addressList: null,
@@ -146,7 +147,8 @@ module.exports = React.createClass({
         locality: '',
         postal_code: '',
         region: '',
-        country_name: ''
+        country_name: country.name,
+        paf_valid: false
       }
     });
   },
@@ -180,6 +182,7 @@ module.exports = React.createClass({
   setAddress: function(address) {
     if (address === null) { return this.setError('500'); }
     if (_.isEmpty(address.address)) { return this.setError('empty'); }
+    address.address.paf_valid = this.state.country === "GB";
     this.setState({ error: null, address: address.address, addressList: null, loading: false }, this.output);
   },
 
@@ -268,9 +271,7 @@ module.exports = React.createClass({
         required={ this.props.required }
         address={ address }
         region={ this.state.country }
-        onChange={ this.setCustom }>
-        { this.state.country === "GB" && <input type="hidden" name={ this.props.prefix + "PAF_validated" } value={ this.props.paf_valid || !this.state.custom } /> }
-      </AddressBreakdown>
+        onChange={ this.setCustom } />
     );
   },
 

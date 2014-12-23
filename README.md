@@ -625,10 +625,10 @@ Displays a form input field and country selector, which allows users to lookup t
     locality: '',
     postal_code: '',
     region: '',
-    country_name: ''
+    country_name: '',
+    paf_valid: false
   }
   ```
-- `paf_valid`: *optional* boolean. Supply only when address has prevously been validated. Default is 'false'.
 - `output`: *optional* function to get user's final selected address.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 

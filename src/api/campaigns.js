@@ -20,7 +20,7 @@ module.exports = {
     if (_.isEmpty(campaignUids)) {
       _.defer(callback, { campaigns: [] });
       return;
-    };
+    }
 
     return getJSONP(routes.get('campaigns', { campaignUids: campaignUids }), callback);
   },

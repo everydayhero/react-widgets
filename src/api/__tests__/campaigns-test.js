@@ -45,7 +45,7 @@ describe('campaigns', function() {
 
       it('does not fetch results', function() {
         expect(getJSONP).not.toBeCalled();
-      })
+      });
 
       it('defers callback with empty results', function() {
         expect(callback).not.toBeCalled();
@@ -53,7 +53,7 @@ describe('campaigns', function() {
         jest.runOnlyPendingTimers();
 
         expect(callback).toBeCalledWith({ campaigns: [] });
-      })
+      });
     });
   });
 

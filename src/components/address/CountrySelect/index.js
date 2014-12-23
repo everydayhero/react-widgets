@@ -1,12 +1,14 @@
 "use strict";
 
-var React             = require('react/addons');
-var cx                = require('react/lib/cx');
-var _                 = require('lodash');
-var countries         = require('./countries');
-var Input             = require('../../forms/Input');
-var CountrySelectItem = require('../CountrySelectItem');
-var FlagIcon          = require('../../helpers/FlagIcon');
+var React               = require('react/addons');
+var cx                  = require('react/lib/cx');
+var _                   = require('lodash');
+var countries           = require('./countries');
+var Input               = require('../../forms/Input');
+var CountrySelectItem   = require('../CountrySelectItem');
+var FlagIcon            = require('../../helpers/FlagIcon');
+var addEventListener    = require('../../../lib/addEventListener');
+var removeEventListener = require('../../../lib/removeEventListener');
 
 module.exports = React.createClass({
   displayName: "CountrySelect",
@@ -37,11 +39,15 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    if (nextProps.open) window.addEventListener('keydown', this.keyHandler);
+    if (nextProps.open) addEventListener(window, 'keydown', this.keyHandler);
     if (!nextProps.open) {
       this.setFauxFocus(0);
-      window.removeEventListener('keydown', this.keyHandler);
+      removeEventListener(window, 'keydown', this.keyHandler);
     }
+  },
+
+  componentWillUnmount: function() {
+    removeEventListener(window, 'keydown', this.keyHandler);
   },
 
   keyHandler: function(e) {

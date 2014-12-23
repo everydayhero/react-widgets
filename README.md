@@ -705,6 +705,7 @@ Displays an input field which can accept input masking, asynchronous validation,
 - `readOnly`: *optional* boolean to prevent users from altering the input by typing. Best used with a modal attached. Default is 'false'.
 - `disabled`: *optional* boolean to prevent users from changing the input, and displays as disabled. Default is 'false'.
 - `autoFocus`: *optional* boolean to determine if the input should gain focus as soon as it is loaded. Should only be true for one input on the page. Default is 'false'.
+- `autoComplete`: *optional* boolean to determine if the input should use the browser's autocomplete functionality. Default is 'false'.
 - `required`: *optional* boolean to trigger optional validation methods and ensure the input isn't left blank. Default is 'false'.
 - `mask`: *optional* function to modify user input as it is entered. Default is 'null'. Is passed the current input string. Example:
   ```javascript

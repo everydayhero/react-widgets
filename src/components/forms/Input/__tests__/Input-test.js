@@ -96,7 +96,7 @@ describe('Input', function() {
 
   it("will not execute validate function on blur if not required", function() {
     var validate = jest.genMockFunction();
-    var element = TestUtils.renderIntoDocument(<Input required={ false } value="testValue" validate={ validate } />);
+    var element = TestUtils.renderIntoDocument(<Input required={ false } validate={ validate } />);
     var input = findByClass(element, 'Input__input').getDOMNode();
     TestUtils.Simulate.blur(input);
     expect(validate).not.toBeCalled();
@@ -104,9 +104,21 @@ describe('Input', function() {
 
   it("will execute validate function on blur if required", function() {
     var validate = jest.genMockFunction();
-    var element = TestUtils.renderIntoDocument(<Input required={ true } value="testValue" validate={ validate } />);
+    var element = TestUtils.renderIntoDocument(<Input required={ true } validate={ validate } />);
     var input = findByClass(element, 'Input__input').getDOMNode();
+    TestUtils.Simulate.change(input, { target: { value: 'testValue' } });
     TestUtils.Simulate.blur(input);
+    expect(validate).lastCalledWith('testValue', element.setValid);
+    var setValidCallback = validate.mock.calls[0][1];
+    setValidCallback(true);
+    expect(element.state.valid).toBe(true);
+    setValidCallback(false);
+    expect(element.state.valid).toBe(false);
+  });
+
+  it("will execute validate function on load if has value", function() {
+    var validate = jest.genMockFunction();
+    var element = TestUtils.renderIntoDocument(<Input required={ true } value="testValue" validate={ validate } />);
     expect(validate).lastCalledWith('testValue', element.setValid);
     var setValidCallback = validate.mock.calls[0][1];
     setValidCallback(true);

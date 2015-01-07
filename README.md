@@ -147,6 +147,7 @@ Displays the total funds raised for a single specified campaign as a dollar amou
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `format`: *optional* string. Set to `'0.00 a'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -186,6 +187,7 @@ Displays the total number of fundraisers (that have a page) for a single specifi
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
+- `format`: *optional* string. Set to `'0,0'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -225,6 +227,7 @@ Displays the total number of charities associated with a single specified campai
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
+- `format`: *optional* string. Set to `'0,0 a'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -263,6 +266,7 @@ Set a goal in cents to display as a campaign goal.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `format`: *optional* string. Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -303,6 +307,7 @@ Displays the total recorded distance that fundraisers have run for a single spec
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `format`: *optional* string. Set to `'0,0[.]0[0]'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -342,6 +347,7 @@ Displays the total recorded time that fundraisers have run for a single specifie
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `format`: *optional* string. Set to `'0,0[.]0[0]'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -531,6 +537,7 @@ Displays a leaderboard sorted by funds raised (highest first) for a single speci
 - `pageSize`: *optional* number. Set to `12` by default. Determines how many results to show per page.
 - `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
 - `textColor`: *optional* string. Set to `'#333333'` by default.
+- `currencyFormat`: *optional* string. Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js

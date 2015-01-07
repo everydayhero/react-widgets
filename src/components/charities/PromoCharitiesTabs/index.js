@@ -18,14 +18,14 @@ module.exports = React.createClass({
 
   renderTabs: function() {
     return this.props.data.map(function(d, i) {
-      return <PromoCharitiesTab onClick={ this.switchTab } label={ d.tabName } index={ i } active={ this.state.current === i } />;
+      return <PromoCharitiesTab onClick={ this.switchTab } label={ d.tabName } index={ i } active={ this.state.current === i } key={ 'tab-' + i } />;
     }, this);
   },
 
   renderContent: function() {
     return this.props.data.map(function(d, i) {
       return (
-        <div className="PromoCharitiesTabs__content">
+        <div className="PromoCharitiesTabs__content" key={ 'content-' + i }>
           <div className="PromoCharitiesTabs__accordion">
             <PromoCharitiesDrawer
               onClick={ this.switchTab }

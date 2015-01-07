@@ -3,14 +3,14 @@ jest.autoMockOff();
 jest.mock('../../../../api/charities');
 
 describe('TotalCharities', function() {
-  var React                       = require('react/addons');
-  var TotalCharities              = require('../');
-  var charities                   = require('../../../../api/charities');
-  var TestUtils                   = React.addons.TestUtils;
-  var scryByTag                   = TestUtils.scryRenderedDOMComponentsWithTag;
-  var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
+  var React          = require('react/addons');
+  var TotalCharities = require('../');
+  var charities      = require('../../../../api/charities');
+  var TestUtils      = React.addons.TestUtils;
+  var scryByTag      = TestUtils.scryRenderedDOMComponentsWithTag;
+  var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
 
-  describe('component defaults', function() {
+  describe('Component defaults', function() {
     var totalCharities;
     var element;
 
@@ -53,7 +53,7 @@ describe('TotalCharities', function() {
     });
   });
 
-  describe('component props', function() {
+  describe('Custom component props', function() {
     var totalCharities;
     var element;
     var translation = {
@@ -77,6 +77,34 @@ describe('TotalCharities', function() {
       var total = findByClass(element, 'TotalCharities__total');
 
       expect(total.getDOMNode().textContent).toContain('0');
+    });
+  });
+
+  describe('Number formatting options', function() {
+    it('renders in a short format by default', function() {
+      var totalCharities = <TotalCharities campaignUid="au-0" />;
+      var element = TestUtils.renderIntoDocument(totalCharities);
+
+      element.setState({
+        isLoading: false,
+        total: 10000
+      });
+
+      var total = findByClass(element, 'TotalCharities__total');
+      expect(total.getDOMNode().textContent).toBe('10 k');
+    });
+
+    it('renders a different format if given acceptable numeral.js string', function() {
+      var totalCharities = <TotalCharities campaignUid="au-0" format="0,0" />;
+      var element = TestUtils.renderIntoDocument(totalCharities);
+
+      element.setState({
+        isLoading: false,
+        total: 10000
+      });
+
+      var total = findByClass(element, 'TotalCharities__total');
+      expect(total.getDOMNode().textContent).toBe('10,000');
     });
   });
 });

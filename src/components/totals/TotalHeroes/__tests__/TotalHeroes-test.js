@@ -3,13 +3,13 @@ jest.autoMockOff();
 jest.mock('../../../../api/pages');
 
 describe('TotalHeroes', function() {
-  var React                       = require('react/addons');
-  var TotalHeroes                 = require('../');
-  var pages                       = require('../../../../api/pages');
-  var TestUtils                   = React.addons.TestUtils;
-  var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
+  var React       = require('react/addons');
+  var TotalHeroes = require('../');
+  var pages       = require('../../../../api/pages');
+  var TestUtils   = React.addons.TestUtils;
+  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
-  describe('component defaults', function() {
+  describe('Component defaults', function() {
     var totalHeroes;
     var element;
 
@@ -52,7 +52,7 @@ describe('TotalHeroes', function() {
     });
   });
 
-  describe('component props', function() {
+  describe('Custom component props', function() {
     var totalHeroes;
     var element;
     var translation = {
@@ -76,6 +76,34 @@ describe('TotalHeroes', function() {
       var total = findByClass(element, 'TotalHeroes__total');
 
       expect(total.getDOMNode().textContent).toContain('0');
+    });
+  });
+
+  describe('Number formatting options', function() {
+    it('renders in a standard format by default', function() {
+      var totalHeroes = <TotalHeroes campaignUid="au-0" />;
+      var element = TestUtils.renderIntoDocument(totalHeroes);
+
+      element.setState({
+        isLoading: false,
+        total: 10050
+      });
+
+      var total = findByClass(element, 'TotalHeroes__total');
+      expect(total.getDOMNode().textContent).toBe('10,050');
+    });
+
+    it('renders a different format if given acceptable numeral.js string', function() {
+      var totalHeroes = <TotalHeroes campaignUid="au-0" unit="km" format="0.00" />;
+      var element = TestUtils.renderIntoDocument(totalHeroes);
+
+      element.setState({
+        isLoading: false,
+        total: 10050
+      });
+
+      var total = findByClass(element, 'TotalHeroes__total');
+      expect(total.getDOMNode().textContent).toBe('10050.00');
     });
   });
 });

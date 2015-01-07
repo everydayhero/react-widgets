@@ -3,11 +3,11 @@ jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
 
 describe('FundsRaised', function() {
-  var React                       = require('react/addons');
-  var FundsRaised                 = require('../');
-  var campaigns                   = require('../../../../api/campaigns');
-  var TestUtils                   = React.addons.TestUtils;
-  var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
+  var React       = require('react/addons');
+  var FundsRaised = require('../');
+  var campaigns   = require('../../../../api/campaigns');
+  var TestUtils   = React.addons.TestUtils;
+  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
     var fundsRaised;
@@ -77,6 +77,34 @@ describe('FundsRaised', function() {
       var total = findByClass(element, 'FundsRaised__total');
 
       expect(total.getDOMNode().textContent).toContain('£0.00');
+    });
+  });
+
+  describe('Number formatting options', function() {
+    it('renders in a short format by default', function() {
+      var fundsRaised = <FundsRaised campaignUid="au-0" />;
+      var element = TestUtils.renderIntoDocument(fundsRaised);
+
+      element.setState({
+        isLoading: false,
+        total: 1000000
+      });
+
+      var total = findByClass(element, 'FundsRaised__total');
+      expect(total.getDOMNode().textContent).toBe('$10.00 k');
+    });
+
+    it('renders a different format if given acceptable numeral.js string', function() {
+      var fundsRaised = <FundsRaised campaignUid="au-0" format="0[.]0" />;
+      var element = TestUtils.renderIntoDocument(fundsRaised);
+
+      element.setState({
+        isLoading: false,
+        total: 1000000
+      });
+
+      var total = findByClass(element, 'FundsRaised__total');
+      expect(total.getDOMNode().textContent).toBe('$10000');
     });
   });
 });

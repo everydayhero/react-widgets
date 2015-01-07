@@ -3,14 +3,13 @@ jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
 
 describe('TotalDistance', function() {
-  var React                       = require('react/addons');
-  var TotalDistance               = require('../');
-  var campaigns                   = require('../../../../api/campaigns');
-  var TestUtils                   = React.addons.TestUtils;
-  var scryByClass                 = TestUtils.scryRenderedDOMComponentsWithClass;
-  var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
+  var React         = require('react/addons');
+  var TotalDistance = require('../');
+  var campaigns     = require('../../../../api/campaigns');
+  var TestUtils     = React.addons.TestUtils;
+  var findByClass   = TestUtils.findRenderedDOMComponentWithClass;
 
-  describe('component defaults', function() {
+  describe('Component defaults', function() {
     var totalDistance;
     var element;
 
@@ -39,7 +38,7 @@ describe('TotalDistance', function() {
     });
   });
 
-  describe('component props', function() {
+  describe('Custom component props', function() {
     var totalDistance;
     var element;
     var translation = {
@@ -49,16 +48,49 @@ describe('TotalDistance', function() {
     beforeEach(function() {
       totalDistance = <TotalDistance i18n={ translation } renderIcon={ false } />;
       element = TestUtils.renderIntoDocument(totalDistance);
-    });
-
-    it('renders a custom title', function() {
       element.setState({
         isLoading: false,
         hasResults: true
       });
-      var title = findByClass(element, 'TotalDistance__title');
+    });
 
+    it('renders a custom title', function() {
+      var title = findByClass(element, 'TotalDistance__title');
       expect(title.getDOMNode().textContent).toBe(translation.title);
+    });
+
+    it('renders no icon', function() {
+      expect(element.renderIcon()).toBeUndefined();
+    });
+  });
+
+  describe('Number formatting options', function() {
+    it('renders in a human readable format by default', function() {
+      var totalDistance = <TotalDistance campaignUid="au-0" unit="km" />;
+      var element = TestUtils.renderIntoDocument(totalDistance);
+
+      element.setState({
+        isLoading: false,
+        hasResults: true,
+        total: 1000050
+      });
+
+      var total = findByClass(element, 'TotalDistance__total');
+      expect(total.getDOMNode().textContent).toBe('10,000.5');
+    });
+
+    it('renders a different format if given acceptable numeral.js string', function() {
+      var totalDistance = <TotalDistance campaignUid="au-0" unit="km" format="0.00" />;
+      var element = TestUtils.renderIntoDocument(totalDistance);
+
+      element.setState({
+        isLoading: false,
+        hasResults: true,
+        total: 1000050
+      });
+
+      var total = findByClass(element, 'TotalDistance__total');
+      expect(total.getDOMNode().textContent).toBe('10000.50');
     });
   });
 });

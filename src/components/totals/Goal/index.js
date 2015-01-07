@@ -13,7 +13,8 @@ module.exports = React.createClass({
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
-    i18n: React.PropTypes.object,
+    format: React.PropTypes.string,
+    i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
@@ -23,6 +24,7 @@ module.exports = React.createClass({
       goal: 0,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
+      format: '0[.]00 a',
       defaultI18n: {
         title: 'Goal',
         symbol: '$'
@@ -34,7 +36,7 @@ module.exports = React.createClass({
     var title = this.t('title');
     var symbol = this.t('symbol');
     var goal = this.props.goal / 100;
-    var formattedTotal = symbol + numeral(goal).format('0[.]00 a');
+    var formattedTotal = symbol + numeral(goal).format(this.props.format);
 
     return (
       <div>

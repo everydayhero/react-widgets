@@ -7,7 +7,7 @@ describe('Goal', function() {
   var TestUtils                   = React.addons.TestUtils;
   var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
 
-  describe('component defaults', function() {
+  describe('Component defaults', function() {
     var goal;
     var element;
 
@@ -41,7 +41,7 @@ describe('Goal', function() {
     });
   });
 
-  describe('component props', function() {
+  describe('Custom component props', function() {
     var goal;
     var element;
     var translation = {
@@ -68,4 +68,23 @@ describe('Goal', function() {
       expect(total.getDOMNode().textContent).toContain('£50 k');
     });
   });
+
+  describe('Number formatting options', function() {
+    it('renders in a short format by default', function() {
+      var goal = <Goal goal="5000000" />;
+      var element = TestUtils.renderIntoDocument(goal);
+      var total = findByClass(element, 'Goal__total');
+
+      expect(total.getDOMNode().textContent).toBe('$50 k');
+    });
+
+    it('renders a different format if given acceptable numeral.js string', function() {
+      var goal = <Goal goal="5000000" format="0,0.00" />;
+      var element = TestUtils.renderIntoDocument(goal);
+      var total = findByClass(element, 'Goal__total');
+
+      expect(total.getDOMNode().textContent).toBe('$50,000.00');
+    });
+  });
+
 });

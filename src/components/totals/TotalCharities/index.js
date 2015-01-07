@@ -1,10 +1,10 @@
 "use strict";
 
-var React             = require('react');
-var I18nMixin         = require('../../mixins/I18n');
-var charities         = require('../../../api/charities');
-var Icon              = require('../../helpers/Icon');
-var numeral           = require('numeral');
+var React     = require('react');
+var I18nMixin = require('../../mixins/I18n');
+var charities = require('../../../api/charities');
+var Icon      = require('../../helpers/Icon');
+var numeral   = require('numeral');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -14,7 +14,8 @@ module.exports = React.createClass({
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
-    i18n: React.PropTypes.object,
+    format: React.PropTypes.string,
+    i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
@@ -23,6 +24,7 @@ module.exports = React.createClass({
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
+      format: '0,0 a',
       defaultI18n: {
         title: 'Non Profits'
       }
@@ -52,7 +54,7 @@ module.exports = React.createClass({
 
   renderTotal: function() {
     var totalCharities = this.state.total;
-    var formattedTotal = numeral(totalCharities).format('0,0');
+    var formattedTotal = numeral(totalCharities).format(this.props.format);
     var title = this.t('title');
 
     if (this.state.isLoading) {

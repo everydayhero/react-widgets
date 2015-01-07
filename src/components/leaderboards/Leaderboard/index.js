@@ -32,7 +32,7 @@ module.exports = React.createClass({
       pageSize: 12,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
-      format: '0[.]00 a',
+      currencyFormat: '0[.]00 a',
       defaultI18n: {
         raisedTitle: 'Raised',
         membersTitle: 'Members',

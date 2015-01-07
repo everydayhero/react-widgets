@@ -103,7 +103,7 @@ describe('Leaderboard', function() {
       var leaderboard = <Leaderboard campaignUid="au-0" />;
       var element = TestUtils.renderIntoDocument(leaderboard);
 
-      expect(element.formatAmount(10000)).toEqual('$100');
+      expect(element.formatAmount(10000)).toEqual('$100 ');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {

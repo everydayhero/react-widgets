@@ -1,13 +1,13 @@
 "use strict";
 
-var _                   = require('lodash');
-var React               = require('react');
-var I18nMixin           = require('../../mixins/I18n');
-var leaderboard         = require('../../../api/leaderboard');
-var pages               = require('../../../api/pages');
-var Icon                = require('../../helpers/Icon');
-var MMFLeaderboardItem  = require('../MMFLeaderboardItem');
-var numeral             = require('numeral');
+var _                  = require('lodash');
+var React              = require('react');
+var I18nMixin          = require('../../mixins/I18n');
+var leaderboard        = require('../../../api/leaderboard');
+var pages              = require('../../../api/pages');
+var Icon               = require('../../helpers/Icon');
+var MMFLeaderboardItem = require('../MMFLeaderboardItem');
+var numeral            = require('numeral');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -27,7 +27,7 @@ module.exports = React.createClass({
       campaignUid: '',
       type: 'individual',
       limit: 24,
-      pageSize: 12,
+      pageSize: 24,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
       defaultI18n: {
@@ -75,20 +75,12 @@ module.exports = React.createClass({
   },
 
   processLeaderboard: function(pageData) {
-
-    //
-    // TODO LIST:
-    //
-    // - Find a campaign with actual MMF fitness data
-    // - Figure out the best way to display
-    // - Merge as a set of options with the regular leaderboard component
-
-    console.log(pageData.fitness_activity_overview);
-
     var leaderboard = _.map(this.state.pageIds, function(pageId, i) {
       var page = _.find(pageData.pages, {id: pageId});
       return this.processPage(page);
     }, this);
+
+    console.log(leaderboard);
 
     this.rankLeaderboard(leaderboard);
 
@@ -99,6 +91,24 @@ module.exports = React.createClass({
   },
 
   processPage: function(page) {
+    if (page.fitness_activity_overview !== null) {
+      var new_fitness_activity_overview = {
+        duration_in_seconds: 0,
+        calories: 0,
+        distance_in_meters: 0
+      };
+
+      // Combines all fitness activity in to one rather than splitting by each activity.
+      Object.keys(page.fitness_activity_overview).forEach(function (key) {
+        var fitness_activity_overview = page.fitness_activity_overview[key];
+        new_fitness_activity_overview.duration_in_seconds += fitness_activity_overview.duration_in_seconds;
+        new_fitness_activity_overview.calories += fitness_activity_overview.calories;
+        new_fitness_activity_overview.distance_in_meters += fitness_activity_overview.distance_in_meters;
+      });
+
+      page.fitness_activity_overview = new_fitness_activity_overview;
+    }
+
     return {
       id: page.id,
       name: page.name,
@@ -107,7 +117,10 @@ module.exports = React.createClass({
       amount:  page.amount.cents,
       totalMembers: page.team_member_uids.length,
       imgSrc: page.image.large_image_url,
-      medImgSrc: page.image.medium_image_url
+      medImgSrc: page.image.medium_image_url,
+      duration_in_seconds: page.fitness_activity_overview.duration_in_seconds,
+      calories: page.fitness_activity_overview.calories,
+      distance_in_meters: page.fitness_activity_overview.distance_in_meters
     };
   },
 
@@ -221,16 +234,16 @@ module.exports = React.createClass({
 
     if (limit > pageSize) {
       pageControls = (
-        <div className="Leaderboard__controller">
-          <div className="Leaderboard__indicators">
+        <div className="MMFLeaderboard__controller">
+          <div className="MMFLeaderboard__indicators">
             { this.renderIndicators() }
           </div>
-          <div className="Leaderboard__controls">
+          <div className="MMFLeaderboard__controls">
             <div onClick={ this.prevPage } className="Leaderboard__prevBtn">
-              <Icon className="Leaderboard__icon" icon="caret-left"/>
+              <Icon className="MMFLeaderboard__icon" icon="caret-left"/>
             </div>
             <div onClick={ this.nextPage } className="Leaderboard__nextBtn">
-              <Icon className="Leaderboard__icon" icon="caret-right"/>
+              <Icon className="MMFLeaderboard__icon" icon="caret-right"/>
             </div>
           </div>
         </div>
@@ -238,11 +251,19 @@ module.exports = React.createClass({
     }
 
     return (
-      <div className="Leaderboard" style={ customStyle }>
-        <h3 className="Leaderboard__heading">{ heading }</h3>
-        <ol className="Leaderboard__items">
+      <div className="MMFLeaderboard" style={ customStyle }>
+        <h3 className="MMFLeaderboard__heading">{ heading }</h3>
+
+        <div className="MMFLeaderboard__headings">
+          <div className="MMFLeaderboard__heading-image"></div>
+          <div className="MMFLeaderboard__heading-name">Name</div>
+          <div className="MMFLeaderboard__heading-time">Time Invested</div>
+          <div className="MMFLeaderboard__heading-calories">Calories Burned</div>
+          <div className="MMFLeaderboard__heading-distance">Distance Moved</div>
+        </div>
+        <div className="MMFLeaderboard__items">
           { this.renderLeaderboardItems() }
-        </ol>
+        </div>
         { pageControls }
       </div>
     );

@@ -7,26 +7,33 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <li className="LeaderboardItem">
-        <div className="LeaderboardItem__skin">
-          <a href={ this.props.url } className="LeaderboardItem__image">
-            <img src={ this.props.imgSrc } />
-          </a>
-          <div className="LeaderboardItem__content">
-            <div className="LeaderboardItem__details">
-              <div className="LeaderboardItem__name">
-                { this.props.name }
-              </div>
-              <div className="LeaderboardItem__rank">
-                { this.props.rankTitle + ' ' + this.props.rank }
-              </div>
-            </div>
-            <div className="LeaderboardItem__amount">
-              { this.props.amount }
-            </div>
-          </div>
+      <div className="MMFLeaderboardItem">
+
+        <a href={ this.props.url } className="MMFLeaderboardItem__image">
+          <img src={ this.props.imgSrc } />
+        </a>
+
+        <div className="MMFLeaderboardItem__name">
+          { this.props.name }
         </div>
-      </li>
+
+        <div className="MMFLeaderboardItem__amount">
+          { this.props.amount }
+        </div>
+
+        <div className="MMFLeaderboardItem__time">
+          10m 55s
+        </div>
+
+        <div className="MMFLeaderboardItem__calories">
+          10 Calories
+        </div>
+
+        <div className="MMFLeaderboardItem__distance">
+          10 km
+        </div>
+
+      </div>
     );
   }
 });

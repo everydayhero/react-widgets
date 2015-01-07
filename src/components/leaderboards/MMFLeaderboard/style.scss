@@ -1,0 +1,59 @@
+.MMFLeaderboard {
+  @extend %clearfix;
+  background: $ehw-grey-dark;
+  font-family: $ehw-sans-serif-fonts;
+  font-size: $ehw-default-font-size;
+  color: #fff;
+
+  .MMFLeaderboard__heading {
+    @extend %ehw-tile-heading;
+  }
+
+  .MMFLeaderboard__items {
+    @extend %clearfix;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .MMFLeaderboard__controller {
+    clear: both;
+    text-align: right;
+    margin: 0 15px 15px;
+  }
+
+  .MMFLeaderboard__controls,
+  .MMFLeaderboard__indicators {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+
+  .MMFLeaderboard__prevBtn,
+  .MMFLeaderboard__nextBtn {
+    display: inline-block;
+    padding: 5px;
+    cursor: pointer;
+    font-size: $x-6;
+  }
+
+  .MMFLeaderboard__indicator {
+    display: inline-block;
+    padding: 3px;
+    margin: 0 2px 0 0;
+    cursor: pointer;
+  }
+
+  .MMFLeaderboard__loading {
+    @extend %ehw-tile-loading-icon;
+  }
+}
+
+.MMFLeaderboard__headings {
+  @extend %clearfix;
+}
+
+.MMFLeaderboard__headings > div {
+  float: left;
+  padding: 10px;
+}

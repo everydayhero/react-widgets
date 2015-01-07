@@ -20,7 +20,7 @@ module.exports = React.createClass({
     pageSize: React.PropTypes.number,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
-    format: React.PropTypes.string,
+    currencyFormat: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
 
@@ -126,7 +126,7 @@ module.exports = React.createClass({
   },
 
   formatAmount: function(amount) {
-    return this.t('symbol') + numeral(amount / 100).format(this.props.format);
+    return this.t('symbol') + numeral(amount / 100).format(this.props.currencyFormat);
   },
 
   renderLeaderboardItems: function() {

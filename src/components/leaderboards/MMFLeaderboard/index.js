@@ -26,8 +26,8 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       type: 'individual',
-      limit: 40,
-      pageSize: 40,
+      limit: 50,
+      pageSize: 50,
       backgroundColor: '',
       textColor: '',
       defaultI18n: {
@@ -55,12 +55,9 @@ module.exports = React.createClass({
   },
 
   loadLeaderboard: function() {
-    this.setState({
-      isLoading: true
-    });
+    this.setState({ isLoading: true });
 
     var props = this.props;
-
     leaderboard.find(props.campaignUid, props.type, props.limit, this.loadPages);
   },
 
@@ -88,16 +85,12 @@ module.exports = React.createClass({
   processPage: function(page) {
     if (page.fitness_activity_overview !== null) {
       var new_fitness_activity_overview = {
-        duration_in_seconds: 0,
-        calories: 0,
         distance_in_meters: 0
       };
 
-      // Combines all fitness activity in to one rather than splitting by each activity.
-      Object.keys(page.fitness_activity_overview).forEach(function (key) {
+      // Combines all fitness activity in to one rather than splitting by activity type.
+      _.forOwn(page.fitness_activity_overview, function(num, key) {
         var fitness_activity_overview = page.fitness_activity_overview[key];
-        new_fitness_activity_overview.duration_in_seconds += fitness_activity_overview.duration_in_seconds;
-        new_fitness_activity_overview.calories += fitness_activity_overview.calories;
         new_fitness_activity_overview.distance_in_meters += fitness_activity_overview.distance_in_meters;
       });
 
@@ -113,8 +106,6 @@ module.exports = React.createClass({
       totalMembers: page.team_member_uids.length,
       imgSrc: page.image.large_image_url,
       medImgSrc: page.image.medium_image_url,
-      duration_in_seconds: page.fitness_activity_overview.duration_in_seconds,
-      calories: page.fitness_activity_overview.calories,
       distance_in_meters: page.fitness_activity_overview.distance_in_meters
     };
   },
@@ -147,7 +138,7 @@ module.exports = React.createClass({
       );
     }
 
-    return boardData.map(function(d,i) {
+    return _.map(boardData, function(d, i) {
       var formattedAmount = symbol + numeral(d.amount / 100).format('0[.]00 a');
       var formattedMeters = d.distance_in_meters;
       var formattedRank = numeral(d.rank).format('0o');
@@ -169,7 +160,7 @@ module.exports = React.createClass({
 
   renderIndicators: function() {
     if (!this.state.isLoading) {
-      return this.state.boardData.map(function(d, i) {
+      return _.map(this.state.boardData, function(d, i) {
         var iconClass;
 
         if (this.state.currentPage == i + 1) {
@@ -188,19 +179,8 @@ module.exports = React.createClass({
   },
 
   sortLeaderboard: function(attr) {
-    var leaderboard = this.state.boardData;
-
-    // if (leaderboard) {
-    //   leaderboard = leaderboard.sort(function(a, b) {
-    //     return b[attr] - a[attr];
-    //   });
-    // }
-
-    if (leaderboard) {
-      leaderboard = _.sortBy(leaderboard, [attr, 'amount']).reverse();
-    }
-
-    this.setState({ boardData: leaderboard });
+    var sortedBoardData = _.sortBy(this.state.boardData, [attr, 'amount']).reverse();
+    this.setState({ boardData: sortedBoardData });
   },
 
   render: function() {
@@ -211,25 +191,6 @@ module.exports = React.createClass({
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
     };
-    var pageControls;
-
-    if (limit > pageSize) {
-      pageControls = (
-        <div className="MMFLeaderboard__controller">
-          <div className="MMFLeaderboard__indicators">
-            { this.renderIndicators() }
-          </div>
-          <div className="MMFLeaderboard__controls">
-            <div className="Leaderboard__prevBtn">
-              <Icon className="MMFLeaderboard__icon" icon="caret-left"/>
-            </div>
-            <div className="Leaderboard__nextBtn">
-              <Icon className="MMFLeaderboard__icon" icon="caret-right"/>
-            </div>
-          </div>
-        </div>
-      );
-    }
 
     return (
       <div className="MMFLeaderboard" style={ customStyle }>
@@ -239,12 +200,8 @@ module.exports = React.createClass({
         <table className="MMFLeaderboard__table">
           <thead>
             <tr>
-              <td className="MMFLeaderboard__colhead MMFLeaderboard__colhead--fundraiser">
-                Fundraiser
-              </td>
-
+              <td className="MMFLeaderboard__colhead MMFLeaderboard__colhead--fundraiser">Fundraiser</td>
               <td className="MMFLeaderboard__colhead MMFLeaderboard__colhead--raised" onClick={ this.sortLeaderboard.bind(null, 'amount') }>Raised</td>
-
               <td className="MMFLeaderboard__colhead MMFLeaderboard__colhead--distance" onClick={ this.sortLeaderboard.bind(null, 'distance_in_meters') }>Distance</td>
             </tr>
           </thead>

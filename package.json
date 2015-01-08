@@ -6,6 +6,7 @@
   "license": "MIT",
   "main": "src/widgets.js",
   "dependencies": {
+    "es5-shim": "~4.0.5",
     "jsonp": "webmodules/jsonp",
     "lodash": "~2.4.1",
     "numeral": "~1.5.3",
@@ -14,7 +15,6 @@
   "devDependencies": {
     "browserify": "~6.3.3",
     "compression": "~1.2.1",
-    "es5-shim": "~4.0.5",
     "express": "~4.10.4",
     "gulp": "~3.8.10",
     "gulp-autoprefixer": "~2.0.0",

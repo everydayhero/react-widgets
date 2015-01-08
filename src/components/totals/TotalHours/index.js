@@ -43,17 +43,34 @@ module.exports = React.createClass({
 
   componentWillMount: function() {
     this.setState({ isLoading: true });
-    campaigns.find(this.props.campaignUid, this.onSuccess);
+    campaigns.find(this.props.campaignUid, this.combineActivityData);
   },
 
-  onSuccess: function(result) {
-    var fitnessResults = result.campaign.fitness_activity_overview.run;
+  combineActivityData: function(result) {
+    var fitnessActivity = result.campaign.fitness_activity_overview;
 
-    if (fitnessResults){
+    if (fitnessActivity !== null) {
+      var new_fitness_activity_overview = {
+        duration_in_seconds: 0
+      };
+
+      _.forOwn(fitnessActivity, function(num, key) {
+        var fitness_activity_overview = fitnessActivity[key];
+        new_fitness_activity_overview.duration_in_seconds += fitness_activity_overview.duration_in_seconds;
+      });
+
+      fitnessActivity = new_fitness_activity_overview;
+    }
+
+    this.onSuccess(fitnessActivity);
+  },
+
+  onSuccess: function(combinedFitnessActivity) {
+    if (combinedFitnessActivity){
       this.setState({
         isLoading: false,
         hasResults: true,
-        total: fitnessResults.duration_in_seconds
+        total: combinedFitnessActivity.duration_in_seconds
       });
     } else {
       this.setState({

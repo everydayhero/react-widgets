@@ -1,11 +1,12 @@
 "use strict";
 
-var _         = require('lodash');
-var React     = require('react');
-var I18nMixin = require('../../mixins/I18n');
-var campaigns = require('../../../api/campaigns');
-var Icon      = require('../../helpers/Icon');
-var numeral   = require('numeral');
+var _               = require('lodash');
+var React           = require('react');
+var I18nMixin       = require('../../mixins/I18n');
+var campaigns       = require('../../../api/campaigns');
+var Icon            = require('../../helpers/Icon');
+var numeral         = require('numeral');
+var METERS_TO_MILES = 0.000621371192;
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -89,7 +90,7 @@ module.exports = React.createClass({
     if (this.props.unit === 'km') {
       return numeral(meters / 1000).format(this.props.format);
     } else {
-      return numeral(meters * 0.000621371192).format(this.props.format);
+      return numeral(meters * METERS_TO_MILES).format(this.props.format);
     }
   },
 

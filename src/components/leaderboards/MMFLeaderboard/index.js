@@ -26,16 +26,16 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       type: 'individual',
-      limit: 24,
-      pageSize: 24,
-      backgroundColor: '#525252',
-      textColor: '#FFFFFF',
+      limit: 40,
+      pageSize: 40,
+      backgroundColor: '',
+      textColor: '',
       defaultI18n: {
         raisedTitle: 'Raised',
         membersTitle: 'Members',
         rankTitle: 'Ranked',
         symbol: '$',
-        heading: 'Leaderboard > Top Individuals'
+        heading: 'Top Individuals'
       }
     };
   },
@@ -66,10 +66,7 @@ module.exports = React.createClass({
 
   loadPages: function(result) {
     var pageIds = result.leaderboard.page_ids;
-
-    this.setState({
-      pageIds: pageIds
-    });
+    this.setState({ pageIds: pageIds });
 
     pages.findByIds(pageIds, this.processLeaderboard);
   },
@@ -80,13 +77,11 @@ module.exports = React.createClass({
       return this.processPage(page);
     }, this);
 
-    console.log(leaderboard);
-
     this.rankLeaderboard(leaderboard);
 
     this.setState({
       isLoading: false,
-      boardData: this.paginateLeaderboard(leaderboard)
+      boardData: leaderboard
     });
   },
 
@@ -138,28 +133,23 @@ module.exports = React.createClass({
     });
   },
 
-  paginateLeaderboard: function(leaderboard) {
-    var pageSize         = this.props.pageSize;
-    var pagedLeaderboard = [];
-
-    for (var i = 0; i < leaderboard.length; i += pageSize) {
-      pagedLeaderboard.push(leaderboard.slice(i,i + pageSize));
-    }
-
-    return pagedLeaderboard;
-  },
-
   renderLeaderboardItems: function() {
-    var boardData   = this.state.boardData;
-    var currentPage = this.state.currentPage - 1;
-    var symbol      = this.t('symbol');
+    var boardData = this.state.boardData;
+    var symbol    = this.t('symbol');
 
     if (this.state.isLoading) {
-      return <Icon className="Leaderboard__loading" icon="refresh" />;
+      return (
+        <tr>
+          <td>
+            <Icon className="Leaderboard__loading" icon="refresh" />
+          </td>
+        </tr>
+      );
     }
 
-    return boardData[currentPage].map(function(d,i) {
+    return boardData.map(function(d,i) {
       var formattedAmount = symbol + numeral(d.amount / 100).format('0[.]00 a');
+      var formattedMeters = d.distance_in_meters;
       var formattedRank = numeral(d.rank).format('0o');
 
       return (
@@ -171,34 +161,10 @@ module.exports = React.createClass({
           url={ d.url }
           isoCode={ d.isoCode }
           amount={ formattedAmount }
+          meters={ formattedMeters }
           imgSrc={ d.medImgSrc } />
       );
-
     }, this);
-  },
-
-  prevPage: function() {
-    if (this.state.currentPage > 1) {
-      this.setState({
-        currentPage: this.state.currentPage - 1
-      });
-    }
-  },
-
-  nextPage: function() {
-    var totalPages = this.props.limit / this.props.pageSize;
-
-    if (this.state.currentPage < totalPages) {
-      this.setState({
-        currentPage: this.state.currentPage + 1
-      });
-    }
-  },
-
-  switchPage: function(i) {
-    this.setState({
-      currentPage: i + 1
-    });
   },
 
   renderIndicators: function() {
@@ -213,13 +179,28 @@ module.exports = React.createClass({
         }
 
         return (
-          <div key={ i } onClick={ this.switchPage.bind(null,i) } className="Leaderboard__indicator">
+          <div key={ i } onClick={ this.switchPage.bind(null, i) } className="Leaderboard__indicator">
             <Icon className="Leaderboard__icon" icon={ iconClass } />
           </div>
         );
-
       }, this);
     }
+  },
+
+  sortLeaderboard: function(attr) {
+    var leaderboard = this.state.boardData;
+
+    // if (leaderboard) {
+    //   leaderboard = leaderboard.sort(function(a, b) {
+    //     return b[attr] - a[attr];
+    //   });
+    // }
+
+    if (leaderboard) {
+      leaderboard = _.sortBy(leaderboard, [attr, 'amount']).reverse();
+    }
+
+    this.setState({ boardData: leaderboard });
   },
 
   render: function() {
@@ -239,10 +220,10 @@ module.exports = React.createClass({
             { this.renderIndicators() }
           </div>
           <div className="MMFLeaderboard__controls">
-            <div onClick={ this.prevPage } className="Leaderboard__prevBtn">
+            <div className="Leaderboard__prevBtn">
               <Icon className="MMFLeaderboard__icon" icon="caret-left"/>
             </div>
-            <div onClick={ this.nextPage } className="Leaderboard__nextBtn">
+            <div className="Leaderboard__nextBtn">
               <Icon className="MMFLeaderboard__icon" icon="caret-right"/>
             </div>
           </div>
@@ -252,19 +233,25 @@ module.exports = React.createClass({
 
     return (
       <div className="MMFLeaderboard" style={ customStyle }>
-        <h3 className="MMFLeaderboard__heading">{ heading }</h3>
+        <div className="MMFLeaderboard__heading">
+          { heading }
+        </div>
+        <table className="MMFLeaderboard__table">
+          <thead>
+            <tr>
+              <td className="MMFLeaderboard__colhead MMFLeaderboard__colhead--fundraiser">
+                Fundraiser
+              </td>
 
-        <div className="MMFLeaderboard__headings">
-          <div className="MMFLeaderboard__heading-image"></div>
-          <div className="MMFLeaderboard__heading-name">Name</div>
-          <div className="MMFLeaderboard__heading-time">Time Invested</div>
-          <div className="MMFLeaderboard__heading-calories">Calories Burned</div>
-          <div className="MMFLeaderboard__heading-distance">Distance Moved</div>
-        </div>
-        <div className="MMFLeaderboard__items">
-          { this.renderLeaderboardItems() }
-        </div>
-        { pageControls }
+              <td className="MMFLeaderboard__colhead MMFLeaderboard__colhead--raised" onClick={ this.sortLeaderboard.bind(null, 'amount') }>Raised</td>
+
+              <td className="MMFLeaderboard__colhead MMFLeaderboard__colhead--distance" onClick={ this.sortLeaderboard.bind(null, 'distance_in_meters') }>Distance</td>
+            </tr>
+          </thead>
+          <tbody>
+            { this.renderLeaderboardItems() }
+          </tbody>
+        </table>
       </div>
     );
   }

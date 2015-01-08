@@ -38,6 +38,32 @@ describe('TotalDistance', function() {
     });
   });
 
+  describe('Calculating miles/kilometers from meters', function() {
+    it('Correctly calculates miles based on response', function() {
+      var totalDistance = <TotalDistance campaignUid="au-0" />;
+      var element = TestUtils.renderIntoDocument(totalDistance);
+
+      element.setState({
+        isLoading: false,
+        hasResults: true
+      });
+
+      expect(element.formatDistance(1000)).toEqual('0.62');
+    });
+
+    it('Correctly calculates kilometers based on response', function() {
+      var totalDistance = <TotalDistance campaignUid="au-0" unit="km" />;
+      var element = TestUtils.renderIntoDocument(totalDistance);
+
+      element.setState({
+        isLoading: false,
+        hasResults: true
+      });
+
+      expect(element.formatDistance(1000)).toEqual('1');
+    });
+  });
+
   describe('Custom component props', function() {
     var totalDistance;
     var element;
@@ -76,7 +102,7 @@ describe('TotalDistance', function() {
       });
 
       var total = findByClass(element, 'TotalDistance__total');
-      expect(total.getDOMNode().textContent).toBe('10,000.5');
+      expect(total.getDOMNode().textContent).toBe('1,000.05');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
@@ -90,7 +116,7 @@ describe('TotalDistance', function() {
       });
 
       var total = findByClass(element, 'TotalDistance__total');
-      expect(total.getDOMNode().textContent).toBe('10000.50');
+      expect(total.getDOMNode().textContent).toBe('1000.05');
     });
   });
 });

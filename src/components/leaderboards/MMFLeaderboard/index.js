@@ -17,6 +17,7 @@ module.exports = React.createClass({
     type: React.PropTypes.oneOf(['team', 'individual']),
     limit: React.PropTypes.number,
     pageSize: React.PropTypes.number,
+    unit: React.PropTypes.oneOf(['km', 'miles']),
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     i18n: React.PropTypes.object
@@ -26,8 +27,9 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       type: 'individual',
-      limit: 50,
-      pageSize: 50,
+      limit: 100,
+      pageSize: 5,
+      unit: 'miles',
       backgroundColor: '',
       textColor: '',
       defaultI18n: {
@@ -45,8 +47,7 @@ module.exports = React.createClass({
       isLoading: false,
       pageIds: [],
       boardData: [],
-      pagedBoardData: [],
-      currentPage: 1
+      pagedBoardData: []
     };
   },
 
@@ -104,8 +105,7 @@ module.exports = React.createClass({
       isoCode: page.amount.currency.iso_code,
       amount:  page.amount.cents,
       totalMembers: page.team_member_uids.length,
-      imgSrc: page.image.large_image_url,
-      medImgSrc: page.image.medium_image_url,
+      imgSrc: page.image.small_image_url,
       distance_in_meters: page.fitness_activity_overview.distance_in_meters
     };
   },
@@ -124,6 +124,14 @@ module.exports = React.createClass({
     });
   },
 
+  formatDistance: function(meters) {
+    if (this.props.unit === 'km') {
+      return numeral(meters / 1000).format('0,0[.]00') + ' km';
+    } else {
+      return numeral(meters * 0.000621371192).format('0,0[.]00') + ' mi.';
+    }
+  },
+
   renderLeaderboardItems: function() {
     var boardData = this.state.boardData;
     var symbol    = this.t('symbol');
@@ -137,45 +145,28 @@ module.exports = React.createClass({
         </tr>
       );
     }
-
     return _.map(boardData, function(d, i) {
-      var formattedAmount = symbol + numeral(d.amount / 100).format('0[.]00 a');
-      var formattedMeters = d.distance_in_meters;
-      var formattedRank = numeral(d.rank).format('0o');
-
-      return (
-        <MMFLeaderboardItem
-          key={ d.id }
-          rank={ formattedRank }
-          rankTitle={ this.t('rankTitle') }
-          name={ d.name }
-          url={ d.url }
-          isoCode={ d.isoCode }
-          amount={ formattedAmount }
-          meters={ formattedMeters }
-          imgSrc={ d.medImgSrc } />
-      );
-    }, this);
-  },
-
-  renderIndicators: function() {
-    if (!this.state.isLoading) {
-      return _.map(this.state.boardData, function(d, i) {
-        var iconClass;
-
-        if (this.state.currentPage == i + 1) {
-          iconClass = "circle";
-        } else {
-          iconClass = "circle-o";
-        }
+      if (i < this.props.pageSize) {
+        var formattedAmount = symbol + numeral(d.amount / 100).format('0[.]00 a');
+        var formattedMeters = this.formatDistance(d.distance_in_meters);
+        var formattedRank   = numeral(d.rank).format('0o');
 
         return (
-          <div key={ i } onClick={ this.switchPage.bind(null, i) } className="Leaderboard__indicator">
-            <Icon className="Leaderboard__icon" icon={ iconClass } />
-          </div>
+          <MMFLeaderboardItem
+            key={ d.id }
+            rank={ formattedRank }
+            rankTitle={ this.t('rankTitle') }
+            name={ d.name }
+            url={ d.url }
+            isoCode={ d.isoCode }
+            amount={ formattedAmount }
+            meters={ formattedMeters }
+            imgSrc={ d.imgSrc } />
         );
-      }, this);
-    }
+      } else {
+        return;
+      }
+    }, this);
   },
 
   sortLeaderboard: function(attr) {
@@ -185,12 +176,13 @@ module.exports = React.createClass({
 
   render: function() {
     var limit       = this.props.limit;
-    var pageSize    = this.props.pageSize;
     var heading     = this.t('heading');
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
     };
+
+
 
     return (
       <div className="MMFLeaderboard" style={ customStyle }>

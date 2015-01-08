@@ -3,6 +3,10 @@
   padding: 0 10px 15px;
   position: relative;
   border: 1px solid $ehw-grey-light;
+
+  @include media-max($breakpoint-m) {
+    font-size: $x-3;
+  }
 }
 
 .MMFLeaderboardItem__fundraiser, {
@@ -16,22 +20,28 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-weight: bold;
   line-height: 1.2;
   padding: 15px;
+  width: 70%;
+
+  @include media-max($breakpoint-m) {
+    width: 100%;
+  }
 }
 
 .MMFLeaderboardItem__image {
   box-sizing: border-box;
   display: inline-block;
   vertical-align: middle;
-  padding: 15px 0 15px 15px;
+  padding: 10px 0 10px 15px;
   text-align: center;
   border-radius: 50%;
-  width: 80px;
+  width: 30%;
 
   img {
-    width: 100%;
+    box-sizing: border-box;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     border: 0;
   }
@@ -43,15 +53,9 @@
 
 .MMFLeaderboardItem__raised {
   box-sizing: border-box;
-  font-weight: bold;
-  font-size: 16px;
   padding: 10px;
   text-align: center;
   border-right: 1px solid $ehw-grey-light;
-
-  @include media-max($breakpoint-l) {
-    padding: 0;
-  }
 }
 
 .MMFLeaderboardItem__distance {

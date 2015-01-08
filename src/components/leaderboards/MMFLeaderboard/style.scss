@@ -4,6 +4,7 @@
   font-family: $ehw-sans-serif-fonts;
   font-size: $ehw-default-font-size;
   color: #fff;
+  border-radius: $ehw-border-radius;
   margin: 30px 0; // todo: remove
 
   .MMFLeaderboard__loading {
@@ -33,10 +34,13 @@
 
 .MMFLeaderboard__colhead {
   padding: 15px;
-  font-size: 14px;
   text-align: center;
   text-transform: uppercase;
   cursor: pointer;
+
+  @include media-max($breakpoint-m) {
+    font-size: $x-3;
+  }
 }
 
 .MMFLeaderboard__colhead--fundraiser {

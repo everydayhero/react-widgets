@@ -262,8 +262,8 @@ Set and display a campaign goal. While this component can be configured to displ
 
 ##### Options
 
-- `goal`: *required* number. Set a goal in **cents** to be rendered as a dollar amount.
-- `renderIcon`: *optional* boolean. Set to `true` by default.
+- `goal`: *required* number. Set a goal, rendered as a dollar value by default.
+- `renderIcon`: *optional* string or boolean. Set to `true` by default. Pass in a valid [FontAwesome](http://fortawesome.github.io/Font-Awesome/icons/) icon name (without the _fa_ prefix) to override the default; View an example below. Set to `false` to render no icon.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `format`: *optional* string. Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
@@ -292,6 +292,26 @@ Set and display a campaign goal. While this component can be configured to displ
     <div id="GoalExample">Loading...</div>
     <script>
       edh.widgets.renderWidget('GoalExample', 'Goal', { goal: 500000, i18n: { title: '2015 Goal' } });
+    </script>
+  </body>
+</html>
+```
+
+##### Example displaying a distance goal, with a custom icon
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="GoalExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('GoalExample', 'Goal', { goal: 500, renderIcon: 'road', handleCents: false, i18n: { title: 'Distance Goal', suffix: 'km' } });
     </script>
   </body>
 </html>

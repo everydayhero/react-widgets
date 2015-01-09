@@ -49,34 +49,23 @@ module.exports = React.createClass({
       isLoading: true
     });
 
-    campaigns.find(this.props.campaignUid, this.combineActivityData);
+    campaigns.find(this.props.campaignUid, this.onSuccess);
   },
 
-  combineActivityData: function(result) {
+  combineActivityData: function(fitnessActivity) {
+    return _.reduce(fitnessActivity, function(sum, n) {
+      return sum += n.distance_in_meters;
+    }, 0);
+  },
+
+  onSuccess: function(result) {
     var fitnessActivity = result.campaign.fitness_activity_overview;
 
-    if (fitnessActivity !== null) {
-      var new_fitness_activity_overview = {
-        distance_in_meters: 0
-      };
-
-      _.forOwn(fitnessActivity, function(num, key) {
-        var fitness_activity_overview = fitnessActivity[key];
-        new_fitness_activity_overview.distance_in_meters += fitness_activity_overview.distance_in_meters;
-      });
-
-      fitnessActivity = new_fitness_activity_overview;
-    }
-
-    this.onSuccess(fitnessActivity);
-  },
-
-  onSuccess: function(combinedFitnessActivity) {
-    if (combinedFitnessActivity){
+    if (fitnessActivity){
       this.setState({
         isLoading: false,
         hasResults: true,
-        total: combinedFitnessActivity.distance_in_meters
+        total: this.combineActivityData(fitnessActivity)
       });
     } else {
       this.setState({
@@ -84,6 +73,7 @@ module.exports = React.createClass({
         hasResults: false
       });
     }
+
   },
 
   formatDistance: function(meters) {

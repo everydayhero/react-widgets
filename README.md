@@ -258,7 +258,7 @@ Displays the total number of charities associated with a single specified campai
 
 #### Campaign Goal (Campaign)
 
-Set a goal in cents to display as a campaign goal.
+Set and display a campaign goal. While this component can be configured to display any type of goal it renders as a dollar amount by default.
 
 ##### Options
 
@@ -267,6 +267,7 @@ Set a goal in cents to display as a campaign goal.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `format`: *optional* string. Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
+- `handleCents`: *optional* boolean. Set to `true` by default. Determines whether the supplied `goal` is divided by 100 (to display as dollars).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js

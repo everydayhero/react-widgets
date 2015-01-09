@@ -14,6 +14,7 @@ module.exports = React.createClass({
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     format: React.PropTypes.string,
+    centsToDollars: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
 
@@ -25,6 +26,7 @@ module.exports = React.createClass({
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
       format: '0[.]00 a',
+      handleCents: true,
       defaultI18n: {
         title: 'Goal',
         symbol: '$',
@@ -34,10 +36,13 @@ module.exports = React.createClass({
   },
 
   renderTotal: function() {
-    var title          = this.t('title');
-    var symbol         = this.t('symbol');
-    var suffix         = this.t('suffix');
-    var goal           = this.props.goal / 100;
+    var title  = this.t('title');
+    var symbol = this.t('symbol');
+    var suffix = this.t('suffix');
+    var goal   = this.props.goal;
+
+    if (this.props.handCents) goal = goal / 100;
+
     var formattedTotal = symbol + numeral(goal).format(this.props.format);
 
     return (

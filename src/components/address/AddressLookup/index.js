@@ -135,7 +135,7 @@ module.exports = React.createClass({
     return function(value) {
       var custom = this.state.custom || _.clone(this.state.address);
       custom[key] = value;
-      custom.paf_valid = false;
+      custom.paf_validated = false;
       this.setState({
         custom: (_.isEqual(custom, this.state.address)) ? null : custom
       }, this.output);
@@ -154,7 +154,7 @@ module.exports = React.createClass({
         postal_code: '',
         region: '',
         country_name: country.name,
-        paf_valid: false
+        paf_validated: false
       }
     });
   },
@@ -188,7 +188,7 @@ module.exports = React.createClass({
   setAddress: function(address) {
     if (address === null) { return this.setError('500'); }
     if (_.isEmpty(address.address)) { return this.setError('empty'); }
-    address.address.paf_valid = this.state.country === "GB";
+    address.address.paf_validated = this.state.country === "GB";
     this.setState({ error: null, address: address.address, addressList: null, loading: false }, this.output);
   },
 

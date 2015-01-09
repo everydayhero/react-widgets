@@ -633,7 +633,7 @@ Displays a form input field and country selector, which allows users to lookup t
     postal_code: '',
     region: '',
     country_name: '',
-    paf_valid: false
+    paf_validated: false
   }
   ```
 - `output`: *optional* function to get user's final selected address.

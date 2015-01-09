@@ -1,11 +1,12 @@
 "use strict";
 
-var _         = require('lodash');
-var React     = require('react');
-var I18nMixin = require('../../mixins/I18n');
-var campaigns = require('../../../api/campaigns');
-var Icon      = require('../../helpers/Icon');
-var numeral   = require('numeral');
+var _                = require('lodash');
+var React            = require('react');
+var I18nMixin        = require('../../mixins/I18n');
+var campaigns        = require('../../../api/campaigns');
+var Icon             = require('../../helpers/Icon');
+var numeral          = require('numeral');
+var SECONDS_TO_HOURS = 0.000277778;
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -71,7 +72,7 @@ module.exports = React.createClass({
 
   renderTotal: function() {
     var symbol         = this.t('symbol');
-    var totalHrs       = this.state.total * 0.000277778;
+    var totalHrs       = this.state.total * SECONDS_TO_HOURS;
     var formattedTotal = numeral(totalHrs).format(this.props.format);
     var title          = this.t('title');
     var emptyLabel     = this.t('emptyLabel');

@@ -41,7 +41,7 @@ module.exports = React.createClass({
     var suffix = this.t('suffix');
     var goal   = this.props.goal;
 
-    if (this.props.handCents) goal = goal / 100;
+    if (this.props.handleCents) goal = goal / 100;
 
     var formattedTotal = symbol + numeral(goal).format(this.props.format);
 

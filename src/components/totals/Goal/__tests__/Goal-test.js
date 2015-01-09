@@ -47,11 +47,11 @@ describe('Goal', function() {
     var translation = {
       title: 'asdjasj',
       symbol: '£',
-      suffix: ' hours'
+      suffix: ' abc'
     };
 
     beforeEach(function() {
-      goal = <Goal goal="5000000" i18n={ translation } />;
+      goal = <Goal goal="50000" i18n={ translation } handleCents={ false } />;
       element = TestUtils.renderIntoDocument(goal);
     });
 
@@ -62,11 +62,11 @@ describe('Goal', function() {
       expect(title.getDOMNode().textContent).toBe(translation.title);
     });
 
-    it('check for a total with custom symbol and suffix', function() {
+    it('checks for a total with custom symbol and suffix', function() {
       element.setState({ isLoading: false });
       var total = findByClass(element, 'Goal__total');
 
-      expect(total.getDOMNode().textContent).toBe('£50 k hours');
+      expect(total.getDOMNode().textContent).toBe('£50 k abc');
     });
   });
 

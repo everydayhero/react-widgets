@@ -93,10 +93,10 @@ describe('AddressLookup', function() {
     expect(element.state.address).toBe(addressFindResult.address);
 
     var breakdown = findByClass(element, 'AddressBreakdown');
-    var pafValid = findByProp(breakdown, 'name', 'paf_validated').getDOMNode();
+    var pafValidated = findByProp(breakdown, 'name', 'paf_validated').getDOMNode();
     var streetAddress = findByProp(breakdown, 'id', 'street_address').getDOMNode();
     var locality = findByProp(breakdown, 'id', 'locality').getDOMNode();
-    expect(pafValid.value).toBe('false');
+    expect(pafValidated.value).toBe('false');
     expect(streetAddress.value).toBe('1 Place Pl');
     expect(locality.value).toBe('Sydney');
   });
@@ -113,16 +113,16 @@ describe('AddressLookup', function() {
     expect(element.state.address).toBe(addressFindResult.address);
 
     var breakdown = findByClass(element, 'AddressBreakdown');
-    var pafValid = findByProp(breakdown, 'name', 'paf_validated').getDOMNode();
+    var pafValidated = findByProp(breakdown, 'name', 'paf_validated').getDOMNode();
     var streetAddress = findByProp(breakdown, 'id', 'street_address').getDOMNode();
     var locality = findByProp(breakdown, 'id', 'locality').getDOMNode();
-    expect(pafValid.value).toBe('true');
+    expect(pafValidated.value).toBe('true');
     expect(element.state.custom).toBeNull();
     expect(streetAddress.value).toBe('1 Place Pl');
     expect(locality.value).toBe('Sydney');
 
     TestUtils.Simulate.change(streetAddress, { target: { value: "2 SomeOther St" } });
-    expect(pafValid.value).toBe('false');
+    expect(pafValidated.value).toBe('false');
     expect(element.state.custom).not.toBeNull();
   });
 

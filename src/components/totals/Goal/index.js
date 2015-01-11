@@ -14,7 +14,7 @@ module.exports = React.createClass({
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     format: React.PropTypes.string,
-    centsToDollars: React.PropTypes.bool,
+    handleCents: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
 

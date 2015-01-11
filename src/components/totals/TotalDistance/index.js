@@ -1,10 +1,12 @@
 "use strict";
 
-var React     = require('react');
-var I18nMixin = require('../../mixins/I18n');
-var campaigns = require('../../../api/campaigns');
-var Icon      = require('../../helpers/Icon');
-var numeral   = require('numeral');
+var _               = require('lodash');
+var React           = require('react');
+var I18nMixin       = require('../../mixins/I18n');
+var campaigns       = require('../../../api/campaigns');
+var Icon            = require('../../helpers/Icon');
+var numeral         = require('numeral');
+var METERS_TO_MILES = 0.000621371192;
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -50,14 +52,20 @@ module.exports = React.createClass({
     campaigns.find(this.props.campaignUid, this.onSuccess);
   },
 
-  onSuccess: function(result) {
-    var fitnessResults = result.campaign.fitness_activity_overview.run;
+  combineActivityData: function(fitnessActivity) {
+    return _.reduce(fitnessActivity, function(sum, n) {
+      return sum += n.distance_in_meters;
+    }, 0);
+  },
 
-    if (fitnessResults){
+  onSuccess: function(result) {
+    var fitnessActivity = result.campaign.fitness_activity_overview;
+
+    if (fitnessActivity){
       this.setState({
         isLoading: false,
         hasResults: true,
-        total: fitnessResults.distance_in_meters
+        total: this.combineActivityData(fitnessActivity)
       });
     } else {
       this.setState({
@@ -65,21 +73,22 @@ module.exports = React.createClass({
         hasResults: false
       });
     }
+
+  },
+
+  formatDistance: function(meters) {
+    if (this.props.unit === 'km') {
+      return numeral(meters / 1000).format(this.props.format);
+    } else {
+      return numeral(meters * METERS_TO_MILES).format(this.props.format);
+    }
   },
 
   renderTotal: function() {
-    var symbol     = this.t('symbol');
-    var title      = this.t('title');
-    var totalKms   = this.state.total / 100;
-    var totalMiles = totalKms * 0.621371192;
-    var emptyLabel = this.t('emptyLabel');
-    var formattedTotal;
-
-    if (this.props.unit === 'km') {
-      formattedTotal = numeral(totalKms).format(this.props.format);
-    } else {
-      formattedTotal = numeral(totalMiles).format(this.props.format);
-    }
+    var symbol         = this.t('symbol');
+    var title          = this.t('title');
+    var emptyLabel     = this.t('emptyLabel');
+    var formattedTotal = this.formatDistance(this.state.total);
 
     if (this.state.isLoading) {
       return <Icon className="TotalDistance__loading" icon="refresh" />;

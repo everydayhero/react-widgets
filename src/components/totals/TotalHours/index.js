@@ -1,11 +1,12 @@
 "use strict";
 
-var _         = require('lodash');
-var React     = require('react');
-var I18nMixin = require('../../mixins/I18n');
-var campaigns = require('../../../api/campaigns');
-var Icon      = require('../../helpers/Icon');
-var numeral   = require('numeral');
+var _                = require('lodash');
+var React            = require('react');
+var I18nMixin        = require('../../mixins/I18n');
+var campaigns        = require('../../../api/campaigns');
+var Icon             = require('../../helpers/Icon');
+var numeral          = require('numeral');
+var SECONDS_TO_HOURS = 1 / 3600;
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -46,14 +47,20 @@ module.exports = React.createClass({
     campaigns.find(this.props.campaignUid, this.onSuccess);
   },
 
-  onSuccess: function(result) {
-    var fitnessResults = result.campaign.fitness_activity_overview.run;
+  combineActivityData: function(fitnessActivity) {
+    return _.reduce(fitnessActivity, function(sum, n) {
+      return sum += n.duration_in_seconds;
+    }, 0);
+  },
 
-    if (fitnessResults){
+  onSuccess: function(result) {
+    var fitnessActivity = result.campaign.fitness_activity_overview;
+
+    if (fitnessActivity){
       this.setState({
         isLoading: false,
         hasResults: true,
-        total: fitnessResults.duration_in_seconds
+        total: this.combineActivityData(fitnessActivity)
       });
     } else {
       this.setState({
@@ -65,8 +72,8 @@ module.exports = React.createClass({
 
   renderTotal: function() {
     var symbol         = this.t('symbol');
-    var totalHrs       = this.state.total * 0.000277778;
-    var formattedTotal = numeral(totalHrs).format(this.props.format);
+    var totalHours     = this.state.total * SECONDS_TO_HOURS;
+    var formattedTotal = numeral(totalHours).format(this.props.format);
     var title          = this.t('title');
     var emptyLabel     = this.t('emptyLabel');
 

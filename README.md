@@ -319,7 +319,7 @@ Set and display a campaign goal. While this component can be configured to displ
 
 #### Total Distance (Campaign)
 
-Displays the total recorded distance that fundraisers have run for a single specified campaign in either **kilometers** or **miles**.
+Displays the total distance recorded by fundraisers (using MapMyFitness) for a single specified campaign in either **kilometers** or **miles**.
 
 ##### Options
 
@@ -360,7 +360,7 @@ Displays the total recorded distance that fundraisers have run for a single spec
 
 #### Total Hours (Campaign)
 
-Displays the total recorded time that fundraisers have run for a single specified campaign in **hours**.
+Displays the total time recorded by fundraisers (using MapMyFitness) for a single specified campaign in **hours**.
 
 ##### Options
 

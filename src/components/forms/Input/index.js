@@ -65,7 +65,7 @@ module.exports = React.createClass({
     if (this.props.autoFocus) {
       this.refs.input.getDOMNode().focus();
     }
-    if (this.props.value && !this.props.disabled) {
+    if (this.props.value && !this.props.disabled && this.props.validate) {
       this.validate();
     }
   },

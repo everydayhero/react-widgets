@@ -15,7 +15,8 @@ module.exports = React.createClass({
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     unit: React.PropTypes.oneOf(['km', 'miles']),
-    i18n: React.PropTypes.object,
+    format: React.PropTypes.string,
+    i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
@@ -25,6 +26,7 @@ module.exports = React.createClass({
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
       unit: 'miles',
+      format: '0,0[.]0[0]',
       defaultI18n: {
         title: 'Miles',
         emptyLabel: 'No data to display.'
@@ -74,9 +76,9 @@ module.exports = React.createClass({
     var formattedTotal;
 
     if (this.props.unit === 'km') {
-      formattedTotal = numeral(totalKms).format('0,0[.]00');
+      formattedTotal = numeral(totalKms).format(this.props.format);
     } else {
-      formattedTotal = numeral(totalMiles).format('0,0[.]00');
+      formattedTotal = numeral(totalMiles).format(this.props.format);
     }
 
     if (this.state.isLoading) {

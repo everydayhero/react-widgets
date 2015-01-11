@@ -2,12 +2,12 @@
 jest.autoMockOff();
 
 describe('LeaderboardItem', function() {
-  var React                       = require('react/addons');
-  var LeaderboardItem             = require('../');
-  var TestUtils                   = React.addons.TestUtils;
-  var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
+  var React           = require('react/addons');
+  var LeaderboardItem = require('../');
+  var TestUtils       = React.addons.TestUtils;
+  var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
 
-  describe('component defaults', function() {
+  describe('Component defaults', function() {
     var leaderboardItem;
     var element;
 

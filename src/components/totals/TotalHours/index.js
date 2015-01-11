@@ -15,7 +15,8 @@ module.exports = React.createClass({
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
-    i18n: React.PropTypes.object,
+    format: React.PropTypes.string,
+    i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
@@ -24,6 +25,7 @@ module.exports = React.createClass({
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
+      format: '0,0[.]0[0]',
       defaultI18n: {
         title: 'Hours',
         emptyLabel: 'No data to display.'
@@ -40,10 +42,7 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    this.setState({
-      isLoading: true
-    });
-
+    this.setState({ isLoading: true });
     campaigns.find(this.props.campaignUid, this.onSuccess);
   },
 
@@ -67,7 +66,7 @@ module.exports = React.createClass({
   renderTotal: function() {
     var symbol         = this.t('symbol');
     var totalHrs       = this.state.total * 0.000277778;
-    var formattedTotal = numeral(totalHrs).format('0,0[.]00');
+    var formattedTotal = numeral(totalHrs).format(this.props.format);
     var title          = this.t('title');
     var emptyLabel     = this.t('emptyLabel');
 

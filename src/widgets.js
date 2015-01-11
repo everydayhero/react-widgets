@@ -90,4 +90,5 @@ module.exports = {
   renderWidget: renderWidget,
   initModal: initModal,
   showModal: showModal,
+  widgets: widgets,
 };

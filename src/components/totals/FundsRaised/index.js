@@ -14,7 +14,8 @@ module.exports = React.createClass({
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
-    i18n: React.PropTypes.object,
+    format: React.PropTypes.string,
+    i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
@@ -23,6 +24,7 @@ module.exports = React.createClass({
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
+      format: '0.00 a',
       defaultI18n: {
         title: 'Raised To Date',
         symbol: '$'
@@ -55,7 +57,7 @@ module.exports = React.createClass({
   renderTotal: function() {
     var symbol = this.t('symbol');
     var totalDollars = this.state.total / 100;
-    var formattedTotal = symbol + numeral(totalDollars).format('0.00 a');
+    var formattedTotal = symbol + numeral(totalDollars).format(this.props.format);
     var title = this.t('title');
 
     if (this.state.isLoading) {

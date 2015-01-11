@@ -20,6 +20,7 @@ module.exports = React.createClass({
     pageSize: React.PropTypes.number,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
+    currencyFormat: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
 
@@ -31,6 +32,7 @@ module.exports = React.createClass({
       pageSize: 12,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
+      currencyFormat: '0[.]00 a',
       defaultI18n: {
         raisedTitle: 'Raised',
         membersTitle: 'Members',
@@ -46,7 +48,6 @@ module.exports = React.createClass({
       isLoading: false,
       pageIds: [],
       boardData: [],
-      pagedBoardData: [],
       currentPage: 1
     };
   },
@@ -67,10 +68,7 @@ module.exports = React.createClass({
 
   loadPages: function(result) {
     var pageIds = result.leaderboard.page_ids;
-
-    this.setState({
-      pageIds: pageIds
-    });
+    this.setState({ pageIds: pageIds });
 
     pages.findByIds(pageIds, this.processLeaderboard);
   },
@@ -127,17 +125,20 @@ module.exports = React.createClass({
     return pagedLeaderboard;
   },
 
+  formatAmount: function(amount) {
+    return this.t('symbol') + numeral(amount / 100).format(this.props.currencyFormat);
+  },
+
   renderLeaderboardItems: function() {
     var boardData   = this.state.boardData;
     var currentPage = this.state.currentPage - 1;
-    var symbol      = this.t('symbol');
 
     if (this.state.isLoading) {
       return <Icon className="Leaderboard__loading" icon="refresh" />;
     }
 
     return boardData[currentPage].map(function(d,i) {
-      var formattedAmount = symbol + numeral(d.amount / 100).format('0[.]00 a');
+      var formattedAmount = this.formatAmount(d.amount);
       var formattedRank = numeral(d.rank).format('0o');
 
       if (this.props.type === 'team') {

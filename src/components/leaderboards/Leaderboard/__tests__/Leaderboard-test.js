@@ -12,7 +12,7 @@ describe('Leaderboard', function() {
   var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
   var scryByClass     = TestUtils.scryRenderedDOMComponentsWithClass;
 
-  describe('component defaults', function() {
+  describe('Component defaults', function() {
     var leaderboard;
     var element;
 
@@ -37,7 +37,7 @@ describe('Leaderboard', function() {
     });
   });
 
-  describe('component props', function() {
+  describe('Custom component props', function() {
     var leaderboard;
     var element;
     var translation = {
@@ -95,6 +95,22 @@ describe('Leaderboard', function() {
 
       element.rankLeaderboard(data);
       expect(_.pluck(data, 'rank')).toEqual([1, 2, 2, 2, 5]);
+    });
+  });
+
+  describe('Number formatting options', function() {
+    it('renders in a short format by default', function() {
+      var leaderboard = <Leaderboard campaignUid="au-0" />;
+      var element = TestUtils.renderIntoDocument(leaderboard);
+
+      expect(element.formatAmount(10000)).toEqual('$100 ');
+    });
+
+    it('renders a different format if given acceptable numeral.js string', function() {
+      var leaderboard = <Leaderboard campaignUid="au-0" currencyFormat="0.00" />;
+      var element = TestUtils.renderIntoDocument(leaderboard);
+
+      expect(element.formatAmount(10000)).toEqual('$100.00');
     });
   });
 });

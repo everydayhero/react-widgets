@@ -6,7 +6,7 @@ var I18nMixin        = require('../../mixins/I18n');
 var campaigns        = require('../../../api/campaigns');
 var Icon             = require('../../helpers/Icon');
 var numeral          = require('numeral');
-var SECONDS_TO_HOURS = 0.000277778;
+var SECONDS_TO_HOURS = 1 / 3600;
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -72,8 +72,8 @@ module.exports = React.createClass({
 
   renderTotal: function() {
     var symbol         = this.t('symbol');
-    var totalHrs       = this.state.total * SECONDS_TO_HOURS;
-    var formattedTotal = numeral(totalHrs).format(this.props.format);
+    var totalHours     = this.state.total * SECONDS_TO_HOURS;
+    var formattedTotal = numeral(totalHours).format(this.props.format);
     var title          = this.t('title');
     var emptyLabel     = this.t('emptyLabel');
 

@@ -1,13 +1,15 @@
 "use strict";
 
-var _                  = require('lodash');
-var React              = require('react');
-var I18nMixin          = require('../../mixins/I18n');
-var leaderboard        = require('../../../api/leaderboard');
-var pages              = require('../../../api/pages');
-var Icon               = require('../../helpers/Icon');
-var MMFLeaderboardItem = require('../MMFLeaderboardItem');
-var numeral            = require('numeral');
+var _                     = require('lodash');
+var React                 = require('react');
+var I18nMixin             = require('../../mixins/I18n');
+var leaderboard           = require('../../../api/leaderboard');
+var pages                 = require('../../../api/pages');
+var Icon                  = require('../../helpers/Icon');
+var MMFLeaderboardItem    = require('../MMFLeaderboardItem');
+var MMFLeaderboardColHead = require('../MMFLeaderboardColHead');
+var numeral               = require('numeral');
+var METERS_TO_MILES       = 0.000621371192;
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -20,6 +22,7 @@ module.exports = React.createClass({
     unit: React.PropTypes.oneOf(['km', 'miles']),
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
+    initialSort: React.PropTypes.oneOf(['amount', 'distance']),
     i18n: React.PropTypes.object
   },
 
@@ -32,10 +35,10 @@ module.exports = React.createClass({
       unit: 'miles',
       backgroundColor: '',
       textColor: '',
+      initialSort: 'distance',
       defaultI18n: {
         raisedTitle: 'Raised',
-        membersTitle: 'Members',
-        rankTitle: 'Ranked',
+        distanceTitle: 'Distance',
         symbol: '$',
         heading: 'Top Individuals'
       }
@@ -47,7 +50,7 @@ module.exports = React.createClass({
       isLoading: false,
       pageIds: [],
       boardData: [],
-      pagedBoardData: []
+      currentSort: this.props.initialSort
     };
   },
 
@@ -75,52 +78,36 @@ module.exports = React.createClass({
       return this.processPage(page);
     }, this);
 
-    this.rankLeaderboard(leaderboard);
-
     this.setState({
       isLoading: false,
       boardData: leaderboard
     });
+
+    this.sortLeaderboard(this.props.initialSort);
   },
 
   processPage: function(page) {
-    if (page.fitness_activity_overview !== null) {
-      var new_fitness_activity_overview = {
-        distance_in_meters: 0
-      };
-
-      // Combines all fitness activity in to one rather than splitting by activity type.
-      _.forOwn(page.fitness_activity_overview, function(num, key) {
-        var fitness_activity_overview = page.fitness_activity_overview[key];
-        new_fitness_activity_overview.distance_in_meters += fitness_activity_overview.distance_in_meters;
-      });
-
-      page.fitness_activity_overview = new_fitness_activity_overview;
-    }
-
     return {
       id: page.id,
       name: page.name,
       url: page.url,
       isoCode: page.amount.currency.iso_code,
-      amount:  page.amount.cents,
-      totalMembers: page.team_member_uids.length,
+      amount: page.amount.cents,
       imgSrc: page.image.small_image_url,
-      distance_in_meters: page.fitness_activity_overview.distance_in_meters
+      distance: this.combineActivityData(page.fitness_activity_overview)
     };
   },
 
-  rankLeaderboard: function(leaderboard) {
-    var rank = 1;
-    var prevItem = null;
+  combineActivityData: function(fitnessActivity) {
+    return _.reduce(fitnessActivity, function(sum, n) {
+      return sum += n.distance_in_meters;
+    }, 0);
+  },
 
-    _.forEach(leaderboard, function(item, i) {
-      if (prevItem && item.amount != prevItem.amount) {
-        rank = i + 1;
-      }
-
-      item.rank = rank;
-      prevItem = item;
+  sortLeaderboard: function(sortField) {
+    this.setState({
+      boardData: _.sortBy(this.state.boardData, [sortField, 'amount']).reverse(),
+      currentSort: sortField
     });
   },
 
@@ -128,7 +115,7 @@ module.exports = React.createClass({
     if (this.props.unit === 'km') {
       return numeral(meters / 1000).format('0,0[.]00') + ' km';
     } else {
-      return numeral(meters * 0.000621371192).format('0,0[.]00') + ' mi.';
+      return numeral(meters * METERS_TO_MILES).format('0,0[.]00') + ' mi.';
     }
   },
 
@@ -139,8 +126,8 @@ module.exports = React.createClass({
     if (this.state.isLoading) {
       return (
         <tr>
-          <td>
-            <Icon className="Leaderboard__loading" icon="refresh" />
+          <td colSpan="3">
+            <Icon className="MMFLeaderboard__loading" icon="refresh" />
           </td>
         </tr>
       );
@@ -148,14 +135,11 @@ module.exports = React.createClass({
     return _.map(boardData, function(d, i) {
       if (i < this.props.pageSize) {
         var formattedAmount = symbol + numeral(d.amount / 100).format('0[.]00 a');
-        var formattedMeters = this.formatDistance(d.distance_in_meters);
-        var formattedRank   = numeral(d.rank).format('0o');
+        var formattedMeters = this.formatDistance(d.distance);
 
         return (
           <MMFLeaderboardItem
             key={ d.id }
-            rank={ formattedRank }
-            rankTitle={ this.t('rankTitle') }
             name={ d.name }
             url={ d.url }
             isoCode={ d.isoCode }
@@ -169,20 +153,18 @@ module.exports = React.createClass({
     }, this);
   },
 
-  sortLeaderboard: function(attr) {
-    var sortedBoardData = _.sortBy(this.state.boardData, [attr, 'amount']).reverse();
-    this.setState({ boardData: sortedBoardData });
-  },
-
   render: function() {
-    var limit       = this.props.limit;
-    var heading     = this.t('heading');
+    var limit           = this.props.limit;
+    var heading         = this.t('heading');
+    var raisedTitle     = this.t('raisedTitle');
+    var distanceTitle   = this.t('distanceTitle');
+    var backgroundColor = this.props.backgroundColor;
+    var textColor       = this.props.textColor;
+
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
     };
-
-
 
     return (
       <div className="MMFLeaderboard" style={ customStyle }>
@@ -192,9 +174,9 @@ module.exports = React.createClass({
         <table className="MMFLeaderboard__table">
           <thead>
             <tr>
-              <td className="MMFLeaderboard__colhead MMFLeaderboard__colhead--fundraiser">Fundraiser</td>
-              <td className="MMFLeaderboard__colhead MMFLeaderboard__colhead--raised" onClick={ this.sortLeaderboard.bind(null, 'amount') }>Raised</td>
-              <td className="MMFLeaderboard__colhead MMFLeaderboard__colhead--distance" onClick={ this.sortLeaderboard.bind(null, 'distance_in_meters') }>Distance</td>
+              <MMFLeaderboardColHead name="Fundraiser" />
+              <MMFLeaderboardColHead name={ raisedTitle } sort="amount" onClick={ this.sortLeaderboard } active={ this.state.currentSort === "amount" } />
+              <MMFLeaderboardColHead name={ distanceTitle } sort="distance" onClick={ this.sortLeaderboard } active={ this.state.currentSort === "distance" } />
             </tr>
           </thead>
           <tbody>

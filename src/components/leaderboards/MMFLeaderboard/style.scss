@@ -1,14 +1,16 @@
 .MMFLeaderboard {
-  width: 100%;
   background: $ehw-grey-darker;
+  border-radius: $ehw-border-radius;
   font-family: $ehw-sans-serif-fonts;
   font-size: $ehw-default-font-size;
   color: #fff;
-  border-radius: $ehw-border-radius;
-  margin: 30px 0; // todo: remove
+  width: 100%;
 
   .MMFLeaderboard__loading {
     @extend %ehw-tile-loading-icon;
+    background: #fff;
+    padding: 10px;
+    margin: 0;
   }
 }
 
@@ -18,36 +20,20 @@
 }
 
 .MMFLeaderboard__table {
+  box-sizing: border-box;
   width: 100%;
-  background: #fff;
   table-layout: fixed;
-  border-collapse: collapse;
+  border-spacing: 0;
 
   thead {
-    background: $ehw-grey-dark;
+    background-color: rgba(255,255,255,0.34);
+
+    // rgba background for IE8.
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#56ffffff,endColorstr=#56ffffff);
+    zoom: 1;
   }
 
   tbody {
     color: $ehw-grey-darker;
   }
-}
-
-.MMFLeaderboard__colhead {
-  padding: 15px;
-  text-align: center;
-  text-transform: uppercase;
-  cursor: pointer;
-
-  @include media-max($breakpoint-m) {
-    font-size: $x-3;
-  }
-}
-
-.MMFLeaderboard__colhead--fundraiser {
-  text-align: left;
-}
-
-.MMFLeaderboard__colhead--fundraiser,
-.MMFLeaderboard__colhead--raised {
-  border-right: 1px solid $ehw-grey;
 }

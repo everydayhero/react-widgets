@@ -1,8 +1,21 @@
 .MMFLeaderboardItem {
   box-sizing: border-box;
-  padding: 0 10px 15px;
+  padding: 0 $x-2 $x-4;
   position: relative;
-  border: 1px solid $ehw-grey-light;
+  background: #fff;
+
+  td {
+    border: 1px solid $ehw-grey-light;
+    border-width: 0 1px 1px 0;
+  }
+
+  td:first-child {
+    border-left-width: 1px;
+  }
+
+  a {
+    color: $ehw-grey-darker;
+  }
 
   @include media-max($breakpoint-m) {
     font-size: $x-3;
@@ -33,18 +46,12 @@
   box-sizing: border-box;
   display: inline-block;
   vertical-align: middle;
-  padding: 10px 0 10px 15px;
+  margin: 10px 0 10px 15px;
   text-align: center;
   border-radius: 50%;
-  width: 30%;
-
-  img {
-    box-sizing: border-box;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 0;
-  }
+  width: 48px;
+  height: 48px;
+  border: 0;
 
   @include media-max($breakpoint-m) {
     display: none;

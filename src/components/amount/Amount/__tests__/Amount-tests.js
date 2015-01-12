@@ -27,6 +27,8 @@ describe('Amount', function() {
 
     var selected = findByClass(element, 'AmountRadio--selected').getDOMNode();
     expect(selected.textContent).toContain('1500');
+    var outputField = findByProp(element, 'name', 'amount').getDOMNode();
+    expect(outputField.value).toContain('1500');
   });
 
   it('allows you to enter a custom value', function() {
@@ -38,6 +40,8 @@ describe('Amount', function() {
 
     var selected = findByClass(element, 'AmountInput--selected');
     expect(selected).toBeDefined();
+    var outputField = findByProp(element, 'name', 'amount').getDOMNode();
+    expect(outputField.value).toContain('123');
   });
 
   it('exposes selected value through callback', function() {
@@ -52,5 +56,7 @@ describe('Amount', function() {
     var select = findByProp(element, 'value', 1500);
     TestUtils.Simulate.click(select);
     expect(callback).lastCalledWith(1500);
+    var outputField = findByProp(element, 'name', 'amount').getDOMNode();
+    expect(outputField.value).toContain('1500');
   });
 });

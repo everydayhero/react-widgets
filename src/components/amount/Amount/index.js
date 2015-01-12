@@ -53,7 +53,7 @@ module.exports = React.createClass({
 
   renderRadios: function() {
     return this.props.amounts.map(function(d, i) {
-      return <AmountRadio key={ d + i } index={ i } selected={ this.state.preset } amount={ d } name={ this.props.name } onClick={ this.setPreset } />;
+      return <AmountRadio key={ d + i } index={ i } selected={ this.state.preset } amount={ d } name={ 'AmountRadio-' + this.props.name } onClick={ this.setPreset } />;
     }, this);
   },
 
@@ -62,7 +62,8 @@ module.exports = React.createClass({
       <div className="Amount">
         <div className="Amount__label">{ this.props.label }</div>
         { this.renderRadios() }
-        <AmountInput name={ this.props.name } amount={ this.state.custom } onChange={ this.setCustom } symbol={ this.props.currency} />
+        <AmountInput name={ 'AmountInput-' + this.props.name } amount={ this.state.custom } onChange={ this.setCustom } symbol={ this.props.currency} />
+        <input type="hidden" name={ this.props.name } value={ this.state.preset || this.state.custom }/>
       </div>
     );
   }

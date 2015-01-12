@@ -591,7 +591,7 @@ Displays a leaderboard sorted by distance, recorded using MapMyFitness, for a si
     symbol: '$',
     heading: 'Top Individuals',
     kmSuffix: 'km',
-    milesSuffix: 'mi.'
+    milesSuffix: 'mi'
   }
   ```
 

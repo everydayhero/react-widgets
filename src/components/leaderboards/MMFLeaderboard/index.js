@@ -46,7 +46,7 @@ module.exports = React.createClass({
         symbol: '$',
         heading: 'Top Individuals',
         kmSuffix: 'km',
-        milesSuffix: 'mi.'
+        milesSuffix: 'mi'
       }
     };
   },

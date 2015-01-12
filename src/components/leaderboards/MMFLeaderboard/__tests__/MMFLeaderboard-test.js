@@ -75,14 +75,14 @@ describe('MMFLeaderboard', function() {
       var leaderboard = <MMFLeaderboard campaignUid="au-0" />;
       var component = TestUtils.renderIntoDocument(leaderboard);
 
-      expect(component.formatDistance(4410500)).toEqual('2,740.56 mi.');
+      expect(component.formatDistance(4410500)).toEqual('2,740.56 mi');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
       var leaderboard = <MMFLeaderboard campaignUid="au-0" distanceFormat="0,0" />;
       var component = TestUtils.renderIntoDocument(leaderboard);
 
-      expect(component.formatDistance(4410500)).toEqual('2,741 mi.');
+      expect(component.formatDistance(4410500)).toEqual('2,741 mi');
     });
 
     it('formats kilometers if handed a unit prop', function() {
@@ -104,7 +104,7 @@ describe('MMFLeaderboard', function() {
       var leaderboard = <MMFLeaderboard campaignUid="au-0" />;
       var component = TestUtils.renderIntoDocument(leaderboard);
 
-      component.setState({ boardData: mockBoardData })
+      component.setState({ boardData: mockBoardData });
       component.sortLeaderboard(component.props.initialSort);
 
       expect(component.state.boardData[0].id).toBe(1);
@@ -116,7 +116,7 @@ describe('MMFLeaderboard', function() {
       var leaderboard = <MMFLeaderboard campaignUid="au-0" initialSort="amount" />;
       var component = TestUtils.renderIntoDocument(leaderboard);
 
-      component.setState({ boardData: mockBoardData })
+      component.setState({ boardData: mockBoardData });
       component.sortLeaderboard(component.props.initialSort);
 
       expect(component.state.boardData[0].id).toBe(3);

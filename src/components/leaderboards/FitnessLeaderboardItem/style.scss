@@ -1,4 +1,4 @@
-.MMFLeaderboardItem {
+.FitnessLeaderboardItem {
   box-sizing: border-box;
   padding: 0 $x-2 $x-4;
   position: relative;
@@ -22,11 +22,11 @@
   }
 }
 
-.MMFLeaderboardItem__fundraiser, {
+.FitnessLeaderboardItem__fundraiser, {
   border-right: 1px solid $ehw-grey-light;
 }
 
-.MMFLeaderboardItem__name {
+.FitnessLeaderboardItem__name {
   box-sizing: border-box;
   display: inline-block;
   vertical-align: middle;
@@ -42,7 +42,7 @@
   }
 }
 
-.MMFLeaderboardItem__image {
+.FitnessLeaderboardItem__image {
   box-sizing: border-box;
   display: inline-block;
   vertical-align: middle;
@@ -58,13 +58,13 @@
   }
 }
 
-.MMFLeaderboardItem__raised {
+.FitnessLeaderboardItem__raised {
   box-sizing: border-box;
   padding: 10px;
   text-align: center;
   border-right: 1px solid $ehw-grey-light;
 }
 
-.MMFLeaderboardItem__distance {
+.FitnessLeaderboardItem__distance {
   text-align: center;
 }

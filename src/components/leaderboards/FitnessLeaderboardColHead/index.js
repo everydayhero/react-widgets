@@ -4,7 +4,7 @@ var React = require('react');
 var Icon  = require('../../helpers/Icon');
 
 module.exports = React.createClass({
-  displayName: 'MMFLeaderboardColHead',
+  displayName: 'FitnessLeaderboardColHead',
 
   handleClick: function() {
     this.props.onClick(this.props.sort);
@@ -12,13 +12,13 @@ module.exports = React.createClass({
 
   renderIcon: function() {
     if (this.props.active === true) {
-      return <Icon className="MMFLeaderboardColHead__icon" icon="caret-down" />;
+      return <Icon className="FitnessLeaderboardColHead__icon" icon="caret-down" />;
     }
   },
 
   render: function() {
     return (
-      <td className="MMFLeaderboardColHead" onClick={ this.handleClick }>
+      <td className="FitnessLeaderboardColHead" onClick={ this.handleClick }>
         { this.props.name }
         { this.renderIcon() }
       </td>

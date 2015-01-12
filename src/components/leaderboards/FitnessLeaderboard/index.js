@@ -1,19 +1,19 @@
 "use strict";
 
-var _                     = require('lodash');
-var React                 = require('react');
-var I18nMixin             = require('../../mixins/I18n');
-var leaderboard           = require('../../../api/leaderboard');
-var pages                 = require('../../../api/pages');
-var Icon                  = require('../../helpers/Icon');
-var MMFLeaderboardItem    = require('../MMFLeaderboardItem');
-var MMFLeaderboardColHead = require('../MMFLeaderboardColHead');
-var numeral               = require('numeral');
-var METERS_TO_MILES       = 0.000621371192;
+var _                         = require('lodash');
+var React                     = require('react');
+var I18nMixin                 = require('../../mixins/I18n');
+var leaderboard               = require('../../../api/leaderboard');
+var pages                     = require('../../../api/pages');
+var Icon                      = require('../../helpers/Icon');
+var FitnessLeaderboardItem    = require('../FitnessLeaderboardItem');
+var FitnessLeaderboardColHead = require('../FitnessLeaderboardColHead');
+var numeral                   = require('numeral');
+var METERS_TO_MILES           = 0.000621371192;
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
-  displayName: "MMFLeaderboard",
+  displayName: "FitnessLeaderboard",
   propTypes: {
     campaignUid: React.PropTypes.string.isRequired,
     type: React.PropTypes.oneOf(['team', 'individual']),
@@ -137,7 +137,7 @@ module.exports = React.createClass({
       return (
         <tr>
           <td colSpan="3">
-            <Icon className="MMFLeaderboard__loading" icon="refresh" />
+            <Icon className="FitnessLeaderboard__loading" icon="refresh" />
           </td>
         </tr>
       );
@@ -148,7 +148,7 @@ module.exports = React.createClass({
         var formattedMeters = this.formatDistance(d.distance);
 
         return (
-          <MMFLeaderboardItem
+          <FitnessLeaderboardItem
             key={ d.id }
             name={ d.name }
             url={ d.url }
@@ -175,16 +175,16 @@ module.exports = React.createClass({
     };
 
     return (
-      <div className="MMFLeaderboard" style={ customStyle }>
-        <div className="MMFLeaderboard__heading">
+      <div className="FitnessLeaderboard" style={ customStyle }>
+        <div className="FitnessLeaderboard__heading">
           { heading }
         </div>
-        <table className="MMFLeaderboard__table">
+        <table className="FitnessLeaderboard__table">
           <thead>
             <tr>
-              <MMFLeaderboardColHead name="Fundraiser" />
-              <MMFLeaderboardColHead name={ raisedTitle } sort="amount" onClick={ this.sortLeaderboard } active={ this.state.currentSort === "amount" } />
-              <MMFLeaderboardColHead name={ distanceTitle } sort="distance" onClick={ this.sortLeaderboard } active={ this.state.currentSort === "distance" } />
+              <FitnessLeaderboardColHead name="Fundraiser" />
+              <FitnessLeaderboardColHead name={ raisedTitle } sort="amount" onClick={ this.sortLeaderboard } active={ this.state.currentSort === "amount" } />
+              <FitnessLeaderboardColHead name={ distanceTitle } sort="distance" onClick={ this.sortLeaderboard } active={ this.state.currentSort === "distance" } />
             </tr>
           </thead>
           <tbody>

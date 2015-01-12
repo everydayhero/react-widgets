@@ -1,4 +1,4 @@
-.MMFLeaderboard {
+.FitnessLeaderboard {
   background: $ehw-grey-darker;
   border-radius: $ehw-border-radius;
   font-family: $ehw-sans-serif-fonts;
@@ -6,7 +6,7 @@
   color: #fff;
   width: 100%;
 
-  .MMFLeaderboard__loading {
+  .FitnessLeaderboard__loading {
     @extend %ehw-tile-loading-icon;
     background: #fff;
     padding: 10px;
@@ -14,12 +14,12 @@
   }
 }
 
-.MMFLeaderboard__heading {
+.FitnessLeaderboard__heading {
   @extend %ehw-tile-heading;
   text-align: center;
 }
 
-.MMFLeaderboard__table {
+.FitnessLeaderboard__table {
   box-sizing: border-box;
   width: 100%;
   table-layout: fixed;

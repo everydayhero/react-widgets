@@ -3,10 +3,10 @@
 jest.autoMockOff();
 jest.mock('../../../../api/pages');
 
-describe('MMFLeaderboard', function() {
+describe('FitnessLeaderboard', function() {
   var _                     = require('lodash');
   var React                 = require('react/addons');
-  var MMFLeaderboard        = require('../');
+  var FitnessLeaderboard        = require('../');
   var pages                 = require('../../../../api/pages');
   var TestUtils             = React.addons.TestUtils;
   var findByClass           = TestUtils.findRenderedDOMComponentWithClass;
@@ -16,7 +16,7 @@ describe('MMFLeaderboard', function() {
     var component;
 
     beforeEach(function() {
-      leaderboard = <MMFLeaderboard campaignUid="au-0" />;
+      leaderboard = <FitnessLeaderboard campaignUid="au-0" />;
       component = TestUtils.renderIntoDocument(leaderboard);
     });
 
@@ -25,13 +25,13 @@ describe('MMFLeaderboard', function() {
     });
 
     it('renders a default heading', function() {
-      var heading = findByClass(component, 'MMFLeaderboard__heading');
+      var heading = findByClass(component, 'FitnessLeaderboard__heading');
       expect(heading.getDOMNode().textContent).toBe('Top Individuals');
     });
 
     it('renders a loading icon', function() {
       component.setState({ isLoading: true });
-      var element = findByClass(component, 'MMFLeaderboard__loading');
+      var element = findByClass(component, 'FitnessLeaderboard__loading');
       expect(element).toBeDefined();
     });
   });
@@ -44,26 +44,26 @@ describe('MMFLeaderboard', function() {
     };
 
     beforeEach(function() {
-      leaderboard = <MMFLeaderboard campaignUid="au-0" i18n={ translation } type="team" />;
+      leaderboard = <FitnessLeaderboard campaignUid="au-0" i18n={ translation } type="team" />;
       component = TestUtils.renderIntoDocument(leaderboard);
     });
 
     it('renders a custom heading', function() {
-      var heading = findByClass(component, 'MMFLeaderboard__heading');
+      var heading = findByClass(component, 'FitnessLeaderboard__heading');
       expect(heading.getDOMNode().textContent).toBe(translation.heading);
     });
   });
 
   describe('Currency formatting options', function() {
     it('renders in a short format by default', function() {
-      var leaderboard = <MMFLeaderboard campaignUid="au-0" />;
+      var leaderboard = <FitnessLeaderboard campaignUid="au-0" />;
       var component = TestUtils.renderIntoDocument(leaderboard);
 
       expect(component.formatAmount(10000)).toEqual('$100 ');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var leaderboard = <MMFLeaderboard campaignUid="au-0" currencyFormat="0.00" />;
+      var leaderboard = <FitnessLeaderboard campaignUid="au-0" currencyFormat="0.00" />;
       var component = TestUtils.renderIntoDocument(leaderboard);
 
       expect(component.formatAmount(10000)).toEqual('$100.00');
@@ -72,21 +72,21 @@ describe('MMFLeaderboard', function() {
 
   describe('Distance formatting options', function() {
     it('has and renders a default format', function() {
-      var leaderboard = <MMFLeaderboard campaignUid="au-0" />;
+      var leaderboard = <FitnessLeaderboard campaignUid="au-0" />;
       var component = TestUtils.renderIntoDocument(leaderboard);
 
       expect(component.formatDistance(4410500)).toEqual('2,740.56 mi');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var leaderboard = <MMFLeaderboard campaignUid="au-0" distanceFormat="0,0" />;
+      var leaderboard = <FitnessLeaderboard campaignUid="au-0" distanceFormat="0,0" />;
       var component = TestUtils.renderIntoDocument(leaderboard);
 
       expect(component.formatDistance(4410500)).toEqual('2,741 mi');
     });
 
     it('formats kilometers if handed a unit prop', function() {
-      var leaderboard = <MMFLeaderboard campaignUid="au-0" unit="km" />;
+      var leaderboard = <FitnessLeaderboard campaignUid="au-0" unit="km" />;
       var component = TestUtils.renderIntoDocument(leaderboard);
 
       expect(component.formatDistance(4410500)).toEqual('4,410.50 km');
@@ -101,7 +101,7 @@ describe('MMFLeaderboard', function() {
     ];
 
     it('Sorts leaderboard by distance by default', function() {
-      var leaderboard = <MMFLeaderboard campaignUid="au-0" />;
+      var leaderboard = <FitnessLeaderboard campaignUid="au-0" />;
       var component = TestUtils.renderIntoDocument(leaderboard);
 
       component.setState({ boardData: mockBoardData });
@@ -113,7 +113,7 @@ describe('MMFLeaderboard', function() {
     });
 
     it('Sorts leaderboard by amount when handed an initialSort prop', function() {
-      var leaderboard = <MMFLeaderboard campaignUid="au-0" initialSort="amount" />;
+      var leaderboard = <FitnessLeaderboard campaignUid="au-0" initialSort="amount" />;
       var component = TestUtils.renderIntoDocument(leaderboard);
 
       component.setState({ boardData: mockBoardData });

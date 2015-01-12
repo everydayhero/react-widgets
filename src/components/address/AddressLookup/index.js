@@ -189,7 +189,7 @@ module.exports = React.createClass({
     if (address === null) { return this.setError('500'); }
     if (_.isEmpty(address.address)) { return this.setError('empty'); }
     address.address.paf_validated = this.state.country === "GB";
-    this.setState({ error: null, address: address.address, addressList: null, loading: false }, this.output);
+    this.setState({ error: null, address: address.address, addressList: null, loading: false, focusOnMount: true }, this.output);
   },
 
   setError: function(error) {
@@ -273,6 +273,7 @@ module.exports = React.createClass({
   renderAddress: function(address) {
     return address && (
       <AddressBreakdown
+        autoFocus={ this.state.focusOnMount }
         prefix={ this.props.prefix }
         required={ this.props.required }
         address={ address }

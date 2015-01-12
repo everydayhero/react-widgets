@@ -23,6 +23,8 @@ module.exports = React.createClass({
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     initialSort: React.PropTypes.oneOf(['amount', 'distance']),
+    currencyFormat: React.PropTypes.string,
+    distanceFormat: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
 
@@ -36,11 +38,15 @@ module.exports = React.createClass({
       backgroundColor: '',
       textColor: '',
       initialSort: 'distance',
+      currencyFormat: '0,0[.]00 a',
+      distanceFormat: '0,0[.]00',
       defaultI18n: {
         raisedTitle: 'Raised',
         distanceTitle: 'Distance',
         symbol: '$',
-        heading: 'Top Individuals'
+        heading: 'Top Individuals',
+        kmSuffix: 'km',
+        milesSuffix: 'mi.'
       }
     };
   },
@@ -113,10 +119,14 @@ module.exports = React.createClass({
 
   formatDistance: function(meters) {
     if (this.props.unit === 'km') {
-      return numeral(meters / 1000).format('0,0[.]00') + ' km';
+      return numeral(meters / 1000).format(this.props.distanceFormat) + ' ' + this.t('kmSuffix');
     } else {
-      return numeral(meters * METERS_TO_MILES).format('0,0[.]00') + ' mi.';
+      return numeral(meters * METERS_TO_MILES).format(this.props.distanceFormat) + ' ' + this.t('milesSuffix');
     }
+  },
+
+  formatAmount: function(amount) {
+    return this.t('symbol') + numeral(amount / 100).format(this.props.currencyFormat);
   },
 
   renderLeaderboardItems: function() {
@@ -134,7 +144,7 @@ module.exports = React.createClass({
     }
     return _.map(boardData, function(d, i) {
       if (i < this.props.pageSize) {
-        var formattedAmount = symbol + numeral(d.amount / 100).format('0[.]00 a');
+        var formattedAmount = this.formatAmount(d.amount);
         var formattedMeters = this.formatDistance(d.distance);
 
         return (
@@ -147,8 +157,6 @@ module.exports = React.createClass({
             meters={ formattedMeters }
             imgSrc={ d.imgSrc } />
         );
-      } else {
-        return;
       }
     }, this);
   },

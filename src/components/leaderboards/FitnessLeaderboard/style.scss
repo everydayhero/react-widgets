@@ -1,0 +1,35 @@
+.FitnessLeaderboard {
+  background: $ehw-grey-darker;
+  border-radius: $ehw-border-radius;
+  font-family: $ehw-sans-serif-fonts;
+  font-size: $ehw-default-font-size;
+  color: #fff;
+  width: 100%;
+
+  .FitnessLeaderboard__loading {
+    @extend %ehw-tile-loading-icon;
+    background: #fff;
+    padding: 10px;
+    margin: 0;
+  }
+}
+
+.FitnessLeaderboard__heading {
+  @extend %ehw-tile-heading;
+  text-align: center;
+}
+
+.FitnessLeaderboard__table {
+  box-sizing: border-box;
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 0;
+
+  thead {
+    background-color: rgba(255,255,255,0.34);
+  }
+
+  tbody {
+    color: $ehw-grey-darker;
+  }
+}

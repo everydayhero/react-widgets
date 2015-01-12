@@ -590,6 +590,51 @@ Displays a leaderboard sorted by funds raised (highest first) for a single speci
 </html>
 ```
 
+#### Fitness Leaderboard (Campaign)
+
+Displays a leaderboard sorted by distance, recorded using MapMyFitness, for a single specified campaign. Ordered by highest first. This leaderboard also displays, and can be sorted by, funds raised. Can be set to show leaderboards for teams or individuals.
+
+- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `type`: *optional* string. Set a type of either `'team'` or `'individual'`. Set to `'individual'` by default.
+- `limit`: *optional* number. Set to `100` by default. Determines how many results should be fetched via the everdayhero leaderboards API endpoint.
+- `pageSize`: *optional* number. Set to `5` by default. Determines how many results to display on the leaderboard at once.
+- `backgroundColor`: *optional* string. Not set by default.
+- `textColor`: *optional* string. Not set by default.
+- `currencyFormat`: *optional* string. Set to `0,0[.]00 a` by default. [More format strings](http://numeraljs.com/).
+- `distanceFormat`: *optional* string. Set to `0,0[.]00` by default. [More format strings](http://numeraljs.com/).
+- `i18n`: *optional* object containing localised text. Default i18n is:
+
+  ```js
+  {
+    raisedTitle: 'Raised',
+    distanceTitle: 'Distance',
+    symbol: '$',
+    heading: 'Top Individuals',
+    kmSuffix: 'km',
+    milesSuffix: 'mi'
+  }
+  ```
+
+##### Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="FitnessLeaderboardExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('FitnessLeaderboardExample', 'FitnessLeaderboard', { campaignUid: 'us-0' });
+    </script>
+  </body>
+</html>
+```
+
 
 ### Maps
 

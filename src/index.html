@@ -81,6 +81,7 @@
 
     #LeaderboardExample,
     #TeamLeaderboardExample,
+    #FitnessLeaderboardExample,
     #RecentFundraisersExample,
     #TeamsExample,
     #MapExample,
@@ -161,6 +162,7 @@
 
   <div id="LeaderboardExample">Loading...</div>
   <div id="TeamLeaderboardExample">Loading...</div>
+  <div id="FitnessLeaderboardExample">Loading...</div>
 
   <div id="RecentFundraisersExample">Loading...</div>
   <div id="TeamsExample">Loading...</div>
@@ -196,6 +198,7 @@
     edh.widgets.renderWidget('GoalExample', 'Goal', { goal: '5000000', i18n: { title: '2015 Goal' } });
     edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TeamLeaderboardExample', 'Leaderboard', { campaignUid: 'us-22', type: 'team', limit: 16, pageSize: 4, i18n: { heading: 'Leaderboard > Top Teams' } });
+    edh.widgets.renderWidget('FitnessLeaderboardExample', 'FitnessLeaderboard', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('RecentFundraisersExample', 'RecentFundraisers', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TeamsExample', 'Teams', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('CharitiesExample', 'PromoCharities', {

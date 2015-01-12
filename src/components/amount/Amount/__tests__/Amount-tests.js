@@ -20,7 +20,7 @@ describe('Amount', function() {
 
   it('allows you to select a preset', function() {
     var element = TestUtils.renderIntoDocument(<Amount />);
-    var select = findByProp(element, 'id', 1500);
+    var select = findByProp(element, 'value', 1500);
     TestUtils.Simulate.click(select);
     expect(element.state.preset).toBe(1500);
     expect(element.state.custom).toBe(null);
@@ -49,7 +49,7 @@ describe('Amount', function() {
     TestUtils.Simulate.change(input, { target: { value: 123 } });
     expect(callback).lastCalledWith(123);
 
-    var select = findByProp(element, 'id', 1500);
+    var select = findByProp(element, 'value', 1500);
     TestUtils.Simulate.click(select);
     expect(callback).lastCalledWith(1500);
   });

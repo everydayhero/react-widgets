@@ -114,8 +114,6 @@ The supporter page search modal widget allows you to search for a supporter page
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
-  </head>
-  <body>
     <a id="PageSearchExample">Support a friend</a>
     <script>
       edh.widgets.initModal('PageSearchExample', 'PageSearch', { country: 'uk' });

@@ -273,7 +273,8 @@ Set and display a campaign goal. While this component can be configured to displ
   ```js
   {
     title: 'Goal',
-    symbol: '$'
+    symbol: '$',
+    suffix: ''
   }
   ```
 

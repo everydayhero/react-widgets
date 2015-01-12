@@ -7,12 +7,9 @@ describe('MMFLeaderboard', function() {
   var _                     = require('lodash');
   var React                 = require('react/addons');
   var MMFLeaderboard        = require('../');
-  var MMFLeaderboardItem    = require('../../MMFLeaderboardItem/');
-  var MMFLeaderboardColHead = require('../../MMFLeaderboardColHead/');
   var pages                 = require('../../../../api/pages');
   var TestUtils             = React.addons.TestUtils;
   var findByClass           = TestUtils.findRenderedDOMComponentWithClass;
-  var findByProp            = require('../../../../test/helpers/scryRenderedDOMComponentsWithProp').findRenderedDOMComponentWithProp;
 
   describe('Component defaults', function() {
     var leaderboard;

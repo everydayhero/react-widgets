@@ -7,7 +7,7 @@ describe('MMFLeaderboardColHead', function() {
   var TestUtils             = React.addons.TestUtils;
   var findByClass           = TestUtils.findRenderedDOMComponentWithClass;
 
-  describe('Handling clicks', function() {
+  describe('Default behaviour', function() {
     it('calls a function onclick', function() {
       var callback    = jest.genMockFunction();
       var leaderboard = <MMFLeaderboardColHead onClick={ callback } sort="amount" active={ false } />;

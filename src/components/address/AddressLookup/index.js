@@ -38,10 +38,8 @@ module.exports = React.createClass({
         inputLabel: 'Address Lookup',
         inputLabelGB: 'Postcode Lookup',
         manualEntryButton: 'Enter Manually',
-        error: {
-          empty: "Sorry, we couldn't find that address",
-          '500': "Something went wrong, please try again"
-        }
+        resetButton: 'Reset Address',
+        error: "Sorry, we couldn't find that address"
       }
     };
   },
@@ -56,7 +54,7 @@ module.exports = React.createClass({
       address: this.props.address,
       custom: null,
       loading: false,
-      error: null,
+      error: false,
       fauxFocus: 0,
       cancelSearch: function() {},
       cancelFind: function() {}
@@ -131,6 +129,17 @@ module.exports = React.createClass({
     });
   },
 
+  reset: function() {
+    this.setState({
+      loading: false,
+      input: '',
+      addressList: false,
+      address: null,
+      custom: null,
+      focusOnMount: true
+    });
+  },
+
   setCustom: function(key) {
     return function(value) {
       var custom = this.state.custom || _.clone(this.state.address);
@@ -180,20 +189,26 @@ module.exports = React.createClass({
   },
 
   setList: function(list) {
-    if (list === null) { return this.setError('500'); }
-    if (list.addresses.length === 0) { return this.setError('empty'); }
-    this.setState({ error: null, addressList: list.addresses, loading: false });
+    if (this.validate(list.addresses, this.setError)) {
+      this.setState({ error: false, addressList: list.addresses, loading: false });
+    }
   },
 
   setAddress: function(address) {
-    if (address === null) { return this.setError('500'); }
-    if (_.isEmpty(address.address)) { return this.setError('empty'); }
-    address.address.paf_validated = this.state.country === "GB";
-    this.setState({ error: null, address: address.address, addressList: null, loading: false, focusOnMount: true }, this.output);
+    if (this.validate(address.address, this.setError)) {
+      address.address.paf_validated = this.state.country === "GB";
+      this.setState({ error: false, address: address.address, addressList: null, loading: false, focusOnMount: true }, this.output);
+    }
   },
 
-  setError: function(error) {
-    this.setState({ error: this.t('error.' + error), addressList: null, address: null, loading: false });
+  setError: function(bool) {
+    this.setState({ error: !bool, addressList: null, address: null, loading: false });
+  },
+
+  validate: function(val, callback) {
+    var bool = _.isEmpty(val) || typeof val === 'string';
+    callback(!bool);
+    return !bool;
   },
 
   renderListing: function() {
@@ -236,9 +251,12 @@ module.exports = React.createClass({
         key={ this.t('inputLabel') }
         ref={ 'lookup' }
         required={ this.props.required }
+        error={ this.state.error }
+        validate={ this.validate }
         i18n={{
           name: this.props.prefix + 'lookup',
-          label: this.state.country === 'GB' ? this.t('inputLabelGB') : this.t('inputLabel')
+          label: this.state.country === 'GB' ? this.t('inputLabelGB') : this.t('inputLabel'),
+          error: this.t('error')
         }}
         value={ this.state.input }
         autoFocus={ this.state.focusOnMount }
@@ -254,10 +272,10 @@ module.exports = React.createClass({
     );
   },
 
-  renderError: function(bool) {
-    return bool && (
-      <div className="AddressLookup__error">
-        { this.state.error }
+  renderResetButton: function() {
+    return (
+      <div className="AddressLookup__reset" tabIndex='0' onClick={ this.reset } onKeyPress={ this.reset }>
+        { this.t('resetButton') }
       </div>
     );
   },
@@ -278,7 +296,9 @@ module.exports = React.createClass({
         required={ this.props.required }
         address={ address }
         region={ this.state.country }
-        onChange={ this.setCustom } />
+        onChange={ this.setCustom }>
+        { this.renderResetButton() }
+      </AddressBreakdown>
     );
   },
 
@@ -290,7 +310,6 @@ module.exports = React.createClass({
         { this.renderStatus(!this.state.choosingCountry) }
         { this.renderInput(!address && !this.state.choosingCountry) }
         { this.renderList(this.state.addressList && !address) }
-        { this.renderError(!!this.state.error) }
         { this.renderManualButton(!!this.state.error || (this.state.addressList && !address)) }
         { this.renderAddress(address) }
       </div>

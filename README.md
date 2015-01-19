@@ -709,10 +709,8 @@ Displays a form input field and country selector, which allows users to lookup t
     inputLabel: 'Address Lookup',
     inputLabelGB: 'Postcode Lookup',
     manualEntryButton: 'Enter Manually',
-    error: {
-      empty: "Sorry, we couldn't find that address",
-      '500': "Something went wrong, please try again"
-    }
+    resetButton: 'Reset Address',
+    error:"Sorry, we couldn't find that address"
   }
   ```
 

@@ -16,6 +16,7 @@ module.exports = React.createClass({
     autoFocus: React.PropTypes.bool,
     autoComplete: React.PropTypes.bool,
     required: React.PropTypes.bool,
+    error: React.PropTypes.bool,
     mask: React.PropTypes.func,
     validate: React.PropTypes.func,
     output: React.PropTypes.func,
@@ -35,6 +36,7 @@ module.exports = React.createClass({
       autoFocus: false,
       autoComplete: false,
       required: false,
+      error: false,
       mask: null,
       validate: null,
       output: null,
@@ -57,7 +59,7 @@ module.exports = React.createClass({
       value: this.props.value,
       waiting: false,
       valid: false,
-      error: false
+      error: this.props.error
     };
   },
 
@@ -73,6 +75,9 @@ module.exports = React.createClass({
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.value !== this.state.value) {
       this.setState({ value: nextProps.value });
+    }
+    if (nextProps.error !== this.state.error) {
+      this.setState({ error: nextProps.error });
     }
   },
 

@@ -61,7 +61,6 @@ module.exports = React.createClass({
     return (
       <div className="AddressBreakdown">
         <Input
-          required={ this.props.required }
           autoFocus={ this.props.autoFocus }
           ref={ 'street_address' }
           key={ 'street_address' }
@@ -83,7 +82,6 @@ module.exports = React.createClass({
           spacing={ 'tight' }
           output={ this.props.onChange('extended_address') } />
         <Input
-          required={ this.props.required }
           key={ "locality" }
           ref={ 'locality' }
           i18n={{
@@ -95,7 +93,6 @@ module.exports = React.createClass({
           spacing={ 'tight' }
           output={ this.props.onChange('locality') } />
         <Input
-          required={ this.props.required }
           key={ 'region' }
           ref={ 'region' }
           i18n={{
@@ -107,7 +104,6 @@ module.exports = React.createClass({
           spacing={ 'tight' }
           output={ this.props.onChange('region') } />
         <Input
-          required={ this.props.required }
           key={ "country_name" }
           ref={ 'country_name' }
           i18n={{
@@ -119,7 +115,6 @@ module.exports = React.createClass({
           spacing={ 'tight' }
           output={ this.props.onChange('country_name') } />
         <Input
-          required={ this.props.required }
           key={ "postal_code" }
           ref={ 'postal_code' }
           i18n={{
@@ -130,7 +125,8 @@ module.exports = React.createClass({
           width={ "narrow" }
           spacing={ 'tight' }
           output={ this.props.onChange('postal_code') } />
-          <input type="hidden" name={ this.props.prefix + "paf_validated" } value={ address.paf_validated } />
+        { this.props.children }
+        <input type="hidden" name={ this.props.prefix + "paf_validated" } value={ address.paf_validated } />
       </div>
     );
   }

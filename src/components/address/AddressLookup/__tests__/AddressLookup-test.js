@@ -138,4 +138,20 @@ describe('AddressLookup', function() {
     var countryName = findByProp(breakdown, 'id', 'country_name').getDOMNode();
     expect(countryName.value).toBe('Australia');
   });
+
+  it('allows you to reset the address', function() {
+    var element = TestUtils.renderIntoDocument(<AddressLookup address={ addressFindResult.address } />);
+    var resetButton = findByClass(element, 'AddressLookup__reset').getDOMNode();
+    TestUtils.Simulate.click(resetButton);
+    var addressLookup = findByClass(element, 'AddressLookup').getDOMNode();
+    expect(addressLookup).not.toBeNull();
+  }),
+
+  it('allows you to call output callback when reset the address', function() {
+    var callback = jasmine.createSpy();
+    var element = TestUtils.renderIntoDocument(<AddressLookup address={ addressFindResult.address } output={ callback } />);
+    var resetButton = findByClass(element, 'AddressLookup__reset').getDOMNode();
+    TestUtils.Simulate.click(resetButton);
+    expect(callback).toHaveBeenCalled();
+  })
 });

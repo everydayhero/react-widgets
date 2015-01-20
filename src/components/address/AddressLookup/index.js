@@ -137,7 +137,7 @@ module.exports = React.createClass({
       address: null,
       custom: null,
       focusOnMount: true
-    });
+    }, this.output);
   },
 
   setCustom: function(key) {

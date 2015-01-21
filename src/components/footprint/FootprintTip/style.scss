@@ -1,0 +1,57 @@
+.FootprintTip {
+  backface-visibility: hidden;
+  transition-property: max-width, max-height;
+  transition-duration: 480ms, 480ms;
+  transition-delay: 480ms, 960ms;
+  transition-timing-function: ease-out, ease-out;
+  overflow: hidden;
+  padding: 13px 0;
+  max-width: 0px;
+  max-height: 1px;
+  width: 150px;
+  position: absolute;
+  color: $ehw-grey-dark;
+}
+.FootprintTip--show {
+  max-width: 160px;
+  max-height: 300px;
+}
+.FootprintTip--topRight {
+  border-top: 1px solid $ehw-green-light;
+  text-align: right;
+  top: 0;
+  left: 100%;
+}
+.FootprintTip--bottomRight {
+  border-bottom: 1px solid $ehw-green-light;
+  text-align: right;
+  bottom: 0;
+  left: 100%;
+}
+.FootprintTip--bottomLeft {
+  border-bottom: 1px solid $ehw-green-light;
+  text-align: left;
+  bottom: 0;
+  right: 100%;
+}
+.FootprintTip--topLeft {
+  border-top: 1px solid $ehw-green-light;
+  text-align: left;
+  top: 0;
+  right: 100%;
+}
+.FootprintTip__name {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.16em;
+  font-size: 12px;
+}
+.FootprintTip__value {
+  font-weight: bold;
+  letter-spacing: 0.16em;
+  font-size: 21px;
+}
+.FootprintTip__description {
+  font-size: 11px;
+  font-weight: 300;
+}

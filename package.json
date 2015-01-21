@@ -10,7 +10,9 @@
     "jsonp": "webmodules/jsonp",
     "lodash": "~2.4.1",
     "numeral": "~1.5.3",
-    "react": "~0.12.1"
+    "paths-js": "^0.3.0",
+    "react": "~0.12.1",
+    "react-tween-state": "0.0.4"
   },
   "devDependencies": {
     "browserify": "~6.3.3",

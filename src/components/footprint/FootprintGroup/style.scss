@@ -1,0 +1,4 @@
+.FootprintGroup--active .FootprintDummy { fill: #ddd; }
+.Footprint--hover .FootprintSector { opacity: 0.2; }
+.FootprintGroup--active .FootprintSector { opacity: 0.9; }
+.FootprintGroup--active .FootprintSector--active .FootprintMetric { opacity: 1; }

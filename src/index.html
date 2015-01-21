@@ -180,6 +180,12 @@
       </div>
     </div>
     <div class="effort pull-left">
+      <div class="panel pad-x">
+        <h3 class="title">Footprint</h3>
+        <div id="FootprintExample">Loading...</div>
+      </div>
+    </div>
+    <div class="effort pull-left">
       <div class="panel">
         <h3 class="title">Collective Effort</h3>
         <div id="TotalDistanceExample">Loading...</div>
@@ -259,6 +265,22 @@
     edh.widgets.renderWidget('AmountExample', 'Amount');
     edh.widgets.renderWidget('InputExample', 'Input', { i18n: { name: 'input_example', label: 'Input Example', hint: 'What is this input for?', error: 'This input is required'}, required: true });
     edh.widgets.renderWidget('CallToActionBoxExample', 'CallToActionBox', { campaignUid: 'us-22', registrationUrl: 'https://your-registration-url.com/' });
+    edh.widgets.renderWidget('FootprintExample', 'Footprint', {
+      data: [
+        {id:0, key:'community_raised', name:'Community Raised', group:'community', value:'$0.00', percentile:rand(), description: "The collective funds raised by people who care about the same causes as you."},
+        {id:1, key:'community_engagement', name:'Community Engagement', group:'community', value:'467k', percentile:rand(), description: "The number of people supporting the causes you care about."},
+        {id:2, key:'money_fundraising', name:'Fundraising', group:'money', value:'$4.8k', percentile:rand(), description: "The lifetime amount you have raised through fundraising for the causes you care about."},
+        {id:3, key:'money_donations', name:'Donations', group:'money', value:'$9.8k', percentile:rand(), description: "The lifetime amount you have donated to the causes you care about."},
+        {id:4, key:'voice_reach', name:'Reach', group:'voice', value:'4564', percentile:rand(), description: "How many people you have reached through your philanthropic activities and sharing."},
+        {id:5, key:'voice_engagement', name:'Engagement', group:'voice', value:'36.8k', percentile:rand(), description: "How engaged you are with your supporters and other fundraisers."},
+        {id:6, key:'effort_training', name:'Training', group:'effort', value:'64h', percentile:rand(), description: "The total duration you have trained in support of the causes you care about."},
+        {id:7, key:'effort_volunteering', name:'Volunteering', group:'effort', value:'356h', percentile:rand(), description: "The total duration you have volunteered your talents for causes you care about."}
+      ]
+    });
+
+    function rand() { // for Footprint dummy data
+      return (Math.random() * 100 | 0) + 1;
+    }
   </script>
 </body>
 </html>

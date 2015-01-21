@@ -1,0 +1,31 @@
+.Footprint {
+  display: inline-block;
+  background-color: white;
+  border-radius: 50%;
+  margin-bottom: 13px;
+  position: relative;
+  perspective: 500px;
+  transform-style: preserve-3d;
+  transform: translateZ(0px);
+  position: relative;
+  z-index: 1;
+}
+
+.Footprint * {
+  box-sizing: border-box;
+}
+
+// Colors
+.FootprintAvatar { border-color: white; }
+.FootprintTile:hover .FootprintAvatar { border-color: $ehw-green-light; }
+.FootprintData { color: white; }
+.Footprint--hover {
+  .FootprintMetric--community_raised { fill: #35163d; }
+  .FootprintMetric--community_engagement { fill: #583048; }
+  .FootprintMetric--money_fundraising { fill: #307c99; }
+  .FootprintMetric--money_donations { fill: #6db4d1; }
+  .FootprintMetric--voice_reach { fill: #b14750; }
+  .FootprintMetric--voice_engagement { fill: #f18790; }
+  .FootprintMetric--effort_training { fill: #cf4c22; }
+  .FootprintMetric--effort_volunteering { fill: #e2a13f; }
+}

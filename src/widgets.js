@@ -24,7 +24,8 @@ var widgets = {
   PromoCharities: require('./components/charities/PromoCharities'),
   AddressLookup: require('./components/address/AddressLookup'),
   Amount: require('./components/amount/Amount'),
-  Input: require('./components/forms/Input')
+  Input: require('./components/forms/Input'),
+  Footprint: require('./components/footprint/Footprint')
 };
 var modals = {
   CharitySearch: require('./components/search/CharitySearchModal'),

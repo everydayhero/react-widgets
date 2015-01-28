@@ -14,6 +14,7 @@ module.exports = React.createClass({
     autoFocus: React.PropTypes.bool,
     prefix: React.PropTypes.string,
     region: React.PropTypes.string,
+    required: React.PropTypes.bool,
     onChange: React.PropTypes.func
   },
 
@@ -23,6 +24,7 @@ module.exports = React.createClass({
       autoFocus: false,
       prefix: '',
       region: 'US',
+      required: false,
       defaultI18n: {
         street_address: 'Address',
         extended_address: 'Address 2',
@@ -69,6 +71,8 @@ module.exports = React.createClass({
             label: this.t('street_address', { scope: iso })
           }}
           value={ address.street_address }
+          required={ this.props.required }
+          showIcon={ false }
           spacing={ 'tight' }
           output={ this.props.onChange('street_address') } />
         <Input
@@ -79,6 +83,7 @@ module.exports = React.createClass({
             label: this.t('extended_address', { scope: iso })
           }}
           value={ address.extended_address }
+          showIcon={ false }
           spacing={ 'tight' }
           output={ this.props.onChange('extended_address') } />
         <Input
@@ -90,6 +95,8 @@ module.exports = React.createClass({
           }}
           value={ address.locality }
           width={ "wide" }
+          required={ this.props.required }
+          showIcon={ false }
           spacing={ 'tight' }
           output={ this.props.onChange('locality') } />
         <Input
@@ -101,6 +108,7 @@ module.exports = React.createClass({
           }}
           value={ address.region }
           width={ "narrow" }
+          showIcon={ false }
           spacing={ 'tight' }
           output={ this.props.onChange('region') } />
         <Input
@@ -112,6 +120,8 @@ module.exports = React.createClass({
           }}
           value={ address.country_name }
           width={ "wide" }
+          required={ this.props.required }
+          showIcon={ false }
           spacing={ 'tight' }
           output={ this.props.onChange('country_name') } />
         <Input
@@ -123,6 +133,8 @@ module.exports = React.createClass({
           }}
           value={ address.postal_code }
           width={ "narrow" }
+          required={ this.props.required }
+          showIcon={ false }
           spacing={ 'tight' }
           output={ this.props.onChange('postal_code') } />
         { this.props.children }

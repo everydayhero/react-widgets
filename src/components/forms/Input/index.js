@@ -23,6 +23,7 @@ module.exports = React.createClass({
     modal: React.PropTypes.func,
     type: React.PropTypes.string,
     icon: React.PropTypes.string,
+    showIcon: React.PropTypes.bool,
     width: React.PropTypes.string,
     spacing: React.PropTypes.string,
     value: React.PropTypes.string,
@@ -44,6 +45,7 @@ module.exports = React.createClass({
       type: 'text',
       value: '',
       icon: null,
+      showIcon: true,
       width: 'full',
       spacing: '',
       defaultI18n: {
@@ -143,7 +145,8 @@ module.exports = React.createClass({
   },
 
   renderIcon: function() {
-    var icon = this.state.waiting ? 'refresh'
+    var icon = !this.props.showIcon ? false
+               : this.state.waiting ? 'refresh'
                : this.state.valid ? 'check'
                : this.state.error ? 'times'
                : this.props.disabled ? 'minus'

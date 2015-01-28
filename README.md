@@ -807,6 +807,7 @@ Displays an input field which can accept input masking, asynchronous validation,
   ```
 - `type`: *optional* string defining the html input type. Default is 'text'.
 - `icon`: *optional* string to specify an icon to appear to the right. Valid strings are Font Awesome icon names (without the 'fa-' prefix). Default is 'null'.
+- `showIcon`: *optional* boolean to allow disabling icons when set to 'false'. Default is 'true'.
 - `width`: *optional* string to specify the width of the field. Valid options are: "full", "wide", "half", and "narrow". Default is "full".
 - `spacing`: *optional* string to specify the vertical spacing beneath each input. Valid options are: "", "loose", and "tight". Default is "".
 - `value`: *optional* string for input's initial value. Default is "".

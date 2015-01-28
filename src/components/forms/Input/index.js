@@ -137,10 +137,9 @@ module.exports = React.createClass({
       this.setState({ waiting: true });
       return this.props.validate(this.state.value, this.setValid);
     }
-    this.setState({
-      valid: !!this.state.value,
-      error: !this.state.value
-    });
+
+    var valid = !!this.state.value.trim();
+    this.setValid(valid);
   },
 
   renderIcon: function() {
@@ -166,7 +165,7 @@ module.exports = React.createClass({
     var enabled = !this.props.disabled;
     var classes = cx({
       'Input': true,
-      'Input--hasValue': !!this.state.value,
+      'Input--hasValue': !!this.state.value.trim(),
       'Input--focused': this.state.focused,
       'Input--valid': this.state.valid,
       'Input--error': this.state.error,

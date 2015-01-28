@@ -145,7 +145,7 @@ describe('AddressLookup', function() {
     TestUtils.Simulate.click(resetButton);
     var addressLookup = findByClass(element, 'AddressLookup').getDOMNode();
     expect(addressLookup).not.toBeNull();
-  }),
+  });
 
   it('allows you to call output callback when reset the address', function() {
     var callback = jasmine.createSpy();
@@ -153,5 +153,5 @@ describe('AddressLookup', function() {
     var resetButton = findByClass(element, 'AddressLookup__reset').getDOMNode();
     TestUtils.Simulate.click(resetButton);
     expect(callback).toHaveBeenCalled();
-  })
+  });
 });

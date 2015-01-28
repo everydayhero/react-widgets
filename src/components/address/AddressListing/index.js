@@ -24,7 +24,8 @@ module.exports = React.createClass({
     };
   },
 
-  handleClick: function() {
+  handleClick: function(e) {
+    e.preventDefault();
     this.props.onClick(this.props.id);
   },
 

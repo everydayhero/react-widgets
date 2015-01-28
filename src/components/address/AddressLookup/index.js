@@ -206,7 +206,7 @@ module.exports = React.createClass({
   },
 
   validate: function(val, callback) {
-    var bool = _.isEmpty(val) || typeof val === 'string';
+    var bool = _.isEmpty(val);
     callback(!bool);
     return !bool;
   },
@@ -252,7 +252,6 @@ module.exports = React.createClass({
         ref={ 'lookup' }
         required={ this.props.required }
         error={ this.state.error }
-        validate={ this.validate }
         i18n={{
           name: this.props.prefix + 'lookup',
           label: this.state.country === 'GB' ? this.t('inputLabelGB') : this.t('inputLabel'),

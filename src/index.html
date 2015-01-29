@@ -259,19 +259,12 @@
       ]
     });
     edh.widgets.renderWidget('MapExample', 'Map', { campaignUid: 'us-22', region:'US' });
-
     edh.widgets.renderWidget('TotalDistanceExample', 'TotalDistance', { campaignUids: ['us-22','us-24'] });
-
     edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUids: ['us-22', 'us-24'] });
-
-
     edh.widgets.renderWidget('AddressLookupExample', 'AddressLookup', { country: 'GB' });
     edh.widgets.renderWidget('AmountExample', 'Amount');
     edh.widgets.renderWidget('InputExample', 'Input', { i18n: { name: 'input_example', label: 'Input Example', hint: 'What is this input for?', error: 'This input is required'}, required: true });
-
     edh.widgets.renderWidget('CallToActionBoxExample', 'CallToActionBox', { campaignUid: 'us-22', registrationUrl: 'https://your-registration-url.com/' });
-
-
     edh.widgets.renderWidget('FootprintExample', 'Footprint', {
       data: [
         {id:0, key:'community_raised', name:'Community Raised', group:'community', value:'$0.00', percentile:rand(), description: "The collective funds raised by people who care about the same causes as you."},

@@ -47,7 +47,7 @@ module.exports = React.createClass({
     this.loadCampaigns();
   },
 
-  processUids: function() {
+  setUids: function() {
     var campaignUids = [];
 
     if (this.props.campaignUid) {
@@ -61,7 +61,7 @@ module.exports = React.createClass({
 
   loadCampaigns: function() {
     this.setState({ isLoading: true });
-    campaigns.findByUids(this.processUids(), this.onSuccess);
+    campaigns.findByUids(this.setUids(), this.onSuccess);
   },
 
   combineActivityData: function(fitnessActivity) {

@@ -141,7 +141,8 @@ Displays the total funds raised for specified campaigns as a dollar amount. Eith
 
 ##### Options
 
-- `campaignUids`: *required* array of campaign uids.
+- `campaignUid`: *optional* string campaign uid to filter results by campaign.
+- `campaignUids`: *optional* array of campaign uids to filter results by multiple campaigns.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
@@ -181,7 +182,8 @@ Displays the total number of fundraisers (that have an everydayhero page) for sp
 
 ##### Options
 
-- `campaignUids`: *required* array of campaign uids.
+- `campaignUid`: *optional* string campaign uid to filter results by campaign.
+- `campaignUids`: *optional* array of campaign uids to filter results by multiple campaigns.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
@@ -220,7 +222,8 @@ Displays the total number of charities associated with specified campaigns. Eith
 
 ##### Options
 
-- `campaignUids`: *required* array of campaign uids.
+- `campaignUid`: *optional* string campaign uid to filter results by campaign.
+- `campaignUids`: *optional* array of campaign uids to filter results by multiple campaigns.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
@@ -325,7 +328,8 @@ Either a single or multiple campaign uids can be provided to scope this widget.
 
 ##### Options
 
-- `campaignUids`: *required* array of campaign uids.
+- `campaignUid`: *optional* string campaign uid to filter results by campaign.
+- `campaignUids`: *optional* array of campaign uids to filter results by multiple campaigns.
 - `unit`: *optional* string. Can be set to either `'km'` or `'miles'`. Converts input to whichever is defined. Set to `'miles'` by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
@@ -369,7 +373,8 @@ Either a single or multiple campaign uids can be provided to scope this widget.
 
 ##### Options
 
-- `campaignUids`: *required* array of campaign uids.
+- `campaignUid`: *optional* string campaign uid to filter results by campaign.
+- `campaignUids`: *optional* array of campaign uids to filter results by multiple campaigns.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.

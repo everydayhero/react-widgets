@@ -40,18 +40,29 @@ module.exports = React.createClass({
     };
   },
 
+  componentWillMount: function() {
+    this.loadCharities();
+  },
+
+  loadCharities: function() {
+    this.setState({ isLoading: true });
+
+    var campaignUids = [];
+
+    if (this.props.campaignUid) {
+      campaignUids.push(this.props.campaignUid);
+    } else {
+      campaignUids = this.props.campaignUids;
+    }
+
+    charities.findByCampaign(campaignUids, 1, 1, this.onSuccess);
+  },
+
   onSuccess: function(result) {
     this.setState({
       isLoading: false,
       total: result.meta.count
     });
-  },
-
-  componentWillMount: function() {
-    this.setState({
-      isLoading: true
-    });
-    charities.findByCampaign(this.props.campaignUids, 1, 1, this.onSuccess);
   },
 
   renderTotal: function() {

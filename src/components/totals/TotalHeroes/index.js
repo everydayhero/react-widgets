@@ -54,21 +54,30 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    this.setState({
-      isLoading: true
-    });
+    this.loadPages();
+  },
 
-    var props        = this.props;
-    var campaignUid  = props.campaignUid;
-    var campaignUids = props.campaignUids;
+  setUids: function() {
+    var campaignUids = [];
 
-    if (campaignUids.length) {
-      _.each(props.campaignUids, function(campaignUid) {
-        pages.findByCampaign(campaignUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess);
-      }, this);
+    if (this.props.campaignUid) {
+      campaignUids.push(this.props.campaignUid);
     } else {
-      pages.findByCampaign(campaignUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess);
+      campaignUids = this.props.campaignUids;
     }
+
+    return campaignUids;
+  },
+
+  loadPages: function() {
+    this.setState({ isLoading: true });
+
+    var campaignUids = this.setUids();
+    var props = this.props;
+
+    _.each(campaignUids, function(campaignUid) {
+      pages.findByCampaign(campaignUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess);
+    }, this);
   },
 
   renderTotal: function() {

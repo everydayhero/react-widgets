@@ -48,13 +48,13 @@ describe('TotalHeroes', function() {
       findByClass(element, 'TotalHeroes__loading');
     });
 
-    it('checks that find function works with 1 campaign uid', function() {
+    it('makes a single call using to fetch api data', function() {
       expect(pages.findByCampaign.mock.calls.length).toEqual(1);
       expect(pages.findByCampaign).toBeCalledWith("us-22", 'individual', 1, 1, element.onSuccess);
     });
   });
 
-  describe('working with multiple uids', function() {
+  describe('Working with multiple uids', function() {
     var totalHeroes;
     var element;
 
@@ -64,7 +64,7 @@ describe('TotalHeroes', function() {
       element = TestUtils.renderIntoDocument(totalHeroes);
     });
 
-    it('runs findByCampaign function for each uid provided', function() {
+    it('makes multiple calls to fetch api data', function() {
       expect(pages.findByCampaign.mock.calls.length).toEqual(2);
       expect(pages.findByCampaign).toBeCalledWith("us-22", 'individual', 1, 1, element.onSuccess);
       expect(pages.findByCampaign).toBeCalledWith("us-24", 'individual', 1, 1, element.onSuccess);

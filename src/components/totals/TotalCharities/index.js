@@ -44,9 +44,7 @@ module.exports = React.createClass({
     this.loadCharities();
   },
 
-  loadCharities: function() {
-    this.setState({ isLoading: true });
-
+  setUids: function() {
     var campaignUids = [];
 
     if (this.props.campaignUid) {
@@ -55,7 +53,12 @@ module.exports = React.createClass({
       campaignUids = this.props.campaignUids;
     }
 
-    charities.findByCampaign(campaignUids, 1, 1, this.onSuccess);
+    return campaignUids;
+  },
+
+  loadCharities: function() {
+    this.setState({ isLoading: true });
+    charities.findByCampaign(this.setUids(), 1, 1, this.onSuccess);
   },
 
   onSuccess: function(result) {

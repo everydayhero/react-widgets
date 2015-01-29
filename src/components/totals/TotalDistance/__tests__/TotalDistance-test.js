@@ -33,7 +33,7 @@ describe('TotalDistance', function() {
       findByClass(element, 'TotalDistance__loading');
     });
 
-    it('handles a single campaign id', function() {
+    it('handles multiple campaign uids', function() {
       expect(campaigns.findByUids.mock.calls.length).toEqual(1);
       expect(campaigns.findByUids).toBeCalledWith(["us-22", "us-24"], element.onSuccess);
     });
@@ -49,7 +49,7 @@ describe('TotalDistance', function() {
       element = TestUtils.renderIntoDocument(totalDistance);
     });
 
-    it('handles a multiple campaign ids', function() {
+    it('handles a sinlge campaign uid', function() {
       expect(campaigns.findByUids.mock.calls.length).toEqual(1);
       expect(campaigns.findByUids).toBeCalledWith(["us-22"], element.onSuccess);
     });
@@ -65,7 +65,7 @@ describe('TotalDistance', function() {
       expect(element.formatDistance(1000)).toEqual('0.62');
     });
 
-    it('Correctly calculates kilometers based on response', function() {
+    it('correctly calculates kilometers based on response', function() {
       var totalDistance = <TotalDistance campaignUid="au-0" unit="km" />;
       var element = TestUtils.renderIntoDocument(totalDistance);
       element.setState({ isLoading: false });

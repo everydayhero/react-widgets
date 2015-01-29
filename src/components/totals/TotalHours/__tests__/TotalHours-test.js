@@ -9,12 +9,12 @@ describe('TotalDistance', function() {
   var TestUtils   = React.addons.TestUtils;
   var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
-  describe('component defaults', function() {
+  describe('Component when handed multiple uids', function() {
     var totalHours;
     var element;
 
     beforeEach(function() {
-      campaigns.find.mockClear();
+      campaigns.findByUids.mockClear();
       totalHours = <TotalHours campaignUids={ ["us-22", "us-24"] } />;
       element = TestUtils.renderIntoDocument(totalHours);
     });
@@ -25,7 +25,6 @@ describe('TotalDistance', function() {
 
     it('renders an icon by default', function() {
       var icon = findByClass(element, 'TotalHours__icon');
-
       expect(icon).not.toBeNull();
     });
 
@@ -34,15 +33,29 @@ describe('TotalDistance', function() {
       findByClass(element, 'TotalHours__loading');
     });
 
-    it('handles a campaign id', function() {
-      expect(campaigns.find.mock.calls.length).toEqual(2);
-
-      expect(campaigns.find).toBeCalledWith("us-22", element.onSuccess);
-      expect(campaigns.find).toBeCalledWith("us-24", element.onSuccess);
+    it('loads data for multiple campaigns', function() {
+      expect(campaigns.findByUids.mock.calls.length).toEqual(1);
+      expect(campaigns.findByUids).toBeCalledWith(["us-22", "us-24"], element.onSuccess);
     });
   });
 
-  describe('component props', function() {
+  describe('Component when handed one uid', function() {
+    var totalHours;
+    var element;
+
+    beforeEach(function() {
+      campaigns.findByUids.mockClear();
+      totalHours = <TotalHours campaignUid="us-22" />;
+      element = TestUtils.renderIntoDocument(totalHours);
+    });
+
+    it('handles loads data for a single campaign', function() {
+      expect(campaigns.findByUids.mock.calls.length).toEqual(1);
+      expect(campaigns.findByUids).toBeCalledWith(["us-22"], element.onSuccess);
+    });
+  });
+
+  describe('Custom component props', function() {
     var totalHours;
     var element;
     var translation = {
@@ -62,6 +75,36 @@ describe('TotalDistance', function() {
       var title = findByClass(element, 'TotalHours__title');
 
       expect(title.getDOMNode().textContent).toBe(translation.title);
+    });
+  });
+
+  describe('Number formatting options', function() {
+    it('renders in a human readable format by default', function() {
+      var totalHours = <TotalHours campaignUid="au-0" />;
+      var element = TestUtils.renderIntoDocument(totalHours);
+
+      element.setState({
+        isLoading: false,
+        hasResults: true,
+        total: 37800
+      });
+
+      var total = findByClass(element, 'TotalHours__total');
+      expect(total.getDOMNode().textContent).toBe('10.5');
+    });
+
+    it('renders a different format if given acceptable numeral.js string', function() {
+      var totalHours = <TotalHours campaignUid="au-0" format="0,0[.]00" />;
+      var element = TestUtils.renderIntoDocument(totalHours);
+
+      element.setState({
+        isLoading: false,
+        hasResults: true,
+        total: 37800
+      });
+
+      var total = findByClass(element, 'TotalHours__total');
+      expect(total.getDOMNode().textContent).toBe('10.50');
     });
   });
 });

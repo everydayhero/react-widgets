@@ -40,7 +40,7 @@ module.exports = React.createClass({
     return (
       <label className={ classes + order } onClick={ this.handleClick }>
         { this.props.amount }
-        <input ref="radio" type="radio" name={ this.props.name } id={ this.props.amount } />
+        <input ref="radio" type="radio" name={ this.props.name } value={ this.props.amount } id={ this.props.name + '-' + this.props.amount } />
       </label>
     );
   }

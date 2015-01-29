@@ -11,6 +11,7 @@ module.exports = React.createClass({
 
   propTypes: {
     address: React.PropTypes.object,
+    autoFocus: React.PropTypes.bool,
     prefix: React.PropTypes.string,
     region: React.PropTypes.string,
     onChange: React.PropTypes.func
@@ -19,6 +20,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       address: null,
+      autoFocus: false,
       prefix: '',
       region: 'US',
       defaultI18n: {
@@ -59,8 +61,7 @@ module.exports = React.createClass({
     return (
       <div className="AddressBreakdown">
         <Input
-          required={ this.props.required }
-          autoFocus={ true }
+          autoFocus={ this.props.autoFocus }
           ref={ 'street_address' }
           key={ 'street_address' }
           i18n={{
@@ -81,7 +82,6 @@ module.exports = React.createClass({
           spacing={ 'tight' }
           output={ this.props.onChange('extended_address') } />
         <Input
-          required={ this.props.required }
           key={ "locality" }
           ref={ 'locality' }
           i18n={{
@@ -93,7 +93,6 @@ module.exports = React.createClass({
           spacing={ 'tight' }
           output={ this.props.onChange('locality') } />
         <Input
-          required={ this.props.required }
           key={ 'region' }
           ref={ 'region' }
           i18n={{
@@ -105,7 +104,6 @@ module.exports = React.createClass({
           spacing={ 'tight' }
           output={ this.props.onChange('region') } />
         <Input
-          required={ this.props.required }
           key={ "country_name" }
           ref={ 'country_name' }
           i18n={{
@@ -117,7 +115,6 @@ module.exports = React.createClass({
           spacing={ 'tight' }
           output={ this.props.onChange('country_name') } />
         <Input
-          required={ this.props.required }
           key={ "postal_code" }
           ref={ 'postal_code' }
           i18n={{
@@ -129,6 +126,7 @@ module.exports = React.createClass({
           spacing={ 'tight' }
           output={ this.props.onChange('postal_code') } />
         { this.props.children }
+        <input type="hidden" name={ this.props.prefix + "paf_validated" } value={ address.paf_validated } />
       </div>
     );
   }

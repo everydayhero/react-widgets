@@ -14,7 +14,7 @@ describe('FundsRaised', function() {
     var element;
 
     beforeEach(function() {
-      campaigns.find.mockClear();
+      campaigns.findByUids.mockClear();
       fundsRaised = <FundsRaised campaignUid="us-22" />;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
@@ -47,8 +47,8 @@ describe('FundsRaised', function() {
     });
 
     it('handles a single campaign id', function() {
-      expect(campaigns.find.mock.calls.length).toEqual(1);
-      expect(campaigns.find).toBeCalledWith("us-22", element.onSuccess);
+      expect(campaigns.findByUids.mock.calls.length).toEqual(1);
+      expect(campaigns.findByUids).toBeCalledWith(["us-22"], element.onSuccess);
     });
   });
 
@@ -57,7 +57,7 @@ describe('FundsRaised', function() {
     var element;
 
     beforeEach(function() {
-      campaigns.find.mockClear();
+      campaigns.findByUids.mockClear();
       fundsRaised = <FundsRaised campaignUids={ ["us-22", "us-24"] } />;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
@@ -93,6 +93,34 @@ describe('FundsRaised', function() {
       var total = findByClass(element, 'FundsRaised__total');
 
       expect(total.getDOMNode().textContent).toContain('£0.00');
+    });
+  });
+
+  describe('Number formatting options', function() {
+    it('renders in a short format by default', function() {
+      var fundsRaised = <FundsRaised campaignUid="au-0" />;
+      var element = TestUtils.renderIntoDocument(fundsRaised);
+
+      element.setState({
+        isLoading: false,
+        total: 1000000
+      });
+
+      var total = findByClass(element, 'FundsRaised__total');
+      expect(total.getDOMNode().textContent).toBe('$10.00 k');
+    });
+
+    it('renders a different format if given acceptable numeral.js string', function() {
+      var fundsRaised = <FundsRaised campaignUid="au-0" format="0[.]0" />;
+      var element = TestUtils.renderIntoDocument(fundsRaised);
+
+      element.setState({
+        isLoading: false,
+        total: 1000000
+      });
+
+      var total = findByClass(element, 'FundsRaised__total');
+      expect(total.getDOMNode().textContent).toBe('$10000');
     });
   });
 });

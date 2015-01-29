@@ -81,7 +81,7 @@ describe('AddressLookup', function() {
     expect(listItem.textContent).toContain('TestAddressListing');
   });
 
-  it('breaks down a selected address', function() {
+  it('breaks down a selected US address', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup />);
     element.setList(addressSearchResult);
     var listItem = findByClass(element, 'AddressListing--focused').getDOMNode();
@@ -93,9 +93,65 @@ describe('AddressLookup', function() {
     expect(element.state.address).toBe(addressFindResult.address);
 
     var breakdown = findByClass(element, 'AddressBreakdown');
+    var pafValidated = findByProp(breakdown, 'name', 'paf_validated').getDOMNode();
     var streetAddress = findByProp(breakdown, 'id', 'street_address').getDOMNode();
     var locality = findByProp(breakdown, 'id', 'locality').getDOMNode();
+    expect(pafValidated.value).toBe('false');
     expect(streetAddress.value).toBe('1 Place Pl');
     expect(locality.value).toBe('Sydney');
   });
+
+  it('breaks down a selected GB address', function() {
+    var element = TestUtils.renderIntoDocument(<AddressLookup country={ "UK" }/>);
+    element.setList(addressSearchResult);
+    var listItem = findByClass(element, 'AddressListing--focused').getDOMNode();
+    TestUtils.Simulate.click(listItem);
+    expect(address.find).lastCalledWith('123', 'GB', jasmine.any(Function));
+
+    var callback = address.find.mock.calls[0][2];
+    callback(addressFindResult);
+    expect(element.state.address).toBe(addressFindResult.address);
+
+    var breakdown = findByClass(element, 'AddressBreakdown');
+    var pafValidated = findByProp(breakdown, 'name', 'paf_validated').getDOMNode();
+    var streetAddress = findByProp(breakdown, 'id', 'street_address').getDOMNode();
+    var locality = findByProp(breakdown, 'id', 'locality').getDOMNode();
+    expect(pafValidated.value).toBe('true');
+    expect(element.state.custom).toBeNull();
+    expect(streetAddress.value).toBe('1 Place Pl');
+    expect(locality.value).toBe('Sydney');
+
+    TestUtils.Simulate.change(streetAddress, { target: { value: "2 SomeOther St" } });
+    expect(pafValidated.value).toBe('false');
+    expect(element.state.custom).not.toBeNull();
+  });
+
+  it('breaks down an empty address on manual entry', function() {
+    var element = TestUtils.renderIntoDocument(<AddressLookup country={ 'AU' } />);
+    element.setList(addressSearchResult);
+    var manualEntry = findByClass(element, 'AddressLookup__manual').getDOMNode();
+    TestUtils.Simulate.click(manualEntry);
+
+    var breakdown = findByClass(element, 'AddressBreakdown');
+    var streetAddress = findByProp(breakdown, 'id', 'street_address').getDOMNode();
+    expect(streetAddress.value).toBe('');
+    var countryName = findByProp(breakdown, 'id', 'country_name').getDOMNode();
+    expect(countryName.value).toBe('Australia');
+  });
+
+  it('allows you to reset the address', function() {
+    var element = TestUtils.renderIntoDocument(<AddressLookup address={ addressFindResult.address } />);
+    var resetButton = findByClass(element, 'AddressLookup__reset').getDOMNode();
+    TestUtils.Simulate.click(resetButton);
+    var addressLookup = findByClass(element, 'AddressLookup').getDOMNode();
+    expect(addressLookup).not.toBeNull();
+  }),
+
+  it('allows you to call output callback when reset the address', function() {
+    var callback = jasmine.createSpy();
+    var element = TestUtils.renderIntoDocument(<AddressLookup address={ addressFindResult.address } output={ callback } />);
+    var resetButton = findByClass(element, 'AddressLookup__reset').getDOMNode();
+    TestUtils.Simulate.click(resetButton);
+    expect(callback).toHaveBeenCalled();
+  })
 });

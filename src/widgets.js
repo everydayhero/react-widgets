@@ -14,6 +14,7 @@ var widgets = {
   TotalCharities: require('./components/totals/TotalCharities'),
   Goal: require('./components/totals/Goal'),
   Leaderboard: require('./components/leaderboards/Leaderboard'),
+  FitnessLeaderboard: require('./components/leaderboards/FitnessLeaderboard'),
   RecentFundraisers: require('./components/fundraisers/RecentFundraisers'),
   Teams: require('./components/teams/Teams'),
   Map: require('./components/maps/Map'),
@@ -23,7 +24,8 @@ var widgets = {
   PromoCharities: require('./components/charities/PromoCharities'),
   AddressLookup: require('./components/address/AddressLookup'),
   Amount: require('./components/amount/Amount'),
-  Input: require('./components/forms/Input')
+  Input: require('./components/forms/Input'),
+  Footprint: require('./components/footprint/Footprint')
 };
 var modals = {
   CharitySearch: require('./components/search/CharitySearchModal'),
@@ -89,4 +91,5 @@ module.exports = {
   renderWidget: renderWidget,
   initModal: initModal,
   showModal: showModal,
+  widgets: widgets,
 };

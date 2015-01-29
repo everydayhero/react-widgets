@@ -14,7 +14,9 @@ module.exports = React.createClass({
     readOnly: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     autoFocus: React.PropTypes.bool,
+    autoComplete: React.PropTypes.bool,
     required: React.PropTypes.bool,
+    error: React.PropTypes.bool,
     mask: React.PropTypes.func,
     validate: React.PropTypes.func,
     output: React.PropTypes.func,
@@ -32,7 +34,9 @@ module.exports = React.createClass({
       readOnly: false,
       disabled: false,
       autoFocus: false,
+      autoComplete: false,
       required: false,
+      error: false,
       mask: null,
       validate: null,
       output: null,
@@ -55,7 +59,7 @@ module.exports = React.createClass({
       value: this.props.value,
       waiting: false,
       valid: false,
-      error: false
+      error: this.props.error
     };
   },
 
@@ -63,11 +67,17 @@ module.exports = React.createClass({
     if (this.props.autoFocus) {
       this.refs.input.getDOMNode().focus();
     }
+    if (this.props.value && !this.props.disabled && this.props.validate) {
+      this.validate();
+    }
   },
 
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.value !== this.state.value) {
       this.setState({ value: nextProps.value });
+    }
+    if (nextProps.error !== this.state.error) {
+      this.setState({ error: nextProps.error });
     }
   },
 
@@ -89,7 +99,11 @@ module.exports = React.createClass({
     if (this.props.disabled) {
       return false;
     }
-    this.setState({ value: value });
+    this.setState({
+      valid: false,
+      error: false,
+      value: value
+    }, this.handleBlur);
   },
 
   handleFocus: function() {
@@ -170,7 +184,7 @@ module.exports = React.createClass({
         <label className="Input__label" htmlFor={ this.t('name') }>
           { this.t('label') }
           <input
-            autocomplete="false"
+            autoComplete={ this.props.autoComplete ? 'on' : 'off' }
             className="Input__input"
             ref="input"
             type={ this.props.type }

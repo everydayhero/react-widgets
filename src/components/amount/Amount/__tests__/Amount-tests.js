@@ -20,13 +20,15 @@ describe('Amount', function() {
 
   it('allows you to select a preset', function() {
     var element = TestUtils.renderIntoDocument(<Amount />);
-    var select = findByProp(element, 'id', 1500);
+    var select = findByProp(element, 'value', 1500);
     TestUtils.Simulate.click(select);
     expect(element.state.preset).toBe(1500);
     expect(element.state.custom).toBe(null);
 
     var selected = findByClass(element, 'AmountRadio--selected').getDOMNode();
     expect(selected.textContent).toContain('1500');
+    var outputField = findByProp(element, 'name', 'amount').getDOMNode();
+    expect(outputField.value).toContain('1500');
   });
 
   it('allows you to enter a custom value', function() {
@@ -38,6 +40,8 @@ describe('Amount', function() {
 
     var selected = findByClass(element, 'AmountInput--selected');
     expect(selected).toBeDefined();
+    var outputField = findByProp(element, 'name', 'amount').getDOMNode();
+    expect(outputField.value).toContain('123');
   });
 
   it('exposes selected value through callback', function() {
@@ -49,8 +53,10 @@ describe('Amount', function() {
     TestUtils.Simulate.change(input, { target: { value: 123 } });
     expect(callback).lastCalledWith(123);
 
-    var select = findByProp(element, 'id', 1500);
+    var select = findByProp(element, 'value', 1500);
     TestUtils.Simulate.click(select);
     expect(callback).lastCalledWith(1500);
+    var outputField = findByProp(element, 'name', 'amount').getDOMNode();
+    expect(outputField.value).toContain('1500');
   });
 });

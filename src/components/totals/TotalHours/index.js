@@ -1,29 +1,34 @@
 "use strict";
 
-var _         = require('lodash');
-var React     = require('react');
-var I18nMixin = require('../../mixins/I18n');
-var campaigns = require('../../../api/campaigns');
-var Icon      = require('../../helpers/Icon');
-var numeral   = require('numeral');
+var _                = require('lodash');
+var React            = require('react');
+var I18nMixin        = require('../../mixins/I18n');
+var campaigns        = require('../../../api/campaigns');
+var Icon             = require('../../helpers/Icon');
+var numeral          = require('numeral');
+var SECONDS_TO_HOURS = 1 / 3600;
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "TotalHours",
   propTypes: {
+    campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
-    i18n: React.PropTypes.object,
+    format: React.PropTypes.string,
+    i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
     return {
+      campaignUid: '',
       campaignUids: [],
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
+      format: '0,0[.]0[0]',
       defaultI18n: {
         title: 'Hours',
         emptyLabel: 'No data to display.'
@@ -39,22 +44,44 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    this.setState({
-      isLoading: true
-    });
+    this.loadCampaigns();
+  },
 
-    _.each(this.props.campaignUids, function(campaignUid) {
-      campaigns.find(campaignUid, this.onSuccess);
-    }, this);
+  processUids: function() {
+    var campaignUids = [];
+
+    if (this.props.campaignUid) {
+      campaignUids.push(this.props.campaignUid);
+    } else {
+      campaignUids = this.props.campaignUids;
+    }
+
+    return campaignUids;
+  },
+
+  loadCampaigns: function() {
+    this.setState({ isLoading: true });
+    campaigns.findByUids(this.processUids(), this.onSuccess);
+  },
+
+  combineActivityData: function(fitnessActivity) {
+    return _.reduce(fitnessActivity, function(sum, n) {
+      return sum += n.duration_in_seconds;
+    }, 0);
   },
 
   onSuccess: function(result) {
-    var fitnessResults = result.campaign.fitness_activity_overview.run;
+    var fitnessActivity = 0;
 
-    if (fitnessResults){
+    _.forEach(result.campaigns, function(campaign) {
+      fitnessActivity += this.combineActivityData(campaign.fitness_activity_overview);
+    }, this);
+
+    if (fitnessActivity){
       this.setState({
         isLoading: false,
-        total: this.state.total + fitnessResults.duration_in_seconds
+        hasResults: true,
+        total: fitnessActivity
       });
     } else {
       this.setState({ isLoading: false });
@@ -63,8 +90,8 @@ module.exports = React.createClass({
 
   renderTotal: function() {
     var symbol         = this.t('symbol');
-    var totalHrs       = this.state.total * 0.000277778;
-    var formattedTotal = numeral(totalHrs).format('0,0[.]00');
+    var totalHours     = this.state.total * SECONDS_TO_HOURS;
+    var formattedTotal = numeral(totalHours).format(this.props.format);
     var title          = this.t('title');
     var emptyLabel     = this.t('emptyLabel');
 

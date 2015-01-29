@@ -27,7 +27,8 @@
   font-size: 13px;
 }
 
-.AddressLookup__manual {
+.AddressLookup__manual,
+.AddressLookup__reset {
   transition: all 80ms ease-out;
   border-radius: $ehw-border-radius;
   float: right;
@@ -44,7 +45,9 @@
 }
 
 .AddressLookup__manual:hover,
-.AddressLookup__manual:focus {
+.AddressLookup__manual:focus,
+.AddressLookup__reset:hover,
+.AddressLookup__reset:focus  {
   background-color: $ehw-green-light;
   color: #fff;
   outline: none;

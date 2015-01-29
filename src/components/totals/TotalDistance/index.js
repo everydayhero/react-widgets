@@ -1,11 +1,12 @@
 "use strict";
 
-var _         = require('lodash');
-var React     = require('react');
-var I18nMixin = require('../../mixins/I18n');
-var campaigns = require('../../../api/campaigns');
-var Icon      = require('../../helpers/Icon');
-var numeral   = require('numeral');
+var _               = require('lodash');
+var React           = require('react');
+var I18nMixin       = require('../../mixins/I18n');
+var campaigns       = require('../../../api/campaigns');
+var Icon            = require('../../helpers/Icon');
+var numeral         = require('numeral');
+var METERS_TO_MILES = 0.000621371192;
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -17,7 +18,8 @@ module.exports = React.createClass({
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     unit: React.PropTypes.oneOf(['km', 'miles']),
-    i18n: React.PropTypes.object,
+    format: React.PropTypes.string,
+    i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
@@ -28,6 +30,7 @@ module.exports = React.createClass({
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
       unit: 'miles',
+      format: '0,0[.]0[0]',
       defaultI18n: {
         title: 'Miles',
         emptyLabel: 'No data to display.'
@@ -43,46 +46,71 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    this.setState({
-      isLoading: true
-    });
+    this.loadCampaigns();
+  },
 
-    var campaignUid  = this.props.campaignUid;
-    var campaignUids = this.props.campaignUids;
+  processUids: function() {
+    var campaignUids = [];
 
-    if (campaignUids.length) {
-      campaigns.findByUids(campaignUids, this.onSuccess);
+    if (this.props.campaignUid) {
+      campaignUids.push(this.props.campaignUid);
     } else {
-      campaigns.find(campaignUid, this.onSuccess);
+      campaignUids = this.props.campaignUids;
     }
+
+    return campaignUids;
+  },
+
+  loadCampaigns: function() {
+    this.setState({ isLoading: true });
+
+    var campaignUids = [];
+
+    if (this.props.campaignUid) {
+      campaignUids.push(this.props.campaignUid);
+    } else {
+      campaignUids = this.props.campaignUids;
+    }
+
+    campaigns.findByUids(this.processUids(), this.onSuccess);
+  },
+
+  combineActivityData: function(fitnessActivity) {
+    return _.reduce(fitnessActivity, function(sum, n) {
+      return sum += n.distance_in_meters;
+    }, 0);
   },
 
   onSuccess: function(result) {
-    var fitnessResults = result.campaign.fitness_activity_overview.run;
+    var fitnessActivity = 0;
 
-    if (fitnessResults){
+    _.forEach(result.campaigns, function(campaign) {
+      fitnessActivity += this.combineActivityData(campaign.fitness_activity_overview);
+    }, this);
+
+    if (fitnessActivity){
       this.setState({
         isLoading: false,
-        total: this.state.total + fitnessResults.distance_in_meters
+        total: fitnessActivity
       });
     } else {
       this.setState({ isLoading: false });
     }
   },
 
-  renderTotal: function() {
-    var symbol     = this.t('symbol');
-    var title      = this.t('title');
-    var totalKms   = this.state.total / 100;
-    var totalMiles = totalKms * 0.621371192;
-    var emptyLabel = this.t('emptyLabel');
-    var formattedTotal;
-
+  formatDistance: function(meters) {
     if (this.props.unit === 'km') {
-      formattedTotal = numeral(totalKms).format('0,0[.]00');
+      return numeral(meters / 1000).format(this.props.format);
     } else {
-      formattedTotal = numeral(totalMiles).format('0,0[.]00');
+      return numeral(meters * METERS_TO_MILES).format(this.props.format);
     }
+  },
+
+  renderTotal: function() {
+    var symbol         = this.t('symbol');
+    var title          = this.t('title');
+    var emptyLabel     = this.t('emptyLabel');
+    var formattedTotal = this.formatDistance(this.state.total);
 
     if (this.state.isLoading) {
       return <Icon className="TotalDistance__loading" icon="refresh" />;

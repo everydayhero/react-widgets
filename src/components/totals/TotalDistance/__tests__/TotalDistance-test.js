@@ -7,16 +7,15 @@ describe('TotalDistance', function() {
   var TotalDistance = require('../');
   var campaigns     = require('../../../../api/campaigns');
   var TestUtils     = React.addons.TestUtils;
-  var scryByClass   = TestUtils.scryRenderedDOMComponentsWithClass;
   var findByClass   = TestUtils.findRenderedDOMComponentWithClass;
 
-  describe('component defaults', function() {
+  describe('Component when handed multiple uids', function() {
     var totalDistance;
     var element;
 
     beforeEach(function() {
-      campaigns.find.mockClear();
-      totalDistance = <TotalDistance campaignUid="us-22" />;
+      campaigns.findByUids.mockClear();
+      totalDistance = <TotalDistance campaignUids={ ["us-22", "us-24"] } />;
       element = TestUtils.renderIntoDocument(totalDistance);
     });
 
@@ -26,7 +25,6 @@ describe('TotalDistance', function() {
 
     it('renders an icon by default', function() {
       var icon = findByClass(element, 'TotalDistance__icon');
-
       expect(icon).not.toBeNull();
     });
 
@@ -36,46 +34,97 @@ describe('TotalDistance', function() {
     });
 
     it('handles a single campaign id', function() {
-      expect(campaigns.find.mock.calls.length).toEqual(1);
-      expect(campaigns.find).toBeCalledWith("us-22", element.onSuccess);
-    });
-  });
-
-  describe('working with multiple uids', function() {
-    var totalDistance;
-    var element;
-
-    beforeEach(function() {
-      campaigns.find.mockClear();
-      totalDistance = <TotalDistance campaignUids={ ["us-22", "us-24"] } />;
-      element = TestUtils.renderIntoDocument(totalDistance);
-    });
-
-    it('handles a multiple campaign ids', function() {
       expect(campaigns.findByUids.mock.calls.length).toEqual(1);
       expect(campaigns.findByUids).toBeCalledWith(["us-22", "us-24"], element.onSuccess);
     });
   });
 
-  describe('component props', function() {
+  describe('Component when handed one uid', function() {
+    var totalDistance;
+    var element;
+
+    beforeEach(function() {
+      campaigns.findByUids.mockClear();
+      totalDistance = <TotalDistance campaignUid="us-22" />;
+      element = TestUtils.renderIntoDocument(totalDistance);
+    });
+
+    it('handles a multiple campaign ids', function() {
+      expect(campaigns.findByUids.mock.calls.length).toEqual(1);
+      expect(campaigns.findByUids).toBeCalledWith(["us-22"], element.onSuccess);
+    });
+  });
+
+  describe('Calculating miles/kilometers from meters', function() {
+    it('Correctly calculates miles based on response', function() {
+      var totalDistance = <TotalDistance campaignUid="au-0" />;
+      var element = TestUtils.renderIntoDocument(totalDistance);
+
+      element.setState({ isLoading: false });
+
+      expect(element.formatDistance(1000)).toEqual('0.62');
+    });
+
+    it('Correctly calculates kilometers based on response', function() {
+      var totalDistance = <TotalDistance campaignUid="au-0" unit="km" />;
+      var element = TestUtils.renderIntoDocument(totalDistance);
+      element.setState({ isLoading: false });
+
+      expect(element.formatDistance(1000)).toEqual('1');
+    });
+  });
+
+  describe('Custom component props', function() {
     var totalDistance;
     var element;
     var translation = {
-      title: 'Hours'
+      title: 'Ground Covered'
     };
 
     beforeEach(function() {
       totalDistance = <TotalDistance i18n={ translation } renderIcon={ false } />;
       element = TestUtils.renderIntoDocument(totalDistance);
+      element.setState({
+        isLoading: false,
+        total: 1000
+      });
     });
 
     it('renders a custom title', function() {
-      element.setState({
-        isLoading: false,
-        total: 123
-      });
       var title = findByClass(element, 'TotalDistance__title');
       expect(title.getDOMNode().textContent).toBe(translation.title);
+    });
+
+    it('renders no icon', function() {
+      expect(element.renderIcon()).toBeUndefined();
+    });
+  });
+
+  describe('Number formatting options', function() {
+    it('renders in a human readable format by default', function() {
+      var totalDistance = <TotalDistance campaignUid="au-0" unit="km" />;
+      var element = TestUtils.renderIntoDocument(totalDistance);
+
+      element.setState({
+        isLoading: false,
+        total: 1000050
+      });
+
+      var total = findByClass(element, 'TotalDistance__total');
+      expect(total.getDOMNode().textContent).toBe('1,000.05');
+    });
+
+    it('renders a different format if given acceptable numeral.js string', function() {
+      var totalDistance = <TotalDistance campaignUid="au-0" unit="km" format="0.00" />;
+      var element = TestUtils.renderIntoDocument(totalDistance);
+
+      element.setState({
+        isLoading: false,
+        total: 1000050
+      });
+
+      var total = findByClass(element, 'TotalDistance__total');
+      expect(total.getDOMNode().textContent).toBe('1000.05');
     });
   });
 });

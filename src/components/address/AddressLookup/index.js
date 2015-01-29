@@ -1,14 +1,17 @@
 "use strict";
 
-var React             = require('react/addons');
-var I18nMixin         = require('../../mixins/I18n');
-var _                 = require('lodash');
-var Input             = require('../../forms/Input');
-var CountrySelect     = require('../CountrySelect');
-var AddressStatus     = require('../AddressStatus');
-var AddressListing    = require('../AddressListing');
-var AddressBreakdown  = require('../AddressBreakdown');
-var addressAPI        = require('../../../api/address');
+var React               = require('react/addons');
+var I18nMixin           = require('../../mixins/I18n');
+var _                   = require('lodash');
+var Input               = require('../../forms/Input');
+var CountrySelect       = require('../CountrySelect');
+var countryList         = require('../CountrySelect/countries');
+var AddressStatus       = require('../AddressStatus');
+var AddressListing      = require('../AddressListing');
+var AddressBreakdown    = require('../AddressBreakdown');
+var addressAPI          = require('../../../api/address');
+var addEventListener    = require('../../../lib/addEventListener');
+var removeEventListener = require('../../../lib/removeEventListener');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -21,7 +24,6 @@ module.exports = React.createClass({
     prefix: React.PropTypes.string,
     country: React.PropTypes.string,
     address: React.PropTypes.object,
-    paf_valid: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
 
@@ -32,15 +34,12 @@ module.exports = React.createClass({
       country: 'US',
       prefix: '',
       address: null,
-      paf_valid: false,
       defaultI18n: {
         inputLabel: 'Address Lookup',
         inputLabelGB: 'Postcode Lookup',
         manualEntryButton: 'Enter Manually',
-        error: {
-          empty: "Sorry, we couldn't find that address",
-          '500': "Something went wrong, please try again"
-        }
+        resetButton: 'Reset Address',
+        error: "Sorry, we couldn't find that address"
       }
     };
   },
@@ -49,13 +48,13 @@ module.exports = React.createClass({
     return {
       focusOnMount: false,
       choosingCountry: false,
-      country: this.props.country,
+      country: this.props.country === 'UK' ? 'GB' : this.props.country,
       input: '',
       addressList: null,
       address: this.props.address,
       custom: null,
       loading: false,
-      error: null,
+      error: false,
       fauxFocus: 0,
       cancelSearch: function() {},
       cancelFind: function() {}
@@ -63,8 +62,12 @@ module.exports = React.createClass({
   },
 
   componentWillUpdate: function(nextProps, nextState) {
-    if (nextState.addressList) window.addEventListener('keydown', this.keyHandler);
-    if (!nextState.addressList) window.removeEventListener('keydown', this.keyHandler);
+    if (nextState.addressList) addEventListener(window, 'keydown', this.keyHandler);
+    if (!nextState.addressList) removeEventListener(window, 'keydown', this.keyHandler);
+  },
+
+  componentWillUnmount: function() {
+    removeEventListener(window, 'keydown', this.keyHandler);
   },
 
   keyHandler: function(e) {
@@ -126,10 +129,22 @@ module.exports = React.createClass({
     });
   },
 
+  reset: function() {
+    this.setState({
+      loading: false,
+      input: '',
+      addressList: false,
+      address: null,
+      custom: null,
+      focusOnMount: true
+    }, this.output);
+  },
+
   setCustom: function(key) {
     return function(value) {
       var custom = this.state.custom || _.clone(this.state.address);
       custom[key] = value;
+      custom.paf_validated = false;
       this.setState({
         custom: (_.isEqual(custom, this.state.address)) ? null : custom
       }, this.output);
@@ -137,6 +152,7 @@ module.exports = React.createClass({
   },
 
   setManualEntry: function() {
+    var country = _.find(countryList, { iso: this.state.country });
     this.setState({
       error: null,
       addressList: null,
@@ -146,7 +162,8 @@ module.exports = React.createClass({
         locality: '',
         postal_code: '',
         region: '',
-        country_name: ''
+        country_name: country.name,
+        paf_validated: false
       }
     });
   },
@@ -172,19 +189,26 @@ module.exports = React.createClass({
   },
 
   setList: function(list) {
-    if (list === null) { return this.setError('500'); }
-    if (list.addresses.length === 0) { return this.setError('empty'); }
-    this.setState({ error: null, addressList: list.addresses, loading: false });
+    if (this.validate(list.addresses, this.setError)) {
+      this.setState({ error: false, addressList: list.addresses, loading: false });
+    }
   },
 
   setAddress: function(address) {
-    if (address === null) { return this.setError('500'); }
-    if (_.isEmpty(address.address)) { return this.setError('empty'); }
-    this.setState({ error: null, address: address.address, addressList: null, loading: false }, this.output);
+    if (this.validate(address.address, this.setError)) {
+      address.address.paf_validated = this.state.country === "GB";
+      this.setState({ error: false, address: address.address, addressList: null, loading: false, focusOnMount: true }, this.output);
+    }
   },
 
-  setError: function(error) {
-    this.setState({ error: this.t('error.' + error), addressList: null, address: null, loading: false });
+  setError: function(bool) {
+    this.setState({ error: !bool, addressList: null, address: null, loading: false });
+  },
+
+  validate: function(val, callback) {
+    var bool = _.isEmpty(val) || typeof val === 'string';
+    callback(!bool);
+    return !bool;
   },
 
   renderListing: function() {
@@ -227,9 +251,12 @@ module.exports = React.createClass({
         key={ this.t('inputLabel') }
         ref={ 'lookup' }
         required={ this.props.required }
+        error={ this.state.error }
+        validate={ this.validate }
         i18n={{
           name: this.props.prefix + 'lookup',
-          label: this.state.country === 'GB' ? this.t('inputLabelGB') : this.t('inputLabel')
+          label: this.state.country === 'GB' ? this.t('inputLabelGB') : this.t('inputLabel'),
+          error: this.t('error')
         }}
         value={ this.state.input }
         autoFocus={ this.state.focusOnMount }
@@ -245,10 +272,10 @@ module.exports = React.createClass({
     );
   },
 
-  renderError: function(bool) {
-    return bool && (
-      <div className="AddressLookup__error">
-        { this.state.error }
+  renderResetButton: function() {
+    return (
+      <div className="AddressLookup__reset" tabIndex='0' onClick={ this.reset } onKeyPress={ this.reset }>
+        { this.t('resetButton') }
       </div>
     );
   },
@@ -264,12 +291,13 @@ module.exports = React.createClass({
   renderAddress: function(address) {
     return address && (
       <AddressBreakdown
+        autoFocus={ this.state.focusOnMount }
         prefix={ this.props.prefix }
         required={ this.props.required }
         address={ address }
         region={ this.state.country }
         onChange={ this.setCustom }>
-        { this.state.country === "GB" && <input type="hidden" name={ this.props.prefix + "PAF_validated" } value={ this.props.paf_valid || !this.state.custom } /> }
+        { this.renderResetButton() }
       </AddressBreakdown>
     );
   },
@@ -282,7 +310,6 @@ module.exports = React.createClass({
         { this.renderStatus(!this.state.choosingCountry) }
         { this.renderInput(!address && !this.state.choosingCountry) }
         { this.renderList(this.state.addressList && !address) }
-        { this.renderError(!!this.state.error) }
         { this.renderManualButton(!!this.state.error || (this.state.addressList && !address)) }
         { this.renderAddress(address) }
       </div>

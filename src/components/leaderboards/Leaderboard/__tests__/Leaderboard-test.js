@@ -3,14 +3,16 @@ jest.autoMockOff();
 jest.mock('../../../../api/pages');
 
 describe('Leaderboard', function() {
-  var React       = require('react/addons');
-  var Leaderboard = require('../');
-  var pages       = require('../../../../api/pages');
-  var TestUtils   = React.addons.TestUtils;
-  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+  var _               = require('lodash');
+  var React           = require('react/addons');
+  var Leaderboard     = require('../');
+  var LeaderboardItem = require('../../LeaderboardItem/');
+  var pages           = require('../../../../api/pages');
+  var TestUtils       = React.addons.TestUtils;
+  var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
+  var scryByClass     = TestUtils.scryRenderedDOMComponentsWithClass;
 
-  describe('component defaults', function() {
+  describe('Component defaults', function() {
     var leaderboard;
     var element;
 
@@ -35,7 +37,7 @@ describe('Leaderboard', function() {
     });
   });
 
-  describe('component props', function() {
+  describe('Custom component props', function() {
     var leaderboard;
     var element;
     var translation = {
@@ -49,8 +51,66 @@ describe('Leaderboard', function() {
 
     it('renders a custom heading', function() {
       var heading = findByClass(element, 'Leaderboard__heading');
-
       expect(heading.getDOMNode().textContent).toBe(translation.heading);
+    });
+  });
+
+  describe('standard competition ranking system', function() {
+    var element;
+    var data;
+
+    beforeEach(function() {
+      element = TestUtils.renderIntoDocument(<Leaderboard />);
+    });
+
+    it('assigns rank in order of amount', function(){
+      data = [
+        { id: 1, amount: 1100 },
+        { id: 2, amount: 1000 },
+        { id: 3, amount: 900 }
+      ];
+
+      element.rankLeaderboard(data);
+      expect(_.pluck(data, 'rank')).toEqual([1, 2, 3]);
+    });
+
+    it('gives results with the same amount the same rank', function() {
+      data = [
+        { id: 1, amount: 1000 },
+        { id: 2, amount: 1000 }
+      ];
+
+      element.rankLeaderboard(data);
+      expect(_.pluck(data, 'rank')).toEqual([1, 1]);
+    });
+
+    it('leaves a gap to compensate for items with the same rank', function(){
+      data = [
+        { id: 1, amount: 1100 },
+        { id: 2, amount: 1000 },
+        { id: 3, amount: 1000 },
+        { id: 4, amount: 1000 },
+        { id: 5, amount: 900 }
+      ];
+
+      element.rankLeaderboard(data);
+      expect(_.pluck(data, 'rank')).toEqual([1, 2, 2, 2, 5]);
+    });
+  });
+
+  describe('Number formatting options', function() {
+    it('renders in a short format by default', function() {
+      var leaderboard = <Leaderboard campaignUid="au-0" />;
+      var element = TestUtils.renderIntoDocument(leaderboard);
+
+      expect(element.formatAmount(10000)).toEqual('$100 ');
+    });
+
+    it('renders a different format if given acceptable numeral.js string', function() {
+      var leaderboard = <Leaderboard campaignUid="au-0" currencyFormat="0.00" />;
+      var element = TestUtils.renderIntoDocument(leaderboard);
+
+      expect(element.formatAmount(10000)).toEqual('$100.00');
     });
   });
 });

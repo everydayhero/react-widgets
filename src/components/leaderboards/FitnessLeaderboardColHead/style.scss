@@ -1,0 +1,23 @@
+.FitnessLeaderboardColHead {
+  padding: $x-4;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-right: 1px solid rgba(255,255,255,0.34);
+
+  &:first-child {
+    cursor: default;
+  }
+
+  &:last-child {
+    border: 0;
+  }
+
+  @include media-max($breakpoint-m) {
+    font-size: 11px;
+  }
+}
+
+.FitnessLeaderboardColHead__icon {
+  padding: 0 $x-2;
+}

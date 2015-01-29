@@ -18,6 +18,7 @@ module.exports = React.createClass({
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
+    format: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
 
@@ -31,6 +32,7 @@ module.exports = React.createClass({
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
+      format: '0,0',
       defaultI18n: {
         title: 'Heroes'
       }
@@ -71,7 +73,7 @@ module.exports = React.createClass({
 
   renderTotal: function() {
     var totalHeroes = this.state.total;
-    var formattedTotal = numeral(totalHeroes).format('0,0');
+    var formattedTotal = numeral(totalHeroes).format(this.props.format);
     var title = this.t('title');
 
     if (this.state.isLoading) {

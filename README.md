@@ -114,8 +114,6 @@ The supporter page search modal widget allows you to search for a supporter page
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
-  </head>
-  <body>
     <a id="PageSearchExample">Support a friend</a>
     <script>
       edh.widgets.initModal('PageSearchExample', 'PageSearch', { country: 'uk' });
@@ -147,6 +145,7 @@ Displays the total funds raised for specified campaigns as a dollar amount. Eith
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `format`: *optional* string. Set to `'0.00 a'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -186,6 +185,7 @@ Displays the total number of fundraisers (that have an everydayhero page) for sp
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
+- `format`: *optional* string. Set to `'0,0'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -225,6 +225,7 @@ Displays the total number of charities associated with specified campaigns. Eith
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
+- `format`: *optional* string. Set to `'0,0 a'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -255,20 +256,23 @@ Displays the total number of charities associated with specified campaigns. Eith
 
 #### Campaign Goal (Campaign)
 
-Set a goal in cents to display as a campaign goal.
+Set and display a campaign goal. While this component can be configured to display any type of goal it renders as a dollar amount by default.
 
 ##### Options
 
-- `goal`: *required* number. Set a goal in **cents** to be rendered as a dollar amount.
-- `renderIcon`: *optional* boolean. Set to `true` by default.
+- `goal`: *required* number. Set a goal, rendered as a dollar value by default.
+- `renderIcon`: *optional* string or boolean. Set to `true` by default. Pass in a valid [FontAwesome](http://fortawesome.github.io/Font-Awesome/icons/) icon name (without the _fa_ prefix) to override the default; View an example below. Set to `false` to render no icon.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `format`: *optional* string. Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
+- `handleCents`: *optional* boolean. Set to `true` by default. Determines whether the supplied `goal` is divided by 100 (to display as dollars).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
   {
     title: 'Goal',
-    symbol: '$'
+    symbol: '$',
+    suffix: ''
   }
   ```
 
@@ -292,9 +296,32 @@ Set a goal in cents to display as a campaign goal.
 </html>
 ```
 
+##### Example displaying a distance goal, with a custom icon
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="GoalExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('GoalExample', 'Goal', { goal: 500, renderIcon: 'road', handleCents: false, i18n: { title: 'Distance Goal', suffix: 'km' } });
+    </script>
+  </body>
+</html>
+```
+
 #### Total Distance (Campaign)
 
-Displays the total recorded distance that fundraisers have run for specified campaigns. The result can be displayed as either **kilometers** or **miles**. Either a single or multiple campaign uids can be provided to scope this widget.
+Displays the total distance recorded by fundraisers (using MapMyFitness) for a single specified campaign in either **kilometers** or **miles**.
+
+Either a single or multiple campaign uids can be provided to scope this widget.
+
 
 ##### Options
 
@@ -303,6 +330,7 @@ Displays the total recorded distance that fundraisers have run for specified cam
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `format`: *optional* string. Set to `'0,0[.]0[0]'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -334,7 +362,10 @@ Displays the total recorded distance that fundraisers have run for specified cam
 
 #### Total Hours (Campaign)
 
-Displays the total recorded time that fundraisers have run for specified campaigns in **hours**. Either a single or multiple campaign uids can be provided to scope this widget.
+Displays the total time recorded by fundraisers (using MapMyFitness) for a single specified campaign in **hours**.
+
+Either a single or multiple campaign uids can be provided to scope this widget.
+
 
 ##### Options
 
@@ -342,6 +373,7 @@ Displays the total recorded time that fundraisers have run for specified campaig
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `format`: *optional* string. Set to `'0,0[.]0[0]'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -531,6 +563,7 @@ Displays a leaderboard sorted by funds raised (highest first) for a single speci
 - `pageSize`: *optional* number. Set to `12` by default. Determines how many results to show per page.
 - `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
 - `textColor`: *optional* string. Set to `'#333333'` by default.
+- `currencyFormat`: *optional* string. Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -558,6 +591,51 @@ Displays a leaderboard sorted by funds raised (highest first) for a single speci
     <div id="LeaderboardExample">Loading...</div>
     <script>
       edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-0' });
+    </script>
+  </body>
+</html>
+```
+
+#### Fitness Leaderboard (Campaign)
+
+Displays a leaderboard sorted by distance, recorded using MapMyFitness, for a single specified campaign. Ordered by highest first. This leaderboard also displays, and can be sorted by, funds raised. Can be set to show leaderboards for teams or individuals.
+
+- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `type`: *optional* string. Set a type of either `'team'` or `'individual'`. Set to `'individual'` by default.
+- `limit`: *optional* number. Set to `100` by default. Determines how many results should be fetched via the everdayhero leaderboards API endpoint.
+- `pageSize`: *optional* number. Set to `5` by default. Determines how many results to display on the leaderboard at once.
+- `backgroundColor`: *optional* string. Not set by default.
+- `textColor`: *optional* string. Not set by default.
+- `currencyFormat`: *optional* string. Set to `0,0[.]00 a` by default. [More format strings](http://numeraljs.com/).
+- `distanceFormat`: *optional* string. Set to `0,0[.]00` by default. [More format strings](http://numeraljs.com/).
+- `i18n`: *optional* object containing localised text. Default i18n is:
+
+  ```js
+  {
+    raisedTitle: 'Raised',
+    distanceTitle: 'Distance',
+    symbol: '$',
+    heading: 'Top Individuals',
+    kmSuffix: 'km',
+    milesSuffix: 'mi'
+  }
+  ```
+
+##### Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="FitnessLeaderboardExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('FitnessLeaderboardExample', 'FitnessLeaderboard', { campaignUid: 'us-0' });
     </script>
   </body>
 </html>
@@ -625,10 +703,10 @@ Displays a form input field and country selector, which allows users to lookup t
     locality: '',
     postal_code: '',
     region: '',
-    country_name: ''
+    country_name: '',
+    paf_validated: false
   }
   ```
-- `paf_valid`: *optional* boolean. Supply only when address has prevously been validated. Default is 'false'.
 - `output`: *optional* function to get user's final selected address.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
@@ -637,10 +715,8 @@ Displays a form input field and country selector, which allows users to lookup t
     inputLabel: 'Address Lookup',
     inputLabelGB: 'Postcode Lookup',
     manualEntryButton: 'Enter Manually',
-    error: {
-      empty: "Sorry, we couldn't find that address",
-      '500': "Something went wrong, please try again"
-    }
+    resetButton: 'Reset Address',
+    error:"Sorry, we couldn't find that address"
   }
   ```
 
@@ -705,6 +781,7 @@ Displays an input field which can accept input masking, asynchronous validation,
 - `readOnly`: *optional* boolean to prevent users from altering the input by typing. Best used with a modal attached. Default is 'false'.
 - `disabled`: *optional* boolean to prevent users from changing the input, and displays as disabled. Default is 'false'.
 - `autoFocus`: *optional* boolean to determine if the input should gain focus as soon as it is loaded. Should only be true for one input on the page. Default is 'false'.
+- `autoComplete`: *optional* boolean to determine if the input should use the browser's autocomplete functionality. Default is 'false'.
 - `required`: *optional* boolean to trigger optional validation methods and ensure the input isn't left blank. Default is 'false'.
 - `mask`: *optional* function to modify user input as it is entered. Default is 'null'. Is passed the current input string. Example:
   ```javascript

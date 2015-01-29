@@ -1,0 +1,13 @@
+.FootprintSector {
+  transition: all 320ms ease-out;
+  cursor: pointer;
+}
+.FootprintDummy {
+  transition: all 320ms ease-out;
+  fill: transparent;
+}
+.FootprintMetric {
+  transition: all 320ms 120ms ease-out;
+  fill: #ddd;
+}
+.FootprintSector.FootprintSector--active .FootprintDummy { fill: $ehw-grey; }

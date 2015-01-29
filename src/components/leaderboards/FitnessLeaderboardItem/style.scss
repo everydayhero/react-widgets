@@ -1,0 +1,70 @@
+.FitnessLeaderboardItem {
+  box-sizing: border-box;
+  padding: 0 $x-2 $x-4;
+  position: relative;
+  background: #fff;
+
+  td {
+    border: 1px solid $ehw-grey-light;
+    border-width: 0 1px 1px 0;
+  }
+
+  td:first-child {
+    border-left-width: 1px;
+  }
+
+  a {
+    color: $ehw-grey-darker;
+  }
+
+  @include media-max($breakpoint-m) {
+    font-size: $x-3;
+  }
+}
+
+.FitnessLeaderboardItem__fundraiser, {
+  border-right: 1px solid $ehw-grey-light;
+}
+
+.FitnessLeaderboardItem__name {
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+  padding: 15px;
+  width: 70%;
+
+  @include media-max($breakpoint-m) {
+    width: 100%;
+  }
+}
+
+.FitnessLeaderboardItem__image {
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px 0 10px 15px;
+  text-align: center;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  border: 0;
+
+  @include media-max($breakpoint-m) {
+    display: none;
+  }
+}
+
+.FitnessLeaderboardItem__raised {
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  border-right: 1px solid $ehw-grey-light;
+}
+
+.FitnessLeaderboardItem__distance {
+  text-align: center;
+}

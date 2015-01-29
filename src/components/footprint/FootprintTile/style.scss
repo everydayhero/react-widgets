@@ -1,0 +1,73 @@
+.FootprintTile {
+  transition: transform 320ms 160ms ease-out;
+  text-align: center;
+  border-radius: 50%;
+  perspective: 500px;
+  transform-style: preserve-3d;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  cursor: pointer;
+}
+.FootprintTile:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em;
+}
+.FootprintTile--flip .FootprintAvatar {
+  transform: rotateY(180deg) scale(0.5);
+}
+.FootprintTile--flip .FootprintData {
+  transform: rotateY(0deg) scale(1);
+}
+
+.FootprintAvatar,
+.FootprintData {
+  transition: transform 320ms 160ms ease-out;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  perspective: 500px;
+  transform-style: preserve-3d;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.FootprintAvatar {
+  border-style: solid;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: rotateY(0deg) scale(1);
+  z-index: 2;
+}
+.FootprintData {
+  transform: rotateY(-180deg) scale(0.5);
+  background-color: $ehw-green-light;
+  vertical-align: middle;
+  font-weight: 400;
+  font-family: Amatic;
+}
+.Footprint--compact .FootprintData {
+  padding: 13px;
+}
+
+.FootprintData__percent {
+  font-family: 'Amatic SC';
+}
+.FootprintData__name,
+.FootprintData__value {
+  font-family: $ehw-sans-serif-fonts
+}
+.FootprintData__name {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.16em;
+}
+.FootprintData__value {
+  font-weight: bold;
+  letter-spacing: 0.16em;
+}

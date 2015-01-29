@@ -16,6 +16,7 @@ module.exports = React.createClass({
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
+    format: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
 
@@ -26,6 +27,7 @@ module.exports = React.createClass({
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
+      format: '0.00 a',
       defaultI18n: {
         title: 'Raised To Date',
         symbol: '$'
@@ -40,34 +42,45 @@ module.exports = React.createClass({
     };
   },
 
-  onSuccess: function(result) {
-    console.log(result);
+  componentWillMount: function() {
+    this.loadCampaigns();
+  },
 
+  loadCampaigns: function() {
+    this.setState({ isLoading: true });
+
+    var campaignUids = [];
+
+    if (this.props.campaignUid) {
+      campaignUids.push(this.props.campaignUid);
+    } else {
+      campaignUids = this.props.campaignUids;
+    }
+
+    campaigns.findByUids(campaignUids, this.onSuccess);
+  },
+
+  onSuccess: function(result) {
     this.setState({
       isLoading: false,
-      total: this.state.total + result.campaign.funds_raised.cents
+      total: this.sumCampaignTotals(result.campaigns)
     });
   },
 
-  componentWillMount: function() {
-    this.setState({
-      isLoading: true
+  sumCampaignTotals: function(campaigns) {
+    var totalCents = this.state.total;
+
+    _.forEach(campaigns, function(campaign) {
+      totalCents += campaign.funds_raised.cents;
     });
 
-    var campaignUid  = this.props.campaignUid;
-    var campaignUids = this.props.campaignUids;
-
-    if (campaignUids.length) {
-      campaigns.findByUids(campaignUids, this.onSuccess);
-    } else {
-      campaigns.find(campaignUid, this.onSuccess);
-    }
+    return totalCents;
   },
 
   renderTotal: function() {
     var symbol = this.t('symbol');
     var totalDollars = this.state.total / 100;
-    var formattedTotal = symbol + numeral(totalDollars).format('0.00 a');
+    var formattedTotal = symbol + numeral(totalDollars).format(this.props.format);
     var title = this.t('title');
 
     if (this.state.isLoading) {

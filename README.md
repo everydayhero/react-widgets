@@ -742,6 +742,7 @@ Displays a radio group and input field, which allows users to choose from four p
 ##### Options
 
 - `name`: *optional* string to identify the radio group and input in a form. Default is 'Amount'.
+- `amount`: *optional* number value of the initial selected preset or custom amount. Default is 'null'.
 - `amounts`: *optional* array of exactly four predefined numbers (not strings). Default is [500, 700, 1500, 3000].
 - `output`: *optional* function to get selected amount.
 - `currency`: *optional* string of currency symbol. Default is '$'.

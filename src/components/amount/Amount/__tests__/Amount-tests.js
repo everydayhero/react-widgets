@@ -3,13 +3,49 @@ jest.autoMockOff();
 
 var React = require('react/addons');
 var TestUtils   = React.addons.TestUtils;
-var Amount = require('../');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
+var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 var findByProp = require('../../../../test/helpers/scryRenderedDOMComponentsWithProp').findRenderedDOMComponentWithProp;
-
+var Amount = require('../');
 
 describe('Amount', function() {
-  it('loads with a selected default', function() {
+  it('defaults to second preset amount', function() {
+    var element = TestUtils.renderIntoDocument(<Amount amounts={[10,20,30,40]}/>);
+    var selected = findByClass(element, 'AmountRadio--selected').getDOMNode();
+    expect(selected.textContent).toBe('20');
+
+    var outputField = findByProp(element, 'name', 'amount').getDOMNode();
+    expect(outputField.value).toBe('20');
+  });
+
+  it('allows you to set initial preset value', function() {
+    var element = TestUtils.renderIntoDocument(<Amount amounts={[10,20,30,40]} amount={30}/>);
+    expect(element.state.preset).toBe(30);
+    expect(element.state.custom).toBe(null);
+
+    var selected = findByClass(element, 'AmountRadio--selected').getDOMNode();
+    expect(selected.textContent).toBe('30');
+
+    var outputField = findByProp(element, 'name', 'amount').getDOMNode();
+    expect(outputField.value).toBe('30');
+  });
+
+  it('allows you to set initial custom value', function() {
+    var element = TestUtils.renderIntoDocument(<Amount amounts={[10,20,30,40]} amount={123}/>);
+    expect(element.state.preset).toBe(null);
+    expect(element.state.custom).toBe(123);
+
+    var selectedPresets = scryByClass(element, 'AmountRadio--selected');
+    expect(selectedPresets.length).toBe(0);
+
+    var selectedInput = findByProp(element, 'name', 'AmountInput-amount').getDOMNode();
+    expect(selectedInput.value).toBe('123');
+
+    var outputField = findByProp(element, 'name', 'amount').getDOMNode();
+    expect(outputField.value).toBe('123');
+  });
+
+  it('allows you to set label', function() {
     var element = TestUtils.renderIntoDocument(<Amount label="testLabel" />);
     var selected = findByClass(element, 'AmountRadio--selected');
     expect(selected).toBeDefined();

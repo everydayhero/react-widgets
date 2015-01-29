@@ -10,6 +10,7 @@ module.exports = React.createClass({
   propTypes: {
     label: React.PropTypes.string,
     name: React.PropTypes.string,
+    amount: React.PropTypes.number,
     amounts: React.PropTypes.array,
     output: React.PropTypes.func,
     currency: React.PropTypes.string
@@ -19,6 +20,7 @@ module.exports = React.createClass({
     return {
       label: 'Amount',
       name: 'amount',
+      amount: null,
       amounts: [500, 700, 1500, 3000],
       output: function() {},
       currency: '$'
@@ -26,10 +28,11 @@ module.exports = React.createClass({
   },
 
   getInitialState: function() {
-    return {
-      preset: this.props.amounts[1],
-      custom: null
-    };
+    var amount = this.props.amount > 0 ? this.props.amount : this.props.amounts[1];
+    var preset = this.props.amounts.indexOf(amount) < 0 ? null : amount;
+    var custom = preset ? null : amount;
+
+    return { custom: custom, preset: preset };
   },
 
   componentDidMount: function() {

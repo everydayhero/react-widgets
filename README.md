@@ -170,7 +170,7 @@ Displays the total funds raised for specified campaigns as a dollar amount. Eith
   <body>
     <div id="FundsRaisedExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('FundsRaisedExample', 'FundsRaised', { campaignUids: ['us-0'] });
+      edh.widgets.renderWidget('FundsRaisedExample', 'FundsRaised', { campaignUids: ['us-0','us-1'] });
     </script>
   </body>
 </html>
@@ -210,7 +210,7 @@ Displays the total number of fundraisers (that have an everydayhero page) for sp
   <body>
     <div id="TotalHeroesExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', { campaignUids: ['us-0'] });
+      edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', { campaignUids: ['us-0','us-1'] });
     </script>
   </body>
 </html>
@@ -251,7 +251,7 @@ Displays the total number of charities associated with specified campaigns. Eith
   <body>
     <div id="TotalCharitiesExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUids: ['us-0'] });
+      edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUids: ['us-0','us-1'] });
     </script>
   </body>
 </html>
@@ -358,7 +358,7 @@ Either a single or multiple campaign uids can be provided to scope this widget.
   <body>
     <div id="TotalDistanceExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('TotalDistanceExample', 'TotalDistance', { campaignUids: ['us-0'] });
+      edh.widgets.renderWidget('TotalDistanceExample', 'TotalDistance', { campaignUids: ['us-0','us-1'] });
     </script>
   </body>
 </html>
@@ -402,7 +402,7 @@ Either a single or multiple campaign uids can be provided to scope this widget.
   <body>
     <div id="TotalHoursExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUids: ['us-0'] });
+      edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUids: ['us-0','us-1'] });
     </script>
   </body>
 </html>

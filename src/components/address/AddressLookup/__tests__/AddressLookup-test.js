@@ -101,29 +101,43 @@ describe('AddressLookup', function() {
     expect(locality.value).toBe('Sydney');
   });
 
-  it('breaks down a selected GB address', function() {
-    var element = TestUtils.renderIntoDocument(<AddressLookup country={ "UK" }/>);
-    element.setList(addressSearchResult);
-    var listItem = findByClass(element, 'AddressListing--focused').getDOMNode();
-    TestUtils.Simulate.click(listItem);
-    expect(address.find).lastCalledWith('123', 'GB', jasmine.any(Function));
+  describe('selected address', function() {
+    var element, listItem, callback, validate;
 
-    var callback = address.find.mock.calls[0][2];
-    callback(addressFindResult);
-    expect(element.state.address).toBe(addressFindResult.address);
 
-    var breakdown = findByClass(element, 'AddressBreakdown');
-    var pafValidated = findByProp(breakdown, 'name', 'paf_validated').getDOMNode();
-    var streetAddress = findByProp(breakdown, 'id', 'street_address').getDOMNode();
-    var locality = findByProp(breakdown, 'id', 'locality').getDOMNode();
-    expect(pafValidated.value).toBe('true');
-    expect(element.state.custom).toBeNull();
-    expect(streetAddress.value).toBe('1 Place Pl');
-    expect(locality.value).toBe('Sydney');
+    beforeEach(function() {
+      address.find.mockClear();
+      address.search.mockClear();
+      validate = jest.genMockFunction();
 
-    TestUtils.Simulate.change(streetAddress, { target: { value: "2 SomeOther St" } });
-    expect(pafValidated.value).toBe('false');
-    expect(element.state.custom).not.toBeNull();
+      element = TestUtils.renderIntoDocument(<AddressLookup validate={ validate } country={ "UK" }/>);
+      element.setList(addressSearchResult);
+      listItem = findByClass(element, 'AddressListing--focused').getDOMNode();
+      TestUtils.Simulate.click(listItem);
+      expect(address.find).lastCalledWith('123', 'GB', jasmine.any(Function));
+      callback = address.find.mock.calls[0][2];
+      callback(addressFindResult);
+      expect(element.state.address).toBe(addressFindResult.address);
+    });
+
+    it('breaks down a selected GB address', function() {
+      var breakdown = findByClass(element, 'AddressBreakdown');
+      var pafValidated = findByProp(breakdown, 'name', 'paf_validated').getDOMNode();
+      var streetAddress = findByProp(breakdown, 'id', 'street_address').getDOMNode();
+      var locality = findByProp(breakdown, 'id', 'locality').getDOMNode();
+      expect(pafValidated.value).toBe('true');
+      expect(element.state.custom).toBeNull();
+      expect(streetAddress.value).toBe('1 Place Pl');
+      expect(locality.value).toBe('Sydney');
+
+      TestUtils.Simulate.change(streetAddress, { target: { value: "2 SomeOther St" } });
+      expect(pafValidated.value).toBe('false');
+      expect(element.state.custom).not.toBeNull();
+    });
+
+    it('calls the validate prop on breaking down a selected address', function() {
+      expect(validate).toBeCalled();
+    });
   });
 
   it('breaks down an empty address on manual entry', function() {
@@ -140,11 +154,13 @@ describe('AddressLookup', function() {
   });
 
   it('allows you to reset the address', function() {
-    var element = TestUtils.renderIntoDocument(<AddressLookup address={ addressFindResult.address } />);
+    var validate = jest.genMockFunction();
+    var element = TestUtils.renderIntoDocument(<AddressLookup validate={ validate } address={ addressFindResult.address } />);
     var resetButton = findByClass(element, 'AddressLookup__reset').getDOMNode();
     TestUtils.Simulate.click(resetButton);
     var addressLookup = findByClass(element, 'AddressLookup').getDOMNode();
     expect(addressLookup).not.toBeNull();
+    expect(validate).toBeCalled();
   });
 
   it('allows you to call output callback when reset the address', function() {

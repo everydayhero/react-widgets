@@ -19,21 +19,23 @@ module.exports = React.createClass({
   displayName: "AddressLookup",
 
   propTypes: {
-    required: React.PropTypes.bool,
+    address: React.PropTypes.object,
+    country: React.PropTypes.string,
+    i18n: React.PropTypes.object,
     output: React.PropTypes.func,
     prefix: React.PropTypes.string,
-    country: React.PropTypes.string,
-    address: React.PropTypes.object,
-    i18n: React.PropTypes.object
+    required: React.PropTypes.bool,
+    validate: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
-      required: false,
-      output: function() {},
-      country: 'US',
-      prefix: '',
       address: null,
+      country: 'US',
+      output: function() {},
+      prefix: '',
+      required: false,
+      validate: function() {},
       defaultI18n: {
         inputLabel: 'Address Lookup',
         inputLabelGB: 'Postcode Lookup',
@@ -130,6 +132,7 @@ module.exports = React.createClass({
   },
 
   reset: function() {
+    var that = this;
     this.setState({
       loading: false,
       input: '',
@@ -137,7 +140,10 @@ module.exports = React.createClass({
       address: null,
       custom: null,
       focusOnMount: true
-    }, this.output);
+    }, function() {
+      that.output();
+      that.validate('', that.props.validate);
+    });
   },
 
   setCustom: function(key) {
@@ -154,17 +160,17 @@ module.exports = React.createClass({
   setManualEntry: function() {
     var country = _.find(countryList, { iso: this.state.country });
     this.setState({
-      error: null,
       addressList: null,
       custom: {
-        street_address: '',
+        country_name: country.name,
         extended_address: '',
         locality: '',
+        paf_validated: false,
         postal_code: '',
         region: '',
-        country_name: country.name,
-        paf_validated: false
-      }
+        street_address: ''
+      },
+      error: null,
     });
   },
 
@@ -288,13 +294,17 @@ module.exports = React.createClass({
   },
 
   renderAddress: function(address) {
+    var props = this.props;
+    var state = this.state;
+
     return address && (
       <AddressBreakdown
-        autoFocus={ this.state.focusOnMount }
-        prefix={ this.props.prefix }
-        required={ this.props.required }
+        validate={ props.validate }
+        autoFocus={ state.focusOnMount }
+        prefix={ props.prefix }
+        required={ props.required }
         address={ address }
-        region={ this.state.country }
+        region={ state.country }
         onChange={ this.setCustom }>
         { this.renderResetButton() }
       </AddressBreakdown>

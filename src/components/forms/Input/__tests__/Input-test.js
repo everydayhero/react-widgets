@@ -94,15 +94,12 @@ describe('Input', function() {
     expect(input.value).toBe('newValue--masked');
   });
 
-  it("will execute validate function, but not set state as invalid on blur if not required", function() {
+  it("will not execute validate function on blur if not required", function() {
     var validate = jest.genMockFunction();
-    var setValid = jest.genMockFunction();
     var element = TestUtils.renderIntoDocument(<Input required={ false } validate={ validate } />);
-    element.setValid = setValid;
     var input = findByClass(element, 'Input__input').getDOMNode();
     TestUtils.Simulate.blur(input);
-    expect(setValid).not.toBeCalled();
-    expect(validate).toBeCalled();
+    expect(validate).not.toBeCalled();
   });
 
   it("will execute validate function on blur if required", function() {

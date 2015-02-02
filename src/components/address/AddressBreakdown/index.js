@@ -7,16 +7,15 @@ var Input     = require('../../forms/Input');
 module.exports = React.createClass({
   mixins: [I18nMixin],
 
-  displayName: 'AddressBreakdown',
+  displayName: "AddressBreakdown",
 
   propTypes: {
     address: React.PropTypes.object,
     autoFocus: React.PropTypes.bool,
-    onChange: React.PropTypes.func,
     prefix: React.PropTypes.string,
     region: React.PropTypes.string,
     required: React.PropTypes.bool,
-    validate: React.PropTypes.func
+    onChange: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -26,7 +25,6 @@ module.exports = React.createClass({
       prefix: '',
       region: 'US',
       required: false,
-      validate: function() {},
       defaultI18n: {
         street_address: 'Address',
         extended_address: 'Address 2',
@@ -60,94 +58,87 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var props = this.props;
-    var address = props.address;
-    var iso = props.region;
-    var onChange = props.onChange;
-    var prefix = props.prefix;
-    var required = props.required;
-    var validate = props.validate;
-
+    var address = this.props.address;
+    var iso = this.props.region;
     return (
       <div className="AddressBreakdown">
         <Input
-          autoFocus={ props.autoFocus }
+          autoFocus={ this.props.autoFocus }
           ref={ 'street_address' }
           key={ 'street_address' }
           i18n={{
-            name: prefix + 'street_address',
+            name: this.props.prefix + 'street_address',
             label: this.t('street_address', { scope: iso })
           }}
           value={ address.street_address }
-          required={ required }
+          required={ this.props.required }
           showIcon={ false }
           spacing={ 'tight' }
-          validate={ props.validate }
-          output={ onChange('street_address') } />
+          output={ this.props.onChange('street_address') } />
         <Input
-          key={ 'extended_address' }
+          key={ "extended_address" }
           ref={ 'extended_address' }
           i18n={{
-            name: prefix + 'extended_address',
+            name: this.props.prefix + 'extended_address',
             label: this.t('extended_address', { scope: iso })
           }}
           value={ address.extended_address }
           showIcon={ false }
           spacing={ 'tight' }
-          output={ onChange('extended_address') } />
+          output={ this.props.onChange('extended_address') } />
         <Input
-          key={ 'locality' }
+          key={ "locality" }
           ref={ 'locality' }
           i18n={{
-            name: prefix + 'locality',
+            name: this.props.prefix + 'locality',
             label: this.t('locality', { scope: iso })
           }}
           value={ address.locality }
-          width={ 'wide' }
-          required={ required }
+          width={ "wide" }
+          required={ this.props.required }
           showIcon={ false }
           spacing={ 'tight' }
-          output={ onChange('locality') } />
+          output={ this.props.onChange('locality') } />
         <Input
           key={ 'region' }
           ref={ 'region' }
           i18n={{
-            name: prefix + 'region',
+            name: this.props.prefix + 'region',
             label: this.t('region', { scope: iso })
           }}
           value={ address.region }
-          width={ 'narrow' }
+          width={ "narrow" }
           showIcon={ false }
           spacing={ 'tight' }
-          output={ onChange('region') } />
+          output={ this.props.onChange('region') } />
         <Input
-          key={ 'country_name' }
+          key={ "country_name" }
           ref={ 'country_name' }
           i18n={{
-            name: prefix + 'country_name',
+            name: this.props.prefix + 'country_name',
             label: this.t('country_name', { scope: iso })
           }}
           value={ address.country_name }
-          width={ 'wide' }
-          required={ required }
+          width={ "wide" }
+          required={ this.props.required }
           showIcon={ false }
           spacing={ 'tight' }
-          output={ onChange('country_name') } />
+          output={ this.props.onChange('country_name') } />
         <Input
-          key={ 'postal_code' }
+          key={ "postal_code" }
           ref={ 'postal_code' }
           i18n={{
-            name: prefix + 'postal_code',
+            name: this.props.prefix + 'postal_code',
             label: this.t('postal_code', { scope: iso })
           }}
           value={ address.postal_code }
-          width={ 'narrow' }
-          required={ required }
+          width={ "narrow" }
+          required={ this.props.required }
           showIcon={ false }
           spacing={ 'tight' }
-          output={ onChange('postal_code') } />
-        { props.children }
-        <input type="hidden" name={ prefix + "paf_validated" } value={ address.paf_validated } />
+          output={ this.props.onChange('postal_code') } />
+        { this.props.children }
+        <input type="hidden" name={ this.props.prefix + "paf_validated" } value={ address.paf_validated } />
       </div>
     );
   }

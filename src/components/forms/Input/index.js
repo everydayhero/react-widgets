@@ -11,57 +11,57 @@ module.exports = React.createClass({
   displayName: "Input",
 
   propTypes: {
-    autoComplete: React.PropTypes.bool,
-    autoFocus: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    error: React.PropTypes.bool,
-    i18n: React.PropTypes.object,
-    icon: React.PropTypes.string,
-    mask: React.PropTypes.func,
-    modal: React.PropTypes.func,
-    output: React.PropTypes.func,
     readOnly: React.PropTypes.bool,
+    disabled: React.PropTypes.bool,
+    autoFocus: React.PropTypes.bool,
+    autoComplete: React.PropTypes.bool,
     required: React.PropTypes.bool,
-    showIcon: React.PropTypes.bool,
-    spacing: React.PropTypes.string,
-    type: React.PropTypes.string,
+    error: React.PropTypes.bool,
+    mask: React.PropTypes.func,
     validate: React.PropTypes.func,
+    output: React.PropTypes.func,
+    modal: React.PropTypes.func,
+    type: React.PropTypes.string,
+    icon: React.PropTypes.string,
+    showIcon: React.PropTypes.bool,
+    width: React.PropTypes.string,
+    spacing: React.PropTypes.string,
     value: React.PropTypes.string,
-    width: React.PropTypes.string
+    i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
     return {
-      autoComplete: false,
+      readOnly: false,
+      disabled: false,
       autoFocus: false,
+      autoComplete: false,
+      required: false,
+      error: false,
+      mask: null,
+      validate: null,
+      output: null,
+      modal: null,
+      type: 'text',
+      value: '',
+      icon: null,
+      showIcon: true,
+      width: 'full',
+      spacing: '',
       defaultI18n: {
         name: 'input',
         label: 'Input'
-      },
-      disabled: false,
-      error: false,
-      icon: null,
-      mask: null,
-      modal: null,
-      output: null,
-      readOnly: false,
-      required: false,
-      showIcon: true,
-      spacing: '',
-      type: 'text',
-      validate: null,
-      value: '',
-      width: 'full'
+      }
     };
   },
 
   getInitialState: function() {
     return {
-      error: this.props.error,
       focused: false,
-      valid: false,
       value: this.props.value,
-      waiting: false
+      waiting: false,
+      valid: false,
+      error: this.props.error
     };
   },
 
@@ -88,8 +88,8 @@ module.exports = React.createClass({
               : this.props.mask ? this.props.mask(e.target.value)
               : e.target.value;
     this.setState({
-      error: false,
       valid: false,
+      error: false,
       value: value
     });
     if (this.props.output) {
@@ -102,8 +102,8 @@ module.exports = React.createClass({
       return false;
     }
     this.setState({
-      error: false,
       valid: false,
+      error: false,
       value: value
     }, this.handleBlur);
   },
@@ -121,13 +121,15 @@ module.exports = React.createClass({
 
   handleBlur: function() {
     this.setState({ focused: false });
-    this.validate();
+    if (this.props.required) {
+      this.validate();
+    }
   },
 
   setValid: function(valid) {
     this.setState({
-      error: !valid,
       valid: valid,
+      error: !valid,
       waiting: false
     });
   },
@@ -137,10 +139,9 @@ module.exports = React.createClass({
       this.setState({ waiting: true });
       return this.props.validate(this.state.value, this.setValid);
     }
-    if (this.props.required) {
-      var valid = this.state.value && !!this.state.value.trim();
-      this.setValid(valid);
-    }
+
+    var valid = this.state.value && !!this.state.value.trim();
+    this.setValid(valid);
   },
 
   renderIcon: function() {
@@ -187,15 +188,15 @@ module.exports = React.createClass({
           <input
             autoComplete={ this.props.autoComplete ? 'on' : 'off' }
             className="Input__input"
-            disabled={ this.props.disabled }
-            id={ this.t('name') }
-            name={ this.t('name') }
-            onBlur={ enabled && this.handleBlur }
-            onChange={ enabled && this.handleChange }
-            onFocus={ enabled && this.handleFocus }
             ref="input"
             type={ this.props.type }
-            value={ this.state.value } />
+            id={ this.t('name') }
+            name={ this.t('name') }
+            value={ this.state.value }
+            disabled={ this.props.disabled }
+            onChange={ enabled && this.handleChange }
+            onFocus={ enabled && this.handleFocus }
+            onBlur={ enabled && this.handleBlur } />
           { this.renderIcon() }
         </label>
         { this.renderMessage(this.t('error') || this.t('hint')) }

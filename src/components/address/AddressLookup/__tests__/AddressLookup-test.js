@@ -35,7 +35,7 @@ describe('AddressLookup', function() {
     TestUtils.Simulate.click(countrySelect);
     var country = findByClass(element, 'CountrySelectItem--focused').getDOMNode();
     TestUtils.Simulate.click(country);
-    expect(element.state.country).toBe('AF');
+    expect(element.state.country.iso).toBe('AU');
   });
 
   it('allows you to filter and select a country', function() {
@@ -46,7 +46,7 @@ describe('AddressLookup', function() {
     TestUtils.Simulate.change(input, { target: { value: "king" } });
     var country = findByClass(element, 'CountrySelectItem--focused').getDOMNode();
     TestUtils.Simulate.click(country);
-    expect(element.state.country).toBe('GB');
+    expect(element.state.country.iso).toBe('GB');
   });
 
   it('accepts an existing address', function() {
@@ -71,7 +71,7 @@ describe('AddressLookup', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup />);
     var input = findByClass(element, 'Input__input').getDOMNode();
     TestUtils.Simulate.change(input, { target: { value: "TestAddress" } });
-    expect(address.search).lastCalledWith('TestAddress', 'US', jasmine.any(Function));
+    expect(address.search).lastCalledWith('TestAddress', 'AU', jasmine.any(Function));
 
     var callback = address.search.mock.calls[0][2];
     callback(addressSearchResult);
@@ -82,7 +82,7 @@ describe('AddressLookup', function() {
   });
 
   it('breaks down a selected US address', function() {
-    var element = TestUtils.renderIntoDocument(<AddressLookup />);
+    var element = TestUtils.renderIntoDocument(<AddressLookup country={ 'US' } />);
     element.setList(addressSearchResult);
     var listItem = findByClass(element, 'AddressListing--focused').getDOMNode();
     TestUtils.Simulate.click(listItem);

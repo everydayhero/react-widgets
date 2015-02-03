@@ -1,20 +1,24 @@
 "use strict";
 
-var React     = require('react/addons');
-var I18nMixin = require('../../mixins/I18n');
-var Input     = require('../../forms/Input');
+var React           = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
+var cx              = require('react/lib/cx');
+var I18nMixin       = require('../../mixins/I18n');
+var Input           = require('../../forms/Input');
+var Select          = require('../../forms/Select');
+var countryList     = require('../CountrySelect/countries');
 
 module.exports = React.createClass({
-  mixins: [I18nMixin],
+  displayName: "AddressBreakdown",
 
-  displayName: 'AddressBreakdown',
+  mixins: [I18nMixin, PureRenderMixin],
 
   propTypes: {
     address: React.PropTypes.object,
+    region: React.PropTypes.object.isRequired,
     autoFocus: React.PropTypes.bool,
     onChange: React.PropTypes.func,
     prefix: React.PropTypes.string,
-    region: React.PropTypes.string,
     required: React.PropTypes.bool,
     validate: React.PropTypes.func
   },
@@ -24,7 +28,6 @@ module.exports = React.createClass({
       address: null,
       autoFocus: false,
       prefix: '',
-      region: 'US',
       required: false,
       validate: function() {},
       defaultI18n: {
@@ -59,39 +62,51 @@ module.exports = React.createClass({
     };
   },
 
+  handleCountryChange: function(val, obj) {
+    this.props.onChange('country_name')(val);
+    this.props.validate(val);
+    this.props.onCountryChange(obj);
+  },
+
   render: function() {
+    var t = this.t;
     var props = this.props;
     var address = props.address;
-    var iso = props.region;
+    var iso = props.region.iso;
     var onChange = props.onChange;
     var prefix = props.prefix;
     var required = props.required;
     var validate = props.validate;
-
+    var classes = cx({
+      'AddressBreakdown': true,
+      'AddressBreakdown--compact': props.spacing === 'compact',
+      'AddressBreakdown--tight': props.spacing === 'tight',
+      'AddressBreakdown--loose': props.spacing === 'loose'
+    });
     return (
-      <div className="AddressBreakdown">
+      <div className={ classes }>
         <Input
           autoFocus={ props.autoFocus }
           ref={ 'street_address' }
           key={ 'street_address' }
           i18n={{
             name: prefix + 'street_address',
-            label: this.t('street_address', { scope: iso })
+            label: t('street_address', { scope: iso })
           }}
           value={ address.street_address }
           required={ required }
           showIcon={ false }
           spacing={ 'tight' }
-          validate={ props.validate }
+          validate={ validate }
           output={ onChange('street_address') } />
         <Input
           key={ 'extended_address' }
           ref={ 'extended_address' }
           i18n={{
             name: prefix + 'extended_address',
-            label: this.t('extended_address', { scope: iso })
+            label: t('extended_address', { scope: iso })
           }}
-          validate={ props.validate }
+          validate={ validate }
           value={ address.extended_address }
           showIcon={ false }
           spacing={ 'tight' }
@@ -101,9 +116,9 @@ module.exports = React.createClass({
           ref={ 'locality' }
           i18n={{
             name: prefix + 'locality',
-            label: this.t('locality', { scope: iso })
+            label: t('locality', { scope: iso })
           }}
-          validate={ props.validate }
+          validate={ validate }
           value={ address.locality }
           width={ 'wide' }
           required={ required }
@@ -115,36 +130,35 @@ module.exports = React.createClass({
           ref={ 'region' }
           i18n={{
             name: prefix + 'region',
-            label: this.t('region', { scope: iso })
+            label: t('region', { scope: iso })
           }}
-          validate={ props.validate }
+          validate={ validate }
           value={ address.region }
           width={ 'narrow' }
           showIcon={ false }
           spacing={ 'tight' }
           output={ onChange('region') } />
-        <Input
-          key={ 'country_name' }
+        <Select
+          key={ "country_name" }
           ref={ 'country_name' }
           i18n={{
             name: prefix + 'country_name',
-            label: this.t('country_name', { scope: iso })
+            label: t('country_name', { scope: iso })
           }}
-          validate={ props.validate }
           value={ address.country_name }
           width={ 'wide' }
           required={ required }
-          showIcon={ false }
           spacing={ 'tight' }
-          output={ onChange('country_name') } />
+          options={ countryList }
+          output={ this.handleCountryChange } />
         <Input
           key={ 'postal_code' }
           ref={ 'postal_code' }
           i18n={{
             name: prefix + 'postal_code',
-            label: this.t('postal_code', { scope: iso })
+            label: t('postal_code', { scope: iso })
           }}
-          validate={ props.validate }
+          validate={ validate }
           value={ address.postal_code }
           width={ 'narrow' }
           required={ required }
@@ -152,7 +166,8 @@ module.exports = React.createClass({
           spacing={ 'tight' }
           output={ onChange('postal_code') } />
         { props.children }
-        <input type="hidden" name={ prefix + "paf_validated" } value={ address.paf_validated } />
+        <input type="hidden" name={ props.prefix + "country_iso" } value={ iso } />
+        <input type="hidden" name={ props.prefix + "paf_validated" } value={ address.paf_validated } />
       </div>
     );
   }

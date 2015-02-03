@@ -1,10 +1,13 @@
 "use strict";
 
-var React = require('react/addons');
-var cx = require('react/lib/cx');
+var React           = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
+var cx              = require('react/lib/cx');
 
 module.exports = React.createClass({
   displayName: "AddressListing",
+
+  mixins: [PureRenderMixin],
 
   propTypes: {
     id: React.PropTypes.string,

@@ -12,16 +12,20 @@
 }
 
 .AddressLookup__list {
+  border-radius: 0 0 $ehw-border-radius $ehw-border-radius;
   background-color: #fff;
-  margin-top: -20px;
-  padding-top: 8px;
-  margin-bottom: 8px;
+  padding-top: 5px;
+  float: left;
+  width: 100%;
+  overflow-y: scroll;
+  max-height: 300px;
+  margin-top: -8px;
 }
 
 .AddressLookup__error {
   border-radius: 0 0 $ehw-border-radius $ehw-border-radius;
   padding: 5px 8px;
-  margin: -20px 8px 8px;
+  margin: 0 8px;
   background-color: $ehw-color-error;
   color: #fff;
   font-size: 13px;
@@ -39,7 +43,7 @@
   font-size: 11px;
   letter-spacing: 0.08em;
   font-weight: bold;
-  margin: 0 8px 8px;
+  margin: 8px;
   cursor: pointer;
   text-align: center;
 }
@@ -52,3 +56,7 @@
   color: #fff;
   outline: none;
 }
+
+.AddressLookup--compact { padding: 0; }
+.AddressLookup--tight { padding: 0 $x-1 $x-2; }
+.AddressLookup--loose { padding: 0 ($x-8 / 2) $x-8; }

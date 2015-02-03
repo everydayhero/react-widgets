@@ -1,0 +1,15 @@
+.SelectOption {
+  transition: all 80ms ease-out;
+  background-color: #fff;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.SelectOption--focused {
+  background-color: rgba(126,199,116,0.1);
+}
+
+.SelectOption + .SelectOption {
+  border-top: 1px solid #eee;
+}

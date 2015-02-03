@@ -1,0 +1,21 @@
+.Select {
+  box-sizing: border-box;
+  float: left;
+  position: relative;
+  z-index: 1;
+  text-align: left;
+  font-family: $ehw-sans-serif-fonts;
+}
+
+.Select * {
+  box-sizing: border-box;
+}
+
+.Select--full { width: 100%; }
+.Select--wide { width: 66%; }
+.Select--half { width: 50%; }
+.Select--narrow { width: 34%; }
+
+.Select--compact { padding: 0; }
+.Select--tight { padding: 0 $x-1 $x-2; }
+.Select--loose { padding: 0 ($x-8 / 2) $x-8; }

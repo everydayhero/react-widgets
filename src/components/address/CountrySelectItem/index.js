@@ -1,11 +1,14 @@
 "use strict";
 
-var React = require('react/addons');
-var FlagIcon = require('../../helpers/FlagIcon');
-var cx = require('react/lib/cx');
+var React           = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
+var cx              = require('react/lib/cx');
+var FlagIcon        = require('../../helpers/FlagIcon');
 
 module.exports = React.createClass({
   displayName: "CountrySelectItem",
+
+  mixins: [PureRenderMixin],
 
   propTypes: {
     focused: React.PropTypes.bool,

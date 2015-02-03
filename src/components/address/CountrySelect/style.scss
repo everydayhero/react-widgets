@@ -31,13 +31,13 @@
 }
 
 .CountrySelect__list {
-  border-radius: $ehw-border-radius;
+  border-radius: 0 0 $ehw-border-radius $ehw-border-radius;
   background-color: #fff;
   max-height: 300px;
   overflow-y: scroll;
   padding-top: 5px;
-  margin-top: -20px;
-  margin-bottom: 8px;
+  float: left;
+  width: 100%;
 }
 
 .CountrySelect__flag {

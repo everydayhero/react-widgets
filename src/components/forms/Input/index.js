@@ -1,14 +1,15 @@
 "use strict";
 
-var React     = require('react');
-var cx        = require('react/lib/cx');
-var I18nMixin = require('../../mixins/I18n');
-var Icon      = require('../../helpers/Icon');
+var React           = require('react');
+var PureRenderMixin = React.addons.PureRenderMixin;
+var cx              = require('react/lib/cx');
+var I18nMixin       = require('../../mixins/I18n');
+var Icon            = require('../../helpers/Icon');
 
 module.exports = React.createClass({
-  mixins: [I18nMixin],
-
   displayName: "Input",
+
+  mixins: [I18nMixin, PureRenderMixin],
 
   propTypes: {
     autoComplete: React.PropTypes.bool,
@@ -20,12 +21,12 @@ module.exports = React.createClass({
     mask: React.PropTypes.func,
     modal: React.PropTypes.func,
     output: React.PropTypes.func,
+    validate: React.PropTypes.func,
     readOnly: React.PropTypes.bool,
     required: React.PropTypes.bool,
     showIcon: React.PropTypes.bool,
     spacing: React.PropTypes.string,
     type: React.PropTypes.string,
-    validate: React.PropTypes.func,
     value: React.PropTypes.string,
     width: React.PropTypes.string
   },
@@ -34,24 +35,24 @@ module.exports = React.createClass({
     return {
       autoComplete: false,
       autoFocus: false,
-      defaultI18n: {
-        name: 'input',
-        label: 'Input'
-      },
       disabled: false,
       error: false,
       icon: null,
       mask: null,
       modal: null,
       output: null,
+      validate: null,
       readOnly: false,
       required: false,
       showIcon: true,
-      spacing: '',
       type: 'text',
-      validate: null,
       value: '',
-      width: 'full'
+      width: 'full',
+      spacing: 'loose',
+      defaultI18n: {
+        name: 'input',
+        label: 'Input'
+      }
     };
   },
 
@@ -133,24 +134,27 @@ module.exports = React.createClass({
   },
 
   validate: function() {
-    if (this.props.validate) {
-      this.setState({ waiting: true });
-      return this.props.validate(this.state.value, this.setValid);
+    var props = this.props;
+    var value = this.state.value;
+    if (props.required) {
+      this.setValid(value && !!value.trim());
     }
-    if (this.props.required) {
-      var valid = this.state.value && !!this.state.value.trim();
-      this.setValid(valid);
+    if (props.validate) {
+      this.setState({ waiting: true });
+      props.validate(value, this.setValid);
     }
   },
 
   renderIcon: function() {
-    var icon = !this.props.showIcon ? false
-               : this.state.waiting ? 'refresh'
-               : this.state.valid ? 'check'
-               : this.state.error ? 'times'
-               : this.props.disabled ? 'minus'
-               : this.props.icon ? this.props.icon
-               : (this.props.required && !this.state.value) ? 'caret-left'
+    var props = this.props;
+    var state = this.state;
+    var icon = !props.showIcon ? false
+               : state.waiting ? 'refresh'
+               : state.valid ? 'check'
+               : state.error ? 'times'
+               : props.disabled ? 'minus'
+               : props.icon ? props.icon
+               : (props.required && !state.value) ? 'caret-left'
                : false;
     return icon && <Icon icon={ icon } className="Input__icon" fixedWidth={ true } />;
   },
@@ -164,41 +168,47 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var enabled = !this.props.disabled;
+    var props = this.props;
+    var state = this.state;
+    var t = this.t;
+    var width = props.width;
+    var spacing = props.spacing;
+    var enabled = !props.disabled;
     var classes = cx({
       'Input': true,
-      'Input--hasValue': this.state.value && !!this.state.value.trim(),
-      'Input--focused': this.state.focused,
-      'Input--valid': this.state.valid,
-      'Input--error': this.state.error,
-      'Input--disabled': this.props.disabled,
-      'Input--full': !this.props.width || this.props.width === 'full',
-      'Input--wide': this.props.width === 'wide',
-      'Input--half': this.props.width === 'half',
-      'Input--narrow': this.props.width === 'narrow',
-      'Input--tight': this.props.spacing === 'tight',
-      'Input--loose': this.props.spacing === 'loose'
+      'Input--hasValue': state.value && !!state.value.trim(),
+      'Input--focused': state.focused,
+      'Input--valid': state.valid,
+      'Input--error': state.error,
+      'Input--disabled': props.disabled,
+      'Input--full': !width || width === 'full',
+      'Input--wide': width === 'wide',
+      'Input--half': width === 'half',
+      'Input--narrow': width === 'narrow',
+      'Input--compact': spacing === 'compact',
+      'Input--tight': spacing === 'tight',
+      'Input--loose': spacing === 'loose'
     });
 
     return (
       <div className={ classes }>
-        <label className="Input__label" htmlFor={ this.t('name') }>
-          { this.t('label') }
+        <label className="Input__label" htmlFor={ t('name') }>
+          { t('label') }
           <input
-            autoComplete={ this.props.autoComplete ? 'on' : 'off' }
+            autoComplete={ props.autoComplete ? 'on' : 'off' }
             className="Input__input"
-            disabled={ this.props.disabled }
-            id={ this.t('name') }
-            name={ this.t('name') }
+            disabled={ props.disabled }
+            id={ t('name') }
+            name={ t('name') }
             onBlur={ enabled && this.handleBlur }
             onChange={ enabled && this.handleChange }
             onFocus={ enabled && this.handleFocus }
             ref="input"
-            type={ this.props.type }
-            value={ this.state.value } />
+            type={ props.type }
+            value={ state.value } />
           { this.renderIcon() }
         </label>
-        { this.renderMessage(this.t('error') || this.t('hint')) }
+        { this.renderMessage(t('error') || t('hint')) }
       </div>
     );
   }

@@ -1,10 +1,9 @@
 .Input {
-  display: inline-block;
+  box-sizing: border-box;
+  float: left;
   position: relative;
   z-index: 1;
-  width: 100%;
   text-align: left;
-  margin-bottom: $x-5;
   font-family: $ehw-sans-serif-fonts;
 }
 
@@ -54,7 +53,6 @@
   line-height: $x-3;
   letter-spacing: 0.05em;
   padding: $x-1 $x-2;
-  margin-bottom: -$x-2;
   opacity: 0;
 }
 
@@ -109,11 +107,10 @@
 }
 
 .Input--full { width: 100%; }
-.Input--wide { width: 63%; }
-.Input--half { width: 49%; }
-.Input--narrow { width: 35%; }
+.Input--wide { width: 66%; }
+.Input--half { width: 50%; }
+.Input--narrow { width: 34%; }
 
-.Input--wide + .Input--narrow { margin-left: 2%; }
-
-.Input--tight { margin-bottom: $x-2; }
-.Input--loose { margin-bottom: $x-9; }
+.Input--compact { padding: 0; }
+.Input--tight { padding: 0 $x-1 $x-2; }
+.Input--loose { padding: 0 ($x-8 / 2) $x-8; }

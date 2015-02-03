@@ -198,9 +198,9 @@
     edh.widgets.initModal('CharitySearchDonate', 'CharitySearch', { country: 'uk', action: 'donate' });
     edh.widgets.initModal('CharitySearchFundraise', 'CharitySearch', { country: 'uk', action: 'fundraise' });
     edh.widgets.initModal('PageSearchExample', 'PageSearch', { country: 'uk' });
-    edh.widgets.renderWidget('FundsRaisedExample','FundsRaised', { campaignUid: 'us-22' });
-    edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', { campaignUid: 'us-22' });
-    edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUid: 'us-22' });
+    edh.widgets.renderWidget('FundsRaisedExample','FundsRaised', { campaignUids: ['us-22', 'us-24'] });
+    edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', { campaignUids: ['us-22', 'us-24'] });
+    edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('GoalExample', 'Goal', { goal: '5000000', i18n: { title: '2015 Goal' } });
     edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TeamLeaderboardExample', 'Leaderboard', { campaignUid: 'us-22', type: 'team', limit: 16, pageSize: 4, i18n: { heading: 'Leaderboard > Top Teams' } });
@@ -259,8 +259,8 @@
       ]
     });
     edh.widgets.renderWidget('MapExample', 'Map', { campaignUid: 'us-22', region:'US' });
-    edh.widgets.renderWidget('TotalDistanceExample', 'TotalDistance', { campaignUid: 'us-22' });
-    edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUid: 'us-22' });
+    edh.widgets.renderWidget('TotalDistanceExample', 'TotalDistance', { campaignUids: ['us-22','us-24'] });
+    edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('AddressLookupExample', 'AddressLookup', { country: 'GB' });
     edh.widgets.renderWidget('AmountExample', 'Amount');
     edh.widgets.renderWidget('InputExample', 'Input', { i18n: { name: 'input_example', label: 'Input Example', hint: 'What is this input for?', error: 'This input is required'}, required: true });

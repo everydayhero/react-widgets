@@ -13,6 +13,7 @@ module.exports = React.createClass({
   displayName: "TotalDistance",
   propTypes: {
     campaignUid: React.PropTypes.string,
+    campaignUids: React.PropTypes.array,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -24,6 +25,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       campaignUid: '',
+      campaignUids: [],
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
@@ -39,17 +41,29 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       isLoading: false,
-      hasResults: false,
       total: 0
     };
   },
 
   componentWillMount: function() {
-    this.setState({
-      isLoading: true
-    });
+    this.loadCampaigns();
+  },
 
-    campaigns.find(this.props.campaignUid, this.onSuccess);
+  setUids: function() {
+    var campaignUids = [];
+
+    if (this.props.campaignUid) {
+      campaignUids.push(this.props.campaignUid);
+    } else {
+      campaignUids = this.props.campaignUids;
+    }
+
+    return campaignUids;
+  },
+
+  loadCampaigns: function() {
+    this.setState({ isLoading: true });
+    campaigns.findByUids(this.setUids(), this.onSuccess);
   },
 
   combineActivityData: function(fitnessActivity) {
@@ -59,21 +73,20 @@ module.exports = React.createClass({
   },
 
   onSuccess: function(result) {
-    var fitnessActivity = result.campaign.fitness_activity_overview;
+    var fitnessActivity = 0;
+
+    _.forEach(result.campaigns, function(campaign) {
+      fitnessActivity += this.combineActivityData(campaign.fitness_activity_overview);
+    }, this);
 
     if (fitnessActivity){
       this.setState({
         isLoading: false,
-        hasResults: true,
-        total: this.combineActivityData(fitnessActivity)
+        total: fitnessActivity
       });
     } else {
-      this.setState({
-        isLoading: false,
-        hasResults: false
-      });
+      this.setState({ isLoading: false });
     }
-
   },
 
   formatDistance: function(meters) {
@@ -94,7 +107,7 @@ module.exports = React.createClass({
       return <Icon className="TotalDistance__loading" icon="refresh" />;
     }
 
-    if (this.state.hasResults) {
+    if (this.state.total) {
       return (
         <div className="TotalDistance__content">
           <div className="TotalDistance__total">{ formattedTotal }</div>

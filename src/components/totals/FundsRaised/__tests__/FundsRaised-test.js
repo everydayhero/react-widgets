@@ -14,7 +14,8 @@ describe('FundsRaised', function() {
     var element;
 
     beforeEach(function() {
-      fundsRaised = <FundsRaised campaignUid="au-0" />;
+      campaigns.findByUids.mockClear();
+      fundsRaised = <FundsRaised campaignUid="us-22" />;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
 
@@ -23,14 +24,13 @@ describe('FundsRaised', function() {
     });
 
     it('renders a default total', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       var total = findByClass(element, 'FundsRaised__total');
-
       expect(total.getDOMNode().textContent).toContain('$0.00');
     });
 
     it('renders a default title', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       var title = findByClass(element, 'FundsRaised__title');
 
       expect(title.getDOMNode().textContent).toBe('Raised To Date');
@@ -38,21 +38,37 @@ describe('FundsRaised', function() {
 
     it('renders an icon by default', function() {
       var icon = findByClass(element, 'FundsRaised__icon');
-
       expect(icon).not.toBeNull();
     });
 
     it('renders a loading icon', function() {
-      element.setState({isLoading: true});
+      element.setState({ isLoading: true });
       findByClass(element, 'FundsRaised__loading');
     });
 
-    it('handles a campaign id', function() {
-      expect(campaigns.find).toBeCalledWith('au-0', element.onSuccess);
+    it('handles a single campaign id', function() {
+      expect(campaigns.findByUids.mock.calls.length).toEqual(1);
+      expect(campaigns.findByUids).toBeCalledWith(["us-22"], element.onSuccess);
     });
   });
 
-  describe('component props', function() {
+  describe('working with multiple uids', function() {
+    var fundsRaised;
+    var element;
+
+    beforeEach(function() {
+      campaigns.findByUids.mockClear();
+      fundsRaised = <FundsRaised campaignUids={ ["us-22", "us-24"] } />;
+      element = TestUtils.renderIntoDocument(fundsRaised);
+    });
+
+    it('handles a multiple campaign ids', function() {
+      expect(campaigns.findByUids.mock.calls.length).toEqual(1);
+      expect(campaigns.findByUids).toBeCalledWith(["us-22", "us-24"], element.onSuccess);
+    });
+  });
+
+  describe('using component props', function() {
     var fundsRaised;
     var element;
     var translation = {
@@ -73,7 +89,7 @@ describe('FundsRaised', function() {
     });
 
     it('check for a default total', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       var total = findByClass(element, 'FundsRaised__total');
 
       expect(total.getDOMNode().textContent).toContain('£0.00');

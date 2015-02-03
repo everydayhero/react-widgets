@@ -9,12 +9,13 @@ describe('TotalDistance', function() {
   var TestUtils     = React.addons.TestUtils;
   var findByClass   = TestUtils.findRenderedDOMComponentWithClass;
 
-  describe('Component defaults', function() {
+  describe('Component when handed multiple uids', function() {
     var totalDistance;
     var element;
 
     beforeEach(function() {
-      totalDistance = <TotalDistance campaignUid="au-0" />;
+      campaigns.findByUids.mockClear();
+      totalDistance = <TotalDistance campaignUids={ ["us-22", "us-24"] } />;
       element = TestUtils.renderIntoDocument(totalDistance);
     });
 
@@ -24,7 +25,6 @@ describe('TotalDistance', function() {
 
     it('renders an icon by default', function() {
       var icon = findByClass(element, 'TotalDistance__icon');
-
       expect(icon).not.toBeNull();
     });
 
@@ -33,8 +33,25 @@ describe('TotalDistance', function() {
       findByClass(element, 'TotalDistance__loading');
     });
 
-    it('handles a campaign id', function() {
-      expect(campaigns.find).toBeCalledWith('au-0', element.onSuccess);
+    it('handles multiple campaign uids', function() {
+      expect(campaigns.findByUids.mock.calls.length).toEqual(1);
+      expect(campaigns.findByUids).toBeCalledWith(["us-22", "us-24"], element.onSuccess);
+    });
+  });
+
+  describe('Component when handed one uid', function() {
+    var totalDistance;
+    var element;
+
+    beforeEach(function() {
+      campaigns.findByUids.mockClear();
+      totalDistance = <TotalDistance campaignUid="us-22" />;
+      element = TestUtils.renderIntoDocument(totalDistance);
+    });
+
+    it('handles a sinlge campaign uid', function() {
+      expect(campaigns.findByUids.mock.calls.length).toEqual(1);
+      expect(campaigns.findByUids).toBeCalledWith(["us-22"], element.onSuccess);
     });
   });
 
@@ -43,22 +60,15 @@ describe('TotalDistance', function() {
       var totalDistance = <TotalDistance campaignUid="au-0" />;
       var element = TestUtils.renderIntoDocument(totalDistance);
 
-      element.setState({
-        isLoading: false,
-        hasResults: true
-      });
+      element.setState({ isLoading: false });
 
       expect(element.formatDistance(1000)).toEqual('0.62');
     });
 
-    it('Correctly calculates kilometers based on response', function() {
+    it('correctly calculates kilometers based on response', function() {
       var totalDistance = <TotalDistance campaignUid="au-0" unit="km" />;
       var element = TestUtils.renderIntoDocument(totalDistance);
-
-      element.setState({
-        isLoading: false,
-        hasResults: true
-      });
+      element.setState({ isLoading: false });
 
       expect(element.formatDistance(1000)).toEqual('1');
     });
@@ -68,7 +78,7 @@ describe('TotalDistance', function() {
     var totalDistance;
     var element;
     var translation = {
-      title: 'Hours'
+      title: 'Ground Covered'
     };
 
     beforeEach(function() {
@@ -76,7 +86,7 @@ describe('TotalDistance', function() {
       element = TestUtils.renderIntoDocument(totalDistance);
       element.setState({
         isLoading: false,
-        hasResults: true
+        total: 1000
       });
     });
 
@@ -97,7 +107,6 @@ describe('TotalDistance', function() {
 
       element.setState({
         isLoading: false,
-        hasResults: true,
         total: 1000050
       });
 
@@ -111,7 +120,6 @@ describe('TotalDistance', function() {
 
       element.setState({
         isLoading: false,
-        hasResults: true,
         total: 1000050
       });
 

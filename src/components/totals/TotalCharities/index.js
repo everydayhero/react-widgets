@@ -11,6 +11,7 @@ module.exports = React.createClass({
   displayName: "TotalCharities",
   propTypes: {
     campaignUid: React.PropTypes.string,
+    campaignUids: React.PropTypes.array,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -21,6 +22,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       campaignUid: '',
+      campaignUids: [],
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
@@ -38,18 +40,32 @@ module.exports = React.createClass({
     };
   },
 
+  componentWillMount: function() {
+    this.loadCharities();
+  },
+
+  setUids: function() {
+    var campaignUids = [];
+
+    if (this.props.campaignUid) {
+      campaignUids.push(this.props.campaignUid);
+    } else {
+      campaignUids = this.props.campaignUids;
+    }
+
+    return campaignUids;
+  },
+
+  loadCharities: function() {
+    this.setState({ isLoading: true });
+    charities.findByCampaign(this.setUids(), 1, 1, this.onSuccess);
+  },
+
   onSuccess: function(result) {
     this.setState({
       isLoading: false,
       total: result.meta.count
     });
-  },
-
-  componentWillMount: function() {
-    this.setState({
-      isLoading: true
-    });
-    charities.findByCampaign(this.props.campaignUid, 1, 1, this.onSuccess);
   },
 
   renderTotal: function() {

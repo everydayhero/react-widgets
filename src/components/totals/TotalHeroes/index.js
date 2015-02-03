@@ -1,5 +1,6 @@
 "use strict";
 
+var _         = require('lodash');
 var React     = require('react');
 var I18nMixin = require('../../mixins/I18n');
 var pages     = require('../../../api/pages');
@@ -11,8 +12,9 @@ module.exports = React.createClass({
   displayName: "TotalHeroes",
   propTypes: {
     campaignUid: React.PropTypes.string,
-    page_count: React.PropTypes.string,
-    page_size: React.PropTypes.string,
+    campaignUids: React.PropTypes.array,
+    pageCount: React.PropTypes.number,
+    pageSize: React.PropTypes.number,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -23,9 +25,10 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       campaignUid: '',
-      page_count: '1',
-      page_size: '1',
-      page_type: 'user',
+      campaignUids: [],
+      pageCount: 1,
+      pageSize: 1,
+      pageType: 'individual',
       renderIcon: true,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
@@ -46,18 +49,35 @@ module.exports = React.createClass({
   onSuccess: function(result) {
     this.setState({
       isLoading: false,
-      total: result.meta.count
+      total: this.state.total + result.meta.count
     });
   },
 
   componentWillMount: function() {
-    this.setState({
-      isLoading: true
-    });
+    this.loadPages();
+  },
 
+  setUids: function() {
+    var campaignUids = [];
+
+    if (this.props.campaignUid) {
+      campaignUids.push(this.props.campaignUid);
+    } else {
+      campaignUids = this.props.campaignUids;
+    }
+
+    return campaignUids;
+  },
+
+  loadPages: function() {
+    this.setState({ isLoading: true });
+
+    var campaignUids = this.setUids();
     var props = this.props;
 
-    pages.findByCampaign(props.campaignUid, props.page_count, props.page_size, props.page_type, this.onSuccess);
+    _.each(campaignUids, function(campaignUid) {
+      pages.findByCampaign(campaignUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess);
+    }, this);
   },
 
   renderTotal: function() {

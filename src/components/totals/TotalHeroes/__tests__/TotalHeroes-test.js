@@ -14,7 +14,8 @@ describe('TotalHeroes', function() {
     var element;
 
     beforeEach(function() {
-      totalHeroes = <TotalHeroes campaignUid="au-0" />;
+      pages.findByCampaign.mockClear();
+      totalHeroes = <TotalHeroes campaignUid="us-22" />;
       element = TestUtils.renderIntoDocument(totalHeroes);
     });
 
@@ -23,14 +24,14 @@ describe('TotalHeroes', function() {
     });
 
     it('renders default total of pages', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       var total = findByClass(element, 'TotalHeroes__total');
 
       expect(total.getDOMNode().textContent).toContain('0');
     });
 
     it('renders a default title', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       var title = findByClass(element, 'TotalHeroes__title');
 
       expect(title.getDOMNode().textContent).toBe('Heroes');
@@ -43,12 +44,30 @@ describe('TotalHeroes', function() {
     });
 
     it('shows a loading icon', function() {
-      element.setState({isLoading: true});
+      element.setState({ isLoading: true });
       findByClass(element, 'TotalHeroes__loading');
     });
 
-    it('checks that find function works with default props', function() {
-      expect(pages.findByCampaign).toBeCalledWith('au-0', '1', '1', 'user', element.onSuccess);
+    it('makes a single call using to fetch api data', function() {
+      expect(pages.findByCampaign.mock.calls.length).toEqual(1);
+      expect(pages.findByCampaign).toBeCalledWith("us-22", 'individual', 1, 1, element.onSuccess);
+    });
+  });
+
+  describe('Working with multiple uids', function() {
+    var totalHeroes;
+    var element;
+
+    beforeEach(function() {
+      pages.findByCampaign.mockClear();
+      totalHeroes = <TotalHeroes campaignUids={ ["us-22", "us-24"] } />;
+      element = TestUtils.renderIntoDocument(totalHeroes);
+    });
+
+    it('makes multiple calls to fetch api data', function() {
+      expect(pages.findByCampaign.mock.calls.length).toEqual(2);
+      expect(pages.findByCampaign).toBeCalledWith("us-22", 'individual', 1, 1, element.onSuccess);
+      expect(pages.findByCampaign).toBeCalledWith("us-24", 'individual', 1, 1, element.onSuccess);
     });
   });
 
@@ -65,14 +84,14 @@ describe('TotalHeroes', function() {
     });
 
     it('renders a custom title', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       var title = findByClass(element, 'TotalHeroes__title');
 
       expect(title.getDOMNode().textContent).toBe(translation.title);
     });
 
     it('renders a default total', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       var total = findByClass(element, 'TotalHeroes__total');
 
       expect(total.getDOMNode().textContent).toContain('0');

@@ -9,12 +9,13 @@ describe('TotalDistance', function() {
   var TestUtils   = React.addons.TestUtils;
   var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
-  describe('Component defaults', function() {
+  describe('Component when handed multiple uids', function() {
     var totalHours;
     var element;
 
     beforeEach(function() {
-      totalHours = <TotalHours campaignUid="au-0" />;
+      campaigns.findByUids.mockClear();
+      totalHours = <TotalHours campaignUids={ ["us-22", "us-24"] } />;
       element = TestUtils.renderIntoDocument(totalHours);
     });
 
@@ -32,8 +33,25 @@ describe('TotalDistance', function() {
       findByClass(element, 'TotalHours__loading');
     });
 
-    it('handles a campaign id', function() {
-      expect(campaigns.find).toBeCalledWith('au-0', element.onSuccess);
+    it('loads data for multiple campaigns', function() {
+      expect(campaigns.findByUids.mock.calls.length).toEqual(1);
+      expect(campaigns.findByUids).toBeCalledWith(["us-22", "us-24"], element.onSuccess);
+    });
+  });
+
+  describe('Component when handed one uid', function() {
+    var totalHours;
+    var element;
+
+    beforeEach(function() {
+      campaigns.findByUids.mockClear();
+      totalHours = <TotalHours campaignUid="us-22" />;
+      element = TestUtils.renderIntoDocument(totalHours);
+    });
+
+    it('handles loads data for a single campaign', function() {
+      expect(campaigns.findByUids.mock.calls.length).toEqual(1);
+      expect(campaigns.findByUids).toBeCalledWith(["us-22"], element.onSuccess);
     });
   });
 
@@ -52,7 +70,7 @@ describe('TotalDistance', function() {
     it('renders a custom title', function() {
       element.setState({
         isLoading: false,
-        hasResults: true
+        total: 123
       });
       var title = findByClass(element, 'TotalHours__title');
 

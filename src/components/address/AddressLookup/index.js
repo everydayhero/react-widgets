@@ -117,16 +117,17 @@ module.exports = React.createClass({
   },
 
   setInput: function(input) {
-    if (input.length > 4) {
-      this.getList(input);
-    }
+    var chars = this.state.country === 'GB' ? 5 : 7;
     this.setState({
       focusOnMount: false,
-      loading: input.length > 4,
+      loading: false,
       input: input,
       error: null,
       addressList: null
     });
+    if (input.length >= chars) {
+      this.getList(input);
+    }
   },
 
   reset: function() {
@@ -178,7 +179,7 @@ module.exports = React.createClass({
       loading: true,
       cancelSearch: addressAPI.search(input, this.state.country, this.setList)
     });
-  }, 100, { trailing: true }),
+  }, 250, { trailing: true }),
 
   getAddress: function(id) {
     this.state.cancelFind();

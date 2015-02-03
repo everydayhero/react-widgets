@@ -4,7 +4,7 @@
   z-index: 1;
   width: 100%;
   text-align: left;
-  padding-bottom: $x-5;
+  margin-bottom: $x-5;
   font-family: $ehw-sans-serif-fonts;
 }
 
@@ -115,5 +115,5 @@
 
 .Input--wide + .Input--narrow { margin-left: 2%; }
 
-.Input--tight { padding-bottom: $x-2; }
-.Input--loose { padding-bottom: $x-9; }
+.Input--tight { margin-bottom: $x-2; }
+.Input--loose { margin-bottom: $x-9; }

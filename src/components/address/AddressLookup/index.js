@@ -117,7 +117,6 @@ module.exports = React.createClass({
   },
 
   setInput: function(input) {
-    var chars = this.state.country === 'GB' ? 5 : 7;
     this.setState({
       focusOnMount: false,
       loading: false,
@@ -125,16 +124,14 @@ module.exports = React.createClass({
       error: null,
       addressList: null
     });
-    if (input.length >= chars) {
-      this.getList(input);
-    }
+    this.getList(input);
   },
 
   reset: function() {
     this.setState({
       loading: false,
       input: '',
-      addressList: false,
+      addressList: null,
       address: null,
       custom: null,
       focusOnMount: true
@@ -174,11 +171,15 @@ module.exports = React.createClass({
   },
 
   getList: _.debounce(function(input) {
+    var chars = this.state.country === 'GB' ? 5 : 7;
     this.state.cancelSearch();
-    this.setState({
-      loading: true,
-      cancelSearch: addressAPI.search(input, this.state.country, this.setList)
-    });
+    if (input.length >= chars) {
+      this.setState({
+        loading: true,
+        addressList: null,
+        cancelSearch: addressAPI.search(input, this.state.country, this.setList)
+      });
+    }
   }, 250, { trailing: true }),
 
   getAddress: function(id) {
@@ -190,13 +191,13 @@ module.exports = React.createClass({
   },
 
   setList: function(list) {
-    if (this.validate(list.addresses, this.setError)) {
+    if (this.validate(list && list.addresses, this.setError)) {
       this.setState({ error: false, addressList: list.addresses, loading: false });
     }
   },
 
   setAddress: function(address) {
-    if (this.validate(address.address, this.setError)) {
+    if (this.validate(address && address.address, this.setError)) {
       address.address.paf_validated = this.state.country === "GB";
       this.setState({ error: false, address: address.address, addressList: null, loading: false, focusOnMount: true }, this.output);
     }

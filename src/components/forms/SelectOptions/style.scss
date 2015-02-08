@@ -1,0 +1,11 @@
+.SelectOptions {
+  border-radius: 0 0 $ehw-border-radius $ehw-border-radius;
+  background-color: #fff;
+  max-height: 300px;
+  overflow-y: scroll;
+  padding-top: 5px;
+  position: relative;
+  z-index: 1;
+  float: left;
+  width: 100%;
+}

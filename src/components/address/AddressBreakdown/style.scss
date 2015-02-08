@@ -1,3 +1,7 @@
 .AddressBreakdown {
-  padding-bottom: $x-3;
+  overflow: hidden;
 }
+
+.AddressBreakdown--compact { margin: 0; }
+.AddressBreakdown--tight { margin: 0 (-$x-1); }
+.AddressBreakdown--loose { margin: 0 (-$x-9 / 4); }

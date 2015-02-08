@@ -1,6 +1,7 @@
 "use strict";
 
 var React               = require('react/addons');
+var PureRenderMixin     = React.addons.PureRenderMixin;
 var cx                  = require('react/lib/cx');
 var _                   = require('lodash');
 var countries           = require('./countries');
@@ -13,9 +14,11 @@ var removeEventListener = require('../../../lib/removeEventListener');
 module.exports = React.createClass({
   displayName: "CountrySelect",
 
+  mixins: [PureRenderMixin],
+
   propTypes: {
     prefix: React.PropTypes.string,
-    selected: React.PropTypes.string,
+    selected: React.PropTypes.object.isRequired,
     open: React.PropTypes.bool,
     onOpen: React.PropTypes.func,
     onChange: React.PropTypes.func
@@ -24,7 +27,6 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       prefix: '',
-      selected: 'US',
       open: false
     };
   },
@@ -99,7 +101,7 @@ module.exports = React.createClass({
 
   setCountry: function(country) {
     this.reset();
-    this.props.onChange(country.iso);
+    this.props.onChange(country);
   },
 
   renderCountries: function() {
@@ -116,11 +118,11 @@ module.exports = React.createClass({
   },
 
   renderToggle: function(bool) {
-    var iso = this.props.selected === 'GB' ? 'UK' : this.props.selected;
+    var iso = this.props.selected.iso === 'GB' ? 'UK' : this.props.selected.iso;
     return bool && (
       <div className="CountrySelect__toggle" onKeyPress={ this.props.onOpen } onClick={ this.props.onOpen } tabIndex="0">
         { iso }
-        <FlagIcon className="CountrySelect__flag" country={ this.props.selected } />
+        <FlagIcon className="CountrySelect__flag" country={ this.props.selected.iso } />
       </div>
     );
   },
@@ -135,6 +137,7 @@ module.exports = React.createClass({
           name: this.props.prefix + 'countryFilter',
           label: "Find Country"
         }}
+        spacing={ "compact" }
         value={ this.state.filter }
         output={ this.setFilter } />
     );

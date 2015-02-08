@@ -699,6 +699,7 @@ Displays a form input field and country selector, which allows users to lookup t
 
 - `required`: *optional* sets the address field as being required. Defaults to 'false'.
 - `prefix`: *optional* string to add a unique identifier to the input elements, for use when multiple AddressLookup widgets appear on the same page / post to the same form. Defaults to ''.
+- `spacing`: *optional* string to specify the spacing around input. Valid options are: "compact", "loose", and "tight". Default is "loose".
 - `country`: *optional* two-digit capitalized country ISO code (AU, GB, US, NZ, IE, etc). Default is 'US'.
 - `address`: *optional* object containing a pre-existing address to display. If provided, lookup functionality is not available. Use when user address already provided or when page reloads on form validation. Default is 'null'. Takes the form:
   ```js
@@ -757,6 +758,7 @@ Displays a radio group and input field, which allows users to choose from four p
 - `amounts`: *optional* array of exactly four predefined numbers (not strings). Default is [500, 700, 1500, 3000].
 - `output`: *optional* function to get selected amount.
 - `currency`: *optional* string of currency symbol. Default is '$'.
+- `spacing`: *optional* string to specify the spacing around the input. Valid options are: "compact", "loose", and "tight". Default is "loose".
 
 ##### Example
 
@@ -821,7 +823,7 @@ Displays an input field which can accept input masking, asynchronous validation,
 - `icon`: *optional* string to specify an icon to appear to the right. Valid strings are Font Awesome icon names (without the 'fa-' prefix). Default is 'null'.
 - `showIcon`: *optional* boolean to allow disabling icons when set to 'false'. Default is 'true'.
 - `width`: *optional* string to specify the width of the field. Valid options are: "full", "wide", "half", and "narrow". Default is "full".
-- `spacing`: *optional* string to specify the vertical spacing beneath each input. Valid options are: "", "loose", and "tight". Default is "".
+- `spacing`: *optional* string to specify the vertical spacing beneath each input. Valid options are: "compact", "loose", and "tight". Default is "loose".
 - `value`: *optional* string for input's initial value. Default is "".
 - `i18n`: *required* object containing localised text. Valid i18n is:
   ```javascript

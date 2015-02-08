@@ -1,6 +1,6 @@
 .Amount {
+  box-sizing: border-box;
   white-space: nowrap;
-  margin-bottom: $x-5;
   font-size: 14px;
   overflow: hidden;
 }
@@ -20,3 +20,7 @@
   line-height: 9px;
   color: $ehw-grey-dark;
 }
+
+.Amount--compact { padding: 0; }
+.Amount--tight { padding: 0 $x-1 $x-2; }
+.Amount--loose { padding: 0 ($x-8 / 2) $x-8; }

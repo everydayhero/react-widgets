@@ -1,6 +1,8 @@
 "use strict";
 
 var React               = require('react/addons');
+var PureRenderMixin     = React.addons.PureRenderMixin;
+var cx                  = require('react/lib/cx');
 var I18nMixin           = require('../../mixins/I18n');
 var _                   = require('lodash');
 var Input               = require('../../forms/Input');
@@ -14,27 +16,29 @@ var addEventListener    = require('../../../lib/addEventListener');
 var removeEventListener = require('../../../lib/removeEventListener');
 
 module.exports = React.createClass({
-  mixins: [I18nMixin],
-
   displayName: "AddressLookup",
+
+  mixins: [I18nMixin, PureRenderMixin],
 
   propTypes: {
     address: React.PropTypes.object,
-    country: React.PropTypes.string,
-    i18n: React.PropTypes.object,
     output: React.PropTypes.func,
     prefix: React.PropTypes.string,
     required: React.PropTypes.bool,
-    validate: React.PropTypes.func
+    validate: React.PropTypes.func,
+    spacing: React.PropTypes.string,
+    country: React.PropTypes.string,
+    i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
     return {
       address: null,
-      country: 'US',
-      output: function() {},
       prefix: '',
-      required: false,
+      required: true,
+      country: 'AU',
+      spacing: 'loose',
+      output: function() {},
       validate: function() {},
       defaultI18n: {
         inputLabel: 'Address Lookup',
@@ -47,10 +51,11 @@ module.exports = React.createClass({
   },
 
   getInitialState: function() {
+    var iso = this.props.country === 'UK' ? 'GB' : this.props.country;
     return {
       focusOnMount: false,
       choosingCountry: false,
-      country: this.props.country === 'UK' ? 'GB' : this.props.country,
+      country: _.find(countryList, { iso: iso }),
       input: '',
       addressList: null,
       address: this.props.address,
@@ -157,19 +162,18 @@ module.exports = React.createClass({
   },
 
   setManualEntry: function() {
-    var country = _.find(countryList, { iso: this.state.country });
     this.setState({
       addressList: null,
+      error: false,
       custom: {
-        country_name: country.name,
+        street_address: '',
         extended_address: '',
         locality: '',
-        paf_validated: false,
         postal_code: '',
         region: '',
-        street_address: ''
-      },
-      error: null,
+        country_name: this.state.country.name,
+        paf_validated: false
+      }
     });
   },
 
@@ -184,7 +188,7 @@ module.exports = React.createClass({
       this.setState({
         loading: true,
         addressList: null,
-        cancelSearch: addressAPI.search(input, this.state.country, this.setList)
+        cancelSearch: addressAPI.search(input, this.state.country.iso, this.setList)
       });
     }
   }, 250, { trailing: true }),
@@ -193,7 +197,7 @@ module.exports = React.createClass({
     this.state.cancelFind();
     this.setState({
       loading: true,
-      cancelFind: addressAPI.find(id, this.state.country, this.setAddress)
+      cancelFind: addressAPI.find(id, this.state.country.iso, this.setAddress)
     });
   },
 
@@ -205,7 +209,7 @@ module.exports = React.createClass({
 
   setAddress: function(address) {
     if (this.validate(address && address.address, this.setError)) {
-      address.address.paf_validated = this.state.country === "GB";
+      address.address.paf_validated = this.state.country.iso === "GB";
       this.setState({ error: false, address: address.address, addressList: null, loading: false, focusOnMount: true }, this.output);
     }
   },
@@ -263,10 +267,11 @@ module.exports = React.createClass({
         error={ this.state.error }
         i18n={{
           name: this.props.prefix + 'lookup',
-          label: this.state.country === 'GB' ? this.t('inputLabelGB') : this.t('inputLabel'),
+          label: this.state.country.iso === 'GB' ? this.t('inputLabelGB') : this.t('inputLabel'),
           error: this.t('error')
         }}
         value={ this.state.input }
+        spacing={ 'compact' }
         autoFocus={ this.state.focusOnMount }
         output={ this.setInput } />
     );
@@ -308,6 +313,8 @@ module.exports = React.createClass({
         required={ props.required }
         address={ address }
         region={ state.country }
+        spacing={ props.spacing }
+        onCountryChange={ this.setCountry }
         onChange={ this.setCustom }>
         { this.renderResetButton() }
       </AddressBreakdown>
@@ -316,8 +323,14 @@ module.exports = React.createClass({
 
   render: function() {
     var address = this.state.custom || this.state.address;
+    var classes = cx({
+      'AddressLookup': true,
+      'AddressLookup--compact': this.props.spacing === 'compact',
+      'AddressLookup--tight': this.props.spacing === 'tight',
+      'AddressLookup--loose': this.props.spacing === 'loose'
+    });
     return (
-      <div className="AddressLookup">
+      <div className={ classes }>
         { this.renderCountry(!address) }
         { this.renderStatus(!this.state.choosingCountry) }
         { this.renderInput(!address && !this.state.choosingCountry) }

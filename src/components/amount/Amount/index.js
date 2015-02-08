@@ -1,6 +1,7 @@
 "use strict";
 
 var React        = require('react');
+var cx           = require('react/lib/cx');
 var AmountInput  = require('../AmountInput');
 var AmountRadio  = require('../AmountRadio');
 
@@ -10,6 +11,7 @@ module.exports = React.createClass({
   propTypes: {
     label: React.PropTypes.string,
     name: React.PropTypes.string,
+    spacing: React.PropTypes.string,
     amount: React.PropTypes.number,
     amounts: React.PropTypes.array,
     output: React.PropTypes.func,
@@ -20,6 +22,7 @@ module.exports = React.createClass({
     return {
       label: 'Amount',
       name: 'amount',
+      spacing: 'loose',
       amount: null,
       amounts: [500, 700, 1500, 3000],
       output: function() {},
@@ -61,8 +64,14 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var classes = cx({
+      'Amount': true,
+      'Amount--compact': this.props.spacing === 'compact',
+      'Amount--tight': this.props.spacing === 'tight',
+      'Amount--loose': this.props.spacing === 'loose'
+    });
     return (
-      <div className="Amount">
+      <div className={ classes }>
         <div className="Amount__label">{ this.props.label }</div>
         { this.renderRadios() }
         <AmountInput name={ 'AmountInput-' + this.props.name } amount={ this.state.custom } onChange={ this.setCustom } symbol={ this.props.currency} />

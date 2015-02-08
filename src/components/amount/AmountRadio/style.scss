@@ -15,19 +15,20 @@
   color: $ehw-grey-dark;
 }
 
+.AmountRadio--selected {
+  background-color: $ehw-grey;
+  color: white;
+}
+
 .AmountRadio:hover {
-  background-color: rgba(126,199,116,0.1);
+  background-color: $ehw-green-light;
+  color: white;
 }
 
 .AmountRadio input {
   position: absolute;
   left: 0;
   top: -100%;
-}
-.AmountRadio--selected,
-.AmountRadio--selected:hover {
-  background-color: $ehw-green-light;
-  color: white;
 }
 
 .AmountRadio--1 { width: 16%; }

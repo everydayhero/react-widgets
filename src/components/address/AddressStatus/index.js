@@ -1,10 +1,13 @@
 "use strict";
 
-var React = require('react/addons');
-var Icon = require('../../helpers/Icon');
+var React           = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
+var Icon            = require('../../helpers/Icon');
 
 module.exports = React.createClass({
   displayName: "AddressStatus",
+
+  mixins: [PureRenderMixin],
 
   propTypes: {
     loading: React.PropTypes.bool,

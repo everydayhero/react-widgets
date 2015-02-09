@@ -32,7 +32,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       userUrl: '#',
-      userImage: 'http://fillmurray.com/600/600',
+      userImage: '',
       userName: 'User Footprint',
       compact: false,
       size: 144,
@@ -80,7 +80,7 @@ module.exports = React.createClass({
 
   shrinkCenter: _.debounce(function(bool) {
     var min = (this.props.size / 2) * this.props.ratio - this.props.offset;
-    var scale = this.state.compact ? 0.75 : 0.55;
+    var scale = this.state.compact ? 0.75 : 0.6;
     if (bool) {
       this.tween('min', min * scale);
     } else {

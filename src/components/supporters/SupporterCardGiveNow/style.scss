@@ -1,0 +1,106 @@
+.SupporterCardGiveNow {
+  perspective: 600px;
+  user-select: none;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.SupporterCardGiveNow__cta {
+  transition: all 160ms ease-out;
+  box-sizing: border-box;
+  border: 2px solid $ehw-green;
+  border-radius: 2px;
+  background-color: transparent;
+  margin: 0;
+  color: $ehw-green;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+  font-size: $x-4;
+  letter-spacing: 0.1em;
+  line-height: $x-9;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  width: 100%;
+
+  &:before {
+    transition: all 240ms ease-out;
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    padding-bottom: 100%;
+    background-color: $ehw-green;
+    margin-top: -50%;
+    border-radius: 50%;
+    box-shadow: 0 0 90px 35px $ehw-green;
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.SupporterCardGiveNow__label {
+  transition: all 240ms ease-out;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  line-height: 14px;
+  text-align: center;
+  color: white;
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  text-shadow: 0 0 5px rgba(82,82,82, 0.8);
+}
+
+.SupporterCardGiveNow__progress {
+  transition: all 240ms ease-out;
+  position: relative;
+  border: 1px solid $ehw-grey;
+  border-top: none;
+  background-color: transparent;
+  background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 10px, rgba(255, 255, 255, 0.2) 10px, rgba(255, 255, 255, 0.2) 20px);
+  display: block;
+  height: $x-3;
+  margin: 0 $x-2;
+  overflow: hidden;
+  border-radius: 0 0 2px 2px;
+}
+
+.SupporterCardGiveNow__current {
+  transition: all 240ms ease-out;
+  float: left;
+  height: $x-3;
+  background-color: rgba(82,82,82, 1);
+}
+
+.SupporterCardGiveNow:hover .SupporterCardGiveNow__cta {
+  background-color: $ehw-green;
+  color: white;
+
+  &:before {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.SupporterCardGiveNow:hover .SupporterCardGiveNow__progress {
+  background-color: rgba(179,179,179, 0.6);
+}
+
+.SupporterCardGiveNow:hover .SupporterCardGiveNow__label {
+  opacity: 1;
+}

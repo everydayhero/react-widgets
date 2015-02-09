@@ -168,6 +168,7 @@
   <div id="FitnessLeaderboardExample">Loading...</div>
 
   <div id="RecentFundraisersExample">Loading...</div>
+  <div id="SupportersExample">Loading...</div>
   <div id="TeamsExample">Loading...</div>
 
   <div id="CharitiesExample">Loading...</div>
@@ -210,6 +211,7 @@
     edh.widgets.renderWidget('FitnessLeaderboardExample', 'FitnessLeaderboard', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('UpcomingEventsExample','UpcomingEvents', { charityUid: 'us-134225990', charitySlug: 'rock-n-roll-dallas' });
     edh.widgets.renderWidget('RecentFundraisersExample', 'RecentFundraisers', { campaignUid: 'us-22' });
+    edh.widgets.renderWidget('SupportersExample', 'Supporters', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TeamsExample', 'Teams', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('CharitiesExample', 'PromoCharities', {
       action: 'fundraise',
@@ -265,20 +267,20 @@
     edh.widgets.renderWidget('MapExample', 'Map', { campaignUid: 'us-22', region:'US' });
     edh.widgets.renderWidget('TotalDistanceExample', 'TotalDistance', { campaignUids: ['us-22','us-24'] });
     edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUids: ['us-22', 'us-24'] });
-    edh.widgets.renderWidget('AddressLookupExample', 'AddressLookup');
+    edh.widgets.renderWidget('AddressLookupExample', 'AddressLookup', { country: 'GB' });
     edh.widgets.renderWidget('AmountExample', 'Amount');
     edh.widgets.renderWidget('InputExample', 'Input', { i18n: { name: 'input_example', label: 'Input Example', hint: 'What is this input for?', error: 'This input is required'}, required: true });
     edh.widgets.renderWidget('CallToActionBoxExample', 'CallToActionBox', { campaignUid: 'us-22', registrationUrl: 'https://your-registration-url.com/' });
     edh.widgets.renderWidget('FootprintExample', 'Footprint', {
+      url: 'http://fillmurray.com/600/600',
+      size: 200,
+      ratio: 0.5,
+      offset: 4,
+      compact: true,
       data: [
         {id:0, key:'community_raised', name:'Community Raised', group:'community', value:'$0.00', percentile:rand(), description: "The collective funds raised by people who care about the same causes as you."},
-        {id:1, key:'community_engagement', name:'Community Engagement', group:'community', value:'467k', percentile:rand(), description: "The number of people supporting the causes you care about."},
-        {id:2, key:'money_fundraising', name:'Fundraising', group:'money', value:'$4.8k', percentile:rand(), description: "The lifetime amount you have raised through fundraising for the causes you care about."},
-        {id:3, key:'money_donations', name:'Donations', group:'money', value:'$9.8k', percentile:rand(), description: "The lifetime amount you have donated to the causes you care about."},
-        {id:4, key:'voice_reach', name:'Reach', group:'voice', value:'4564', percentile:rand(), description: "How many people you have reached through your philanthropic activities and sharing."},
-        {id:5, key:'voice_engagement', name:'Engagement', group:'voice', value:'36.8k', percentile:rand(), description: "How engaged you are with your supporters and other fundraisers."},
-        {id:6, key:'effort_training', name:'Training', group:'effort', value:'64h', percentile:rand(), description: "The total duration you have trained in support of the causes you care about."},
-        {id:7, key:'effort_volunteering', name:'Volunteering', group:'effort', value:'356h', percentile:rand(), description: "The total duration you have volunteered your talents for causes you care about."}
+        {id:1, key:'community_engagement', name:'Community Engagement', group:'money', value:'467k', percentile:rand(), description: "The number of people supporting the causes you care about."},
+        {id:2, key:'money_fundraising', name:'Fundraising', group:'effort', value:'$4.8k', percentile:rand(), description: "The lifetime amount you have raised through fundraising for the causes you care about."}
       ]
     });
 

@@ -212,6 +212,7 @@ module.exports = React.createClass({
       address.address.paf_validated = this.state.country.iso === "GB";
       this.setState({ error: false, address: address.address, addressList: null, loading: false, focusOnMount: true }, this.output);
     }
+    this.props.validate(address);
   },
 
   setError: function(bool) {

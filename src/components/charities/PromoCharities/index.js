@@ -55,10 +55,20 @@ module.exports = React.createClass({
   },
 
   tabLoaded: function(tabIndex, charities) {
+    var keys = this.props.tabs[tabIndex].charityUids;
     var tabs = this.state.tabs;
     var tab  = tabs[tabIndex];
-    var keys = this.props.tabs[tabIndex].charityUids;
 
+    tab.isLoaded = true;
+    tab.contents = this.orderCharities(charities, keys);
+
+    this.setState({
+      isLoaded: _.every(tabs, 'isLoaded'),
+      tabs: tabs
+    });
+  },
+
+  orderCharities: function(charities, keys) {
     var tempObj = {};
 
     _.forEach(charities, function(charity) {
@@ -69,15 +79,7 @@ module.exports = React.createClass({
       charities[i] = tempObj[key];
     });
 
-    tempObj = undefined;
-
-    tab.isLoaded = true;
-    tab.contents = charities;
-
-    this.setState({
-      isLoaded: _.every(tabs, 'isLoaded'),
-      tabs: tabs
-    });
+    return charities;
   },
 
   selectHandler: function(charity) {

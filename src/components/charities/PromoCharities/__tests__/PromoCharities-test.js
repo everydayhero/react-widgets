@@ -12,7 +12,7 @@ describe('PromoCharities', function() {
   describe('default behaviour for PromoCharities', function() {
     var promoCharities;
     var element;
-    var tabsData = [{category: 'Tab One', charityUids: ['au-1']}];
+    var tabsData = [{ category: 'Tab One', charityUids: ['au-1'] }];
 
     beforeEach(function() {
       promoCharities = <PromoCharities action="fundraise" tabs={ tabsData } />;
@@ -52,12 +52,42 @@ describe('PromoCharities', function() {
     });
 
     it('renders a custom heading and subheading', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       var heading = findByClass(element, 'PromoCharities__heading');
       var subHeading  = findByClass(element, 'PromoCharities__subheading');
 
       expect(heading.getDOMNode().textContent).toBe(translation.heading);
       expect(subHeading.getDOMNode().textContent).toBe(translation.subheading);
+    });
+  });
+
+  describe('Order of rendered items matches order of supplied uids', function() {
+    var promoCharities;
+    var element;
+    var tabsData = [{ category: 'Tab One', charityUids: ['au-1','au-2','au-3'] }];
+    var keys = tabsData[0].charityUids;
+
+    var charities = [
+      { name: 'charity3', id: 'au-3' },
+      { name: 'charity1', id: 'au-1' },
+      { name: 'charity2', id: 'au-2' }
+    ];
+
+    beforeEach(function() {
+      promoCharities = <PromoCharities action="fundraise" tabs={ tabsData } />;
+      element = TestUtils.renderIntoDocument(promoCharities);
+    });
+
+    it('re-orders an array of charities to match the order of uids passed in', function() {
+      element.setState({ isLoading: false });
+
+      var reordered = [
+        { name: 'charity1', id: 'au-1' },
+        { name: 'charity2', id: 'au-2' },
+        { name: 'charity3', id: 'au-3' }
+      ];
+
+      expect(element.orderCharities(charities, keys)).toEqual(reordered);
     });
   });
 });

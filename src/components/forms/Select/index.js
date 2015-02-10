@@ -70,18 +70,20 @@ module.exports = React.createClass({
   },
 
   isFuzzyMatch: function(val) {
-    var j = 0;
-    var i = 0;
+    var j      = 0;
+    var i      = 0;
     var filter = this.state.filter.toLowerCase();
     var length = filter.length;
-    var val = val.toLowerCase();
+
+    val = val.toLowerCase();
 
     while(i < length) {
       var l = filter[i++];
       if (l === ' ') continue;
       j = val.indexOf(l, j);
       if (j === -1) return false;
-    };
+    }
+
     return true;
   },
 

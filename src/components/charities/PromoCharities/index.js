@@ -57,6 +57,19 @@ module.exports = React.createClass({
   tabLoaded: function(tabIndex, charities) {
     var tabs = this.state.tabs;
     var tab  = tabs[tabIndex];
+    var keys = this.props.tabs[tabIndex].charityUids;
+
+    var tempObj = {};
+
+    _.forEach(charities, function(charity) {
+      tempObj[charity.id] = charity;
+    });
+
+    _.forEach(keys, function(key, i) {
+      charities[i] = tempObj[key];
+    });
+
+    tempObj = undefined;
 
     tab.isLoaded = true;
     tab.contents = charities;

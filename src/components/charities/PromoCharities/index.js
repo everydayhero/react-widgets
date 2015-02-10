@@ -36,7 +36,6 @@ module.exports = React.createClass({
   componentWillMount: function() {
     var tabs = _.map(this.props.tabs, function(tab, tabIndex) {
       var data = {
-        isLoading: true,
         tabName: tab.category,
         contents: []
       };

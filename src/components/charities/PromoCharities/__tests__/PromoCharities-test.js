@@ -79,8 +79,6 @@ describe('PromoCharities', function() {
     });
 
     it('re-orders an array of charities to match the order of uids passed in', function() {
-      element.setState({ isLoading: false });
-
       var reordered = [
         { name: 'charity1', id: 'au-1' },
         { name: 'charity2', id: 'au-2' },

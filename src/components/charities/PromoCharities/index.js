@@ -36,7 +36,6 @@ module.exports = React.createClass({
   componentWillMount: function() {
     var tabs = _.map(this.props.tabs, function(tab, tabIndex) {
       var data = {
-        isLoading: true,
         tabName: tab.category,
         contents: []
       };
@@ -55,16 +54,31 @@ module.exports = React.createClass({
   },
 
   tabLoaded: function(tabIndex, charities) {
+    var keys = this.props.tabs[tabIndex].charityUids;
     var tabs = this.state.tabs;
     var tab  = tabs[tabIndex];
 
     tab.isLoaded = true;
-    tab.contents = charities;
+    tab.contents = this.orderCharities(charities, keys);
 
     this.setState({
       isLoaded: _.every(tabs, 'isLoaded'),
       tabs: tabs
     });
+  },
+
+  orderCharities: function(charities, keys) {
+    var tempObj = {};
+
+    _.forEach(charities, function(charity) {
+      tempObj[charity.id] = charity;
+    });
+
+    _.forEach(keys, function(key, i) {
+      charities[i] = tempObj[key];
+    });
+
+    return charities;
   },
 
   selectHandler: function(charity) {

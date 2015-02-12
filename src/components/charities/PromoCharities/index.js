@@ -20,7 +20,10 @@ module.exports = React.createClass({
       tabs: [],
       defaultI18n: {
         heading: 'Promoted Charities',
-        subheading: 'Choose a tab below to view promoted charities within each category.'
+        subheading: 'Choose a tab below to view promoted charities within each category.',
+        donateAction: 'Give Now',
+        fundraiseAction: 'Fundraise',
+        customAction: 'Select'
       }
     };
   },
@@ -90,6 +93,10 @@ module.exports = React.createClass({
     }
   },
 
+  actionLabel: function() {
+    return this.t(this.props.action + 'Action');
+  },
+
   render: function() {
     var heading    = this.t('heading');
     var subheading = this.t('subheading');
@@ -111,7 +118,8 @@ module.exports = React.createClass({
           <PromoCharitiesTabs
             data={ this.state.tabs }
             loaded={ this.state.isLoaded }
-            onSelect={ this.selectHandler } />
+            onSelect={ this.selectHandler }
+            actionLabel={ this.actionLabel() } />
         </div>
       </div>
     );

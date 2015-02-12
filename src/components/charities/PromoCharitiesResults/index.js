@@ -10,7 +10,13 @@ module.exports = React.createClass({
   renderCharityResults: function() {
     if (this.props.loaded) {
       return this.props.content.map(function(d, i) {
-        return <PromoCharitiesResult key={ d.id } result={ d } onSelect={ this.props.onSelect } />;
+        return (
+          <PromoCharitiesResult
+            key={ d.id }
+            result={ d }
+            onSelect={ this.props.onSelect }
+            actionLabel={ this.props.actionLabel } />
+        );
       }, this);
     }
 

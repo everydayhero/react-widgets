@@ -424,7 +424,10 @@ Displays promoted charities that are passed in as a list of tabs and charity ids
   ```js
   {
     heading: 'Promoted Charities',
-    subheading: 'Choose a tab below to view promoted charities within each category.'
+    subheading: 'Choose a tab below to view promoted charities within each category.',
+    donateAction: 'Give Now',
+    fundraiseAction: 'Fundraise',
+    customAction: 'Select'
   }
   ```
 

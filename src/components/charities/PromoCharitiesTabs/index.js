@@ -38,7 +38,8 @@ module.exports = React.createClass({
             index={ i }
             active={ this.state.current === i }
             onSelect={ this.props.onSelect }
-            loaded={ this.props.loaded } />
+            loaded={ this.props.loaded }
+            actionLabel={ this.props.actionLabel } />
         </div>
       );
     }, this);

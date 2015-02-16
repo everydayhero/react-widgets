@@ -1,28 +1,33 @@
 .PromoCharitiesResult {
   box-sizing: border-box;
-  display: block;
   width: 16.666%;
   padding: 15px 10px 0;
   margin-bottom: 15px;
   overflow: hidden;
   float: left;
   position: relative;
-  transition: opacity 0.24s linear;
+  transition: opacity 0.2s ease-in-out;
 
   @include media-max($breakpoint-xl) {
     width: 25%;
   }
 
   @include media-max($breakpoint-s) {
-    width: 33.33%;
+    width: 50%;
+  }
+
+  &:hover .PromoCharitiesResult__btn {
+    background: $ehw-grey-dark;
   }
 }
 
-.PromoCharitiesResult__skin {
+.PromoCharitiesResult__link {
   @extend %clearfix;
+  position: relative;
+  display: block;
   background: #fff;
   color: $ehw-grey-dark;
-  border-radius: $ehw-border-radius;
+  border-radius: $ehw-border-radius $ehw-border-radius 0 0;
 
   &:before {
     content: '';
@@ -38,11 +43,11 @@
   left: 0;
   bottom: 0;
   right: 0;
-  padding: 25px 25px 0;
+  padding: 0 25px;
   text-align: center;
 
   @include media-max($breakpoint-s) {
-    padding: 15px 15px 0;
+    padding: 0 15px;
   }
 
   &:before {
@@ -60,4 +65,17 @@
   vertical-align: middle;
   max-width: 100%;
   border: 0;
+}
+
+.PromoCharitiesResult__btn {
+  display: block;
+  background-color: $ehw-grey;
+  border-radius: 0 0 $ehw-border-radius $ehw-border-radius;
+  color: #fff;
+  padding: $x-2 $x-3;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }

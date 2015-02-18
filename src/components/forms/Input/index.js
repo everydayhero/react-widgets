@@ -1,6 +1,6 @@
 "use strict";
 
-var React           = require('react');
+var React           = require('react/addons');
 var PureRenderMixin = React.addons.PureRenderMixin;
 var cx              = require('react/lib/cx');
 var I18nMixin       = require('../../mixins/I18n');

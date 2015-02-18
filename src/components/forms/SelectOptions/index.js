@@ -1,6 +1,6 @@
 "use strict";
 
-var React               = require('react');
+var React               = require('react/addons');
 var PureRenderMixin     = React.addons.PureRenderMixin;
 var SelectOption        = require('../SelectOption');
 var addEventListener    = require('../../../lib/addEventListener');

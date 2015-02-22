@@ -2,11 +2,11 @@
 
 module.exports = [
   { name: "Australia", iso: "AU" },
-  { name: "New Zealand", iso: "NZ" },
   { name: "Canada", iso: "CA" },
-  { name: "United States", iso: "US" },
   { name: "Ireland", iso: "IE" },
+  { name: "New Zealand", iso: "NZ" },
   { name: "United Kingdom", iso: "GB" },
+  { name: "United States", iso: "US" },
   { name: "Afghanistan", iso: "AF" },
   { name: "Åland Islands", iso: "AX" },
   { name: "Albania", iso: "AL" },

@@ -75,7 +75,6 @@ module.exports = React.createClass({
         focused={ i === this.state.fauxFocus }
         option={ d }
         label={ d[key] }
-        onMouseEnter={ this.setFauxFocus }
         onSelect={ this.props.onSelect }/>;
     }, this);
   },

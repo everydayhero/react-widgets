@@ -14,6 +14,7 @@ module.exports = React.createClass({
     focused: React.PropTypes.bool,
     option: React.PropTypes.object.isRequired,
     label: React.PropTypes.string.isRequired,
+    onMouseEnter: React.PropTypes.func.isRequired,
     onSelect: React.PropTypes.func.isRequired
   },
 
@@ -28,6 +29,10 @@ module.exports = React.createClass({
     this.props.onSelect(this.props.option);
   },
 
+  handleMouseEnter: function() {
+    this.props.onMouseEnter(this.props.index);
+  },
+
   render: function() {
     var classes = cx({
       "SelectOption": true,
@@ -35,7 +40,7 @@ module.exports = React.createClass({
     });
 
     return (
-      <div className={ classes } onClick={ this.handleClick }>
+      <div className={ classes } onMouseEnter={ this.handleMouseEnter } onClick={ this.handleClick }>
         { this.props.label }
       </div>
     );

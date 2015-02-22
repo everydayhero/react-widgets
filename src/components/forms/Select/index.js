@@ -66,8 +66,7 @@ module.exports = React.createClass({
   },
 
   getNearestMatch: function() {
-    var options = this.getFilteredOptions(this.state.filter);
-    return _.isEmpty(options) ? '' : options[0][this.props.labelKey];
+    return this.getFilteredOptions(this.state.filter)[0] || '';
   },
 
   isFuzzyMatch: function(val) {
@@ -122,17 +121,9 @@ module.exports = React.createClass({
   },
 
   renderOptions: function(bool) {
-    if (!bool) {
-      return false;
-    }
-    var options = this.getFilteredOptions();
-    var key = this.props.labelKey;
-    var value = this.state.value;
-    var fauxFocus = value ? _.findIndex(options, function(obj) { return obj[key] == value; }) : -1;
     return bool && <SelectOptions
-      options={ options }
+      options={ this.getFilteredOptions() }
       labelKey={ this.props.labelKey }
-      fauxFocus={ fauxFocus }
       onSelect={ this.setMatch } />;
   },
 

@@ -6,7 +6,7 @@
   font-size: 14px;
 }
 
-.SelectOption--focused {
+.SelectOption--focused, .SelectOption:hover {
   background-color: rgba(126,199,116,0.1);
 }
 

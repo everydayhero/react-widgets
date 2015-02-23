@@ -130,7 +130,7 @@ module.exports = React.createClass({
     return <SelectOptions
       options={ options }
       labelKey={ key }
-      selected={ selected > 0 ? selected : 0 }
+      selected={ selected >= 0 ? selected : value ? 0 : -1 }
       onSelect={ this.setMatch } />;
   },
 

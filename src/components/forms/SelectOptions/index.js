@@ -87,6 +87,11 @@ module.exports = React.createClass({
       return;
     }
 
+    if (this.state.fauxFocus <= 0) {
+      menu.scrollTop = 0;
+      return;
+    }
+
     var top = menu.scrollTop;
     var bottom = menu.scrollTop + menu.offsetHeight;
     var pos = _.reduce(_.range(0, this.state.fauxFocus),

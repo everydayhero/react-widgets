@@ -6,8 +6,13 @@
   font-size: 14px;
 }
 
-.SelectOption--focused, .SelectOption:hover {
+.SelectOption--focused {
   background-color: rgba(126,199,116,0.1);
+}
+
+.SelectOption:hover {
+  color: white;
+  background-color: $ehw-green-light;
 }
 
 .SelectOption + .SelectOption {

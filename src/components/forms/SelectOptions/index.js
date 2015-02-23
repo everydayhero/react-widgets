@@ -1,5 +1,6 @@
 "use strict";
 
+var _                   = require('lodash');
 var React               = require('react/addons');
 var PureRenderMixin     = React.addons.PureRenderMixin;
 var SelectOption        = require('../SelectOption');
@@ -14,16 +15,28 @@ module.exports = React.createClass({
   propTypes: {
     options: React.PropTypes.array.isRequired,
     labelKey: React.PropTypes.string.isRequired,
-    onSelect: React.PropTypes.func.isRequired
+    onSelect: React.PropTypes.func.isRequired,
+    selected: React.PropTypes.number
+  },
+
+  getDefaultProps: function() {
+    return {
+      selected: 0
+    };
   },
 
   getInitialState: function() {
     return {
-      fauxFocus: 0
+      fauxFocus: this.props.selected
     };
   },
 
-  componentWillMount: function(nextProps, nextState) {
+  componentWillReceiveProps: function(nextProps) {
+    this.setFauxFocus(nextProps.selected || 0);
+  },
+
+  componentDidMount: function(nextProps, nextState) {
+    this.setState({ menu: this.getDOMNode() }, this.scrollMenu);
     addEventListener(window, 'keydown', this.keyHandler);
     addEventListener(window, 'mousedown', this.clickHandler);
   },
@@ -34,8 +47,9 @@ module.exports = React.createClass({
   },
 
   clickHandler: function(e) {
-    if (!this.getDOMNode().contains(e.target)) {
-      this.props.onSelect(false);
+    if (this.state.menu && !this.state.menu.contains(e.target)) {
+      var option = this.props.options[this.state.fauxFocus];
+      this.props.onSelect(option || false);
     }
   },
 
@@ -54,16 +68,42 @@ module.exports = React.createClass({
       return this.setFauxFocus(i);
     }
     if (e.keyCode === 9) {
-      this.props.onSelect(i > 0 ? options[i] : false);
+      this.props.onSelect(options[i] || false);
     }
-    if (key === 13 && i >= 0) {
+    if (key === 13 && options[i]) {
       e.preventDefault();
       this.props.onSelect(options[i]);
     }
   },
 
   setFauxFocus: function(i) {
-    this.setState({ fauxFocus: i });
+    this.setState({ fauxFocus: i }, this.scrollMenu);
+  },
+
+  scrollMenu: function() {
+    var menu = this.state.menu;
+    var listLength = this.props.options.length;
+    if (!menu || !listLength) {
+      return;
+    }
+
+    if (this.state.fauxFocus <= 0) {
+      menu.scrollTop = 0;
+      return;
+    }
+
+    var top = menu.scrollTop;
+    var bottom = menu.scrollTop + menu.offsetHeight;
+    var pos = _.reduce(_.range(0, this.state.fauxFocus),
+      function(sum, i) { return sum + menu.children[i].offsetHeight; }, 0);
+
+    var itemHeight = menu.children[this.state.fauxFocus].offsetHeight;
+    var margin = menu.offsetHeight * 0.10;
+    if (pos < top + margin) {
+      menu.scrollTop = Math.max(pos - margin, 0);
+    } else if (pos + itemHeight > bottom - margin) {
+      menu.scrollTop = Math.min(pos + itemHeight + margin, menu.scrollHeight) - menu.offsetHeight;
+    }
   },
 
   renderOptions: function() {
@@ -75,7 +115,6 @@ module.exports = React.createClass({
         focused={ i === this.state.fauxFocus }
         option={ d }
         label={ d[key] }
-        onMouseEnter={ this.setFauxFocus }
         onSelect={ this.props.onSelect }/>;
     }, this);
   },

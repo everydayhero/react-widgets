@@ -10,6 +10,11 @@
   background-color: rgba(126,199,116,0.1);
 }
 
+.SelectOption:hover {
+  color: white;
+  background-color: $ehw-green-light;
+}
+
 .SelectOption + .SelectOption {
   border-top: 1px solid #eee;
 }

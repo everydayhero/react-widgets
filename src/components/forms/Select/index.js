@@ -66,7 +66,8 @@ module.exports = React.createClass({
   },
 
   getNearestMatch: function() {
-    return this.getFilteredOptions(this.state.filter)[0] || '';
+    var options = this.getFilteredOptions(this.state.filter);
+    return _.isEmpty(options) ? '' : options[0][this.props.labelKey];
   },
 
   isFuzzyMatch: function(val) {
@@ -121,9 +122,15 @@ module.exports = React.createClass({
   },
 
   renderOptions: function(bool) {
-    return bool && <SelectOptions
-      options={ this.getFilteredOptions() }
-      labelKey={ this.props.labelKey }
+    if (!bool) return;
+    var options = this.getFilteredOptions();
+    var key = this.props.labelKey;
+    var value = this.state.value;
+    var selected = _.findIndex(options, function(obj) { return obj[key] === value; });
+    return <SelectOptions
+      options={ options }
+      labelKey={ key }
+      selected={ selected >= 0 ? selected : value ? 0 : -1 }
       onSelect={ this.setMatch } />;
   },
 

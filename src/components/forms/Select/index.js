@@ -122,17 +122,15 @@ module.exports = React.createClass({
   },
 
   renderOptions: function(bool) {
-    if (!bool) {
-      return false;
-    }
+    if (!bool) return;
     var options = this.getFilteredOptions();
     var key = this.props.labelKey;
     var value = this.state.value;
-    var fauxFocus = value ? _.findIndex(options, function(obj) { return obj[key] == value; }) : -1;
-    return bool && <SelectOptions
+    var selected = _.findIndex(options, function(obj) { return obj[key] === value; });
+    return <SelectOptions
       options={ options }
-      labelKey={ this.props.labelKey }
-      fauxFocus={ fauxFocus }
+      labelKey={ key }
+      selected={ selected > 0 ? selected : 0 }
       onSelect={ this.setMatch } />;
   },
 

@@ -15,28 +15,28 @@ module.exports = React.createClass({
   propTypes: {
     options: React.PropTypes.array.isRequired,
     labelKey: React.PropTypes.string.isRequired,
-    fauxFocus: React.PropTypes.number,
-    onSelect: React.PropTypes.func.isRequired
+    onSelect: React.PropTypes.func.isRequired,
+    selected: React.PropTypes.number
   },
 
   getDefaultProps: function() {
     return {
-      fauxFocus: -1
+      selected: 0
     };
   },
 
   getInitialState: function() {
     return {
-      fauxFocus: Math.max(this.props.fauxFocus, 0)
+      fauxFocus: this.props.selected
     };
   },
 
   componentWillReceiveProps: function(nextProps) {
-    var fauxFocus = Math.max(nextProps.fauxFocus || 0, 0);
-    this.setFauxFocus(fauxFocus, this.scrollMenu);
+    this.setFauxFocus(nextProps.selected || 0);
   },
 
-  componentWillMount: function(nextProps, nextState) {
+  componentDidMount: function(nextProps, nextState) {
+    this.setState({ menu: this.getDOMNode() }, this.scrollMenu);
     addEventListener(window, 'keydown', this.keyHandler);
     addEventListener(window, 'mousedown', this.clickHandler);
   },
@@ -46,17 +46,10 @@ module.exports = React.createClass({
     removeEventListener(window, 'mousedown', this.clickHandler);
   },
 
-  componentDidMount: function() {
-    if (this.state.fauxFocus > 0) {
-      this.scrollMenu();
-    }
-  },
-
   clickHandler: function(e) {
-    if (!this.getDOMNode().contains(e.target)) {
-      var i = this.state.fauxFocus;
-      var options = this.props.options;
-      this.props.onSelect(options[i] || false);
+    if (this.state.menu && !this.state.menu.contains(e.target)) {
+      var option = this.props.options[this.state.fauxFocus];
+      this.props.onSelect(option || false);
     }
   },
 
@@ -67,12 +60,12 @@ module.exports = React.createClass({
     if (key === 40) {
       e.preventDefault();
       i = (i + 1) % options.length;
-      return this.setFauxFocus(i, this.scrollMenu);
+      return this.setFauxFocus(i);
     }
     if (key === 38) {
       e.preventDefault();
       i = i <= 0 ? options.length - 1 : i - 1;
-      return this.setFauxFocus(i, this.scrollMenu);
+      return this.setFauxFocus(i);
     }
     if (e.keyCode === 9) {
       this.props.onSelect(options[i] || false);
@@ -83,12 +76,12 @@ module.exports = React.createClass({
     }
   },
 
-  setFauxFocus: function(i, cb) {
-    this.setState({ fauxFocus: i }, cb);
+  setFauxFocus: function(i) {
+    this.setState({ fauxFocus: i }, this.scrollMenu);
   },
 
   scrollMenu: function() {
-    var menu = this.getDOMNode();
+    var menu = this.state.menu;
     var listLength = this.props.options.length;
     if (!menu || !listLength) {
       return;

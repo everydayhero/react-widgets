@@ -67,6 +67,26 @@ describe('AddressLookup', function() {
     expect(locality.value).toBe('Sydney');
   });
 
+  it('UK postcode search requires at least 5 chars', function() {
+    var element = TestUtils.renderIntoDocument(<AddressLookup country="GB"/>);
+    var input = findByClass(element, 'Input__input').getDOMNode();
+    TestUtils.Simulate.change(input, { target: { value: "1234" } });
+    expect(address.search).not.toBeCalled();
+
+    TestUtils.Simulate.change(input, { target: { value: "12345" } });
+    expect(address.search).lastCalledWith('12345', 'GB', jasmine.any(Function));
+  });
+
+  it('Address search requires at least 7 chars', function() {
+    var element = TestUtils.renderIntoDocument(<AddressLookup country="US"/>);
+    var input = findByClass(element, 'Input__input').getDOMNode();
+    TestUtils.Simulate.change(input, { target: { value: "123456" } });
+    expect(address.search).not.toBeCalled();
+
+    TestUtils.Simulate.change(input, { target: { value: "1234567" } });
+    expect(address.search).lastCalledWith('1234567', 'US', jasmine.any(Function));
+  });
+
   it('returns a list of addresses', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup />);
     var input = findByClass(element, 'Input__input').getDOMNode();
@@ -103,7 +123,6 @@ describe('AddressLookup', function() {
 
   describe('selected address', function() {
     var element, listItem, callback, validate;
-
 
     beforeEach(function() {
       address.find.mockClear();

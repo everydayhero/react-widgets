@@ -182,7 +182,7 @@ module.exports = React.createClass({
   },
 
   getList: _.debounce(function(input) {
-    var chars = this.state.country === 'GB' ? 5 : 7;
+    var chars = this.state.country.iso === 'GB' ? 5 : 7;
     this.state.cancelSearch();
     if (input.length >= chars) {
       this.setState({

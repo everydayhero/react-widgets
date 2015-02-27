@@ -11,7 +11,7 @@ var baseRoutes = {
 
   campaign:             '{baseUrl}/api/v2/campaigns/{campaignUid}.jsonp',
   campaignLeaderboard:  '{baseUrl}/api/v2/campaigns/{campaignUid}/leaderboard.jsonp?type={type}&limit={limit}',
-  campaigns:            '{baseUrl}/api/v2/campaigns.jsonp?ids={campaignUids}',
+  campaigns:            '{baseUrl}/api/v2/campaigns.jsonp?ids={campaignUids}&charity_id={charityUid}&sort_by={sortBy}&status={status}&exclude_bau={excludeBau}&page={page}&limit={limit}',
   charity:              '{baseUrl}/api/v2/charities/{charityUid}.jsonp',
   charities:            '{baseUrl}/api/v2/charities.jsonp?ids={charityUids}&campaign_ids={campaignUid}&page={page}&limit={limit}',
   page:                 '{baseUrl}/api/v2/pages/{pageId}.jsonp',

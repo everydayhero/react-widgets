@@ -86,6 +86,7 @@
     #TeamsExample,
     #MapExample,
     #CharitiesExample,
+    #UpcomingEventsExample,
     .effort,
     .main-content .panel {
       margin-top: 15px;
@@ -137,8 +138,12 @@
 </head>
 <body>
   <h1>Widget Examples</h1>
+  <div id="UpcomingEventsExample">Loading...</div>
+  <script>
+    edh.widgets.renderWidget('UpcomingEventsExample','UpcomingEvents', { charityUid: 'us-134225990', charitySlug: 'rock-n-roll-dallas' });
+  </script>
 
-  <div class="clearfix">
+  <!-- <div class="clearfix">
     <div class="main-content pull-left">
       <div class="panel clearfix">
         <h3 class="title">Search</h3>
@@ -281,6 +286,6 @@
     function rand() { // for Footprint dummy data
       return (Math.random() * 100 | 0) + 1;
     }
-  </script>
+  </script> -->
 </body>
 </html>

@@ -3,7 +3,7 @@
 var React = require('react');
 var I18n = require('../../mixins/I18n');
 var effect = require('../../../lib/effect');
-var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; // Needs localisation
 
 module.exports = React.createClass({
   displayName: 'Event',
@@ -23,16 +23,16 @@ module.exports = React.createClass({
     };
   },
 
-  componentWillMount: function() {
-    var self = this;
-    var backgroundImage = document.createElement('img');
-    backgroundImage.src = this.props.backgroundImageUrl;
-    // backgroundImage.onload = function() {
-    //   self.setState({
-    //     blurredImage: effect.blurImage(backgroundImage, 30)
-    //   });
-    // };
-  },
+  // componentWillMount: function() {
+  //   var self = this;
+  //   var backgroundImage = document.createElement('img');
+  //   backgroundImage.src = this.props.backgroundImageUrl;
+  //   backgroundImage.onload = function() {
+  //     self.setState({
+  //       blurredImage: effect.blurImage(backgroundImage, 30)
+  //     });
+  //   };
+  // },
 
   // () -> XJS
   render: function() {
@@ -41,10 +41,10 @@ module.exports = React.createClass({
       backgroundSize: 'cover'
     };
 
-    var blurStyles = {
-      backgroundImage: 'url(' + this.props.blurredImage + ')',
-      backgroundSize: 'cover'
-    };
+    // var blurStyles = {
+    //   backgroundImage: 'url(' + this.props.blurredImage + ')',
+    //   backgroundSize: 'cover'
+    // };
 
     var date = this.props.date;
 
@@ -52,7 +52,7 @@ module.exports = React.createClass({
       <div className="Event">
         <a href={ this.props.getStartedUrl }>
           <div className="Event__base" style={ baseStyles }>
-            <div className="Event__blur" style={ blurStyles }></div>
+            // <div className="Event__blur" style={ blurStyles }></div>
             <div className="Event__gradient"></div>
             <ul className="Event__date">
               <li>{ date.getDate() }</li>

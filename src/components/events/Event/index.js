@@ -1,10 +1,38 @@
 'use strict';
 
 var React = require('react');
+var I18n = require('../../mixins/I18n');
+var effect = require('../../../lib/effect');
 var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 module.exports = React.createClass({
   displayName: 'Event',
+  mixins: [I18n],
+  propTypes: {
+    i18n: React.PropTypes.object,
+    blurredImage: React.PropTypes.string
+  },
+
+  // () -> Object
+  getDefaultProps: function() {
+    return {
+      defaultI18n: {
+        joinLabel: 'Join Event',
+        supportersLabel: 'Supporters'
+      }
+    };
+  },
+
+  componentWillMount: function() {
+    var self = this;
+    var backgroundImage = document.createElement('img');
+    backgroundImage.src = this.props.backgroundImageUrl;
+    // backgroundImage.onload = function() {
+    //   self.setState({
+    //     blurredImage: effect.blurImage(backgroundImage, 30)
+    //   });
+    // };
+  },
 
   // () -> XJS
   render: function() {
@@ -12,22 +40,30 @@ module.exports = React.createClass({
       background: this.props.backgroundColor + ' url(' + this.props.backgroundImageUrl + ')',
       backgroundSize: 'cover'
     };
+
+    var blurStyles = {
+      backgroundImage: 'url(' + this.props.blurredImage + ')',
+      backgroundSize: 'cover'
+    };
+
     var date = this.props.date;
 
     return (
       <div className="Event">
-        <div className="Event__base" style={ baseStyles }>
-          <div className="Event__gradient"></div>
-          <ul className="Event__date">
-            <li>{ date.getDate() }</li>
-            <li>{ months[date.getMonth()] }</li>
-            <li>{ date.getFullYear() }</li>
-          </ul>
-          <p className="Event__name">{ this.props.name }</p>
-        </div>
-        <div className="Event__hover">
-          <p className="Event_supporter-count">{ this.props.supporterCount }</p>
-        </div>
+        <a href={ this.props.getStartedUrl }>
+          <div className="Event__base" style={ baseStyles }>
+            <div className="Event__blur" style={ blurStyles }></div>
+            <div className="Event__gradient"></div>
+            <ul className="Event__date">
+              <li>{ date.getDate() }</li>
+              <li>{ months[date.getMonth()] }</li>
+              <li>{ date.getFullYear() }</li>
+            </ul>
+            <p className="Event__name">{ this.props.name }</p>
+            <p className="Event__supporter-count">{ this.props.supporterCount || 0 + ' ' + this.t('supportersLabel') }</p>
+            <p className="Event__join-event">{ this.t('joinLabel') }</p>
+          </div>
+        </a>
       </div>
     );
   }

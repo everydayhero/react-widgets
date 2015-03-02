@@ -59,7 +59,7 @@ module.exports = React.createClass({
                       getStartedUrl={ fundraiseUrl }
                       backgroundColor={ backgroundColor }
                       backgroundImageUrl={ e.background_image_url }
-                      supporterCount={ e.supporter_count } />;
+                      supporterCount={ e.page_count } />;
       });
     } else {
       return (

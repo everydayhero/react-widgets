@@ -60,7 +60,7 @@ module.exports = React.createClass({
               <li>{ date.getFullYear() }</li>
             </ul>
             <p className="Event__name">{ this.props.name }</p>
-            <p className="Event__supporter-count">{ this.props.supporterCount || 0 + ' ' + this.t('supportersLabel') }</p>
+            <p className="Event__supporter-count">{ (this.props.supporterCount || 0) + ' ' + this.t('supportersLabel') }</p>
             <p className="Event__join-event">{ this.t('joinLabel') }</p>
           </div>
         </a>

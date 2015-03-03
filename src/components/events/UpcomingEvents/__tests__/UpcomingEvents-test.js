@@ -10,15 +10,15 @@ describe('UpcomingEvents', function() {
   var TestUtils      = React.addons.TestUtils;
   var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
 
-  var translation    = { emptyLabel: 'Nothing to see here!' };
-  var element;
-
-  beforeEach(function() {
-    var events = <UpcomingEvents charityUid="au-1234" charitySlug="au-1234-slug" i18n={ translation } />;
-    element = TestUtils.renderIntoDocument(events);
-  });
-
   describe('component', function() {
+    var translation  = { emptyLabel: 'Nothing to see here!' };
+    var element;
+
+    beforeEach(function() {
+      var events = <UpcomingEvents charityUid="au-1234" charitySlug="au-1234-slug" i18n={ translation } />;
+      element = TestUtils.renderIntoDocument(events);
+    });
+
     it('renders something', function() {
       expect(element).not.toBeNull();
     });

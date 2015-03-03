@@ -25,6 +25,18 @@ module.exports = {
     return getJSONP(routes.get('campaigns', { campaignUids: campaignUids }), callback);
   },
 
+  findByCharity: function(charityUid, page, limit, callback) {
+    var params = {
+      charityUid: charityUid,
+      sortBy: 'finish_at',
+      status: 'active',
+      excludeBau: true,
+      page: page,
+      limit: limit
+    };
+    return getJSONP(routes.get('campaigns', params), callback);
+  },
+
   search: function(params, callback) {
     params = _.merge({ page: 1, pageSize: 10 }, params);
     return getJSONP(routes.get('searchCampaigns', params), callback);

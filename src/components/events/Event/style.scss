@@ -1,0 +1,134 @@
+$ehw-animation-speed: 200ms;
+
+.Event {
+  -moz-box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.2);
+  color: $ehw-grey-light;
+  display: inline-block;
+  font-family: $ehw-sans-serif-fonts;
+  font-size: $ehw-default-font-size;
+  height: 252px;
+  line-height: initial;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  width: 240px;
+
+  div {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: top $ehw-animation-speed ease-in-out;
+    -moz-transition: top $ehw-animation-speed ease-in-out;
+    -webkit-transition: top $ehw-animation-speed ease-in-out;
+  }
+
+  a { color: $ehw-grey-light; }
+
+  .Event__base {
+    position: relative;
+
+    &:hover {
+      .Event__gradient {
+        top: -100%;
+      }
+
+      .Event__blur { opacity: 1; }
+      .Event__date { top: 16%; }
+      .Event__name { top: 42%; }
+      .Event__supporter-count { top: 64%; }
+      .Event__join-event { top: 70%; }
+    }
+  }
+
+  .Event__gradient {
+    background-image: -moz-linear-gradient(transparent, transparent 25%, rgba(0, 0, 0, 0.8));
+    background-image: -webkit-linear-gradient(transparent, transparent 25%, rgba(0, 0, 0, 0.8));
+    background-image: linear-gradient(transparent, transparent 25%, rgba(0, 0, 0, 0.8));
+    -webkit-animation: Gradient $ehw-animation-speed ease infinite;
+    -moz-animation: Gradient $ehw-animation-speed ease infinite;
+    animation: Gradient $ehw-animation-speed ease infinite;
+    height: 200%;
+    position: absolute;
+  }
+
+  .Event__blur {
+    opacity: 0;
+    transition: opacity $ehw-animation-speed ease-in-out;
+    -moz-transition: opacity $ehw-animation-speed ease-in-out;
+    -webkit-transition: opacity $ehw-animation-speed ease-in-out;
+    -webkit-transition-delay: 100ms;
+    transition-delay: 100ms;
+  }
+
+  p, ul {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    position: absolute;
+    transition: top $ehw-animation-speed ease-in-out;
+    -moz-transition: top $ehw-animation-speed ease-in-out;
+    -webkit-transition: top $ehw-animation-speed ease-in-out;
+
+    &.Event__date {
+      border: 2px transparentize($ehw-grey-light, 0.5) solid;
+      display: block;
+      height: 45px;
+      left: 95.5px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      top: 41%;
+      width: 45px;
+      -webkit-transition-delay: 125ms;
+      transition-delay: 125ms;
+
+      li {
+        font-size: 0.5em;
+        text-transform: uppercase;
+
+        &:first-child {
+          font-size: 1em;
+          margin-top: 0.15em;
+        }
+      }
+    }
+
+    &.Event__name {
+      left: 10%;
+      top: 67%;
+      width:80%;
+      -webkit-transition-delay: 150ms;
+      transition-delay: 150ms;
+    }
+
+    &.Event__supporter-count {
+      font-size: 0.6em;
+      left: 10%;
+      text-transform: uppercase;
+      top: 100%;
+      width:80%;
+      -webkit-transition-delay: 175ms;
+      transition-delay: 175ms;
+    }
+
+    &.Event__join-event {
+      left: 30%;
+      font-size: 1em;
+      font-weight: normal;
+      line-height: 2.5;
+      top: 110%;
+      width: 40%;
+      -webkit-transition-delay: 200ms;
+      transition-delay: 200ms;
+      background-color: $ehw-green;
+      border-radius: 3px;
+      -moz-box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.2);
+      -webkit-box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.2);
+      box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.2);
+    }
+  }
+}

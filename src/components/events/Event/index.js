@@ -24,11 +24,11 @@ module.exports = React.createClass({
   },
 
   // componentWillMount: function() {
-  //   var self = this;
+  //   var _this = this;
   //   var backgroundImage = document.createElement('img');
   //   backgroundImage.src = this.props.backgroundImageUrl;
   //   backgroundImage.onload = function() {
-  //     self.setState({
+  //     _this.setState({
   //       blurredImage: effect.blurImage(backgroundImage, 30)
   //     });
   //   };
@@ -41,10 +41,10 @@ module.exports = React.createClass({
       backgroundSize: 'cover'
     };
 
-    // var blurStyles = {
+    var blurStyles = {
     //   backgroundImage: 'url(' + this.props.blurredImage + ')',
     //   backgroundSize: 'cover'
-    // };
+    };
 
     var date = this.props.date;
 
@@ -52,7 +52,7 @@ module.exports = React.createClass({
       <div className="Event">
         <a href={ this.props.getStartedUrl }>
           <div className="Event__base" style={ baseStyles }>
-            // <div className="Event__blur" style={ blurStyles }></div>
+            <div className="Event__blur" style={ blurStyles }></div>
             <div className="Event__gradient"></div>
             <ul className="Event__date">
               <li>{ date.getDate() }</li>

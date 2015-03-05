@@ -1,7 +1,7 @@
 'use strict';
 jest.autoMockOff();
 
-describe('FundraiserImage', function() {
+describe('Event', function() {
   var React       = require('react/addons');
   var Event       = require('../');
   var TestUtils   = React.addons.TestUtils;

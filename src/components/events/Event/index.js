@@ -3,12 +3,17 @@
 var React = require('react');
 var I18n = require('../../mixins/I18n');
 var effect = require('../../../lib/effect');
-var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; // Needs localisation
 
 module.exports = React.createClass({
   displayName: 'Event',
   mixins: [I18n],
   propTypes: {
+    name: React.PropTypes.string.isRequired,
+    date: React.PropTypes.object.isRequired,
+    getStartedUrl: React.PropTypes.string.isRequired,
+    backgroundColor: React.PropTypes.string.isRequired,
+    backgroundImageUrl: React.PropTypes.string.isRequired,
+    supporterCount: React.PropTypes.number.isRequired,
     i18n: React.PropTypes.object,
   },
 
@@ -17,15 +22,16 @@ module.exports = React.createClass({
     return {
       defaultI18n: {
         joinLabel: 'Join Event',
-        supportersLabel: 'Supporters'
+        supportersLabel: 'Supporters',
+        months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       }
     };
   },
 
-  // () -> ()
+  // () -> Object
   getInitialState: function() {
     return {
-      blurredBackgroundImage: ''
+      base64BlurredBackgroundImage: ''
     };
   },
 
@@ -37,7 +43,7 @@ module.exports = React.createClass({
     backgroundImage.src = this.props.backgroundImageUrl;
     backgroundImage.onload = function() {
       _this.setState({
-        blurredBackgroundImage: effect.blurImage(backgroundImage, 30)
+        base64BlurredBackgroundImage: effect.blurImage(backgroundImage, 30)
       });
     };
   },
@@ -50,7 +56,7 @@ module.exports = React.createClass({
     };
 
     var blurStyles = {
-      backgroundImage: 'url(' + this.state.blurredBackgroundImage + ')',
+      backgroundImage: 'url(' + this.state.base64BlurredBackgroundImage + ')',
       backgroundSize: 'cover'
     };
 
@@ -64,7 +70,7 @@ module.exports = React.createClass({
             <div className="Event__gradient"></div>
             <ul className="Event__date">
               <li>{ date.getDate() }</li>
-              <li>{ months[date.getMonth()] }</li>
+              <li>{ this.t('months')[date.getMonth()] }</li>
               <li>{ date.getFullYear() }</li>
             </ul>
             <p className="Event__name">{ this.props.name }</p>

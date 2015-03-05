@@ -10,7 +10,6 @@ module.exports = React.createClass({
   mixins: [I18n],
   propTypes: {
     i18n: React.PropTypes.object,
-    blurredImage: React.PropTypes.string
   },
 
   // () -> Object
@@ -23,16 +22,25 @@ module.exports = React.createClass({
     };
   },
 
-  // componentWillMount: function() {
-  //   var _this = this;
-  //   var backgroundImage = document.createElement('img');
-  //   backgroundImage.src = this.props.backgroundImageUrl;
-  //   backgroundImage.onload = function() {
-  //     _this.setState({
-  //       blurredImage: effect.blurImage(backgroundImage, 30)
-  //     });
-  //   };
-  // },
+  // () -> ()
+  getInitialState: function() {
+    return {
+      blurredBackgroundImage: ''
+    };
+  },
+
+  // () -> ()
+  componentWillMount: function() {
+    var _this = this;
+    var backgroundImage = document.createElement('img');
+    backgroundImage.setAttribute('crossorigin', 'anonymous');
+    backgroundImage.src = this.props.backgroundImageUrl;
+    backgroundImage.onload = function() {
+      _this.setState({
+        blurredBackgroundImage: effect.blurImage(backgroundImage, 30)
+      });
+    };
+  },
 
   // () -> XJS
   render: function() {
@@ -42,8 +50,8 @@ module.exports = React.createClass({
     };
 
     var blurStyles = {
-    //   backgroundImage: 'url(' + this.props.blurredImage + ')',
-    //   backgroundSize: 'cover'
+      backgroundImage: 'url(' + this.state.blurredBackgroundImage + ')',
+      backgroundSize: 'cover'
     };
 
     var date = this.props.date;

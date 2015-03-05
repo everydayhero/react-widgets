@@ -50,6 +50,7 @@ function blur(image, radius) {
   canvas.height = h;
 
   var ctx = canvas.getContext("2d");
+
   ctx.drawImage(image, 0, 0);
 
   return blurCanvas(canvas, ctx, w, h, radius || 30);

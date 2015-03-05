@@ -17,7 +17,6 @@ module.exports = React.createClass({
     i18n: React.PropTypes.object
   },
 
-  // () -> Object
   getDefaultProps: function() {
     return {
       defaultI18n: {
@@ -26,14 +25,12 @@ module.exports = React.createClass({
     };
   },
 
-  // () -> Object
   getInitialState: function() {
     return {
       content: this.renderIcon()
     };
   },
 
-  // () -> ()
   componentWillMount: function() {
     var _this = this;
     campaign.findByCharity(this.props.charityUid, 1, 6, function(result) {
@@ -43,7 +40,6 @@ module.exports = React.createClass({
     });
   },
 
-  // [Event] -> XJS
   renderEvents: function(events) {
     var _this = this;
     if(!_.isEmpty(events)) {
@@ -66,12 +62,10 @@ module.exports = React.createClass({
     }
   },
 
-  // () -> XJS
   renderIcon: function() {
     return <Icon className='UpcomingEvents__loading' icon='refresh' />;
   },
 
-  // () -> XJS
   render: function() {
     return (
       <div className='UpcomingEvents'>

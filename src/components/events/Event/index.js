@@ -17,7 +17,6 @@ module.exports = React.createClass({
     i18n: React.PropTypes.object,
   },
 
-  // () -> Object
   getDefaultProps: function() {
     return {
       defaultI18n: {
@@ -28,14 +27,12 @@ module.exports = React.createClass({
     };
   },
 
-  // () -> Object
   getInitialState: function() {
     return {
       base64BlurredBackgroundImage: ''
     };
   },
 
-  // () -> ()
   componentWillMount: function() {
     var _this = this;
     var backgroundImage = document.createElement('img');
@@ -48,7 +45,6 @@ module.exports = React.createClass({
     };
   },
 
-  // () -> XJS
   render: function() {
     var baseStyles = {
       background: this.props.backgroundColor + ' url(' + this.props.backgroundImageUrl + ')',

@@ -19,6 +19,14 @@ describe('pages', function() {
         'https://everydayhero.com/api/v2/pages/123.jsonp', callback);
       expect(callback).toBeCalledWith(results);
     });
+
+    it('accepts options', function() {
+      var callback = jest.genMockFunction();
+      pages.find('123', callback, {includeFootprint: true});
+
+      expect(getJSONP).lastCalledWith(
+        'https://everydayhero.com/api/v2/pages/123.jsonp?include_footprint=true', callback);
+    });
   });
 
   describe('findByIds', function() {
@@ -29,6 +37,14 @@ describe('pages', function() {
       expect(getJSONP).lastCalledWith(
         'https://everydayhero.com/api/v2/pages.jsonp?ids=123,456', callback);
       expect(callback).toBeCalledWith(results);
+    });
+
+    it('accepts options', function() {
+      var callback = jest.genMockFunction();
+      pages.findByIds(['123', '456'], callback, {includeFootprint: true});
+
+      expect(getJSONP).lastCalledWith(
+        'https://everydayhero.com/api/v2/pages.jsonp?ids=123,456&include_footprint=true', callback);
     });
   });
 
@@ -42,6 +58,16 @@ describe('pages', function() {
         callback
       );
       expect(callback).toBeCalledWith(results);
+    });
+
+    it('accepts options', function() {
+      var callback = jest.genMockFunction();
+      pages.findByCampaign('xy-12', 'foo', 7, 2, callback, {includeFootprint: true});
+
+      expect(getJSONP).lastCalledWith(
+        'https://everydayhero.com/api/v2/pages.jsonp?campaign_id=xy-12&type=foo&include_footprint=true&page=2&limit=7',
+        callback
+      );
     });
   });
 

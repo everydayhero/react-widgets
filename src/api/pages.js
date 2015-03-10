@@ -6,21 +6,23 @@ var getJSONP = require('../lib/getJSONP');
 var campaigns = require('./campaigns');
 
 module.exports = {
-  find: function(pageId, callback) {
-    return getJSONP(routes.get('page', { pageId: pageId }), callback);
+  find: function(pageId, callback, options) {
+    var params = _.merge({ pageId: pageId }, options);
+    return getJSONP(routes.get('page', params), callback);
   },
 
-  findByIds: function(pageIds, callback) {
-    return getJSONP(routes.get('pages', { pageIds: pageIds }), callback);
+  findByIds: function(pageIds, callback, options) {
+    var params = _.merge({ pageIds: pageIds }, options);
+    return getJSONP(routes.get('pages', params), callback);
   },
 
-  findByCampaign: function(campaignUid, type, limit, page, callback) {
-    var params = {
+  findByCampaign: function(campaignUid, type, limit, page, callback, options) {
+    var params = _.merge({
       campaignUid: campaignUid,
       type: type,
       page: page,
       limit: limit
-    };
+    }, options);
     return getJSONP(routes.get('pages', params), callback);
   },
 

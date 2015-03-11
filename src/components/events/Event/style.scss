@@ -26,16 +26,11 @@ $ehw-animation-speed: 200ms;
     -webkit-transition: top $ehw-animation-speed ease-in-out;
   }
 
-  a { color: $ehw-grey-light; }
-
   .Event__base {
     position: relative;
 
-    &:hover {
-      .Event__gradient {
-        top: -100%;
-      }
-
+    &.active {
+      .Event__gradient { top: -100%; }
       .Event__blur { opacity: 1; }
       .Event__date { top: 16%; }
       .Event__name { top: 42%; }
@@ -64,7 +59,7 @@ $ehw-animation-speed: 200ms;
     transition-delay: 100ms;
   }
 
-  p, ul {
+  a, p, ul {
     font-size: 1.2em;
     font-weight: bold;
     margin: 0;
@@ -116,6 +111,7 @@ $ehw-animation-speed: 200ms;
     }
 
     &.Event__join-event {
+      color: $ehw-grey-light;
       left: 30%;
       font-size: 1em;
       font-weight: normal;
@@ -123,6 +119,7 @@ $ehw-animation-speed: 200ms;
       top: 110%;
       width: 40%;
       -webkit-transition-delay: 200ms;
+      text-decoration: none;
       transition-delay: 200ms;
       background-color: $ehw-green;
       border-radius: 3px;

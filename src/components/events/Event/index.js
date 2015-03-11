@@ -19,6 +19,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
+      activeClass: '',
       defaultI18n: {
         joinLabel: 'Join Event',
         supportersLabel: 'Supporters',
@@ -29,6 +30,7 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
+      activeClass: '',
       base64BlurredBackgroundImage: ''
     };
   },
@@ -45,6 +47,24 @@ module.exports = React.createClass({
     };
   },
 
+  activate: function() {
+    this.setState({ activeClass: 'active' });
+  },
+
+  activateAndTimeout: function() {
+    this.activate();
+    this.timeout();
+  },
+
+  timeout: function() {
+    var _this = this;
+    setTimeout(function() { _this.deactivate(); }, 3000);
+  },
+
+  deactivate: function() {
+    this.setState({ activeClass: '' });
+  },
+
   render: function() {
     var baseStyles = {
       background: this.props.backgroundColor + ' url(' + this.props.backgroundImageUrl + ')',
@@ -56,24 +76,27 @@ module.exports = React.createClass({
       backgroundSize: 'cover'
     };
 
+    var baseClass = "Event__base " + this.state.activeClass;
     var date = this.props.date;
 
     return (
-      <div className="Event">
-        <a href={ this.props.getStartedUrl }>
-          <div className="Event__base" style={ baseStyles }>
-            <div className="Event__blur" style={ blurStyles }></div>
-            <div className="Event__gradient"></div>
-            <ul className="Event__date">
-              <li>{ date.getDate() }</li>
-              <li>{ this.t('months')[date.getMonth()] }</li>
-              <li>{ date.getFullYear() }</li>
-            </ul>
-            <p className="Event__name">{ this.props.name }</p>
-            <p className="Event__supporter-count">{ (this.props.supporterCount || 0) + ' ' + this.t('supportersLabel') }</p>
-            <p className="Event__join-event">{ this.t('joinLabel') }</p>
-          </div>
-        </a>
+      <div className="Event"
+        onTouchStart={ this.activateAndTimeout }
+        onTouchCancel={ this.deactivate }
+        onMouseEnter={ this.activate }
+        onMouseLeave={ this.deactivate }>
+        <div className={ baseClass } style={ baseStyles }>
+          <div className="Event__blur" style={ blurStyles }></div>
+          <div className="Event__gradient"></div>
+          <ul className="Event__date">
+            <li>{ date.getDate() }</li>
+            <li>{ this.t('months')[date.getMonth()] }</li>
+            <li>{ date.getFullYear() }</li>
+          </ul>
+          <p className="Event__name">{ this.props.name }</p>
+          <p className="Event__supporter-count">{ (this.props.supporterCount || 0) + ' ' + this.t('supportersLabel') }</p>
+          <a href={ this.props.getStartedUrl } className="Event__join-event">{ this.t('joinLabel') }</a>
+        </div>
       </div>
     );
   }

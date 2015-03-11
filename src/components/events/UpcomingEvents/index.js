@@ -70,7 +70,7 @@ module.exports = React.createClass({
     return (
       <div className='UpcomingEvents'>
         <div className='UpcomingEvents__content'>
-        { this.state.content }
+          { this.state.content }
         </div>
       </div>
     );

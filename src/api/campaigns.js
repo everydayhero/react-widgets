@@ -37,6 +37,15 @@ module.exports = {
     return getJSONP(routes.get('campaigns', params), callback);
   },
 
+  leaderboard: function(campaignUid, type, limit, callback, options) {
+    var params = _.merge({
+      campaignUid: campaignUid,
+      type: type,
+      limit: limit
+    }, options);
+    return getJSONP(routes.get('campaignLeaderboard', params), callback);
+  },
+
   search: function(params, callback) {
     params = _.merge({ page: 1, pageSize: 10 }, params);
     params.searchTerm = encodeURIComponent(params.searchTerm);

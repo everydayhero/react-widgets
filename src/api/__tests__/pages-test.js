@@ -10,6 +10,10 @@ var routes = require('../routes');
 var pages = require('../pages');
 
 describe('pages', function() {
+  beforeEach(function() {
+    getJSONP.mockClear();
+  });
+
   describe('find', function() {
     it('gets a page by id', function() {
       var callback = jest.genMockFunction();
@@ -22,10 +26,9 @@ describe('pages', function() {
 
     it('accepts options', function() {
       var callback = jest.genMockFunction();
-      pages.find('123', callback, {includeFootprint: true});
+      pages.find('123', callback, { includeFootprint: true });
 
-      expect(getJSONP).lastCalledWith(
-        'https://everydayhero.com/api/v2/pages/123.jsonp?include_footprint=true', callback);
+      expect(getJSONP.mock.calls[0][0]).toContain('include_footprint=true');
     });
   });
 
@@ -43,8 +46,7 @@ describe('pages', function() {
       var callback = jest.genMockFunction();
       pages.findByIds(['123', '456'], callback, {includeFootprint: true});
 
-      expect(getJSONP).lastCalledWith(
-        'https://everydayhero.com/api/v2/pages.jsonp?ids=123,456&include_footprint=true', callback);
+      expect(getJSONP.mock.calls[0][0]).toContain('&include_footprint=true');
     });
   });
 
@@ -64,10 +66,7 @@ describe('pages', function() {
       var callback = jest.genMockFunction();
       pages.findByCampaign('xy-12', 'foo', 7, 2, callback, {includeFootprint: true});
 
-      expect(getJSONP).lastCalledWith(
-        'https://everydayhero.com/api/v2/pages.jsonp?campaign_id=xy-12&type=foo&include_footprint=true&page=2&limit=7',
-        callback
-      );
+      expect(getJSONP.mock.calls[0][0]).toContain('&include_footprint=true');
     });
   });
 

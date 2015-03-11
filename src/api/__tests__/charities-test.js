@@ -32,6 +32,17 @@ describe('charities', function() {
     });
   });
 
+  describe('findBySlug', function() {
+    it('gets a charity by country and slug', function() {
+      var callback = jest.genMockFunction();
+      charities.findBySlug('xy', 'slugs-for-pugs', callback);
+
+      expect(getJSONP).lastCalledWith(
+        'https://everydayhero.com/api/v2/charities/xy/slugs-for-pugs.jsonp', callback);
+      expect(callback).toBeCalledWith(results);
+    });
+  });
+
   describe('findByUids', function() {
     it('gets charities by uid', function() {
       var callback = jest.genMockFunction();
@@ -92,6 +103,30 @@ describe('charities', function() {
     it('accepts options', function() {
       var callback = jest.genMockFunction();
       charities.leaderboard('xy-123', 'foo', 12, callback, {
+        includePages: true,
+        includeFootprint: true
+      });
+
+      expect(getJSONP.mock.calls[0][0]).toContain('&include_pages=true');
+      expect(getJSONP.mock.calls[0][0]).toContain('&include_footprint=true');
+    });
+  });
+
+  describe('leaderboardBySlug', function() {
+    it('gets charity leaderboard by country and slug', function() {
+      var callback = jest.genMockFunction();
+      charities.leaderboardBySlug('xy', 'slugs-for-pugs', 'foo', 12, callback);
+
+      expect(getJSONP).lastCalledWith(
+        'https://everydayhero.com/api/v2/charities/xy/slugs-for-pugs/leaderboard.jsonp?type=foo&limit=12',
+        callback
+      );
+      expect(callback).toBeCalledWith(results);
+    });
+
+    it('accepts options', function() {
+      var callback = jest.genMockFunction();
+      charities.leaderboardBySlug('xy', 'slugs-for-pugs', 'foo', 12, callback, {
         includePages: true,
         includeFootprint: true
       });

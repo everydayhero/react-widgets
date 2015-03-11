@@ -25,6 +25,17 @@ describe('campaigns', function() {
     });
   });
 
+  describe('findBySlug', function() {
+    it('gets a campaign by country and slug', function() {
+      var callback = jest.genMockFunction();
+      campaigns.findBySlug('xy', 'slugathon-2015', callback);
+
+      expect(getJSONP).lastCalledWith(
+        'https://everydayhero.com/api/v2/campaigns/xy/slugathon-2015.jsonp', callback);
+      expect(callback).toBeCalledWith(results);
+    });
+  });
+
   describe('findByUids', function() {
     it('gets campaigns by uid', function() {
       var callback = jest.genMockFunction();
@@ -72,6 +83,30 @@ describe('campaigns', function() {
     it('accepts options', function() {
       var callback = jest.genMockFunction();
       campaigns.leaderboard('xy-123', 'foo', 12, callback, {
+        includePages: true,
+        includeFootprint: true
+      });
+
+      expect(getJSONP.mock.calls[0][0]).toContain('&include_pages=true');
+      expect(getJSONP.mock.calls[0][0]).toContain('&include_footprint=true');
+    });
+  });
+
+  describe('leaderboardBySlug', function() {
+    it('gets campaign leaderboard by country and slug', function() {
+      var callback = jest.genMockFunction();
+      campaigns.leaderboardBySlug('xy', 'slugathon-2015', 'foo', 12, callback);
+
+      expect(getJSONP).lastCalledWith(
+        'https://everydayhero.com/api/v2/campaigns/xy/slugathon-2015/leaderboard.jsonp?type=foo&limit=12',
+        callback
+      );
+      expect(callback).toBeCalledWith(results);
+    });
+
+    it('accepts options', function() {
+      var callback = jest.genMockFunction();
+      campaigns.leaderboardBySlug('xy', 'slugathon-2015', 'foo', 12, callback, {
         includePages: true,
         includeFootprint: true
       });

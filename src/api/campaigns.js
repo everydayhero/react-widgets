@@ -16,6 +16,10 @@ module.exports = {
     return getJSONP(routes.get('campaign', { campaignUid: campaignUid }), callback);
   },
 
+  findBySlug: function(country, campaignSlug, callback) {
+    return this.find(country + '/' + campaignSlug, callback);
+  },
+
   findByUids: function(campaignUids, callback) {
     if (_.isEmpty(campaignUids)) {
       _.defer(callback, { campaigns: [] });
@@ -44,6 +48,10 @@ module.exports = {
       limit: limit
     }, options);
     return getJSONP(routes.get('campaignLeaderboard', params), callback);
+  },
+
+  leaderboardBySlug: function(country, campaignSlug, type, limit, callback, options) {
+    return this.leaderboard(country + '/' + campaignSlug, type, limit, callback, options);
   },
 
   search: function(params, callback) {

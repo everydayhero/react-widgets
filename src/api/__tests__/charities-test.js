@@ -77,6 +77,30 @@ describe('charities', function() {
     });
   });
 
+  describe('leaderboard', function() {
+    it('gets charity leaderboard by charity uid', function() {
+      var callback = jest.genMockFunction();
+      charities.leaderboard('xy-123', 'foo', 12, callback);
+
+      expect(getJSONP).lastCalledWith(
+        'https://everydayhero.com/api/v2/charities/xy-123/leaderboard.jsonp?type=foo&limit=12',
+        callback
+      );
+      expect(callback).toBeCalledWith(results);
+    });
+
+    it('accepts options', function() {
+      var callback = jest.genMockFunction();
+      charities.leaderboard('xy-123', 'foo', 12, callback, {
+        includePages: true,
+        includeFootprint: true
+      });
+
+      expect(getJSONP.mock.calls[0][0]).toContain('&include_pages=true');
+      expect(getJSONP.mock.calls[0][0]).toContain('&include_footprint=true');
+    });
+  });
+
   describe('search', function() {
     it('searches for charities', function() {
       var query = { searchTerm: 'bar', country: 'xy', campaignUid: [12, 42], page: 2, pageSize: 7 };

@@ -33,6 +33,15 @@ module.exports = {
     return getJSONP(routes.get('charities', params), callback);
   },
 
+  leaderboard: function(charityUid, type, limit, callback, options) {
+    var params = _.merge({
+      charityUid: charityUid,
+      type: type,
+      limit: limit
+    }, options);
+    return getJSONP(routes.get('charityLeaderboard', params), callback);
+  },
+
   search: function(params, callback) {
     params = _.merge({ page: 1, pageSize: 10 }, params);
     params.searchTerm = encodeURIComponent(params.searchTerm);

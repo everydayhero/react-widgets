@@ -49,14 +49,14 @@
   background-color: $ehw-green-light;
   vertical-align: middle;
   font-weight: 400;
-  font-family: Amatic;
+  font-family: $ehw-marketing-fonts;
 }
 .Footprint--compact .FootprintData {
   padding: 13px;
 }
 
 .FootprintData__percent {
-  font-family: 'Amatic SC';
+  font-family: $ehw-marketing-fonts;
 }
 .FootprintData__name,
 .FootprintData__value {

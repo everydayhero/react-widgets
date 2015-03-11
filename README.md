@@ -559,13 +559,17 @@ Displays a set of fundraiser profile images (that have a page) for a single spec
 
 ### Leaderboards
 
-#### Leaderboard (Campaign)
+#### Leaderboard
 
-Displays a leaderboard sorted by funds raised (highest first) for a single specified campaign. Can be set to show leaderboards for teams or individuals.
+Displays a leaderboard sorted by funds raised (highest first) for a campaign or charity. Can be set to show leaderboards for teams or individuals.
 
 ##### Options
 
-- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `campaignUid`: *optional* string campaign uid to filter results by campaign.
+- `campaignSlug`: *optional* string campaign slug to filter results by campaign. Requires `country`.
+- `charityUid`: *optional* string charity uid to filter results by charity.
+- `charitySlug`: *optional* string charity slug to filter results by charity. Requires `country`.
+- `country`: *optional* string country code of region, either 'au', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
 - `type`: *optional* string. Set a type of either `'team'` or `'individual'`. Set to `'individual'` by default.
 - `limit`: *optional* number. Set to `24` by default. Determines how many results are returned in total.
 - `pageSize`: *optional* number. Set to `12` by default. Determines how many results to show per page.
@@ -604,11 +608,15 @@ Displays a leaderboard sorted by funds raised (highest first) for a single speci
 </html>
 ```
 
-#### Fitness Leaderboard (Campaign)
+#### Fitness Leaderboard
 
-Displays a leaderboard sorted by distance, recorded using MapMyFitness, for a single specified campaign. Ordered by highest first. This leaderboard also displays, and can be sorted by, funds raised. Can be set to show leaderboards for teams or individuals.
+Displays a leaderboard sorted by distance, recorded using MapMyFitness, for a campaign or charity. Ordered by highest first. This leaderboard also displays, and can be sorted by, funds raised. Can be set to show leaderboards for teams or individuals.
 
-- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `campaignUid`: *optional* string campaign uid to filter results by campaign.
+- `campaignSlug`: *optional* string campaign slug to filter results by campaign. Requires `country`.
+- `charityUid`: *optional* string charity uid to filter results by charity.
+- `charitySlug`: *optional* string charity slug to filter results by charity. Requires `country`.
+- `country`: *optional* string country code of region, either 'au', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
 - `type`: *optional* string. Set a type of either `'team'` or `'individual'`. Set to `'individual'` by default.
 - `limit`: *optional* number. Set to `100` by default. Determines how many results should be fetched via the everdayhero leaderboards API endpoint.
 - `pageSize`: *optional* number. Set to `5` by default. Determines how many results to display on the leaderboard at once.

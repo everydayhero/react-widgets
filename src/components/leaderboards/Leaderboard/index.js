@@ -3,7 +3,8 @@
 var _                   = require('lodash');
 var React               = require('react');
 var I18nMixin           = require('../../mixins/I18n');
-var leaderboard         = require('../../../api/leaderboard');
+var campaigns           = require('../../../api/campaigns');
+var charities           = require('../../../api/charities');
 var pages               = require('../../../api/pages');
 var Icon                = require('../../helpers/Icon');
 var TeamLeaderboardItem = require('../TeamLeaderboardItem');
@@ -14,7 +15,11 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "Leaderboard",
   propTypes: {
-    campaignUid: React.PropTypes.string.isRequired,
+    campaignSlug: React.PropTypes.string,
+    campaignUid: React.PropTypes.string,
+    charitySlug: React.PropTypes.string,
+    charityUid: React.PropTypes.string,
+    country: React.PropTypes.oneOf(['au', 'nz', 'uk', 'us']),
     type: React.PropTypes.oneOf(['team', 'individual']),
     limit: React.PropTypes.number,
     pageSize: React.PropTypes.number,
@@ -26,7 +31,6 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      campaignUid: '',
       type: 'individual',
       limit: 24,
       pageSize: 12,
@@ -46,7 +50,6 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       isLoading: false,
-      pageIds: [],
       boardData: [],
       currentPage: 1
     };
@@ -56,28 +59,37 @@ module.exports = React.createClass({
     this.loadLeaderboard();
   },
 
+  getEndpoint: function() {
+    var endpoint;
+
+    var props = this.props;
+    if (props.country) {
+      if (props.campaignSlug) endpoint = campaigns.leaderboardBySlug.bind(campaigns, props.country, props.campaignSlug);
+      if (props.charitySlug)  endpoint = charities.leaderboardBySlug.bind(charities, props.country, props.charitySlug);
+    } else {
+      if (props.campaignUid)  endpoint = campaigns.leaderboard.bind(campaigns, props.campaignUid);
+      if (props.charityUid)   endpoint = charities.leaderboard.bind(charities, props.charityUid);
+    }
+
+    if (!endpoint && console && console.log) {
+      console.log("Leaderboard widget requires 'campaignUid' or 'charityUid'. If 'country' is given then 'campaignSlug' or 'charitySlug' may be used instead. ");
+    }
+
+    return (endpoint || function(type, limit, callback) { callback(null); });
+  },
+
   loadLeaderboard: function() {
     this.setState({
       isLoading: true
     });
 
-    var props = this.props;
-
-    leaderboard.find(props.campaignUid, props.type, props.limit, this.loadPages);
+    var endpoint = this.getEndpoint();
+    endpoint(this.props.type, this.props.limit, this.processLeaderboard, { includePages: true });
   },
 
-  loadPages: function(result) {
-    var pageIds = result.leaderboard.page_ids;
-    this.setState({ pageIds: pageIds });
-
-    pages.findByIds(pageIds, this.processLeaderboard);
-  },
-
-  processLeaderboard: function(pageData) {
-    var leaderboard = _.map(this.state.pageIds, function(pageId, i) {
-      var page = _.find(pageData.pages, {id: pageId});
-      return this.processPage(page);
-    }, this);
+  processLeaderboard: function(result) {
+    var pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : [];
+    var leaderboard = _.map(pages, this.processPage);
 
     this.rankLeaderboard(leaderboard);
 
@@ -130,14 +142,18 @@ module.exports = React.createClass({
   },
 
   renderLeaderboardItems: function() {
-    var boardData   = this.state.boardData;
-    var currentPage = this.state.currentPage - 1;
-
     if (this.state.isLoading) {
       return <Icon className="Leaderboard__loading" icon="refresh" />;
     }
 
-    return boardData[currentPage].map(function(d,i) {
+    var currentPage = this.state.currentPage - 1;
+    var board = this.state.boardData[currentPage];
+
+    if (!board) {
+      return;
+    }
+
+    return board.map(function(d,i) {
       var formattedAmount = this.formatAmount(d.amount);
       var formattedRank = numeral(d.rank).format('0o');
 

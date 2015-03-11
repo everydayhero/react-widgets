@@ -1,13 +1,12 @@
 "use strict";
 
 jest.autoMockOff();
-jest.mock('../../../../api/pages');
+jest.mock('../../../../api/campaigns');
 
 describe('FitnessLeaderboard', function() {
   var _                     = require('lodash');
   var React                 = require('react/addons');
-  var FitnessLeaderboard        = require('../');
-  var pages                 = require('../../../../api/pages');
+  var FitnessLeaderboard    = require('../');
   var TestUtils             = React.addons.TestUtils;
   var findByClass           = TestUtils.findRenderedDOMComponentWithClass;
 

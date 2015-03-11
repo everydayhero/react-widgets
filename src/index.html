@@ -185,12 +185,6 @@
       </div>
     </div>
     <div class="effort pull-left">
-      <div class="panel pad-x">
-        <h3 class="title">Footprint</h3>
-        <div id="FootprintExample">Loading...</div>
-      </div>
-    </div>
-    <div class="effort pull-left">
       <div class="panel">
         <h3 class="title">Collective Effort</h3>
         <div id="TotalDistanceExample">Loading...</div>
@@ -272,22 +266,6 @@
     edh.widgets.renderWidget('AmountExample', 'Amount');
     edh.widgets.renderWidget('InputExample', 'Input', { i18n: { name: 'input_example', label: 'Input Example', hint: 'What is this input for?', error: 'This input is required'}, required: true });
     edh.widgets.renderWidget('CallToActionBoxExample', 'CallToActionBox', { campaignUid: 'us-22', registrationUrl: 'https://your-registration-url.com/' });
-    edh.widgets.renderWidget('FootprintExample', 'Footprint', {
-      url: 'http://fillmurray.com/600/600',
-      size: 200,
-      ratio: 0.5,
-      offset: 4,
-      compact: true,
-      data: [
-        {id:0, key:'community_raised', name:'Community Raised', group:'community', value:'$0.00', percentile:rand(), description: "The collective funds raised by people who care about the same causes as you."},
-        {id:1, key:'community_engagement', name:'Community Engagement', group:'money', value:'467k', percentile:rand(), description: "The number of people supporting the causes you care about."},
-        {id:2, key:'money_fundraising', name:'Fundraising', group:'effort', value:'$4.8k', percentile:rand(), description: "The lifetime amount you have raised through fundraising for the causes you care about."}
-      ]
-    });
-
-    function rand() { // for Footprint dummy data
-      return (Math.random() * 100 | 0) + 1;
-    }
   </script>
 </body>
 </html>

@@ -1,0 +1,559 @@
+{
+  "leaderboard": {
+    "charity_id": "us-123",
+    "pages": [
+      {
+        "id": 137,
+        "slug": "bob",
+        "gift_aid_eligible": false,
+        "charity_uid": "us-202768192",
+        "campaign_uid": "us-0",
+        "owner_uid": "47",
+        "owner_type": "User",
+        "uid": 137,
+        "state": "active",
+        "target_cents": 4200,
+        "name": "Bob",
+        "team_uid": null,
+        "team_member_uids": [],
+        "team_leader_page_uid": null,
+        "expires_at": "2015-08-17T21:26:32.000Z",
+        "amount": {
+          "cents": 0,
+          "currency": {
+            "iso_code": "USD",
+            "name": "United States Dollar",
+            "symbol": "$"
+          }
+        },
+        "cached_offline_amount_cents": 0,
+        "campaign_date": null,
+        "fitness_activity_overview": {},
+        "story": "I've created this page because I want to make a difference. I'm inspired by the work of 100 CLUB OF AMARILLO INC and wanted to support them by raising money. Please help me help them by giving whatever you can using the 'Give Now' button. The more people that know about 100 CLUB OF AMARILLO INC, the greater their impact, so please also spread the word by sharing my page with your friends and family. Thank you in advance for your generosity, it means a lot!\n",
+        "image": {
+          "original_image_url": "http://supporter.dev/assets/pages/images/original/missing.gif",
+          "tiny_image_url": "http://supporter.dev/assets/pages/images/tiny/missing.gif",
+          "small_image_url": "http://supporter.dev/assets/pages/images/small/missing.gif",
+          "medium_image_url": "http://supporter.dev/assets/pages/images/medium/missing.gif",
+          "large_image_url": "http://supporter.dev/assets/pages/images/large/missing.gif"
+        },
+        "created_at": "2015-02-17T22:26:32.000Z",
+        "updated_at": "2015-02-17T22:26:32.000Z",
+        "url": "http://give.supporter.dev/us/bob",
+        "invitation_id": null,
+        "coordinate": {
+          "lat": 41.26,
+          "lon": -74.27
+        },
+        "owner_footprint": [
+          {
+            "key": "cause_raised",
+            "group": "community",
+            "amount_formatted": "$662.00",
+            "percentile": 95
+          },
+          {
+            "key": "cause_engagement",
+            "group": "community",
+            "amount_formatted": "2",
+            "percentile": 49
+          },
+          {
+            "key": "duration_volunteered",
+            "group": "effort",
+            "amount_formatted": "0h0m",
+            "percentile": 17
+          },
+          {
+            "key": "duration_trained",
+            "group": "effort",
+            "amount_formatted": "0h0m",
+            "percentile": 77
+          },
+          {
+            "key": "sharing",
+            "group": "voice",
+            "amount_formatted": "0",
+            "percentile": 46
+          },
+          {
+            "key": "page_views",
+            "group": "voice",
+            "amount_formatted": "0",
+            "percentile": 25
+          },
+          {
+            "key": "given",
+            "group": "money",
+            "amount_formatted": "$518.00",
+            "percentile": 90
+          },
+          {
+            "key": "raised",
+            "group": "money",
+            "amount_formatted": "$753.00",
+            "percentile": 80
+          }
+        ]
+      },
+      {
+        "id": 139,
+        "slug": "frank",
+        "gift_aid_eligible": false,
+        "charity_uid": "us-202768192",
+        "campaign_uid": "us-0",
+        "owner_uid": "1",
+        "owner_type": "User",
+        "uid": 139,
+        "state": "active",
+        "target_cents": 70000,
+        "name": "Frank",
+        "team_uid": null,
+        "team_member_uids": [],
+        "team_leader_page_uid": null,
+        "expires_at": "2015-05-23T05:00:00.000Z",
+        "amount": {
+          "cents": 0,
+          "currency": {
+            "iso_code": "USD",
+            "name": "United States Dollar",
+            "symbol": "$"
+          }
+        },
+        "cached_offline_amount_cents": 0,
+        "campaign_date": null,
+        "fitness_activity_overview": {},
+        "story": "I've created this page because I want to make a difference. I'm inspired by the work of 100 CLUB OF AMARILLO INC and wanted to support them by raising money. Please help me help them by giving whatever you can using the 'Give Now' button. The more people that know about 100 CLUB OF AMARILLO INC, the greater their impact, so please also spread the word by sharing my page with your friends and family. Thank you in advance for your generosity, it means a lot!\n",
+        "image": {
+          "original_image_url": "http://supporter.dev/system/users/images/1/original/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "tiny_image_url": "http://supporter.dev/system/users/images/1/tiny/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "small_image_url": "http://supporter.dev/system/users/images/1/small/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "medium_image_url": "http://supporter.dev/system/users/images/1/medium/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "large_image_url": "http://supporter.dev/system/users/images/1/large/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg"
+        },
+        "created_at": "2015-02-23T04:07:43.000Z",
+        "updated_at": "2015-02-23T04:07:43.000Z",
+        "url": "http://give.supporter.dev/us/frank",
+        "invitation_id": null,
+        "coordinate": null,
+        "owner_footprint": [
+          {
+            "key": "cause_raised",
+            "group": "community",
+            "amount_formatted": "$361.00",
+            "percentile": 32
+          },
+          {
+            "key": "cause_engagement",
+            "group": "community",
+            "amount_formatted": "2",
+            "percentile": 80
+          },
+          {
+            "key": "duration_volunteered",
+            "group": "effort",
+            "amount_formatted": "2241h0m",
+            "percentile": 39
+          },
+          {
+            "key": "duration_trained",
+            "group": "effort",
+            "amount_formatted": "0h0m",
+            "percentile": 7
+          },
+          {
+            "key": "sharing",
+            "group": "voice",
+            "amount_formatted": "0",
+            "percentile": 0
+          },
+          {
+            "key": "page_views",
+            "group": "voice",
+            "amount_formatted": "54",
+            "percentile": 18
+          },
+          {
+            "key": "given",
+            "group": "money",
+            "amount_formatted": "$108.00",
+            "percentile": 21
+          },
+          {
+            "key": "raised",
+            "group": "money",
+            "amount_formatted": "$533.00",
+            "percentile": 92
+          }
+        ]
+      },
+      {
+        "id": 140,
+        "slug": "shirley",
+        "gift_aid_eligible": false,
+        "charity_uid": "us-202768192",
+        "campaign_uid": "us-0",
+        "owner_uid": "1",
+        "owner_type": "User",
+        "uid": 140,
+        "state": "active",
+        "target_cents": 70000,
+        "name": "Shirley",
+        "team_uid": null,
+        "team_member_uids": [],
+        "team_leader_page_uid": null,
+        "expires_at": "2015-05-23T05:00:00.000Z",
+        "amount": {
+          "cents": 0,
+          "currency": {
+            "iso_code": "USD",
+            "name": "United States Dollar",
+            "symbol": "$"
+          }
+        },
+        "cached_offline_amount_cents": 0,
+        "campaign_date": null,
+        "fitness_activity_overview": {},
+        "story": "I've created this page because I want to make a difference. I'm inspired by the work of 100 CLUB OF AMARILLO INC and wanted to support them by raising money. Please help me help them by giving whatever you can using the 'Give Now' button. The more people that know about 100 CLUB OF AMARILLO INC, the greater their impact, so please also spread the word by sharing my page with your friends and family. Thank you in advance for your generosity, it means a lot!\n",
+        "image": {
+          "original_image_url": "http://supporter.dev/system/users/images/1/original/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "tiny_image_url": "http://supporter.dev/system/users/images/1/tiny/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "small_image_url": "http://supporter.dev/system/users/images/1/small/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "medium_image_url": "http://supporter.dev/system/users/images/1/medium/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "large_image_url": "http://supporter.dev/system/users/images/1/large/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg"
+        },
+        "created_at": "2015-02-23T04:09:18.000Z",
+        "updated_at": "2015-02-23T04:09:18.000Z",
+        "url": "http://give.supporter.dev/us/shirley",
+        "invitation_id": null,
+        "coordinate": null,
+        "owner_footprint": [
+          {
+            "key": "cause_raised",
+            "group": "community",
+            "amount_formatted": "$803.00",
+            "percentile": 96
+          },
+          {
+            "key": "cause_engagement",
+            "group": "community",
+            "amount_formatted": "2",
+            "percentile": 73
+          },
+          {
+            "key": "duration_volunteered",
+            "group": "effort",
+            "amount_formatted": "2241h0m",
+            "percentile": 53
+          },
+          {
+            "key": "duration_trained",
+            "group": "effort",
+            "amount_formatted": "0h0m",
+            "percentile": 83
+          },
+          {
+            "key": "sharing",
+            "group": "voice",
+            "amount_formatted": "0",
+            "percentile": 42
+          },
+          {
+            "key": "page_views",
+            "group": "voice",
+            "amount_formatted": "54",
+            "percentile": 66
+          },
+          {
+            "key": "given",
+            "group": "money",
+            "amount_formatted": "$731.00",
+            "percentile": 57
+          },
+          {
+            "key": "raised",
+            "group": "money",
+            "amount_formatted": "$699.00",
+            "percentile": 7
+          }
+        ]
+      },
+      {
+        "id": 141,
+        "slug": "ted",
+        "gift_aid_eligible": false,
+        "charity_uid": "us-202768192",
+        "campaign_uid": "us-0",
+        "owner_uid": "1",
+        "owner_type": "User",
+        "uid": 141,
+        "state": "active",
+        "target_cents": 70000,
+        "name": "Ted",
+        "team_uid": null,
+        "team_member_uids": [],
+        "team_leader_page_uid": null,
+        "expires_at": "2015-05-23T05:00:00.000Z",
+        "amount": {
+          "cents": 0,
+          "currency": {
+            "iso_code": "USD",
+            "name": "United States Dollar",
+            "symbol": "$"
+          }
+        },
+        "cached_offline_amount_cents": 0,
+        "campaign_date": null,
+        "fitness_activity_overview": {},
+        "story": "I've created this page because I want to make a difference. I'm inspired by the work of 100 CLUB OF AMARILLO INC and wanted to support them by raising money. Please help me help them by giving whatever you can using the 'Give Now' button. The more people that know about 100 CLUB OF AMARILLO INC, the greater their impact, so please also spread the word by sharing my page with your friends and family. Thank you in advance for your generosity, it means a lot!\n",
+        "image": {
+          "original_image_url": "http://supporter.dev/system/users/images/1/original/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "tiny_image_url": "http://supporter.dev/system/users/images/1/tiny/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "small_image_url": "http://supporter.dev/system/users/images/1/small/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "medium_image_url": "http://supporter.dev/system/users/images/1/medium/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "large_image_url": "http://supporter.dev/system/users/images/1/large/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg"
+        },
+        "created_at": "2015-02-23T04:13:04.000Z",
+        "updated_at": "2015-02-23T04:13:04.000Z",
+        "url": "http://give.supporter.dev/us/ted",
+        "invitation_id": null,
+        "coordinate": null,
+        "owner_footprint": [
+          {
+            "key": "cause_raised",
+            "group": "community",
+            "amount_formatted": "$216.00",
+            "percentile": 76
+          },
+          {
+            "key": "cause_engagement",
+            "group": "community",
+            "amount_formatted": "2",
+            "percentile": 82
+          },
+          {
+            "key": "duration_volunteered",
+            "group": "effort",
+            "amount_formatted": "2241h0m",
+            "percentile": 38
+          },
+          {
+            "key": "duration_trained",
+            "group": "effort",
+            "amount_formatted": "0h0m",
+            "percentile": 55
+          },
+          {
+            "key": "sharing",
+            "group": "voice",
+            "amount_formatted": "0",
+            "percentile": 28
+          },
+          {
+            "key": "page_views",
+            "group": "voice",
+            "amount_formatted": "54",
+            "percentile": 26
+          },
+          {
+            "key": "given",
+            "group": "money",
+            "amount_formatted": "$409.00",
+            "percentile": 67
+          },
+          {
+            "key": "raised",
+            "group": "money",
+            "amount_formatted": "$685.00",
+            "percentile": 66
+          }
+        ]
+      },
+      {
+        "id": 142,
+        "slug": "roger",
+        "gift_aid_eligible": false,
+        "charity_uid": "us-202768192",
+        "campaign_uid": "us-0",
+        "owner_uid": "1",
+        "owner_type": "User",
+        "uid": 142,
+        "state": "active",
+        "target_cents": 70000,
+        "name": "Roger",
+        "team_uid": null,
+        "team_member_uids": [],
+        "team_leader_page_uid": null,
+        "expires_at": "2015-05-23T05:00:00.000Z",
+        "amount": {
+          "cents": 0,
+          "currency": {
+            "iso_code": "USD",
+            "name": "United States Dollar",
+            "symbol": "$"
+          }
+        },
+        "cached_offline_amount_cents": 0,
+        "campaign_date": null,
+        "fitness_activity_overview": {},
+        "story": "I've created this page because I want to make a difference. I'm inspired by the work of 100 CLUB OF AMARILLO INC and wanted to support them by raising money. Please help me help them by giving whatever you can using the 'Give Now' button. The more people that know about 100 CLUB OF AMARILLO INC, the greater their impact, so please also spread the word by sharing my page with your friends and family. Thank you in advance for your generosity, it means a lot!\n",
+        "image": {
+          "original_image_url": "http://supporter.dev/system/users/images/1/original/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "tiny_image_url": "http://supporter.dev/system/users/images/1/tiny/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "small_image_url": "http://supporter.dev/system/users/images/1/small/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "medium_image_url": "http://supporter.dev/system/users/images/1/medium/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg",
+          "large_image_url": "http://supporter.dev/system/users/images/1/large/1795595_10151934307823365_1046953391_n-ec5c83dba208b168ed9a3f4a0186cc28.jpg"
+        },
+        "created_at": "2015-02-23T06:41:17.000Z",
+        "updated_at": "2015-02-23T06:41:18.000Z",
+        "url": "http://give.supporter.dev/us/roger",
+        "invitation_id": null,
+        "coordinate": null,
+        "owner_footprint": [
+          {
+            "key": "cause_raised",
+            "group": "community",
+            "amount_formatted": "$709.00",
+            "percentile": 51
+          },
+          {
+            "key": "cause_engagement",
+            "group": "community",
+            "amount_formatted": "2",
+            "percentile": 60
+          },
+          {
+            "key": "duration_volunteered",
+            "group": "effort",
+            "amount_formatted": "2241h0m",
+            "percentile": 10
+          },
+          {
+            "key": "duration_trained",
+            "group": "effort",
+            "amount_formatted": "0h0m",
+            "percentile": 67
+          },
+          {
+            "key": "sharing",
+            "group": "voice",
+            "amount_formatted": "0",
+            "percentile": 3
+          },
+          {
+            "key": "page_views",
+            "group": "voice",
+            "amount_formatted": "54",
+            "percentile": 80
+          },
+          {
+            "key": "given",
+            "group": "money",
+            "amount_formatted": "$58.00",
+            "percentile": 72
+          },
+          {
+            "key": "raised",
+            "group": "money",
+            "amount_formatted": "$968.00",
+            "percentile": 72
+          }
+        ]
+      },
+      {
+        "id": 135,
+        "slug": "elaine",
+        "gift_aid_eligible": false,
+        "charity_uid": "us-273949762",
+        "campaign_uid": "us-0",
+        "owner_uid": "45",
+        "owner_type": "User",
+        "uid": 135,
+        "state": "active",
+        "target_cents": 300000,
+        "name": "Elaine",
+        "team_uid": null,
+        "team_member_uids": [],
+        "team_leader_page_uid": null,
+        "expires_at": "2015-08-10T00:48:51.000Z",
+        "amount": {
+          "cents": 0,
+          "currency": {
+            "iso_code": "USD",
+            "name": "United States Dollar",
+            "symbol": "$"
+          }
+        },
+        "cached_offline_amount_cents": 0,
+        "campaign_date": null,
+        "fitness_activity_overview": {},
+        "story": "I've created this page because I want to make a difference. I'm inspired by the work of 1 STEP 2 HOPE and wanted to support them by raising money. Please help me help them by giving whatever you can using the 'Give Now' button. The more people that know about 1 STEP 2 HOPE, the greater their impact, so please also spread the word by sharing my page with your friends and family. Thank you in advance for your generosity, it means a lot!\n",
+        "image": {
+          "original_image_url": "http://supporter.dev/assets/pages/images/original/missing.gif",
+          "tiny_image_url": "http://supporter.dev/assets/pages/images/tiny/missing.gif",
+          "small_image_url": "http://supporter.dev/assets/pages/images/small/missing.gif",
+          "medium_image_url": "http://supporter.dev/assets/pages/images/medium/missing.gif",
+          "large_image_url": "http://supporter.dev/assets/pages/images/large/missing.gif"
+        },
+        "created_at": "2015-02-10T01:48:53.000Z",
+        "updated_at": "2015-02-10T01:48:53.000Z",
+        "url": "http://give.supporter.dev/us/elaine",
+        "invitation_id": null,
+        "coordinate": {
+          "lat": 40.91,
+          "lon": -73.83
+        },
+        "owner_footprint": [
+          {
+            "key": "cause_raised",
+            "group": "community",
+            "amount_formatted": "$266.00",
+            "percentile": 59
+          },
+          {
+            "key": "cause_engagement",
+            "group": "community",
+            "amount_formatted": "1",
+            "percentile": 81
+          },
+          {
+            "key": "duration_volunteered",
+            "group": "effort",
+            "amount_formatted": "0h0m",
+            "percentile": 32
+          },
+          {
+            "key": "duration_trained",
+            "group": "effort",
+            "amount_formatted": "0h0m",
+            "percentile": 42
+          },
+          {
+            "key": "sharing",
+            "group": "voice",
+            "amount_formatted": "0",
+            "percentile": 5
+          },
+          {
+            "key": "page_views",
+            "group": "voice",
+            "amount_formatted": "0",
+            "percentile": 81
+          },
+          {
+            "key": "given",
+            "group": "money",
+            "amount_formatted": "$252.00",
+            "percentile": 32
+          },
+          {
+            "key": "raised",
+            "group": "money",
+            "amount_formatted": "$190.00",
+            "percentile": 53
+          }
+        ]
+      }
+    ]
+  }
+}

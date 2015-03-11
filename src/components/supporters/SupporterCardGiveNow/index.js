@@ -11,7 +11,6 @@ module.exports = React.createClass({
   propTypes: {
     current: React.PropTypes.number,
     target: React.PropTypes.number,
-    name: React.PropTypes.string,
     url: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
@@ -23,9 +22,8 @@ module.exports = React.createClass({
       url: '#',
       defaultI18n: {
         cta: 'Give Now',
-        labelPre: 'Only',
         currency: '$',
-        labelPost: 'to go'
+        label: 'Only {currency}{amount_remaining} to go'
       }
     };
   },
@@ -33,17 +31,18 @@ module.exports = React.createClass({
   render: function() {
     var props = this.props;
     var t = this.t;
-    var label = [t('labelPre'), t('currency') + (props.target - props.current), t('labelPost')];
-    var currentStyle = {
-      width: (Math.min(props.current / props.target * 100, 100)) + '%'
-    };
+    var label = t('label', {
+      currency: t('currency'),
+      amount_remaining: props.target - props.current
+    });
+    var progress = props.target > 0 ? Math.floor(props.current / props.target * 100) : 0;
 
     return (
       <a href={ props.url } className="SupporterCardGiveNow">
         <div className="SupporterCardGiveNow__cta">{ t('cta') }</div>
         <div className="SupporterCardGiveNow__progress">
-          <div className="SupporterCardGiveNow__current" style={ currentStyle }></div>
-          <div className="SupporterCardGiveNow__label">{ label.join(' ') }</div>
+          <div className="SupporterCardGiveNow__current" style={{ width: Math.min(progress, 100) + '%' }}></div>
+          <div className="SupporterCardGiveNow__label">{ label }</div>
         </div>
       </a>
     );

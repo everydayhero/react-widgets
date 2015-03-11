@@ -6,13 +6,14 @@ var _                   = require('lodash');
 var tweenState          = require('react-tween-state');
 var addEventListener    = require('../../../lib/addEventListener');
 var removeEventListener = require('../../../lib/removeEventListener');
+var I18nMixin           = require('../../mixins/I18n');
 var FootprintGroup      = require('../FootprintGroup');
 var FootprintTile       = require('../FootprintTile');
 var FootprintTip        = require('../FootprintTip');
 var FootprintTipLine    = require('../FootprintTipLine');
 
 module.exports = React.createClass({
-  mixins: [tweenState.Mixin],
+  mixins: [tweenState.Mixin, I18nMixin],
 
   displayName: "Footprint",
 
@@ -37,7 +38,51 @@ module.exports = React.createClass({
       compact: false,
       size: 144,
       offset: 2,
-      ratio: 0.85
+      ratio: 0.85,
+      onAvatarClick: function() {},
+      onMetricClick: function() {},
+      defaultI18n: {
+        community: {
+          cause_engagement: {
+            title: 'Community Engagement',
+            description: 'The number of people who share a passion for the same causes.'
+          },
+          cause_raised: {
+            title: 'Community Raised',
+            description: 'The collective funds raised by the people who care about the same causes.'
+          }
+        },
+        effort: {
+          duration_volunteered: {
+            title: 'Duration Volunteered',
+            description: 'A record of the hours spent helping their favourite causes.'
+          },
+          duration_trained: {
+            title: 'Duration Trained',
+            description: 'A record of the distance, time and calories spent supporting their favourite causes.'
+          }
+        },
+        voice: {
+          sharing: {
+            title: 'Sharing',
+            description: 'The number of times their story has been shared.'
+          },
+          page_views: {
+            title: 'Page Views',
+            description: 'Recognition of the awareness they have raised for the causes they care about.'
+          }
+        },
+        money: {
+          given: {
+            title: 'Amount Given',
+            description: 'A lifetime record of the donations made to the causes they care about.'
+          },
+          raised: {
+            title: 'Amount Raised',
+            description: 'A lifetime record of the money raised through the fundraising activities they undertook for their favourite causes.'
+          }
+        }
+      }
     };
   },
 
@@ -46,14 +91,37 @@ module.exports = React.createClass({
     return {
       min: radius * this.props.ratio - this.props.offset,
       max: radius - this.props.offset,
-      arc: Math.PI * 2 / this.props.data.length,
       metric: null,
       tip: false,
       compact: this.props.compact
     };
   },
 
-  componentDidMount: function() {
+  processData: function() {
+    var data = this.props.data.map(function(metric, index) {
+      return {
+        id: index,
+        key: metric.key,
+        group: metric.group,
+        value: metric.amount_formatted,
+        percentile: metric.percentile,
+        name: this.t(metric.group + '.' + metric.key + '.title'),
+        description: this.t(metric.group + '.' + metric.key + '.description')
+      };
+    }.bind(this));
+
+    this.setState({
+      data: data,
+      arc: data.length > 0 ? Math.PI * 2 / data.length : 0
+    });
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    this.processData();
+  },
+
+  componentWillMount: function() {
+    this.processData();
     addEventListener(window, 'touchstart', this.setCompact);
   },
 
@@ -117,8 +185,9 @@ module.exports = React.createClass({
   },
 
   renderGroups: function() {
-    return _.map(_.uniq(_.pluck(this.props.data, 'group')), function(d, i) {
-      var metrics = _.filter(this.props.data, { 'group': d });
+    var options = this.getOptions();
+    return _.map(_.uniq(_.pluck(this.state.data, 'group')), function(d, i) {
+      var metrics = _.filter(this.state.data, { 'group': d });
       return <FootprintGroup
         index={ i }
         key={ i + d }
@@ -127,7 +196,7 @@ module.exports = React.createClass({
         active = { _.contains(metrics, this.state.metric) }
         current={ this.state.metric }
         data={ metrics }
-        options={ this.getOptions() }
+        options={ options }
         onShowTip={ this.showTip }
         onHover={ this.setMetric }
         onClick={ this.sectorClick } />;

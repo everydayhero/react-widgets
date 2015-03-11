@@ -658,6 +658,54 @@ Displays a leaderboard sorted by distance, recorded using MapMyFitness, for a ca
 ```
 
 
+### Supporters
+
+#### Supporters
+
+Displays a set of supporter cards (fundraising page summary with donate call to action) for a charity or campaign.
+
+##### Options
+
+- `campaignUid`: *optional* string campaign uid to filter results by campaign.
+- `campaignSlug`: *optional* string campaign slug to filter results by campaign. Requires `country`.
+- `charityUid`: *optional* string charity uid to filter results by charity.
+- `charitySlug`: *optional* string charity slug to filter results by charity. Requires `country`.
+- `country`: *optional* string country code of region, either 'au', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
+- `limit`: *optional* number of supporter cards to show. Default is 6.
+- `type`: *optional* string. Set a type of either `'team'` or `'individual'`. Set to `'individual'` by default.
+- `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
+- `textColor`: *optional* string. Set to `'#333333'` by default.
+- `i18n`: *optional* object containing localised text. Default i18n is:
+
+  ```js
+  {
+    heading: 'Supporters',
+    emptyLabel: 'No supporters to display.'
+  }
+  ```
+
+##### Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic|Amatic+SC" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="SupportersExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('SupportersExample', 'Supporters', { campaignUid: 'us-0' });
+    </script>
+  </body>
+</html>
+```
+
+
 ### Maps
 
 #### Map (Campaign)

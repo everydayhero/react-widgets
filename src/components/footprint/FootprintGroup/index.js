@@ -15,8 +15,10 @@ module.exports = React.createClass({
     index: React.PropTypes.number.isRequired,
     name: React.PropTypes.string.isRequired,
     active: React.PropTypes.bool,
+    compact: React.PropTypes.bool,
     current: React.PropTypes.object,
     data: React.PropTypes.array.isRequired,
+    options: React.PropTypes.object.isRequired,
     onShowTip: React.PropTypes.func,
     onHover: React.PropTypes.func,
     onClick: React.PropTypes.func
@@ -25,6 +27,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       active: false,
+      compact: false
     };
   },
 
@@ -80,7 +83,7 @@ module.exports = React.createClass({
         end: end
       }, this);
       return <FootprintSector
-        key={ d.id + this.props.id }
+        key={ this.props.id + '_' + d.id}
         index={ d.id }
         id={ this.props.id }
         name={ d.key }

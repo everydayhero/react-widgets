@@ -1,31 +1,15 @@
 "use strict";
 
-var _                 = require('lodash');
-var React             = require('react');
-var I18nMixin         = require('../../mixins/I18n');
-var DOMInfoMixin      = require('../../mixins/DOMInfo');
-var pages             = require('../../../api/pages');
-var Icon              = require('../../helpers/Icon');
-var SupporterCard     = require('../SupporterCard');
+var _                   = require('lodash');
+var React               = require('react');
+var Icon                = require('../../helpers/Icon');
+var I18nMixin           = require('../../mixins/I18n');
+var DOMInfoMixin        = require('../../mixins/DOMInfo');
+var campaigns           = require('../../../api/campaigns');
+var charities           = require('../../../api/charities');
 var addEventListener    = require('../../../lib/addEventListener');
 var removeEventListener = require('../../../lib/removeEventListener');
-
-// DELETE THIS SHIT WHEN ENDPOINT EXISTS
-function rand() { // for Footprint dummy data
-  return (Math.random() * 100 | 0) + 1;
-}
-
-var dummyData = [
-  {id:0, key:'community_raised', name:'Community Raised', group:'community', value:'$0.00', percentile:rand(), description: "The collective funds raised by people who care about the same causes as you."},
-  {id:1, key:'community_engagement', name:'Community Engagement', group:'community', value:'467k', percentile:rand(), description: "The number of people supporting the causes you care about."},
-  {id:2, key:'money_fundraising', name:'Fundraising', group:'money', value:'$4.8k', percentile:rand(), description: "The lifetime amount you have raised through fundraising for the causes you care about."},
-  {id:3, key:'money_donations', name:'Donations', group:'money', value:'$9.8k', percentile:rand(), description: "The lifetime amount you have donated to the causes you care about."},
-  {id:4, key:'voice_reach', name:'Reach', group:'voice', value:'4564', percentile:rand(), description: "How many people you have reached through your philanthropic activities and sharing."},
-  {id:5, key:'voice_engagement', name:'Engagement', group:'voice', value:'36.8k', percentile:rand(), description: "How engaged you are with your supporters and other fundraisers."},
-  {id:6, key:'effort_training', name:'Training', group:'effort', value:'64h', percentile:rand(), description: "The total duration you have trained in support of the causes you care about."},
-  {id:7, key:'effort_volunteering', name:'Volunteering', group:'effort', value:'356h', percentile:rand(), description: "The total duration you have volunteered your talents for causes you care about."}
-];
-// DELETE THAT ^^^ SHIT WHEN ENDPOINT EXISTS
+var SupporterCard       = require('../SupporterCard');
 
 module.exports = React.createClass({
   displayName: "Supporters",
@@ -33,10 +17,13 @@ module.exports = React.createClass({
   mixins: [I18nMixin, DOMInfoMixin],
 
   propTypes: {
+    campaignSlug: React.PropTypes.string,
     campaignUid: React.PropTypes.string,
-    page: React.PropTypes.string,
-    pageSize: React.PropTypes.string,
-    type: React.PropTypes.string,
+    charitySlug: React.PropTypes.string,
+    charityUid: React.PropTypes.string,
+    country: React.PropTypes.oneOf(['au', 'nz', 'uk', 'us']),
+    limit: React.PropTypes.number,
+    type: React.PropTypes.oneOf(['team', 'individual']),
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     i18n: React.PropTypes.object
@@ -44,9 +31,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      campaignUid: '',
-      page: '1',
-      pageSize: '6',
+      limit: 6,
       type: 'individual',
       backgroundColor: '#EBEBEB',
       textColor: '#333333',
@@ -61,21 +46,12 @@ module.exports = React.createClass({
     return {
       isLoading: false,
       cardWidth: '',
-      supporters: []
+      pages: []
     };
   },
 
-  componentWillMount: function() {
-    this.setState({
-      isLoading: true
-    });
-
-    var props = this.props;
-
-    pages.findByCampaign(props.campaignUid, props.type, props.pageSize, props.page, this.onSuccess);
-  },
-
   componentDidMount: function() {
+    this.loadPages();
     addEventListener(window, 'resize', this.setCardWidth);
   },
 
@@ -85,37 +61,69 @@ module.exports = React.createClass({
 
   setCardWidth: _.debounce(function() {
     this.setState({
-      cardWidth: this.getChildrenWidth(180, this.state.supporters.length)
+      cardWidth: this.getChildrenWidth(180, this.state.pages.length)
     });
   }, 100),
 
+  getEndpoint: function() {
+    var endpoint;
+
+    var props = this.props;
+    if (props.country) {
+      if (props.campaignSlug) endpoint = campaigns.leaderboardBySlug.bind(campaigns, props.country, props.campaignSlug);
+      if (props.charitySlug)  endpoint = charities.leaderboardBySlug.bind(charities, props.country, props.charitySlug);
+    } else {
+      if (props.campaignUid)  endpoint = campaigns.leaderboard.bind(campaigns, props.campaignUid);
+      if (props.charityUid)   endpoint = charities.leaderboard.bind(charities, props.charityUid);
+    }
+
+    if (!endpoint && console && console.log) {
+      console.log("Supporters widget requires 'campaignUid' or 'charityUid'. If 'country' is given then 'campaignSlug' or 'charitySlug' may be used instead. ");
+    }
+
+    return (endpoint || function(type, limit, callback) { callback(null); });
+  },
+
+  loadPages: function() {
+    this.setState({ isLoading: true });
+
+    var endpoint = this.getEndpoint();
+    endpoint(this.props.type, this.props.limit, this.onSuccess, { includePages: true, includeFootprint: true });
+  },
+
   onSuccess: function(result) {
+    var pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : [];
+
     this.setState({
       isLoading: false,
-      supporters: result.pages,
-      cardWidth: this.getChildrenWidth(180, result.pages.length)
+      pages: pages,
+      cardWidth: this.getChildrenWidth(180, pages.length)
     });
   },
 
   renderSupporterCards: function() {
     var state = this.state;
-    var supporters = state.supporters;
     if (state.isLoading) {
       return <Icon className="Supporters__loading" icon="refresh" />;
-    } else {
-      return supporters.map(function(d) {
-        return <SupporterCard
-          key={ d.id }
-          data={ dummyData }
-          width={ state.cardWidth }
-          url={ d.url }
-          image={ d.image.large_image_url }
-          name={ d.name }
-          target={ d.target_cents / 100 }
-          current={ d.amount.cents / 100 }
-          currency={ d.amount.currency.symbol } />;
-      });
     }
+
+    var pages = state.pages;
+    if (_.isEmpty(pages)) {
+      return <p className="Supporters__emptyLabel">{ this.t('emptyLabel') }</p>;
+    }
+
+    return pages.map(function(page) {
+      return <SupporterCard
+        key={ page.id }
+        footprint={ page.owner_footprint }
+        width={ state.cardWidth }
+        url={ page.url }
+        image={ page.image.large_image_url }
+        name={ page.name }
+        target={ page.target_cents / 100 }
+        current={ page.amount.cents / 100 }
+        currency={ page.amount.currency.symbol } />;
+    });
   },
 
   render: function() {
@@ -128,10 +136,7 @@ module.exports = React.createClass({
     return (
       <div className="Supporters" style={ style }>
         <h3 className="Supporters__heading">{ this.t('heading') }</h3>
-        <div className="Supporters__content">
-          { !_.isEmpty(supporterCards) ? supporterCards : <p className="Supporters__emptyLabel">{ this.t('emptyLabel') }</p>
-          }
-        </div>
+        <div className="Supporters__content">{ supporterCards }</div>
       </div>
     );
   }

@@ -16,18 +16,15 @@ function simulateMouseOver(from, to) {
   TestUtils.SimulateNative.mouseOver(to, { relatedTarget: from });
 }
 
-function rand() { // for Footprint dummy data
-  return (Math.random() * 100 | 0) + 1;
-}
 var model = [
-  {id:0, key:'community_raised', name:'Community Raised', group:'community', value:'$0.00', percentile:rand(), description: "The collective funds raised by people who care about the same causes as you."},
-  {id:1, key:'community_engagement', name:'Community Engagement', group:'community', value:'467k', percentile:rand(), description: "The number of people supporting the causes you care about."},
-  {id:2, key:'money_fundraising', name:'Fundraising', group:'money', value:'$4.8k', percentile:rand(), description: "The lifetime amount you have raised through fundraising for the causes you care about."},
-  {id:3, key:'money_donations', name:'Donations', group:'money', value:'$9.8k', percentile:rand(), description: "The lifetime amount you have donated to the causes you care about."},
-  {id:4, key:'voice_reach', name:'Reach', group:'voice', value:'4564', percentile:rand(), description: "How many people you have reached through your philanthropic activities and sharing."},
-  {id:5, key:'voice_engagement', name:'Engagement', group:'voice', value:'36.8k', percentile:rand(), description: "How engaged you are with your supporters and other fundraisers."},
-  {id:6, key:'effort_training', name:'Training', group:'effort', value:'64h', percentile:rand(), description: "The total duration you have trained in support of the causes you care about."},
-  {id:7, key:'effort_volunteering', name:'Volunteering', group:'effort', value:'356h', percentile:rand(), description: "The total duration you have volunteered your talents for causes you care about."}
+  {key:'cause_raised', group:'community', amount_formatted:'$0.00', percentile:10},
+  {key:'cause_engagement', group:'community', amount_formatted:'467k', percentile:20},
+  {key:'raised', group:'money', amount_formatted:'$4.8k', percentile:30},
+  {key:'given', group:'money', amount_formatted:'$9.8k', percentile:40},
+  {key:'page_views', group:'voice', amount_formatted:'36.8k', percentile:50},
+  {key:'sharing', group:'voice', amount_formatted:'4564', percentile:60},
+  {key:'duration_volunteered', group:'effort', amount_formatted:'64h', percentile:70},
+  {key:'duration_trained', group:'effort', amount_formatted:'356h', percentile:80}
 ];
 
 describe('Footprint', function() {
@@ -73,9 +70,9 @@ describe('Footprint', function() {
 
     it('shows metric details on hover', function() {
       var svg = findByTag(element, 'svg');
-      var communityRaisedSector = findByClass(svg, 'FootprintMetric--community_raised').getDOMNode();
-      expect(communityRaisedSector).not.toBeNull();
-      simulateMouseOver(element.getDOMNode(), communityRaisedSector);
+      var causeRaisedSector = findByClass(svg, 'FootprintMetric--cause_raised').getDOMNode();
+      expect(causeRaisedSector).not.toBeNull();
+      simulateMouseOver(element.getDOMNode(), causeRaisedSector);
 
       var metricData = findByClass(element, 'FootprintTile--flip');
       expect(metricData.getDOMNode()).not.toBeNull();
@@ -87,9 +84,9 @@ describe('Footprint', function() {
       var tooltipName = findByClass(tooltip, 'FootprintTip__name').getDOMNode();
       var tooltipValue = findByClass(tooltip, 'FootprintTip__value').getDOMNode();
       var tooltipDescription = findByClass(tooltip, 'FootprintTip__description').getDOMNode();
-      expect(tooltipName.textContent).toContain(model[0].name);
-      expect(tooltipValue.textContent).toContain(model[0].value);
-      expect(tooltipDescription.textContent).toContain(model[0].description);
+      expect(tooltipName.textContent).toContain('Community Raised');
+      expect(tooltipValue.textContent).toContain(model[0].amount_formatted);
+      expect(tooltipDescription.textContent).toContain('The collective funds raised by the people who care about the same causes.');
     });
   });
 
@@ -105,7 +102,7 @@ describe('Footprint', function() {
 
     it('shows metric details in center on hover', function() {
       var svg = findByTag(element, 'svg');
-      var voiceEngagementSector = findByClass(svg, 'FootprintMetric--voice_engagement').getDOMNode();
+      var voiceEngagementSector = findByClass(svg, 'FootprintMetric--sharing').getDOMNode();
       expect(voiceEngagementSector).not.toBeNull();
       simulateMouseOver(element.getDOMNode(), voiceEngagementSector);
 
@@ -116,8 +113,8 @@ describe('Footprint', function() {
       var dataValue = findByClass(metricData, 'FootprintData__value').getDOMNode();
       var dataName = findByClass(metricData, 'FootprintData__name').getDOMNode();
       expect(dataPercent.textContent).toContain(model[5].percentile);
-      expect(dataValue.textContent).toContain(model[5].value);
-      expect(dataName.textContent).toContain(model[5].name);
+      expect(dataValue.textContent).toContain(model[5].amount_formatted);
+      expect(dataName.textContent).toContain('Sharing');
     });
   });
 });

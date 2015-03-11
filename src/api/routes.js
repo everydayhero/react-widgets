@@ -27,6 +27,10 @@ var baseRoutes = {
 };
 var routes = {};
 
+function removeEmptyQueryParams(url) {
+  return url.replace(/\w+=(&|$)/g, '').replace(/(\?|&)$/, '');
+}
+
 function getRoute(name, params) {
   var route = routes[name];
   if (!route) {
@@ -41,7 +45,7 @@ function getRoute(name, params) {
   });
 
   route = format(route, params, true);
-  route = route.replace(/\w+=(&|$)/g, '').replace(/(\?|&)$/, '');  // removed empty query params
+  route = removeEmptyQueryParams(route);
 
   return route;
 }

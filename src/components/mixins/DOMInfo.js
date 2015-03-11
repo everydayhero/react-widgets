@@ -41,6 +41,6 @@ module.exports = {
     var width = this.getComponentWidth();
     var maxPerRow = Math.floor(width / min);
     var rows = Math.ceil(count / maxPerRow);
-    return (100 / Math.min(count, maxPerRow)) + '%';
+    return Math.floor(100 / Math.min(count, maxPerRow) * 100) / 100 + '%';
   }
 };

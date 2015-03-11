@@ -36,7 +36,7 @@ function getRoute(name, params) {
     if (_.isArray(value)) {
       return value.join(',');
     }
-    return value == null ? '' : encodeURIComponent(value);
+    return value == null ? '' : value;
   });
 
   route = format(route, params, true);

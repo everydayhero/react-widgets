@@ -9,7 +9,7 @@ module.exports = {
   },
 
   search: function(searchTerm, country, callback) {
-    var query = { searchTerm: searchTerm, country: country };
+    var query = { searchTerm: encodeURIComponent(searchTerm), country: country };
     return getJSONP(routes.get('searchAddresses', query), callback);
   }
 };

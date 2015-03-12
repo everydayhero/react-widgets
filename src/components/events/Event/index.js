@@ -19,7 +19,6 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      activeClass: '',
       defaultI18n: {
         joinLabel: 'Join Event',
         supportersLabel: 'Supporters',

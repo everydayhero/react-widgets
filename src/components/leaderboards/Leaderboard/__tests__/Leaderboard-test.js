@@ -1,13 +1,12 @@
 "use strict";
 jest.autoMockOff();
-jest.mock('../../../../api/pages');
+jest.mock('../../../../api/campaigns');
 
 describe('Leaderboard', function() {
   var _               = require('lodash');
   var React           = require('react/addons');
   var Leaderboard     = require('../');
   var LeaderboardItem = require('../../LeaderboardItem/');
-  var pages           = require('../../../../api/pages');
   var TestUtils       = React.addons.TestUtils;
   var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
   var scryByClass     = TestUtils.scryRenderedDOMComponentsWithClass;
@@ -60,7 +59,7 @@ describe('Leaderboard', function() {
     var data;
 
     beforeEach(function() {
-      element = TestUtils.renderIntoDocument(<Leaderboard />);
+      element = TestUtils.renderIntoDocument(<Leaderboard campaignUid="au-0" />);
     });
 
     it('assigns rank in order of amount', function(){

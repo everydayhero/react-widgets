@@ -27,7 +27,8 @@ var widgets = {
   AddressLookup: require('./components/address/AddressLookup'),
   Amount: require('./components/amount/Amount'),
   Input: require('./components/forms/Input'),
-  Footprint: require('./components/footprint/Footprint')
+  Footprint: require('./components/footprint/Footprint'),
+  Supporters: require('./components/supporters/Supporters')
 };
 var modals = {
   CharitySearch: require('./components/search/CharitySearchModal'),

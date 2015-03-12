@@ -10,6 +10,10 @@ module.exports = {
     return getJSONP(routes.get('charity', { charityUid: charityUid }), callback);
   },
 
+  findBySlug: function(country, charitySlug, callback) {
+    return this.find(country + '/' + charitySlug, callback);
+  },
+
   findByUids: function(charityUids, callback) {
     if (_.isEmpty(charityUids)) {
       _.defer(callback, { charities: [] });
@@ -33,8 +37,22 @@ module.exports = {
     return getJSONP(routes.get('charities', params), callback);
   },
 
+  leaderboard: function(charityUid, type, limit, callback, options) {
+    var params = _.merge({
+      charityUid: charityUid,
+      type: type,
+      limit: limit
+    }, options);
+    return getJSONP(routes.get('charityLeaderboard', params), callback);
+  },
+
+  leaderboardBySlug: function(country, charitySlug, type, limit, callback, options) {
+    return this.leaderboard(country + '/' + charitySlug, type, limit, callback, options);
+  },
+
   search: function(params, callback) {
     params = _.merge({ page: 1, pageSize: 10 }, params);
+    params.searchTerm = encodeURIComponent(params.searchTerm);
     return getJSONP(routes.get('searchCharities', params), callback);
   },
 

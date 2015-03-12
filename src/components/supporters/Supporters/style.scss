@@ -1,0 +1,23 @@
+.Supporters {
+  @extend %clearfix;
+  background: $ehw-grey-light;
+  font-family: $ehw-sans-serif-fonts;
+  border-radius: $ehw-border-radius;
+}
+
+.Supporters__heading {
+  @extend %ehw-tile-heading;
+}
+
+.Supporters__content {
+  text-align: center;
+}
+
+.Supporters__loading {
+  padding: 0 15px 15px;
+  display: inline-block;
+}
+
+.Supporters__empty-label {
+  padding: 0 15px;
+}

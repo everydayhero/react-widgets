@@ -36,7 +36,6 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       isLoading: false,
-      hasResults: false,
       pageResults: []
     };
   },
@@ -55,47 +54,37 @@ module.exports = React.createClass({
     this.setState({
       isLoading: false,
       pageResults: result.pages
-    },
-
-    function() {
-      if (!_.isEmpty(this.state.pageResults)) {
-        this.setState({
-          hasResults: true
-        });
-      }
-    }.bind(this));
+    });
   },
 
   renderFundraiserImage: function() {
-    var emptyLabel = this.t('emptyLabel');
-
     if (this.state.isLoading) {
       return <Icon className="RecentFundraisers__loading" icon="refresh" />;
     } else {
-      if (this.state.hasResults) {
-        return this.state.pageResults.map(function(d) {
-          return <FundraiserImage key={ d.id } pageUrl={ d.url } imgSrc={ d.image.large_image_url } imgTitle={ d.name } />;
-        });
-      } else {
-        return (
-          <p className="RecentFundraisers__empty-label">{ emptyLabel }</p>
-        );
-      }
+      return this.state.pageResults.map(function(d) {
+        return <FundraiserImage
+          key={ d.id }
+          pageUrl={ d.url }
+          imgSrc={ d.image.large_image_url }
+          imgTitle={ d.name } />;
+      });
     }
   },
 
   render: function() {
+    var fundraisers = this.renderFundraiserImage();
     var heading = this.t('heading');
-    var customStyle = {
+    var style = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
     };
 
     return (
-      <div className="RecentFundraisers" style={ customStyle }>
+      <div className="RecentFundraisers" style={ style }>
         <h3 className="RecentFundraisers__heading">{ heading }</h3>
         <div className="RecentFundraisers__content">
-          { this.renderFundraiserImage() }
+          { !_.isEmpty(fundraisers) ? fundraisers : <p className="RecentFundraisers__empty-label">{ this.t('emptyLabel') }</p>
+          }
         </div>
       </div>
     );

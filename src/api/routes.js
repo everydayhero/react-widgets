@@ -10,12 +10,13 @@ var baseRoutes = {
   fundraise:            '{protocol}://{campaignSlug}.{hostname}/{country}/{charitySlug}/get-started',
 
   campaign:             '{baseUrl}/api/v2/campaigns/{campaignUid}.jsonp',
-  campaignLeaderboard:  '{baseUrl}/api/v2/campaigns/{campaignUid}/leaderboard.jsonp?type={type}&limit={limit}',
+  campaignLeaderboard:  '{baseUrl}/api/v2/campaigns/{campaignUid}/leaderboard.jsonp?type={type}&limit={limit}&include_pages={includePages}&include_footprint={includeFootprint}',
   campaigns:            '{baseUrl}/api/v2/campaigns.jsonp?ids={campaignUids}&charity_id={charityUid}&sort_by={sortBy}&status={status}&exclude_bau={excludeBau}&page={page}&limit={limit}',
   charity:              '{baseUrl}/api/v2/charities/{charityUid}.jsonp',
+  charityLeaderboard:   '{baseUrl}/api/v2/charities/{charityUid}/leaderboard.jsonp?type={type}&limit={limit}&include_pages={includePages}&include_footprint={includeFootprint}',
   charities:            '{baseUrl}/api/v2/charities.jsonp?ids={charityUids}&campaign_ids={campaignUid}&page={page}&limit={limit}',
-  page:                 '{baseUrl}/api/v2/pages/{pageId}.jsonp',
-  pages:                '{baseUrl}/api/v2/pages.jsonp?ids={pageIds}&campaign_id={campaignUid}&type={type}&page={page}&limit={limit}',
+  page:                 '{baseUrl}/api/v2/pages/{pageId}.jsonp?include_footprint={includeFootprint}',
+  pages:                '{baseUrl}/api/v2/pages.jsonp?ids={pageIds}&campaign_id={campaignUid}&type={type}&include_footprint={includeFootprint}&page={page}&limit={limit}',
 
   searchCampaigns:      '{baseUrl}/api/v2/search/campaigns.jsonp?q={searchTerm}&country_code={country}&page={page}&page_size={pageSize}',
   searchCharities:      '{baseUrl}/api/v2/search/charities.jsonp?q={searchTerm}&country_code={country}&campaign_id={campaignUid}&page={page}&page_size={pageSize}',
@@ -25,6 +26,10 @@ var baseRoutes = {
   searchAddresses:      '{baseUrl}/api/v2/addresses.jsonp?country_code={country}&q={searchTerm}'
 };
 var routes = {};
+
+function removeEmptyQueryParams(url) {
+  return url.replace(/\w+=(&|$)/g, '').replace(/(\?|&)$/, '');
+}
 
 function getRoute(name, params) {
   var route = routes[name];
@@ -36,11 +41,11 @@ function getRoute(name, params) {
     if (_.isArray(value)) {
       return value.join(',');
     }
-    return value === null ? '' : encodeURIComponent(value);
+    return value == null ? '' : value;
   });
 
   route = format(route, params, true);
-  route = route.replace(/\w+=(&|$)/g, '').replace(/(\?|&)$/, '');  // removed empty query params
+  route = removeEmptyQueryParams(route);
 
   return route;
 }

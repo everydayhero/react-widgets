@@ -3,8 +3,8 @@
 var _                         = require('lodash');
 var React                     = require('react');
 var I18nMixin                 = require('../../mixins/I18n');
-var leaderboard               = require('../../../api/leaderboard');
-var pages                     = require('../../../api/pages');
+var campaigns                 = require('../../../api/campaigns');
+var charities                 = require('../../../api/charities');
 var Icon                      = require('../../helpers/Icon');
 var FitnessLeaderboardItem    = require('../FitnessLeaderboardItem');
 var FitnessLeaderboardColHead = require('../FitnessLeaderboardColHead');
@@ -15,7 +15,11 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "FitnessLeaderboard",
   propTypes: {
-    campaignUid: React.PropTypes.string.isRequired,
+    campaignSlug: React.PropTypes.string,
+    campaignUid: React.PropTypes.string,
+    charitySlug: React.PropTypes.string,
+    charityUid: React.PropTypes.string,
+    country: React.PropTypes.oneOf(['au', 'nz', 'uk', 'us']),
     type: React.PropTypes.oneOf(['team', 'individual']),
     limit: React.PropTypes.number,
     pageSize: React.PropTypes.number,
@@ -30,7 +34,6 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      campaignUid: '',
       type: 'individual',
       limit: 100,
       pageSize: 5,
@@ -54,7 +57,6 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       isLoading: false,
-      pageIds: [],
       boardData: [],
       currentSort: this.props.initialSort
     };
@@ -64,25 +66,35 @@ module.exports = React.createClass({
     this.loadLeaderboard();
   },
 
+  getEndpoint: function() {
+    var endpoint;
+
+    var props = this.props;
+    if (props.country) {
+      if (props.campaignSlug) { endpoint = campaigns.leaderboardBySlug.bind(campaigns, props.country, props.campaignSlug); }
+      if (props.charitySlug)  { endpoint = charities.leaderboardBySlug.bind(charities, props.country, props.charitySlug); }
+    } else {
+      if (props.campaignUid)  { endpoint = campaigns.leaderboard.bind(campaigns, props.campaignUid); }
+      if (props.charityUid)   { endpoint = charities.leaderboard.bind(charities, props.charityUid); }
+    }
+
+    if (!endpoint && console && console.log) {
+      console.log("FitnessLeaderboard widget requires 'campaignUid' or 'charityUid'. If 'country' is given then 'campaignSlug' or 'charitySlug' may be used instead. ");
+    }
+
+    return (endpoint || function(type, limit, callback) { callback(null); });
+  },
+
   loadLeaderboard: function() {
     this.setState({ isLoading: true });
 
-    var props = this.props;
-    leaderboard.find(props.campaignUid, props.type, props.limit, this.loadPages);
+    var endpoint = this.getEndpoint();
+    endpoint(this.props.type, this.props.limit, this.processLeaderboard, { includePages: true });
   },
 
-  loadPages: function(result) {
-    var pageIds = result.leaderboard.page_ids;
-    this.setState({ pageIds: pageIds });
-
-    pages.findByIds(pageIds, this.processLeaderboard);
-  },
-
-  processLeaderboard: function(pageData) {
-    var leaderboard = _.map(this.state.pageIds, function(pageId, i) {
-      var page = _.find(pageData.pages, {id: pageId});
-      return this.processPage(page);
-    }, this);
+  processLeaderboard: function(result) {
+    var pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : [];
+    var leaderboard = _.map(pages, this.processPage);
 
     this.setState({
       isLoading: false,

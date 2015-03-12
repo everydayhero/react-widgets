@@ -19,8 +19,8 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    var _this = this;
-    window.setTimeout(function() { _this.setState({ show: true }); }, 10);
+    var component = this;
+    window.setTimeout(function() { component.setState({ show: true }); }, 10);
   },
 
   render: function() {

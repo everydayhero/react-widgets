@@ -32,19 +32,19 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    var _this = this;
+    var component = this;
     campaign.findByCharity(this.props.charityUid, 1, 6, function(result) {
-      _this.setState({
-        content: _this.renderEvents(result.campaigns)
+      component.setState({
+        content: component.renderEvents(result.campaigns)
       });
     });
   },
 
   renderEvents: function(events) {
-    var _this = this;
+    var component = this;
     if(!_.isEmpty(events)) {
       return _.map(events, function(e) {
-        var fundraiseUrl = charity.fundraiseUrl({country_code: e.country_code, slug: _this.props.charitySlug}, e.slug);
+        var fundraiseUrl = charity.fundraiseUrl({country_code: e.country_code, slug: component.props.charitySlug}, e.slug);
         var backgroundColor = e.background_color ? e.background_color : 'transparent';
         var date = new Date(e.display_finish_at);
         return <Event key={ e.id }

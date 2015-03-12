@@ -35,12 +35,12 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    var _this = this;
+    var component = this;
     var backgroundImage = document.createElement('img');
     backgroundImage.setAttribute('crossorigin', 'anonymous');
     backgroundImage.src = this.props.backgroundImageUrl;
     backgroundImage.onload = function() {
-      _this.setState({
+      component.setState({
         base64BlurredBackgroundImage: effect.blurImage(backgroundImage, 30)
       });
     };
@@ -56,8 +56,8 @@ module.exports = React.createClass({
   },
 
   timeout: function() {
-    var _this = this;
-    setTimeout(function() { _this.deactivate(); }, 3000);
+    var component = this;
+    setTimeout(function() { component.deactivate(); }, 3000);
   },
 
   deactivate: function() {

@@ -931,14 +931,47 @@ Displays a call to action box with links to the *getting started* and *sign in* 
 ```html
 <html>
   <head>
-    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" type="text/css" />
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
     <div id="CallToActionBoxExample">Loading...</div>
     <script>
       edh.widgets.renderWidget('CallToActionBoxExample', 'CallToActionBox', { campaignUid: 'us-0', registrationUrl: 'https://your-registration-url.com/' });
+    </script>
+  </body>
+</html>
+```
+
+
+### Events
+
+#### Upcoming Events
+
+Displays a list of upcoming events / campaigns.
+
+- `charityUid`: *required* string. Charity uid to filter campaigns results.
+- `charitySlug`: *required* string. Charity slug for given charity uid.
+- `i18n`: *optional* object containing localised text. Default i18n is:
+
+  ```js
+    {
+      emptyLabel: 'No events to display.'
+    }
+  ```
+
+```html
+<html>
+  <head>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="UpcomingEventsExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('UpcomingEventsExample', 'UpcomingEvents', { charityUid: 'gb-1', charitySlug: 'walk-the-walk' });
     </script>
   </body>
 </html>

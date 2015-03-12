@@ -1,0 +1,66 @@
+$ehw-animation-speed: 200ms;
+
+@keyframes progress-bar-loaded {
+  from {width: 0%;}
+  to {width: 100%;}
+}
+
+
+.GoalProgress {
+  display: table;
+  width: 100%;
+  background: url(
+    data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVQIHWNgQAX/kblEcgCBwgP9UmTMJwAAAABJRU5ErkJggg==
+  ) repeat;
+}
+
+.GoalProgress__icon {
+  display: table-cell;
+  max-width: 12px;
+  text-align: center;
+  border-left: solid white 2px;
+}
+
+.GoalProgress__area {
+  position: relative;
+  text-align: right;
+  display: table-cell;
+}
+
+.GoalProgress__bar,
+.GoalProgress__bar--completed {
+  position: absolute;
+  animation: progress-bar-loaded 1s ease forwards;
+}
+
+.GoalProgress__bar--completed .GoalProgress__barChevron {
+  display: none;
+}
+
+.GoalProgress__barTable {
+  display: table;
+  height: 40px;
+}
+
+.GoalProgress__barFill {
+  display: table-cell;
+  background: red;
+  width: 100%;
+  /*transition: width $ehw-animation-speed ease-in-out;
+  -moz-transition: width $ehw-animation-speed ease-in-out;
+  -webkit-transition: width $ehw-animation-speed ease-in-out;*/
+}
+
+.GoalProgress__barChevron {
+  display: table-cell;
+  border-left: solid red 20px;
+  border-bottom: solid transparent 20px;
+  border-top: solid transparent 20px;
+}
+
+.GoalProgress__text {
+  margin: 0;
+  position: relative;
+  padding: 12px 0;
+  text-align: center;
+}

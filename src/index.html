@@ -149,6 +149,11 @@
       </div>
 
       <div class="panel clearfix">
+        <h3 class="title">Goal Progress</h3>
+        <div id="GoalProgressExample" class="">Loading...</div>
+      </div>
+
+      <div class="panel clearfix">
         <h3 class="title">Metrics</h3>
         <div id="FundsRaisedExample" class="main-metric">Loading...</div>
         <div id="TotalHeroesExample" class="main-metric">Loading...</div>
@@ -201,6 +206,7 @@
     edh.widgets.initModal('CharitySearchDonate', 'CharitySearch', { country: 'uk', action: 'donate' });
     edh.widgets.initModal('CharitySearchFundraise', 'CharitySearch', { country: 'uk', action: 'fundraise' });
     edh.widgets.initModal('PageSearchExample', 'PageSearch', { country: 'uk' });
+    edh.widgets.renderWidget('GoalProgressExample', 'GoalProgress', { campaignUid: 'us-22', goal: 20000000 });
     edh.widgets.renderWidget('FundsRaisedExample','FundsRaised', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUids: ['us-22', 'us-24'] });

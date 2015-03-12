@@ -64,11 +64,11 @@ module.exports = React.createClass({
 
     var props = this.props;
     if (props.country) {
-      if (props.campaignSlug) endpoint = campaigns.leaderboardBySlug.bind(campaigns, props.country, props.campaignSlug);
-      if (props.charitySlug)  endpoint = charities.leaderboardBySlug.bind(charities, props.country, props.charitySlug);
+      if (props.campaignSlug) { endpoint = campaigns.leaderboardBySlug.bind(campaigns, props.country, props.campaignSlug); }
+      if (props.charitySlug)  { endpoint = charities.leaderboardBySlug.bind(charities, props.country, props.charitySlug); }
     } else {
-      if (props.campaignUid)  endpoint = campaigns.leaderboard.bind(campaigns, props.campaignUid);
-      if (props.charityUid)   endpoint = charities.leaderboard.bind(charities, props.charityUid);
+      if (props.campaignUid)  { endpoint = campaigns.leaderboard.bind(campaigns, props.campaignUid); }
+      if (props.charityUid)   { endpoint = charities.leaderboard.bind(charities, props.charityUid); }
     }
 
     if (!endpoint && console && console.log) {

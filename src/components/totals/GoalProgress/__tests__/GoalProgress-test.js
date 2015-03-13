@@ -26,7 +26,7 @@ describe('FundsRaised', function() {
 
     it('renders a loading icon', function() {
       element.setState({ isLoading: true });
-      findByClass(element, 'GoalProgress__loading');
+      findByClass(element, 'fa-refresh');
     });
 
     it('renders a default text', function() {
@@ -52,10 +52,9 @@ describe('FundsRaised', function() {
     var goalProgress;
     var element;
     var goal = 100 * 100;
-    var currencySymbol = '£';
 
     beforeEach(function() {
-      goalProgress = <GoalProgress goal={ goal } currencySymbol={ currencySymbol } />;
+      goalProgress = <GoalProgress goal={ goal } />;
       element = TestUtils.renderIntoDocument(goalProgress);
     });
 
@@ -63,7 +62,7 @@ describe('FundsRaised', function() {
       element.setState({ isLoading: false });
       var text = findByClass(element, 'GoalProgress__text');
 
-      expect(text.getDOMNode().textContent).toContain('£100 goal');
+      expect(text.getDOMNode().textContent).toContain('$100 goal');
     });
   });
 

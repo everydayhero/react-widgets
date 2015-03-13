@@ -1,0 +1,23 @@
+.CountDown {
+  text-align: center;
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+.CountDown__days {
+  font-size: $x-12;
+  padding-top: $x-4;
+  font-weight: bold;
+  margin: 0;
+}
+
+.CountDown__daysToGo {
+  font-size: $x-5;
+  margin: 0;
+}
+
+.CountDown__register {
+  display: block;
+  padding: $x-3;
+  color: #FF7E6B;
+}

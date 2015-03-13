@@ -1062,6 +1062,28 @@ Displays a list of upcoming events / campaigns.
   </body>
 </html>
 ```
+#### Countdown
+
+Displays the countdown to the end of an event / campaign.
+
+- `days`: *required* number. The countdown days to the end of an event / campaign.
+- `registerUrl`: *required* string. The URL to your registration page.
+
+```html
+<html>
+  <head>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="CountDownExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('CountDownExample', 'CountDown', { days: 34, registerUrl: 'https://pmhincelebration.edheroy.com/au/get-started' });
+    </script>
+  </body>
+</html>
+```
 
 
 ## Commands

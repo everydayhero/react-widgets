@@ -11,15 +11,12 @@ module.exports = React.createClass({
   propTypes: {
     goal: React.PropTypes.number,
     campaignUid: React.PropTypes.string.isRequired,
-    textColor: React.PropTypes.string,
     format: React.PropTypes.string
   },
 
   getDefaultProps: function() {
     return {
       goal: 0,
-      campaignUid: '',
-      textColor: '#FFFFFF',
       format: '0,0'
     };
   },
@@ -107,18 +104,14 @@ module.exports = React.createClass({
       <p className="GoalProgress__text">
         { formattedTotal }
         <span className="GoalProgress__text--raised"> raised of </span>
-        { formattedGoal}
+        { formattedGoal }
       </p>
     );
   },
 
   render: function() {
-    var customStyle = {
-      color: this.props.textColor
-    };
-
     return (
-      <div className="GoalProgress" style={ customStyle }>
+      <div className="GoalProgress">
         <div className="GoalProgress__area">
           { this.renderProgressBar() }
           { this.renderText() }

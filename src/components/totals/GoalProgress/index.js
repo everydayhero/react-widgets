@@ -13,7 +13,6 @@ module.exports = React.createClass({
     campaignUid: React.PropTypes.string.isRequired,
     progressColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
-    currencySymbol: React.PropTypes.string,
     format: React.PropTypes.string
   },
 
@@ -23,7 +22,6 @@ module.exports = React.createClass({
       campaignUid: '',
       progressColor: '#346fa3',
       textColor: '#FFFFFF',
-      currencySymbol: '$',
       format: '0,0'
     };
   },
@@ -31,7 +29,8 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       isLoading: false,
-      total: 0
+      total: 0,
+      currencySymbol: '$'
     };
   },
 
@@ -46,11 +45,15 @@ module.exports = React.createClass({
 
   onSuccess: function(result) {
     var campaign = result.campaign;
-    var total = campaign.funds_raised.cents;
+    var funds_raised = campaign.funds_raised || {};
+    var total = funds_raised.cents || 0;
+    var currency = funds_raised.currency || {};
+    var currencySymbol = currency.symbol || '$';
 
     this.setState({
       isLoading: false,
-      total: total
+      total: total,
+      currencySymbol: currencySymbol
     });
   },
 
@@ -59,14 +62,14 @@ module.exports = React.createClass({
     var goal = this.props.goal;
     var offsetWidth = numeral(total / goal).format('0%');
     var style = { width: offsetWidth || '100%' };
-    var classes = 'GoalProgress__bar--completed';
+    var classes = 'GoalProgress__bar';
 
     if (offsetWidth == '100%') {
       classes += '--completed';
     }
 
     if (this.state.isLoading) {
-      return <Icon className="GoalProgress__loading" icon="refresh" />;
+      return null;
     } else {
       return (
         <div className={ classes } >
@@ -80,9 +83,14 @@ module.exports = React.createClass({
   },
 
   renderIcon: function() {
+    var icon = "trophy";
+    if (this.state.isLoading) {
+      icon = "refresh";
+    }
+
     return(
       <div className="GoalProgress__icon">
-        <Icon icon="trophy"/>
+        <Icon icon={ icon } />
       </div>
     );
   },
@@ -90,9 +98,10 @@ module.exports = React.createClass({
   renderText: function() {
     var props = this.props,
         format = props.format,
-        goal = props.goal / 100,
-        currencySymbol = props.currencySymbol;
-    var total = this.state.total / 100;
+        goal = props.goal / 100;
+    var state = this.state,
+        currencySymbol = state.currencySymbol,
+        total = this.state.total / 100;
     var formattedGoal = currencySymbol + numeral(goal).format(format) + ' goal';
     var formattedTotal = currencySymbol + numeral(total).format(format);
 

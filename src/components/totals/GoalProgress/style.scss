@@ -9,14 +9,18 @@ $ehw-animation-speed: 200ms;
 .GoalProgress {
   display: table;
   width: 100%;
-  background: url(
-    data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVQIHWNgQAX/kblEcgCBwgP9UmTMJwAAAABJRU5ErkJggg==
-  ) repeat;
+  background-image: url(
+    data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAEklEQVQIHWPYu3fvfwZcYKAkAaN7E0X4jmdZAAAAAElFTkSuQmCC
+  );
+  background-color: #D0D0D0;
 }
+
+/* edit pattern at http://ptrn.it/1x0nFEh */
 
 .GoalProgress__icon {
   display: table-cell;
   max-width: 12px;
+  width: $x-9;
   text-align: center;
   border-left: solid white 2px;
 }
@@ -44,16 +48,13 @@ $ehw-animation-speed: 200ms;
 
 .GoalProgress__barFill {
   display: table-cell;
-  background: red;
+  background: $ehw-grey-dark;
   width: 100%;
-  /*transition: width $ehw-animation-speed ease-in-out;
-  -moz-transition: width $ehw-animation-speed ease-in-out;
-  -webkit-transition: width $ehw-animation-speed ease-in-out;*/
 }
 
 .GoalProgress__barChevron {
   display: table-cell;
-  border-left: solid red 20px;
+  border-left: solid $ehw-grey-dark 20px;
   border-bottom: solid transparent 20px;
   border-top: solid transparent 20px;
 }
@@ -63,4 +64,9 @@ $ehw-animation-speed: 200ms;
   position: relative;
   padding: 12px 0;
   text-align: center;
+  font-weight: 500;
+}
+
+.GoalProgress__text--raised {
+  font-weight: lighter;
 }

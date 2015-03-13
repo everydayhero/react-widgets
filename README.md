@@ -319,6 +319,38 @@ Set and display a campaign goal. While this component can be configured to displ
 </html>
 ```
 
+#### Goal Progress(Campaign)
+
+Display a campaign goal progress bar.
+
+##### Options
+
+- `goal`: *required* number. Set a goal, rendered as a dollar value by default.
+- `campaignUid`: *required* string campaign uid to filter results by campaign.
+- `progressColor`: *optional* string. Set to `'#346fa3'` by default.
+- `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `format`: *optional* string. Set to `'0,0 a'` by default. [More format strings](http://numeraljs.com/).
+
+##### Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="GoalProgressExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('GoalProgressExample', 'GoalProgress', { campaignUid: 'us-22', goal: 20000000 });
+    </script>
+  </body>
+</html>
+```
+
 #### Total Distance (Campaign)
 
 Displays the total distance recorded by fundraisers (using MapMyFitness) for a single specified campaign in either **kilometers** or **miles**.

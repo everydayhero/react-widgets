@@ -327,7 +327,6 @@ Display a campaign goal progress bar.
 
 - `goal`: *required* number. Set a goal, rendered as a dollar value by default.
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
-- `progressColor`: *optional* string. Set to `'#346fa3'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `format`: *optional* string. Set to `'0,0 a'` by default. [More format strings](http://numeraljs.com/).
 

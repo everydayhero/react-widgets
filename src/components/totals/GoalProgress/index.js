@@ -11,7 +11,6 @@ module.exports = React.createClass({
   propTypes: {
     goal: React.PropTypes.number,
     campaignUid: React.PropTypes.string.isRequired,
-    progressColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     format: React.PropTypes.string
   },
@@ -20,7 +19,6 @@ module.exports = React.createClass({
     return {
       goal: 0,
       campaignUid: '',
-      progressColor: '#346fa3',
       textColor: '#FFFFFF',
       format: '0,0'
     };

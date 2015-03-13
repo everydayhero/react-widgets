@@ -156,6 +156,11 @@
         <div id="TotalCharitiesExample" class="main-metric">Loading...</div>
         <div id="GoalExample" class="main-metric">Loading...</div>
       </div>
+
+      <div class="panel clearfix">
+        <h3 class="title">Events</h3>
+        <div id="CountDownExample" class="main-metric">Loading...</div>
+      </div>
     </div>
     <div class="calls-to-action pull-left">
       <div id="CallToActionBoxExample">Loading...</div>
@@ -201,6 +206,7 @@
     edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('GoalExample', 'Goal', { goal: '5000000', i18n: { title: '2015 Goal' } });
+    edh.widgets.renderWidget('CountDownExample', 'CountDown', { days: 34, registerUrl: 'https://pmhincelebration.edheroy.com/au/get-started' });
     edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TeamLeaderboardExample', 'Leaderboard', { campaignUid: 'us-22', type: 'team', limit: 16, pageSize: 4, i18n: { heading: 'Leaderboard > Top Teams' } });
     edh.widgets.renderWidget('FitnessLeaderboardExample', 'FitnessLeaderboard', { campaignUid: 'us-22' });

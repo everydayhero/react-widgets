@@ -1,0 +1,72 @@
+$ehw-animation-speed: 200ms;
+
+@keyframes progress-bar-loaded {
+  from {width: 0%;}
+  to {width: 100%;}
+}
+
+.GoalProgress {
+  display: table;
+  width: 100%;
+  background-image: url(
+    data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAEklEQVQIHWPYu3fvfwZcYKAkAaN7E0X4jmdZAAAAAElFTkSuQmCC
+  );
+  background-color: #D0D0D0;
+  color: #FFFFFF;
+}
+
+/* edit pattern at http://ptrn.it/1x0nFEh */
+
+.GoalProgress__icon {
+  display: table-cell;
+  max-width: 12px;
+  width: $x-9;
+  text-align: center;
+  border-left: solid white 2px;
+}
+
+.GoalProgress__area {
+  position: relative;
+  text-align: right;
+  display: table-cell;
+}
+
+.GoalProgress__bar,
+.GoalProgress__bar--completed {
+  position: absolute;
+  animation: progress-bar-loaded 1s ease forwards;
+}
+
+.GoalProgress__bar--completed .GoalProgress__barChevron {
+  display: none;
+}
+
+.GoalProgress__barTable {
+  display: table;
+  height: 40px;
+}
+
+.GoalProgress__barFill {
+  display: table-cell;
+  background: $ehw-grey-dark;
+  width: 100%;
+}
+
+.GoalProgress__barChevron {
+  display: table-cell;
+  border-left: solid $ehw-grey-dark 20px;
+  border-bottom: solid transparent 20px;
+  border-top: solid transparent 20px;
+}
+
+.GoalProgress__text {
+  margin: 0;
+  position: relative;
+  padding: 12px 0;
+  text-align: center;
+  font-weight: 500;
+}
+
+.GoalProgress__text--raised {
+  font-weight: lighter;
+}

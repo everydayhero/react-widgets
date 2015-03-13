@@ -1038,9 +1038,6 @@ Displays the countdown to the end of an event / campaign.
 
 - `days`: *required* number. The countdown days to the end of an event / campaign.
 - `registerUrl`: *required* string. The URL to your registration page.
-- `backgroundColor`: *optional*. Set to `'#FFFFFF'` by default.
-- `textColor`: *optional*. Set to `'#000000'` by default.
-- `linkColor`: *optional*. Set to `'#FF7E6B'` by default.
 
 ```html
 <html>

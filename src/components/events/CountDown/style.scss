@@ -1,5 +1,7 @@
 .CountDown {
   text-align: center;
+  background-color: #FFFFFF;
+  color: #000000;
 }
 
 .CountDown__days {
@@ -17,4 +19,5 @@
 .CountDown__register {
   display: block;
   padding: $x-3;
+  color: #FF7E6B;
 }

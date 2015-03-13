@@ -7,37 +7,24 @@ module.exports = React.createClass({
   displayName: 'CountDown',
   propTypes: {
     days: React.PropTypes.number.isRequired,
-    registerUrl: React.PropTypes.string.isRequired,
-    backgroundColor: React.PropTypes.string,
-    textColor: React.PropTypes.string,
-    linkColor: React.PropTypes.string
+    registerUrl: React.PropTypes.string.isRequired
   },
 
   getDefaultProps: function() {
     return {
       days: 0,
-      registerUrl: '',
-      backgroundColor: '#FFFFFF',
-      textColor: '#000000',
-      linkColor: '#FF7E6B'
+      registerUrl: ''
     };
   },
 
   render: function() {
     var props = this.props;
-    var customStyle = {
-      backgroundColor: props.backgroundColor,
-      color: props.textColor
-    };
-    var linkStyle = {
-      color: props.linkColor
-    };
 
     return (
-      <div className="CountDown" style={ customStyle }>
+      <div className="CountDown">
         <p className="CountDown__days">{ props.days }</p>
         <p className="CountDown__daysToGo">days to go</p>
-        <a href={ props.registerUrl } className="CountDown__register" style={ linkStyle }>Register</a>
+        <a href={ props.registerUrl } className="CountDown__register">Register</a>
       </div>
     );
   }

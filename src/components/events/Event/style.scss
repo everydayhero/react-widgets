@@ -1,19 +1,16 @@
 $ehw-animation-speed: 200ms;
 
 .Event {
-  -moz-box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.2);
   color: $ehw-grey-light;
   display: inline-block;
   font-family: $ehw-sans-serif-fonts;
   font-size: $ehw-default-font-size;
-  height: 252px;
   line-height: initial;
   overflow: hidden;
   position: relative;
   text-align: center;
   width: 240px;
+  height: 252px;
 
   div {
     height: 100%;
@@ -71,13 +68,13 @@ $ehw-animation-speed: 200ms;
     &.Event__date {
       border: 2px transparentize($ehw-grey-light, 0.5) solid;
       display: block;
-      height: 45px;
-      left: 95.5px;
+      height: 18%;
+      left: 38%;
       list-style: none;
       margin: 0;
       padding: 0;
       top: 41%;
-      width: 45px;
+      width: 19%;
       -webkit-transition-delay: 125ms;
       transition-delay: 125ms;
 

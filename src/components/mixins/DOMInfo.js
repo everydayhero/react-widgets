@@ -37,10 +37,16 @@ module.exports = {
     { return 'huge'; }
   },
 
-  getChildrenWidth: function(min, count) {
-    var width = this.getComponentWidth();
-    var maxPerRow = Math.floor(width / min);
-    var rows = Math.ceil(count / maxPerRow);
-    return Math.floor(100 / Math.min(count, maxPerRow) * 100) / 100 + '%';
+  getChildrenWidth: function(min_width, count) {
+    var child_count = Math.min(count, this.getChildCountFromWidth(min_width));
+    return this.getChildWidth(child_count);
+  },
+
+  getChildWidth: function(count) {
+    return Math.floor(10000 / Math.max(1, count)) * 0.01 + '%';
+  },
+  
+  getChildCountFromWidth: function(min_width) {
+    return Math.max(1, Math.floor(this.getComponentWidth() / min_width));
   }
 };

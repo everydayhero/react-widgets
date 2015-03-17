@@ -47,7 +47,7 @@ The charity search modal widget allows you to search for a charity by name to do
 - `onSelect`: *optional* function called on selecting a result when `action` set to 'custom'.
 - `campaignUid`: *optional* string campaign uid to filter charity results.
 - `campaignSlug`: *optional* string campaign slug for given campaign uid.
-- `country`: *optional* string country code of region, either 'au', 'nz', 'uk' or 'us'.
+- `country`: *optional* string country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'.
 - `promotedCharityUids`: *optional* array of charity uids for charities to show by default for empty query.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
@@ -90,7 +90,7 @@ The supporter page search modal widget allows you to search for a supporter page
 - `onSelect`: *optional* function called on selecting a result. Default redirects to supporter page.
 - `campaignUid`: *optional* string campaign uid to filter page results.
 - `charityUid`: *optional* string charity uid to filter page results.
-- `country`: *optional* string country code of region, either 'au', 'nz', 'uk' or 'us'.
+- `country`: *optional* string country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'.
 - `pageType`: *optional* string type of page either 'user', 'team' or 'all' (default).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
@@ -599,7 +599,7 @@ Displays a leaderboard sorted by funds raised (highest first) for a campaign or 
 - `campaignSlug`: *optional* string campaign slug to filter results by campaign. Requires `country`.
 - `charityUid`: *optional* string charity uid to filter results by charity.
 - `charitySlug`: *optional* string charity slug to filter results by charity. Requires `country`.
-- `country`: *optional* string country code of region, either 'au', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
+- `country`: *optional* string country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
 - `type`: *optional* string. Set a type of either `'team'` or `'individual'`. Set to `'individual'` by default.
 - `limit`: *optional* number. Set to `24` by default. Determines how many results are returned in total.
 - `pageSize`: *optional* number. Set to `12` by default. Determines how many results to show per page.
@@ -646,7 +646,7 @@ Displays a leaderboard sorted by distance, recorded using MapMyFitness, for a ca
 - `campaignSlug`: *optional* string campaign slug to filter results by campaign. Requires `country`.
 - `charityUid`: *optional* string charity uid to filter results by charity.
 - `charitySlug`: *optional* string charity slug to filter results by charity. Requires `country`.
-- `country`: *optional* string country code of region, either 'au', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
+- `country`: *optional* string country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
 - `type`: *optional* string. Set a type of either `'team'` or `'individual'`. Set to `'individual'` by default.
 - `limit`: *optional* number. Set to `100` by default. Determines how many results should be fetched via the everdayhero leaderboards API endpoint.
 - `pageSize`: *optional* number. Set to `5` by default. Determines how many results to display on the leaderboard at once.
@@ -700,7 +700,7 @@ Displays a set of supporter cards (fundraising page summary with donate call to 
 - `campaignSlug`: *optional* string campaign slug to filter results by campaign. Requires `country`.
 - `charityUid`: *optional* string charity uid to filter results by charity.
 - `charitySlug`: *optional* string charity slug to filter results by charity. Requires `country`.
-- `country`: *optional* string country code of region, either 'au', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
+- `country`: *optional* string country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
 - `limit`: *optional* number of supporter cards to show. Default is 6.
 - `type`: *optional* string. Set a type of either `'team'` or `'individual'`. Set to `'individual'` by default.
 - `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.

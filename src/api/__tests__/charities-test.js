@@ -12,7 +12,8 @@ var charities = require('../charities');
 describe('charities', function() {
   var data = {
     au: { country_code: 'au', uid: 'au-123', slug: 'bar' },
-    nz: { country_code: 'nz', uid: 'gb-123', slug: 'bar' },
+    ie: { country_code: 'ie', uid: 'ie-123', slug: 'bar' },
+    nz: { country_code: 'nz', uid: 'nz-123', slug: 'bar' },
     uk: { country_code: 'uk', uid: 'gb-123', slug: 'bar' },
     us: { country_code: 'us', uid: 'us-123', slug: 'bar' },
   };

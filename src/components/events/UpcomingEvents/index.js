@@ -53,11 +53,11 @@ module.exports = React.createClass({
     removeEventListener(window, 'resize', this.resize);
   },
 
-  resize: function() {
+  resize: _.debounce(function() {
     this.setState({
       content: this.renderEvents(this.state.events)
     });
-  },
+  }, 100, { trailing: true }),
 
   renderEvents: function(events) {
     if(!_.isEmpty(events)) {

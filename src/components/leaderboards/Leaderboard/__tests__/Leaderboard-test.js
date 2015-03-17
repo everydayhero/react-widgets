@@ -27,7 +27,7 @@ describe('Leaderboard', function() {
     it('renders a default heading', function() {
       var heading = findByClass(element, 'Leaderboard__heading');
 
-      expect(heading.getDOMNode().textContent).toBe('Leaderboard > Top Individuals');
+      expect(heading.getDOMNode().textContent).toBe('Top Individuals');
     });
 
     it('renders a loading icon', function() {
@@ -98,11 +98,11 @@ describe('Leaderboard', function() {
   });
 
   describe('Number formatting options', function() {
-    it('renders in a short format by default', function() {
+    it('renders in a long format with commas by default', function() {
       var leaderboard = <Leaderboard campaignUid="au-0" />;
       var element = TestUtils.renderIntoDocument(leaderboard);
 
-      expect(element.formatAmount(10000)).toEqual('$100 ');
+      expect(element.formatAmount(100000)).toEqual('$1,000');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {

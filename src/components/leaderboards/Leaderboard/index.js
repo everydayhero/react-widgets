@@ -2,6 +2,7 @@
 
 var _                   = require('lodash');
 var React               = require('react');
+var cx                  = require('react/lib/cx');
 var I18nMixin           = require('../../mixins/I18n');
 var campaigns           = require('../../../api/campaigns');
 var charities           = require('../../../api/charities');
@@ -32,17 +33,16 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       type: 'individual',
-      limit: 24,
+      limit: 48,
       pageSize: 12,
       backgroundColor: '#525252',
       textColor: '#FFFFFF',
-      currencyFormat: '0[.]00 a',
+      currencyFormat: '0,0[.]00',
       defaultI18n: {
         raisedTitle: 'Raised',
         membersTitle: 'Members',
-        rankTitle: 'Ranked',
         symbol: '$',
-        heading: 'Leaderboard > Top Individuals'
+        heading: 'Top Individuals'
       }
     };
   },
@@ -61,8 +61,8 @@ module.exports = React.createClass({
 
   getEndpoint: function() {
     var endpoint;
-
     var props = this.props;
+
     if (props.country) {
       if (props.campaignSlug) { endpoint = campaigns.leaderboardBySlug.bind(campaigns, props.country, props.campaignSlug); }
       if (props.charitySlug)  { endpoint = charities.leaderboardBySlug.bind(charities, props.country, props.charitySlug); }
@@ -176,7 +176,6 @@ module.exports = React.createClass({
         <LeaderboardItem
           key={ d.id }
           rank={ formattedRank }
-          rankTitle={ this.t('rankTitle') }
           name={ d.name }
           url={ d.url }
           isoCode={ d.isoCode }
@@ -232,6 +231,35 @@ module.exports = React.createClass({
     }
   },
 
+  renderPrevBtn: function() {
+    var classes = cx({
+      "Leaderboard__prevBtn": true,
+      "Leaderboard__prevBtn--active": this.state.currentPage > 1
+    });
+
+    return (
+      <div onClick={ this.prevPage } className={ classes }>
+        <Icon className="Leaderboard__icon" icon="caret-left"/>
+      </div>
+    );
+  },
+
+  renderNextBtn: function() {
+    var pageCount = this.props.limit / this.props.pageSize;
+    var currentPage = this.state.currentPage;
+
+    var classes = cx({
+      "Leaderboard__nextBtn": true,
+      "Leaderboard__nextBtn--active": currentPage < pageCount
+    });
+
+    return (
+      <div onClick={ this.nextPage } className={ classes }>
+        <Icon className="Leaderboard__icon" icon="caret-right"/>
+      </div>
+    );
+  },
+
   render: function() {
     var limit       = this.props.limit;
     var pageSize    = this.props.pageSize;
@@ -242,6 +270,7 @@ module.exports = React.createClass({
     };
     var pageControls;
 
+
     if (limit > pageSize) {
       pageControls = (
         <div className="Leaderboard__controller">
@@ -249,12 +278,8 @@ module.exports = React.createClass({
             { this.renderIndicators() }
           </div>
           <div className="Leaderboard__controls">
-            <div onClick={ this.prevPage } className="Leaderboard__prevBtn">
-              <Icon className="Leaderboard__icon" icon="caret-left"/>
-            </div>
-            <div onClick={ this.nextPage } className="Leaderboard__nextBtn">
-              <Icon className="Leaderboard__icon" icon="caret-right"/>
-            </div>
+            { this.renderPrevBtn() }
+            { this.renderNextBtn() }
           </div>
         </div>
       );

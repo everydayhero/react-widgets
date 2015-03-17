@@ -7,6 +7,7 @@
 
   .Leaderboard__heading {
     @extend %ehw-tile-heading;
+    text-align: center;
   }
 
   .Leaderboard__items {
@@ -35,6 +36,12 @@
     padding: 5px;
     cursor: pointer;
     font-size: $x-6;
+    opacity: 0.5;
+  }
+
+  .Leaderboard__prevBtn--active,
+  .Leaderboard__nextBtn--active {
+    opacity: 1;
   }
 
   .Leaderboard__indicator {

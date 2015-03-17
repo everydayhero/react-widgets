@@ -19,8 +19,8 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
+      backgroundColor: '#525252',
       defaultI18n: {
-        backgroundColor: '#525252',
         joinLabel: 'Join Event',
         supportersLabel: 'Supporters',
         months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']

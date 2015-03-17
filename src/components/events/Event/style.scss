@@ -25,6 +25,7 @@ $ehw-animation-speed: 200ms;
 
   .Event__base {
     position: relative;
+    background-color: $ehw-grey-dark;
 
     &.active {
       .Event__gradient { top: -100%; }

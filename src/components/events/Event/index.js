@@ -11,7 +11,6 @@ module.exports = React.createClass({
     name: React.PropTypes.string.isRequired,
     date: React.PropTypes.object.isRequired,
     getStartedUrl: React.PropTypes.string.isRequired,
-    backgroundColor: React.PropTypes.string.isRequired,
     backgroundImageUrl: React.PropTypes.string.isRequired,
     supporterCount: React.PropTypes.number.isRequired,
     width: React.PropTypes.string.isRequired,
@@ -21,6 +20,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       defaultI18n: {
+        backgroundColor: '#525252',
         joinLabel: 'Join Event',
         supportersLabel: 'Supporters',
         months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -73,7 +73,7 @@ module.exports = React.createClass({
 
   baseStyles: function() {
     return {
-      background: this.props.backgroundColor + ' url(' + this.props.backgroundImageUrl + ')',
+      backgroundImage: 'url(' + this.props.backgroundImageUrl + ')',
       backgroundSize: 'cover'
     };
   },

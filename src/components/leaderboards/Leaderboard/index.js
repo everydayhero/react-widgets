@@ -4,6 +4,7 @@ var _                   = require('lodash');
 var React               = require('react');
 var cx                  = require('react/lib/cx');
 var I18nMixin           = require('../../mixins/I18n');
+var DOMInfoMixin        = require('../../mixins/DOMInfo');
 var campaigns           = require('../../../api/campaigns');
 var charities           = require('../../../api/charities');
 var pages               = require('../../../api/pages');
@@ -11,9 +12,11 @@ var Icon                = require('../../helpers/Icon');
 var TeamLeaderboardItem = require('../TeamLeaderboardItem');
 var LeaderboardItem     = require('../LeaderboardItem');
 var numeral             = require('numeral');
+var addEventListener    = require('../../../lib/addEventListener');
+var removeEventListener = require('../../../lib/removeEventListener');
 
 module.exports = React.createClass({
-  mixins: [I18nMixin],
+  mixins: [I18nMixin, DOMInfoMixin],
   displayName: "Leaderboard",
   propTypes: {
     campaignSlug: React.PropTypes.string,
@@ -51,13 +54,28 @@ module.exports = React.createClass({
     return {
       isLoading: false,
       boardData: [],
-      currentPage: 1
+      currentPage: 1,
+      itemWidth: '',
     };
   },
 
   componentWillMount: function() {
     this.loadLeaderboard();
   },
+
+  componentDidMount: function() {
+    addEventListener(window, 'resize', this.setItemWidth);
+  },
+
+  componentWillUnmount: function() {
+    removeEventListener(window, 'resize', this.setItemWidth);
+  },
+
+  setItemWidth: _.debounce(function() {
+    this.setState({
+      itemWidth: this.getChildrenWidth(250, this.props.pageSize)
+    });
+  }, 100),
 
   getEndpoint: function() {
     var endpoint;
@@ -180,7 +198,8 @@ module.exports = React.createClass({
           url={ d.url }
           isoCode={ d.isoCode }
           amount={ formattedAmount }
-          imgSrc={ d.medImgSrc } />
+          imgSrc={ d.medImgSrc }
+          width={ this.state.itemWidth } />
       );
 
     }, this);

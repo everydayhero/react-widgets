@@ -2,16 +2,7 @@
   box-sizing: border-box;
   display: block;
   padding: 0 10px 15px;
-  width: 25%;
   float: left;
-
-  @include media-max($breakpoint-l) {
-    width: 50%;
-  }
-
-  @include media-max($breakpoint-s) {
-    width: 100%;
-  }
 
   .TeamLeaderboard__items-skin {
     @extend %clearfix;
@@ -24,11 +15,6 @@
 .TeamLeaderboard__items-content {
   box-sizing: border-box;
   padding: 15px;
-
-  @include media-max($breakpoint-l) {
-    width: 50%;
-    float: left;
-  }
 }
 
 .TeamLeaderboard__items-name {
@@ -52,12 +38,6 @@
     width:100%;
     border: 0;
   }
-
-  @include media-max($breakpoint-l) {
-    width: 50%;
-    float: left;
-    padding: 15px;
-  }
 }
 
 .TeamLeaderboard__items-stats {
@@ -71,10 +51,6 @@
     width: 50%;
     padding: 10px;
     text-align: center;
-
-    @include media-max($breakpoint-l) {
-      padding: 0;
-    }
   }
 
   .TeamLeaderboard__items-stat-content {
@@ -84,14 +60,6 @@
   .TeamLeaderboard__items-stat-title {
     text-transform: uppercase;
     font-size: 13px;
-
-    @include media-max($breakpoint-xl) {
-      font-size: 11px;
-    }
-
-    @include media-max($breakpoint-l) {
-      font-size: 10px;
-    }
   }
 
   .TeamLeaderboard__items-stat:first-child {

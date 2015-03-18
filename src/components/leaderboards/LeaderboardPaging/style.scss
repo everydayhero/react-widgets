@@ -1,0 +1,30 @@
+.LeaderboardPaging {
+  clear: both;
+  text-align: center;
+  margin: $x-4;
+}
+
+.LeaderboardPaging__prevBtn,
+.LeaderboardPaging__nextBtn {
+  display: inline-block;
+  border: 1px solid #fff;
+  margin: $x-1;
+  cursor: pointer;
+  font-size: $x-6;
+  line-height: 1;
+  opacity: 0.5;
+  border-radius: $ehw-border-radius;
+}
+
+.LeaderboardPaging__prevBtn {
+  padding: 0 10px 0 8px;
+}
+
+.LeaderboardPaging__nextBtn {
+  padding: 0 8px 0 10px;
+}
+
+.LeaderboardPaging__prevBtn--active,
+.LeaderboardPaging__nextBtn--active {
+  opacity: 1;
+}

@@ -6,21 +6,21 @@ var I18nMixin           = require('../../mixins/I18n');
 var DOMInfoMixin        = require('../../mixins/DOMInfo');
 var LeaderboardMixin    = require('../../mixins/Leaderboard');
 var Icon                = require('../../helpers/Icon');
-var LeaderboardItem     = require('../LeaderboardItem');
+var TeamLeaderboardItem = require('../TeamLeaderboardItem');
 var numeral             = require('numeral');
 var addEventListener    = require('../../../lib/addEventListener');
 var removeEventListener = require('../../../lib/removeEventListener');
 
 module.exports = React.createClass({
   mixins: [I18nMixin, DOMInfoMixin, LeaderboardMixin],
-  displayName: "Leaderboard",
+  displayName: "TeamLeaderboard",
   propTypes: {
     campaignSlug: React.PropTypes.string,
     campaignUid: React.PropTypes.string,
     charitySlug: React.PropTypes.string,
     charityUid: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'nz', 'uk', 'us']),
-    type: React.PropTypes.oneOf(['team', 'individual']),
+    type: React.PropTypes.oneOf(['team']),
     limit: React.PropTypes.number,
     pageSize: React.PropTypes.number,
     backgroundColor: React.PropTypes.string,
@@ -31,18 +31,18 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      type: 'individual',
-      limit: 48,
-      pageSize: 12,
+      type: 'team',
+      limit: 24,
+      pageSize: 4,
       backgroundColor: null,
       textColor: null,
-      childWidth: 250,
-      currencyFormat: '0,0[.]00',
+      childWidth: 240,
+      currencyFormat: '0[.]00 a',
       defaultI18n: {
         raisedTitle: 'Raised',
         membersTitle: 'Members',
         symbol: '$',
-        heading: 'Top Individuals'
+        heading: 'Top Teams'
       }
     };
   },
@@ -52,21 +52,21 @@ module.exports = React.createClass({
       isLoading: false,
       boardData: [],
       currentPage: 1,
-      itemWidth: this.props.childWidth,
+      childWidth: '',
     };
   },
 
   componentDidMount: function() {
-    addEventListener(window, 'resize', this.setItemWidth);
+    addEventListener(window, 'resize', this.setchildWidth);
   },
 
   componentWillUnmount: function() {
-    removeEventListener(window, 'resize', this.setItemWidth);
+    removeEventListener(window, 'resize', this.setchildWidth);
   },
 
-  setItemWidth: _.debounce(function() {
+  setchildWidth: _.debounce(function() {
     this.setState({
-      itemWidth: this.getChildrenWidth(this.props.childWidth, this.props.pageSize)
+      childWidth: this.getChildrenWidth(this.props.childWidth, this.props.pageSize)
     });
   }, 100),
 
@@ -87,15 +87,17 @@ module.exports = React.createClass({
       var formattedRank = numeral(d.rank).format('0o');
 
       return (
-        <LeaderboardItem
+        <TeamLeaderboardItem
           key={ d.id }
-          rank={ formattedRank }
           name={ d.name }
           url={ d.url }
           isoCode={ d.isoCode }
           amount={ formattedAmount }
-          imgSrc={ d.medImgSrc }
-          width={ this.state.itemWidth } />
+          totalMembers={ d.totalMembers }
+          imgSrc={ d.imgSrc }
+          raisedTitle={ this.t('raisedTitle') }
+          membersTitle={ this.t('membersTitle') }
+          width={ this.state.childWidth } />
       );
 
     }, this);

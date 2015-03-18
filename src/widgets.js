@@ -15,6 +15,8 @@ var widgets = {
   Goal: require('./components/totals/Goal'),
   GoalProgress: require('./components/totals/GoalProgress'),
   Leaderboard: require('./components/leaderboards/Leaderboard'),
+  TeamLeaderboard: require('./components/leaderboards/TeamLeaderboard'),
+  LeaderboardPaging: require('./components/leaderboards/LeaderboardPaging'),
   FitnessLeaderboard: require('./components/leaderboards/FitnessLeaderboard'),
   UpcomingEvents: require('./components/events/UpcomingEvents'),
   Event: require('./components/events/Event'),

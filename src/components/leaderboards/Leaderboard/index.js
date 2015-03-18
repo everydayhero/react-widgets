@@ -1,15 +1,16 @@
 "use strict";
 
-var _                   = require('lodash');
-var React               = require('react');
-var I18nMixin           = require('../../mixins/I18n');
-var DOMInfoMixin        = require('../../mixins/DOMInfo');
-var LeaderboardMixin    = require('../../mixins/Leaderboard');
-var Icon                = require('../../helpers/Icon');
-var LeaderboardItem     = require('../LeaderboardItem');
-var numeral             = require('numeral');
-var addEventListener    = require('../../../lib/addEventListener');
-var removeEventListener = require('../../../lib/removeEventListener');
+var _                       = require('lodash');
+var React                   = require('react/addons');
+var I18nMixin               = require('../../mixins/I18n');
+var DOMInfoMixin            = require('../../mixins/DOMInfo');
+var LeaderboardMixin        = require('../../mixins/Leaderboard');
+var Icon                    = require('../../helpers/Icon');
+var LeaderboardItem         = require('../LeaderboardItem');
+var numeral                 = require('numeral');
+var addEventListener        = require('../../../lib/addEventListener');
+var removeEventListener     = require('../../../lib/removeEventListener');
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 module.exports = React.createClass({
   mixins: [I18nMixin, DOMInfoMixin, LeaderboardMixin],
@@ -52,21 +53,21 @@ module.exports = React.createClass({
       isLoading: false,
       boardData: [],
       currentPage: 1,
-      itemWidth: this.props.childWidth,
+      childWidth: this.props.childWidth,
     };
   },
 
   componentDidMount: function() {
-    addEventListener(window, 'resize', this.setItemWidth);
+    addEventListener(window, 'resize', this.setChildWidth);
   },
 
   componentWillUnmount: function() {
-    removeEventListener(window, 'resize', this.setItemWidth);
+    removeEventListener(window, 'resize', this.setChildWidth);
   },
 
-  setItemWidth: _.debounce(function() {
+  setChildWidth: _.debounce(function() {
     this.setState({
-      itemWidth: this.getChildrenWidth(this.props.childWidth, this.props.pageSize)
+      childWidth: this.getChildrenWidth(this.props.childWidth, this.props.pageSize)
     });
   }, 100),
 
@@ -95,7 +96,7 @@ module.exports = React.createClass({
           isoCode={ d.isoCode }
           amount={ formattedAmount }
           imgSrc={ d.medImgSrc }
-          width={ this.state.itemWidth } />
+          width={ this.state.childWidth } />
       );
 
     }, this);
@@ -112,7 +113,9 @@ module.exports = React.createClass({
       <div className="Leaderboard" style={ customStyle }>
         <h3 className="Leaderboard__heading">{ heading }</h3>
         <ol className="Leaderboard__items">
-          { this.renderLeaderboardItems() }
+          <ReactCSSTransitionGroup transitionName="Leaderboard__animation" component="div">
+            { this.renderLeaderboardItems() }
+          </ReactCSSTransitionGroup>
         </ol>
         { this.renderPaging() }
       </div>

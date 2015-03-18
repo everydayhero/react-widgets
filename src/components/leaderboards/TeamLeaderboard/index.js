@@ -1,15 +1,16 @@
 "use strict";
 
-var _                   = require('lodash');
-var React               = require('react');
-var I18nMixin           = require('../../mixins/I18n');
-var DOMInfoMixin        = require('../../mixins/DOMInfo');
-var LeaderboardMixin    = require('../../mixins/Leaderboard');
-var Icon                = require('../../helpers/Icon');
-var TeamLeaderboardItem = require('../TeamLeaderboardItem');
-var numeral             = require('numeral');
-var addEventListener    = require('../../../lib/addEventListener');
-var removeEventListener = require('../../../lib/removeEventListener');
+var _                       = require('lodash');
+var React                   = require('react/addons');
+var I18nMixin               = require('../../mixins/I18n');
+var DOMInfoMixin            = require('../../mixins/DOMInfo');
+var LeaderboardMixin        = require('../../mixins/Leaderboard');
+var Icon                    = require('../../helpers/Icon');
+var TeamLeaderboardItem     = require('../TeamLeaderboardItem');
+var numeral                 = require('numeral');
+var addEventListener        = require('../../../lib/addEventListener');
+var removeEventListener     = require('../../../lib/removeEventListener');
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 module.exports = React.createClass({
   mixins: [I18nMixin, DOMInfoMixin, LeaderboardMixin],
@@ -57,26 +58,26 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    addEventListener(window, 'resize', this.setchildWidth);
+    addEventListener(window, 'resize', this.setChildWidth);
   },
 
   componentWillUnmount: function() {
-    removeEventListener(window, 'resize', this.setchildWidth);
+    removeEventListener(window, 'resize', this.setChildWidth);
   },
 
-  setchildWidth: _.debounce(function() {
+  setChildWidth: _.debounce(function() {
     this.setState({
       childWidth: this.getChildrenWidth(this.props.childWidth, this.props.pageSize)
     });
   }, 100),
 
   renderLeaderboardItems: function() {
-    if (this.state.isLoading) {
-      return <Icon className="Leaderboard__loading" icon="refresh" />;
-    }
-
     var currentPage = this.state.currentPage - 1;
     var board = this.state.boardData[currentPage];
+
+    if (this.state.isLoading) {
+      return <Icon className="TeamLeaderboard__loading" icon="refresh" />;
+    }
 
     if (!board) {
       return;
@@ -111,10 +112,12 @@ module.exports = React.createClass({
     };
 
     return (
-      <div className="Leaderboard" style={ customStyle }>
-        <h3 className="Leaderboard__heading">{ heading }</h3>
-        <ol className="Leaderboard__items">
-          { this.renderLeaderboardItems() }
+      <div className="TeamLeaderboard" style={ customStyle }>
+        <h3 className="TeamLeaderboard__heading">{ heading }</h3>
+        <ol className="TeamLeaderboard__items">
+          <ReactCSSTransitionGroup transitionName="TeamLeaderboard__animation" component="div">
+            { this.renderLeaderboardItems() }
+          </ReactCSSTransitionGroup>
         </ol>
         { this.renderPaging() }
       </div>

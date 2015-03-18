@@ -21,3 +21,21 @@
     @extend %ehw-tile-loading-icon;
   }
 }
+
+.Leaderboard__animation-enter {
+  opacity: 0.01;
+  transition: opacity .66s ease-in;
+}
+
+.Leaderboard__animation-enter-active {
+  opacity: 1;
+}
+
+// pull existing items out of view immediately
+.Leaderboard__animation-leave {
+  position: absolute;
+  top: -999px;
+  left: -999px;
+  opacity: 0;
+  transition: all .1s ease-in;
+}

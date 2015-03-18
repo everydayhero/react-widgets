@@ -8,14 +8,6 @@ var cx    = require('react/lib/cx');
 module.exports = React.createClass({
   displayName: 'LeaderboardPaging',
 
-  handleNext: function() {
-    this.props.nextPage();
-  },
-
-  handlePrev: function() {
-    this.props.prevPage();
-  },
-
   renderPrevBtn: function() {
     var classes = cx({
       "LeaderboardPaging__prevBtn": true,
@@ -23,7 +15,7 @@ module.exports = React.createClass({
     });
 
     return (
-      <div onClick={ this.handlePrev } className={ classes }>
+      <div onClick={ this.props.prevPage } className={ classes }>
         <Icon className="LeaderboardPaging__icon" icon="caret-left"/>
       </div>
     );
@@ -39,7 +31,7 @@ module.exports = React.createClass({
     });
 
     return (
-      <div onClick={ this.handleNext } className={ classes }>
+      <div onClick={ this.props.nextPage } className={ classes }>
         <Icon className="LeaderboardPaging__icon" icon="caret-right"/>
       </div>
     );

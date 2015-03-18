@@ -4,6 +4,7 @@
   font-family: $ehw-sans-serif-fonts;
   font-size: $ehw-default-font-size;
   color: #fff;
+  padding: 0 0 $x-2;
 
   .Leaderboard__heading {
     @extend %ehw-tile-heading;

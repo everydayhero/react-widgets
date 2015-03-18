@@ -115,7 +115,7 @@ module.exports = {
   renderPaging: function() {
     var pageCount = this.props.limit / this.props.pageSize;
 
-    if (!this.state.isLoading) {
+    if (!this.state.isLoading && pageCount > 1) {
       return (
         <LeaderboardPaging
           nextPage={ this.nextPage }

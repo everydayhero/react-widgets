@@ -13,6 +13,7 @@ $ehw-animation-speed: 200ms;
   );
   background-color: #D0D0D0;
   color: #FFFFFF;
+  overflow: hidden;
 }
 
 /* edit pattern at http://ptrn.it/1x0nFEh */
@@ -23,12 +24,18 @@ $ehw-animation-speed: 200ms;
   width: $x-9;
   text-align: center;
   border-left: solid white 2px;
+  position: relative;
 }
 
 .GoalProgress__area {
   position: relative;
   text-align: right;
   display: table-cell;
+}
+
+.GoalProgress__bar,
+.GoalProgress__barTable {
+  height: 100%;
 }
 
 .GoalProgress__bar,
@@ -43,7 +50,6 @@ $ehw-animation-speed: 200ms;
 
 .GoalProgress__barTable {
   display: table;
-  height: 40px;
 }
 
 .GoalProgress__barFill {

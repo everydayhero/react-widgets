@@ -10,10 +10,12 @@ module.exports = React.createClass({
   propTypes: {
     name: React.PropTypes.string.isRequired,
     date: React.PropTypes.object.isRequired,
+    campaignUrl: React.PropTypes.string.isRequired,
     getStartedUrl: React.PropTypes.string.isRequired,
     backgroundColor: React.PropTypes.string.isRequired,
     backgroundImageUrl: React.PropTypes.string.isRequired,
     supporterCount: React.PropTypes.number.isRequired,
+    width: React.PropTypes.string.isRequired,
     i18n: React.PropTypes.object,
   },
 
@@ -64,37 +66,53 @@ module.exports = React.createClass({
     this.setState({ activeClass: '' });
   },
 
-  render: function() {
-    var baseStyles = {
-      background: this.props.backgroundColor + ' url(' + this.props.backgroundImageUrl + ')',
+  eventStyles: function() {
+    return {
+      width: this.props.width
+    };
+  },
+
+  baseStyles: function() {
+    return {
+      backgroundColor: this.props.backgroundColor,
+      backgroundImage: 'url(' + this.props.backgroundImageUrl + ')',
       backgroundSize: 'cover'
     };
+  },
 
-    var blurStyles = {
+  blurStyles: function() {
+    return {
       backgroundImage: 'url(' + this.state.base64BlurredBackgroundImage + ')',
       backgroundSize: 'cover'
     };
+  },
 
-    var baseClass = "Event__base " + this.state.activeClass;
-    var date = this.props.date;
+  baseClass: function() {
+    return "Event__base " + this.state.activeClass;
+  },
+
+  render: function() {
+    var props = this.props;
+    var date = props.date;
+    var t = this.t;
 
     return (
-      <div className="Event"
+      <div className="Event" style={ this.eventStyles() }
         onTouchStart={ this.activateAndTimeout }
         onTouchCancel={ this.deactivate }
         onMouseEnter={ this.activate }
         onMouseLeave={ this.deactivate }>
-        <div className={ baseClass } style={ baseStyles }>
-          <div className="Event__blur" style={ blurStyles }></div>
+        <div className={ this.baseClass() } style={ this.baseStyles() }>
+          <div className="Event__blur" style={ this.blurStyles() }></div>
           <div className="Event__gradient"></div>
           <ul className="Event__date">
             <li>{ date.getDate() }</li>
-            <li>{ this.t('months')[date.getMonth()] }</li>
+            <li>{ t('months')[date.getMonth()] }</li>
             <li>{ date.getFullYear() }</li>
           </ul>
-          <p className="Event__name">{ this.props.name }</p>
-          <p className="Event__supporter-count">{ (this.props.supporterCount || 0) + ' ' + this.t('supportersLabel') }</p>
-          <a href={ this.props.getStartedUrl } className="Event__join-event">{ this.t('joinLabel') }</a>
+          <a href={ props.campaignUrl } className="Event__name">{ props.name }</a>
+          <p className="Event__supporter-count">{ (props.supporterCount || 0) + ' ' + t('supportersLabel') }</p>
+          <a href={ props.getStartedUrl } className="Event__join-event">{ t('joinLabel') }</a>
         </div>
       </div>
     );

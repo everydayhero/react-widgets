@@ -10,7 +10,9 @@ module.exports = React.createClass({
   propTypes: {
     name: React.PropTypes.string.isRequired,
     date: React.PropTypes.object.isRequired,
+    campaignUrl: React.PropTypes.string.isRequired,
     getStartedUrl: React.PropTypes.string.isRequired,
+    backgroundColor: React.PropTypes.string.isRequired,
     backgroundImageUrl: React.PropTypes.string.isRequired,
     supporterCount: React.PropTypes.number.isRequired,
     width: React.PropTypes.string.isRequired,
@@ -19,7 +21,6 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      backgroundColor: '#525252',
       defaultI18n: {
         joinLabel: 'Join Event',
         supportersLabel: 'Supporters',
@@ -73,6 +74,7 @@ module.exports = React.createClass({
 
   baseStyles: function() {
     return {
+      backgroundColor: this.props.backgroundColor,
       backgroundImage: 'url(' + this.props.backgroundImageUrl + ')',
       backgroundSize: 'cover'
     };
@@ -108,7 +110,7 @@ module.exports = React.createClass({
             <li>{ t('months')[date.getMonth()] }</li>
             <li>{ date.getFullYear() }</li>
           </ul>
-          <p className="Event__name">{ props.name }</p>
+          <a href={ props.campaignUrl } className="Event__name">{ props.name }</a>
           <p className="Event__supporter-count">{ (props.supporterCount || 0) + ' ' + t('supportersLabel') }</p>
           <a href={ props.getStartedUrl } className="Event__join-event">{ t('joinLabel') }</a>
         </div>

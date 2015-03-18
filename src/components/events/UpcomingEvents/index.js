@@ -65,13 +65,13 @@ module.exports = React.createClass({
       var count = this.getChildCountFromWidth(240);
       var width = this.getChildWidth(count);
       return _.map(_.take(events, count), function(e) {
-        var fundraiseUrl = charity.fundraiseUrl({country_code: e.country_code, slug: component.props.charitySlug}, e.slug);
-        var backgroundColor = e.background_color ? e.background_color : 'transparent';
+        var backgroundColor = e.background_color ? e.background_color : '#525252';
         var date = new Date(e.display_finish_at);
         return <Event key={ e.id }
                       name={ e.name }
                       date={ date }
-                      getStartedUrl={ fundraiseUrl }
+                      campaignUrl={ e.url}
+                      getStartedUrl={ e.get_started_url }
                       backgroundColor={ backgroundColor }
                       backgroundImageUrl={ e.background_image_url }
                       supporterCount={ e.page_count }

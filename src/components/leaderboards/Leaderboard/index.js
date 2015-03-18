@@ -21,7 +21,7 @@ module.exports = React.createClass({
     charitySlug: React.PropTypes.string,
     charityUid: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
-    type: React.PropTypes.oneOf(['team', 'individual']),
+    type: React.PropTypes.oneOf(['individual']),
     limit: React.PropTypes.number,
     pageSize: React.PropTypes.number,
     backgroundColor: React.PropTypes.string,

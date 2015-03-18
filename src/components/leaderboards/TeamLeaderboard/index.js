@@ -6,6 +6,7 @@ var I18nMixin               = require('../../mixins/I18n');
 var DOMInfoMixin            = require('../../mixins/DOMInfo');
 var LeaderboardMixin        = require('../../mixins/Leaderboard');
 var Icon                    = require('../../helpers/Icon');
+var LeaderboardItem         = require('../LeaderboardItem');
 var TeamLeaderboardItem     = require('../TeamLeaderboardItem');
 var numeral                 = require('numeral');
 var addEventListener        = require('../../../lib/addEventListener');
@@ -33,11 +34,12 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       type: 'team',
-      limit: 24,
-      pageSize: 4,
+      limit: 48,
+      pageSize: 12,
       backgroundColor: null,
       textColor: null,
-      childWidth: 240,
+      childWidth: 250,
+      altTemplate: false,
       currencyFormat: '0[.]00 a',
       defaultI18n: {
         raisedTitle: 'Raised',
@@ -87,17 +89,31 @@ module.exports = React.createClass({
       var formattedAmount = this.formatAmount(d.amount);
       var formattedRank = numeral(d.rank).format('0o');
 
+      if (this.props.altTemplate) {
+        return (
+          <TeamLeaderboardItem
+            key={ d.id }
+            name={ d.name }
+            url={ d.url }
+            isoCode={ d.isoCode }
+            amount={ formattedAmount }
+            totalMembers={ d.totalMembers }
+            imgSrc={ d.imgSrc }
+            raisedTitle={ this.t('raisedTitle') }
+            membersTitle={ this.t('membersTitle') }
+            width={ this.state.childWidth } />
+        );
+      }
+
       return (
-        <TeamLeaderboardItem
+        <LeaderboardItem
           key={ d.id }
+          rank={ formattedRank }
           name={ d.name }
           url={ d.url }
           isoCode={ d.isoCode }
           amount={ formattedAmount }
-          totalMembers={ d.totalMembers }
-          imgSrc={ d.imgSrc }
-          raisedTitle={ this.t('raisedTitle') }
-          membersTitle={ this.t('membersTitle') }
+          imgSrc={ d.medImgSrc }
           width={ this.state.childWidth } />
       );
 

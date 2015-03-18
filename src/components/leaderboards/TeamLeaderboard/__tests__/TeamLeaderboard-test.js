@@ -111,4 +111,14 @@ describe('TeamLeaderboard', function() {
       expect(element.formatAmount(100000)).toEqual('$1000.00');
     });
   });
+
+  describe('rendering different templates', function(){
+    it('renders LeaderboardItem component for children by default', function() {
+      // todo
+    });
+
+    it('renders TeamLeaderboardItem component for children when set', function() {
+      // todo
+    });
+  });
 });

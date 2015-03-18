@@ -133,6 +133,7 @@ describe('campaigns', function() {
   describe('giveCampaignUid', function() {
     it('returns uid for give campaign', function() {
       expect(campaigns.giveCampaignUid('au')).toBe('au-0');
+      expect(campaigns.giveCampaignUid('ie')).toBe('ie-0');
       expect(campaigns.giveCampaignUid('nz')).toBe('nz-0');
       expect(campaigns.giveCampaignUid('uk')).toBe('gb-0');
       expect(campaigns.giveCampaignUid('us')).toBe('us-0');

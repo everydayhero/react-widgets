@@ -6,6 +6,7 @@ var getJSONP = require('../lib/getJSONP');
 
 var giveCampaignUids = {
   'au': 'au-0',
+  'ie': 'ie-0',
   'nz': 'nz-0',
   'uk': 'gb-0',
   'us': 'us-0'

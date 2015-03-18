@@ -21,7 +21,7 @@ module.exports = React.createClass({
     campaignUid: React.PropTypes.string,
     charitySlug: React.PropTypes.string,
     charityUid: React.PropTypes.string,
-    country: React.PropTypes.oneOf(['au', 'nz', 'uk', 'us']),
+    country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
     limit: React.PropTypes.number,
     type: React.PropTypes.oneOf(['team', 'individual']),
     backgroundColor: React.PropTypes.string,

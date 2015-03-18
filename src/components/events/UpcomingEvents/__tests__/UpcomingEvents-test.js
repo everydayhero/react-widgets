@@ -35,7 +35,7 @@ describe('UpcomingEvents', function() {
     });
 
     it('renders if handed default charity uid, page, size', function() {
-      expect(campaign.findByCharity).toBeCalledWith('au-1234', 1, 6, jasmine.any(Function));
+      expect(campaign.findByCharity).toBeCalledWith('au-1234', 1, 20, jasmine.any(Function));
     });
   });
 });

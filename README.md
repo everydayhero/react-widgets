@@ -602,8 +602,8 @@ Displays an individuals leaderboard sorted by funds raised (highest first) for a
 - `country`: *optional* string country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
 - `limit`: *optional* number. Set to `24` by default. Determines how many results are returned in total.
 - `pageSize`: *optional* number. Set to `12` by default. Determines how many results to show per page.
-- `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
-- `textColor`: *optional* string. Set to `'#333333'` by default.
+- `backgroundColor`: *optional* string. Accepts a hex value. Not set by default.
+- `textColor`: *optional* string. Accepts a hex value. Not set by default.
 - `childWidth`: *optional* number. Set to `250` by default. Sets the minimum width for leaderboard items to display.
 - `currencyFormat`: *optional* string. Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
@@ -648,8 +648,8 @@ Displays a team leaderboard sorted by funds raised (highest first) for a campaig
 - `country`: *optional* string country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
 - `limit`: *optional* number. Set to `24` by default. Determines how many results are returned in total.
 - `pageSize`: *optional* number. Set to `12` by default. Determines how many results to show per page.
-- `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
-- `textColor`: *optional* string. Set to `'#333333'` by default.
+- `backgroundColor`: *optional* string. Accepts a hex value. Not set by default.
+- `textColor`: *optional* string. Accepts a hex value. Not set by default.
 - `childWidth`: *optional* number. Set to `250` by default. Sets the minimum width for leaderboard items to display.
 - `altTemplate`: *optional* boolean. Set to `false` by default. Renders an alternate template set when set to `true`.
 - `currencyFormat`: *optional* string. Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).

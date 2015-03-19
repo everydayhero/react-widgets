@@ -27,6 +27,7 @@ module.exports = React.createClass({
     pageSize: React.PropTypes.number,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
+    childWidth: React.PropTypes.number,
     currencyFormat: React.PropTypes.string,
     i18n: React.PropTypes.object
   },

@@ -26,6 +26,7 @@ module.exports = React.createClass({
     pageSize: React.PropTypes.number,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
+    childWidth: React.PropTypes.number,
     currencyFormat: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
@@ -40,8 +41,6 @@ module.exports = React.createClass({
       childWidth: 250,
       currencyFormat: '0,0[.]00',
       defaultI18n: {
-        raisedTitle: 'Raised',
-        membersTitle: 'Members',
         symbol: '$',
         heading: 'Top Individuals'
       }

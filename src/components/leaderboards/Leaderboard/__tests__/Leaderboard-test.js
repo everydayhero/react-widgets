@@ -3,13 +3,13 @@ jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
 
 describe('Leaderboard', function() {
-  var _               = require('lodash');
-  var React           = require('react/addons');
-  var Leaderboard     = require('../');
-  var LeaderboardItem = require('../../LeaderboardItem/');
-  var TestUtils       = React.addons.TestUtils;
-  var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass     = TestUtils.scryRenderedDOMComponentsWithClass;
+  var _                 = require('lodash');
+  var React             = require('react/addons');
+  var Leaderboard       = require('../');
+  var LeaderboardItem   = require('../../LeaderboardItem/');
+  var LeaderboardPaging = require('../../LeaderboardPaging/');
+  var TestUtils         = React.addons.TestUtils;
+  var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('Component defaults', function() {
     var leaderboard;
@@ -110,6 +110,28 @@ describe('Leaderboard', function() {
       var element = TestUtils.renderIntoDocument(leaderboard);
 
       expect(element.formatAmount(10000)).toEqual('$100.00');
+    });
+  });
+
+  describe('paging button rendering', function() {
+    it('renders a paging component if multiple pages are available', function() {
+      var leaderboard = <Leaderboard campaignUid="au-0" limit={ 10 } pageSize={ 5 } />;
+      var element = TestUtils.renderIntoDocument(leaderboard);
+      element.setState({ isLoading: false });
+
+      var paging = <LeaderboardPaging />;
+      var pagingFunction = element.renderPaging();
+      expect(pagingFunction).toBeDefined();
+    });
+
+    it('does not render a paging component if only 1 page is available', function() {
+      var leaderboard = <Leaderboard campaignUid="au-0" limit={ 5 } pageSize={ 5 } />;
+      var element = TestUtils.renderIntoDocument(leaderboard);
+      element.setState({ isLoading: false });
+
+      var paging = <LeaderboardPaging />;
+      var pagingFunction = element.renderPaging();
+      expect(pagingFunction).toBeUndefined();
     });
   });
 });

@@ -8,9 +8,9 @@ describe('TeamLeaderboard', function() {
   var TeamLeaderboard     = require('../');
   var LeaderboardItem     = require('../../LeaderboardItem/');
   var TeamLeaderboardItem = require('../../TeamLeaderboardItem/');
+  var LeaderboardPaging   = require('../../LeaderboardPaging/');
   var TestUtils           = React.addons.TestUtils;
   var findByClass         = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass         = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component defaults', function() {
     var teamLeaderboard;
@@ -126,6 +126,28 @@ describe('TeamLeaderboard', function() {
       var element = TestUtils.renderIntoDocument(leaderboard);
       var template = TestUtils.scryRenderedComponentsWithType(element, TeamLeaderboardItem);
       expect(element.props.altTemplate).toBeTruthy();
+    });
+  });
+
+  describe('paging button rendering', function() {
+    it('renders a paging component if multiple pages are available', function() {
+      var leaderboard = <TeamLeaderboard campaignUid="au-0" limit={ 10 } pageSize={ 5 } />;
+      var element = TestUtils.renderIntoDocument(leaderboard);
+      element.setState({ isLoading: false });
+
+      var paging = <LeaderboardPaging />;
+      var pagingFunction = element.renderPaging();
+      expect(pagingFunction).toBeDefined();
+    });
+
+    it('does not render a paging component if only 1 page is available', function() {
+      var leaderboard = <TeamLeaderboard campaignUid="au-0" limit={ 5 } pageSize={ 5 } />;
+      var element = TestUtils.renderIntoDocument(leaderboard);
+      element.setState({ isLoading: false });
+
+      var paging = <LeaderboardPaging />;
+      var pagingFunction = element.renderPaging();
+      expect(pagingFunction).toBeUndefined();
     });
   });
 });

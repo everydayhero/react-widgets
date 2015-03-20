@@ -61,6 +61,8 @@ module.exports = React.createClass({
 
     if (offsetWidth == '100%') {
       classes += '--completed';
+    } else if (offsetWidth == '0%') {
+      style = { width: '0.001%'}; // Forces zero width cell in Chrome
     }
 
     if (this.state.isLoading) {

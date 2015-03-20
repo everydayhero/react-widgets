@@ -20,8 +20,7 @@ $ehw-animation-speed: 200ms;
 
 .GoalProgress__icon {
   display: table-cell;
-  max-width: 12px;
-  width: $x-9;
+  width: $x-12;
   text-align: center;
   border-left: solid white 2px;
   position: relative;
@@ -50,12 +49,13 @@ $ehw-animation-speed: 200ms;
 
 .GoalProgress__barTable {
   display: table;
+  table-layout: fixed;
 }
 
 .GoalProgress__barFill {
   display: table-cell;
   background: $ehw-grey-dark;
-  width: 100%;
+  width: 95%;
 }
 
 .GoalProgress__barChevron {

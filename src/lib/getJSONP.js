@@ -2,6 +2,8 @@
 
 var jsonp = require('jsonp');
 var DEFAULT_TIMEOUT = 20000;
+var IS_CLIENT = typeof window !== 'undefined';
+var noop = function() {};
 
 function getJSONP(url, callback) {
   return jsonp(url, {timeout: DEFAULT_TIMEOUT}, function(error, data) {
@@ -9,4 +11,4 @@ function getJSONP(url, callback) {
   });
 }
 
-module.exports = getJSONP;
+module.exports = IS_CLIENT ? getJSONP : function() { return noop; };

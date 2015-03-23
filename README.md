@@ -43,7 +43,7 @@ The charity search modal widget allows you to search for a charity by name to do
 
 ##### Options
 
-- `action`: *required* action to perform on charity select, either 'donate', 'fundraise' or 'custom'. *Note: 'donate' action is currently not supported for country 'us'.*
+- `action`: *optional* action to perform on charity select, either 'visit' (default), 'donate', 'fundraise', or 'custom'. *Note: 'visit' and 'donate' actions are currently not supported for country 'us'.*
 - `onSelect`: *optional* function called on selecting a result when `action` set to 'custom'.
 - `campaignUid`: *optional* string campaign uid to filter charity results.
 - `campaignSlug`: *optional* string campaign slug for given campaign uid.
@@ -54,6 +54,7 @@ The charity search modal widget allows you to search for a charity by name to do
   ```js
   {
     title: 'Search for a Charity',
+    visitAction: 'Visit Charity',
     donateAction: 'Give to this Charity',
     fundraiseAction: 'Fundraise for this Charity',
     selectAction: 'Select',
@@ -73,9 +74,9 @@ The charity search modal widget allows you to search for a charity by name to do
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
-    <a id="CharitySearchExample">Support a Charity</a>
+    <a id="CharitySearchExample">Find a Charity</a>
     <script>
-      edh.widgets.initModal('CharitySearchExample', 'CharitySearch', { country: 'uk', action: 'donate' });
+      edh.widgets.initModal('CharitySearchExample', 'CharitySearch', { country: 'uk' });
     </script>
   </body>
 </html>

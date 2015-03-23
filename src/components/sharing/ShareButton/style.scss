@@ -1,13 +1,16 @@
 .ShareButton {
-  border: 1px solid $ehw-grey;
-  color: $ehw-grey-dark;
-  padding: $x-2 $x-4;
-  background: #fff;
-  font-weight: bold;
-  border-radius: $ehw-border-radius;
-  display: inline-block;
-  cursor: pointer;
   position: relative;
+
+  .ShareButton__btn {
+    border: 1px solid $ehw-grey;
+    color: $ehw-grey-dark;
+    padding: $x-2 $x-4;
+    background: #fff;
+    font-weight: bold;
+    border-radius: $ehw-border-radius;
+    display: inline-block;
+    cursor: pointer;
+  }
 
   .ShareButton__icon {
     padding-right: $x-2;

@@ -1,12 +1,41 @@
 "use strict";
 
-var React     = require('react');
-var I18nMixin = require('../../mixins/I18n');
-var Icon      = require('../../helpers/Icon');
-var Input     = require('../../forms/Input');
+var React       = require('react');
+var I18nMixin   = require('../../mixins/I18n');
+var Input       = require('../../forms/Input');
+var ShareDialog = require('share-dialog');
+var ShareIcon   = require('../ShareIcon');
+
+
+var url = "http://example.com";
+
+var facebook   = ShareDialog.facebook(url);
+var twitter    = ShareDialog.twitter(url, "This is my tweet");
+var pinterest  = ShareDialog.pinterest(url, "This is my tweet");
+var googleplus = ShareDialog.gplus(url);
 
 module.exports = React.createClass({
   displayName: "ShareBox",
+
+  handleClick: function(serviceName) {
+    if (serviceName == "twitter") {
+      twitter.open();
+    }
+
+    if (serviceName == "googleplus") {
+      googleplus.open();
+    }
+
+    if (serviceName == "facebook") {
+      facebook.open();
+    }
+  },
+
+  renderShareIcons: function() {
+    return this.props.services.map(function(name) {
+      return <ShareIcon key={ name } service={ name } open={ this.handleClick.bind(null, name) } />;
+    }, this);
+  },
 
   render: function() {
     var shareLinkLabel = this.props.shareLinkLabel;
@@ -28,14 +57,7 @@ module.exports = React.createClass({
 
           <div className="ShareBox__services">
             <label>Share via</label>
-            <Icon className="ShareBox__icon ShareBox__email" icon="envelope" />
-            <Icon className="ShareBox__icon ShareBox__facebook" icon="facebook" />
-            <Icon className="ShareBox__icon ShareBox__twitter" icon="twitter" />
-            <Icon className="ShareBox__icon ShareBox__google-plus" icon="google-plus" />
-            <Icon className="ShareBox__icon ShareBox__tumblr" icon="tumblr" />
-            <Icon className="ShareBox__icon ShareBox__pinterest" icon="pinterest" />
-            <Icon className="ShareBox__icon ShareBox__reddit" icon="reddit" />
-            <Icon className="ShareBox__icon ShareBox__linkedin" icon="linkedin" />
+            { this.renderShareIcons() }
           </div>
 
       </div>

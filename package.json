@@ -12,7 +12,8 @@
     "numeral": "~1.5.3",
     "paths-js": "^0.3.0",
     "react": "~0.12.1",
-    "react-tween-state": "0.0.4"
+    "react-tween-state": "0.0.4",
+    "share-dialog": "^0.1.0"
   },
   "devDependencies": {
     "browserify": "~6.3.3",

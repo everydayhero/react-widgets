@@ -23,7 +23,6 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       services: [
-        'link',
         'email',
         'facebook',
         'twitter',
@@ -71,9 +70,11 @@ module.exports = React.createClass({
     var buttonLabel = this.t('buttonLabel');
 
     return (
-      <div className="ShareButton" onClick={ this.toggleActive }>
-        { this.renderIcon() }
-        <span className="ShareButton__label">{ buttonLabel }</span>
+      <div className="ShareButton">
+        <div className="ShareButton__btn" onClick={ this.toggleActive }>
+          { this.renderIcon() }
+          <span className="ShareButton__label">{ buttonLabel }</span>
+        </div>
         <ReactCSSTransitionGroup transitionName="ShareButton__transition" transitionEnter={ false }>
           { this.renderShareBox() }
         </ReactCSSTransitionGroup>

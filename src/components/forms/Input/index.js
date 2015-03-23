@@ -14,6 +14,7 @@ module.exports = React.createClass({
   propTypes: {
     autoComplete: React.PropTypes.bool,
     autoFocus: React.PropTypes.bool,
+    autoSelect: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     error: React.PropTypes.bool,
     i18n: React.PropTypes.object,
@@ -35,6 +36,7 @@ module.exports = React.createClass({
     return {
       autoComplete: false,
       autoFocus: false,
+      autoSelect: false,
       disabled: false,
       error: false,
       icon: null,
@@ -69,6 +71,9 @@ module.exports = React.createClass({
   componentDidMount: function() {
     if (this.props.autoFocus) {
       this.refs.input.getDOMNode().focus();
+    }
+    if (this.props.autoSelect) {
+      this.refs.input.getDOMNode().select();
     }
     if (this.props.value && !this.props.disabled && this.props.validate) {
       this.validate();

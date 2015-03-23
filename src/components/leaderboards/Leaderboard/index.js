@@ -58,6 +58,7 @@ module.exports = React.createClass({
 
   componentDidMount: function() {
     addEventListener(window, 'resize', this.setChildWidth);
+    this.setChildWidth();
   },
 
   componentWillUnmount: function() {
@@ -68,7 +69,7 @@ module.exports = React.createClass({
     this.setState({
       childWidth: this.getChildrenWidth(this.props.childWidth, this.props.pageSize)
     });
-  }, 100),
+  }, 100, { trailing: true }),
 
   renderLeaderboardItems: function() {
     if (this.state.isLoading) {

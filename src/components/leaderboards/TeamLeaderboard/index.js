@@ -62,6 +62,7 @@ module.exports = React.createClass({
 
   componentDidMount: function() {
     addEventListener(window, 'resize', this.setChildWidth);
+    this.setChildWidth();
   },
 
   componentWillUnmount: function() {
@@ -72,7 +73,7 @@ module.exports = React.createClass({
     this.setState({
       childWidth: this.getChildrenWidth(this.props.childWidth, this.props.pageSize)
     });
-  }, 100),
+  }, 100, { trailing: true }),
 
   renderLeaderboardItems: function() {
     var currentPage = this.state.currentPage - 1;
@@ -90,32 +91,23 @@ module.exports = React.createClass({
       var formattedAmount = this.formatAmount(d.amount);
       var formattedRank = numeral(d.rank).format('0o');
 
-      if (this.props.altTemplate) {
-        return (
-          <TeamLeaderboardItem
-            key={ d.id }
-            name={ d.name }
-            url={ d.url }
-            isoCode={ d.isoCode }
-            amount={ formattedAmount }
-            totalMembers={ d.totalMembers }
-            imgSrc={ d.imgSrc }
-            raisedTitle={ this.t('raisedTitle') }
-            membersTitle={ this.t('membersTitle') }
-            width={ this.state.childWidth } />
-        );
-      }
+      var El = this.props.altTemplate ? TeamLeaderboardItem : LeaderboardItem;
+      var props = {
+        key: d.id,
+        name: d.name,
+        rank: formattedRank,
+        url: d.url,
+        isoCode: d.isoCode,
+        amount: formattedAmount,
+        totalMembers: d.totalMembers,
+        imgSrc: d.imgSrc,
+        raisedTitle: this.t('raisedTitle'),
+        membersTitle: this.t('membersTitle'),
+        width: this.state.childWidth
+      };
 
       return (
-        <LeaderboardItem
-          key={ d.id }
-          rank={ formattedRank }
-          name={ d.name }
-          url={ d.url }
-          isoCode={ d.isoCode }
-          amount={ formattedAmount }
-          imgSrc={ d.medImgSrc }
-          width={ this.state.childWidth } />
+        <El { ...props } />
       );
 
     }, this);

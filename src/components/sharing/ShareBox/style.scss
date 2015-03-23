@@ -1,0 +1,123 @@
+.ShareBox__divider {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  clear: both;
+  text-transform: uppercase;
+  padding: $x-4 0;
+
+  > span {
+    position: relative;
+    display: inline-block;
+  }
+
+  > span:before,
+  > span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 99999px;
+    height: 1px;
+    background: $ehw-grey-light;
+  }
+
+  > span:before {
+    right: 100%;
+    margin-right: 15px;
+  }
+
+  > span:after {
+    left: 100%;
+    margin-left: 15px;
+  }
+}
+
+$shareBoxWidth: 320px;
+
+.ShareBox {
+  box-sizing: border-box;
+  width: $shareBoxWidth;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -($shareBoxWidth/2);
+  margin-top: $x-2 + 1;
+  background: #fff;
+  border-radius: $ehw-border-radius;
+  padding: $x-4;
+  border: 1px solid $ehw-grey-light;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.25);
+
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: $x-2 solid transparent;
+    border-right: $x-2 solid transparent;
+    border-bottom: $x-2 solid #fff;
+    position: absolute;
+    left: 50%;
+    margin-left: -$x-1;
+  }
+
+  &:before {
+    top: -$x-2;
+    z-index: 2;
+  }
+
+  &:after {
+    border-bottom-color: $ehw-grey-light;
+    top: -($x-2 + 1);
+    z-index: 1;
+  }
+}
+
+.ShareBox .Input__label {
+  border-bottom-color: $ehw-grey;
+  color: $ehw-grey;
+}
+
+.ShareBox__icon {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+  padding: 0 $x-1;
+
+  &:nth-child(4n + 1) {
+    padding-right: 0;
+  }
+
+  &:nth-child(4n + 2) {
+    padding-left: 0;
+  }
+
+  .Icon {
+    box-sizing: border-box;
+    border-radius: $ehw-border-radius;
+    border: 1px solid $ehw-grey-light;
+    width: 100%;
+    padding: $x-2 0;
+    margin: 0 0 $x-2;
+  }
+}
+
+.ShareBox__services {
+  clear: left;
+  text-align: left;
+
+  label {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: $x-2 0 $x-2;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 9px;
+    line-height: 9px;
+    color: $ehw-grey-dark;
+  }
+}

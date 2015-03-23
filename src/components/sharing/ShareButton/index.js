@@ -74,7 +74,7 @@ module.exports = React.createClass({
       <div className="ShareButton" onClick={ this.toggleActive }>
         { this.renderIcon() }
         <span className="ShareButton__label">{ buttonLabel }</span>
-        <ReactCSSTransitionGroup transitionName="example">
+        <ReactCSSTransitionGroup transitionName="ShareButton__transition" transitionEnter={ false }>
           { this.renderShareBox() }
         </ReactCSSTransitionGroup>
       </div>

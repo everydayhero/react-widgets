@@ -30,7 +30,8 @@ var widgets = {
   Amount: require('./components/amount/Amount'),
   Input: require('./components/forms/Input'),
   Footprint: require('./components/footprint/Footprint'),
-  Supporters: require('./components/supporters/Supporters')
+  Supporters: require('./components/supporters/Supporters'),
+  ShareButton: require('./components/sharing/ShareButton')
 };
 var modals = {
   CharitySearch: require('./components/search/CharitySearchModal'),

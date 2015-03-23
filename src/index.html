@@ -144,9 +144,10 @@
     <div class="main-content pull-left">
       <div class="panel clearfix">
         <h3 class="title">Search</h3>
+        <a id="CharitySearchVisit" class="modal"><i class="Icon fa fa-heart fa-fw"></i> Find a Charity</a>
         <a id="CharitySearchDonate" class="modal"><i class="Icon fa fa-money fa-fw"></i> Donate to a Charity</a>
         <a id="CharitySearchFundraise" class="modal"><i class="Icon fa fa-bolt fa-fw"></i> Fundraise for a Charity</a>
-        <a id="PageSearchExample" class="modal"><i class="Icon fa fa-heart fa-fw"></i> Support a Friend</a>
+        <a id="PageSearchExample" class="modal"><i class="Icon fa fa-group fa-fw"></i> Support a Friend</a>
       </div>
 
       <div class="panel clearfix">
@@ -204,6 +205,7 @@
   </div>
 
   <script>
+    edh.widgets.initModal('CharitySearchVisit', 'CharitySearch', { country: 'uk' });
     edh.widgets.initModal('CharitySearchDonate', 'CharitySearch', { country: 'uk', action: 'donate' });
     edh.widgets.initModal('CharitySearchFundraise', 'CharitySearch', { country: 'uk', action: 'fundraise' });
     edh.widgets.initModal('PageSearchExample', 'PageSearch', { country: 'uk' });

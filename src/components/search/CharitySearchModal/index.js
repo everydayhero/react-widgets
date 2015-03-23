@@ -14,7 +14,7 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
 
   propTypes: {
-    action: React.PropTypes.oneOf(['donate', 'fundraise', 'custom']).isRequired,
+    action: React.PropTypes.oneOf(['visit', 'donate', 'fundraise', 'custom']),
     autoFocus: React.PropTypes.bool,
     campaignUid: React.PropTypes.string,
     campaignSlug: React.PropTypes.string,
@@ -27,11 +27,13 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
+      action: 'visit',
       autoFocus: true,
       campaignUid: '',
       campaignSlug: null,
       defaultI18n: {
         title: 'Search for a Charity',
+        visitAction: 'Visit Charity',
         donateAction: 'Give to this Charity',
         fundraiseAction: 'Fundraise for this Charity',
         emptyLabel: "We couldn't find any matching Charities."
@@ -132,7 +134,7 @@ module.exports = React.createClass({
   },
 
   hasCustomHandler: function() {
-    return this.props.action == 'custom';
+    return this.props.action == 'custom' && this.props.onSelect;
   },
 
   customHandler: function(result) {
@@ -155,7 +157,7 @@ module.exports = React.createClass({
       return {
         id: charity.id,
         charity: charity,
-        url: resultUrl && resultUrl(charity, props.campaignSlug)
+        url: resultUrl ? resultUrl(charity, props.campaignSlug) : charity.url
       };
     });
   },

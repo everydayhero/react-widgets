@@ -44,7 +44,7 @@ describe('Leaderboard', function() {
     };
 
     beforeEach(function() {
-      leaderboard = <Leaderboard campaignUid="au-0" i18n={ translation } type="team" />;
+      leaderboard = <Leaderboard campaignUid="au-0" i18n={ translation } />;
       element = TestUtils.renderIntoDocument(leaderboard);
     });
 

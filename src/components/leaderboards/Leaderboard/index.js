@@ -21,7 +21,6 @@ module.exports = React.createClass({
     charitySlug: React.PropTypes.string,
     charityUid: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
-    type: React.PropTypes.oneOf(['individual']),
     limit: React.PropTypes.number,
     pageSize: React.PropTypes.number,
     backgroundColor: React.PropTypes.string,
@@ -33,7 +32,6 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      type: 'individual',
       limit: 48,
       pageSize: 12,
       backgroundColor: null,
@@ -54,6 +52,10 @@ module.exports = React.createClass({
       currentPage: 1,
       childWidth: this.props.childWidth,
     };
+  },
+
+  componentWillMount: function() {
+    this.loadLeaderboard('individual');
   },
 
   componentDidMount: function() {

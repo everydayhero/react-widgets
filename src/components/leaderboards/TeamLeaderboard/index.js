@@ -22,7 +22,6 @@ module.exports = React.createClass({
     charitySlug: React.PropTypes.string,
     charityUid: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'nz', 'uk', 'us']),
-    type: React.PropTypes.oneOf(['team']),
     limit: React.PropTypes.number,
     pageSize: React.PropTypes.number,
     backgroundColor: React.PropTypes.string,
@@ -34,7 +33,6 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      type: 'team',
       limit: 48,
       pageSize: 12,
       backgroundColor: null,
@@ -58,6 +56,10 @@ module.exports = React.createClass({
       currentPage: 1,
       childWidth: '',
     };
+  },
+
+  componentWillMount: function() {
+    this.loadLeaderboard('team');
   },
 
   componentDidMount: function() {

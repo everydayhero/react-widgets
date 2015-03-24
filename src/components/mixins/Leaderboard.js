@@ -10,10 +10,6 @@ var charities         = require('../../api/charities');
 var LeaderboardPaging = require('../leaderboards/LeaderboardPaging');
 
 module.exports = {
-  componentWillMount: function() {
-    this.loadLeaderboard();
-  },
-
   getEndpoint: function() {
     var endpoint;
     var props = this.props;
@@ -33,13 +29,13 @@ module.exports = {
     return (endpoint || function(type, limit, callback) { callback(null); });
   },
 
-  loadLeaderboard: function() {
+  loadLeaderboard: function(type) {
     this.setState({
       isLoading: true
     });
 
     var endpoint = this.getEndpoint();
-    endpoint(this.props.type, this.props.limit, this.processLeaderboard, { includePages: true });
+    endpoint(type, this.props.limit, this.processLeaderboard, { includePages: true });
   },
 
   processLeaderboard: function(result) {

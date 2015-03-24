@@ -1,0 +1,35 @@
+.LeaderboardPagingButton__prev,
+.LeaderboardPagingButton__next {
+  display: inline-block;
+  border: 1px solid #fff;
+  margin: $x-1;
+  cursor: pointer;
+  font-size: $x-6;
+  line-height: 1;
+  border-radius: $ehw-border-radius;
+  transition: opacity 0.25s ease-in-out;
+
+  &,
+  &:hover,
+  &:focus {
+    opacity: 0.1;
+  }
+}
+
+.LeaderboardPagingButton__prev {
+  padding: 0 10px 0 8px;
+}
+
+.LeaderboardPagingButton__next {
+  padding: 0 8px 0 10px;
+}
+
+.LeaderboardPagingButton__prev--active,
+.LeaderboardPagingButton__next--active {
+  opacity: 0.66;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}

@@ -1,23 +1,24 @@
 "use strict";
-jest.autoMockOff();
-jest.mock('../../../../api/campaigns');
 
-describe('Leaderboard', function() {
-  var _                 = require('lodash');
-  var React             = require('react/addons');
-  var Leaderboard       = require('../');
-  var LeaderboardItem   = require('../../LeaderboardItem/');
-  var LeaderboardPaging = require('../../LeaderboardPaging/');
-  var TestUtils         = React.addons.TestUtils;
-  var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
+jest.autoMockOff();
+
+describe('TeamLeaderboard', function() {
+  var _                   = require('lodash');
+  var React               = require('react/addons');
+  var TeamLeaderboard     = require('../');
+  var LeaderboardItem     = require('../../LeaderboardItem/');
+  var TeamLeaderboardItem = require('../../TeamLeaderboardItem/');
+  var LeaderboardPaging   = require('../../LeaderboardPaging/');
+  var TestUtils           = React.addons.TestUtils;
+  var findByClass         = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('Component defaults', function() {
-    var leaderboard;
+    var teamLeaderboard;
     var element;
 
     beforeEach(function() {
-      leaderboard = <Leaderboard campaignUid="au-0" />;
-      element = TestUtils.renderIntoDocument(leaderboard);
+      teamLeaderboard = <TeamLeaderboard campaignUid="au-0" />;
+      element = TestUtils.renderIntoDocument(teamLeaderboard);
     });
 
     it('renders something', function() {
@@ -25,14 +26,13 @@ describe('Leaderboard', function() {
     });
 
     it('renders a default heading', function() {
-      var heading = findByClass(element, 'Leaderboard__heading');
-
-      expect(heading.getDOMNode().textContent).toBe('Top Individuals');
+      var heading = findByClass(element, 'TeamLeaderboard__heading');
+      expect(heading.getDOMNode().textContent).toBe('Top Teams');
     });
 
     it('renders a loading icon', function() {
       element.setState({ isLoading: true });
-      findByClass(element, 'Leaderboard__loading');
+      findByClass(element, 'TeamLeaderboard__loading');
     });
   });
 
@@ -44,12 +44,12 @@ describe('Leaderboard', function() {
     };
 
     beforeEach(function() {
-      leaderboard = <Leaderboard campaignUid="au-0" i18n={ translation } />;
+      leaderboard = <TeamLeaderboard campaignUid="au-0" i18n={ translation } />;
       element = TestUtils.renderIntoDocument(leaderboard);
     });
 
     it('renders a custom heading', function() {
-      var heading = findByClass(element, 'Leaderboard__heading');
+      var heading = findByClass(element, 'TeamLeaderboard__heading');
       expect(heading.getDOMNode().textContent).toBe(translation.heading);
     });
   });
@@ -59,7 +59,7 @@ describe('Leaderboard', function() {
     var data;
 
     beforeEach(function() {
-      element = TestUtils.renderIntoDocument(<Leaderboard campaignUid="au-0" />);
+      element = TestUtils.renderIntoDocument(<TeamLeaderboard campaignUid="au-0" />);
     });
 
     it('assigns rank in order of amount', function(){
@@ -98,24 +98,40 @@ describe('Leaderboard', function() {
   });
 
   describe('Number formatting options', function() {
-    it('renders in a long format with commas by default', function() {
-      var leaderboard = <Leaderboard campaignUid="au-0" />;
+    it('renders in a abbreviated format by default', function() {
+      var leaderboard = <TeamLeaderboard campaignUid="au-0" />;
       var element = TestUtils.renderIntoDocument(leaderboard);
 
-      expect(element.formatAmount(100000)).toEqual('$1,000');
+      expect(element.formatAmount(100000)).toEqual('$1 k');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var leaderboard = <Leaderboard campaignUid="au-0" currencyFormat="0.00" />;
+      var leaderboard = <TeamLeaderboard campaignUid="au-0" currencyFormat="0.00" />;
       var element = TestUtils.renderIntoDocument(leaderboard);
 
-      expect(element.formatAmount(10000)).toEqual('$100.00');
+      expect(element.formatAmount(100000)).toEqual('$1000.00');
+    });
+  });
+
+  describe('rendering different templates', function(){
+    it('renders LeaderboardItem component for children by default', function() {
+      var leaderboard = <TeamLeaderboard campaignUid="au-0" />;
+      var element = TestUtils.renderIntoDocument(leaderboard);
+      var template = TestUtils.scryRenderedComponentsWithType(element, LeaderboardItem);
+      expect(element.props.altTemplate).toBeFalsy();
+    });
+
+    it('renders TeamLeaderboardItem component for children when set', function() {
+      var leaderboard = <TeamLeaderboard campaignUid="au-0" altTemplate={ true } />;
+      var element = TestUtils.renderIntoDocument(leaderboard);
+      var template = TestUtils.scryRenderedComponentsWithType(element, TeamLeaderboardItem);
+      expect(element.props.altTemplate).toBeTruthy();
     });
   });
 
   describe('paging button rendering', function() {
     it('renders a paging component if multiple pages are available', function() {
-      var leaderboard = <Leaderboard campaignUid="au-0" limit={ 10 } pageSize={ 5 } />;
+      var leaderboard = <TeamLeaderboard campaignUid="au-0" limit={ 10 } pageSize={ 5 } />;
       var element = TestUtils.renderIntoDocument(leaderboard);
       element.setState({ isLoading: false });
 
@@ -125,7 +141,7 @@ describe('Leaderboard', function() {
     });
 
     it('does not render a paging component if only 1 page is available', function() {
-      var leaderboard = <Leaderboard campaignUid="au-0" limit={ 5 } pageSize={ 5 } />;
+      var leaderboard = <TeamLeaderboard campaignUid="au-0" limit={ 5 } pageSize={ 5 } />;
       var element = TestUtils.renderIntoDocument(leaderboard);
       element.setState({ isLoading: false });
 

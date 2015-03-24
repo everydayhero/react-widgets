@@ -1,0 +1,23 @@
+.TeamLeaderboard {
+  @extend %clearfix;
+  background: $ehw-grey-dark;
+  font-family: $ehw-sans-serif-fonts;
+  font-size: $ehw-default-font-size;
+  color: #fff;
+
+  .TeamLeaderboard__heading {
+    @extend %ehw-tile-heading;
+    text-align: center;
+  }
+
+  .TeamLeaderboard__items {
+    @extend %clearfix;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .TeamLeaderboard__loading {
+    @extend %ehw-tile-loading-icon;
+  }
+}

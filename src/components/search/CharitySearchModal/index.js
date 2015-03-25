@@ -133,15 +133,14 @@ module.exports = React.createClass({
     }
   },
 
-  hasCustomHandler: function() {
-    return this.props.action == 'custom' && this.props.onSelect;
-  },
-
-  customHandler: function(result) {
-    if (this.props.onSelect) {
-      this.props.onSelect(result);
-    }
+  selectHandler: function(result) {
     this.props.onClose();
+
+    if (this.props.action == 'custom' && this.props.onSelect) {
+      this.props.onSelect(result.charity);
+    } else {
+      window.location = result.url;
+    }
   },
 
   selectAction: function() {
@@ -171,7 +170,7 @@ module.exports = React.createClass({
         onClose={ this.props.onClose }
         onInputChange={ this.inputChanged }
         onPageChange={ this.pageChanged }
-        onSelect={ this.hasCustomHandler() && this.customHandler }
+        onSelect={ this.selectHandler }
         pagination={ this.state.pagination }
         results={ this.getResults() }
         resultComponent={ CharitySearchResult }

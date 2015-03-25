@@ -17,11 +17,10 @@ module.exports = React.createClass({
 
   render: function() {
     var props = this.props;
-    var url = props.onSelect ? '#' : props.url;
     var clickHandler = props.onSelect && this.clickHandler;
 
     return (
-      <a href={ url }
+      <a href={ props.result.url || '#' }
         className="SearchResult"
         onClick={ clickHandler }>
         { props.children }

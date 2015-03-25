@@ -119,7 +119,7 @@ gulp.task('examples', [ 'styles', 'scripts' ], function() {
     .pipe(gulp.dest('public'));
 });
 
-gulp.task('publish', function() {
+gulp.task('deploy_assets', ['default'], function() {
   if (!process.env.AWS_KEY || !process.env.AWS_SECRET) {
     console.error('ERROR: No AWS credentials found.');
     return;

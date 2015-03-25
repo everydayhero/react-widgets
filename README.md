@@ -1135,17 +1135,17 @@ Displays the countdown to the end of an event / campaign.
 OSX users may need to increase the maximum number of open files (default is 256) using `ulimit -Sn 1000` to use build, watch, and scripts commands.
 
 ```sh
-$ npm run setup       # install global dependencies, node modules and build production assets
-$ npm run build       # build production assets
-$ npm run build-dev   # build un minified assets (for debugging)
-$ npm run watch       # watch assests and build production
-$ npm run watch-dev   # watch assests and build un minified assets (for debugging)
-$ npm run jshint      # check javascript code quality
-$ npm run scripts     # build production scripts
-$ npm run scripts-dev # build un-minified scripts (for debugging)
-$ npm run styles      # build production styles
-$ npm run styles-dev  # build un-minified styles (for debugging)
-$ npm run publish     # publish build files to S3 bucket (AWS_KEY and AWS_SECRET environment variables must be set)
+$ npm run setup         # install global dependencies, node modules and build production assets
+$ npm run build         # build production assets
+$ npm run build-dev     # build un minified assets (for debugging)
+$ npm run watch         # watch assets and build production
+$ npm run watch-dev     # watch assets and build un minified assets (for debugging)
+$ npm run jshint        # check javascript code quality
+$ npm run scripts       # build production scripts
+$ npm run scripts-dev   # build un-minified scripts (for debugging)
+$ npm run styles        # build production styles
+$ npm run styles-dev    # build un-minified styles (for debugging)
+$ npm run deploy-assets # publish build files to S3 bucket (AWS_KEY and AWS_SECRET environment variables must be set)
 
 $ npm test            # run tests
 $ npm start           # run local server

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+git checkout master
+git pull
+bin/version_check
+gulp deploy_assets

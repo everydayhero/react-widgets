@@ -83,7 +83,7 @@
     "test": "jest",
     "test-debug": "node --debug-brk --harmony ./node_modules/.bin/jest --runInBand",
     "start": "node server.js",
-    "publish": "bin/version-check && gulp && gulp publish"
+    "deploy-assets": "bin/deploy_assets"
   },
   "browserify": {
     "transform": [

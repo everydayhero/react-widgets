@@ -9,12 +9,14 @@ describe('UpcomingEvents', function() {
   var campaign       = require('../../../../api/campaigns');
   var TestUtils      = React.addons.TestUtils;
   var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
+  var scryByClass    = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('component', function() {
     var translation  = { emptyLabel: 'Nothing to see here!' };
     var element;
 
     beforeEach(function() {
+      campaign.findByCharity.mockClear();
       var events = <UpcomingEvents charityUid="au-1234" charitySlug="au-1234-slug" i18n={ translation } />;
       element = TestUtils.renderIntoDocument(events);
     });
@@ -23,19 +25,46 @@ describe('UpcomingEvents', function() {
       expect(element).not.toBeNull();
     });
 
-    it('renders a default message if no results are returned', function() {
-      element.setState({ content: element.renderEvents([]) });
+    it('initially renders loading icon', function() {
+      findByClass(element, 'UpcomingEvents__loading');
+    });
+
+    it('setContent renders a loading icon when not loaded', function() {
+      element.setContent();
+      findByClass(element, 'UpcomingEvents__loading');
+    });
+
+    it('renders an empty message when no results are returned', function() {
+      element.setEvents([]);
       var emptyLabel = findByClass(element, 'UpcomingEvents__empty-label');
       expect(emptyLabel.getDOMNode().textContent).toContain(translation.emptyLabel);
     });
 
-    it('renders a loading icon', function() {
-      element.setState({ content: element.renderIcon() });
-      findByClass(element, 'UpcomingEvents__loading');
+    it('renders events when results are returned', function() {
+      var campaigns = [{
+        id: 1,
+        name: 'Blah',
+        country_code: 'ie',
+        display_finish_at: '2016-01-01',
+        url: 'http://blah.com',
+        get_started_url: 'https://blah.edheroy.com/ie/get-started',
+        background_image_url: null,
+        page_count: 2
+      }];
+
+      element.setEvents(campaigns);
+
+      var events = scryByClass(element, 'Event');
+      expect(events.length).toBe(1);
     });
 
-    it('renders if handed default charity uid, page, size', function() {
+    it('loads campaigns for given charity', function() {
       expect(campaign.findByCharity).toBeCalledWith('au-1234', 1, 20, jasmine.any(Function));
+
+      var callback = campaign.findByCharity.mock.calls[0][3];
+      callback({campaigns: []});
+
+      findByClass(element, 'UpcomingEvents__empty-label');
     });
   });
 });

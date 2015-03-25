@@ -4,6 +4,10 @@ var React = require('react');
 var I18n = require('../../mixins/I18n');
 var effect = require('../../../lib/effect');
 
+function cssUrl(url) {
+  return url ? 'url(' + url + ')' : 'none';
+}
+
 module.exports = React.createClass({
   displayName: 'Event',
   mixins: [I18n],
@@ -13,7 +17,7 @@ module.exports = React.createClass({
     campaignUrl: React.PropTypes.string.isRequired,
     getStartedUrl: React.PropTypes.string.isRequired,
     backgroundColor: React.PropTypes.string.isRequired,
-    backgroundImageUrl: React.PropTypes.string.isRequired,
+    backgroundImageUrl: React.PropTypes.string,
     supporterCount: React.PropTypes.number.isRequired,
     width: React.PropTypes.string.isRequired,
     i18n: React.PropTypes.object,
@@ -37,15 +41,18 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    var component = this;
-    var backgroundImage = document.createElement('img');
-    backgroundImage.setAttribute('crossorigin', 'anonymous');
-    backgroundImage.src = this.props.backgroundImageUrl;
-    backgroundImage.onload = function() {
-      component.setState({
-        base64BlurredBackgroundImage: effect.blurImage(backgroundImage, 30)
-      });
-    };
+    if (this.props.backgroundImageUrl) {
+      var backgroundImage = document.createElement('img');
+      backgroundImage.setAttribute('crossorigin', 'anonymous');
+      backgroundImage.src = this.props.backgroundImageUrl;
+      backgroundImage.onload = this.blurBackgroundImage.bind(this, backgroundImage);
+    }
+  },
+
+  blurBackgroundImage: function(backgroundImage) {
+    this.setState({
+      base64BlurredBackgroundImage: effect.blurImage(backgroundImage, 30)
+    });
   },
 
   activate: function() {
@@ -75,14 +82,14 @@ module.exports = React.createClass({
   baseStyles: function() {
     return {
       backgroundColor: this.props.backgroundColor,
-      backgroundImage: 'url(' + this.props.backgroundImageUrl + ')',
+      backgroundImage: cssUrl(this.props.backgroundImageUrl),
       backgroundSize: 'cover'
     };
   },
 
   blurStyles: function() {
     return {
-      backgroundImage: 'url(' + this.state.base64BlurredBackgroundImage + ')',
+      backgroundImage: cssUrl(this.state.base64BlurredBackgroundImage),
       backgroundSize: 'cover'
     };
   },

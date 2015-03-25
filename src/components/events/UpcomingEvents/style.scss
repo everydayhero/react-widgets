@@ -1,4 +1,21 @@
 .UpcomingEvents {
-  line-height: 0;
-  box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.2);
+  position: relative;
+  height: 252px;
+  padding: 40px;
+}
+
+.UpcomingEvents.mobile {
+  padding: 40px 20px;
+}
+
+.UpcomingEvents__loading {
+  @extend %absolute-center;
+  font-size: 30px;
+  color: $ehw-grey;
+}
+
+.UpcomingEvents__empty-label {
+  @extend %absolute-center;
+  font-size: 20px;
+  color: inherit;
 }

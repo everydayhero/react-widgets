@@ -1,7 +1,7 @@
 .SupporterCardWrapper {
   box-sizing: border-box;
   padding: $x-1;
-  float: left;
+  display: inline-block;
   overflow: hidden;
 }
 
@@ -16,11 +16,14 @@
 }
 
 .SupporterCard__userName {
+  display: block;
   transition: all 160ms ease-out;
+  white-space: nowrap;
   text-transform: uppercase;
   text-decoration: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
   color: inherit;
-  display: block;
   font-weight: bold;
   letter-spacing: 0.1em;
   line-height: 1.1;
@@ -31,4 +34,3 @@
     color: $ehw-green;
   }
 }
-

@@ -49,20 +49,21 @@
 }
 
 .SupporterCardGiveNow__label {
-  transition: all 240ms ease-out;
+  transition: all 240ms 100ms ease-out;
   position: absolute;
   z-index: 1;
   left: 0;
   width: 100%;
   bottom: 0;
-  line-height: 14px;
+  line-height: 11px;
   text-align: center;
   color: white;
-  font-size: 10px;
+  font-size: 8px;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   opacity: 0;
+  white-space: nowrap;
   text-shadow: 0 0 5px rgba(82,82,82, 0.8);
 }
 

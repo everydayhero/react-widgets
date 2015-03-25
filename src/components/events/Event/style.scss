@@ -33,7 +33,7 @@ $ehw-animation-speed: 200ms;
   width: 100%;
   background-color: $ehw-grey-dark;
   overflow: hidden;
-  border-radius: 2px;
+  border-radius: $ehw-border-radius;
 
   &.active {
     .Event__blur { opacity: 1; }

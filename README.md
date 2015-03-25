@@ -1090,7 +1090,7 @@ Displays a list of upcoming events / campaigns.
 
   ```js
     {
-      emptyLabel: 'No events to display.'
+      emptyLabel: 'No upcoming events available.'
     }
   ```
 

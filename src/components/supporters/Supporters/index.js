@@ -22,21 +22,15 @@ module.exports = React.createClass({
     charitySlug: React.PropTypes.string,
     charityUid: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
-    limit: React.PropTypes.number,
     type: React.PropTypes.oneOf(['team', 'individual']),
-    backgroundColor: React.PropTypes.string,
-    textColor: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
     return {
-      limit: 6,
       type: 'individual',
       backgroundColor: '#EBEBEB',
-      textColor: '#333333',
       defaultI18n: {
-        heading: 'Supporters',
         emptyLabel: 'No supporters to display.'
       }
     };
@@ -44,26 +38,14 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      isLoading: false,
-      cardWidth: '',
+      isLoading: true,
       pages: []
     };
   },
 
-  componentDidMount: function() {
+  componentWillMount: function() {
     this.loadPages();
-    addEventListener(window, 'resize', this.setCardWidth);
   },
-
-  componentWillUnmount: function() {
-    removeEventListener(window, 'resize', this.setCardWidth);
-  },
-
-  setCardWidth: _.debounce(function() {
-    this.setState({
-      cardWidth: this.getChildrenWidth(180, this.state.pages.length)
-    });
-  }, 100),
 
   getEndpoint: function() {
     var endpoint;
@@ -85,10 +67,8 @@ module.exports = React.createClass({
   },
 
   loadPages: function() {
-    this.setState({ isLoading: true });
-
     var endpoint = this.getEndpoint();
-    endpoint(this.props.type, this.props.limit, this.onSuccess, { includePages: true, includeFootprint: true });
+    endpoint(this.props.type, 20, this.onSuccess, { includePages: true, includeFootprint: true });
   },
 
   onSuccess: function(result) {
@@ -96,27 +76,30 @@ module.exports = React.createClass({
 
     this.setState({
       isLoading: false,
-      pages: pages,
-      cardWidth: this.getChildrenWidth(180, pages.length)
+      pages: pages
     });
   },
 
   renderSupporterCards: function() {
     var state = this.state;
+
     if (state.isLoading) {
-      return <Icon className="Supporters__loading" icon="refresh" />;
+      return <Icon className="Supporters__loading" icon="circle-o-notch" />;
     }
 
     var pages = state.pages;
     if (_.isEmpty(pages)) {
-      return <p className="Supporters__emptyLabel">{ this.t('emptyLabel') }</p>;
+      return <p className="Supporters__empty-label">{ this.t('emptyLabel') }</p>;
     }
 
-    return pages.map(function(page) {
+    var count = this.getChildCountFromWidth(180);
+    var width = this.getChildWidth(count);
+
+    return _.map(_.take(pages, Math.max(count, 2)), function(page) {
       return <SupporterCard
         key={ page.id }
         footprint={ page.owner_footprint }
-        width={ state.cardWidth }
+        width={ width }
         url={ page.url }
         image={ page.image.large_image_url }
         name={ page.name }
@@ -127,16 +110,9 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var supporterCards = this.renderSupporterCards();
-    var style = {
-      backgroundColor: this.props.backgroundColor,
-      color: this.props.textColor
-    };
-
     return (
-      <div className="Supporters" style={ style }>
-        <h3 className="Supporters__heading">{ this.t('heading') }</h3>
-        <div className="Supporters__content">{ supporterCards }</div>
+      <div className="Supporters">
+        { this.renderSupporterCards() }
       </div>
     );
   }

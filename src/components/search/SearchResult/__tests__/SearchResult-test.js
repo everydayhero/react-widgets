@@ -7,7 +7,7 @@ var TestUtils   = React.addons.TestUtils;
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
 describe('SearchResult', function() {
-  var result = { id: '1' };
+  var result = { id: '1', url: 'http://blah.com/' };
 
   it('renders a result', function() {
     var searchResult = <Result result={ result }>foo</Result>;
@@ -19,12 +19,11 @@ describe('SearchResult', function() {
 
   it('links to given url if onSelect callback not given', function() {
     var callback = jest.genMockFunction();
-    var url = 'http://blah.com/';
-    var searchResult = <Result result={ result } url={ url } />;
+    var searchResult = <Result result={ result } />;
     var component = TestUtils.renderIntoDocument(searchResult);
     var element = findByClass(component, 'SearchResult');
 
-    expect(element.getDOMNode().href).toBe(url);
+    expect(element.getDOMNode().href).toBe(result.url);
   });
 
   it('calls onSelect callback on click if given', function() {

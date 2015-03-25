@@ -1,23 +1,20 @@
 .Supporters {
   @extend %clearfix;
-  background: $ehw-grey-light;
   font-family: $ehw-sans-serif-fonts;
   border-radius: $ehw-border-radius;
-}
-
-.Supporters__heading {
-  @extend %ehw-tile-heading;
-}
-
-.Supporters__content {
   text-align: center;
+  position: relative;
+  min-height: 273px;
 }
 
 .Supporters__loading {
-  padding: 0 15px 15px;
-  display: inline-block;
+  @extend %absolute-center;
+  font-size: 30px;
+  color: $ehw-grey;
 }
 
 .Supporters__empty-label {
-  padding: 0 15px;
+  @extend %absolute-center;
+  font-size: 20px;
+  color: inherit;
 }

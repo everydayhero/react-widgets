@@ -49,7 +49,7 @@ module.exports = React.createClass({
   clickHandler: function(e) {
     if (this.state.menu && !this.state.menu.contains(e.target)) {
       var option = this.props.options[this.state.fauxFocus];
-      this.props.onSelect(option || false);
+      this.props.onSelect(option || null);
     }
   },
 
@@ -68,7 +68,7 @@ module.exports = React.createClass({
       return this.setFauxFocus(i);
     }
     if (e.keyCode === 9) {
-      this.props.onSelect(options[i] || false);
+      this.props.onSelect(options[i] || null);
     }
     if (key === 13 && options[i]) {
       e.preventDefault();

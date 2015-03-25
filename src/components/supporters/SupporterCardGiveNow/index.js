@@ -23,18 +23,26 @@ module.exports = React.createClass({
       defaultI18n: {
         cta: 'Give Now',
         currency: '$',
-        label: 'Only {currency}{amount_remaining} to go'
+        label: 'Only {currency}{amount_remaining} to go',
+        achievedLabel: '{currency}{amount_raised} raised so far'
       }
     };
   },
 
-  render: function() {
-    var props = this.props;
+  getLabel: function () {
     var t = this.t;
-    var label = t('label', {
+    var props = this.props;
+
+    return t(props.current >= props.target ? 'achievedLabel' : 'label', {
       currency: t('currency'),
-      amount_remaining: props.target - props.current
+      amount_raised: parseFloat(props.current.toFixed(2)),
+      amount_remaining: parseFloat((props.target - props.current).toFixed(2))
     });
+  },
+
+  render: function() {
+    var t = this.t;
+    var props = this.props;
     var progress = props.target > 0 ? Math.floor(props.current / props.target * 100) : 0;
 
     return (
@@ -42,7 +50,7 @@ module.exports = React.createClass({
         <div className="SupporterCardGiveNow__cta">{ t('cta') }</div>
         <div className="SupporterCardGiveNow__progress">
           <div className="SupporterCardGiveNow__current" style={{ width: Math.min(progress, 100) + '%' }}></div>
-          <div className="SupporterCardGiveNow__label">{ label }</div>
+          <div className="SupporterCardGiveNow__label">{ this.getLabel() }</div>
         </div>
       </a>
     );

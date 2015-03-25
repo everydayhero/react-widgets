@@ -55,19 +55,10 @@ module.exports = React.createClass({
     }
   },
 
-  setMatch: function(obj) {
-    var key = this.props.labelKey;
-    var options = { focused: false,  filter: null, value: '' };
-    if (obj !== false) {
-      options.value = obj ? obj[key] : this.getNearestMatch();
-      this.props.output(options.value, obj);
-    }
-    this.setState(options);
-  },
-
-  getNearestMatch: function() {
-    var options = this.getFilteredOptions(this.state.filter);
-    return _.isEmpty(options) ? '' : options[0][this.props.labelKey];
+  selectHandler: function(option) {
+    var value = option ? option[this.props.labelKey] : '';
+    this.props.output(value, option);
+    this.setState({ focused: false, filter: null, value: value });
   },
 
   isFuzzyMatch: function(val) {
@@ -126,12 +117,12 @@ module.exports = React.createClass({
     var options = this.getFilteredOptions();
     var key = this.props.labelKey;
     var value = this.state.value;
-    var selected = _.findIndex(options, function(obj) { return obj[key] === value; });
+    var selected = _.findIndex(options, function(option) { return option[key] === value; });
     return <SelectOptions
       options={ options }
       labelKey={ key }
       selected={ selected >= 0 ? selected : value ? 0 : -1 }
-      onSelect={ this.setMatch } />;
+      onSelect={ this.selectHandler } />;
   },
 
   render: function() {

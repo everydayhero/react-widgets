@@ -15,9 +15,7 @@ $ehw-animation-speed: 200ms;
   padding: 3px;
 
   * {
-    transition: top $ehw-animation-speed ease-in-out;
-    -moz-transition: top $ehw-animation-speed ease-in-out;
-    -webkit-transition: top $ehw-animation-speed ease-in-out;
+    transition: top $ehw-animation-speed ease-out;
   }
 }
 
@@ -35,40 +33,38 @@ $ehw-animation-speed: 200ms;
   width: 100%;
   background-color: $ehw-grey-dark;
   overflow: hidden;
+  border-radius: $ehw-border-radius;
 
   &.active {
-    .Event__gradient { top: -100%; }
     .Event__blur { opacity: 1; }
     .Event__date { top: 25%; }
     .Event__name { top: 42%; }
     .Event__supporter-count { top: 64%; }
     .Event__join-event { top: 70%; }
+    .Event__gradient {
+      background-color: transparentize($ehw-grey-dark, 0.25);
+    }
   }
 }
 
 .Event__gradient {
-  background-image: -moz-linear-gradient(transparent, transparent 25%, rgba(0, 0, 0, 0.8));
-  background-image: -webkit-linear-gradient(transparent, transparent 25%, rgba(0, 0, 0, 0.8));
-  background-image: linear-gradient(transparent, transparent 25%, rgba(0, 0, 0, 0.8));
-  -webkit-animation: Gradient $ehw-animation-speed ease infinite;
-  -moz-animation: Gradient $ehw-animation-speed ease infinite;
-  animation: Gradient $ehw-animation-speed ease infinite;
-  height: 200%;
+  background-color: transparentize($ehw-grey-dark, 0.85);
+  background-image: linear-gradient(transparent, transparentize($ehw-grey-dark, 0.25));
+  height: 100%;
   position: absolute;
+  transition: background-color $ehw-animation-speed * 2.5 ease-out;
 }
 
 .Event__blur {
   opacity: 0;
-  transition: opacity $ehw-animation-speed ease-in-out;
-  -moz-transition: opacity $ehw-animation-speed ease-in-out;
-  -webkit-transition: opacity $ehw-animation-speed ease-in-out;
-  -webkit-transition-delay: 100ms;
+  transition: opacity $ehw-animation-speed ease-out;
   transition-delay: 100ms;
 }
 
 .Event__date {
   box-sizing: border-box;
-  border: 2px transparentize($ehw-grey-light, 0.5) solid;
+  border: 1px $ehw-grey-light solid;
+  background-color: transparentize($ehw-grey-dark, 0.5);
   display: block;
   height: 50px;
   width: 50px;
@@ -78,7 +74,6 @@ $ehw-animation-speed: 200ms;
   list-style: none;
   margin: 0;
   padding: 0;
-  -webkit-transition-delay: 125ms;
   transition-delay: 125ms;
 
   li {
@@ -101,7 +96,6 @@ $ehw-animation-speed: 200ms;
   width: 80%;
   left: 10%;
   top: 67%;
-  -webkit-transition-delay: 150ms;
   transition-delay: 150ms;
 }
 
@@ -119,7 +113,6 @@ $ehw-animation-speed: 200ms;
   text-transform: uppercase;
   top: 100%;
   width: 80%;
-  -webkit-transition-delay: 175ms;
   transition-delay: 175ms;
 }
 
@@ -132,12 +125,9 @@ $ehw-animation-speed: 200ms;
   line-height: 2.5;
   top: 110%;
   width: 40%;
-  -webkit-transition-delay: 200ms;
   text-decoration: none;
   transition-delay: 200ms;
   background-color: $ehw-green;
   border-radius: 3px;
-  -moz-box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.2);
   box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.2);
 }

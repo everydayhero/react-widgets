@@ -38,21 +38,15 @@ describe('Supporters', function() {
       expect(findByClass(element, 'Supporters')).not.toBeNull();
     });
 
-    it('contains a heading', function() {
-      var heading = findByClass(element, 'Supporters__heading');
-      expect(heading).not.toBeNull();
-      expect(heading.getDOMNode().textContent).toBe('Supporters');
-    });
-
     it('shows loading icon', function() {
       expect(findByClass(element, 'Supporters__loading').getDOMNode()).not.toBeNull();
-      expect(scryByClass(element, 'Supporters__emptyLabel').length).toBe(0);
+      expect(scryByClass(element, 'Supporters__empty-label').length).toBe(0);
     });
 
     it('shows empty label when empty', function() {
       callback(emptyData);
 
-      expect(findByClass(element, 'Supporters__emptyLabel').getDOMNode()).not.toBeNull();
+      expect(findByClass(element, 'Supporters__empty-label').getDOMNode()).not.toBeNull();
       expect(scryByClass(element, 'Supporters__loading').length).toBe(0);
     });
 
@@ -66,14 +60,13 @@ describe('Supporters', function() {
       });
 
       it('does not show empty label', function() {
-        expect(scryByClass(element, 'Supporters__emptyLabel').length).toBe(0);
+        expect(scryByClass(element, 'Supporters__empty-label').length).toBe(0);
       });
 
       it('contains SupporterCards', function() {
         var cards = scryByClass(element, 'SupporterCard');
 
         expect(cards.length).toBeGreaterThan(0);
-        expect(cards.length).toBe(leaderboardData.leaderboard.pages.length);
       });
     });
   });

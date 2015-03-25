@@ -55,7 +55,7 @@ module.exports = React.createClass({
     }
 
     return (
-      <SearchResult url={ result.url } onSelect={ props.onSelect } result={ result.charity }>
+      <SearchResult onSelect={ props.onSelect } result={ result }>
         { logo }
         <div className='CharitySearchResult__content'>
           <div className='CharitySearchResult__header'>{ charity.name }{ merchantName }</div>

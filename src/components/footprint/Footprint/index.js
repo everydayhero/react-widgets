@@ -227,7 +227,7 @@ module.exports = React.createClass({
     var diameter = this.getTweeningValue('min') * 2 - this.props.offset;
     var classes = cx({
       "Footprint": true,
-      "Footprint--hover": !!this.state.metric && !!this.state.tip,
+      "Footprint--hover": !!this.state.metric,
       "Footprint--compact": this.state.compact
     });
 

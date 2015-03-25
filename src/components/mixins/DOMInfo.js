@@ -9,13 +9,17 @@ var breakpoints = {
   mobile: 450,
   tablet: 700,
   laptop: 950,
-  desktop: 1200
+  desktop: 1200,
+  wide: 1450,
+  xWide: 1700
 };
 var sizes = {
   tiny: 200,
   small: 350,
   medium: 500,
-  large: 650
+  large: 650,
+  huge: 800,
+  xHuge: 950,
 };
 
 var resizeHandlers = [];
@@ -46,10 +50,7 @@ module.exports = {
   },
 
   componentWillUnmount: function() {
-    var index = resizeHandlers.indexOf(this.setSizeAndDevice);
-    if (index !== -1) {
-      resizeHandlers = resizeHandlers.splice(index, 1);
-    }
+    _.pull(resizeHandlers, this.setSizeAndDevice);
   },
 
   handleResize: _.debounce(function() {
@@ -102,11 +103,11 @@ module.exports = {
 
   getDevice: function() {
     var w = this.getWindowWidth();
-    return findSize(breakpoints, w) || 'wide';
+    return findSize(breakpoints, w) || 'xxWide';
   },
 
   getSize: function() {
     var w = this.getComponentWidth();
-    return findSize(sizes, w) || 'huge';
+    return findSize(sizes, w) || 'xxHuge';
   }
 };

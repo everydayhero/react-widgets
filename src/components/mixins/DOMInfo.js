@@ -50,10 +50,7 @@ module.exports = {
   },
 
   componentWillUnmount: function() {
-    var index = resizeHandlers.indexOf(this.setSizeAndDevice);
-    if (index !== -1) {
-      resizeHandlers = resizeHandlers.splice(index, 1);
-    }
+    _.pull(resizeHandlers, this.setSizeAndDevice);
   },
 
   handleResize: _.debounce(function() {

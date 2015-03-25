@@ -117,9 +117,9 @@ module.exports = React.createClass({
 
   setCountry: function(country) {
     this.setState({
-      country: country,
+      country: country || this.state.country,
       choosingCountry: false,
-      focusOnMount: true
+      focusOnMount: !!country
     });
   },
 

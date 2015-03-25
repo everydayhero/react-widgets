@@ -1,7 +1,8 @@
 .UpcomingEvents {
   position: relative;
-  height: 252px;
+  min-height: 252px;
   padding: 40px;
+  text-align: center;
 }
 
 .UpcomingEvents.mobile {

@@ -20,12 +20,12 @@
 .FootprintTile:hover .FootprintAvatar { border-color: $ehw-green-light; }
 .FootprintData { color: white; }
 .Footprint--hover {
-  .FootprintMetric--community_raised { fill: #35163d; }
-  .FootprintMetric--community_engagement { fill: #583048; }
-  .FootprintMetric--money_fundraising { fill: #307c99; }
-  .FootprintMetric--money_donations { fill: #6db4d1; }
-  .FootprintMetric--voice_reach { fill: #b14750; }
-  .FootprintMetric--voice_engagement { fill: #f18790; }
-  .FootprintMetric--effort_training { fill: #cf4c22; }
-  .FootprintMetric--effort_volunteering { fill: #e2a13f; }
+  .FootprintMetric--cause_raised { fill: #35163d; }
+  .FootprintMetric--cause_engagement { fill: #583048; }
+  .FootprintMetric--raised { fill: #307c99; }
+  .FootprintMetric--given { fill: #6db4d1; }
+  .FootprintMetric--sharing { fill: #b14750; }
+  .FootprintMetric--page_views { fill: #f18790; }
+  .FootprintMetric--duration_trained { fill: #cf4c22; }
+  .FootprintMetric--duration_volunteered { fill: #e2a13f; }
 }

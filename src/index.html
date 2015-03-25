@@ -42,6 +42,7 @@
     .panel {
       background: #ebebeb;
       border-radius: 2px;
+      margin-top: 15px;
     }
 
     .panel .title {
@@ -87,9 +88,7 @@
     #TeamsExample,
     #MapExample,
     #CharitiesExample,
-    #UpcomingEventsExample,
-    .effort,
-    .main-content .panel {
+    #UpcomingEventsExample {
       margin-top: 15px;
     }
 
@@ -173,14 +172,21 @@
     </div>
   </div>
 
-  <div id="UpcomingEventsExample">Loading...</div>
+  <div class="panel">
+    <h3 class="title">Upcoming Events</h3>
+    <div id="UpcomingEventsExample">Loading...</div>
+  </div>
 
   <div id="LeaderboardExample">Loading...</div>
   <div id="TeamLeaderboardExample">Loading...</div>
   <div id="FitnessLeaderboardExample">Loading...</div>
 
+  <div class="panel">
+    <h3 class="title">Supporters</h3>
+    <div id="SupportersExample">Loading...</div>
+  </div>
+
   <div id="RecentFundraisersExample">Loading...</div>
-  <div id="SupportersExample">Loading...</div>
   <div id="TeamsExample">Loading...</div>
 
   <div id="CharitiesExample">Loading...</div>
@@ -218,9 +224,9 @@
     edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TeamLeaderboardExample', 'TeamLeaderboard', { campaignUid: 'us-22', altTemplate: true, limit: 12, pageSize: 4 });
     edh.widgets.renderWidget('FitnessLeaderboardExample', 'FitnessLeaderboard', { campaignUid: 'us-22' });
-    edh.widgets.renderWidget('UpcomingEventsExample','UpcomingEvents', { charityUid: 'gb-1', charitySlug: 'walk-the-walk' });
+    edh.widgets.renderWidget('UpcomingEventsExample', 'UpcomingEvents', { charityUid: 'au-31', charitySlug: 'australian-red-cross' });
     edh.widgets.renderWidget('RecentFundraisersExample', 'RecentFundraisers', { campaignUid: 'us-22' });
-    edh.widgets.renderWidget('SupportersExample', 'Supporters', { campaignUid: 'us-22' });
+    edh.widgets.renderWidget('SupportersExample', 'Supporters', { charityUid: 'au-31' });
     edh.widgets.renderWidget('TeamsExample', 'Teams', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('CharitiesExample', 'PromoCharities', {
       action: 'fundraise',

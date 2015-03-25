@@ -750,13 +750,10 @@ Displays a set of supporter cards (fundraising page summary with donate call to 
 - `country`: *optional* string country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
 - `limit`: *optional* number of supporter cards to show. Default is 6.
 - `type`: *optional* string. Set a type of either `'team'` or `'individual'`. Set to `'individual'` by default.
-- `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
-- `textColor`: *optional* string. Set to `'#333333'` by default.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
   {
-    heading: 'Supporters',
     emptyLabel: 'No supporters to display.'
   }
   ```

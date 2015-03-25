@@ -33,7 +33,6 @@ module.exports = React.createClass({
     return {
       events: [],
       isLoading: true,
-      content: this.renderLoading()
     };
   },
 
@@ -44,27 +43,11 @@ module.exports = React.createClass({
   },
 
   setEvents: function (events) {
-    this.setState({ events: events, isLoading: false }, this.setContent);
+    this.setState({ events: events, isLoading: false });
   },
 
   componentWillMount: function() {
     this.loadEvents();
-  },
-
-  componentDidMount: function() {
-    addEventListener(window, 'resize', this.resize);
-  },
-
-  componentWillUnmount: function() {
-    removeEventListener(window, 'resize', this.resize);
-  },
-
-  resize: _.debounce(function() {
-    this.setContent();
-  }, 100, { trailing: true }),
-
-  setContent: function() {
-    this.setState({ content: this.renderContent() });
   },
 
   renderContent: function() {
@@ -76,14 +59,13 @@ module.exports = React.createClass({
       return this.renderEmpty();
     }
 
-
     return this.renderEvents();
   },
 
   renderEvents: function() {
     var count = this.getChildCountFromWidth(240);
     var width = this.getChildWidth(count);
-    return _.map(_.take(this.state.events, count), function(e) {
+    return _.map(_.take(this.state.events, Math.max(count, 2)), function(e) {
       var backgroundColor = e.background_color ? e.background_color : '#525252';
       var date = new Date(e.display_finish_at);
       return <Event key={ e.id }
@@ -109,7 +91,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div className={ 'UpcomingEvents ' + this.state.device }>
-        { this.state.content }
+        { this.renderContent()  }
       </div>
     );
   }

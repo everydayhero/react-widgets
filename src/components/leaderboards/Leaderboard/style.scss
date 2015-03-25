@@ -4,9 +4,11 @@
   font-family: $ehw-sans-serif-fonts;
   font-size: $ehw-default-font-size;
   color: #fff;
+  padding: 0 0 $x-2;
 
   .Leaderboard__heading {
     @extend %ehw-tile-heading;
+    text-align: center;
   }
 
   .Leaderboard__items {
@@ -16,35 +18,25 @@
     margin: 0;
   }
 
-  .Leaderboard__controller {
-    clear: both;
-    text-align: right;
-    margin: 0 15px 15px;
-  }
-
-  .Leaderboard__controls,
-  .Leaderboard__indicators {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 5px;
-  }
-
-  .Leaderboard__prevBtn,
-  .Leaderboard__nextBtn {
-    display: inline-block;
-    padding: 5px;
-    cursor: pointer;
-    font-size: $x-6;
-  }
-
-  .Leaderboard__indicator {
-    display: inline-block;
-    padding: 3px;
-    margin: 0 2px 0 0;
-    cursor: pointer;
-  }
-
   .Leaderboard__loading {
     @extend %ehw-tile-loading-icon;
   }
+}
+
+.Leaderboard__animation-enter {
+  opacity: 0.01;
+  transition: opacity .6s ease-in;
+}
+
+.Leaderboard__animation-enter-active {
+  opacity: 1;
+}
+
+// pull existing items out of view immediately
+.Leaderboard__animation-leave {
+  position: absolute;
+  top: -999px;
+  left: -999px;
+  opacity: 0;
+  transition: all .1s ease-in;
 }

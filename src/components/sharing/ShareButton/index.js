@@ -19,19 +19,19 @@ module.exports = React.createClass({
    * Check out:
    * https://github.com/vweevers/share-dialog/blob/master/index.js
    * https://github.com/vutran/share.js/blob/master/src/share.js
+   * https://github.com/bradvin/social-share-urls !!!!!!
    */
   getDefaultProps: function() {
     return {
       services: [
-        'email',
         'facebook',
         'twitter',
         'googleplus',
-        'tumblr',
-        'pinterest',
-        'reddit',
-        'linkedin'
+        'pinterest'
       ],
+      shareUrl: window.location.href,
+      shareTitle: document.title,
+      shareImage: null,
       renderIcon: true,
       defaultI18n: {
         buttonLabel: 'Share this page',
@@ -58,9 +58,15 @@ module.exports = React.createClass({
 
   renderShareBox: function() {
     if (this.state.active) {
+      var props = this.props;
+      var image = props.shareImage || 'http://placehold.it/800x800';
+
       return (
         <ShareBox
-          services={ this.props.services }
+          services={ props.services }
+          shareUrl={ props.shareUrl }
+          shareTitle={ props.shareTitle }
+          shareImage={ image }
           shareLinkLabel={ this.t('shareLinkLabel') } />
       );
     }

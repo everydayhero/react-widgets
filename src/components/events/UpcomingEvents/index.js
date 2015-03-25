@@ -14,6 +14,7 @@ var removeEventListener = require('../../../lib/removeEventListener');
 module.exports = React.createClass({
   displayName: 'UpcomingEvents',
   mixins: [I18n, DOMInfo],
+
   propTypes: {
     charityUid: React.PropTypes.string.isRequired,
     charitySlug: React.PropTypes.string.isRequired,
@@ -23,7 +24,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       defaultI18n: {
-        emptyLabel: 'No events to display.'
+        emptyLabel: 'No upcoming events available.'
       }
     };
   },
@@ -31,18 +32,23 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       events: [],
-      content: this.renderIcon()
+      isLoading: true,
+      content: this.renderLoading()
     };
   },
 
-  componentWillMount: function() {
-    var component = this;
+  loadEvents: function() {
     campaign.findByCharity(this.props.charityUid, 1, 20, function(result) {
-      component.setState({
-        events: result.campaigns,
-        content: component.renderEvents(result.campaigns)
-      });
-    });
+      this.setEvents(result ? result.campaigns : []);
+    }.bind(this));
+  },
+
+  setEvents: function (events) {
+    this.setState({ events: events, isLoading: false }, this.setContent);
+  },
+
+  componentWillMount: function() {
+    this.loadEvents();
   },
 
   componentDidMount: function() {
@@ -54,46 +60,56 @@ module.exports = React.createClass({
   },
 
   resize: _.debounce(function() {
-    this.setState({
-      content: this.renderEvents(this.state.events)
-    });
+    this.setContent();
   }, 100, { trailing: true }),
 
-  renderEvents: function(events) {
-    if(!_.isEmpty(events)) {
-      var component = this;
-      var count = this.getChildCountFromWidth(240);
-      var width = this.getChildWidth(count);
-      return _.map(_.take(events, count), function(e) {
-        var backgroundColor = e.background_color ? e.background_color : '#525252';
-        var date = new Date(e.display_finish_at);
-        return <Event key={ e.id }
-                      name={ e.name }
-                      date={ date }
-                      campaignUrl={ e.url}
-                      getStartedUrl={ e.get_started_url }
-                      backgroundColor={ backgroundColor }
-                      backgroundImageUrl={ e.background_image_url }
-                      supporterCount={ e.page_count }
-                      width={ width } />;
-      });
-    } else {
-      return (
-        <p className='UpcomingEvents__empty-label'>{ this.t('emptyLabel') }</p>
-      );
-    }
+  setContent: function() {
+    this.setState({ content: this.renderContent() });
   },
 
-  renderIcon: function() {
-    return <Icon className='UpcomingEvents__loading' icon='refresh' />;
+  renderContent: function() {
+    if (this.state.isLoading) {
+      return this.renderLoading();
+    }
+
+    if (_.isEmpty(this.state.events)) {
+      return this.renderEmpty();
+    }
+
+
+    return this.renderEvents();
+  },
+
+  renderEvents: function() {
+    var count = this.getChildCountFromWidth(240);
+    var width = this.getChildWidth(count);
+    return _.map(_.take(this.state.events, count), function(e) {
+      var backgroundColor = e.background_color ? e.background_color : '#525252';
+      var date = new Date(e.display_finish_at);
+      return <Event key={ e.id }
+                    name={ e.name }
+                    date={ date }
+                    campaignUrl={ e.url}
+                    getStartedUrl={ e.get_started_url }
+                    backgroundColor={ backgroundColor }
+                    backgroundImageUrl={ e.background_image_url }
+                    supporterCount={ e.page_count }
+                    width={ width } />;
+    });
+  },
+
+  renderLoading: function() {
+    return <Icon className='UpcomingEvents__loading' icon='circle-o-notch' />;
+  },
+
+  renderEmpty: function() {
+    return <p className='UpcomingEvents__empty-label'>{ this.t('emptyLabel') }</p>;
   },
 
   render: function() {
     return (
-      <div className='UpcomingEvents'>
-        <div className='UpcomingEvents__content'>
-          { this.state.content }
-        </div>
+      <div className={ 'UpcomingEvents ' + this.state.device }>
+        { this.state.content }
       </div>
     );
   }

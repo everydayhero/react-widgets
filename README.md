@@ -43,7 +43,7 @@ The charity search modal widget allows you to search for a charity by name to do
 
 ##### Options
 
-- `action`: *required* action to perform on charity select, either 'donate', 'fundraise' or 'custom'. *Note: 'donate' action is currently not supported for country 'us'.*
+- `action`: *optional* action to perform on charity select, either 'visit' (default), 'donate', 'fundraise', or 'custom'. *Note: 'visit' and 'donate' actions are currently not supported for country 'us'.*
 - `onSelect`: *optional* function called on selecting a result when `action` set to 'custom'.
 - `campaignUid`: *optional* string campaign uid to filter charity results.
 - `campaignSlug`: *optional* string campaign slug for given campaign uid.
@@ -54,6 +54,7 @@ The charity search modal widget allows you to search for a charity by name to do
   ```js
   {
     title: 'Search for a Charity',
+    visitAction: 'Visit Charity',
     donateAction: 'Give to this Charity',
     fundraiseAction: 'Fundraise for this Charity',
     selectAction: 'Select',
@@ -73,9 +74,9 @@ The charity search modal widget allows you to search for a charity by name to do
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
-    <a id="CharitySearchExample">Support a Charity</a>
+    <a id="CharitySearchExample">Find a Charity</a>
     <script>
-      edh.widgets.initModal('CharitySearchExample', 'CharitySearch', { country: 'uk', action: 'donate' });
+      edh.widgets.initModal('CharitySearchExample', 'CharitySearch', { country: 'uk' });
     </script>
   </body>
 </html>
@@ -591,7 +592,7 @@ Displays a set of fundraiser profile images (that have a page) for a single spec
 
 #### Leaderboard
 
-Displays a leaderboard sorted by funds raised (highest first) for a campaign or charity. Can be set to show leaderboards for teams or individuals.
+Displays an individuals leaderboard sorted by funds raised (highest first) for a campaign or charity.
 
 ##### Options
 
@@ -600,21 +601,18 @@ Displays a leaderboard sorted by funds raised (highest first) for a campaign or 
 - `charityUid`: *optional* string charity uid to filter results by charity.
 - `charitySlug`: *optional* string charity slug to filter results by charity. Requires `country`.
 - `country`: *optional* string country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
-- `type`: *optional* string. Set a type of either `'team'` or `'individual'`. Set to `'individual'` by default.
 - `limit`: *optional* number. Set to `24` by default. Determines how many results are returned in total.
 - `pageSize`: *optional* number. Set to `12` by default. Determines how many results to show per page.
-- `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
-- `textColor`: *optional* string. Set to `'#333333'` by default.
+- `backgroundColor`: *optional* string. Accepts a hex value. Not set by default.
+- `textColor`: *optional* string. Accepts a hex value. Not set by default.
+- `childWidth`: *optional* number. Set to `250` by default. Sets the minimum width for leaderboard items to display.
 - `currencyFormat`: *optional* string. Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
   {
-    raisedTitle: 'Raised',
-    membersTitle: 'Members',
-    rankTitle: 'Ranked',
     symbol: '$',
-    heading: 'Leaderboard > Top Individuals'
+    heading: 'Top Individuals'
   }
   ```
 
@@ -633,6 +631,55 @@ Displays a leaderboard sorted by funds raised (highest first) for a campaign or 
     <div id="LeaderboardExample">Loading...</div>
     <script>
       edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-0' });
+    </script>
+  </body>
+</html>
+```
+
+#### Team Leaderboard
+
+Displays a team leaderboard sorted by funds raised (highest first) for a campaign or charity.
+
+##### Options
+
+- `campaignUid`: *optional* string campaign uid to filter results by campaign.
+- `campaignSlug`: *optional* string campaign slug to filter results by campaign. Requires `country`.
+- `charityUid`: *optional* string charity uid to filter results by charity.
+- `charitySlug`: *optional* string charity slug to filter results by charity. Requires `country`.
+- `country`: *optional* string country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
+- `limit`: *optional* number. Set to `24` by default. Determines how many results are returned in total.
+- `pageSize`: *optional* number. Set to `12` by default. Determines how many results to show per page.
+- `backgroundColor`: *optional* string. Accepts a hex value. Not set by default.
+- `textColor`: *optional* string. Accepts a hex value. Not set by default.
+- `childWidth`: *optional* number. Set to `250` by default. Sets the minimum width for leaderboard items to display.
+- `altTemplate`: *optional* boolean. Set to `false` by default. Renders an alternate template set when set to `true`.
+- `currencyFormat`: *optional* string. Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
+- `i18n`: *optional* object containing localised text. Default i18n is:
+
+  ```js
+  {
+    raisedTitle: 'Raised',
+    membersTitle: 'Members',
+    symbol: '$',
+    heading: 'Top Teams'
+  }
+  ```
+
+##### Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="TeamLeaderboardExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('TeamLeaderboardExample', 'TeamLeaderboard', { campaignUid: 'us-0' });
     </script>
   </body>
 </html>
@@ -1043,7 +1090,7 @@ Displays a list of upcoming events / campaigns.
 
   ```js
     {
-      emptyLabel: 'No events to display.'
+      emptyLabel: 'No upcoming events available.'
     }
   ```
 

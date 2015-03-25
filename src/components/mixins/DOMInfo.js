@@ -1,41 +1,60 @@
 "use strict";
+/**
+* This Mixin can only be called in/after ComponentDidMount(), as
+* getDOMNode() is unavailable until after the component is rendered.
+*/
+
+var _ = require('lodash');
+var breakpoints = {
+  mobile: 450,
+  tablet: 700,
+  laptop: 950,
+  desktop: 1200
+};
+var sizes = {
+  tiny: 200,
+  small: 350,
+  medium: 500,
+  large: 650
+};
+
+var resizeHandlers = [];
+
+if (typeof window !== 'undefined') window.addEventListener('resize', function(e) {
+  resizeHandlers.forEach(function(handler) {
+    handler(e);
+  });
+}, false);
+
+function findSize(o, w) {
+  return _.findKey(o, function(d) {
+    return w < d;
+  });
+}
 
 module.exports = {
-  /**
-  * This Mixin can only be called in/after ComponentDidMount(), as
-  * getDOMNode() is unavailable until after the component is rendered.
-  */
-  getComponentWidth: function () {
-    return this.getDOMNode().offsetWidth;
+  getInitialState: function() {
+    return {
+      size: 'tiny',
+      device: 'mobile' // Mobile first
+    };
   },
 
-  getDevice: function() {
-    if (this.getComponentWidth() < 450) { return 'mobile'; } else
-    if (this.getComponentWidth() < 700) { return 'tablet'; } else
-    if (this.getComponentWidth() < 950) { return 'laptop'; } else
-    if (this.getComponentWidth() < 1200) { return 'desktop'; } else
-    { return 'wide'; }
+  componentDidMount: function() {
+    resizeHandlers.push(this.setSizeAndDevice);
+    this.setSizeAndDevice();
   },
 
-  getDeviceFallback: function(device, obj) {
-    var devices = ['mobile', 'tablet', 'laptop', 'desktop', 'wide'],
-      length = devices.length,
-        i = devices.indexOf(device),
-        fallback,
-        inc = 0;
-    while (!fallback && inc++ <= length) {
-      fallback = obj[devices[i - inc]] || obj[devices[i + inc]];
+  componentWillUnmount: function() {
+    var index = resizeHandlers.indexOf(this.setSizeAndDevice);
+    if (index !== -1) {
+      resizeHandlers = resizeHandlers.splice(index, 1);
     }
-    return fallback;
   },
 
-  getSize: function() {
-    if (this.getComponentWidth() < 200) { return 'tiny'; } else
-    if (this.getComponentWidth() < 350) { return 'small'; } else
-    if (this.getComponentWidth() < 500) { return 'medium'; } else
-    if (this.getComponentWidth() < 650) { return 'large'; } else
-    { return 'huge'; }
-  },
+  handleResize: _.debounce(function() {
+    this.setSizeAndDevice();
+  }, 100, { trailing: true }),
 
   getChildrenWidth: function(min_width, count) {
     var child_count = Math.min(count, this.getChildCountFromWidth(min_width));
@@ -45,8 +64,49 @@ module.exports = {
   getChildWidth: function(count) {
     return Math.floor(10000 / Math.max(1, count)) * 0.01 + '%';
   },
-  
+
   getChildCountFromWidth: function(min_width) {
     return Math.max(1, Math.floor(this.getComponentWidth() / min_width));
+  },
+
+  getDeviceFallback: function(device, obj) {
+    var devices = ['mobile', 'tablet', 'laptop', 'desktop', 'wide'],
+        length = devices.length,
+        i = devices.indexOf(device),
+        fallback,
+        inc = 0;
+    while (!fallback && inc++ <= length) {
+      fallback = obj[devices[i - inc]] || obj[devices[i + inc]];
+    }
+    return fallback;
+  },
+
+  setSizeAndDevice: function() {
+    var size = this.getSize();
+    var device = this.getDevice();
+    if (size !== this.state.size || device !== this.state.device) {
+      this.setState({
+        size: size,
+        device: device
+      });
+    }
+  },
+
+  getWindowWidth: function() {
+    return document.body.clientWidth;
+  },
+
+  getComponentWidth: function () {
+    return this.getDOMNode().offsetWidth || 0;
+  },
+
+  getDevice: function() {
+    var w = this.getWindowWidth();
+    return findSize(breakpoints, w) || 'wide';
+  },
+
+  getSize: function() {
+    var w = this.getComponentWidth();
+    return findSize(sizes, w) || 'huge';
   }
 };

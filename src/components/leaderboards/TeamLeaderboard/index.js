@@ -7,6 +7,7 @@ var DOMInfoMixin            = require('../../mixins/DOMInfo');
 var LeaderboardMixin        = require('../../mixins/Leaderboard');
 var Icon                    = require('../../helpers/Icon');
 var LeaderboardItem         = require('../LeaderboardItem');
+var TeamLeaderboardItem     = require('../TeamLeaderboardItem');
 var numeral                 = require('numeral');
 var addEventListener        = require('../../../lib/addEventListener');
 var removeEventListener     = require('../../../lib/removeEventListener');
@@ -14,13 +15,13 @@ var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 module.exports = React.createClass({
   mixins: [I18nMixin, DOMInfoMixin, LeaderboardMixin],
-  displayName: "Leaderboard",
+  displayName: "TeamLeaderboard",
   propTypes: {
     campaignSlug: React.PropTypes.string,
     campaignUid: React.PropTypes.string,
     charitySlug: React.PropTypes.string,
     charityUid: React.PropTypes.string,
-    country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
+    country: React.PropTypes.oneOf(['au', 'nz', 'uk', 'us']),
     limit: React.PropTypes.number,
     pageSize: React.PropTypes.number,
     backgroundColor: React.PropTypes.string,
@@ -37,10 +38,13 @@ module.exports = React.createClass({
       backgroundColor: null,
       textColor: null,
       childWidth: 250,
-      currencyFormat: '0,0[.]00',
+      altTemplate: false,
+      currencyFormat: '0[.]00 a',
       defaultI18n: {
+        raisedTitle: 'Raised',
+        membersTitle: 'Members',
         symbol: '$',
-        heading: 'Top Individuals'
+        heading: 'Top Teams'
       }
     };
   },
@@ -50,12 +54,12 @@ module.exports = React.createClass({
       isLoading: false,
       boardData: [],
       currentPage: 1,
-      childWidth: this.props.childWidth,
+      childWidth: '',
     };
   },
 
   componentWillMount: function() {
-    this.loadLeaderboard('individual');
+    this.loadLeaderboard('team');
   },
 
   componentDidMount: function() {
@@ -74,12 +78,12 @@ module.exports = React.createClass({
   }, 100, { trailing: true }),
 
   renderLeaderboardItems: function() {
-    if (this.state.isLoading) {
-      return <Icon className="Leaderboard__loading" icon="refresh" />;
-    }
-
     var currentPage = this.state.currentPage - 1;
     var board = this.state.boardData[currentPage];
+
+    if (this.state.isLoading) {
+      return <Icon className="TeamLeaderboard__loading" icon="refresh" />;
+    }
 
     if (!board) {
       return;
@@ -89,16 +93,23 @@ module.exports = React.createClass({
       var formattedAmount = this.formatAmount(d.amount);
       var formattedRank = numeral(d.rank).format('0o');
 
+      var El = this.props.altTemplate ? TeamLeaderboardItem : LeaderboardItem;
+      var props = {
+        key: d.id,
+        name: d.name,
+        rank: formattedRank,
+        url: d.url,
+        isoCode: d.isoCode,
+        amount: formattedAmount,
+        totalMembers: d.totalMembers,
+        imgSrc: d.imgSrc,
+        raisedTitle: this.t('raisedTitle'),
+        membersTitle: this.t('membersTitle'),
+        width: this.state.childWidth
+      };
+
       return (
-        <LeaderboardItem
-          key={ d.id }
-          rank={ formattedRank }
-          name={ d.name }
-          url={ d.url }
-          isoCode={ d.isoCode }
-          amount={ formattedAmount }
-          imgSrc={ d.medImgSrc }
-          width={ this.state.childWidth } />
+        <El { ...props } />
       );
 
     }, this);
@@ -112,10 +123,10 @@ module.exports = React.createClass({
     };
 
     return (
-      <div className="Leaderboard" style={ customStyle }>
-        <h3 className="Leaderboard__heading">{ heading }</h3>
-        <ol className="Leaderboard__items">
-          <ReactCSSTransitionGroup transitionName="Leaderboard__animation" component="div">
+      <div className="TeamLeaderboard" style={ customStyle }>
+        <h3 className="TeamLeaderboard__heading">{ heading }</h3>
+        <ol className="TeamLeaderboard__items">
+          <ReactCSSTransitionGroup transitionName="TeamLeaderboard__animation" component="div">
             { this.renderLeaderboardItems() }
           </ReactCSSTransitionGroup>
         </ol>

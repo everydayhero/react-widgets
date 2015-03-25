@@ -25,7 +25,8 @@ var charity = {
   slug: 'foo',
   name: 'Foo',
   description: 'Fooy',
-  country_code: 'xy'
+  country_code: 'xy',
+  url: 'http://foo.com/'
 };
 
 var charity2 = {
@@ -33,7 +34,8 @@ var charity2 = {
   slug: 'bar',
   name: 'Bar',
   description: 'Bary',
-  country_code: 'xy'
+  country_code: 'xy',
+  url: 'http://bar.com/'
 };
 
 var searchResponse = {
@@ -79,7 +81,7 @@ describe('CharitySearchModal', function() {
 
   it('search for all charities when search is empty', function() {
     var query = { country: 'xy', searchTerm: '', campaignUid: '', page: 1, pageSize: 10 };
-    var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy"/>;
+    var charitySearchModal = <CharitySearchModal autoFocus={ false } country="xy"/>;
     var element = TestUtils.renderIntoDocument(charitySearchModal);
 
     expect(charities.search).lastCalledWith(query, element.updateResults);
@@ -87,7 +89,7 @@ describe('CharitySearchModal', function() {
 
   it('searches for charities within campaign', function() {
     var query = { country: 'xy', searchTerm: '', campaignUid: 'xy-123', page: 1, pageSize: 10 };
-    var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy" campaignUid="xy-123" />;
+    var charitySearchModal = <CharitySearchModal autoFocus={ false } country="xy" campaignUid="xy-123" />;
     var element = TestUtils.renderIntoDocument(charitySearchModal);
 
     expect(charities.search).lastCalledWith(query, element.updateResults);
@@ -95,7 +97,7 @@ describe('CharitySearchModal', function() {
 
   it('searches for charities on input change', function() {
     var query = { country: 'xy', searchTerm: 'foo', campaignUid: '', page: 1, pageSize: 10 };
-    var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy" />;
+    var charitySearchModal = <CharitySearchModal autoFocus={ false } country="xy" />;
     var element = TestUtils.renderIntoDocument(charitySearchModal);
     var input = findByTag(element, 'input');
     TestUtils.Simulate.change(input, { target: { value: 'foo' } });
@@ -108,7 +110,7 @@ describe('CharitySearchModal', function() {
     charities.search.mockImplementation(function(query, callback) { callback(searchResponse); });
 
     var query = { country: 'xy', searchTerm: '', campaignUid: '', page: 2, pageSize: 10 };
-    var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy" />;
+    var charitySearchModal = <CharitySearchModal autoFocus={ false } country="xy" />;
     var element = TestUtils.renderIntoDocument(charitySearchModal);
     var nextPageButton = findByClass(element, 'SearchPagination__button--right');
     TestUtils.Simulate.click(nextPageButton);
@@ -126,7 +128,7 @@ describe('CharitySearchModal', function() {
   });
 
   it('updates isSearching accordingly', function() {
-    var charitySearchModal = <CharitySearchModal autoFocus={ false } action="donate" country="xy" />;
+    var charitySearchModal = <CharitySearchModal autoFocus={ false } country="xy" />;
     var element = TestUtils.renderIntoDocument(charitySearchModal);
 
     expect(element.state.isSearching).toBeTruthy();
@@ -140,6 +142,17 @@ describe('CharitySearchModal', function() {
     TestUtils.Simulate.change(input, { target: { value: 'foo' } });
 
     expect(element.state.isSearching).toBeTruthy();
+  });
+
+  it('links to charity url for default visit action', function() {
+    var onClose = jest.genMockFunction();
+    var charitySearchModal = <CharitySearchModal autoFocus={ false } onClose={ onClose } />;
+    var element = TestUtils.renderIntoDocument(charitySearchModal);
+    element.setState({ results: [charity] });
+
+    var resultElements = scryByClass(element, 'SearchResult');
+
+    expect(resultElements[0].getDOMNode().href).toBe(charity.url);
   });
 
   it('links to fundraise url for fundraise action', function() {

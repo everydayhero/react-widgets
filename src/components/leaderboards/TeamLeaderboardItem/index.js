@@ -5,9 +5,25 @@ var React = require('react');
 module.exports = React.createClass({
   displayName: 'TeamLeaderboardItem',
 
+  propTypes: {
+    imgSrc: React.PropTypes.string.isRequired,
+    url: React.PropTypes.string.isRequired,
+    totalMembers: React.PropTypes.number.isRequired,
+    name: React.PropTypes.string.isRequired,
+    isoCode: React.PropTypes.string.isRequired,
+    amount: React.PropTypes.string.isRequired,
+    raisedTitle: React.PropTypes.string.isRequired,
+    membersTitle: React.PropTypes.string.isRequired,
+    width: React.PropTypes.string.isRequired
+  },
+
   render: function() {
+    var style = {
+      width: this.props.width
+    };
+
     return (
-      <li className="TeamLeaderboard__items-item">
+      <li className="TeamLeaderboard__items-item" style={ style }>
         <div className="TeamLeaderboard__items-skin">
           <a href={ this.props.url } className="TeamLeaderboard__items-image">
             <img src={ this.props.imgSrc } />

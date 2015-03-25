@@ -1,39 +1,82 @@
 "use strict";
 
+var _           = require('lodash');
 var React       = require('react');
 var I18nMixin   = require('../../mixins/I18n');
 var Input       = require('../../forms/Input');
-var ShareDialog = require('share-dialog');
 var ShareIcon   = require('../ShareIcon');
+var format      = require('../../../lib/format');
 
+var shareServices = [
+  {
+    name: "facebook",
+    url: "http://www.facebook.com/sharer.php?u={url}"
+  },
+  {
+    name: "twitter",
+    url: "https://twitter.com/share?url={url}&text={title}"
+  },
+  {
+    name: "googleplus",
+    url: "https://plus.google.com/share?url={url}"
+  },
+  {
+    name: "pinterest",
+    url: "https://pinterest.com/pin/create/bookmarklet/?media={img}&url={url}&description={title}"
+  }
+];
 
-var url = "http://example.com";
-
-var facebook   = ShareDialog.facebook(url);
-var twitter    = ShareDialog.twitter(url, "This is my tweet");
-var pinterest  = ShareDialog.pinterest(url, "This is my tweet");
-var googleplus = ShareDialog.gplus(url);
 
 module.exports = React.createClass({
   displayName: "ShareBox",
 
-  handleClick: function(serviceName) {
-    if (serviceName == "twitter") {
-      twitter.open();
-    }
+  toString: function(obj) {
+    return _.map(obj, function(value, key) {
+      return encodeURIComponent(key) + '=' + encodeURIComponent(value);
+    }).join(',');
+  },
 
-    if (serviceName == "googleplus") {
-      googleplus.open();
-    }
+  openDialog: function(url) {
+    var dialogX = window.screen.availWidth/2 - 650/2;
+    var dialogY = window.screen.availHeight/2 - 310/2;
 
-    if (serviceName == "facebook") {
-      facebook.open();
-    }
+    var wWidth = window.innerWidth;
+
+
+    var config = {
+      toolbar: 0,
+      status: 0,
+      width: 650,
+      height: 310,
+      top: dialogY,
+      left: dialogX
+    };
+
+    console.log(wWidth);
+
+    config = this.toString(config);
+
+    window.open(url, 'sharer', config);
+  },
+
+  getUrl: function(serviceName) {
+    var serviceUrl = _.result(_.find(shareServices, function(service) {
+      return service.name == serviceName;
+    }), "url");
+
+    return format(serviceUrl, {
+      "url": this.props.shareUrl,
+      "title": this.props.shareTitle,
+      "img": this.props.image
+    }, true);
   },
 
   renderShareIcons: function() {
     return this.props.services.map(function(name) {
-      return <ShareIcon key={ name } service={ name } open={ this.handleClick.bind(null, name) } />;
+
+      var url = this.getUrl(name);
+
+      return <ShareIcon key={ name } service={ name } open={ this.openDialog.bind(null, url) } />;
     }, this);
   },
 
@@ -59,7 +102,6 @@ module.exports = React.createClass({
             <label>Share via</label>
             { this.renderShareIcons() }
           </div>
-
       </div>
     );
   }

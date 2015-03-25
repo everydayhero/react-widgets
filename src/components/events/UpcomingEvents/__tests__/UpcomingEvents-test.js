@@ -29,11 +29,6 @@ describe('UpcomingEvents', function() {
       findByClass(element, 'UpcomingEvents__loading');
     });
 
-    it('setContent renders a loading icon when not loaded', function() {
-      element.setContent();
-      findByClass(element, 'UpcomingEvents__loading');
-    });
-
     it('renders an empty message when no results are returned', function() {
       element.setEvents([]);
       var emptyLabel = findByClass(element, 'UpcomingEvents__empty-label');

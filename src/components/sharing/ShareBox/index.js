@@ -18,7 +18,8 @@ var shareServices = [
   },
   {
     name: "googleplus",
-    url: "https://plus.google.com/share?url={url}"
+    url: "https://plus.google.com/share?url={url}",
+    icon: "google-plus"
   },
   {
     name: "pinterest",
@@ -40,39 +41,44 @@ module.exports = React.createClass({
     var config = {
       toolbar: 0,
       status: 0,
-      width: 650,
-      height: 310
+      width: 640,
+      height: 320
     };
 
-    var windowTop = window.screenTop ? window.screenTop : window.screenY;
+    var windowTop  = window.screenTop ? window.screenTop : window.screenY;
     var windowLeft = window.screenLeft ? window.screenLeft : window.screenX;
 
-    config.top = windowTop + (window.innerHeight / 2) - (config.height / 2);
+    config.top  = windowTop + (window.innerHeight / 2) - (config.height / 2);
     config.left = windowLeft + (window.innerWidth / 2) - (config.width / 2);
+    config      = this.toString(config);
 
-    config = this.toString(config);
-
-    window.open(url, 'sharer', config);
+    var windowRef = window.open(url, 'shareWindow', config);
   },
 
-  getUrl: function(serviceName) {
-    var serviceUrl = _.result(_.find(shareServices, function(service) {
+  fetchValue: function(serviceName, value) {
+    return _.result(_.find(shareServices, function(service) {
       return service.name == serviceName;
-    }), "url");
-
-    return format(serviceUrl, {
-      "url": this.props.shareUrl,
-      "title": this.props.shareTitle,
-      "img": this.props.image
-    }, true);
+    }), value);
   },
 
   renderShareIcons: function() {
     return this.props.services.map(function(name) {
+      var url  = this.fetchValue(name, "url");
+      var icon = this.fetchValue(name, "icon") || name;
 
-      var url = this.getUrl(name);
+      url = format(url, {
+        "url": this.props.shareUrl,
+        "title": this.props.shareTitle,
+        "img": this.props.shareImage
+      }, true);
 
-      return <ShareIcon key={ name } service={ name } open={ this.openDialog.bind(null, url) } />;
+      return (
+        <ShareIcon
+          key={ name }
+          service={ name }
+          icon={ icon }
+          open={ this.openDialog.bind(null, url) } />
+      );
     }, this);
   },
 
@@ -85,8 +91,8 @@ module.exports = React.createClass({
           readOnly={ true }
           autoSelect={ true }
           type="url"
-          icon="clipboard"
-          value="http://everydayhero.com/us"
+          icon="link"
+          value={ this.props.shareUrl }
           i18n={{ label: shareLinkLabel }}
           spacing="compact" />
 
@@ -96,7 +102,9 @@ module.exports = React.createClass({
 
           <div className="ShareBox__services">
             <label>Share via</label>
-            { this.renderShareIcons() }
+            <div className="ShareBox__icons">
+              { this.renderShareIcons() }
+            </div>
           </div>
       </div>
     );

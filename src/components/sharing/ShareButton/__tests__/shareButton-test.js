@@ -28,7 +28,9 @@ describe('Share Button', function() {
     });
 
     it('has default button label text', function() {
-
+      var label = findByTag(component, 'ShareButton__label').getDOMNode();
+      expect(label).toBeDefined();
+      expect(label.getDOMNode().textContent).toBe('Share this page');
     });
   });
 

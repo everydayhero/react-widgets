@@ -11,16 +11,13 @@ module.exports = React.createClass({
   displayName: "ShareButton",
   propTypes: {
     services: React.PropTypes.array,
+    shareUrl: React.PropTypes.string,
+    shareTitle: React.PropTypes.string,
+    shareImage: React.PropTypes.string,
     renderIcon: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
 
-  /*
-   * Check out:
-   * https://github.com/vweevers/share-dialog/blob/master/index.js
-   * https://github.com/vutran/share.js/blob/master/src/share.js
-   * https://github.com/bradvin/social-share-urls !!!!!!
-   */
   getDefaultProps: function() {
     return {
       services: [
@@ -31,11 +28,12 @@ module.exports = React.createClass({
       ],
       shareUrl: window.location.href,
       shareTitle: document.title,
-      shareImage: null,
+      shareImage: '',
       renderIcon: true,
       defaultI18n: {
         buttonLabel: 'Share this page',
-        shareLinkLabel: 'Share a direct link'
+        shareLinkLabel: 'Share a direct link',
+        shareViaLabel: 'Share via'
       }
     };
   },
@@ -59,7 +57,7 @@ module.exports = React.createClass({
   renderShareBox: function() {
     if (this.state.active) {
       var props = this.props;
-      var image = props.shareImage || 'http://placehold.it/800x800';
+      var image = props.shareImage;
 
       return (
         <ShareBox
@@ -67,7 +65,8 @@ module.exports = React.createClass({
           shareUrl={ props.shareUrl }
           shareTitle={ props.shareTitle }
           shareImage={ image }
-          shareLinkLabel={ this.t('shareLinkLabel') } />
+          shareLinkLabel={ this.t('shareLinkLabel') }
+          shareViaLabel={ this.t('shareViaLabel') }  />
       );
     }
   },

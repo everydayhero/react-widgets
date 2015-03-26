@@ -2,7 +2,6 @@
 
 var React = require('react');
 var Icon  = require('../../helpers/Icon');
-var cx    = require('react/lib/cx');
 
 module.exports = React.createClass({
   displayName: "ShareIcon",
@@ -13,8 +12,8 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <div className={ 'ShareBox__icon ShareBox__' + this.props.service } onClick={ this.handleClick }>
-        <Icon icon={ this.props.service } />
+      <div className={ 'ShareIcon ShareIcon__' + this.props.service } onClick={ this.handleClick }>
+        <Icon icon={ this.props.icon } />
       </div>
     );
   }

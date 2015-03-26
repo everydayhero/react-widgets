@@ -2,8 +2,8 @@
   position: relative;
 
   .ShareButton__btn {
-    border: 1px solid $ehw-grey;
-    color: $ehw-grey-dark;
+    border: 2px solid rgba($ehw-grey, 0.5);
+    color: $ehw-grey;
     padding: $x-2 $x-4;
     background: #fff;
     font-weight: bold;
@@ -19,7 +19,7 @@
 
 .ShareButton__transition-leave {
   opacity: 1;
-  transition: opacity .25s ease-in;
+  transition: all .25s ease-in;
 }
 
 .ShareButton__transition-leave.ShareButton__transition-leave-active {

@@ -1,0 +1,56 @@
+$ShareIcon-twitter: #00a0d1;
+$ShareIcon-facebook: #3B5998;
+$ShareIcon-googleplus: #DB4A39;
+$ShareIcon-pinterest: #C8232C;
+
+
+@keyframes ShareIconAnim {
+  from {
+    opacity: 0;
+    transform: translateY(-$x-3);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.ShareIcon {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+  cursor: pointer;
+  animation: ShareIconAnim 0.25s ease-out forwards;
+
+  .Icon {
+    display: inline-block;
+    border: 2px solid $ehw-grey-light;
+    border-radius: 50%;
+    padding: $x-4;
+    width: $x-4;
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.5, -0.55, 0.25, 1.5);
+  }
+}
+
+
+.ShareIcon__twitter:hover .Icon {
+  color: $ShareIcon-twitter;
+  border-color: $ShareIcon-twitter;
+}
+
+.ShareIcon__facebook:hover .Icon {
+  color: $ShareIcon-facebook;
+  border-color: $ShareIcon-facebook;
+}
+
+.ShareIcon__googleplus:hover .Icon {
+  color: $ShareIcon-googleplus;
+  border-color: $ShareIcon-googleplus;
+}
+
+.ShareIcon__pinterest:hover .Icon {
+  color: $ShareIcon-pinterest;
+  border-color: $ShareIcon-pinterest;
+}

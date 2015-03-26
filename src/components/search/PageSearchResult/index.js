@@ -23,10 +23,12 @@ module.exports = React.createClass({
     return (
       <SearchResult onSelect={ props.onSelect } result={ page }>
         <div className='PageSearchResult__avatar'>
-          <img src={ page.image.small_image_url } />
+          <img src={ page.image.medium_image_url } />
         </div>
         <div className='PageSearchResult__content'>
-          <div className='PageSearchResult__header'>{ page.name }</div>
+          <div className='PageSearchResult__header'>
+            { page.name } <span className="PageSearchResult__subheader"> – { page.supporter.name }</span>
+          </div>
           <p className='PageSearchResult__description'>{ page.charity.name }</p>
           <div className='PageSearchResult__footer'>{ campaignName }</div>
         </div>

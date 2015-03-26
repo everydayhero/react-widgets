@@ -9,9 +9,9 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
 
   propTypes: {
-    current: React.PropTypes.number,
-    target: React.PropTypes.number,
-    url: React.PropTypes.string,
+    current: React.PropTypes.number.isRequired,
+    target: React.PropTypes.number.isRequired,
+    url: React.PropTypes.string.isRequired,
     i18n: React.PropTypes.object
   },
 
@@ -23,18 +23,17 @@ module.exports = React.createClass({
       defaultI18n: {
         cta: 'Give Now',
         currency: '$',
-        label: 'Only {currency}{amount_remaining} to go',
-        achievedLabel: '{currency}{amount_raised} raised so far'
+        label: 'Only **{currency}{amount_remaining}** to go',
+        achievedLabel: '**{currency}{amount_raised}** raised so far'
       }
     };
   },
 
   getLabel: function () {
-    var t = this.t;
     var props = this.props;
 
-    return t(props.current >= props.target ? 'achievedLabel' : 'label', {
-      currency: t('currency'),
+    return this.tm(props.current >= props.target ? 'achievedLabel' : 'label', {
+      currency: this.t('currency'),
       amount_raised: parseFloat(props.current.toFixed(2)),
       amount_remaining: parseFloat((props.target - props.current).toFixed(2))
     });

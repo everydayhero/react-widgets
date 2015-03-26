@@ -1,124 +1,98 @@
 "use strict";
 
-var _         = require('lodash');
-var React     = require('react');
-var campaigns = require('../../../api/campaigns');
-var Icon      = require('../../helpers/Icon');
-var numeral   = require('numeral');
+var React           = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
+var I18nMixin       = require('../../mixins/I18n');
+var Icon            = require('../../helpers/Icon');
+var numeral         = require('numeral');
 
 module.exports = React.createClass({
   displayName: "GoalProgress",
+
+  mixins: [PureRenderMixin, I18nMixin],
+
   propTypes: {
-    goal: React.PropTypes.number,
-    campaignUid: React.PropTypes.string.isRequired,
-    format: React.PropTypes.string
+    total: React.PropTypes.number.isRequired,
+    goal: React.PropTypes.number.isRequired,
+    format: React.PropTypes.string,
+    currencySymbol: React.PropTypes.string,
+    i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
     return {
-      goal: 0,
-      format: '0,0'
+      format: '0,0',
+      currencySymbol: '$',
+      defaultI18n: {
+        text: '**{total}** raised of **{goal}** goal'
+      }
     };
   },
 
   getInitialState: function() {
     return {
-      isLoading: false,
-      total: 0,
-      currencySymbol: '$'
+      progress: this.getProgress()
     };
   },
 
-  componentWillMount: function() {
-    this.loadCampaignGoal();
+  componentDidUpdate: function() {
+    this.setState({ progress: this.getProgress() });
   },
 
-  loadCampaignGoal: function() {
-    this.setState({ isLoading: true });
-    campaigns.find(this.props.campaignUid, this.onSuccess);
-  },
-
-  onSuccess: function(result) {
-    var campaign = result.campaign;
-    var funds_raised = campaign.funds_raised || {};
-    var total = funds_raised.cents || 0;
-    var currency = funds_raised.currency || {};
-    var currencySymbol = currency.symbol || '$';
-
-    this.setState({
-      isLoading: false,
-      total: total,
-      currencySymbol: currencySymbol
-    });
+  getProgress: function() {
+    var props = this.props;
+    return Math.min(props.total / props.goal, 1);
   },
 
   renderProgressBar: function() {
-    var total = this.state.total;
-    var goal = this.props.goal;
-    var offsetWidth = numeral(total / goal).format('0%');
+    var progress = this.state.progress;
+    var offsetWidth = numeral(progress).format('0%');
     var style = { width: offsetWidth || '100%' };
-    var classes = 'GoalProgress__bar';
 
-    if (offsetWidth == '100%') {
-      classes += '--completed';
-    } else if (offsetWidth == '0%') {
-      style = { width: '0.001%'}; // Forces zero width cell in Chrome
-    }
-
-    if (this.state.isLoading) {
-      return null;
-    } else {
-      return (
-        <div className={ classes } >
-          <div className="GoalProgress__barTable" style={ style }>
-            <div className="GoalProgress__barFill"></div>
-            <div className="GoalProgress__barChevron"></div>
-          </div>
-        </div>
-      );
-    }
-  },
-
-  renderIcon: function() {
-    var icon = "trophy";
-    if (this.state.isLoading) {
-      icon = "refresh";
-    }
-
-    return(
-      <div className="GoalProgress__icon">
-        <Icon icon={ icon } />
+    return (
+      <div className="GoalProgress__bar" >
+        <div className="GoalProgress__barFill" style={ style }></div>
       </div>
     );
   },
 
-  renderText: function() {
-    var props = this.props,
-        format = props.format,
-        goal = props.goal / 100;
-    var state = this.state,
-        currencySymbol = state.currencySymbol,
-        total = this.state.total / 100;
-    var formattedGoal = currencySymbol + numeral(goal).format(format) + ' goal';
-    var formattedTotal = currencySymbol + numeral(total).format(format);
+  renderIcon: function() {
+    var classes = "GoalProgress__icon";
+    if (this.state.progress === 1) {
+      classes += "--achieved";
+    }
 
     return (
-      <p className="GoalProgress__text">
-        { formattedTotal }
-        <span className="GoalProgress__text--raised"> raised of </span>
-        { formattedGoal }
-      </p>
+      <Icon icon="trophy" className={ classes } />
+    );
+  },
+
+  formatCurrency: function(cents) {
+    var props = this.props;
+    return props.currencySymbol + numeral(cents / 100).format(props.format);
+  },
+
+  renderText: function() {
+    var props = this.props;
+
+    return (
+      <div className="GoalProgress__text">
+        { this.tm('text', {
+          total: this.formatCurrency(props.total),
+          goal: this.formatCurrency(props.goal)
+        }) }
+      </div>
     );
   },
 
   render: function() {
     return (
       <div className="GoalProgress">
+        { this.renderIcon() }
         <div className="GoalProgress__area">
           { this.renderProgressBar() }
           { this.renderText() }
         </div>
-        { this.renderIcon() }
       </div>
     );
   }

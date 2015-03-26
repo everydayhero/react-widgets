@@ -1,78 +1,92 @@
 $ehw-animation-speed: 200ms;
 
+%progress-bg {
+  background-color: transparentize($ehw-grey-dark, 0.9);
+  background-image: url(
+    data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAKklEQVQIW2NkgIKgoKCZ69atSwdxQWxGGANZEMRmRFcJUwDWgU0X6UYBAPlXKyVlaAWEAAAAAElFTkSuQmCC
+  );
+}
+
 @keyframes progress-bar-loaded {
   from {width: 0%;}
   to {width: 100%;}
 }
 
 .GoalProgress {
-  display: table;
+  display: block;
   width: 100%;
-  background-image: url(
-    data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAEklEQVQIHWPYu3fvfwZcYKAkAaN7E0X4jmdZAAAAAElFTkSuQmCC
-  );
-  background-color: #D0D0D0;
   color: #FFFFFF;
   overflow: hidden;
 }
 
 /* edit pattern at http://ptrn.it/1x0nFEh */
 
-.GoalProgress__icon {
-  display: table-cell;
+.GoalProgress__icon,
+.GoalProgress__icon--achieved {
+  @extend %progress-bg;
+  transition: all 160ms ease-out;
+  float: right;
   width: $x-12;
   text-align: center;
-  border-left: solid white 2px;
+  margin-left: 5px;
   position: relative;
+  font-size: 21px;
+  line-height: $x-12;
+}
+
+.GoalProgress__icon--achieved {
+  background-color: $ehw-green-light;
+  text-shadow: 0 0 5px scale-color($ehw-green-light, $lightness: 50%);
+  font-size: 26px;
 }
 
 .GoalProgress__area {
+  @extend %progress-bg;
   position: relative;
   text-align: right;
-  display: table-cell;
+  display: block;
+  overflow: hidden;
 }
 
 .GoalProgress__bar,
-.GoalProgress__barTable {
+.GoalProgress__barFill {
   height: 100%;
 }
 
-.GoalProgress__bar,
-.GoalProgress__bar--completed {
+.GoalProgress__bar {
   position: absolute;
-  animation: progress-bar-loaded 1s ease forwards;
-}
-
-.GoalProgress__bar--completed .GoalProgress__barChevron {
-  display: none;
-}
-
-.GoalProgress__barTable {
-  display: table;
-  table-layout: fixed;
+  animation: progress-bar-loaded 1s ease-out forwards;
 }
 
 .GoalProgress__barFill {
-  display: table-cell;
+  display: block;
   background: $ehw-grey-dark;
-  width: 95%;
+  position: relative;
 }
 
-.GoalProgress__barChevron {
-  display: table-cell;
-  border-left: solid $ehw-grey-dark 20px;
-  border-bottom: solid transparent 20px;
-  border-top: solid transparent 20px;
+.GoalProgress__barFill::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 0;
+  display: block;
+  border-left: solid $ehw-grey-dark $x-2;
+  border-bottom: solid transparent $x-6;
+  border-top: solid transparent $x-6;
 }
 
 .GoalProgress__text {
-  margin: 0;
   position: relative;
-  padding: 12px 0;
+  line-height: $x-12;
   text-align: center;
-  font-weight: 500;
-}
+  font-size: $x-4;
+  font-weight: 300;
+  white-space: nowrap;
+  p {
+    margin: 0;
+  }
 
-.GoalProgress__text--raised {
-  font-weight: lighter;
+  @include media-max($breakpoint-xs) {
+    font-size: $x-3;
+  }
 }

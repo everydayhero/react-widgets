@@ -1,88 +1,46 @@
 "use strict";
 jest.autoMockOff();
-jest.mock('../../../../api/campaigns');
 
-describe('FundsRaised', function() {
+describe('GoalProgress', function() {
   var React        = require('react/addons');
   var GoalProgress = require('../');
-  var campaigns    = require('../../../../api/campaigns');
   var TestUtils    = React.addons.TestUtils;
   var findByClass  = TestUtils.findRenderedDOMComponentWithClass;
-  var numeral      = require('numeral');
 
-  describe('component defaults', function() {
-    var goalProgress;
-    var element;
+  var props = { total: 15000, goal: 30000 };
+  var element;
 
-    beforeEach(function() {
-      campaigns.find.mockClear();
-      goalProgress = <GoalProgress campaignUid="us-22" />;
-      element = TestUtils.renderIntoDocument(goalProgress);
-    });
-
-    it('renders something', function() {
-      expect(element).not.toBeNull();
-    });
-
-    it('renders a loading icon', function() {
-      element.setState({ isLoading: true });
-      findByClass(element, 'fa-refresh');
-    });
-
-    it('renders a default text', function() {
-      element.setState({ isLoading: false });
-      findByClass(element, 'GoalProgress__text');
-    });
-
-    it('renders a progress bar', function() {
-      element.setState({ isLoading: false });
-      findByClass(element, 'GoalProgress__bar');
-    });
-
-    it('renders an icon by default', function() {
-      findByClass(element, 'GoalProgress__icon');
-    });
-
-    it('handles a single campaign id', function() {
-      expect(campaigns.find).toBeCalledWith("us-22", element.onSuccess);
-    });
+  beforeEach(function() {
+    element = TestUtils.renderIntoDocument(<GoalProgress { ...props } />);
   });
 
-  describe('using component props', function() {
-    var goalProgress;
-    var element;
-    var goal = 100 * 100;
+  it('renders something', function() {
+    expect(element).not.toBeNull();
+  });
 
-    beforeEach(function() {
-      goalProgress = <GoalProgress goal={ goal } />;
-      element = TestUtils.renderIntoDocument(goalProgress);
-    });
+  it('renders progress text', function() {
+    var text = findByClass(element, 'GoalProgress__text');
+    expect(text.getDOMNode().textContent).toContain('$150');
+    expect(text.getDOMNode().textContent).toContain('$300');
+  });
 
-    it('renders the goal', function() {
-      element.setState({ isLoading: false });
-      var text = findByClass(element, 'GoalProgress__text');
+  it('renders a progress bar', function() {
+    findByClass(element, 'GoalProgress__bar');
+  });
 
-      expect(text.getDOMNode().textContent).toContain('$100 goal');
-    });
+  it('renders a trophy icon', function() {
+    findByClass(element, 'GoalProgress__icon');
+    findByClass(element, 'fa-trophy');
   });
 
   describe('using custom format', function() {
-    var goalProgress;
-    var element;
-    var goal = 1234.56 * 100;
-    var format = '0.00';
-
     beforeEach(function() {
-      goalProgress = <GoalProgress goal={ goal } format={ format } />;
-      element = TestUtils.renderIntoDocument(goalProgress);
+      element = TestUtils.renderIntoDocument(<GoalProgress { ...props } format={ '0.00' } />);
     });
 
     it('renders the custom format goal', function() {
-      element.setState({ isLoading: false });
       var text = findByClass(element, 'GoalProgress__text');
-      var custom_goal = '$' + numeral(goal / 100).format(format) + ' goal';
-
-      expect(text.getDOMNode().textContent).toContain(custom_goal);
+      expect(text.getDOMNode().textContent).toContain('$300.00');
     });
   });
 });

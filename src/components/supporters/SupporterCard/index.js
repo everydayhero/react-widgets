@@ -38,6 +38,7 @@ module.exports = React.createClass({
           <a href={ props.url } className="SupporterCard__userName">{ props.name }</a>
 
           <SupporterCardGiveNow
+            url={ props.url }
             target={ props.target }
             current={ props.current }
             i18n={{ currency: props.currency }} />

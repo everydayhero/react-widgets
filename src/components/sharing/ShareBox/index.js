@@ -37,22 +37,18 @@ module.exports = React.createClass({
   },
 
   openDialog: function(url) {
-    var dialogX = window.screen.availWidth/2 - 650/2;
-    var dialogY = window.screen.availHeight/2 - 310/2;
-
-    var wWidth = window.innerWidth;
-
-
     var config = {
       toolbar: 0,
       status: 0,
       width: 650,
-      height: 310,
-      top: dialogY,
-      left: dialogX
+      height: 310
     };
 
-    console.log(wWidth);
+    var windowTop = window.screenTop ? window.screenTop : window.screenY;
+    var windowLeft = window.screenLeft ? window.screenLeft : window.screenX;
+
+    config.top = windowTop + (window.innerHeight / 2) - (config.height / 2);
+    config.left = windowLeft + (window.innerWidth / 2) - (config.width / 2);
 
     config = this.toString(config);
 

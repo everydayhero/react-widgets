@@ -31,9 +31,12 @@ var page = {
     name: 'Bar'
   },
   image: {
-    small_image_url: 'http://blah.com/avatar.png'
+    medium_image_url: 'http://blah.com/avatar.png'
   },
-  url: 'http://page.url/'
+  url: 'http://page.url/',
+  supporter: {
+    name: 'Supporter Name'
+  }
 };
 
 var response = {

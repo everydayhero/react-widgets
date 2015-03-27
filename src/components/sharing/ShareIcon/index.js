@@ -12,7 +12,7 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <div className={ 'ShareIcon ShareIcon__' + this.props.network } onClick={ this.handleClick }>
+      <div className={ 'ShareIcon ShareIcon__' + this.props.name } onClick={ this.handleClick }>
         <Icon icon={ this.props.icon } />
       </div>
     );

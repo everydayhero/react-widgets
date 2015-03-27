@@ -5,28 +5,6 @@ var React       = require('react');
 var I18nMixin   = require('../../mixins/I18n');
 var Input       = require('../../forms/Input');
 var ShareIcon   = require('../ShareIcon');
-var format      = require('../../../lib/format');
-
-var networks = [
-  {
-    name: "facebook",
-    url: "http://www.facebook.com/sharer.php?u={url}"
-  },
-  {
-    name: "twitter",
-    url: "https://twitter.com/share?url={url}&text={title}"
-  },
-  {
-    name: "googleplus",
-    url: "https://plus.google.com/share?url={url}",
-    icon: "google-plus"
-  },
-  {
-    name: "pinterest",
-    url: "https://pinterest.com/pin/create/bookmarklet/?media={img}&url={url}&description={title}"
-  }
-];
-
 
 module.exports = React.createClass({
   displayName: "ShareBox",
@@ -55,29 +33,14 @@ module.exports = React.createClass({
     var windowRef = window.open(url, 'shareWindow', config);
   },
 
-  fetchValue: function(networkName, value) {
-    return _.result(_.find(networks, function(network) {
-      return network.name == networkName;
-    }), value);
-  },
-
   renderShareIcons: function() {
-    return this.props.networks.map(function(name) {
-      var url  = this.fetchValue(name, "url");
-      var icon = this.fetchValue(name, "icon") || name;
-
-      url = format(url, {
-        "url": this.props.shareUrl,
-        "title": this.props.shareTitle,
-        "img": this.props.shareImage
-      }, true);
-
+    return this.props.services.map(function(service) {
       return (
         <ShareIcon
-          key={ name }
-          network={ name }
-          icon={ icon }
-          open={ this.openDialog.bind(null, url) } />
+          key={ service.name }
+          name={ service.name }
+          icon={ service.icon || service.name }
+          open={ this.openDialog.bind(null, service.url) } />
       );
     }, this);
   },
@@ -100,7 +63,7 @@ module.exports = React.createClass({
             <span>Or</span>
           </div>
 
-          <div className="ShareBox__networks">
+          <div className="ShareBox__services">
             <label>Share via</label>
             <div className="ShareBox__icons">
               { this.renderShareIcons() }

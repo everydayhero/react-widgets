@@ -7,7 +7,7 @@ var Input       = require('../../forms/Input');
 var ShareIcon   = require('../ShareIcon');
 var format      = require('../../../lib/format');
 
-var shareServices = [
+var networks = [
   {
     name: "facebook",
     url: "http://www.facebook.com/sharer.php?u={url}"
@@ -55,14 +55,14 @@ module.exports = React.createClass({
     var windowRef = window.open(url, 'shareWindow', config);
   },
 
-  fetchValue: function(serviceName, value) {
-    return _.result(_.find(shareServices, function(service) {
-      return service.name == serviceName;
+  fetchValue: function(networkName, value) {
+    return _.result(_.find(networks, function(network) {
+      return network.name == networkName;
     }), value);
   },
 
   renderShareIcons: function() {
-    return this.props.services.map(function(name) {
+    return this.props.networks.map(function(name) {
       var url  = this.fetchValue(name, "url");
       var icon = this.fetchValue(name, "icon") || name;
 
@@ -75,7 +75,7 @@ module.exports = React.createClass({
       return (
         <ShareIcon
           key={ name }
-          service={ name }
+          network={ name }
           icon={ icon }
           open={ this.openDialog.bind(null, url) } />
       );
@@ -100,7 +100,7 @@ module.exports = React.createClass({
             <span>Or</span>
           </div>
 
-          <div className="ShareBox__services">
+          <div className="ShareBox__networks">
             <label>Share via</label>
             <div className="ShareBox__icons">
               { this.renderShareIcons() }

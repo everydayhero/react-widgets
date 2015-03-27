@@ -10,7 +10,7 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "ShareButton",
   propTypes: {
-    services: React.PropTypes.array,
+    networks: React.PropTypes.array,
     shareUrl: React.PropTypes.string,
     shareTitle: React.PropTypes.string,
     shareImage: React.PropTypes.string,
@@ -20,7 +20,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      services: [
+      networks: [
         'facebook',
         'twitter',
         'googleplus',
@@ -61,7 +61,7 @@ module.exports = React.createClass({
 
       return (
         <ShareBox
-          services={ props.services }
+          networks={ props.networks }
           shareUrl={ props.shareUrl }
           shareTitle={ props.shareTitle }
           shareImage={ image }

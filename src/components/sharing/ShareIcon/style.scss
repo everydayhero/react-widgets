@@ -4,7 +4,6 @@ $ShareIcon-googleplus: #DB4A39;
 $ShareIcon-pinterest: #C8232C;
 $ShareIcon-speed: 0.25s;
 
-
 @keyframes ShareIconAnim {
   from {
     opacity: 0;
@@ -22,7 +21,7 @@ $ShareIcon-speed: 0.25s;
   width: 25%;
   text-align: center;
   cursor: pointer;
-  animation: ShareIconAnim $ShareIcon-speed ease-out forwards;
+  animation: ShareIconAnim $ShareIcon-speed cubic-bezier(0.25, 0, 0.25, 1.8) forwards;
 
   .Icon {
     display: inline-block;

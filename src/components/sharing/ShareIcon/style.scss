@@ -2,6 +2,7 @@ $ShareIcon-twitter: #00a0d1;
 $ShareIcon-facebook: #3B5998;
 $ShareIcon-googleplus: #DB4A39;
 $ShareIcon-pinterest: #C8232C;
+$ShareIcon-speed: 0.25s;
 
 
 @keyframes ShareIconAnim {
@@ -21,7 +22,7 @@ $ShareIcon-pinterest: #C8232C;
   width: 25%;
   text-align: center;
   cursor: pointer;
-  animation: ShareIconAnim 0.25s ease-out forwards;
+  animation: ShareIconAnim $ShareIcon-speed ease-out forwards;
 
   .Icon {
     display: inline-block;
@@ -30,27 +31,71 @@ $ShareIcon-pinterest: #C8232C;
     padding: $x-4;
     width: $x-4;
     text-align: center;
-    transition: all 0.5s cubic-bezier(0.5, -0.55, 0.25, 1.5);
+    transition: all $ShareIcon-speed ease-out;
+
+
+    position: relative;
+
+    &:after {
+      content: "";
+      box-sizing: content-box;
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      padding: 3px;
+      transform: scale(.75);
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      pointer-events: none;
+      transition: transform $ShareIcon-speed, opacity $ShareIcon-speed;
+    }
+
+    &:hover:after {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 }
 
 
 .ShareIcon__twitter:hover .Icon {
-  color: $ShareIcon-twitter;
+  color: #fff;
+  background-color: $ShareIcon-twitter;
   border-color: $ShareIcon-twitter;
+
+  &:after {
+    box-shadow: 0 0 0 2px $ShareIcon-twitter;
+  }
 }
 
 .ShareIcon__facebook:hover .Icon {
-  color: $ShareIcon-facebook;
+  color: #fff;
+  background-color: $ShareIcon-facebook;
   border-color: $ShareIcon-facebook;
+
+  &:after {
+    box-shadow: 0 0 0 2px $ShareIcon-facebook;
+  }
 }
 
 .ShareIcon__googleplus:hover .Icon {
-  color: $ShareIcon-googleplus;
+  color: #fff;
+  background-color: $ShareIcon-googleplus;
   border-color: $ShareIcon-googleplus;
+
+  &:after {
+    box-shadow: 0 0 0 2px $ShareIcon-googleplus;
+  }
 }
 
 .ShareIcon__pinterest:hover .Icon {
-  color: $ShareIcon-pinterest;
+  color: #fff;
+  background-color: $ShareIcon-pinterest;
   border-color: $ShareIcon-pinterest;
+
+  &:after {
+    box-shadow: 0 0 0 2px $ShareIcon-pinterest;
+  }
 }

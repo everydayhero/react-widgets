@@ -1,20 +1,27 @@
 .ShareButton {
   position: relative;
 
-  .ShareButton__btn {
-    border: 2px solid rgba($ehw-grey, 0.5);
-    color: $ehw-grey;
-    padding: $x-2 $x-4;
-    background: #fff;
-    font-weight: bold;
-    border-radius: $ehw-border-radius;
-    display: inline-block;
-    cursor: pointer;
+  &:hover .ShareButton__btn,
+  &:focus .ShareButton__btn,
+  &:active .ShareButton__btn {
+    border-color: $ehw-grey;
   }
+}
 
-  .ShareButton__icon {
-    padding-right: $x-2;
-  }
+.ShareButton__btn {
+  border: 2px solid rgba($ehw-grey, 0.5);
+  color: $ehw-grey;
+  padding: $x-2 $x-4;
+  background: transparent;
+  font-weight: bold;
+  border-radius: $ehw-border-radius;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+}
+
+.ShareButton__icon {
+  padding-right: $x-2;
 }
 
 .ShareButton__transition-leave {

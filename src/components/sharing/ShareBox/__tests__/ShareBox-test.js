@@ -3,44 +3,25 @@
 jest.autoMockOff();
 
 describe('Share Box', function() {
-  var React       = require('react/addons');
-  var ShareBox    = require('../');
-  var TestUtils   = React.addons.TestUtils;
-  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  var React                  = require('react/addons');
+  var ShareBox               = require('../');
+  var ShareIcon              = require('../../ShareIcon/');
+  var TestUtils              = React.addons.TestUtils;
+  var findByClass            = TestUtils.findRenderedDOMComponentWithClass;
+  var scryRenderedComponents = TestUtils.scryRenderedComponentsWithType;
+
+  var mockServices = [
+    { name: 'facebuck', url: 'http://facebuck.com/' },
+    { name: 'twattar', url: 'http://twatter.com/' },
+    { name: 'goobleplos', url: 'http://goobleplos.com/' }
+  ];
 
   describe('component defaults', function() {
     var shareBox;
     var component;
 
-    var shareUrls = [
-      {
-        name: "facebook",
-        url: "http://www.facebook.com/sharer.php?u={url}"
-      },
-      {
-        name: "twitter",
-        url: "https://twitter.com/share?url={url}&text={title}"
-      },
-      {
-        name: "googleplus",
-        url: "https://plus.google.com/share?url={url}",
-        icon: "google-plus"
-      },
-      {
-        name: "pinterest",
-        url: "https://pinterest.com/pin/create/bookmarklet/?media={img}&url={url}&description={title}"
-      }
-    ];
-
-    var networks: [
-      'facebook',
-      'twitter',
-      'googleplus',
-      'pinterest'
-    ];
-
     beforeEach(function() {
-      shareBox = <ShareBox networks  />;
+      shareBox  = <ShareBox services={ mockServices } />;
       component = TestUtils.renderIntoDocument(shareBox);
     });
 
@@ -48,31 +29,32 @@ describe('Share Box', function() {
       expect(component).not.toBeNull();
     });
 
-    // it('can fetch specific values from an array of social networks', function() {
-    //   var facebookUrl = component.fetchValue("facebook", url);
-    //   expect(facebookUrl).toEqual('http://www.facebook.com/sharer.php?u={url}');
-    // });
+    it('will attempt to render service buttons', function() {
+      var result      = component.renderServiceButtons();
+      var iconWrapper = findByClass(component, 'ShareBox__icons');
+      var icons       = scryRenderedComponents(component, ShareIcon);
 
-    // it('converts an object to a string (window.open config)', function() {
-
-    // });
-
-    // it('opens a popup', function() {
-
-    // });
+      expect(result).toBeTruthy();
+      expect(icons.length).toBe(mockServices.length);
+    });
   });
 
-  // describe('icon display option', function() {
-  //   var shareBox;
-  //   var component;
+  describe('what happens when an empty service array is provided', function() {
+    var shareBox;
+    var component;
 
-  //   beforeEach(function() {
-  //     shareBox = <ShareBox renderIcon={ false } />;
-  //     component = TestUtils.renderIntoDocument(shareBox);
-  //   });
+    beforeEach(function() {
+      shareBox = <ShareBox services={ [] } />;
+      component = TestUtils.renderIntoDocument(shareBox);
+    });
 
-  //   it('has an option that stops the icon from displaying', function() {
-  //     expect(component.renderIcon()).toBeFalsy();
-  //   });
-  // });
+    it('will not render any service buttons', function() {
+      var result = component.renderServiceButtons();
+      var icons  = scryRenderedComponents(component, ShareIcon);
+
+      expect(result).toBeFalsy();
+      expect(icons.length).toBe(0);
+    });
+  });
+
 });

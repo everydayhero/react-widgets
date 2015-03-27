@@ -45,6 +45,24 @@ module.exports = React.createClass({
     }, this);
   },
 
+  renderServiceButtons: function() {
+    if (this.props.services.length !== 0) {
+      return (
+        <div>
+          <div className="ShareBox__divider">
+            <span>Or</span>
+          </div>
+          <div className="ShareBox__services">
+            <label>Share via</label>
+            <div className="ShareBox__icons">
+              { this.renderShareIcons() }
+            </div>
+          </div>
+        </div>
+      );
+    }
+  },
+
   render: function() {
     var shareLinkLabel = this.props.shareLinkLabel;
 
@@ -59,16 +77,7 @@ module.exports = React.createClass({
           i18n={{ label: shareLinkLabel }}
           spacing="compact" />
 
-          <div className="ShareBox__divider">
-            <span>Or</span>
-          </div>
-
-          <div className="ShareBox__services">
-            <label>Share via</label>
-            <div className="ShareBox__icons">
-              { this.renderShareIcons() }
-            </div>
-          </div>
+          { this.renderServiceButtons() }
       </div>
     );
   }

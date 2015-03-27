@@ -67,6 +67,10 @@
   text-shadow: 0 0 5px rgba(82,82,82, 0.8);
 }
 
+.SupporterCardGiveNow__label p {
+  margin: 0;
+}
+
 .SupporterCardGiveNow__progress {
   transition: all 240ms ease-out;
   position: relative;

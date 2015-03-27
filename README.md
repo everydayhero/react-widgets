@@ -342,9 +342,9 @@ Display a campaign goal progress bar.
     <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
   </head>
   <body>
-    <div id="GoalProgressExample">Loading...</div>
+    <div id="EntityGoalProgressExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('GoalProgressExample', 'GoalProgress', { campaignUid: 'us-22', goal: 20000000 });
+      edh.widgets.renderWidget('EntityGoalProgressExample', 'EntityGoalProgress', { campaignUid: 'us-0', goal: 20000000 });
     </script>
   </body>
 </html>

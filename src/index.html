@@ -153,7 +153,7 @@
 
       <div class="panel clearfix">
         <h3 class="title">Goal Progress</h3>
-        <div id="GoalProgressExample" class="">Loading...</div>
+        <div id="EntityGoalProgressExample" class="">Loading...</div>
       </div>
 
       <div class="panel clearfix">
@@ -220,12 +220,12 @@
     edh.widgets.initModal('CharitySearchDonate', 'CharitySearch', { country: 'uk', action: 'donate' });
     edh.widgets.initModal('CharitySearchFundraise', 'CharitySearch', { country: 'uk', action: 'fundraise' });
     edh.widgets.initModal('PageSearchExample', 'PageSearch', { country: 'uk' });
-    edh.widgets.renderWidget('GoalProgressExample', 'GoalProgress', { campaignUid: 'us-22', goal: 20000000 });
+    edh.widgets.renderWidget('EntityGoalProgressExample', 'EntityGoalProgress', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('FundsRaisedExample','FundsRaised', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('GoalExample', 'Goal', { goal: '5000000', i18n: { title: '2015 Goal' } });
-    edh.widgets.renderWidget('CountDownExample', 'CountDown', { days: 34, registerUrl: 'https://pmhincelebration.edheroy.com/au/get-started' });
+    edh.widgets.renderWidget('CountDownExample', 'CountDown', { days: 34, linkUrl: 'https://pmhincelebration.edheroy.com/au/get-started', i18n: { linkText: 'Register' } });
     edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TeamLeaderboardExample', 'TeamLeaderboard', { campaignUid: 'us-22', altTemplate: true, limit: 12, pageSize: 4 });
     edh.widgets.renderWidget('FitnessLeaderboardExample', 'FitnessLeaderboard', { campaignUid: 'us-22' });

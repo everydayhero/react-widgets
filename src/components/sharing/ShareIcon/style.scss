@@ -30,10 +30,8 @@ $ShareIcon-speed: 0.25s;
     padding: $x-4;
     width: $x-4;
     text-align: center;
-    transition: all $ShareIcon-speed ease-out;
-
-
     position: relative;
+    transition: all $ShareIcon-speed ease-out;
 
     &:after {
       content: "";
@@ -57,7 +55,6 @@ $ShareIcon-speed: 0.25s;
     }
   }
 }
-
 
 .ShareIcon__twitter:hover .Icon {
   color: #fff;

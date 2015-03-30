@@ -191,7 +191,7 @@ module.exports = React.createClass({
       return <FootprintGroup
         index={ i }
         key={ i + d }
-        id={ this.props.userName.replace(/\s+/g, '') }
+        id={ this.props.userName.replace(/\W/g, '') }
         name={ d }
         active = { _.contains(metrics, this.state.metric) }
         current={ this.state.metric }

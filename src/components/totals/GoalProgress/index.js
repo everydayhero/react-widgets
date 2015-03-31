@@ -12,11 +12,12 @@ module.exports = React.createClass({
   mixins: [PureRenderMixin, I18nMixin],
 
   propTypes: {
-    total: React.PropTypes.number.isRequired,
-    goal: React.PropTypes.number.isRequired,
-    format: React.PropTypes.string,
     currencySymbol: React.PropTypes.string,
-    i18n: React.PropTypes.object
+    fallbackToFundsRaised: React.PropTypes.bool,
+    format: React.PropTypes.string,
+    goal: React.PropTypes.number,
+    i18n: React.PropTypes.object,
+    total: React.PropTypes.number.isRequired
   },
 
   getDefaultProps: function() {
@@ -24,7 +25,8 @@ module.exports = React.createClass({
       format: '0,0',
       currencySymbol: '$',
       defaultI18n: {
-        text: '**{total}** raised of **{goal}** goal'
+        goal_text: '**{total}** raised of **{goal}** goal',
+        no_goal_text: '**{total}** raised'
       }
     };
   },
@@ -74,13 +76,25 @@ module.exports = React.createClass({
 
   renderText: function() {
     var props = this.props;
+    var message;
+
+    if(!props.goal && props.fallbackToFundsRaised) {
+
+      message = this.tm('no_goal_text', {
+        total: this.formatCurrency(props.total)
+      });
+
+    } else {
+
+      message = this.tm('goal_text', {
+        total: this.formatCurrency(props.total),
+        goal: this.formatCurrency(props.goal)
+      });
+    }
 
     return (
       <div className="GoalProgress__text">
-        { this.tm('text', {
-          total: this.formatCurrency(props.total),
-          goal: this.formatCurrency(props.goal)
-        }) }
+        { message }
       </div>
     );
   },

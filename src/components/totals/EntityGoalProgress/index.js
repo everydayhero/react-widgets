@@ -39,7 +39,7 @@ module.exports = React.createClass({
     this.setState({
       isLoading: false,
       total: funds_raised.cents || 0,
-      goal: data.goal || 20000000,
+      goal: data.goal,
       currencySymbol: funds_raised.currency.symbol
     });
   },
@@ -50,7 +50,8 @@ module.exports = React.createClass({
     return (
       <GoalProgress
         total={ this.state.total }
-        goal={ this.state.goal }
+        goal={ this.props.goal || this.state.goal }
+        fallbackToFundsRaised={ true }
         currencySymbol={ this.state.currencySymbol } />
     );
   }

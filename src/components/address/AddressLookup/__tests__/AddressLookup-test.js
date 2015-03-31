@@ -101,6 +101,18 @@ describe('AddressLookup', function() {
     expect(listItem.textContent).toContain('TestAddressListing');
   });
 
+  it('address listing has google class for logo styling', function() {
+    var element = TestUtils.renderIntoDocument(<AddressLookup />);
+    var input = findByClass(element, 'Input__input').getDOMNode();
+    TestUtils.Simulate.change(input, { target: { value: "TestAddress" } });
+
+    var callback = address.search.mock.calls[0][2];
+    callback(addressSearchResult);
+
+    var list = findByClass(element, 'AddressLookup__list-google');
+    expect(list).not.toBeNull();
+  });
+
   it('breaks down a selected US address', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup country={ 'US' } />);
     element.setList(addressSearchResult);

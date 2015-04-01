@@ -181,10 +181,18 @@ module.exports = React.createClass({
     this.props.output(this.state.custom || this.state.address);
   },
 
+  isPAFLookup: function () {
+    return this.state.country.iso === 'GB';
+  },
+
+  isGoogleLookup: function () {
+    return !this.isPAFLookup();
+  },
+
   getList: _.debounce(function(input) {
-    var chars = this.state.country.iso === 'GB' ? 5 : 7;
+    var minChars = this.isPAFLookup() ? 5 : 7;
     this.state.cancelSearch();
-    if (input.length >= chars) {
+    if (input.length >= minChars) {
       this.setState({
         loading: true,
         addressList: null,
@@ -209,7 +217,7 @@ module.exports = React.createClass({
 
   setAddress: function(address) {
     if (this.validate(address && address.address, this.setError)) {
-      address.address.paf_validated = this.state.country.iso === "GB";
+      address.address.paf_validated = this.isPAFLookup();
       this.setState({ error: false, address: address.address, addressList: null, loading: false, focusOnMount: true }, this.output);
     }
     this.props.validate(address);
@@ -268,7 +276,7 @@ module.exports = React.createClass({
         error={ this.state.error }
         i18n={{
           name: this.props.prefix + 'lookup',
-          label: this.state.country.iso === 'GB' ? this.t('inputLabelGB') : this.t('inputLabel'),
+          label: this.t('inputLabel' + this.state.country.iso) || this.t('inputLabel'),
           error: this.t('error')
         }}
         value={ this.state.input }
@@ -279,8 +287,12 @@ module.exports = React.createClass({
   },
 
   renderList: function(bool) {
+    var classes = cx({
+      'AddressLookup__list': true,
+      'AddressLookup__list-google': this.isGoogleLookup()
+    });
     return bool && (
-      <div className="AddressLookup__list">
+      <div className={ classes }>
         { this.renderListing() }
       </div>
     );

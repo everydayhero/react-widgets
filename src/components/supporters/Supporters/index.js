@@ -7,8 +7,6 @@ var I18nMixin           = require('../../mixins/I18n');
 var DOMInfoMixin        = require('../../mixins/DOMInfo');
 var campaigns           = require('../../../api/campaigns');
 var charities           = require('../../../api/charities');
-var addEventListener    = require('../../../lib/addEventListener');
-var removeEventListener = require('../../../lib/removeEventListener');
 var SupporterCard       = require('../SupporterCard');
 
 module.exports = React.createClass({

@@ -1,4 +1,6 @@
 "use strict";
+var IS_CLIENT = typeof window !== 'undefined';
+var noop = function() {};
 
 function removeEventListener(el, eventName, handler) {
   if (el.removeEventListener) {
@@ -10,4 +12,4 @@ function removeEventListener(el, eventName, handler) {
   }
 }
 
-module.exports = removeEventListener;
+module.exports = IS_CLIENT ? removeEventListener : noop;

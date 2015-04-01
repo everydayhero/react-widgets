@@ -24,7 +24,7 @@ var sizes = {
 };
 var resizeHandlers = [];
 
-addEventListener(window, 'resize', function(e) {
+addEventListener('resize', function(e) {
   resizeHandlers.forEach(function(handler) {
     handler(e);
   });

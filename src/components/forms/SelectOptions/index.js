@@ -37,13 +37,13 @@ module.exports = React.createClass({
 
   componentDidMount: function(nextProps, nextState) {
     this.setState({ menu: this.getDOMNode() }, this.scrollMenu);
-    addEventListener(window, 'keydown', this.keyHandler);
-    addEventListener(window, 'mousedown', this.clickHandler);
+    addEventListener('keydown', this.keyHandler);
+    addEventListener('mousedown', this.clickHandler);
   },
 
   componentWillUnmount: function() {
-    removeEventListener(window, 'keydown', this.keyHandler);
-    removeEventListener(window, 'mousedown', this.clickHandler);
+    removeEventListener('keydown', this.keyHandler);
+    removeEventListener('mousedown', this.clickHandler);
   },
 
   clickHandler: function(e) {

@@ -2,7 +2,8 @@
 var IS_CLIENT = typeof window !== 'undefined';
 var noop = function() {};
 
-function addEventListener(el, eventName, handler) {
+function addEventListener(eventName, handler, el) {
+  el = el || window;
   if (el.addEventListener) {
     el.addEventListener(eventName, handler);
   } else {

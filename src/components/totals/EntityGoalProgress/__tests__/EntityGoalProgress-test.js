@@ -25,7 +25,7 @@ describe('FundsRaised', function() {
     it('renders GoalProgress text', function() {
       element.setState(state);
       var text = findByClass(element, 'GoalProgress__text');
-      expect(text.getDOMNode().textContent).toBe('$150 raised of $300 goal\n')
+      expect(text.getDOMNode().textContent).toBe('$150 raised of $300 goal\n');
     });
 
     it('renders a GoalProgress bar', function() {
@@ -47,7 +47,7 @@ describe('FundsRaised', function() {
     it('goal as property', function() {
       element.setState(state);
       var text = findByClass(element, 'GoalProgress__text');
-      expect(text.getDOMNode().textContent).toBe('$150 raised of $555 goal\n')
+      expect(text.getDOMNode().textContent).toBe('$150 raised of $555 goal\n');
     });
   });
 
@@ -62,7 +62,7 @@ describe('FundsRaised', function() {
     it('Shows funds raised message', function() {
       element.setState(state);
       var text = findByClass(element, 'GoalProgress__text');
-      expect(text.getDOMNode().textContent).toBe('$150 raised\n')
+      expect(text.getDOMNode().textContent).toBe('$150 raised\n');
     });
   });
 });

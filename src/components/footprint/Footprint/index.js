@@ -122,11 +122,11 @@ module.exports = React.createClass({
 
   componentWillMount: function() {
     this.processData();
-    addEventListener(window, 'touchstart', this.setCompact);
+    addEventListener('touchstart', this.setCompact);
   },
 
   componentWillUnmount: function() {
-    removeEventListener(window, 'touchstart', this.setCompact);
+    removeEventListener('touchstart', this.setCompact);
   },
 
   tween: function(state, value) {

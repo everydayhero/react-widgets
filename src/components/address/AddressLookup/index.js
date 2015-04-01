@@ -69,12 +69,12 @@ module.exports = React.createClass({
   },
 
   componentWillUpdate: function(nextProps, nextState) {
-    if (nextState.addressList) addEventListener(window, 'keydown', this.keyHandler);
-    if (!nextState.addressList) removeEventListener(window, 'keydown', this.keyHandler);
+    if (nextState.addressList) addEventListener('keydown', this.keyHandler);
+    if (!nextState.addressList) removeEventListener('keydown', this.keyHandler);
   },
 
   componentWillUnmount: function() {
-    removeEventListener(window, 'keydown', this.keyHandler);
+    removeEventListener('keydown', this.keyHandler);
   },
 
   keyHandler: function(e) {

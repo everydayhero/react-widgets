@@ -70,12 +70,12 @@ function initModal(element, name, options) {
   }
   element.href = '#';
 
-  addEventListener(element, 'click', function(event) {
+  addEventListener('click', function(event) {
     if (event) {
       event.preventDefault();
     }
     showModal(name, options);
-  });
+  }, element);
 }
 
 function renderWidget(element, name, options) {

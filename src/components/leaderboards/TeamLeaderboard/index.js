@@ -63,12 +63,12 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    addEventListener(window, 'resize', this.setChildWidth);
+    addEventListener('resize', this.setChildWidth);
     this.setChildWidth();
   },
 
   componentWillUnmount: function() {
-    removeEventListener(window, 'resize', this.setChildWidth);
+    removeEventListener('resize', this.setChildWidth);
   },
 
   setChildWidth: _.debounce(function() {

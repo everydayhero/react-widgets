@@ -25,7 +25,7 @@ describe('FundsRaised', function() {
     it('renders GoalProgress text', function() {
       element.setState(state);
       var text = findByClass(element, 'GoalProgress__text');
-      expect(text.getDOMNode().textContent).toBe('$150 raised of $300 goal\n');
+      expect(text.getDOMNode().textContent).toContain('$150 raised of $300 goal');
     });
 
     it('renders a GoalProgress bar', function() {
@@ -47,22 +47,22 @@ describe('FundsRaised', function() {
     it('goal as property', function() {
       element.setState(state);
       var text = findByClass(element, 'GoalProgress__text');
-      expect(text.getDOMNode().textContent).toBe('$150 raised of $555 goal\n');
+      expect(text.getDOMNode().textContent).toContain('$150 raised of $555 goal');
     });
   });
 
-  describe('No goal, with fallbackToFundsRaised', function() {
+  describe('With no goal', function() {
     var state = { isLoading: false, total: 15000 };
 
     beforeEach(function() {
       campaigns.find.mockClear();
-      element = TestUtils.renderIntoDocument(<EntityGoalProgress campaignUid="us-22" fallbackToFundsRaised={ true }  />);
+      element = TestUtils.renderIntoDocument(<EntityGoalProgress campaignUid="us-22" />);
     });
 
     it('Shows funds raised message', function() {
       element.setState(state);
       var text = findByClass(element, 'GoalProgress__text');
-      expect(text.getDOMNode().textContent).toBe('$150 raised\n');
+      expect(text.getDOMNode().textContent).toContain('$150 raised');
     });
   });
 });

@@ -8,8 +8,6 @@ var Icon = require('../../helpers/Icon');
 var Event = require('../Event');
 var campaign = require('../../../api/campaigns');
 var charity = require('../../../api/charities');
-var addEventListener = require('../../../lib/addEventListener');
-var removeEventListener = require('../../../lib/removeEventListener');
 
 module.exports = React.createClass({
   displayName: 'UpcomingEvents',

@@ -1,4 +1,6 @@
 "use strict";
+var IS_CLIENT = typeof window !== 'undefined';
+var noop = function() {};
 
 function addEventListener(el, eventName, handler) {
   if (el.addEventListener) {
@@ -10,4 +12,4 @@ function addEventListener(el, eventName, handler) {
   }
 }
 
-module.exports = addEventListener;
+module.exports = IS_CLIENT ? addEventListener : noop;

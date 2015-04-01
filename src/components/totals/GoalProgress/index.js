@@ -13,7 +13,6 @@ module.exports = React.createClass({
 
   propTypes: {
     currencySymbol: React.PropTypes.string,
-    fallbackToFundsRaised: React.PropTypes.bool,
     format: React.PropTypes.string,
     goal: React.PropTypes.number,
     i18n: React.PropTypes.object,
@@ -22,8 +21,9 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      format: '0,0',
       currencySymbol: '$',
+      format: '0,0',
+      goal: 0,
       defaultI18n: {
         goal_text: '**{total}** raised of **{goal}** goal',
         no_goal_text: '**{total}** raised'
@@ -43,7 +43,7 @@ module.exports = React.createClass({
 
   getProgress: function() {
     var props = this.props;
-    return Math.min(props.total / props.goal, 1);
+    return props.goal > 0 ? Math.min(props.total / props.goal, 1) : 0;
   },
 
   renderProgressBar: function() {
@@ -51,7 +51,7 @@ module.exports = React.createClass({
     var offsetWidth = numeral(progress).format('0%');
     var style = { width: offsetWidth || '100%' };
 
-    return progress && (
+    return progress > 0 && (
       <div className="GoalProgress__bar" >
         <div className="GoalProgress__barFill" style={ style }></div>
       </div>
@@ -76,20 +76,11 @@ module.exports = React.createClass({
 
   getMessage: function() {
     var props = this.props;
-    var message;
 
-    if(!props.goal && props.fallbackToFundsRaised) {
-      message = this.tm('no_goal_text', {
-        total: this.formatCurrency(props.total)
-      });
-    } else {
-      message = this.tm('goal_text', {
-        total: this.formatCurrency(props.total),
-        goal: this.formatCurrency(props.goal)
-      });
-    }
-
-    return message;
+    return this.tm(props.goal > 0 ? 'goal_text' : 'no_goal_text', {
+      total: this.formatCurrency(props.total),
+      goal: this.formatCurrency(props.goal)
+    });
   },
 
   renderText: function() {

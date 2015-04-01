@@ -11,7 +11,6 @@ module.exports = React.createClass({
   propTypes: {
     campaignUid: React.PropTypes.string,
     charityUid: React.PropTypes.string,
-    fallbackToFundsRaised: React.PropTypes.bool
   },
 
   getInitialState: function() {
@@ -54,7 +53,6 @@ module.exports = React.createClass({
       <GoalProgress
         total={ this.state.total }
         goal={ this.props.goal || this.state.goal }
-        fallbackToFundsRaised={ props.fallbackToFundsRaised }
         currencySymbol={ this.state.currencySymbol } />
     );
   }

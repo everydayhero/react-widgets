@@ -54,7 +54,7 @@ describe('UpcomingEvents', function() {
     });
 
     it('loads campaigns for given charity', function() {
-      var options = { status: 'active', sortBy: 'finish_at', excludeCharities: true, excludePages: true, excludeBau: true };
+      var options = { status: 'active', sortBy: 'start_at', excludeCharities: true, excludePages: true, excludeBau: true };
       expect(campaign.findByCharity).toBeCalledWith('au-1234', 1, 20, jasmine.any(Function), options);
 
       var callback = campaign.findByCharity.mock.calls[0][3];

@@ -5,6 +5,7 @@
 */
 
 var _ = require('lodash');
+var addEventListener = require('../../lib/addEventListener');
 var breakpoints = {
   mobile: 450,
   tablet: 700,
@@ -21,14 +22,13 @@ var sizes = {
   huge: 800,
   xHuge: 950,
 };
-
 var resizeHandlers = [];
 
-if (typeof window !== 'undefined') window.addEventListener('resize', function(e) {
+addEventListener(window, 'resize', function(e) {
   resizeHandlers.forEach(function(handler) {
     handler(e);
   });
-}, false);
+});
 
 function findSize(o, w) {
   return _.findKey(o, function(d) {

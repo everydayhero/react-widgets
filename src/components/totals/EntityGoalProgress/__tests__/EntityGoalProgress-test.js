@@ -50,4 +50,19 @@ describe('FundsRaised', function() {
       expect(text.getDOMNode().textContent).toBe('$150 raised of $555 goal\n')
     });
   });
+
+  describe('No goal, with fallbackToFundsRaised', function() {
+    var state = { isLoading: false, total: 15000 };
+
+    beforeEach(function() {
+      campaigns.find.mockClear();
+      element = TestUtils.renderIntoDocument(<EntityGoalProgress campaignUid="us-22" fallbackToFundsRaised={ true }  />);
+    });
+
+    it('Shows funds raised message', function() {
+      element.setState(state);
+      var text = findByClass(element, 'GoalProgress__text');
+      expect(text.getDOMNode().textContent).toBe('$150 raised\n')
+    });
+  });
 });

@@ -51,7 +51,7 @@ module.exports = React.createClass({
     var offsetWidth = numeral(progress).format('0%');
     var style = { width: offsetWidth || '100%' };
 
-    return (
+    return progress && (
       <div className="GoalProgress__bar" >
         <div className="GoalProgress__barFill" style={ style }></div>
       </div>
@@ -74,27 +74,28 @@ module.exports = React.createClass({
     return props.currencySymbol + numeral(cents / 100).format(props.format);
   },
 
-  renderText: function() {
+  getMessage: function() {
     var props = this.props;
     var message;
 
     if(!props.goal && props.fallbackToFundsRaised) {
-
       message = this.tm('no_goal_text', {
         total: this.formatCurrency(props.total)
       });
-
     } else {
-
       message = this.tm('goal_text', {
         total: this.formatCurrency(props.total),
         goal: this.formatCurrency(props.goal)
       });
     }
 
+    return message;
+  },
+
+  renderText: function() {
     return (
       <div className="GoalProgress__text">
-        { message }
+        { this.getMessage() }
       </div>
     );
   },

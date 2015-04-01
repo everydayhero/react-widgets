@@ -37,9 +37,17 @@ module.exports = React.createClass({
   },
 
   loadEvents: function() {
-    campaign.findByCharity(this.props.charityUid, 1, 20, function(result) {
-      this.setEvents(result ? result.campaigns : []);
-    }.bind(this));
+    campaign.findByCharity(this.props.charityUid, 1, 20, this.onLoaded, {
+      status: 'active',
+      sortBy: 'start_at',
+      excludeBau: true,
+      excludePages: true,
+      excludeCharities: true
+    });
+  },
+
+  onLoaded: function(result) {
+    this.setEvents(result ? result.campaigns : []);
   },
 
   setEvents: function (events) {

@@ -13,32 +13,37 @@ var giveCampaignUids = {
 };
 
 module.exports = {
-  find: function(campaignUid, callback) {
-    return getJSONP(routes.get('campaign', { campaignUid: campaignUid }), callback);
+  find: function(campaignUid, callback, options) {
+    var params = _.merge({
+      campaignUid: campaignUid
+    }, options);
+
+    return getJSONP(routes.get('campaign', params), callback);
   },
 
-  findBySlug: function(country, campaignSlug, callback) {
-    return this.find(country + '/' + campaignSlug, callback);
+  findBySlug: function(country, campaignSlug, callback, options) {
+    return this.find(country + '/' + campaignSlug, callback, options);
   },
 
-  findByUids: function(campaignUids, callback) {
+  findByUids: function(campaignUids, callback, options) {
     if (_.isEmpty(campaignUids)) {
       _.defer(callback, { campaigns: [] });
       return;
     }
 
-    return getJSONP(routes.get('campaigns', { campaignUids: campaignUids }), callback);
+    var params = _.merge({
+      campaignUids: campaignUids
+    }, options);
+
+    return getJSONP(routes.get('campaigns', params), callback);
   },
 
-  findByCharity: function(charityUid, page, limit, callback) {
-    var params = {
+  findByCharity: function(charityUid, page, limit, callback, options) {
+    var params = _.merge({
       charityUid: charityUid,
-      sortBy: 'finish_at',
-      status: 'active',
-      excludeBau: true,
       page: page,
       limit: limit
-    };
+    }, options);
     return getJSONP(routes.get('campaigns', params), callback);
   },
 

@@ -49,7 +49,8 @@ module.exports = React.createClass({
   },
 
   setEvents: function (events) {
-    this.setState({ events: events, isLoading: false });
+    var sortedEvents = _.sortBy(events, function(e) { return new Date(e.display_start_at); });
+    this.setState({ events: sortedEvents, isLoading: false });
   },
 
   componentWillMount: function() {
@@ -73,7 +74,7 @@ module.exports = React.createClass({
     var width = this.getChildWidth(count);
     return _.map(_.take(this.state.events, Math.max(count, 2)), function(e) {
       var backgroundColor = e.background_color ? e.background_color : '#525252';
-      var date = new Date(e.display_finish_at);
+      var date = new Date(e.display_start_at);
       return <Event key={ e.id }
                     name={ e.name }
                     date={ date }

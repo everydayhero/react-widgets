@@ -12,19 +12,21 @@ module.exports = React.createClass({
   mixins: [PureRenderMixin, I18nMixin],
 
   propTypes: {
-    total: React.PropTypes.number.isRequired,
-    goal: React.PropTypes.number.isRequired,
-    format: React.PropTypes.string,
     currencySymbol: React.PropTypes.string,
-    i18n: React.PropTypes.object
+    format: React.PropTypes.string,
+    goal: React.PropTypes.number,
+    i18n: React.PropTypes.object,
+    total: React.PropTypes.number.isRequired
   },
 
   getDefaultProps: function() {
     return {
-      format: '0,0',
       currencySymbol: '$',
+      format: '0,0',
+      goal: 0,
       defaultI18n: {
-        text: '**{total}** raised of **{goal}** goal'
+        goal_text: '**{total}** raised of **{goal}** goal',
+        no_goal_text: '**{total}** raised'
       }
     };
   },
@@ -41,7 +43,7 @@ module.exports = React.createClass({
 
   getProgress: function() {
     var props = this.props;
-    return Math.min(props.total / props.goal, 1);
+    return props.goal > 0 ? Math.min(props.total / props.goal, 1) : 0;
   },
 
   renderProgressBar: function() {
@@ -49,7 +51,7 @@ module.exports = React.createClass({
     var offsetWidth = numeral(progress).format('0%');
     var style = { width: offsetWidth || '100%' };
 
-    return (
+    return progress > 0 && (
       <div className="GoalProgress__bar" >
         <div className="GoalProgress__barFill" style={ style }></div>
       </div>
@@ -72,15 +74,19 @@ module.exports = React.createClass({
     return props.currencySymbol + numeral(cents / 100).format(props.format);
   },
 
-  renderText: function() {
+  getMessage: function() {
     var props = this.props;
 
+    return this.tm(props.goal > 0 ? 'goal_text' : 'no_goal_text', {
+      total: this.formatCurrency(props.total),
+      goal: this.formatCurrency(props.goal)
+    });
+  },
+
+  renderText: function() {
     return (
       <div className="GoalProgress__text">
-        { this.tm('text', {
-          total: this.formatCurrency(props.total),
-          goal: this.formatCurrency(props.goal)
-        }) }
+        { this.getMessage() }
       </div>
     );
   },

@@ -46,6 +46,8 @@ function blur(image, radius) {
   var h = image.height;
 
   var canvas = document.createElement("canvas");
+  if (!canvas.getContext) return;
+
   canvas.width = w;
   canvas.height = h;
 

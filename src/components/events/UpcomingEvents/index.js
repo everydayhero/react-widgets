@@ -8,8 +8,6 @@ var Icon = require('../../helpers/Icon');
 var Event = require('../Event');
 var campaign = require('../../../api/campaigns');
 var charity = require('../../../api/charities');
-var addEventListener = require('../../../lib/addEventListener');
-var removeEventListener = require('../../../lib/removeEventListener');
 
 module.exports = React.createClass({
   displayName: 'UpcomingEvents',
@@ -37,13 +35,22 @@ module.exports = React.createClass({
   },
 
   loadEvents: function() {
-    campaign.findByCharity(this.props.charityUid, 1, 20, function(result) {
-      this.setEvents(result ? result.campaigns : []);
-    }.bind(this));
+    campaign.findByCharity(this.props.charityUid, 1, 20, this.onLoaded, {
+      status: 'active',
+      sortBy: 'start_at',
+      excludeBau: true,
+      excludePages: true,
+      excludeCharities: true
+    });
+  },
+
+  onLoaded: function(result) {
+    this.setEvents(result ? result.campaigns : []);
   },
 
   setEvents: function (events) {
-    this.setState({ events: events, isLoading: false });
+    var sortedEvents = _.sortBy(events, function(e) { return new Date(e.display_start_at); });
+    this.setState({ events: sortedEvents, isLoading: false });
   },
 
   componentWillMount: function() {
@@ -67,7 +74,7 @@ module.exports = React.createClass({
     var width = this.getChildWidth(count);
     return _.map(_.take(this.state.events, Math.max(count, 2)), function(e) {
       var backgroundColor = e.background_color ? e.background_color : '#525252';
-      var date = new Date(e.display_finish_at);
+      var date = new Date(e.display_start_at);
       return <Event key={ e.id }
                     name={ e.name }
                     date={ date }

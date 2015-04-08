@@ -6,6 +6,7 @@ describe('GoalProgress', function() {
   var GoalProgress = require('../');
   var TestUtils    = React.addons.TestUtils;
   var findByClass  = TestUtils.findRenderedDOMComponentWithClass;
+  var scryByClass  = TestUtils.scryRenderedDOMComponentsWithClass;
 
   var props = { total: 15000, goal: 30000 };
   var element;
@@ -26,6 +27,11 @@ describe('GoalProgress', function() {
 
   it('renders a progress bar', function() {
     findByClass(element, 'GoalProgress__bar');
+  });
+
+  it('does not render a progress bar when no goal', function() {
+    element = TestUtils.renderIntoDocument(<GoalProgress total={ 15000 } />);
+    expect(scryByClass(element, 'GoalProgress__bar').length).toBe(0);
   });
 
   it('renders a trophy icon', function() {

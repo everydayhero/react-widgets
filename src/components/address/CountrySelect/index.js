@@ -41,15 +41,15 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    if (nextProps.open) addEventListener(window, 'keydown', this.keyHandler);
+    if (nextProps.open) addEventListener('keydown', this.keyHandler);
     if (!nextProps.open) {
       this.setFauxFocus(0);
-      removeEventListener(window, 'keydown', this.keyHandler);
+      removeEventListener('keydown', this.keyHandler);
     }
   },
 
   componentWillUnmount: function() {
-    removeEventListener(window, 'keydown', this.keyHandler);
+    removeEventListener('keydown', this.keyHandler);
   },
 
   keyHandler: function(e) {

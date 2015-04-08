@@ -10,7 +10,7 @@ module.exports = React.createClass({
 
   propTypes: {
     campaignUid: React.PropTypes.string,
-    charityUid: React.PropTypes.string
+    charityUid: React.PropTypes.string,
   },
 
   getInitialState: function() {
@@ -39,18 +39,20 @@ module.exports = React.createClass({
     this.setState({
       isLoading: false,
       total: funds_raised.cents || 0,
-      goal: data.goal || 20000000,
+      goal: data.goal,
       currencySymbol: funds_raised.currency.symbol
     });
   },
 
   render: function() {
+    var props = this.props;
+
     if (this.state.isLoading) { return false; }
 
     return (
       <GoalProgress
         total={ this.state.total }
-        goal={ this.state.goal }
+        goal={ this.props.goal || this.state.goal }
         currencySymbol={ this.state.currencySymbol } />
     );
   }

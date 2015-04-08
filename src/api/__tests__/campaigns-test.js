@@ -23,6 +23,17 @@ describe('campaigns', function() {
         'https://everydayhero.com/api/v2/campaigns/xy-12.jsonp', callback);
       expect(callback).toBeCalledWith(results);
     });
+
+    it('accepts options', function() {
+      var callback = jest.genMockFunction();
+      campaigns.find('xy-12', callback, {
+        excludeCharities: true,
+        excludePages: true
+      });
+
+      expect(getJSONP.mock.calls[0][0]).toContain('exclude_charities=true');
+      expect(getJSONP.mock.calls[0][0]).toContain('exclude_pages=true');
+    });
   });
 
   describe('findBySlug', function() {
@@ -34,6 +45,17 @@ describe('campaigns', function() {
         'https://everydayhero.com/api/v2/campaigns/xy/slugathon-2015.jsonp', callback);
       expect(callback).toBeCalledWith(results);
     });
+
+    it('accepts options', function() {
+      var callback = jest.genMockFunction();
+      campaigns.findBySlug('xy', 'slugathon-2015', callback, {
+        excludeCharities: true,
+        excludePages: true
+      });
+
+      expect(getJSONP.mock.calls[0][0]).toContain('exclude_charities=true');
+      expect(getJSONP.mock.calls[0][0]).toContain('exclude_pages=true');
+    });
   });
 
   describe('findByUids', function() {
@@ -44,6 +66,23 @@ describe('campaigns', function() {
       expect(getJSONP).lastCalledWith(
         'https://everydayhero.com/api/v2/campaigns.jsonp?ids=xy-123,xy-456', callback);
       expect(callback).toBeCalledWith(results);
+    });
+
+    it('accepts options', function() {
+      var callback = jest.genMockFunction();
+      campaigns.findByUids(['xy-123', 'xy-456'], callback, {
+        status: 'active',
+        sortBy: 'finish_at',
+        excludeCharities: true,
+        excludePages: true,
+        excludeBau: true
+      });
+
+      expect(getJSONP.mock.calls[0][0]).toContain('status=active');
+      expect(getJSONP.mock.calls[0][0]).toContain('sort_by=finish_at');
+      expect(getJSONP.mock.calls[0][0]).toContain('exclude_charities=true');
+      expect(getJSONP.mock.calls[0][0]).toContain('exclude_pages=true');
+      expect(getJSONP.mock.calls[0][0]).toContain('exclude_bau=true');
     });
 
     describe('with empty array', function() {
@@ -65,6 +104,33 @@ describe('campaigns', function() {
 
         expect(callback).toBeCalledWith({ campaigns: [] });
       });
+    });
+  });
+
+  describe('findByCharity', function() {
+    it('gets campaigns that include the given charity uid', function() {
+      var callback = jest.genMockFunction();
+      campaigns.findByCharity('xy-123', 1, 10, callback);
+      expect(getJSONP).lastCalledWith(
+        'https://everydayhero.com/api/v2/campaigns.jsonp?charity_id=xy-123&page=1&limit=10', callback);
+      expect(callback).toBeCalledWith(results);
+    });
+
+    it('accepts options', function() {
+      var callback = jest.genMockFunction();
+      campaigns.findByCharity('xy-123', 1, 10, callback, {
+        status: 'active',
+        sortBy: 'finish_at',
+        excludeCharities: true,
+        excludePages: true,
+        excludeBau: true
+      });
+
+      expect(getJSONP.mock.calls[0][0]).toContain('status=active');
+      expect(getJSONP.mock.calls[0][0]).toContain('sort_by=finish_at');
+      expect(getJSONP.mock.calls[0][0]).toContain('exclude_charities=true');
+      expect(getJSONP.mock.calls[0][0]).toContain('exclude_pages=true');
+      expect(getJSONP.mock.calls[0][0]).toContain('exclude_bau=true');
     });
   });
 

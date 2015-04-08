@@ -24,6 +24,11 @@
   margin-top: -8px;
 }
 
+.AddressLookup__list-google {
+  padding-bottom: 18px;
+  background: #fff image-url( "widgets-powered-by-google" + $ehw-version + ".png" ) no-repeat left bottom;
+}
+
 .AddressLookup__error {
   border-radius: 0 0 $ehw-border-radius $ehw-border-radius;
   padding: 5px 8px;

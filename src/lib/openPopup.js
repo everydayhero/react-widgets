@@ -9,6 +9,8 @@ function toString(obj) {
 }
 
 function openPopup(url, config) {
+  config = _.defaults(config || {}, { width: 640, height: 320 });
+
   var windowTop  = window.screenTop ? window.screenTop : window.screenY;
   var windowLeft = window.screenLeft ? window.screenLeft : window.screenX;
 

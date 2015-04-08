@@ -63,12 +63,12 @@ module.exports = React.createClass({
 
   open: function() {
     this.setState({ open: true });
-    document.addEventListener('click', this.close);
+    addEventListener('click', this.close);
   },
 
   close: function() {
     this.setState({ open: false });
-    document.removeEventListener('click', this.close);
+    removeEventListener('click', this.close);
   },
 
   filterServices: function() {

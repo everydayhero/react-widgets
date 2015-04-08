@@ -75,8 +75,8 @@ $share-box-width: 320px;
     position: relative;
     display: inline-block;
 
-    > &:before,
-    > &:after {
+    &:before,
+    &:after {
       content: "";
       position: absolute;
       top: 50%;
@@ -85,12 +85,12 @@ $share-box-width: 320px;
       background: $ehw-grey-light;
     }
 
-    > &:before {
+    &:before {
       right: 100%;
       margin-right: $x-4;
     }
 
-    > &:after {
+    &:after {
       left: 100%;
       margin-left: $x-4;
     }

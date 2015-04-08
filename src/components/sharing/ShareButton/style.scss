@@ -1,0 +1,35 @@
+.ShareButton {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+.ShareButton__btn {
+  color: #fff;
+  padding: $x-2 $x-4;
+  background: #000;
+  font-weight: bold;
+  border-radius: $ehw-border-radius;
+  display: inline-block;
+  cursor: pointer;
+  transition: all .25s ease-out;
+
+  &:hover {
+    background: $ehw-grey-dark;
+  }
+}
+
+.ShareButton__icon {
+  padding-right: $x-2;
+}
+
+.ShareButton__transition-leave {
+  opacity: 1;
+  transform: scale(1) translateY(0px);
+  transition: all .3s cubic-bezier(0.5, -0.5, 0.25, 1.5);
+}
+
+.ShareButton__transition-leave.ShareButton__transition-leave-active {
+  opacity: 0;
+  transform: scale(0.1) translateY(-100px);
+}

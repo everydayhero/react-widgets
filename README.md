@@ -225,7 +225,6 @@ Displays the total number of charities associated with specified campaigns. Eith
 
 - `campaignUid`: *optional* string campaign uid to filter results by campaign.
 - `campaignUids`: *optional* array of campaign uids to filter results by multiple campaigns.
-- `renderIcon`: *optional* boolean. Set to `true` by default.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
 - `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
@@ -922,6 +921,7 @@ Displays an input field which can accept input masking, asynchronous validation,
 - `readOnly`: *optional* boolean to prevent users from altering the input by typing. Best used with a modal attached. Default is 'false'.
 - `disabled`: *optional* boolean to prevent users from changing the input, and displays as disabled. Default is 'false'.
 - `autoFocus`: *optional* boolean to determine if the input should gain focus as soon as it is loaded. Should only be true for one input on the page. Default is 'false'.
+- `autoSelect`: *optional* boolean to determine if the input should gain focus and also have the value highlighted upon loading. Should only be true for one input on the page. Default is 'false'.
 - `autoComplete`: *optional* boolean to determine if the input should use the browser's autocomplete functionality. Default is 'false'.
 - `required`: *optional* boolean to trigger optional validation methods and ensure the input isn't left blank. Default is 'false'.
 - `mask`: *optional* function to modify user input as it is entered. Default is 'null'. Is passed the current input string. Example:
@@ -1069,6 +1069,44 @@ Displays a call to action box with links to the *getting started* and *sign in* 
     <div id="CallToActionBoxExample">Loading...</div>
     <script>
       edh.widgets.renderWidget('CallToActionBoxExample', 'CallToActionBox', { campaignUid: 'us-0', registrationUrl: 'https://your-registration-url.com/' });
+    </script>
+  </body>
+</html>
+```
+
+#### Share Button
+
+A share button that opens a pop-over when clicked and allows for sharing a URL. Includes the options for sharing a direct link or sharing via popular social networks.
+
+
+- `buttons`: *optional* array. Determines which social network/sharing service buttons to show. Choices include `'facebook'`, `'twitter'`, `'googleplus'` and `'pinterest'`. Default is set to display all buttons.
+- `shareUrl`: *optional* string. Sets the URL to share. Default is set to the current page URL.
+- `shareTitle`: *optional* string. Sets the title to share for some services. Default is set to the value stored in the current page `<title>` tag.
+- `shareImage`: *optional* string. Sets the image to share on Pinterest. Is not set by default.
+- `renderIcon`: *optional* boolean. Set to `true` by default.
+- `i18n`: *optional* object containing localised text. Default i18n is:
+
+  ```js
+    {
+      buttonLabel: 'Share this page',
+      shareLinkLabel: 'Share a direct link',
+      shareViaLabel: 'Share via'
+    }
+  ```
+
+##### Example
+
+```html
+<html>
+  <head>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="ShareButtonExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('ShareButtonExample', 'ShareButton');
     </script>
   </body>
 </html>

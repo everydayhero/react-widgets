@@ -88,8 +88,13 @@
     #TeamsExample,
     #MapExample,
     #CharitiesExample,
-    #UpcomingEventsExample {
+    #UpcomingEventsExample,
+    #ShareButtonExample {
       margin-top: 15px;
+    }
+
+    #ShareButtonExample {
+      text-align: center;
     }
 
     #MapExample {
@@ -169,6 +174,7 @@
     </div>
     <div class="calls-to-action pull-left">
       <div id="CallToActionBoxExample">Loading...</div>
+      <div id="ShareButtonExample"></div>
     </div>
   </div>
 
@@ -284,8 +290,11 @@
     edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('AddressLookupExample', 'AddressLookup', { country: 'GB' });
     edh.widgets.renderWidget('AmountExample', 'Amount');
+
     edh.widgets.renderWidget('InputExample', 'Input', { i18n: { name: 'input_example', label: 'Input Example', hint: 'What is this input for?', error: 'This input is required'}, required: true });
     edh.widgets.renderWidget('CallToActionBoxExample', 'CallToActionBox', { campaignUid: 'us-22', registrationUrl: 'https://your-registration-url.com/' });
+
+    edh.widgets.renderWidget('ShareButtonExample', 'ShareButton');
   </script>
 </body>
 </html>

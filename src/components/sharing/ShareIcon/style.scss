@@ -1,0 +1,97 @@
+$ShareIcon-twitter: #00a0d1;
+$ShareIcon-facebook: #3B5998;
+$ShareIcon-googleplus: #DB4A39;
+$ShareIcon-pinterest: #C8232C;
+$ShareIcon-speed: 0.25s;
+
+@keyframes ShareIconAnim {
+  from {
+    opacity: 0;
+    transform: translateY(-$x-3);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.ShareIcon {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+  cursor: pointer;
+  animation: ShareIconAnim $ShareIcon-speed cubic-bezier(0.25, 0, 0.25, 1.8) forwards;
+
+  .Icon {
+    display: inline-block;
+    border: 2px solid $ehw-grey-light;
+    border-radius: 50%;
+    padding: $x-4;
+    width: $x-4;
+    text-align: center;
+    position: relative;
+    transition: all $ShareIcon-speed ease-out;
+
+    &:after {
+      content: "";
+      box-sizing: content-box;
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      padding: 3px;
+      transform: scale(.75);
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      pointer-events: none;
+      transition: transform $ShareIcon-speed, opacity $ShareIcon-speed;
+    }
+
+    &:hover:after {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+.ShareIcon__twitter:hover .Icon {
+  color: #fff;
+  background-color: $ShareIcon-twitter;
+  border-color: $ShareIcon-twitter;
+
+  &:after {
+    box-shadow: 0 0 0 2px $ShareIcon-twitter;
+  }
+}
+
+.ShareIcon__facebook:hover .Icon {
+  color: #fff;
+  background-color: $ShareIcon-facebook;
+  border-color: $ShareIcon-facebook;
+
+  &:after {
+    box-shadow: 0 0 0 2px $ShareIcon-facebook;
+  }
+}
+
+.ShareIcon__googleplus:hover .Icon {
+  color: #fff;
+  background-color: $ShareIcon-googleplus;
+  border-color: $ShareIcon-googleplus;
+
+  &:after {
+    box-shadow: 0 0 0 2px $ShareIcon-googleplus;
+  }
+}
+
+.ShareIcon__pinterest:hover .Icon {
+  color: #fff;
+  background-color: $ShareIcon-pinterest;
+  border-color: $ShareIcon-pinterest;
+
+  &:after {
+    box-shadow: 0 0 0 2px $ShareIcon-pinterest;
+  }
+}

@@ -5,6 +5,11 @@ var Icon  = require('../../helpers/Icon');
 
 module.exports = React.createClass({
   displayName: "ShareIcon",
+  propTypes: {
+    open: React.PropTypes.func.isRequired,
+    name: React.PropTypes.oneOf(['facebook', 'twitter', 'googleplus', 'pinterest']),
+    icon: React.PropTypes.string
+  },
 
   handleClick: function() {
     this.props.open();

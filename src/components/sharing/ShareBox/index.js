@@ -4,21 +4,9 @@ var _         = require('lodash');
 var React     = require('react');
 var Input     = require('../../forms/Input');
 var ShareIcon = require('../ShareIcon');
-var openPopup = require('../../../lib/openPopup');
 
 module.exports = React.createClass({
   displayName: "ShareBox",
-
-  handleClick: function(url) {
-    var popUpConfig = {
-      toolbar: 0,
-      status: 0,
-      width: 640,
-      height: 320
-    };
-
-    openPopup(url, popUpConfig);
-  },
 
   renderShareIcons: function() {
     return this.props.services.map(function(service) {
@@ -27,7 +15,7 @@ module.exports = React.createClass({
           key={ service.name }
           name={ service.name }
           icon={ service.icon || service.name }
-          open={ this.handleClick.bind(null, service.url) } />
+          url={ service.url } />
       );
     }, this);
   },

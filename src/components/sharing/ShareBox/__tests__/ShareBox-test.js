@@ -6,7 +6,6 @@ describe('Share Box', function() {
   var React                  = require('react/addons');
   var ShareBox               = require('../');
   var ShareIcon              = require('../../ShareIcon/');
-  var openPopup              = require('../../../../lib/openPopup');
   var TestUtils              = React.addons.TestUtils;
   var findByClass            = TestUtils.findRenderedDOMComponentWithClass;
   var scryRenderedComponents = TestUtils.scryRenderedComponentsWithType;

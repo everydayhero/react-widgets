@@ -1,18 +1,26 @@
 "use strict";
 
-var React = require('react');
-var Icon  = require('../../helpers/Icon');
+var React     = require('react');
+var Icon      = require('../../helpers/Icon');
+var openPopup = require('../../../lib/openPopup');
 
 module.exports = React.createClass({
   displayName: "ShareIcon",
   propTypes: {
-    open: React.PropTypes.func.isRequired,
-    name: React.PropTypes.oneOf(['facebook', 'twitter', 'googleplus', 'pinterest']),
-    icon: React.PropTypes.string
+    name: React.PropTypes.oneOf(['facebook', 'twitter', 'googleplus', 'pinterest']).isRequired,
+    icon: React.PropTypes.string.isRequired,
+    url: React.PropTypes.string.isRequired
   },
 
   handleClick: function() {
-    this.props.open();
+    var popUpConfig = {
+      toolbar: 0,
+      status: 0,
+      width: 640,
+      height: 320
+    };
+
+    openPopup(this.props.url, popUpConfig);
   },
 
   render: function() {

@@ -1,36 +1,23 @@
 "use strict";
 
-var _           = require('lodash');
-var React       = require('react');
-var I18nMixin   = require('../../mixins/I18n');
-var Input       = require('../../forms/Input');
-var ShareIcon   = require('../ShareIcon');
+var _         = require('lodash');
+var React     = require('react');
+var Input     = require('../../forms/Input');
+var ShareIcon = require('../ShareIcon');
+var openPopup = require('../../../lib/openPopup');
 
 module.exports = React.createClass({
   displayName: "ShareBox",
 
-  toString: function(obj) {
-    return _.map(obj, function(value, key) {
-      return encodeURIComponent(key) + '=' + encodeURIComponent(value);
-    }).join(',');
-  },
-
-  openDialog: function(url) {
-    var config = {
+  handleClick: function(url) {
+    var popUpConfig = {
       toolbar: 0,
       status: 0,
       width: 640,
       height: 320
     };
 
-    var windowTop  = window.screenTop ? window.screenTop : window.screenY;
-    var windowLeft = window.screenLeft ? window.screenLeft : window.screenX;
-
-    config.top  = windowTop + (window.innerHeight / 2) - (config.height / 2);
-    config.left = windowLeft + (window.innerWidth / 2) - (config.width / 2);
-    config      = this.toString(config);
-
-    var windowRef = window.open(url, 'shareWindow', config);
+    openPopup(url, popUpConfig);
   },
 
   renderShareIcons: function() {
@@ -40,7 +27,7 @@ module.exports = React.createClass({
           key={ service.name }
           name={ service.name }
           icon={ service.icon || service.name }
-          open={ this.openDialog.bind(null, service.url) } />
+          open={ this.handleClick.bind(null, service.url) } />
       );
     }, this);
   },
@@ -77,7 +64,7 @@ module.exports = React.createClass({
           i18n={{ label: shareLinkLabel }}
           spacing="compact" />
 
-          { this.renderServiceButtons() }
+        { this.renderServiceButtons() }
       </div>
     );
   }

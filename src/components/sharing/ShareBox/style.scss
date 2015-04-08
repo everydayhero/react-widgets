@@ -1,18 +1,19 @@
-$shareBoxWidth: 320px;
+$share-box-width: 320px;
 
 .ShareBox {
   box-sizing: border-box;
-  width: $shareBoxWidth;
+  width: $share-box-width;
   position: absolute;
   top: 100%;
   left: 50%;
-  margin-left: -($shareBoxWidth/2);
+  margin-left: -($share-box-width/2);
   margin-top: $x-2 + 1;
+  padding: $x-4;
   background: #fff;
   border-radius: $ehw-border-radius;
-  padding: $x-4;
   border: 1px solid $ehw-grey-light;
   box-shadow: 0 2px 3px rgba(0,0,0,0.25);
+  text-align: center;
 
   &:before,
   &:after {
@@ -73,25 +74,25 @@ $shareBoxWidth: 320px;
   > span {
     position: relative;
     display: inline-block;
-  }
 
-  > span:before,
-  > span:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 99999px;
-    height: 1px;
-    background: $ehw-grey-light;
-  }
+    > &:before,
+    > &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 99999px;
+      height: 1px;
+      background: $ehw-grey-light;
+    }
 
-  > span:before {
-    right: 100%;
-    margin-right: $x-4;
-  }
+    > &:before {
+      right: 100%;
+      margin-right: $x-4;
+    }
 
-  > span:after {
-    left: 100%;
-    margin-left: $x-4;
+    > &:after {
+      left: 100%;
+      margin-left: $x-4;
+    }
   }
 }

@@ -7,6 +7,8 @@ var Icon                    = require('../../helpers/Icon');
 var ShareBox                = require('../ShareBox');
 var format                  = require('../../../lib/format');
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+var addEventListener        = require('../../../lib/addEventListener');
+var removeEventListener     = require('../../../lib/removeEventListener');
 
 var serviceConfigs = [
   {
@@ -29,8 +31,8 @@ var serviceConfigs = [
 ];
 
 module.exports = React.createClass({
-  mixins: [I18nMixin],
   displayName: "ShareButton",
+  mixins: [I18nMixin],
   propTypes: {
     buttons: React.PropTypes.array,
     shareUrl: React.PropTypes.string,
@@ -42,12 +44,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      buttons: [
-        'facebook',
-        'twitter',
-        'googleplus',
-        'pinterest'
-      ],
+      buttons: _.pluck(serviceConfigs, 'name'),
       shareUrl: window.location.href,
       shareTitle: document.title,
       shareImage: '',
@@ -61,32 +58,38 @@ module.exports = React.createClass({
   },
 
   getInitialState: function() {
-    return {
-      active: false
-    };
+    return { open: false };
   },
 
-  toggleActive: function() {
-    this.setState({ active: !this.state.active });
+  open: function() {
+    this.setState({ open: true });
+    document.addEventListener('click', this.close);
+  },
+
+  close: function() {
+    this.setState({ open: false });
+    document.removeEventListener('click', this.close);
   },
 
   filterServices: function() {
-    var filteredServices = [];
-
-    _.forEach(this.props.buttons, function(name) {
-      filteredServices.push(_.findWhere(serviceConfigs, { 'name': name }));
+    return _.map(this.props.buttons, function(name) {
+      return _.findWhere(serviceConfigs, { 'name': name });
     });
-
-    return filteredServices;
   },
 
   formatServiceUrls: function(services) {
-    return _.forEach(services, function(service) {
-      service.url = format(service.url, {
-        "url": this.props.shareUrl,
-        "title": this.props.shareTitle,
-        "img": this.props.shareImage
-      }, true);
+    var urlParams = {
+      "url": this.props.shareUrl,
+      "title": this.props.shareTitle,
+      "img": this.props.shareImage
+    };
+
+    return _.map(services, function(service) {
+      return {
+        name: service.name,
+        icon: service.icon,
+        url: format(service.url, urlParams, true)
+      };
     }, this);
   },
 
@@ -97,12 +100,12 @@ module.exports = React.createClass({
   },
 
   renderShareBox: function() {
-    if (this.state.active) {
+    if (this.state.open) {
       var props    = this.props;
       var image    = props.shareImage;
       var services = this.filterServices();
 
-      this.formatServiceUrls(services);
+      services = this.formatServiceUrls(services);
 
       return (
         <ShareBox
@@ -121,7 +124,7 @@ module.exports = React.createClass({
 
     return (
       <div className="ShareButton">
-        <div className="ShareButton__btn" onClick={ this.toggleActive }>
+        <div className="ShareButton__btn" onClick={ this.open }>
           { this.renderIcon() }
           <span className="ShareButton__label">{ buttonLabel }</span>
         </div>

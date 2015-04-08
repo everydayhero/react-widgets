@@ -35,8 +35,8 @@ describe('Share Button', function() {
       expect(label.textContent).toBe('Share this page');
     });
 
-    it('displays a ShareBox when active', function() {
-      component.setState({ active: true });
+    it('displays a ShareBox when state is open', function() {
+      component.setState({ open: true });
 
       var result   = component.renderShareBox();
       var shareBox = findRenderedComponent(component, ShareBox);
@@ -45,16 +45,16 @@ describe('Share Button', function() {
       expect(shareBox).toBeDefined();
     });
 
-    it('can toggle to be active', function() {
-      var result = component.toggleActive();
-      expect(component.state.active).toBe(true);
+    it('can toggle state to be open', function() {
+      var result = component.open();
+      expect(component.state.open).toBe(true);
     });
 
-    it('can toggle to be inactive', function() {
-      component.setState({ active: true });
+    it('can toggle state to be close', function() {
+      component.setState({ open: true });
 
-      var result = component.toggleActive();
-      expect(component.state.active).toBe(false);
+      var result = component.close();
+      expect(component.state.open).toBe(false);
     });
   });
 

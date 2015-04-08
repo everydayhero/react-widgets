@@ -31,7 +31,7 @@ describe('Share Icon component', function() {
     expect(element.className).toContain(props.name);
   });
 
-  it('calls an on click with an index', function() {
+  it('calls an on click function', function() {
     TestUtils.Simulate.click(component.getDOMNode());
     expect(props.open).toBeCalled();
   });

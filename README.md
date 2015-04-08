@@ -1084,7 +1084,7 @@ A share button that opens a pop-over when clicked and allows for sharing a URL. 
 - `shareTitle`: *optional* string. Sets the title to share for some services. Default is set to the value stored in the current page `<title>` tag.
 - `shareImage`: *optional* string. Sets the image to share on Pinterest. Is not set by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
-- i18n: *optional* object containing localised text. Default i18n is:
+- `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
     {

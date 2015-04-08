@@ -40,6 +40,12 @@
   text-transform: none;
   letter-spacing: 0.05em;
   line-height: 27px;
+  min-height: 27px;
+
+  &::-ms-clear {
+    width : 0;
+    height: 0;
+  }
 }
 
 .Input__message {

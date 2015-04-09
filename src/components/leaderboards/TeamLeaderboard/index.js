@@ -115,7 +115,7 @@ module.exports = React.createClass({
     }, this);
   },
 
-  render: function() {
+  renderLeaderboard: function() {
     var heading     = this.t('heading');
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
@@ -133,5 +133,15 @@ module.exports = React.createClass({
         { this.renderPaging() }
       </div>
     );
+  },
+
+  render: function() {
+    var state = this.state;
+
+    if (state.isLoading || state.boardData.length > 0) {
+      return (this.renderLeaderboard());
+    } else {
+      return null;
+    }
   }
 });

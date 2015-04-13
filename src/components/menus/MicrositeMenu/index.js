@@ -48,6 +48,18 @@ module.exports = React.createClass({
     });
   },
 
+  shouldRenderDynamicItems: function() {
+    var dynamicItems  = this.state.dynamicItems;
+    var shouldDisplay = false;
+
+    if (dynamicItems.length > 0) {
+      shouldDisplay = _.any(dynamicItems, function(item) {
+        return item.hasContent;
+      });
+    }
+    return shouldDisplay;
+  },
+
   renderStaticItems: function() {
     return (
       <div className="MicrositeMenu__static">
@@ -58,12 +70,10 @@ module.exports = React.createClass({
   },
 
   renderDynamicItems: function() {
-    var dynamicItems = this.state.dynamicItems;
-    var hasContent = _.any(dynamicItems, function(item) {
-      return item.hasContent;
-    });
+    var dynamicItems  = this.state.dynamicItems;
+    var shouldDisplay = this.shouldRenderDynamicItems();
 
-    if (dynamicItems.length > 0 && hasContent) {
+    if (shouldDisplay) {
       return (
         <div className="MicrositeMenu__dynamic">
           <a className="MicrositeMenu__link" href="#Leaderboard">{ this.t('leaderboard') }</a>
@@ -74,22 +84,11 @@ module.exports = React.createClass({
     }
   },
 
-  renderMenuItems: function() {
-    return (
-      <div className="MicrositeMenu">
-        { this.renderStaticItems() }
-        { this.renderDynamicItems() }
-      </div>
-    );
-  },
-
   render: function() {
-    var props = this.props;
-    var state = this.state;
-
     return (
       <div className='MicrositeMenu'>
-        { this.renderMenuItems() }
+        { this.renderStaticItems() }
+        { this.renderDynamicItems() }
       </div>
     );
   }

@@ -40,10 +40,11 @@ module.exports = {
   },
 
   processLeaderboard: function(result) {
+    var props = this.props;
     var pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : [];
     var leaderboard = _.map(pages, this.processPage);
-    var id = this.props.id;
-    var eventType = this.props.eventType;
+    var id = props.id;
+    var eventType = props.eventType;
     var eventId = id + '/' + eventType;
 
     if (leaderboard.length > 0) {

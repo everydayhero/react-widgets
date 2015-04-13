@@ -8,6 +8,7 @@ describe('MicrositeMenu', function() {
   var Emitter           = require('../../../../lib/EventEmitter');
   var TestUtils         = React.addons.TestUtils;
   var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
+  var scryByClass       = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component defaults', function() {
     var menu;
@@ -36,7 +37,12 @@ describe('MicrositeMenu', function() {
       element = TestUtils.renderIntoDocument(menu);
     });
 
-    it('renders dynamic items', function() {
+    it('should not render leaderboard menu when no dynamic content', function() {
+      Emitter.emit('Leaderboard/hasContent', {id: 'board', hasContent: false});
+      expect(scryByClass(element, 'MicrositeMenu__dynamic').length).toBe(1);
+    });
+
+    it('renders leaderboard menu when has dynamic contents', function() {
       Emitter.emit('Leaderboard/hasContent', {id: 'board', hasContent: true});
       findByClass(element, 'MicrositeMenu__dynamic');
     });

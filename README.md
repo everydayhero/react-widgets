@@ -595,6 +595,8 @@ Displays an individuals leaderboard sorted by funds raised (highest first) for a
 
 ##### Options
 
+- `id`: *required* string id to identify the component.
+- `eventType`: *optional* string event type to compose the event name with id.
 - `campaignUid`: *optional* string campaign uid to filter results by campaign.
 - `campaignSlug`: *optional* string campaign slug to filter results by campaign. Requires `country`.
 - `charityUid`: *optional* string charity uid to filter results by charity.
@@ -629,7 +631,7 @@ Displays an individuals leaderboard sorted by funds raised (highest first) for a
   <body>
     <div id="LeaderboardExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-0' });
+      edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { id: 'IndividualLeaderboard', eventType: 'hasContent', campaignUid: 'us-0' });
     </script>
   </body>
 </html>
@@ -641,6 +643,8 @@ Displays a team leaderboard sorted by funds raised (highest first) for a campaig
 
 ##### Options
 
+- `id`: *required* string id to identify the component.
+- `eventType`: *optional* string event type to compose the event name with id.
 - `campaignUid`: *optional* string campaign uid to filter results by campaign.
 - `campaignSlug`: *optional* string campaign slug to filter results by campaign. Requires `country`.
 - `charityUid`: *optional* string charity uid to filter results by charity.
@@ -678,7 +682,7 @@ Displays a team leaderboard sorted by funds raised (highest first) for a campaig
   <body>
     <div id="TeamLeaderboardExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('TeamLeaderboardExample', 'TeamLeaderboard', { campaignUid: 'us-0' });
+      edh.widgets.renderWidget('TeamLeaderboardExample', 'TeamLeaderboard', { id: 'TeamLeaderboard', eventType: 'hasContent', campaignUid: 'us-0' });
     </script>
   </body>
 </html>
@@ -1162,6 +1166,45 @@ Displays the countdown to the end of an event / campaign.
     <div id="CountDownExample">Loading...</div>
     <script>
       edh.widgets.renderWidget('CountDownExample', 'CountDown', { days: 34, registerUrl: 'https://pmhincelebration.edheroy.com/au/get-started' });
+    </script>
+  </body>
+</html>
+```
+
+### Menus
+
+#### MicrositeMenu
+
+Displays a microsite menu.
+
+##### Options
+
+- `eventIds`: *optional* string eventIds to determine the events to listen for.
+- `i18n`: *optional* object containing localised text. Default i18n is:
+
+  ```js
+  {
+    howItWorks: 'how it works',
+    about: 'about',
+    leaderboard: 'leaderboard'
+  }
+  ```
+
+##### Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="MicrositeMenuExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('MicrositeMenuExample', 'MicrositeMenu', { eventIds: ['IndividualLeaderboard/hasContent', 'TeamLeaderboard/hasContent'] });
     </script>
   </body>
 </html>

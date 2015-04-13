@@ -54,13 +54,8 @@ module.exports = React.createClass({
       isLoading: false,
       boardData: [],
       currentPage: 1,
-      childWidth: this.props.childWidth,
-      contents: []
+      childWidth: this.props.childWidth
     };
-  },
-
-  onTeamHasData: function(obj) {
-    this.state.contents.push(obj);
   },
 
   componentWillMount: function() {

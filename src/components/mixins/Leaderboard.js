@@ -41,8 +41,11 @@ module.exports = {
   processLeaderboard: function(result) {
     var pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : [];
     var leaderboard = _.map(pages, this.processPage);
+    var onHasContent = this.props.onHasContent;
 
     this.rankLeaderboard(leaderboard);
+
+    onHasContent && onHasContent();
 
     this.setState({
       isLoading: false,

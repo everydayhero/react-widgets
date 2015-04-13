@@ -27,7 +27,8 @@ module.exports = React.createClass({
     textColor: React.PropTypes.string,
     childWidth: React.PropTypes.number,
     currencyFormat: React.PropTypes.string,
-    i18n: React.PropTypes.object
+    i18n: React.PropTypes.object,
+    onHasContent: React.PropTypes.func
   },
 
   getDefaultProps: function() {

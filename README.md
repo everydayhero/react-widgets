@@ -606,6 +606,7 @@ Displays an individuals leaderboard sorted by funds raised (highest first) for a
 - `textColor`: *optional* string. Accepts a hex value. Not set by default.
 - `childWidth`: *optional* number. Set to `250` by default. Sets the minimum width for leaderboard items to display.
 - `currencyFormat`: *optional* string. Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
+- `onHasContent`: *optional* function.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -653,6 +654,7 @@ Displays a team leaderboard sorted by funds raised (highest first) for a campaig
 - `childWidth`: *optional* number. Set to `250` by default. Sets the minimum width for leaderboard items to display.
 - `altTemplate`: *optional* boolean. Set to `false` by default. Renders an alternate template set when set to `true`.
 - `currencyFormat`: *optional* string. Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
+- `onHasContent`: *optional* function.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js

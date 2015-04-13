@@ -8,7 +8,7 @@ var numeral           = require('numeral');
 var campaigns         = require('../../api/campaigns');
 var charities         = require('../../api/charities');
 var LeaderboardPaging = require('../leaderboards/LeaderboardPaging');
-var Emitter           = require('../../lib/EventEmitter');
+var Emitter           = require('../../lib/eventEmitter');
 
 module.exports = {
   getEndpoint: function() {

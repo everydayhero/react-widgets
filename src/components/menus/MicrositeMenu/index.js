@@ -3,7 +3,7 @@
 var React           = require('react/addons');
 var _               = require('lodash');
 var I18nMixin       = require('../../mixins/I18n');
-var Emitter         = require('../../../lib/EventEmitter');
+var Emitter         = require('../../../lib/eventEmitter');
 
 module.exports = React.createClass({
   displayName: "MicrositeMenu",

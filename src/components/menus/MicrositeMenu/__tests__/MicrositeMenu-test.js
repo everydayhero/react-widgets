@@ -5,7 +5,7 @@ describe('MicrositeMenu', function() {
   var _                 = require('lodash');
   var React             = require('react/addons');
   var MicrositeMenu     = require('../');
-  var Emitter           = require('../../../../lib/EventEmitter');
+  var Emitter           = require('../../../../lib/eventEmitter');
   var TestUtils         = React.addons.TestUtils;
   var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
   var scryByClass       = TestUtils.scryRenderedDOMComponentsWithClass;

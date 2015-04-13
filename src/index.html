@@ -183,8 +183,13 @@
     <div id="UpcomingEventsExample">Loading...</div>
   </div>
 
-  <div id="LeaderboardExample">Loading...</div>
-  <div id="TeamLeaderboardExample">Loading...</div>
+  <div class="panel">
+    <div id="MicrositeMenuExample" />
+  </div>
+  <div id="Leaderboard">
+    <div id="LeaderboardExample">Loading...</div>
+    <div id="TeamLeaderboardExample">Loading...</div>
+  </div>
   <div id="FitnessLeaderboardExample">Loading...</div>
 
   <div class="panel">
@@ -227,8 +232,8 @@
     edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('GoalExample', 'Goal', { goal: '5000000', i18n: { title: '2015 Goal' } });
     edh.widgets.renderWidget('CountDownExample', 'CountDown', { days: 34, linkUrl: 'https://pmhincelebration.edheroy.com/au/get-started', i18n: { linkText: 'Register' } });
-    edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-22' });
-    edh.widgets.renderWidget('TeamLeaderboardExample', 'TeamLeaderboard', { campaignUid: 'us-22', altTemplate: true, limit: 12, pageSize: 4 });
+    edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { id: 'IndividualLeaderboard', eventType: 'hasContent', campaignUid: 'us-22' });
+    edh.widgets.renderWidget('TeamLeaderboardExample', 'TeamLeaderboard', { id:'TeamLeaderboard', eventType: 'hasContent', campaignUid: 'us-22', altTemplate: true, limit: 12, pageSize: 4 });
     edh.widgets.renderWidget('FitnessLeaderboardExample', 'FitnessLeaderboard', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('UpcomingEventsExample', 'UpcomingEvents', { charityUid: 'au-31', charitySlug: 'australian-red-cross' });
     edh.widgets.renderWidget('RecentFundraisersExample', 'RecentFundraisers', { campaignUid: 'us-22' });
@@ -295,6 +300,8 @@
     edh.widgets.renderWidget('CallToActionBoxExample', 'CallToActionBox', { campaignUid: 'us-22', registrationUrl: 'https://your-registration-url.com/' });
 
     edh.widgets.renderWidget('ShareButtonExample', 'ShareButton');
+
+    edh.widgets.renderWidget('MicrositeMenuExample', 'MicrositeMenu', { eventIds: ['IndividualLeaderboard/hasContent', 'TeamLeaderboard/hasContent'] });
   </script>
 </body>
 </html>

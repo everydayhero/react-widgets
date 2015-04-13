@@ -17,6 +17,8 @@ module.exports = React.createClass({
   mixins: [I18nMixin, DOMInfoMixin, LeaderboardMixin],
   displayName: "TeamLeaderboard",
   propTypes: {
+    id: React.PropTypes.string.isRequired,
+    eventType: React.PropTypes.string,
     campaignSlug: React.PropTypes.string,
     campaignUid: React.PropTypes.string,
     charitySlug: React.PropTypes.string,
@@ -33,6 +35,8 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
+      id: '',
+      eventType: '',
       limit: 48,
       pageSize: 12,
       backgroundColor: null,

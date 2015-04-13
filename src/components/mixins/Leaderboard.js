@@ -8,6 +8,7 @@ var numeral           = require('numeral');
 var campaigns         = require('../../api/campaigns');
 var charities         = require('../../api/charities');
 var LeaderboardPaging = require('../leaderboards/LeaderboardPaging');
+var Emitter           = require('../../lib/EventEmitter');
 
 module.exports = {
   getEndpoint: function() {
@@ -41,6 +42,15 @@ module.exports = {
   processLeaderboard: function(result) {
     var pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : [];
     var leaderboard = _.map(pages, this.processPage);
+    var id = this.props.id;
+    var eventType = this.props.eventType;
+    var eventId = id + '/' + eventType;
+
+    if (leaderboard.length > 0) {
+      Emitter.emit(eventId, {id: id, hasContent: true});
+    } else {
+      Emitter.emit(eventId, {id: id, hasContent: false});
+    }
 
     this.rankLeaderboard(leaderboard);
 

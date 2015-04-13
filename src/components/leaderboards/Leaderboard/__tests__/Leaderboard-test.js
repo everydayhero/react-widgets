@@ -162,8 +162,8 @@ describe('Leaderboard', function() {
         element = TestUtils.renderIntoDocument(leaderboard);
       });
 
-      it('should not call onHasContent', function() {
-        element.processLeaderboard();
+      it('should not be called', function() {
+        element.processLeaderboard(result);
         expect(onHasContent).not.toHaveBeenCalled();
       });
     });
@@ -174,12 +174,12 @@ describe('Leaderboard', function() {
         element = TestUtils.renderIntoDocument(leaderboard);
       });
 
-      it('should not call onHasContent when there is no page', function() {
+      it('should not be called when there is no page', function() {
         element.processLeaderboard();
         expect(onHasContent).not.toHaveBeenCalled();
       });
 
-      it('should call onHasContent when there are pages', function() {
+      it('should be called when there are pages', function() {
         element.processLeaderboard(result);
         expect(onHasContent).toHaveBeenCalled();
       });

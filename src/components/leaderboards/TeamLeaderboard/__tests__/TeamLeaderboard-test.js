@@ -150,4 +150,55 @@ describe('TeamLeaderboard', function() {
       expect(pagingFunction).toBeUndefined();
     });
   });
+
+  describe('onHasContent callback', function() {
+    var element;
+    var onHasContent = jasmine.createSpy();
+    var result = {
+      leaderboard: {
+        pages: [
+          {
+            id: 1,
+            name: 'page1',
+            url: 'url',
+            amount: {
+              currency: {},
+              cents: 100
+            },
+            team_member_uids: {},
+            image: {}
+          }
+        ]
+      }
+    };
+
+    describe('is not passed in', function() {
+      var teamLeaderboard = <TeamLeaderboard campaignUid="au-0" />;
+      beforeEach(function() {
+        element = TestUtils.renderIntoDocument(teamLeaderboard);
+      });
+
+      it('should not call onHasContent', function() {
+        element.processLeaderboard();
+        expect(onHasContent).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('is passed in', function() {
+      var teamLeaderboard = <TeamLeaderboard campaignUid="au-0" onHasContent={ onHasContent } />;
+      beforeEach(function() {
+        element = TestUtils.renderIntoDocument(teamLeaderboard);
+      });
+
+      it('should not call onHasContent when there is no page', function() {
+        element.processLeaderboard();
+        expect(onHasContent).not.toHaveBeenCalled();
+      });
+
+      it('should call onHasContent when there are pages', function() {
+        element.processLeaderboard(result);
+        expect(onHasContent).toHaveBeenCalled();
+      });
+    });
+  });
 });

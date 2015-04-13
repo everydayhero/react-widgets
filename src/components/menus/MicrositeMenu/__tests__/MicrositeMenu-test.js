@@ -39,7 +39,7 @@ describe('MicrositeMenu', function() {
 
     it('should not render leaderboard menu when no dynamic content', function() {
       Emitter.emit('Leaderboard/hasContent', {id: 'board', hasContent: false});
-      expect(scryByClass(element, 'MicrositeMenu__dynamic').length).toBe(1);
+      expect(scryByClass(element, 'MicrositeMenu__dynamic').length).toBe(0);
     });
 
     it('renders leaderboard menu when has dynamic contents', function() {

@@ -1,0 +1,19 @@
+.MicrositeMenu__dynamic,
+.MicrositeMenu__static {
+  display: inline;
+}
+
+.MicrositeMenu__link {
+  display: inline-block;
+  font-size: 11px;
+  color: grey;
+  margin-right: $x-4;
+  text-transform: uppercase;
+  position: relative;
+  text-decoration: none;
+
+  a:hover &:hover, a:focus & {
+    color: #405B69;
+    opacity: 0.8;
+  }
+}

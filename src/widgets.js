@@ -33,7 +33,8 @@ var widgets = {
   Input: require('./components/forms/Input'),
   Footprint: require('./components/footprint/Footprint'),
   Supporters: require('./components/supporters/Supporters'),
-  ShareButton: require('./components/sharing/ShareButton')
+  ShareButton: require('./components/sharing/ShareButton'),
+  MicrositeMenu: require('./components/menus/MicrositeMenu'),
 };
 var modals = {
   CharitySearch: require('./components/search/CharitySearchModal'),

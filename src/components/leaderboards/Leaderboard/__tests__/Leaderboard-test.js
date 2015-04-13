@@ -134,4 +134,55 @@ describe('Leaderboard', function() {
       expect(pagingFunction).toBeUndefined();
     });
   });
+
+  describe('onHasContent callback', function() {
+    var element;
+    var onHasContent = jasmine.createSpy();
+    var result = {
+      leaderboard: {
+        pages: [
+          {
+            id: 1,
+            name: 'page1',
+            url: 'url',
+            amount: {
+              currency: {},
+              cents: 100
+            },
+            team_member_uids: {},
+            image: {}
+          }
+        ]
+      }
+    };
+
+    describe('is not passed in', function() {
+      var leaderboard = <Leaderboard campaignUid="au-0" />;
+      beforeEach(function() {
+        element = TestUtils.renderIntoDocument(leaderboard);
+      });
+
+      it('should not be called', function() {
+        element.processLeaderboard(result);
+        expect(onHasContent).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('is passed in', function() {
+      var leaderboard = <Leaderboard campaignUid="au-0" onHasContent={ onHasContent } />;
+      beforeEach(function() {
+        element = TestUtils.renderIntoDocument(leaderboard);
+      });
+
+      it('should not be called when there is no page', function() {
+        element.processLeaderboard();
+        expect(onHasContent).not.toHaveBeenCalled();
+      });
+
+      it('should be called when there are pages', function() {
+        element.processLeaderboard(result);
+        expect(onHasContent).toHaveBeenCalled();
+      });
+    });
+  });
 });

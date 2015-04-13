@@ -45,7 +45,9 @@ module.exports = {
 
     this.rankLeaderboard(leaderboard);
 
-    onHasContent && onHasContent();
+    if (leaderboard.length > 0 && onHasContent) {
+      onHasContent();
+    }
 
     this.setState({
       isLoading: false,

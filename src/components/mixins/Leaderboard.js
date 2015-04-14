@@ -43,7 +43,7 @@ module.exports = {
     var leaderboard = this.getLeaderboard(pages);
 
     this.rankLeaderboard(leaderboard);
-    this.CheckHasContentCallback(leaderboard);
+    this.checkHasContentCallback(leaderboard);
 
     this.setState({
       isLoading: false,
@@ -52,7 +52,7 @@ module.exports = {
     });
   },
 
-  CheckHasContentCallback: function(leaderboard) {
+  checkHasContentCallback: function(leaderboard) {
     var onHasContent = this.props.onHasContent;
 
     if (leaderboard.length > 0 && onHasContent) {

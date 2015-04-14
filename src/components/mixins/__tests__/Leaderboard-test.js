@@ -26,7 +26,7 @@ describe('LeaderboardMixin', function() {
           }
         },
         { amount: { cents: 0 } }
-      ]
+      ];
       var leaderboard = Leaderboard.getLeaderboard(pages);
 
       expect(leaderboard.length).toEqual(1);

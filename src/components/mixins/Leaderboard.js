@@ -40,14 +40,10 @@ module.exports = {
 
   processLeaderboard: function(result) {
     var pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : [];
-    var leaderboard = _.map(pages, this.processPage);
-    var onHasContent = this.props.onHasContent;
+    var leaderboard = this.getLeaderboard(pages);
 
     this.rankLeaderboard(leaderboard);
-
-    if (leaderboard.length > 0 && onHasContent) {
-      onHasContent();
-    }
+    this.handleHasContentCallback(leaderboard);
 
     this.setState({
       isLoading: false,
@@ -56,17 +52,30 @@ module.exports = {
     });
   },
 
-  processPage: function(page) {
-    return {
-      id: page.id,
-      name: page.name,
-      url: page.url,
-      isoCode: page.amount.currency.iso_code,
-      amount:  page.amount.cents,
-      totalMembers: page.team_member_uids.length,
-      imgSrc: page.image.large_image_url,
-      medImgSrc: page.image.medium_image_url
-    };
+  handleHasContentCallback: function(leaderboard) {
+    var onHasContent = this.props.onHasContent;
+
+    if (leaderboard.length > 0 && onHasContent) {
+      onHasContent();
+    }
+  },
+
+  getLeaderboard: function(pages) {
+    return _.reduce(pages, function(result, page) {
+      if (page.amount.cents > 0) {
+        result.push({
+          id: page.id,
+          name: page.name,
+          url: page.url,
+          isoCode: page.amount.currency.iso_code,
+          amount:  page.amount.cents,
+          totalMembers: page.team_member_uids.length,
+          imgSrc: page.image.large_image_url,
+          medImgSrc: page.image.medium_image_url
+        });
+      }
+      return result;
+    }, []);
   },
 
   rankLeaderboard: function(leaderboard) {

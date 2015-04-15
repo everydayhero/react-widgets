@@ -135,52 +135,36 @@ describe('Leaderboard', function() {
     });
   });
 
-  describe('onHasContent callback', function() {
+  describe('handleHasContentCallback', function() {
     var element;
     var onHasContent = jasmine.createSpy();
-    var result = {
-      leaderboard: {
-        pages: [
-          {
-            id: 1,
-            name: 'page1',
-            url: 'url',
-            amount: {
-              currency: {},
-              cents: 100
-            },
-            team_member_uids: {},
-            image: {}
-          }
-        ]
-      }
-    };
+    var board = [1];
 
-    describe('is not passed in', function() {
+    describe('callback is not passed in', function() {
       var leaderboard = <Leaderboard campaignUid="au-0" />;
       beforeEach(function() {
         element = TestUtils.renderIntoDocument(leaderboard);
       });
 
       it('should not be called', function() {
-        element.processLeaderboard(result);
+        element.handleHasContentCallback(board);
         expect(onHasContent).not.toHaveBeenCalled();
       });
     });
 
-    describe('is passed in', function() {
+    describe('callback is passed in', function() {
       var leaderboard = <Leaderboard campaignUid="au-0" onHasContent={ onHasContent } />;
       beforeEach(function() {
         element = TestUtils.renderIntoDocument(leaderboard);
       });
 
-      it('should not be called when there is no page', function() {
-        element.processLeaderboard();
+      it('should not be called when leaderboard is empty', function() {
+        element.handleHasContentCallback([]);
         expect(onHasContent).not.toHaveBeenCalled();
       });
 
-      it('should be called when there are pages', function() {
-        element.processLeaderboard(result);
+      it('should be called when leaderboard is not empty', function() {
+        element.handleHasContentCallback(board);
         expect(onHasContent).toHaveBeenCalled();
       });
     });

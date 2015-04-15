@@ -151,7 +151,7 @@ describe('TeamLeaderboard', function() {
     });
   });
 
-  describe('checkHasContentCallback', function() {
+  describe('handleHasContentCallback', function() {
     var element;
     var onHasContent = jasmine.createSpy();
     var board = [1];
@@ -163,7 +163,7 @@ describe('TeamLeaderboard', function() {
       });
 
       it('should not be called', function() {
-        element.checkHasContentCallback(board);
+        element.handleHasContentCallback(board);
         expect(onHasContent).not.toHaveBeenCalled();
       });
     });
@@ -175,12 +175,12 @@ describe('TeamLeaderboard', function() {
       });
 
       it('should not be called when leaderboard is empty', function() {
-        element.checkHasContentCallback([]);
+        element.handleHasContentCallback([]);
         expect(onHasContent).not.toHaveBeenCalled();
       });
 
       it('should be called when leaderboard is not empty', function() {
-        element.checkHasContentCallback(board);
+        element.handleHasContentCallback(board);
         expect(onHasContent).toHaveBeenCalled();
       });
     });

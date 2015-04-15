@@ -135,7 +135,7 @@ describe('Leaderboard', function() {
     });
   });
 
-  describe('checkHasContentCallback', function() {
+  describe('handleHasContentCallback', function() {
     var element;
     var onHasContent = jasmine.createSpy();
     var board = [1];
@@ -147,7 +147,7 @@ describe('Leaderboard', function() {
       });
 
       it('should not be called', function() {
-        element.checkHasContentCallback(board);
+        element.handleHasContentCallback(board);
         expect(onHasContent).not.toHaveBeenCalled();
       });
     });
@@ -159,12 +159,12 @@ describe('Leaderboard', function() {
       });
 
       it('should not be called when leaderboard is empty', function() {
-        element.checkHasContentCallback([]);
+        element.handleHasContentCallback([]);
         expect(onHasContent).not.toHaveBeenCalled();
       });
 
       it('should be called when leaderboard is not empty', function() {
-        element.checkHasContentCallback(board);
+        element.handleHasContentCallback(board);
         expect(onHasContent).toHaveBeenCalled();
       });
     });

@@ -55,19 +55,18 @@
   padding: 13px;
 }
 
-.FootprintData__percent {
-  font-family: $ehw-marketing-fonts;
-}
 .FootprintData__name,
 .FootprintData__value {
   font-family: $ehw-sans-serif-fonts
 }
+.FootprintData__value {
+  font-weight: bold;
+  line-height: 2;
+  letter-spacing: 0.05em;
+}
 .FootprintData__name {
   text-transform: uppercase;
   font-weight: bold;
-  letter-spacing: 0.16em;
-}
-.FootprintData__value {
-  font-weight: bold;
-  letter-spacing: 0.16em;
+  line-height: 1;
+  letter-spacing: 0.1em;
 }

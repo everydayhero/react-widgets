@@ -20,6 +20,7 @@ $ehw-animation-speed: 200ms;
 }
 
 .Event__blur, .Event__gradient,  {
+  background-size: cover;
   position: absolute;
   height: 100%;
   width: 100%;
@@ -32,6 +33,7 @@ $ehw-animation-speed: 200ms;
   height: 100%;
   width: 100%;
   background-color: $ehw-grey-dark;
+  background-size: cover;
   overflow: hidden;
   border-radius: $ehw-border-radius;
 
@@ -40,7 +42,7 @@ $ehw-animation-speed: 200ms;
     .Event__date { top: 25%; }
     .Event__name { top: 42%; }
     .Event__supporter-count { top: 64%; }
-    .Event__join-event { top: 70%; }
+    .Event__join-event { top: 80%; }
     .Event__gradient {
       background-color: transparentize($ehw-grey-dark, 0.25);
     }
@@ -118,16 +120,9 @@ $ehw-animation-speed: 200ms;
 
 .Event__join-event {
   position: absolute;
-  color: $ehw-grey-light;
-  left: 30%;
-  font-size: 1em;
-  font-weight: normal;
-  line-height: 2.5;
+  left: 50%;
   top: 110%;
-  width: 40%;
-  text-decoration: none;
   transition-delay: 200ms;
-  background-color: $ehw-green;
-  border-radius: 3px;
-  box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.2);
+  margin: 0;
+  transform: translateX(-50%) translateY(-50%);
 }

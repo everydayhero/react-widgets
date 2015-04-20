@@ -19,7 +19,8 @@
 .FootprintAvatar { border-color: white; }
 .FootprintTile:hover .FootprintAvatar { border-color: $ehw-green-light; }
 .FootprintData { color: white; }
-.Footprint--hover {
+.Footprint--hover,
+.Footprint:hover {
   .FootprintMetric--cause_raised { fill: #35163d; }
   .FootprintMetric--cause_engagement { fill: #583048; }
   .FootprintMetric--raised { fill: #307c99; }

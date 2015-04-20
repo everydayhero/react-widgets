@@ -39,11 +39,10 @@ module.exports = {
   },
 
   findByCharity: function(charityUid, page, limit, callback, options) {
-    var params = _.merge({
-      charityUid: charityUid,
-      page: page,
-      limit: limit
-    }, options);
+    var params = options || {};
+    params.charityUid = charityUid;
+    if (page) { params.page = page; }
+    if (limit) { params.limit = limit; }
     return getJSONP(routes.get('campaigns', params), callback);
   },
 

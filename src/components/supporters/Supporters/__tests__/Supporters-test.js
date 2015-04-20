@@ -38,29 +38,9 @@ describe('Supporters', function() {
       expect(findByClass(element, 'Supporters')).not.toBeNull();
     });
 
-    it('shows loading icon', function() {
-      expect(findByClass(element, 'Supporters__loading').getDOMNode()).not.toBeNull();
-      expect(scryByClass(element, 'Supporters__empty-label').length).toBe(0);
-    });
-
-    it('shows empty label when empty', function() {
-      callback(emptyData);
-
-      expect(findByClass(element, 'Supporters__empty-label').getDOMNode()).not.toBeNull();
-      expect(scryByClass(element, 'Supporters__loading').length).toBe(0);
-    });
-
     describe('with pages', function() {
       beforeEach(function() {
         callback(leaderboardData);
-      });
-
-      it('does not show loading icon', function() {
-        expect(scryByClass(element, 'Supporters__loading').length).toBe(0);
-      });
-
-      it('does not show empty label', function() {
-        expect(scryByClass(element, 'Supporters__empty-label').length).toBe(0);
       });
 
       it('contains SupporterCards', function() {

@@ -46,9 +46,8 @@ module.exports = React.createClass({
       <div className="FootprintData" style={ dataStyle } onTouchStart={ this.props.onTouch }>
         { !isCompact && metric.percentile + '%' }
 
-        { isCompact && <div className="FootprintData__percent" style={{ fontSize: diameter / 3 + 'px', marginTop: diameter / -10 + 'px' }}>{ metric.percentile + '%' }</div> }
-        { isCompact && <div className="FootprintData__value" style={{ fontSize: diameter / 6 + 'px' }}>{ metric.value }</div> }
-        { isCompact && <div className="FootprintData__name" style={{ fontSize: diameter / 15 + 'px' }}>{ metric.name }</div> }
+        { isCompact && <div className="FootprintData__value" style={{ fontSize: diameter / 5 + 'px' }}>{ metric.value }</div> }
+        { isCompact && <div className="FootprintData__name" style={{ fontSize: diameter / 12 + 'px' }}>{ metric.name }</div> }
       </div>
     );
   },

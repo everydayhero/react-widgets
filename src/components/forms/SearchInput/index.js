@@ -3,7 +3,7 @@
 var React  = require('react');
 var Icon   = require('../../helpers/Icon');
 var Input  = require('../Input');
-var Button = require('hui/buttons/Button');
+var Button = require('HUI/buttons/Button');
 
 module.exports = React.createClass({
   displayName: "SearchInput",

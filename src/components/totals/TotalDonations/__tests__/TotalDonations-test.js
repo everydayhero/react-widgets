@@ -2,21 +2,21 @@
 jest.autoMockOff();
 jest.mock('../../../../api/pages');
 
-describe('TotalHeroes', function() {
-  var React       = require('react/addons');
-  var TotalHeroes = require('../');
-  var pages       = require('../../../../api/pages');
-  var TestUtils   = React.addons.TestUtils;
-  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
+describe('TotalDonations', function() {
+  var React          = require('react/addons');
+  var TotalDonations = require('../');
+  var pages          = require('../../../../api/pages');
+  var TestUtils      = React.addons.TestUtils;
+  var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('Component defaults', function() {
-    var totalHeroes;
+    var totalDonations;
     var element;
 
     beforeEach(function() {
       pages.findByCampaign.mockClear();
-      totalHeroes = <TotalHeroes campaignUid="us-22" />;
-      element = TestUtils.renderIntoDocument(totalHeroes);
+      totalDonations = <TotalDonations campaignUid="us-22" />;
+      element = TestUtils.renderIntoDocument(totalDonations);
     });
 
     it('render something', function() {
@@ -25,27 +25,26 @@ describe('TotalHeroes', function() {
 
     it('renders default total of pages', function() {
       element.setState({ isLoading: false });
-      var total = findByClass(element, 'TotalHeroes__total');
 
+      var total = findByClass(element, 'TotalDonations__total');
       expect(total.getDOMNode().textContent).toContain('0');
     });
 
     it('renders a default title', function() {
       element.setState({ isLoading: false });
-      var title = findByClass(element, 'TotalHeroes__title');
 
-      expect(title.getDOMNode().textContent).toBe('Heroes');
+      var title = findByClass(element, 'TotalDonations__title');
+      expect(title.getDOMNode().textContent).toBe('Donations');
     });
 
     it('renders an icon by default', function() {
-      var icon = findByClass(element, 'TotalHeroes__icon');
-
+      var icon = findByClass(element, 'TotalDonations__icon');
       expect(icon).not.toBeNull();
     });
 
     it('shows a loading icon', function() {
       element.setState({ isLoading: true });
-      findByClass(element, 'TotalHeroes__loading');
+      findByClass(element, 'TotalDonations__loading');
     });
 
     it('makes a single call using to fetch api data', function() {
@@ -55,13 +54,13 @@ describe('TotalHeroes', function() {
   });
 
   describe('Working with multiple uids', function() {
-    var totalHeroes;
+    var totalDonations;
     var element;
 
     beforeEach(function() {
       pages.findByCampaign.mockClear();
-      totalHeroes = <TotalHeroes campaignUids={ ["us-22", "us-24"] } />;
-      element = TestUtils.renderIntoDocument(totalHeroes);
+      totalDonations = <TotalDonations campaignUids={ ["us-22", "us-24"] } />;
+      element = TestUtils.renderIntoDocument(totalDonations);
     });
 
     it('makes multiple calls to fetch api data', function() {
@@ -72,27 +71,27 @@ describe('TotalHeroes', function() {
   });
 
   describe('Custom component props', function() {
-    var totalHeroes;
+    var totalDonations;
     var element;
     var translation = {
-      title: 'blahblah'
+      title: 'foo'
     };
 
     beforeEach(function() {
-      totalHeroes = <TotalHeroes i18n={ translation } />;
-      element = TestUtils.renderIntoDocument(totalHeroes);
+      totalDonations = <TotalDonations i18n={ translation } />;
+      element = TestUtils.renderIntoDocument(totalDonations);
     });
 
     it('renders a custom title', function() {
       element.setState({ isLoading: false });
-      var title = findByClass(element, 'TotalHeroes__title');
+      var title = findByClass(element, 'TotalDonations__title');
 
       expect(title.getDOMNode().textContent).toBe(translation.title);
     });
 
     it('renders a default total', function() {
       element.setState({ isLoading: false });
-      var total = findByClass(element, 'TotalHeroes__total');
+      var total = findByClass(element, 'TotalDonations__total');
 
       expect(total.getDOMNode().textContent).toContain('0');
     });
@@ -100,28 +99,28 @@ describe('TotalHeroes', function() {
 
   describe('Number formatting options', function() {
     it('renders in a standard format by default', function() {
-      var totalHeroes = <TotalHeroes campaignUid="au-0" />;
-      var element = TestUtils.renderIntoDocument(totalHeroes);
+      var totalDonations = <TotalDonations campaignUid="au-0" />;
+      var element = TestUtils.renderIntoDocument(totalDonations);
 
       element.setState({
         isLoading: false,
         total: 10050
       });
 
-      var total = findByClass(element, 'TotalHeroes__total');
+      var total = findByClass(element, 'TotalDonations__total');
       expect(total.getDOMNode().textContent).toBe('10,050');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var totalHeroes = <TotalHeroes campaignUid="au-0" format="0.00" />;
-      var element = TestUtils.renderIntoDocument(totalHeroes);
+      var totalDonations = <TotalDonations campaignUid="au-0" format="0.00" />;
+      var element = TestUtils.renderIntoDocument(totalDonations);
 
       element.setState({
         isLoading: false,
         total: 10050
       });
 
-      var total = findByClass(element, 'TotalHeroes__total');
+      var total = findByClass(element, 'TotalDonations__total');
       expect(total.getDOMNode().textContent).toBe('10050.00');
     });
   });

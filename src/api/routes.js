@@ -23,7 +23,8 @@ var baseRoutes = {
   searchPages:          '{baseUrl}/api/v2/search/pages.jsonp?q={searchTerm}&country_code={country}&campaign_id={campaignUid}&charity_id={charityUid}&type={type}&page={page}&page_size={pageSize}',
 
   address:              '{baseUrl}/api/v2/addresses/{country}/{id}.jsonp',
-  searchAddresses:      '{baseUrl}/api/v2/addresses.jsonp?country_code={country}&q={searchTerm}'
+  searchAddresses:      '{baseUrl}/api/v2/addresses.jsonp?country_code={country}&q={searchTerm}',
+  totals:               '{baseUrl}/api/v2/search/totals.jsonp?charity_id={charityUid}&campaign_id={campaignUid}&page_id={page}&start_at={start}&end_at={end}&kind={type}&country_code={country}'
 };
 var routes = {};
 

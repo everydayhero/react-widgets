@@ -7,6 +7,7 @@ var _ = require('lodash');
 var React = require('react');
 var routes = require('./api/routes');
 var addEventListener = require('./lib/addEventListener');
+var consoleShim = require('./lib/consoleShim');
 var renderModal = require('./lib/renderModal');
 var widgets = {
   FundsRaised: require('./components/totals/FundsRaised'),

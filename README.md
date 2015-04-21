@@ -996,7 +996,40 @@ Default i18n is:
 </html>
 ```
 
+#### SearchInput
 
+Renders search style input and allow onSubmit callback which returns the value
+
+##### Options
+- `autoFocus`: *optional* boolean to determine if the input should gain focus as soon as it is loaded. Should only be true for one input on the page. Default is 'false'.
+- `autoSelect`: *optional* boolean to determine if the input should gain focus and also have the value highlighted upon loading. Should only be true for one input on the page. Default is 'false'.
+- `onSubmit`: function callback which returns input value on enter or click search button.
+- `width`: *optional* string to specify the width of the field. Valid options are: "full", "wide", "half", and "narrow". Default is "full".
+- `label`: *optional* string. Set to `search` by default.
+
+##### Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="SearchInput"></div>
+    <script>
+      edh.widgets.renderWidget('SearchInput', 'SearchInput', {
+        onSubmit: function(value) {
+          alert('Your search term is "' + value + '"');
+        }
+      });
+    </script>
+  </body>
+</html>
+```
 
 ### Teams
 

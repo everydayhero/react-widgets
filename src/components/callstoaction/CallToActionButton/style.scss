@@ -1,11 +1,180 @@
 .CallToActionButton {
-  font-size: $x-4;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: #fff;
-  background: #000;
+  transition: all 160ms ease-out;
   display: inline-block;
-  padding: 10px;
-  margin: 0 0 15px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  margin: 2px;
+  padding: 0;
+  line-height: 44px;
+  border-width: 2px;
+  border-style: solid;
   border-radius: $ehw-border-radius;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  outline-color: transparent;
+  outline-style: none;
+}
+.CallToActionButton::before {
+  transition: all 240ms ease-out;
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  padding-bottom: 100%;
+  border-radius: 50%;
+  transform: translateY(-50%) translateX(-50%) scale(0);
+  opacity: 0;
+}
+.CallToActionButton:hover {
+  color: #fff;
+}
+.CallToActionButton:hover::before {
+  transform: translateY(-50%) translateX(-50%) scale(1);
+  opacity: 1;
+}
+.CallToActionButton p {
+  margin: 0;
+}
+.CallToActionButton__label {
+  display: inline-block;
+  font-family: $ehw-sans-serif-fonts;
+  font-size: $ehw-default-font-size;
+  padding: 0 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+.CallToActionButton__icon {
+  transition: all 240ms ease-out;
+  width: 0;
+  opacity: 0;
+  float: right;
+  margin-left: -5px;
+  border-width: 0;
+  border-style: solid;
+  border-left-width: 1px;
+  overflow: hidden;
+}
+.CallToActionButton--iconLeft .CallToActionButton__icon {
+  margin-left: 0;
+  border-left-width: 0;
+  border-right-width: 1px;
+  margin-right: -5px;
+  float: left;
+}
+.CallToActionButton--hasIcon .CallToActionButton__icon {
+  width: 44px;
+  opacity: 1;
+}
+.CallToActionButton--cta,
+.CallToActionButton--primary {
+  line-height: 44px;
+}
+.CallToActionButton--thin {
+  line-height: 22px;
+}
+.CallToActionButton--thin .CallToActionButton__label {
+  text-transform: none;
+  letter-spacing: 0.05em;
+}
+.CallToActionButton--cta,
+.CallToActionButton--secondary {
+  border-color: $ehw-green;
+}
+.CallToActionButton--cta:before,
+.CallToActionButton--secondary:before {
+  background-color: #00b44d;
+  box-shadow: 0 0 90px 60px #00b44d;
+}
+.CallToActionButton--cta .CallToActionButton__icon,
+.CallToActionButton--secondary .CallToActionButton__icon {
+  border-color: $ehw-green-light;
+}
+.CallToActionButton--primary,
+.CallToActionButton--tertiary {
+  border-color: $ehw-grey-dark;
+}
+.CallToActionButton--primary:before,
+.CallToActionButton--tertiary:before {
+  background-color: #666;
+  box-shadow: 0 0 90px 60px #666;
+}
+.CallToActionButton--primary .CallToActionButton__icon,
+.CallToActionButton--tertiary .CallToActionButton__icon {
+  border-color: $ehw-grey;
+}
+.CallToActionButton--cta {
+  color: #fff;
+  background-color: $ehw-green;
+}
+.CallToActionButton--primary {
+  color: #fff;
+  background-color: $ehw-grey-dark;
+}
+.CallToActionButton--secondary {
+  color: $ehw-green;
+  background-color: transparent;
+}
+.CallToActionButton--tertiary {
+  color: $ehw-grey-dark;
+  background-color: transparent;
+}
+.CallToActionButton--primary.CallToActionButton--reverse {
+  border-color: #fff;
+}
+.CallToActionButton--primary.CallToActionButton--reverse:before {
+  background-color: $ehw-grey-light;
+  box-shadow: 0 0 90px 60px $ehw-grey-light;
+}
+.CallToActionButton--secondary.CallToActionButton--reverse,
+.CallToActionButton--tertiary.CallToActionButton--reverse {
+  border-color: #fff;
+}
+.CallToActionButton--secondary.CallToActionButton--reverse:before,
+.CallToActionButton--tertiary.CallToActionButton--reverse:before {
+  background-color: $ehw-grey-light;
+  box-shadow: 0 0 90px 60px $ehw-grey-light;
+}
+.CallToActionButton--secondary.CallToActionButton--reverse .CallToActionButton__icon,
+.CallToActionButton--tertiary.CallToActionButton--reverse .CallToActionButton__icon {
+  border-color: #fff;
+}
+.CallToActionButton--primary.CallToActionButton--reverse {
+  color: $ehw-grey-dark;
+  background-color: #fff;
+}
+.CallToActionButton--secondary.CallToActionButton--reverse {
+  color: #fff;
+}
+.CallToActionButton--secondary.CallToActionButton--reverse:hover {
+  color: $ehw-green;
+}
+.CallToActionButton--tertiary.CallToActionButton--reverse {
+  color: #fff;
+}
+.CallToActionButton--tertiary.CallToActionButton--reverse:hover {
+  color: $ehw-grey-dark;
+}
+.CallToActionButton--disabled {
+  color: $ehw-grey-dark;
+  border-color: $ehw-grey-dark;
+  background-color: transparent;
+  border-style: dashed;
+  cursor: default;
+}
+.CallToActionButton--disabled:before {
+  background-color: transparent;
+  box-shadow: 0 0 90px 60px transparent;
+}
+.CallToActionButton--disabled:hover {
+  color: $ehw-grey-dark;
+}
+.CallToActionButton--noBorder {
+  border-color: transparent;
 }

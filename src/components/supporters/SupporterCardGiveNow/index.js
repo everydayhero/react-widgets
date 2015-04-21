@@ -1,8 +1,8 @@
 "use strict";
 
-var React     = require('react');
-var I18nMixin = require('../../mixins/I18n');
-var Button    = require('../../callstoaction/Button');
+var React               = require('react');
+var I18nMixin           = require('../../mixins/I18n');
+var CallToActionButton  = require('../../callstoaction/CallToActionButton');
 
 module.exports = React.createClass({
   displayName: 'SupporterCardGiveNow',
@@ -47,7 +47,7 @@ module.exports = React.createClass({
 
     return (
       <a href={ props.url } className="SupporterCardGiveNow">
-        <Button kind="secondary" className="SupporterCardGiveNow__cta">{ t('cta') }</Button>
+        <CallToActionButton kind="secondary" className="SupporterCardGiveNow__cta">{ t('cta') }</CallToActionButton>
         <div className="SupporterCardGiveNow__progress">
           <div className="SupporterCardGiveNow__current" style={{ width: Math.min(progress, 100) + '%' }}></div>
         </div>

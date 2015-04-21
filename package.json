@@ -16,7 +16,7 @@
     "remarkable": "^1.6.0"
   },
   "devDependencies": {
-    "hui": "git+ssh://git@github.com:everydayhero/hui#0.7.1",
+    "hui": "git+https://github.com/everydayhero/hui.git#0.7.1",
     "browserify": "~6.3.3",
     "compression": "~1.2.1",
     "express": "~4.10.4",

@@ -1,9 +1,9 @@
 'use strict';
 
-var React = require('react');
-var I18n = require('../../mixins/I18n');
-var effect = require('../../../lib/effect');
-var Button = require('../../callstoaction/Button');
+var React               = require('react');
+var I18n                = require('../../mixins/I18n');
+var effect              = require('../../../lib/effect');
+var CallToActionButton  = require('../../callstoaction/CallToActionButton');
 
 function cssUrl(url) {
   return url ? 'url(' + url + ')' : 'none';
@@ -110,7 +110,7 @@ module.exports = React.createClass({
           </ul>
           <a href={ props.campaignUrl } className="Event__name">{ props.name }</a>
           <p className="Event__supporter-count">{ (props.supporterCount || 0) + ' ' + t('supportersLabel') }</p>
-          <Button kind="secondary" reverse={ true } href={ props.getStartedUrl } className="Event__join-event">{ t('joinLabel') }</Button>
+          <CallToActionButton kind="secondary" reverse={ true } href={ props.getStartedUrl } className="Event__join-event">{ t('joinLabel') }</CallToActionButton>
         </div>
       </div>
     );

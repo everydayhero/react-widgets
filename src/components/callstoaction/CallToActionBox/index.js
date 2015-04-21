@@ -78,10 +78,10 @@ module.exports = React.createClass({
     return (
       <div>
         <div className="CallToActionBox__title">{ title }</div>
-        <CallToActionButton btnUrl={ registrationUrl } btnLabel={ registerLabel } />
+        <CallToActionButton kind="primary" reverse={ true } href={ registrationUrl } label={ registerLabel } />
         <hr />
         <p>Already Registered? <a href={ signInUrl } className="CallToActionBox__link">{ signInLabel }</a></p>
-        <CallToActionButton btnUrl={ getStartedUrl } btnLabel={ getStartedLabel } />
+        <CallToActionButton kind="primary" reverse={ true } href={ getStartedUrl } label={ getStartedLabel } />
       </div>
     );
   },

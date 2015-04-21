@@ -29,7 +29,8 @@ module.exports = React.createClass({
     spacing: React.PropTypes.string,
     type: React.PropTypes.string,
     value: React.PropTypes.string,
-    width: React.PropTypes.string
+    width: React.PropTypes.string,
+    onEnter: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -93,6 +94,7 @@ module.exports = React.createClass({
     var value = (this.props.readOnly || this.props.disabled) ? this.state.value
               : this.props.mask ? this.props.mask(e.target.value)
               : e.target.value;
+
     this.setState({
       error: false,
       valid: false,
@@ -128,6 +130,12 @@ module.exports = React.createClass({
   handleBlur: function() {
     this.setState({ focused: false });
     this.validate();
+  },
+
+  handleKeyUp: function(e) {
+    if(e.key === 'Enter' && this.props.onEnter) {
+      this.props.onEnter(this.state.value);
+    }
   },
 
   setValid: function(valid) {
@@ -208,6 +216,7 @@ module.exports = React.createClass({
             onBlur={ enabled && this.handleBlur }
             onChange={ enabled && this.handleChange }
             onFocus={ enabled && this.handleFocus }
+            onKeyUp={ enabled && this.handleKeyUp }
             ref="input"
             type={ props.type }
             value={ state.value } />

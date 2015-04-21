@@ -109,10 +109,8 @@ describe('Footprint', function() {
       var metricData = findByClass(element, 'FootprintTile--flip');
       expect(metricData.getDOMNode()).not.toBeNull();
 
-      var dataPercent = findByClass(metricData, 'FootprintData__percent').getDOMNode();
       var dataValue = findByClass(metricData, 'FootprintData__value').getDOMNode();
       var dataName = findByClass(metricData, 'FootprintData__name').getDOMNode();
-      expect(dataPercent.textContent).toContain(model[5].percentile);
       expect(dataValue.textContent).toContain(model[5].amount_formatted);
       expect(dataName.textContent).toContain('Sharing');
     });

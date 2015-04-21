@@ -1,18 +1,18 @@
 "use strict";
 
-var _                   = require('lodash');
-var React               = require('react');
-var Icon                = require('../../helpers/Icon');
-var I18nMixin           = require('../../mixins/I18n');
-var DOMInfoMixin        = require('../../mixins/DOMInfo');
-var campaigns           = require('../../../api/campaigns');
-var charities           = require('../../../api/charities');
-var SupporterCard       = require('../SupporterCard');
+var _             = require('lodash');
+var React         = require('react');
+var Icon          = require('../../helpers/Icon');
+var DOMInfo       = require('../../mixins/DOMInfo');
+var I18n          = require('../../mixins/I18n');
+var campaigns     = require('../../../api/campaigns');
+var charities     = require('../../../api/charities');
+var SupporterCard = require('../SupporterCard');
 
 module.exports = React.createClass({
   displayName: "Supporters",
 
-  mixins: [I18nMixin, DOMInfoMixin],
+  mixins: [I18n, DOMInfo],
 
   propTypes: {
     campaignSlug: React.PropTypes.string,
@@ -21,22 +21,24 @@ module.exports = React.createClass({
     charityUid: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
     type: React.PropTypes.oneOf(['team', 'individual']),
+    hideCharityName: React.PropTypes.bool,
+    hideEventName: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
     return {
       type: 'individual',
-      backgroundColor: '#EBEBEB',
+      hideCharityName: false,
+      hideEventName: false,
       defaultI18n: {
-        emptyLabel: 'No supporters to display.'
+        title: 'Our Top Supporters'
       }
     };
   },
 
   getInitialState: function() {
     return {
-      isLoading: true,
       pages: []
     };
   },
@@ -73,22 +75,14 @@ module.exports = React.createClass({
     var pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : [];
 
     this.setState({
-      isLoading: false,
       pages: pages
     });
   },
 
   renderSupporterCards: function() {
+    var props = this.props;
     var state = this.state;
-
-    if (state.isLoading) {
-      return <Icon className="Supporters__loading" icon="circle-o-notch" />;
-    }
-
     var pages = state.pages;
-    if (_.isEmpty(pages)) {
-      return <p className="Supporters__empty-label">{ this.t('emptyLabel') }</p>;
-    }
 
     var count = this.getChildCountFromWidth(180);
     var width = this.getChildWidth(count);
@@ -101,6 +95,8 @@ module.exports = React.createClass({
         url={ page.url }
         image={ page.image.large_image_url }
         name={ page.name }
+        charityName={ !props.hideCharityName && page.charity_name }
+        eventName={ !props.hideEventName && page.campaign_name }
         target={ page.target_cents / 100 }
         current={ page.amount.cents / 100 }
         currency={ page.amount.currency.symbol } />;
@@ -108,9 +104,12 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var show = !_.isEmpty(this.state.pages);
+
     return (
       <div className="Supporters">
-        { this.renderSupporterCards() }
+        { show && <h2 className="Supporters__title">{ this.t('title') }</h2> }
+        { show && this.renderSupporterCards() }
       </div>
     );
   }

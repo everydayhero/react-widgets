@@ -41,18 +41,8 @@ describe('UpcomingEvents', function() {
       element = TestUtils.renderIntoDocument(events);
     });
 
-    it('renders something', function() {
+    it('renders', function() {
       expect(element).not.toBeNull();
-    });
-
-    it('initially renders loading icon', function() {
-      findByClass(element, 'UpcomingEvents__loading');
-    });
-
-    it('renders an empty message when no results are returned', function() {
-      element.setEvents([]);
-      var emptyLabel = findByClass(element, 'UpcomingEvents__empty-label');
-      expect(emptyLabel.getDOMNode().textContent).toContain(translation.emptyLabel);
     });
 
     it('renders events when results are returned', function() {
@@ -72,12 +62,10 @@ describe('UpcomingEvents', function() {
 
     it('loads campaigns for given charity', function() {
       var options = { status: 'active', sortBy: 'start_at', excludeCharities: true, excludePages: true, excludeBau: true };
-      expect(campaign.findByCharity).toBeCalledWith('au-1234', 1, 20, jasmine.any(Function), options);
+      expect(campaign.findByCharity).toBeCalledWith('au-1234', 1, null, jasmine.any(Function), options);
 
       var callback = campaign.findByCharity.mock.calls[0][3];
       callback({campaigns: []});
-
-      findByClass(element, 'UpcomingEvents__empty-label');
     });
   });
 });

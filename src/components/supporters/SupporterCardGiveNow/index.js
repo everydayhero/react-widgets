@@ -2,6 +2,7 @@
 
 var React     = require('react');
 var I18nMixin = require('../../mixins/I18n');
+var Button    = require('../../callstoaction/Button');
 
 module.exports = React.createClass({
   displayName: 'SupporterCardGiveNow',
@@ -46,11 +47,11 @@ module.exports = React.createClass({
 
     return (
       <a href={ props.url } className="SupporterCardGiveNow">
-        <div className="SupporterCardGiveNow__cta">{ t('cta') }</div>
+        <Button kind="secondary" className="SupporterCardGiveNow__cta">{ t('cta') }</Button>
         <div className="SupporterCardGiveNow__progress">
           <div className="SupporterCardGiveNow__current" style={{ width: Math.min(progress, 100) + '%' }}></div>
-          <div className="SupporterCardGiveNow__label">{ this.getLabel() }</div>
         </div>
+        <div className="SupporterCardGiveNow__label">{ this.getLabel() }</div>
       </a>
     );
   }

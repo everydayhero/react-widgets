@@ -2,8 +2,8 @@
 
 var _ = require('lodash');
 var React = require('react');
-var I18n = require('../../mixins/I18n');
 var DOMInfo = require('../../mixins/DOMInfo');
+var I18n = require('../../mixins/I18n');
 var Icon = require('../../helpers/Icon');
 var Event = require('../Event');
 var campaign = require('../../../api/campaigns');
@@ -11,6 +11,7 @@ var charity = require('../../../api/charities');
 
 module.exports = React.createClass({
   displayName: 'UpcomingEvents',
+
   mixins: [I18n, DOMInfo],
 
   propTypes: {
@@ -22,20 +23,19 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       defaultI18n: {
-        emptyLabel: 'No upcoming events available.'
+        title: 'Upcoming Events'
       }
     };
   },
 
   getInitialState: function() {
     return {
-      events: [],
-      isLoading: true,
+      events: []
     };
   },
 
   loadEvents: function() {
-    campaign.findByCharity(this.props.charityUid, 1, 20, this.onLoaded, {
+    campaign.findByCharity(this.props.charityUid, 1, null, this.onLoaded, {
       status: 'active',
       sortBy: 'start_at',
       excludeBau: true,
@@ -50,55 +50,38 @@ module.exports = React.createClass({
 
   setEvents: function (events) {
     var sortedEvents = _.sortBy(events, function(e) { return new Date(e.display_start_at); });
-    this.setState({ events: sortedEvents, isLoading: false });
+    this.setState({ events: sortedEvents });
   },
 
   componentWillMount: function() {
     this.loadEvents();
   },
 
-  renderContent: function() {
-    if (this.state.isLoading) {
-      return this.renderLoading();
-    }
-
-    if (_.isEmpty(this.state.events)) {
-      return this.renderEmpty();
-    }
-
-    return this.renderEvents();
-  },
-
   renderEvents: function() {
-    var count = this.getChildCountFromWidth(240);
+    var count = this.getChildCountFromWidth(200);
     var width = this.getChildWidth(count);
-    return _.map(_.take(this.state.events, Math.max(count, 2)), function(e) {
-      var backgroundColor = e.background_color ? e.background_color : '#525252';
-      var date = new Date(e.display_start_at);
-      return <Event key={ e.id }
-                    name={ e.name }
-                    date={ date }
-                    campaignUrl={ e.url}
-                    getStartedUrl={ e.get_started_url }
-                    backgroundColor={ backgroundColor }
-                    backgroundImageUrl={ e.background_image_url }
-                    supporterCount={ e.page_count }
-                    width={ width } />;
+    return _.map(this.state.events, function(e) {
+      var props = {
+        key: e.id,
+        name: e.name,
+        date: new Date(e.display_start_at),
+        campaignUrl: e.url,
+        getStartedUrl: e.get_started_url,
+        backgroundImageUrl: e.background_image_url,
+        supporterCount: e.page_count,
+        width: width
+      };
+      return <Event { ...props } />;
     });
   },
 
-  renderLoading: function() {
-    return <Icon className='UpcomingEvents__loading' icon='circle-o-notch' />;
-  },
-
-  renderEmpty: function() {
-    return <p className='UpcomingEvents__empty-label'>{ this.t('emptyLabel') }</p>;
-  },
-
   render: function() {
+    var show = !_.isEmpty(this.state.events);
+
     return (
       <div className={ 'UpcomingEvents ' + this.state.device }>
-        { this.renderContent()  }
+        { show && <h2 className="UpcomingEvents__title">{ this.t('title') }</h2> }
+        { show && this.renderEvents() }
       </div>
     );
   }

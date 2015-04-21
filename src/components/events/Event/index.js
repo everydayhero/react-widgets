@@ -3,6 +3,7 @@
 var React = require('react');
 var I18n = require('../../mixins/I18n');
 var effect = require('../../../lib/effect');
+var Button = require('../../callstoaction/Button');
 
 function cssUrl(url) {
   return url ? 'url(' + url + ')' : 'none';
@@ -16,7 +17,6 @@ module.exports = React.createClass({
     date: React.PropTypes.object.isRequired,
     campaignUrl: React.PropTypes.string.isRequired,
     getStartedUrl: React.PropTypes.string.isRequired,
-    backgroundColor: React.PropTypes.string.isRequired,
     backgroundImageUrl: React.PropTypes.string,
     supporterCount: React.PropTypes.number.isRequired,
     width: React.PropTypes.string.isRequired,
@@ -51,7 +51,7 @@ module.exports = React.createClass({
 
   blurBackgroundImage: function(backgroundImage) {
     this.setState({
-      base64BlurredBackgroundImage: effect.blurImage(backgroundImage, 30)
+      base64BlurredBackgroundImage: effect.blurImage(backgroundImage, 40)
     });
   },
 
@@ -79,14 +79,6 @@ module.exports = React.createClass({
     };
   },
 
-  baseStyles: function() {
-    return {
-      backgroundColor: this.props.backgroundColor,
-      backgroundImage: cssUrl(this.props.backgroundImageUrl),
-      backgroundSize: 'cover'
-    };
-  },
-
   blurStyles: function() {
     return {
       backgroundImage: cssUrl(this.state.base64BlurredBackgroundImage),
@@ -94,13 +86,12 @@ module.exports = React.createClass({
     };
   },
 
-  baseClass: function() {
-    return "Event__base " + this.state.activeClass;
-  },
-
   render: function() {
     var props = this.props;
+    var state = this.state;
     var date = props.date;
+    var bg = cssUrl(props.backgroundImageUrl);
+    var blur = cssUrl(state.base64BlurredBackgroundImage);
     var t = this.t;
 
     return (
@@ -109,8 +100,8 @@ module.exports = React.createClass({
         onTouchCancel={ this.deactivate }
         onMouseEnter={ this.activate }
         onMouseLeave={ this.deactivate }>
-        <div className={ this.baseClass() } style={ this.baseStyles() }>
-          <div className="Event__blur" style={ this.blurStyles() }></div>
+        <div className={ "Event__base " + this.state.activeClass } style={{ backgroundImage: bg }}>
+          <div className="Event__blur" style={{ backgroundImage: blur }}></div>
           <div className="Event__gradient"></div>
           <ul className="Event__date">
             <li>{ date.getDate() }</li>
@@ -119,7 +110,7 @@ module.exports = React.createClass({
           </ul>
           <a href={ props.campaignUrl } className="Event__name">{ props.name }</a>
           <p className="Event__supporter-count">{ (props.supporterCount || 0) + ' ' + t('supportersLabel') }</p>
-          <a href={ props.getStartedUrl } className="Event__join-event">{ t('joinLabel') }</a>
+          <Button kind="secondary" reverse={ true } href={ props.getStartedUrl } className="Event__join-event">{ t('joinLabel') }</Button>
         </div>
       </div>
     );

@@ -36,10 +36,12 @@ describe('SupporterCardGiveNow', function() {
     var progress = findByClass(element, 'SupporterCardGiveNow__progress');
     expect(progress).not.toBeNull();
 
-    var label = findByClass(progress, 'SupporterCardGiveNow__label');
-    expect(label.getDOMNode().textContent).toContain('Only $3087 to go');
-
     var current = findByClass(progress, 'SupporterCardGiveNow__current');
     expect(current.getDOMNode().style.width).toBe('28%');
+  });
+
+  it('displays the amount remaining', function() {
+    var label = findByClass(element, 'SupporterCardGiveNow__label');
+    expect(label.getDOMNode().textContent).toContain('Only $3087 to go');
   });
 });

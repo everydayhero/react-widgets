@@ -2,7 +2,6 @@
 
 var React               = require('react');
 var I18n                = require('../../mixins/I18n');
-var effect              = require('../../../lib/effect');
 var CallToActionButton  = require('../../callstoaction/CallToActionButton');
 
 function cssUrl(url) {
@@ -18,6 +17,7 @@ module.exports = React.createClass({
     campaignUrl: React.PropTypes.string.isRequired,
     getStartedUrl: React.PropTypes.string.isRequired,
     backgroundImageUrl: React.PropTypes.string,
+    backgroundBlurUrl: React.PropTypes.string,
     supporterCount: React.PropTypes.number.isRequired,
     width: React.PropTypes.string.isRequired,
     i18n: React.PropTypes.object,
@@ -35,24 +35,8 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      activeClass: '',
-      base64BlurredBackgroundImage: ''
+      activeClass: ''
     };
-  },
-
-  componentWillMount: function() {
-    if (this.props.backgroundImageUrl) {
-      var backgroundImage = document.createElement('img');
-      backgroundImage.setAttribute('crossorigin', 'anonymous');
-      backgroundImage.src = this.props.backgroundImageUrl;
-      backgroundImage.onload = this.blurBackgroundImage.bind(this, backgroundImage);
-    }
-  },
-
-  blurBackgroundImage: function(backgroundImage) {
-    this.setState({
-      base64BlurredBackgroundImage: effect.blurImage(backgroundImage, 40)
-    });
   },
 
   activate: function() {
@@ -79,19 +63,12 @@ module.exports = React.createClass({
     };
   },
 
-  blurStyles: function() {
-    return {
-      backgroundImage: cssUrl(this.state.base64BlurredBackgroundImage),
-      backgroundSize: 'cover'
-    };
-  },
-
   render: function() {
     var props = this.props;
     var state = this.state;
     var date = props.date;
     var bg = cssUrl(props.backgroundImageUrl);
-    var blur = cssUrl(state.base64BlurredBackgroundImage);
+    var blur = cssUrl(props.backgroundBlurUrl);
     var t = this.t;
 
     return (

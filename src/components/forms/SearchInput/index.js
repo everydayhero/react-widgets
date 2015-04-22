@@ -14,7 +14,8 @@ module.exports = React.createClass({
     onSubmit: React.PropTypes.func,
     value: React.PropTypes.string,
     width: React.PropTypes.string,
-    label: React.PropTypes.string
+    label: React.PropTypes.string,
+    animateLabel: React.PropTypes.bool
   },
 
   getInitialState: function() {
@@ -30,7 +31,8 @@ module.exports = React.createClass({
       onSubmit: null,
       value: '',
       width: 'full',
-      label: 'Search'
+      label: 'Search',
+      animateLabel: true
     };
   },
 
@@ -61,8 +63,8 @@ module.exports = React.createClass({
     var i18n  = { label: props.label };
 
     return (
-      <div className="rw-SearchInput">
-        <div className="rw-SearchInput__input">
+      <div className="ehw-SearchInput">
+        <div className="ehw-SearchInput__input">
           <Input {...props}
             value={ state.value }
             output={ this.handleChange }
@@ -70,9 +72,9 @@ module.exports = React.createClass({
             i18n={ i18n }
             spacing="compact" />
         </div>
-        <div className="rw-SearchInput__button">
+        <div className="ehw-SearchInput__button">
           <Button onClick={ this.handleSubmit } kind="primary">
-            <Icon icon="search" className="rw-SearchInput__icon" fixedWidth={ true } />
+            <Icon icon="search" className="ehw-SearchInput__icon" fixedWidth={ true } />
           </Button>
         </div>
       </div>

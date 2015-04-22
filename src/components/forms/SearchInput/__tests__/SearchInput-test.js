@@ -22,7 +22,7 @@ describe('SearchInput', function() {
   });
 
   it('renders an input', function() {
-    var input = scryByClass(element, 'rw-SearchInput');
+    var input = scryByClass(element, 'ehw-SearchInput');
   });
 
   it('returns a value on enter', function() {

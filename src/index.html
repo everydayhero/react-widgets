@@ -152,6 +152,7 @@
         <a id="CharitySearchDonate" class="modal"><i class="Icon fa fa-money fa-fw"></i> Donate to a Charity</a>
         <a id="CharitySearchFundraise" class="modal"><i class="Icon fa fa-bolt fa-fw"></i> Fundraise for a Charity</a>
         <a id="PageSearchExample" class="modal"><i class="Icon fa fa-group fa-fw"></i> Support a Friend</a>
+        <div id="SearchInput">Search Input</div>
       </div>
 
       <div class="panel clearfix">
@@ -221,6 +222,12 @@
     edh.widgets.initModal('CharitySearchDonate', 'CharitySearch', { country: 'uk', action: 'donate' });
     edh.widgets.initModal('CharitySearchFundraise', 'CharitySearch', { country: 'uk', action: 'fundraise' });
     edh.widgets.initModal('PageSearchExample', 'PageSearch', { country: 'uk' });
+    edh.widgets.renderWidget('SearchInput', 'SearchInput', {
+      onSubmit: function(value) {
+        alert('Your search term is "' + value + '"');
+      }
+    });
+
     edh.widgets.renderWidget('EntityGoalProgressExample', 'EntityGoalProgress', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('FundsRaisedExample','FundsRaised', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', { campaignUids: ['us-22', 'us-24'] });

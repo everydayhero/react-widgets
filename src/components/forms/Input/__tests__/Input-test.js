@@ -5,6 +5,7 @@ var React = require('react/addons');
 var TestUtils   = React.addons.TestUtils;
 var Input = require('../');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
+var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 var findByProp = require('../../../../test/helpers/scryRenderedDOMComponentsWithProp').findRenderedDOMComponentWithProp;
 
 describe('Input', function() {
@@ -128,5 +129,17 @@ describe('Input', function() {
     expect(element.state.valid).toBe(true);
     setValidCallback(false);
     expect(element.state.valid).toBe(false);
+  });
+
+  it("animates label to large hint when 'animateLabel' is true", function() {
+    var element = TestUtils.renderIntoDocument(<Input animateLabel={ true } />);
+    findByClass(element, 'Input__label--empty-blur');
+  });
+
+  it("label is small if has value", function() {
+    var element = TestUtils.renderIntoDocument(<Input animateLabel={ true } value="foo" />);
+    var input = scryByClass(element, 'Input__label--empty-blur');
+
+    expect(input.length).toBeLessThan(1);
   });
 });

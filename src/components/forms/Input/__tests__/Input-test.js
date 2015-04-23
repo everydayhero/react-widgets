@@ -136,6 +136,25 @@ describe('Input', function() {
     findByClass(element, 'Input__label--empty-blur');
   });
 
+  it("adds the 'Input--hasValue' class when it has a value", function() {
+    var element = TestUtils.renderIntoDocument(<Input value="foo" />);
+    findByClass(element, 'Input--hasValue');
+  });
+
+  it("does not add the 'Input--hasValue' class when it does not have a value", function() {
+    var element = TestUtils.renderIntoDocument(<Input value="" />);
+    var input = scryByClass(element, 'Input--hasValue');
+
+    expect(input.length).toBeLessThan(1);
+  });
+
+  it("does not add the 'Input--hasValue' class when the value is set to null", function() {
+    var element = TestUtils.renderIntoDocument(<Input value={ null } />);
+    var input = scryByClass(element, 'Input--hasValue');
+
+    expect(input.length).toBeLessThan(1);
+  });
+
   it("label is small if has value", function() {
     var element = TestUtils.renderIntoDocument(<Input animateLabel={ true } value="foo" />);
     var input = scryByClass(element, 'Input__label--empty-blur');

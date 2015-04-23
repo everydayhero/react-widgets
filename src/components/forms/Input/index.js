@@ -189,10 +189,10 @@ module.exports = React.createClass({
     var width = props.width;
     var spacing = props.spacing;
     var enabled = !props.disabled;
-    var hasValue = state.value !== '' && !!state.value.trim();
+    var hasValue = !!state.value && !!state.value.trim();
     var classes = cx({
       'Input': true,
-      'Input--hasValue': state.value && !!state.value.trim(),
+      'Input--hasValue': hasValue,
       'Input--focused': state.focused,
       'Input--valid': state.valid,
       'Input--error': state.error,

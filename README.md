@@ -1080,6 +1080,8 @@ Displays a set of teams for a single specified campaign.
 
 Displays a call to action box with links to the *getting started* and *sign in* page for the specified campaign. A registration URL must also be provided.
 
+##### Options
+
 - `campaignUid`: *required* string. Campaign uid to automatically insert 'sign in' and 'get started links'.
 - `registrationUrl`: *required* string. Pass a URL to your registration page.
 - `backgroundColor`: *optional* string. Set to `'#525252'` by default.
@@ -1115,6 +1117,7 @@ Displays a call to action box with links to the *getting started* and *sign in* 
 
 A share button that opens a pop-over when clicked and allows for sharing a URL. Includes the options for sharing a direct link or sharing via popular social networks.
 
+##### Options
 
 - `buttons`: *optional* array. Determines which social network/sharing service buttons to show. Choices include `'facebook'`, `'twitter'`, `'googleplus'` and `'pinterest'`. Default is set to display all buttons.
 - `shareUrl`: *optional* string. Sets the URL to share. Default is set to the current page URL.
@@ -1156,6 +1159,8 @@ A share button that opens a pop-over when clicked and allows for sharing a URL. 
 
 Displays a list of upcoming events / campaigns.
 
+##### Options
+
 - `charityUid`: *required* string. Charity uid to filter campaigns results.
 - `charitySlug`: *required* string. Charity slug for given charity uid.
 - `i18n`: *optional* object containing localised text. Default i18n is:
@@ -1165,6 +1170,8 @@ Displays a list of upcoming events / campaigns.
       emptyLabel: 'No upcoming events available.'
     }
   ```
+
+##### Example
 
 ```html
 <html>
@@ -1183,10 +1190,30 @@ Displays a list of upcoming events / campaigns.
 ```
 #### Countdown
 
-Displays the countdown to the end of an event / campaign.
+Displays a countdown of days until the start of an event or campaign. Can be configured to show a call to action button that hides itself once the event has completed or is in the past.
 
-- `days`: *required* number. The countdown days to the end of an event / campaign.
-- `registerUrl`: *required* string. The URL to your registration page.
+##### Options
+
+- `date`: *required* string. The date of your event specified as `YYYY-MM-DD`.
+- `linkUrl`: *optional* string. The URL to link to, e.g. a registration page. Defining this option will result in showing a call to action button.
+- `i18n`: *optional* object containing localised text. Default i18n is:
+
+  ```js
+    {
+      link_text: 'Register',
+      finished: "This event has now finished.",
+      past_tense: {
+        one: "day ago",
+        other: "days ago"
+      },
+      future_tense: {
+        one: "day to go",
+        other: "days to go"
+      }
+    }
+  ```
+
+##### Example
 
 ```html
 <html>
@@ -1198,12 +1225,14 @@ Displays the countdown to the end of an event / campaign.
   <body>
     <div id="CountDownExample">Loading...</div>
     <script>
-      edh.widgets.renderWidget('CountDownExample', 'CountDown', { days: 34, registerUrl: 'https://pmhincelebration.edheroy.com/au/get-started' });
+      edh.widgets.renderWidget('CountDownExample', 'CountDown', {
+        date: "2016-04-24",
+        linkUrl: 'https://everydayhero.com/us'
+      });
     </script>
   </body>
 </html>
 ```
-
 
 ## Commands
 

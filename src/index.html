@@ -216,7 +216,6 @@
       </div>
     </div>
   </div>
-
   <script>
     edh.widgets.initModal('CharitySearchVisit', 'CharitySearch', { country: 'uk' });
     edh.widgets.initModal('CharitySearchDonate', 'CharitySearch', { country: 'uk', action: 'donate' });
@@ -227,14 +226,13 @@
         alert('Your search term is "' + value + '"');
       }
     });
-
     edh.widgets.renderWidget('EntityGoalProgressExample', 'EntityGoalProgress', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('FundsRaisedExample','FundsRaised', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('GoalExample', 'Goal', { goal: '5000000', i18n: { title: '2015 Goal' } });
     edh.widgets.renderWidget('CountDownExample', 'CountDown', {
-      date: "24-04-2016",
+      date: "2016-04-22",
       linkUrl: 'https://everydayhero.com/us'
     });
     edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-22' });
@@ -303,7 +301,6 @@
 
     edh.widgets.renderWidget('InputExample', 'Input', { i18n: { name: 'input_example', label: 'Input Example', hint: 'What is this input for?', error: 'This input is required'}, required: true });
     edh.widgets.renderWidget('CallToActionBoxExample', 'CallToActionBox', { campaignUid: 'us-22', registrationUrl: 'https://your-registration-url.com/' });
-
     edh.widgets.renderWidget('ShareButtonExample', 'ShareButton');
   </script>
 </body>

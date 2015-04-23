@@ -7,8 +7,8 @@ var I18nMixin          = require('../../mixins/I18n');
 var CallToActionButton = require('../../callstoaction/CallToActionButton');
 
 module.exports = React.createClass({
-  mixins: [I18nMixin],
   displayName: 'CountDown',
+  mixins: [I18nMixin],
   propTypes: {
     date: React.PropTypes.string.isRequired,
     linkUrl: React.PropTypes.string,
@@ -19,16 +19,19 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       date: null,
-      days: 0,
       linkUrl: null,
       format: '0,0',
       defaultI18n: {
-        linkText: 'Register',
+        link_text: 'Register',
         finished: "This event has now finished.",
-        days: "days",
-        day: "day",
-        ago: "ago",
-        toGo: "to go"
+        past_tense: {
+          one: "day ago",
+          other: "days ago"
+        },
+        future_tense: {
+          one: "day to go",
+          other: "days to go"
+        }
       }
     };
   },
@@ -39,7 +42,7 @@ module.exports = React.createClass({
     if (linkUrl && !isFinished) {
       return (
         <CallToActionButton href={ linkUrl } kind="primary" thin="true" className="CountDown__link">
-          { this.t('linkText') }
+          { this.t('link_text') }
         </CallToActionButton>
       );
     } else if (linkUrl && isFinished) {
@@ -52,31 +55,21 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var props       = this.props;
-    var today       = moment().startOf('day');
-    var eventDay    = moment(props.date, ["DD-MM-YYYY", "MM-DD-YYYY"]);
-    var days        = Math.ceil(eventDay.diff(today, 'days', true));
-    var timeLabel   = this.t('days');
-    var suffixLabel = this.t('toGo');
-    var isFinished  = false;
-
-    if (days === 1 || days === -1) {
-      timeLabel = this.t('day');
-    }
-
-    if (days < 0) {
-      days *= -1;
-      isFinished = true;
-      suffixLabel = this.t('ago');
-    }
+    var props        = this.props;
+    var today        = moment().startOf('day');
+    var eventDay     = moment(props.date, "YYYY-MM-DD");
+    var days         = Math.ceil(eventDay.diff(today, 'days', true));
+    var isFinished   = days < 0;
+    var daysAbsolute = Math.abs(days);
+    var label        = this.t(isFinished ? 'past_tense' : 'future_tense', { count: daysAbsolute });
 
     return (
       <div className="CountDown">
         <div className="CountDown__days">
-          { numeral(days).format(this.props.format) }
+          { numeral(daysAbsolute).format(props.format) }
         </div>
         <div className="CountDown__label">
-          { timeLabel + ' ' + suffixLabel }
+          { label }
         </div>
         { this.renderLink(isFinished) }
       </div>

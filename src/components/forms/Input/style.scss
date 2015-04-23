@@ -26,13 +26,17 @@
   font-size: 9px;
   line-height: 9px;
   color: $ehw-grey-dark;
+}
 
-  .label__text {
-    position: absolute;
-    transition: all 60ms ease-out;
-    font-size: 9px;
-    top:8px;
-  }
+.Input__label .label__text {
+  position: absolute;
+  transition: all 60ms ease-out;
+  font-size: 9px;
+  top:8px;
+  left: 8px;
+  height: 40px;
+  line-height: 9px;
+  width: auto;
 }
 
 .Input__label--empty-blur .label__text {
@@ -42,6 +46,8 @@
   left: 15px;
   text-transform: none;
   color: $ehw-grey;
+  line-height: 9px;
+  cursor: text;
 }
 
 .Input__input {

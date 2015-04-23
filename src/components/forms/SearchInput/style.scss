@@ -1,5 +1,6 @@
 .ehw-SearchInput {
   display: table;
+  margin: 1px;
 }
 
 .ehw-SearchInput__input {
@@ -12,12 +13,17 @@
   min-height: 34px;
 }
 
+.ehw-SearchInput__input .Input__label {
+  padding: 3px 8px 0;
+  margin: 1px 0;
+}
+
 .ehw-SearchInput__button {
   display: table-cell;
   vertical-align: top;
 
  .hui-Button {
-    padding: 0px 0 1px 0;
+    padding: 1px 0;
     margin: 1px 0 0 0;
   }
 }

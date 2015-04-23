@@ -45,4 +45,14 @@ describe('i18n', function() {
       i18n.t({bar: 'blah'}, 'bar', {scope: 'foo'})
     ).toBe('blah');
   });
+
+  it('accepts a count param', function() {
+    expect(
+      i18n.t({ bar: { one: 'bar', other: 'bars' } }, 'bar', { count: 1 })
+    ).toBe('bar');
+
+    expect(
+      i18n.t({ bar: { one: 'bar', other: 'bars' } }, 'bar', { count: 2 })
+    ).toBe('bars');
+  });
 });

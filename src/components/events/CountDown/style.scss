@@ -1,24 +1,22 @@
 .CountDown {
-  text-align: center;
-  background-color: #FFFFFF;
-  color: #000000;
+  @extend %ehw-tile;
+  background-color: #fff;
+  color: $ehw-grey-darker;
 }
 
 .CountDown__days {
-  font-size: $x-12;
-  padding-top: $x-4;
-  font-weight: bold;
-  margin: 0;
+  @extend %ehw-tile-total;
+  color: $ehw-grey-darker;
 }
 
-.CountDown__daysToGo {
-  font-size: $x-5;
-  margin: 0;
-  margin-top: $x-3
+.CountDown__link,
+.CountDown__finished {
+  margin-top: $x-2;
 }
 
-.CountDown__register {
-  display: block;
-  padding: $x-3;
-  color: #FF7E6B;
+.CountDown__finished {
+  color: $ehw-grey;
+  font-size: $x-3;
+  text-transform: none;
+  font-weight: normal;
 }

@@ -192,7 +192,7 @@ module.exports = React.createClass({
     var hasValue = state.value !== '' && !!state.value.trim();
     var classes = cx({
       'Input': true,
-      'Input--hasValue': hasValue,
+      'Input--hasValue': state.value && !!state.value.trim(),
       'Input--focused': state.focused,
       'Input--valid': state.valid,
       'Input--error': state.error,

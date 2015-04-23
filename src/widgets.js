@@ -32,6 +32,7 @@ var widgets = {
   AddressLookup: require('./components/address/AddressLookup'),
   Amount: require('./components/amount/Amount'),
   Input: require('./components/forms/Input'),
+  SearchInput: require('./components/forms/SearchInput'),
   Footprint: require('./components/footprint/Footprint'),
   Supporters: require('./components/supporters/Supporters'),
   ShareButton: require('./components/sharing/ShareButton')

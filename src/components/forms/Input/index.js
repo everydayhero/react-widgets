@@ -29,7 +29,9 @@ module.exports = React.createClass({
     spacing: React.PropTypes.string,
     type: React.PropTypes.string,
     value: React.PropTypes.string,
-    width: React.PropTypes.string
+    width: React.PropTypes.string,
+    onEnter: React.PropTypes.func,
+    animateLabel: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
@@ -51,6 +53,7 @@ module.exports = React.createClass({
       value: '',
       width: 'full',
       spacing: 'loose',
+      animateLabel: false,
       defaultI18n: {
         name: 'input',
         label: 'Input'
@@ -93,6 +96,7 @@ module.exports = React.createClass({
     var value = (this.props.readOnly || this.props.disabled) ? this.state.value
               : this.props.mask ? this.props.mask(e.target.value)
               : e.target.value;
+
     this.setState({
       error: false,
       valid: false,
@@ -128,6 +132,12 @@ module.exports = React.createClass({
   handleBlur: function() {
     this.setState({ focused: false });
     this.validate();
+  },
+
+  handleKeyUp: function(e) {
+    if(e.key === 'Enter' && this.props.onEnter) {
+      this.props.onEnter(this.state.value);
+    }
   },
 
   setValid: function(valid) {
@@ -179,9 +189,10 @@ module.exports = React.createClass({
     var width = props.width;
     var spacing = props.spacing;
     var enabled = !props.disabled;
+    var hasValue = state.value !== '' && !!state.value.trim();
     var classes = cx({
       'Input': true,
-      'Input--hasValue': state.value && !!state.value.trim(),
+      'Input--hasValue': hasValue,
       'Input--focused': state.focused,
       'Input--valid': state.valid,
       'Input--error': state.error,
@@ -195,10 +206,15 @@ module.exports = React.createClass({
       'Input--loose': spacing === 'loose'
     });
 
+    var labelClasses = cx({
+      'Input__label': true,
+      'Input__label--empty-blur': !state.focused && props.animateLabel && !hasValue
+    });
+
     return (
       <div className={ classes }>
-        <label className="Input__label" htmlFor={ t('name') }>
-          { t('label') }
+        <label className={ labelClasses } htmlFor={ t('name') }>
+          <span className="label__text"> { t('label') } </span>
           <input
             autoComplete={ props.autoComplete ? 'on' : 'off' }
             className="Input__input"
@@ -208,6 +224,7 @@ module.exports = React.createClass({
             onBlur={ enabled && this.handleBlur }
             onChange={ enabled && this.handleChange }
             onFocus={ enabled && this.handleFocus }
+            onKeyUp={ enabled && this.handleKeyUp }
             ref="input"
             type={ props.type }
             value={ state.value } />

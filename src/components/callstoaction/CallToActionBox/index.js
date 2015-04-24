@@ -21,8 +21,8 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       registrationUrl: '',
-      backgroundColor: '#525252',
-      textColor: '#FFFFFF',
+      backgroundColor: null,
+      textColor: null,
       defaultI18n: {
         title: 'Get Involved',
         registerLabel: 'Register Now',

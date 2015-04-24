@@ -145,8 +145,8 @@ Displays the total funds raised for specified campaigns as a dollar amount. Eith
 - `campaignUid`: *optional* string campaign uid to filter results by campaign.
 - `campaignUids`: *optional* array of campaign uids to filter results by multiple campaigns.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
-- `backgroundColor`: *optional* string. Set to `'#525252'` by default.
-- `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `backgroundColor`: *optional* string. Not set by default.
+- `textColor`: *optional* string. Not set by default.
 - `format`: *optional* string. Set to `'0.00 a'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
@@ -185,8 +185,8 @@ Displays the total number of fundraisers (that have an everydayhero page) for sp
 
 - `campaignUid`: *optional* string campaign uid to filter results by campaign.
 - `campaignUids`: *optional* array of campaign uids to filter results by multiple campaigns.
-- `backgroundColor`: *optional* string. Set to `'#525252'` by default.
-- `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `backgroundColor`: *optional* string. Not set by default.
+- `textColor`: *optional* string. Not set by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `format`: *optional* string. Set to `'0,0'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
@@ -225,8 +225,8 @@ Displays the total number of charities associated with specified campaigns. Eith
 
 - `campaignUid`: *optional* string campaign uid to filter results by campaign.
 - `campaignUids`: *optional* array of campaign uids to filter results by multiple campaigns.
-- `backgroundColor`: *optional* string. Set to `'#525252'` by default.
-- `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `backgroundColor`: *optional* string. Not set by default.
+- `textColor`: *optional* string. Not set by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `format`: *optional* string. Set to `'0,0 a'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
@@ -265,8 +265,8 @@ Set and display a campaign goal. While this component can be configured to displ
 
 - `goal`: *required* number. Set a goal, rendered as a dollar value by default.
 - `renderIcon`: *optional* string or boolean. Set to `true` by default. Pass in a valid [FontAwesome](http://fortawesome.github.io/Font-Awesome/icons/) icon name (without the _fa_ prefix) to override the default; View an example below. Set to `false` to render no icon.
-- `backgroundColor`: *optional* string. Set to `'#525252'` by default.
-- `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `backgroundColor`: *optional* string. Not set by default.
+- `textColor`: *optional* string. Not set by default.
 - `format`: *optional* string. Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
 - `handleCents`: *optional* boolean. Set to `true` by default. Determines whether the supplied `goal` is divided by 100 (to display as dollars).
 - `i18n`: *optional* object containing localised text. Default i18n is:
@@ -362,8 +362,8 @@ Either a single or multiple campaign uids can be provided to scope this widget.
 - `campaignUids`: *optional* array of campaign uids to filter results by multiple campaigns.
 - `unit`: *optional* string. Can be set to either `'km'` or `'miles'`. Converts input to whichever is defined. Set to `'miles'` by default.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
-- `backgroundColor`: *optional* string. Set to `'#525252'` by default.
-- `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `backgroundColor`: *optional* string. Not set by default.
+- `textColor`: *optional* string. Not set by default.
 - `format`: *optional* string. Set to `'0,0[.]0[0]'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
@@ -406,8 +406,8 @@ Either a single or multiple campaign uids can be provided to scope this widget.
 - `campaignUid`: *optional* string campaign uid to filter results by campaign.
 - `campaignUids`: *optional* array of campaign uids to filter results by multiple campaigns.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
-- `backgroundColor`: *optional* string. Set to `'#525252'` by default.
-- `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `backgroundColor`: *optional* string. Not set by default.
+- `textColor`: *optional* string. Not set by default.
 - `format`: *optional* string. Set to `'0,0[.]0[0]'` by default. [More format strings](http://numeraljs.com/).
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
@@ -556,8 +556,8 @@ Displays a set of fundraiser profile images (that have a page) for a single spec
 ##### Options
 
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
-- `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
-- `textColor`: *optional* string. Set to `'#333333'` by default.
+- `backgroundColor`: *optional* string. Not set by default.
+- `textColor`: *optional* string. Not set by default.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -1043,8 +1043,8 @@ Displays a set of teams for a single specified campaign.
 
 - `campaignUid`: *required* string campaign uid to filter results by campaign.
 - `page_size`: *optional* string. Set to `'12'` by default. Determines how many results are returned.
-- `backgroundColor`: *optional* string. Set to `'#EBEBEB'` by default.
-- `textColor`: *optional* string. Set to `'#333333'` by default.
+- `backgroundColor`: *optional* string. Not set by default.
+- `textColor`: *optional* string. Not set by default.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js
@@ -1084,8 +1084,8 @@ Displays a call to action box with links to the *getting started* and *sign in* 
 
 - `campaignUid`: *required* string. Campaign uid to automatically insert 'sign in' and 'get started links'.
 - `registrationUrl`: *required* string. Pass a URL to your registration page.
-- `backgroundColor`: *optional* string. Set to `'#525252'` by default.
-- `textColor`: *optional* string. Set to `'#FFFFFF'` by default.
+- `backgroundColor`: *optional* string. Not set by default.
+- `textColor`: *optional* string. Not set by default.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
   ```js

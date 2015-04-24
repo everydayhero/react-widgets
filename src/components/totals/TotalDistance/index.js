@@ -27,8 +27,8 @@ module.exports = React.createClass({
       campaignUid: '',
       campaignUids: [],
       renderIcon: true,
-      backgroundColor: '#525252',
-      textColor: '#FFFFFF',
+      backgroundColor: null,
+      textColor: null,
       unit: 'miles',
       format: '0,0[.]0[0]',
       defaultI18n: {

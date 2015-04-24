@@ -41,7 +41,7 @@ module.exports = React.createClass({
 
     if (linkUrl && !isFinished) {
       return (
-        <CallToActionButton href={ linkUrl } kind="primary" thin="true" className="CountDown__link">
+        <CallToActionButton href={ linkUrl } kind="primary" thin={ true } className="CountDown__link">
           { this.t('link_text') }
         </CallToActionButton>
       );

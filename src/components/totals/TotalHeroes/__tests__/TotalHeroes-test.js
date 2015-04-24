@@ -113,7 +113,7 @@ describe('TotalHeroes', function() {
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var totalHeroes = <TotalHeroes campaignUid="au-0" unit="km" format="0.00" />;
+      var totalHeroes = <TotalHeroes campaignUid="au-0" format="0.00" />;
       var element = TestUtils.renderIntoDocument(totalHeroes);
 
       element.setState({

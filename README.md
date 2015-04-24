@@ -217,6 +217,46 @@ Displays the total number of fundraisers (that have an everydayhero page) for sp
 </html>
 ```
 
+#### Total Donations (Campaign)
+
+Displays the total number of donations made toward a given campaign. Either a single or multiple campaign uids can be provided to scope this widget.
+
+##### Options
+
+- `campaignUid`: *optional* string campaign uid to filter results by campaign.
+- `campaignUids`: *optional* array of campaign uids to filter results by multiple campaigns.
+- `backgroundColor`: *optional* string. Not set by default.
+- `textColor`: *optional* string. Not set by default.
+- `renderIcon`: *optional* boolean. Set to `true` by default.
+- `format`: *optional* string. Set to `'0,0'` by default. [More format strings](http://numeraljs.com/).
+- `i18n`: *optional* object containing localised text. Default i18n is:
+
+  ```js
+  {
+    title: 'Donations'
+  }
+  ```
+
+##### Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="TotalDonationsExample">Loading...</div>
+    <script>
+      edh.widgets.renderWidget('TotalDonationsExample', 'TotalDonations', { campaignUids: ['us-0','us-1'] });
+    </script>
+  </body>
+</html>
+```
+
 #### Total Charities (Campaign)
 
 Displays the total number of charities associated with specified campaigns. Either a single or multiple campaign uids can be provided to scope this widget.

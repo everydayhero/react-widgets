@@ -1,0 +1,15 @@
+.TotalDonations {
+  @extend %ehw-tile;
+}
+
+.TotalDonations__total {
+  @extend %ehw-tile-total;
+}
+
+.TotalDonations__loading {
+  @extend %ehw-tile-loading-icon;
+}
+
+.TotalDonations__icon {
+  @extend %ehw-tile-icon;
+}

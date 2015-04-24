@@ -13,8 +13,6 @@ module.exports = React.createClass({
   propTypes: {
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
-    pageCount: React.PropTypes.number,
-    pageSize: React.PropTypes.number,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -26,9 +24,6 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       campaignUids: [],
-      pageCount: 1,
-      pageSize: 1,
-      pageType: 'individual',
       renderIcon: true,
       backgroundColor: '',
       textColor: '',
@@ -76,14 +71,14 @@ module.exports = React.createClass({
     var props = this.props;
 
     _.each(campaignUids, function(campaignUid) {
-      totals.findByCampaign(campaignUid, '', '', this.onSuccess);
+      totals.findByCampaign(campaignUid, this.onSuccess);
     }, this);
   },
 
   renderTotal: function() {
     var totalDonations = this.state.total;
     var formattedTotal = numeral(totalDonations).format(this.props.format);
-    var title = this.t('title');
+    var title          = this.t('title');
 
     if (this.state.isLoading) {
       return <Icon className="TotalDonations__loading" icon="refresh" />;
@@ -101,7 +96,7 @@ module.exports = React.createClass({
     var renderIcon = this.props.renderIcon;
 
     if (renderIcon) {
-      return <Icon className="TotalDonations__icon" icon="gift"/>;
+      return <Icon className="TotalDonations__icon" icon="life-saver"/>;
     }
   },
 

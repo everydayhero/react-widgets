@@ -1,11 +1,12 @@
 "use strict";
+
 jest.autoMockOff();
-jest.mock('../../../../api/pages');
+jest.mock('../../../../api/totals');
 
 describe('TotalDonations', function() {
   var React          = require('react/addons');
   var TotalDonations = require('../');
-  var pages          = require('../../../../api/pages');
+  var totals         = require('../../../../api/totals');
   var TestUtils      = React.addons.TestUtils;
   var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
 
@@ -14,16 +15,16 @@ describe('TotalDonations', function() {
     var element;
 
     beforeEach(function() {
-      pages.findByCampaign.mockClear();
+      totals.findByCampaign.mockClear();
       totalDonations = <TotalDonations campaignUid="us-22" />;
       element = TestUtils.renderIntoDocument(totalDonations);
     });
 
-    it('render something', function() {
+    it('renders something', function() {
       expect(element).not.toBeNull();
     });
 
-    it('renders default total of pages', function() {
+    it('renders default total of donations', function() {
       element.setState({ isLoading: false });
 
       var total = findByClass(element, 'TotalDonations__total');
@@ -48,8 +49,8 @@ describe('TotalDonations', function() {
     });
 
     it('makes a single call using to fetch api data', function() {
-      expect(pages.findByCampaign.mock.calls.length).toEqual(1);
-      expect(pages.findByCampaign).toBeCalledWith("us-22", 'individual', 1, 1, element.onSuccess);
+      expect(totals.findByCampaign.mock.calls.length).toEqual(1);
+      expect(totals.findByCampaign).toBeCalledWith("us-22", element.onSuccess);
     });
   });
 
@@ -58,15 +59,15 @@ describe('TotalDonations', function() {
     var element;
 
     beforeEach(function() {
-      pages.findByCampaign.mockClear();
+      totals.findByCampaign.mockClear();
       totalDonations = <TotalDonations campaignUids={ ["us-22", "us-24"] } />;
       element = TestUtils.renderIntoDocument(totalDonations);
     });
 
     it('makes multiple calls to fetch api data', function() {
-      expect(pages.findByCampaign.mock.calls.length).toEqual(2);
-      expect(pages.findByCampaign).toBeCalledWith("us-22", 'individual', 1, 1, element.onSuccess);
-      expect(pages.findByCampaign).toBeCalledWith("us-24", 'individual', 1, 1, element.onSuccess);
+      expect(totals.findByCampaign.mock.calls.length).toEqual(2);
+      expect(totals.findByCampaign).toBeCalledWith("us-22", element.onSuccess);
+      expect(totals.findByCampaign).toBeCalledWith("us-24", element.onSuccess);
     });
   });
 
@@ -104,24 +105,24 @@ describe('TotalDonations', function() {
 
       element.setState({
         isLoading: false,
-        total: 10050
+        total: 1000
       });
 
       var total = findByClass(element, 'TotalDonations__total');
-      expect(total.getDOMNode().textContent).toBe('10,050');
+      expect(total.getDOMNode().textContent).toBe('1,000');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var totalDonations = <TotalDonations campaignUid="au-0" format="0.00" />;
+      var totalDonations = <TotalDonations campaignUid="au-0" format="0[.]00" />;
       var element = TestUtils.renderIntoDocument(totalDonations);
 
       element.setState({
         isLoading: false,
-        total: 10050
+        total: 1000
       });
 
       var total = findByClass(element, 'TotalDonations__total');
-      expect(total.getDOMNode().textContent).toBe('10050.00');
+      expect(total.getDOMNode().textContent).toBe('1000');
     });
   });
 });

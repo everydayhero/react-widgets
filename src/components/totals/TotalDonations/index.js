@@ -49,7 +49,7 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    this.loadPages();
+    this.loadTotals();
   },
 
   setUids: function() {
@@ -64,7 +64,7 @@ module.exports = React.createClass({
     return campaignUids;
   },
 
-  loadPages: function() {
+  loadTotals: function() {
     this.setState({ isLoading: true });
 
     var campaignUids = this.setUids();

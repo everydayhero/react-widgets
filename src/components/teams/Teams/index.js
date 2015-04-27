@@ -26,8 +26,8 @@ module.exports = React.createClass({
       page_count: '1',
       page_size: '12',
       type: 'team',
-      backgroundColor: '#EBEBEB',
-      textColor: '#333333',
+      backgroundColor: null,
+      textColor: null,
       defaultI18n: {
         heading: 'Teams',
         emptyLabel: 'No teams to display.'

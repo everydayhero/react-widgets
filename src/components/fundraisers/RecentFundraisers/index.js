@@ -24,8 +24,8 @@ module.exports = React.createClass({
       page: '1',
       pageSize: '6',
       type: 'individual',
-      backgroundColor: '#EBEBEB',
-      textColor: '#333333',
+      backgroundColor: null,
+      textColor: null,
       defaultI18n: {
         heading: 'Fundraisers',
         emptyLabel: 'No fundraisers to display.'

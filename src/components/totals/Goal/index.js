@@ -23,8 +23,8 @@ module.exports = React.createClass({
       campaignUid: '',
       renderIcon: true,
       goal: 0,
-      backgroundColor: '#525252',
-      textColor: '#FFFFFF',
+      backgroundColor: null,
+      textColor: null,
       format: '0[.]00 a',
       handleCents: true,
       defaultI18n: {

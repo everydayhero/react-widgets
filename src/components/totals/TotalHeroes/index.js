@@ -30,8 +30,8 @@ module.exports = React.createClass({
       pageSize: 1,
       pageType: 'individual',
       renderIcon: true,
-      backgroundColor: '#525252',
-      textColor: '#FFFFFF',
+      backgroundColor: null,
+      textColor: null,
       format: '0,0',
       defaultI18n: {
         title: 'Heroes'

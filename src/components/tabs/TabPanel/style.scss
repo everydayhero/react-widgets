@@ -1,0 +1,21 @@
+.TabPanel {
+  @extend %clearfix;
+  display: none;
+  padding: $x-4;
+  background: $ehw-grey-light;
+  color: $ehw-grey-darker;
+  transition: all 0.2s ease-in-out;
+
+  &.TabPanel--active {
+    display: block;
+  }
+}
+
+.TabPanel__inner {
+  margin: 0;
+  padding: 0;
+}
+
+.TabPanel__loading {
+  @extend %ehw-tile-loading-icon;
+}

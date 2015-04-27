@@ -36,7 +36,8 @@ var widgets = {
   SearchInput: require('./components/forms/SearchInput'),
   Footprint: require('./components/footprint/Footprint'),
   Supporters: require('./components/supporters/Supporters'),
-  ShareButton: require('./components/sharing/ShareButton')
+  ShareButton: require('./components/sharing/ShareButton'),
+  Tabs: require('./components/tabs/Tabs')
 };
 var modals = {
   CharitySearch: require('./components/search/CharitySearchModal'),

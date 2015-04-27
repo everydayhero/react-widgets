@@ -1274,6 +1274,49 @@ Displays a countdown of days until the start of an event or campaign. Can be con
 </html>
 ```
 
+### Misc. UI Elements
+
+#### Tabs
+
+Displays a set of tabs that transform to an accordion depending on browser window size/number of tabs.
+
+##### Options
+
+- `data`: *required* array. Array of objects containing a `label` and `content` field to represent each tab.
+
+##### Example
+
+```html
+<html>
+  <head>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" media="all" rel="Stylesheet" />
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <div id="TabsExample"></div>
+    <script>
+      edh.widgets.renderWidget('TabsExample', 'Tabs', {
+        data: [
+          {
+            label: 'Example Tab',
+            content: '<p>Tab content goes here.</p><p>Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec ullamcorper nulla non metus auctor fringilla.</p>'
+          },
+          {
+            label: 'Another Tab',
+            content: '<p>Lorem <strong>ipsum dolor</strong> sit amet, consectetur adipiscing elit. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus.</p>'
+          },
+          {
+            label: 'Last Tab',
+            content: '<p>An image:</p> <img src="http://placehold.it/200x100">'
+          }
+        ]
+      });
+    </script>
+  </body>
+</html>
+```
+
 ## Commands
 
 OSX users may need to increase the maximum number of open files (default is 256) using `ulimit -Sn 1000` to use build, watch, and scripts commands.

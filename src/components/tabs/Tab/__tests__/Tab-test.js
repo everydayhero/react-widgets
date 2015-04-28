@@ -19,7 +19,7 @@ describe('Tab', function() {
     element = findByClass(component, 'Tab');
   });
 
-  it('calls renders a tab with a name', function() {
+  it('renders a tab with a name', function() {
     expect(element.getDOMNode().textContent).toBe('foobar');
     expect(element.getDOMNode().className).toContain('active');
   });

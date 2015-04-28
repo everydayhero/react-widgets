@@ -44,7 +44,7 @@ module.exports = React.createClass({
     var tabListWidth   = this.state.tabListWidth;
 
     this.setState({
-      stacked: tabListWidth > componentWidth ? true : false
+      stacked: tabListWidth > componentWidth
     });
   }, 100, { trailing: true }),
 

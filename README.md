@@ -1282,7 +1282,7 @@ Displays a set of tabs that transform to an accordion depending on browser windo
 
 ##### Options
 
-- `data`: *required* array. Array of objects containing a `label` and `content` field to represent each tab.
+- `children`: *required* array. Array of objects containing a `label` and `content` field to represent each tab, or array of react components.
 
 ##### Example
 
@@ -1297,7 +1297,7 @@ Displays a set of tabs that transform to an accordion depending on browser windo
     <div id="TabsExample"></div>
     <script>
       edh.widgets.renderWidget('TabsExample', 'Tabs', {
-        data: [
+        children: [
           {
             label: 'Example Tab',
             content: '<p>Tab content goes here.</p><p>Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec ullamcorper nulla non metus auctor fringilla.</p>'

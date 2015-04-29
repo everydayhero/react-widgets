@@ -25,7 +25,7 @@ describe('Tabs', function() {
     var component;
 
     beforeEach(function() {
-      tabs = <Tabs data={ data } />;
+      tabs = <Tabs children={ data } />;
       component = TestUtils.renderIntoDocument(tabs);
     });
 

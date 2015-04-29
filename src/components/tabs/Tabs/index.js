@@ -11,11 +11,11 @@ var removeEventListener = require('../../../lib/removeEventListener');
 module.exports = React.createClass({
   displayName: "Tabs",
   propTypes: {
-    data: React.PropTypes.array
+    children: React.PropTypes.array
   },
 
   getDefaultProps: function() {
-    return { data: [] };
+    return { children: [] };
   },
 
   getInitialState: function() {
@@ -54,7 +54,7 @@ module.exports = React.createClass({
 
   handleKeyDown: function(e, i) {
     var key       = e.keyCode || e.which;
-    var totalTabs = this.props.data.length - 1;
+    var totalTabs = this.props.children.length - 1;
     var current   = this.state.current;
 
     if ((key === 39 || key === 40) && current < totalTabs) {
@@ -75,12 +75,12 @@ module.exports = React.createClass({
 
   renderTabs: function() {
     if (!this.state.stacked) {
-      return this.props.data.map(function(d, i) {
+      return this.props.children.map(function(d, i) {
         return (
           <Tab
             onClick={ this.switchTab }
             onKeyDown={ this.handleKeyDown }
-            label={ d.label }
+            label={ d.label || d.props.tabLabel }
             index={ i }
             active={ this.state.current === i }
             tabId={ "tab-" + i }
@@ -97,7 +97,7 @@ module.exports = React.createClass({
         <TabDrawer
           onClick={ this.switchTab }
           onKeyDown={ this.handleKeyDown }
-          label={ d.label }
+          label={ d.label || d.props.tabLabel }
           index={ i }
           active={ this.state.current === i }
           tabId={ "tab-" + i }
@@ -108,12 +108,12 @@ module.exports = React.createClass({
   },
 
   renderContent: function() {
-    return this.props.data.map(function(d, i) {
+    return this.props.children.map(function(d, i) {
       return (
         <div className="Tabs__content" key={ 'content-' + i }>
           { this.renderTabDrawers(d, i) }
           <TabPanel
-            content={ d.content }
+            content={ d.content || d }
             index={ i }
             panelId={ "panel-" + i }
             labelledBy={ "tab-" + i }

@@ -24,13 +24,9 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var active = this.props.active ? " active" : '';
-
     return (
-      <div className={ "PromoCharitiesResults" + active }>
-        <div className="PromoCharitiesResults__inner">
-          { this.renderCharityResults() }
-        </div>
+      <div className="PromoCharitiesResults">
+        { this.renderCharityResults() }
       </div>
     );
   }

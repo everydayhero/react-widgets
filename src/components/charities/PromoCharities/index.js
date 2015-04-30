@@ -1,10 +1,11 @@
 "use strict";
 
-var _                  = require('lodash');
-var React              = require('react');
-var I18nMixin          = require('../../mixins/I18n');
-var charities          = require('../../../api/charities');
-var PromoCharitiesTabs = require('../PromoCharitiesTabs');
+var _                     = require('lodash');
+var React                 = require('react');
+var I18nMixin             = require('../../mixins/I18n');
+var charities             = require('../../../api/charities');
+var Tabs                  = require('../../tabs/Tabs');
+var PromoCharitiesResults = require('../PromoCharitiesResults');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
@@ -93,8 +94,18 @@ module.exports = React.createClass({
     }
   },
 
-  actionLabel: function() {
-    return this.t(this.props.action + 'Action');
+  renderCharityResults: function() {
+    return this.state.tabs.map(function(d, i) {
+      return (
+        <PromoCharitiesResults
+          tabLabel={ d.tabName }
+          content={ d.contents }
+          loaded={ this.state.isLoaded }
+          onSelect={ this.selectHandler }
+          actionLabel={ this.t(this.props.action + 'Action') }
+          key={ "charity-result-" + d.tabName } />
+      );
+    }, this);
   },
 
   render: function() {
@@ -114,13 +125,9 @@ module.exports = React.createClass({
           <h3 className="PromoCharities__heading">{ heading }</h3>
           { renderSubheading() }
         </div>
-        <div className="PromoCharities__content">
-          <PromoCharitiesTabs
-            data={ this.state.tabs }
-            loaded={ this.state.isLoaded }
-            onSelect={ this.selectHandler }
-            actionLabel={ this.actionLabel() } />
-        </div>
+        <Tabs>
+          { this.renderCharityResults() }
+        </Tabs>
       </div>
     );
   }

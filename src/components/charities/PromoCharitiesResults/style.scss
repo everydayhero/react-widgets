@@ -1,18 +1,8 @@
 .PromoCharitiesResults {
   @extend %clearfix;
-  display: none;
-  padding: 5px 10px;
+  display: block;
   background: $ehw-grey-light;
   color: $ehw-grey-darker;
-
-  &.active {
-    display: block;
-  }
-}
-
-.PromoCharitiesResults__inner {
-  margin: 0;
-  padding: 0;
 
   &:hover > * {
     opacity: 0.6;

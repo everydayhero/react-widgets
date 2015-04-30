@@ -15,7 +15,7 @@ function parseUrl(url) {
   return !match ? null : {
     protocol: match[1],
     hostname: match[2],
-    path: match[3],
+    path: match[3] || '/',
     query: match[4],
     bookmark: match[5]
   };

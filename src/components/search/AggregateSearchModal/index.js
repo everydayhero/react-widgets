@@ -24,6 +24,7 @@ module.exports = React.createClass({
 
   propTypes: {
     autoFocus: React.PropTypes.bool,
+    searchTerm: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
     i18n: React.PropTypes.object,
     onClose: React.PropTypes.func.isRequired,
@@ -33,6 +34,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       autoFocus: true,
+      searchTerm: '',
       defaultI18n: {
         title: 'Search',
         inputLabel: 'Search for a supporter, charity or event',
@@ -41,7 +43,7 @@ module.exports = React.createClass({
         supporterAction: 'Support',
         emptyLabel: "We couldn't find any matching supporters, charities or events.",
         noMore: "No more results",
-        loadMore: "Load more results",
+        loadMore: "Show more",
         loadingMore: "Searching"
       },
       pageSize: 10
@@ -50,10 +52,17 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
+      searchTerm: this.props.searchTerm,
       cancelRequest: function() {},
       results: null,
       isSearching: false
     };
+  },
+
+  componentWillMount: function() {
+    if (this.props.searchTerm) {
+      this.aggregateSearch(this.props.searchTerm, 1);
+    }
   },
 
   keyHandler: function(event) {
@@ -176,7 +185,7 @@ module.exports = React.createClass({
         className='AggregateSearchModal__input'
         spacing="compact"
         autoFocus={ props.autoFocus }
-        i18n={{ label: this.t('inputLabel') }}
+        i18n={{ label: this.t('inputLabel'), name: 'aggregate_search_input' }}
         output={ this.inputChanged }
         showIcon={ true }
         icon={ this.state.isSearching ? 'refresh' : '' }

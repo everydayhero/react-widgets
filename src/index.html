@@ -228,7 +228,7 @@
     edh.widgets.initModal('AggregateSearchExample', 'AggregateSearch', { country: 'uk' });
     edh.widgets.renderWidget('SearchInput', 'SearchInput', {
       onSubmit: function(value) {
-        alert('Your search term is "' + value + '"');
+        edh.widgets.showModal('AggregateSearch', { searchTerm: value, country: 'uk' });
       }
     });
     edh.widgets.renderWidget('EntityGoalProgressExample', 'EntityGoalProgress', { campaignUid: 'us-22' });

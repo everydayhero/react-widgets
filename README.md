@@ -88,6 +88,7 @@ The aggregate search modal widget allows you to search for campaigns, charities 
 
 ##### Options
 
+- `searchTerm`: *optional* string initial search term value.
 - `country`: *optional* string country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'.
 - `i18n`: *optional* object containing localised text. Default i18n is:
 
@@ -100,7 +101,7 @@ The aggregate search modal widget allows you to search for campaigns, charities 
     supporterAction: 'Support',
     emptyLabel: "We couldn't find any matching supporters, charities or events.",
     noMore: 'No more results',
-    loadMore: 'Load more results',
+    loadMore: 'Show more',
     loadingMore: 'Searching'
   }
   ```

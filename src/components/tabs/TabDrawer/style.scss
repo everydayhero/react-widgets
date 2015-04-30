@@ -1,0 +1,34 @@
+.TabDrawer {
+  display: block;
+  padding: 10px 20px;
+  background: $ehw-grey-darker;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+
+  &:hover {
+    background: darken($ehw-grey-darker, 5%);
+  }
+
+  &.TabDrawer--active {
+    background: $ehw-grey-light;
+    color: $ehw-grey-darker;
+    cursor: default;
+  }
+}
+
+.TabDrawer__label {
+  display: inline-block;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.TabDrawer__icon {
+  display: inline-block;
+  width: 10%;
+  vertical-align: middle;
+  text-align: right;
+}

@@ -1,0 +1,24 @@
+.Tab {
+  display: inline-block;
+  padding: $x-2 $x-5;
+  margin: 0 $x-1 0;
+  background: $ehw-grey-darker;
+  color: #fff;
+  border-radius: $ehw-border-radius $ehw-border-radius 0 0;
+  cursor: pointer;
+  font-weight: bold;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:hover {
+    background: darken($ehw-grey-darker, 5%);
+  }
+
+  &.Tab--active {
+    background: $ehw-grey-light;
+    color: $ehw-grey-darker;
+    cursor: default;
+  }
+}

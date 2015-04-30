@@ -1,0 +1,9 @@
+.Tabs {
+  display: block;
+}
+
+.Tabs__tab-list {
+  @extend %clearfix;
+  white-space: nowrap;
+  display: inline-block;
+}

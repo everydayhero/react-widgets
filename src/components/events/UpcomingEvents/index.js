@@ -67,7 +67,8 @@ module.exports = React.createClass({
         date: new Date(e.display_start_at),
         campaignUrl: e.url,
         getStartedUrl: e.get_started_url,
-        backgroundImageUrl: e.background_image_url,
+        backgroundImageUrl: e.widget_background_image_url,
+        backgroundBlurUrl: e.widget_blurred_background_image_url,
         supporterCount: e.page_count,
         width: width
       };

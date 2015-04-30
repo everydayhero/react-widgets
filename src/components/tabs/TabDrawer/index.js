@@ -32,10 +32,11 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var active   = this.props.active ? " TabDrawer--active" : '';
+    var active = this.props.active ? " TabDrawer--active" : '';
 
     return (
-      <div
+      <a
+        href={ "#" + this.props.tabId }
         onClick={ this.handleClick }
         onKeyDown={ this.handleKeyDown }
         className={ "TabDrawer" + active }
@@ -46,7 +47,7 @@ module.exports = React.createClass({
         tabIndex="0">
         <span className="TabDrawer__label" title={ this.props.label }>{ this.props.label }</span>
         { this.renderIcon() }
-      </div>
+      </a>
     );
   }
 });

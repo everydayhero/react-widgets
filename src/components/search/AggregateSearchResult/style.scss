@@ -1,0 +1,18 @@
+.AggregateSearchResult {
+  @extend %clearfix;
+  display: block;
+  color: $ehw-grey;
+  line-height: 1;
+  font-size: 12px;
+  margin-bottom: $x-4;
+
+  &:focus, &:hover {
+    color: $ehw-grey;
+    text-decoration: none;
+  }
+
+  &:active {
+    @include vendor(transform, scale(0.98));
+    @include vendor(transition, all 0.01s linear);
+  }
+}

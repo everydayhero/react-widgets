@@ -1,11 +1,11 @@
 "use strict";
 
 var urlRegExp = new RegExp(
-  "^(https?):\\/\\/" +              // protocol
-  "(\\w+(?:\\.\\w+)*(?::\\d+)?)" +  // hostname
-  "(\\/[^?]*)?" +                   // path
-  "(?:\\?([^#]*))?" +               // query
-  "(?:#(.*))?",                     // bookmark
+  "^(https?):\\/\\/" +                    // protocol
+  "([\\w-]+(?:\\.[\\w-]+)*(?::\\d+)?)" +  // hostname
+  "(\\/[^?#]*)?" +                        // path
+  "(?:\\?([^#]*))?" +                     // query
+  "(?:#(.*))?",                           // bookmark
   "i"
 );
 

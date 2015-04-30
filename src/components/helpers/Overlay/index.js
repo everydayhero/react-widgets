@@ -12,6 +12,7 @@ module.exports = React.createClass({
   displayName: 'Overlay',
 
   propTypes: {
+    className: React.PropTypes.string,
     onClose: React.PropTypes.func
   },
 
@@ -37,11 +38,12 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var classes = ['Overlay', this.props.className].join(' ');
     var closeButton = this.props.onClose &&
       <a href="#" className="Overlay__close" onClick={ this.onClose }><Icon icon="times" /></a>;
 
     return (
-      <div className='Overlay' onKeyDown={ this.keyHandler }>
+      <div className={ classes } onKeyDown={ this.keyHandler }>
         { closeButton }
         { this.props.children }
       </div>

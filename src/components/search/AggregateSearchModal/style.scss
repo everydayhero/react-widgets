@@ -1,0 +1,86 @@
+.AggregateSearchModal__header {
+  @extend %clearfix;
+
+  width: 100%;
+  padding: $x-4;
+  position: relative;
+
+  max-width: $x-229;
+  margin: {
+    left: auto;
+    right: auto;
+  };
+  color: white;
+
+  .Input {
+    margin-top: $x-3;
+    width: 100%;
+
+    .label__text {
+      top: 3px;
+    }
+  }
+
+  .Input__label {
+    border-radius: 1px;
+    border-width: 0;
+  }
+
+  .Input--focused .Input__label {
+    color: #525252;
+  }
+}
+
+.AggregateSearchModal__body {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  top: 100px;
+  right: 0px;
+  // padding: $x-9;
+  overflow-x: hidden;
+  transition: all 0.3s;
+  -webkit-overflow-scrolling: touch;
+  color: white;
+}
+
+.AggregateSearchModal__title {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+.AggregateSearchModal__close {
+  font-size: 18px;
+  float: right;
+  color: white;
+  font-weight: lighter;
+}
+
+.AggregateSearchModal__results {
+  @extend %clearfix;
+  position: relative;
+  clear: both;
+  float: none;
+  margin: {
+    left: auto;
+    right: auto;
+  };
+  width: 100%;
+  max-width: $x-229;
+  padding: $x-4;
+  padding-bottom: 100px;
+  overflow-y: scroll;
+}
+
+.AggregateSearchModal__results__empty, .AggregateSearchModal__results__more {
+  margin-top: $x-4;
+  font-size: 18px;
+  text-align: center;
+  text-transform: uppercase;
+
+  a { color: white; }
+  a:hover { color: $ehw-green; }
+
+  i { margin-left: $x-2; }
+}

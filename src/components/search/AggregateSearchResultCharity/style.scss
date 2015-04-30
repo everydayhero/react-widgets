@@ -1,0 +1,92 @@
+.AggregateSearchResultCharity__avatar {
+  float: left;
+  display: block;
+  position: relative;
+  border-radius: 36px;
+  background: $ehw-grey-light;
+  width: 72px;
+  min-height: 72px;
+  margin-right: 10px;
+
+  .Icon {
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    top: 0;
+    left: 0;
+    line-height: 72px;
+    text-align: center;
+    font-size: 36px;
+  }
+}
+
+.AggregateSearchResultCharity__logo {
+  float: left;
+  display: block;
+  width: 72px;
+  height: 72px;
+  text-align: center;
+  background-color: white;
+  border-radius: 2px;
+  padding: 5px;
+  font-size: 0;
+  line-height: 0;
+  margin-right: 10px;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+
+  img {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    border: none;
+  }
+}
+
+.AggregateSearchResultCharity__content {
+  display: block;
+}
+
+.AggregateSearchResultCharity__header {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.AggregateSearchResultCharity__name {
+  font-size: 13px;
+  color: white;
+}
+
+.AggregateSearchResultCharity__subheader {
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  margin-bottom: $x-1;
+  white-space: nowrap;
+  overflow: hidden;
+  // text-overflow: ellipsis;
+}
+
+.AggregateSearchResultCharity__supporters {
+  color: $ehw-green-light;
+}
+
+.AggregateSearchResultCharity__description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin: 0;
+  line-height: 1.2;
+  height: 42px;
+  overflow: hidden;
+}

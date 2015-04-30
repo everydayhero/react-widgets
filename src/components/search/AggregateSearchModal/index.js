@@ -183,7 +183,7 @@ module.exports = React.createClass({
         value={ this.state.searchTerm } />;
 
     return (
-      <Overlay class="AggregateSearchModal__overlay">
+      <Overlay className="AggregateSearchModal__overlay">
         <div className='AggregateSearchModal__header' onKeyDown={ this.keyHandler }>
           { title }
           { closeButton }

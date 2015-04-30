@@ -1,3 +1,10 @@
+.AggregateSearchModal__overlay {
+  background-image: image-url( "widgets-search-bg" + $ehw-version + ".png" );
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
 .AggregateSearchModal__header {
   @extend %clearfix;
 

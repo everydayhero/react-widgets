@@ -3,7 +3,6 @@
 var _         = require('lodash');
 var React     = require('react');
 var I18nMixin = require('../../mixins/I18n');
-var campaigns = require('../../../api/campaigns');
 var totals    = require('../../../api/totals');
 var Icon      = require('../../helpers/Icon');
 var numeral   = require('numeral');
@@ -41,7 +40,8 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       isLoading: false,
-      total: 0
+      total: 0,
+      tmpTotal: 0
     };
   },
 
@@ -69,10 +69,24 @@ module.exports = React.createClass({
     } else if (this.props.pageId) {
       totals.findByPage(this.props.pageId, this.onSuccessPage);
     } else {
-      campaigns.findByUids(this.setUids(), this.onSuccessCampaign);
+      var campaignUids = this.setUids();
+      for (var i=0; i<campaignUids.length; i++) {
+        if (i==(campaignUids.length-1)) {
+          totals.findByCampaign(campaignUids[i], this.onSuccessCampaign);
+        } else {
+          totals.findByCampaign(campaignUids[i], this.onSuccessCampaignSum);
+        }
+      }
     }
   },
 
+  onSuccessCampaignSum: function(result) {
+    this.setState({total: this.state.total + result.total_amount_cents.sum});
+  },
+
+  onSuccessCampaign: function(result) {
+    this.setState({total: this.state.total + result.total_amount_cents.sum, isLoading: false});
+  },
 
   onSuccessPage: function(result) {
     this.setState({
@@ -80,25 +94,6 @@ module.exports = React.createClass({
       total: result.total_amount_cents.sum
     });
   },
-
-
-  onSuccessCampaign: function(result) {
-    this.setState({
-      isLoading: false,
-      total: this.sumCampaignTotals(result.campaigns)
-    });
-  },
-  sumCampaignTotals: function(campaigns) {
-    var totalCents = this.state.total;
-
-    _.forEach(campaigns, function(campaign) {
-      totalCents += campaign.funds_raised.cents;
-    });
-
-    return totalCents;
-  },
-
-
 
   renderTotal: function() {
     var symbol = this.t('symbol');

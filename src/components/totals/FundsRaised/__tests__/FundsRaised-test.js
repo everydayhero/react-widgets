@@ -1,11 +1,11 @@
 "use strict";
 jest.autoMockOff();
-jest.mock('../../../../api/campaigns');
+jest.mock('../../../../api/totals');
 
 describe('FundsRaised', function() {
   var React       = require('react/addons');
   var FundsRaised = require('../');
-  var campaigns   = require('../../../../api/campaigns');
+  var totals   = require('../../../../api/totals');
   var TestUtils   = React.addons.TestUtils;
   var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
@@ -14,7 +14,7 @@ describe('FundsRaised', function() {
     var element;
 
     beforeEach(function() {
-      campaigns.findByUids.mockClear();
+      totals.findByCampaign.mockClear();
       fundsRaised = <FundsRaised campaignUid="us-22" />;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
@@ -47,8 +47,8 @@ describe('FundsRaised', function() {
     });
 
     it('handles a single campaign id', function() {
-      expect(campaigns.findByUids.mock.calls.length).toEqual(1);
-      expect(campaigns.findByUids).toBeCalledWith(["us-22"], element.onSuccess);
+      expect(totals.findByCampaign.mock.calls.length).toEqual(1);
+      expect(totals.findByCampaign).toBeCalledWith("us-22", element.onSuccess);
     });
   });
 
@@ -57,14 +57,15 @@ describe('FundsRaised', function() {
     var element;
 
     beforeEach(function() {
-      campaigns.findByUids.mockClear();
+      totals.findByCampaign.mockClear();
       fundsRaised = <FundsRaised campaignUids={ ["us-22", "us-24"] } />;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
 
     it('handles a multiple campaign ids', function() {
-      expect(campaigns.findByUids.mock.calls.length).toEqual(1);
-      expect(campaigns.findByUids).toBeCalledWith(["us-22", "us-24"], element.onSuccess);
+      expect(totals.findByCampaign.mock.calls.length).toEqual(2);
+      expect(totals.findByCampaign).toBeCalledWith("us-22", element.onSuccess);
+      expect(totals.findByCampaign).toBeCalledWith("us-24", element.onSuccess);
     });
   });
 

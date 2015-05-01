@@ -70,6 +70,7 @@ module.exports = React.createClass({
       totals.findByPage(this.props.pageId, this.onSuccessPage);
     } else {
       var campaignUids = this.setUids();
+
       for (var i=0; i<campaignUids.length; i++) {
         if (i==(campaignUids.length-1)) {
           totals.findByCampaign(campaignUids[i], this.onSuccessCampaign);

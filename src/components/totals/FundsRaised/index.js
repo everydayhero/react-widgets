@@ -14,6 +14,7 @@ module.exports = React.createClass({
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
     pageId: React.PropTypes.string,
+    offset: React.PropTypes.number,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -26,6 +27,7 @@ module.exports = React.createClass({
       campaignUid: '',
       campaignUids: [],
       pageId: '',
+      offset: 0,
       renderIcon: true,
       backgroundColor: null,
       textColor: null,
@@ -40,8 +42,7 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       isLoading: false,
-      total: 0,
-      tmpTotal: 0
+      total: 0
     };
   },
 
@@ -67,38 +68,31 @@ module.exports = React.createClass({
     if (this.props.pageId && (this.props.campaignUid || this.props.campaignUids.length>0)) {
       console.log('Please specify either a pageId or a campaignUid (not both).');
     } else if (this.props.pageId) {
-      totals.findByPage(this.props.pageId, this.onSuccessPage);
+      totals.findByPage(this.props.pageId, this.onSuccess);
     } else {
       var campaignUids = this.setUids();
 
       for (var i=0; i<campaignUids.length; i++) {
         if (i==(campaignUids.length-1)) {
-          totals.findByCampaign(campaignUids[i], this.onSuccessCampaign);
+          totals.findByCampaign(campaignUids[i], this.onSuccess);
         } else {
-          totals.findByCampaign(campaignUids[i], this.onSuccessCampaignSum);
+          totals.findByCampaign(campaignUids[i], this.onSuccessSum);
         }
       }
     }
   },
 
-  onSuccessCampaignSum: function(result) {
+  onSuccessSum: function(result) {
     this.setState({total: this.state.total + result.total_amount_cents.sum});
   },
 
-  onSuccessCampaign: function(result) {
+  onSuccess: function(result) {
     this.setState({total: this.state.total + result.total_amount_cents.sum, isLoading: false});
-  },
-
-  onSuccessPage: function(result) {
-    this.setState({
-      isLoading: false,
-      total: result.total_amount_cents.sum
-    });
   },
 
   renderTotal: function() {
     var symbol = this.t('symbol');
-    var totalDollars = this.state.total / 100;
+    var totalDollars = (this.state.total + this.props.offset) / 100;
     var formattedTotal = symbol + numeral(totalDollars).format(this.props.format);
     var title = this.t('title');
 

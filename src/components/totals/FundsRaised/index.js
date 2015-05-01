@@ -63,7 +63,7 @@ module.exports = React.createClass({
   loadTotals: function() {
     this.setState({ isLoading: true });
 
-    if (this.props.pageId && (this.props.campaignUid || this.props.campaignUids.length>0)) {
+    if (this.props.pageId && (this.props.campaignUid || this.props.campaignUids.length > 0)) {
       console.log('Please specify either a pageId or a campaignUid (not both).');
       return false;
     }
@@ -76,8 +76,8 @@ module.exports = React.createClass({
   },
 
   sumCampaigns: function(campaignUids) {
-    for (var i=0; i<campaignUids.length; i++) {
-      if (i===(campaignUids.length-1)) {
+    for (var i = 0; i < campaignUids.length; i++) {
+      if (i === (campaignUids.length-1)) {
         totals.findByCampaign(campaignUids[i], this.onSuccessCampaign);
       } else {
         totals.findByCampaign(campaignUids[i], this.onSuccessCampaignSum);

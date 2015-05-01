@@ -136,15 +136,17 @@ edh.widgets.renderWidget(element, name, options)
 
 ### Totals
 
-#### Funds Raised (Campaign)
+#### Funds Raised
 
-Displays the total funds raised for specified campaigns as a dollar amount. Either a single or multiple campaign uids can be provided to scope this widget.
+Displays the total funds raised for specified campaigns or page as a dollar amount. Either a single or multiple campaign uids OR a single page id can be provided to scope this widget.
 
 ##### Options
 
 - `campaignUid`: *optional* string campaign uid to filter results by campaign.
 - `campaignUids`: *optional* array of campaign uids to filter results by multiple campaigns.
+- `pageId`: *optional* string page id to filter results by page.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
+- `offset`: *optional* number. Set to `0` by default.
 - `backgroundColor`: *optional* string. Not set by default.
 - `textColor`: *optional* string. Not set by default.
 - `format`: *optional* string. Set to `'0.00 a'` by default. [More format strings](http://numeraljs.com/).

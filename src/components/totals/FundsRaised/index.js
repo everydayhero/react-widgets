@@ -3,7 +3,7 @@
 var _         = require('lodash');
 var React     = require('react');
 var I18nMixin = require('../../mixins/I18n');
-var campaigns = require('../../../api/campaigns');
+var totals    = require('../../../api/totals');
 var Icon      = require('../../helpers/Icon');
 var numeral   = require('numeral');
 
@@ -13,6 +13,7 @@ module.exports = React.createClass({
   propTypes: {
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
+    pageId: React.PropTypes.string,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -24,6 +25,7 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       campaignUids: [],
+      pageId: '',
       renderIcon: true,
       backgroundColor: null,
       textColor: null,
@@ -43,7 +45,7 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    this.loadCampaigns();
+    this.loadTotals();
   },
 
   setUids: function() {
@@ -58,26 +60,44 @@ module.exports = React.createClass({
     return campaignUids;
   },
 
-  loadCampaigns: function() {
+  loadTotals: function() {
     this.setState({ isLoading: true });
-    campaigns.findByUids(this.setUids(), this.onSuccess);
+
+    if (this.props.pageId && (this.props.campaignUid || this.props.campaignUids.length > 0)) {
+      console.log('Please specify either a pageId or a campaignUid (not both).');
+      return false;
+    }
+
+    if (this.props.pageId) {
+      totals.findByPage(this.props.pageId, this.onSuccessPage);
+    } else {
+      this.sumCampaigns(this.setUids());
+    }
   },
 
-  onSuccess: function(result) {
+  sumCampaigns: function(campaignUids) {
+    for (var i = 0; i < campaignUids.length; i++) {
+      if (i === (campaignUids.length-1)) {
+        totals.findByCampaign(campaignUids[i], this.onSuccessCampaign);
+      } else {
+        totals.findByCampaign(campaignUids[i], this.onSuccessCampaignSum);
+      }
+    }
+  },
+
+  onSuccessCampaignSum: function(result) {
+    this.setState({total: this.state.total + result.total_amount_cents.sum});
+  },
+
+  onSuccessCampaign: function(result) {
+    this.setState({total: this.state.total + result.total_amount_cents.sum, isLoading: false});
+  },
+
+  onSuccessPage: function(result) {
     this.setState({
       isLoading: false,
-      total: this.sumCampaignTotals(result.campaigns)
+      total: result.total_amount_cents.sum
     });
-  },
-
-  sumCampaignTotals: function(campaigns) {
-    var totalCents = this.state.total;
-
-    _.forEach(campaigns, function(campaign) {
-      totalCents += campaign.funds_raised.cents;
-    });
-
-    return totalCents;
   },
 
   renderTotal: function() {

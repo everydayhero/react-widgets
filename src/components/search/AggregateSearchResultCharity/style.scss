@@ -56,14 +56,11 @@
 
 .AggregateSearchResultCharity__header {
   text-transform: uppercase;
+  font-size: 13px;
   letter-spacing: 0.1em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.AggregateSearchResultCharity__name {
-  font-size: 13px;
   color: white;
 }
 
@@ -74,7 +71,6 @@
   margin-bottom: $x-1;
   white-space: nowrap;
   overflow: hidden;
-  // text-overflow: ellipsis;
 }
 
 .AggregateSearchResultCharity__supporters {

@@ -6,7 +6,8 @@ module.exports = React.createClass({
   displayName: 'AggregateSearchResult',
 
   propTypes: {
-    url: React.PropTypes.string.isRequired
+    url: React.PropTypes.string,
+    onSelect: React.PropTypes.func
   },
 
   render: function() {
@@ -14,7 +15,8 @@ module.exports = React.createClass({
 
     return (
       <a href={ props.url || '#' }
-        className="AggregateSearchResult">
+        className="AggregateSearchResult"
+        onClick={ props.onSelect }>
         { props.children }
       </a>
     );

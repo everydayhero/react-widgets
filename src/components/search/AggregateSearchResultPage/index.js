@@ -14,6 +14,7 @@ module.exports = React.createClass({
 
   propTypes: {
     result: React.PropTypes.object.isRequired,
+    onSelect: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -65,7 +66,7 @@ module.exports = React.createClass({
     var page = this.props.result;
 
     return (
-      <AggregateSearchResult url={ page.url }>
+      <AggregateSearchResult url={ page.url } onSelect={ this.props.onSelect }>
         <div className='AggregateSearchResultPage__avatar'>
           <img src={ page.image.medium_image_url } />
         </div>

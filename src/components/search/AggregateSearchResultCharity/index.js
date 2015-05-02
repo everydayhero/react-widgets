@@ -13,6 +13,7 @@ module.exports = React.createClass({
 
   propTypes: {
     result: React.PropTypes.object.isRequired,
+    onSelect: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -53,7 +54,7 @@ module.exports = React.createClass({
     var charity = this.props.result;
 
     return (
-      <AggregateSearchResult url={ charity.url }>
+      <AggregateSearchResult url={ charity.url } onSelect={ this.props.onSelect }>
         { this.renderLogo() || this.renderAvatar() }
         <div className='AggregateSearchResultCharity__content'>
           <div className='AggregateSearchResultCharity__header'>{ charity.name }</div>

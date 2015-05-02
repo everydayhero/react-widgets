@@ -13,6 +13,7 @@ module.exports = React.createClass({
 
   propTypes: {
     result: React.PropTypes.object.isRequired,
+    onSelect: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -61,10 +62,10 @@ module.exports = React.createClass({
 
   render: function() {
     var campaign = this.props.result;
-    var url = campaign.url || campaign.get_started_url || '#';
+    var url = campaign.url || campaign.get_started_url;
 
     return (
-      <AggregateSearchResult url={ url }>
+      <AggregateSearchResult url={ url } onSelect={ this.props.onSelect }>
         { this.renderDate() }
         <div className='AggregateSearchResultCampaign__content'>
           <div className='AggregateSearchResultCampaign__header'>{ campaign.name }</div>

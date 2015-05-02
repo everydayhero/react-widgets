@@ -130,7 +130,12 @@ module.exports = React.createClass({
         currentPage: pagination.current_page
       });
     } else {
-      this.setState(this.getInitialState());
+      this.setState({
+        results: null,
+        isSearching: false,
+        lastPage: true,
+        currentPage: 0
+      });
     }
   },
 

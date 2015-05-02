@@ -65,6 +65,10 @@ module.exports = React.createClass({
     }
   },
 
+  componentWillUnmount: function() {
+    this.state.cancelRequest();
+  },
+
   keyHandler: function(event) {
     if (event.key === 'Escape') {
       this.props.onClose(event);
@@ -72,6 +76,12 @@ module.exports = React.createClass({
   },
 
   inputChanged: function(searchTerm) {
+    this.state.cancelRequest();
+
+    this.setState({
+      searchTerm: searchTerm
+    });
+
     this.delayedChange(searchTerm, 1);
   },
 
@@ -80,8 +90,6 @@ module.exports = React.createClass({
   }, 500),
 
   aggregateSearch: function(searchTerm, page) {
-    this.state.cancelRequest();
-
     if (!searchTerm) {
       this.updateResults(null);
       return;
@@ -98,7 +106,6 @@ module.exports = React.createClass({
     this.setState({
       results: null,
       isSearching: true,
-      searchTerm: searchTerm,
       cancelRequest: cancelRequest
     });
   },

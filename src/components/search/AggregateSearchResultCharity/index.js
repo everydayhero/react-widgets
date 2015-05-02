@@ -4,6 +4,7 @@ var _             = require('lodash');
 var React         = require('react');
 var Icon          = require('../../helpers/Icon');
 var I18n          = require('../../mixins/I18n');
+var causeGroups   = require('../../../lib/causeGroups');
 var AggregateSearchResult = require('../AggregateSearchResult');
 
 module.exports = React.createClass({
@@ -26,6 +27,7 @@ module.exports = React.createClass({
 
   renderLogo: function () {
     var charity = this.props.result;
+
     return !!charity.logo_url && (
       <div className="AggregateSearchResultCharity__logo">
         <img src={ charity.logo_url } />
@@ -34,15 +36,21 @@ module.exports = React.createClass({
   },
 
   renderAvatar: function () {
+    var charity = this.props.result;
+    var cause = charity.causes && charity.causes[0] && charity.causes[0].key;
+    var causeGroup = cause && causeGroups.findByCause(cause);
+    var icon = causeGroup ? causeGroup.icon : 'heart-o';
+
     return (
       <div className='AggregateSearchResultCharity__avatar'>
-        <Icon icon='heart-o' fixedWidth={ true } />
+        <Icon icon={ icon } fixedWidth={ true } />
       </div>
     );
   },
 
   renderNumSupporters: function () {
     var charity = this.props.result;
+
     return charity.page_count >= 20 && (
       <span className='AggregateSearchResultCharity__supporters'>
         { this.t('numSupporters', { count: charity.page_count }) }

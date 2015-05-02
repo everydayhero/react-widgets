@@ -87,7 +87,7 @@ module.exports = React.createClass({
 
   delayedChange: _.debounce(function(searchTerm, page) {
     this.aggregateSearch(searchTerm, page);
-  }, 500),
+  }, 300),
 
   aggregateSearch: function(searchTerm, page) {
     if (!searchTerm) {

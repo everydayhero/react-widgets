@@ -82,10 +82,10 @@ module.exports = React.createClass({
       searchTerm: searchTerm
     });
 
-    this.delayedChange(searchTerm, 1);
+    this.delayedSearch(searchTerm, 1);
   },
 
-  delayedChange: _.debounce(function(searchTerm, page) {
+  delayedSearch: _.debounce(function(searchTerm, page) {
     this.aggregateSearch(searchTerm, page);
   }, 300),
 
@@ -150,93 +150,85 @@ module.exports = React.createClass({
     return false;
   },
 
-  renderResultsEmpty: function () {
-    return <p className="AggregateSearchModal__results__footer">{ this.t('emptyLabel') }</p>;
+  renderEmpty: function () {
+    return _.isEmpty(this.state.results) && (
+      <p className="AggregateSearchModal__footer">{ this.t('emptyLabel') }</p>
+    );
   },
 
-  renderResultsLoading: function () {
-    return (
-      <p className="AggregateSearchModal__results__footer">
+  renderLoading: function () {
+    return this.state.isSearching && (
+      <p className="AggregateSearchModal__footer">
         { this.t('loadingMore') }<Icon icon="refresh"/>
       </p>
     );
   },
 
-  renderResultsLoadMore: function () {
+  renderNoMore: function () {
+    return this.state.lastPage && (
+      <p className="AggregateSearchModal__footer">{ this.t('noMore') }</p>
+    );
+  },
+
+  renderLoadMore: function () {
     return (
-      <p className="AggregateSearchModal__results__footer">
+      <p className="AggregateSearchModal__footer">
         <a href="#" onClick={ this.loadMore }>{ this.t('loadMore') }</a>
       </p>
     );
   },
 
-  renderResultsNoMore: function () {
-    return <p className="AggregateSearchModal__results__footer">{ this.t('noMore') }</p>;
-  },
-
-  renderResultsFooter: function () {
-    if (this.state.isSearching) {
-      return this.renderResultsLoading();
-    }
-
-    if (this.state.lastPage) {
-      return this.renderResultsNoMore();
-    }
-
-    return this.renderResultsLoadMore();
+  renderFooter: function () {
+    return this.renderEmpty() || this.renderLoading() || this.renderNoMore() || this.renderLoadMore();
   },
 
   renderResults: function() {
-    if (!this.state.results) {
-      return;
-    }
-
-    if (_.isEmpty(this.state.results)) {
-      return this.renderResultsEmpty();
-    }
-
-    var results = this.state.results.map(function(result) {
+    return this.state.results.map(function(result) {
       var El = resultTypes[result._type];
       return El && <El key={ result._type + result.id } result={ result } />;
     });
+  },
 
-    return (
-      <div className="AggregateSearchModal__results">
-        { results }
-        { this.renderResultsFooter() }
+  renderContent: function() {
+    return this.state.results && (
+      <div className="AggregateSearchModal__content">
+        { this.renderResults() }
+        { this.renderFooter() }
       </div>
     );
   },
 
-  render: function() {
-    var props = this.props;
+  renderCloseButton: function () {
+    return (
+      <a href="#" className="AggregateSearchModal__close" onClick={ this.props.onClose }><Icon icon="times" /></a>
+    );
+  },
 
-    var title = <span className="AggregateSearchModal__title">{ this.t('title') }</span>;
-
-    var closeButton =
-      <a href="#" className="AggregateSearchModal__close" onClick={ this.props.onClose }><Icon icon="times" /></a>;
-
-    var input =
+  renderInput: function () {
+    return (
       <Input
         className='AggregateSearchModal__input'
         spacing="compact"
-        autoFocus={ props.autoFocus }
+        autoFocus={ this.props.autoFocus }
         i18n={{ label: this.t('inputLabel'), name: 'aggregate_search_input' }}
         output={ this.inputChanged }
         showIcon={ true }
         icon={ this.state.isSearching ? 'refresh' : '' }
-        value={ this.state.searchTerm } />;
+        value={ this.state.searchTerm } />
+    );
+  },
 
+  render: function() {
     return (
       <Overlay className="AggregateSearchModal__overlay">
         <div className='AggregateSearchModal__header' onKeyDown={ this.keyHandler }>
-          { title }
-          { closeButton }
-          { input }
+          <span className="AggregateSearchModal__title">{ this.t('title') }</span>
+          { this.renderCloseButton() }
+          { this.renderInput() }
         </div>
         <div ref="body" className="AggregateSearchModal__body">
           { this.renderFilters() }
-          { this.renderResults() }
+          { this.renderContent() }
         </div>
       </ Overlay>
     );

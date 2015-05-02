@@ -59,7 +59,7 @@
   font-weight: lighter;
 }
 
-.AggregateSearchModal__results {
+.AggregateSearchModal__content {
   @extend %clearfix;
   position: relative;
   clear: both;
@@ -75,7 +75,7 @@
   overflow-y: scroll;
 }
 
-.AggregateSearchModal__results__footer {
+.AggregateSearchModal__footer {
   margin-top: $x-4;
   font-size: 18px;
   text-align: center;

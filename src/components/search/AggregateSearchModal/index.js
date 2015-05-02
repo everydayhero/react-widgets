@@ -59,7 +59,7 @@ module.exports = React.createClass({
     };
   },
 
-  componentWillMount: function() {
+  componentDidMount: function() {
     if (this.props.searchTerm) {
       this.aggregateSearch(this.props.searchTerm, 1);
     }
@@ -84,6 +84,10 @@ module.exports = React.createClass({
   }, 300),
 
   aggregateSearch: function(searchTerm, page) {
+    if (!this.isMounted()) {
+      return;
+    }
+
     if (!searchTerm) {
       this.updateResults(null);
       return;

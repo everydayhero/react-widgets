@@ -50,7 +50,6 @@
 .AggregateSearchModal__title {
   text-transform: uppercase;
   font-size: 14px;
-  font-weight: lighter;
 }
 
 .AggregateSearchModal__close {
@@ -76,7 +75,7 @@
   overflow-y: scroll;
 }
 
-.AggregateSearchModal__results__empty, .AggregateSearchModal__results__more {
+.AggregateSearchModal__results__footer {
   margin-top: $x-4;
   font-size: 18px;
   text-align: center;

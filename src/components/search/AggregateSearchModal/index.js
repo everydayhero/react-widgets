@@ -139,35 +139,59 @@ module.exports = React.createClass({
   },
 
   renderResultsEmpty: function () {
-    return <p className="AggregateSearchModal__results__empty">{ this.t('emptyLabel') }</p>;
+    return <p className="AggregateSearchModal__results__footer">{ this.t('emptyLabel') }</p>;
   },
 
-  renderResultsMore: function () {
-    var content = this.state.isSearching ? [ this.t('loadingMore'), <Icon icon="refresh"/>] :
-      this.state.lastPage ? this.t('noMore') : <a href="#" onClick={ this.loadMore }>{ this.t('loadMore') }</a>;
+  renderResultsLoading: function () {
+    return (
+      <p className="AggregateSearchModal__results__footer">
+        { this.t('loadingMore') }<Icon icon="refresh"/>
+      </p>
+    );
+  },
 
-    return <p className="AggregateSearchModal__results__more">{ content }</p>;
+  renderResultsLoadMore: function () {
+    return (
+      <p className="AggregateSearchModal__results__footer">
+        <a href="#" onClick={ this.loadMore }>{ this.t('loadMore') }</a>
+      </p>
+    );
+  },
+
+  renderResultsNoMore: function () {
+    return <p className="AggregateSearchModal__results__footer">{ this.t('noMore') }</p>;
+  },
+
+  renderResultsFooter: function () {
+    if (this.state.isSearching) {
+      return this.renderResultsLoading();
+    }
+
+    if (this.state.lastPage) {
+      return this.renderResultsNoMore();
+    }
+
+    return this.renderResultsLoadMore();
   },
 
   renderResults: function() {
-    var results = this.state.results;
-    if (!results) {
+    if (!this.state.results) {
       return;
     }
 
-    if (_.isEmpty(results)) {
+    if (_.isEmpty(this.state.results)) {
       return this.renderResultsEmpty();
     }
 
-    results = results.map(function(result) {
+    var results = this.state.results.map(function(result) {
       var El = resultTypes[result._type];
-      return El && <El result={ result } />;
+      return El && <El key={ result._type + result.id } result={ result } />;
     });
 
     return (
       <div className="AggregateSearchModal__results">
         { results }
-        { this.renderResultsMore() }
+        { this.renderResultsFooter() }
       </div>
     );
   },

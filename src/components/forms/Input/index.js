@@ -72,11 +72,13 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
+    var node = this.refs.input.getDOMNode();
     if (this.props.autoFocus) {
-      this.refs.input.getDOMNode().focus();
+      node.focus();
+      node.selectionStart = node.selectionEnd = node.value.length;
     }
     if (this.props.autoSelect) {
-      this.refs.input.getDOMNode().select();
+      node.select();
     }
     if (this.props.value && !this.props.disabled && this.props.validate) {
       this.validate();

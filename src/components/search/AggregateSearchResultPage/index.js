@@ -26,22 +26,43 @@ module.exports = React.createClass({
     };
   },
 
-  render: function() {
-    var props = this.props;
-    var page = props.result;
+  renderProgressBar: function () {
+    var page = this.props.result;
     var progress = page.amount && page.target_cents > 0 &&
       Math.min(Math.floor(page.amount.cents / page.target_cents * 100), 100) || 0;
+
+    return (
+      <div className='AggregateSearchResultPage__progress'>
+        <div className='AggregateSearchResultPage__progress__bar' style={{ width: progress + '%' }} />
+      </div>
+    );
+  },
+
+  renderRaisedAmount: function () {
+    var page = this.props.result;
     var raised_amount = page.amount && page.target_cents >= 0 &&
       this.tm('raised_amount', {
         currency: page.amount.currency.symbol,
         amount: page.amount.cents / 100,
         target: page.target_cents / 100
       });
+
+    return <div className='AggregateSearchResultPage__amount'>{ raised_amount }</div>;
+  },
+
+  renderRaisedFor: function () {
+    var page = this.props.result;
     var raised_for =
       this.tm(pagesAPI.isGivePage(page) ? 'raised_for_charity' : 'raised_for_charity_through_campaign', {
         charity: page.charity.name,
         campaign: page.campaign.name
       });
+
+    return <div className='AggregateSearchResultPage__for'>{ raised_for }</div>;
+  },
+
+  render: function() {
+    var page = this.props.result;
 
     return (
       <AggregateSearchResult url={ page.url }>
@@ -50,14 +71,12 @@ module.exports = React.createClass({
         </div>
         <div className='AggregateSearchResultPage__content'>
           <div className='AggregateSearchResultPage__header'>
-            <span className="AggregateSearchResultPage__heading">{ page.supporter.name }</span>
-            <span className="AggregateSearchResultPage__subheading">{ page.supporter.name }</span>
+            { page.supporter.name }
+            <span className="AggregateSearchResultPage__subheader">{ page.name }</span>
           </div>
-          <div className='AggregateSearchResultPage__progress'>
-            <div className='AggregateSearchResultPage__progress__bar' style={{ width: progress + '%' }} />
-          </div>
-          <div className='AggregateSearchResultPage__amount'>{ raised_amount }</div>
-          <div className='AggregateSearchResultPage__for'>{ raised_for }</div>
+          { this.renderProgressBar() }
+          { this.renderRaisedAmount() }
+          { this.renderRaisedFor() }
         </div>
       </AggregateSearchResult>
     );

@@ -29,15 +29,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.AggregateSearchResultPage__heading {
   font-size: 20px;
   color: white;
 }
 
-.AggregateSearchResultPage__subheading {
-  font-size: 14px;
+.AggregateSearchResultPage__subheader {
+  font-size: 0.7em;
   color: $ehw-grey-light;
   text-transform: uppercase;
   margin-left: 0.5em;

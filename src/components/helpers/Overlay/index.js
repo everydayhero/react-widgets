@@ -13,7 +13,15 @@ module.exports = React.createClass({
 
   propTypes: {
     className: React.PropTypes.string,
-    onClose: React.PropTypes.func
+    onClose: React.PropTypes.func,
+    showCloseButton: React.PropTypes.bool,
+  },
+
+  getDefaultProps: function () {
+    return {
+      className: '',
+      showCloseButton: true
+    };
   },
 
   keyHandler: function(event) {
@@ -39,7 +47,7 @@ module.exports = React.createClass({
 
   render: function() {
     var classes = ['Overlay', this.props.className].join(' ');
-    var closeButton = this.props.onClose &&
+    var closeButton = this.props.onClose && this.props.showCloseButton &&
       <a href="#" className="Overlay__close" onClick={ this.onClose }><Icon icon="times" /></a>;
 
     return (

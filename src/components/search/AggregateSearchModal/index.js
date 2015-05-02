@@ -69,12 +69,6 @@ module.exports = React.createClass({
     this.state.cancelRequest();
   },
 
-  keyHandler: function(event) {
-    if (event.key === 'Escape') {
-      this.props.onClose(event);
-    }
-  },
-
   inputChanged: function(searchTerm) {
     this.state.cancelRequest();
 
@@ -220,8 +214,8 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <Overlay className="AggregateSearchModal__overlay">
-        <div className='AggregateSearchModal__header' onKeyDown={ this.keyHandler }>
+      <Overlay className="AggregateSearchModal__overlay" onClose={ this.props.onClose } showCloseButton={ false }>
+        <div className='AggregateSearchModal__header'>
           <span className="AggregateSearchModal__title">{ this.t('title') }</span>
           { this.renderCloseButton() }
           { this.renderInput() }

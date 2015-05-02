@@ -1,4 +1,4 @@
-.AggregateSearchResultCampaign__avatar {
+.AggregateSearchResultCampaign__date {
   float: left;
   display: block;
   position: relative;
@@ -31,16 +31,12 @@
 
 .AggregateSearchResultCampaign__header {
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.AggregateSearchResultCampaign__name {
-  display: block;
   font-size: 13px;
-  color: white;
+  letter-spacing: 0.1em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: white;
 }
 
 .AggregateSearchResultCampaign__subheader {
@@ -50,7 +46,6 @@
   margin-bottom: $x-1;
   white-space: nowrap;
   overflow: hidden;
-  // text-overflow: ellipsis;
 }
 
 .AggregateSearchResultCampaign__supporters {
@@ -59,6 +54,7 @@
 }
 
 .AggregateSearchResultCampaign__charities {
+  color: $ehw-grey;
 }
 
 .AggregateSearchResultCampaign__description {

@@ -40,6 +40,7 @@ var widgets = {
   Tabs: require('./components/tabs/Tabs')
 };
 var modals = {
+  AggregateSearch: require('./components/search/AggregateSearchModal'),
   CharitySearch: require('./components/search/CharitySearchModal'),
   PageSearch: require('./components/search/PageSearchModal'),
 };

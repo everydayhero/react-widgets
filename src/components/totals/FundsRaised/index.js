@@ -65,19 +65,24 @@ module.exports = React.createClass({
   loadTotals: function() {
     this.setState({ isLoading: true });
 
-    if (this.props.pageId && (this.props.campaignUid || this.props.campaignUids.length>0)) {
+    if (this.props.pageId && (this.props.campaignUid || this.props.campaignUids.length > 0)) {
       console.log('Please specify either a pageId or a campaignUid (not both).');
-    } else if (this.props.pageId) {
+      return false;
+    }
+
+    if (this.props.pageId) {
       totals.findByPage(this.props.pageId, this.onSuccess);
     } else {
-      var campaignUids = this.setUids();
+      this.sumCampaigns(this.setUids());
+    }
+  },
 
-      for (var i=0; i<campaignUids.length; i++) {
-        if (i==(campaignUids.length-1)) {
-          totals.findByCampaign(campaignUids[i], this.onSuccess);
-        } else {
-          totals.findByCampaign(campaignUids[i], this.onSuccessSum);
-        }
+  sumCampaigns: function(campaignUids) {
+    for (var i = 0; i < campaignUids.length; i++) {
+      if (i === (campaignUids.length-1)) {
+        totals.findByCampaign(campaignUids[i], this.onSuccess);
+      } else {
+        totals.findByCampaign(campaignUids[i], this.onSuccessSum);
       }
     }
   },

@@ -82,6 +82,50 @@ The charity search modal widget allows you to search for a charity by name to do
 </html>
 ```
 
+#### AggregateSearch
+
+The aggregate search modal widget allows you to search for campaigns, charities and supporters.
+
+##### Options
+
+- `searchTerm`: *optional* string initial search term value.
+- `country`: *optional* string country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'.
+- `i18n`: *optional* object containing localised text. Default i18n is:
+
+  ```js
+  {
+    title: 'Search',
+    inputLabel: 'Search for a supporter, charity or event',
+    campaignAction: 'Get Started',
+    charityAction: 'Visit Charity',
+    supporterAction: 'Support',
+    emptyLabel: "We couldn't find any matching supporters, charities or events.",
+    noMore: 'No more results',
+    loadMore: 'Show more',
+    loadingMore: 'Searching'
+  }
+  ```
+
+##### Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].css" rel="stylesheet">
+    <script src="//d1ig6folwd6a9s.cloudfront.net/widgets-[0.0.0].js"></script>
+  </head>
+  <body>
+    <a id="AggregateSearchExample">Search for a supporter, charity or event</a>
+    <script>
+      edh.widgets.initModal('AggregateSearchExample', 'AggregateSearch', { country: 'uk' });
+    </script>
+  </body>
+</html>
+```
+
 #### PageSearch
 
 The supporter page search modal widget allows you to search for a supporter page by name to visit or perform a custom action. By default, it searches for all pages in a given country, but can also be restricted to pages part of a given campaign or charity.

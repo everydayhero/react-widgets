@@ -1,0 +1,72 @@
+.AggregateSearchResultCampaign__avatar {
+  float: left;
+  display: block;
+  position: relative;
+  text-align: center;
+  width: 72px;
+  height: 72px;
+  margin: 0;
+  margin-right: 10px;
+  padding: 0;
+  border: 1px $ehw-grey-light solid;
+
+  list-style: none;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: lighter;
+  color: white;
+
+  li {
+    &:first-child {
+      font-size: 26px;
+      margin-top: 0.4em;
+    }
+  }
+}
+
+.AggregateSearchResultCampaign__content {
+  display: block;
+  overflow: hidden;
+}
+
+.AggregateSearchResultCampaign__header {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.AggregateSearchResultCampaign__name {
+  display: block;
+  font-size: 13px;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.AggregateSearchResultCampaign__subheader {
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  margin-bottom: $x-1;
+  white-space: nowrap;
+  overflow: hidden;
+  // text-overflow: ellipsis;
+}
+
+.AggregateSearchResultCampaign__supporters {
+  color: $ehw-green-light;
+  margin-right: 0.5em;
+}
+
+.AggregateSearchResultCampaign__charities {
+}
+
+.AggregateSearchResultCampaign__description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin: 0;
+  line-height: 1.2;
+  height: 42px;
+  overflow: hidden;
+}

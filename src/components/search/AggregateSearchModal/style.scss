@@ -20,7 +20,7 @@
   color: white;
 
   .Input {
-    margin-top: $x-3;
+    margin-top: $x-4;
     width: 100%;
 
     .label__text {
@@ -38,9 +38,8 @@
   position: absolute;
   width: 100%;
   bottom: 0px;
-  top: 100px;
+  top: 107px;
   right: 0px;
-  // padding: $x-9;
   overflow-x: hidden;
   transition: all 0.3s;
   -webkit-overflow-scrolling: touch;
@@ -49,30 +48,34 @@
 
 .AggregateSearchModal__title {
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: lighter;
+  letter-spacing: 1px;
 }
 
 .AggregateSearchModal__close {
-  font-size: 18px;
   float: right;
+  font-size: 38px;
+  font-weight: bold;
   color: white;
-  font-weight: lighter;
+  margin: -14px 0;
 }
 
 .AggregateSearchModal__content {
   @extend %clearfix;
   position: relative;
-  clear: both;
-  float: none;
   margin: {
     left: auto;
     right: auto;
   };
   width: 100%;
   max-width: $x-229;
-  padding: $x-4;
-  padding-bottom: 100px;
+  padding: 0 $x-8;
   overflow-y: scroll;
+
+  @include media-max($breakpoint-s) {
+    padding: 0 $x-4;
+  }
 }
 
 .AggregateSearchModal__footer {

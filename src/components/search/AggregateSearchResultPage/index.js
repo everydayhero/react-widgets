@@ -48,7 +48,7 @@ module.exports = React.createClass({
         target: page.target_cents / 100
       });
 
-    return <div className='AggregateSearchResultPage__amount'>{ raised_amount }</div>;
+    return !!raised_amount && <div className='AggregateSearchResultPage__amount'>{ raised_amount }</div>;
   },
 
   renderRaisedFor: function () {

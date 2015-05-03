@@ -1,12 +1,13 @@
 "use strict";
 
-var _                           = require('lodash');
-var React                       = require('react');
-var cx                          = require('react/lib/cx');
-var I18n                        = require('../../mixins/I18n');
-var Input                       = require('../../forms/Input');
-var Icon                        = require('../../helpers/Icon');
-var Overlay                     = require('../../helpers/Overlay');
+var _       = require('lodash');
+var async   = require('async');
+var React   = require('react');
+var cx      = require('react/lib/cx');
+var I18n    = require('../../mixins/I18n');
+var Input   = require('../../forms/Input');
+var Icon    = require('../../helpers/Icon');
+var Overlay = require('../../helpers/Overlay');
 
 var searchAPI = {
   campaigns: require('../../../api/campaigns').search,
@@ -53,13 +54,18 @@ module.exports = React.createClass({
         },
         noMore: 'No more results',
         loadMore: 'Show more',
-        loadingMore: 'Searching',
+        searching: 'Searching',
         filterTypes: {
           pages: 'Supporters',
           charities: 'Charities',
           campaigns: 'Events'
+        },
+        numResults: {
+          one: '{count} result',
+          other: '{count} results'
         }
       },
+      minimumScore: 0.1,
       pageSize: 10
     };
   },
@@ -67,55 +73,59 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       searchTerm: this.props.searchTerm,
-      cancelRequest: function() {},
+      cancelSearch: function() {},
+      cancelSearchCounts: function() {},
       results: null,
       isSearching: false,
-      filter: 'all'
+      filter: 'all',
+      counts: {}
     };
   },
 
   componentDidMount: function() {
     if (this.state.searchTerm) {
       this.search();
+      this.searchCounts();
     }
   },
 
   componentWillUnmount: function() {
-    this.state.cancelRequest();
+    this.state.cancelSearch();
+    this.state.cancelSearchCounts();
   },
 
   inputChanged: function(searchTerm) {
-    this.state.cancelRequest();
+    this.state.cancelSearch();
+    this.state.cancelSearchCounts();
     this.setState({ searchTerm: searchTerm }, this.delayedSearch);
   },
 
-  delayedSearch: _.debounce(function(page) {
-    this.search(page);
+  delayedSearch: _.debounce(function() {
+    if (this.isMounted()) {
+      this.search();
+      this.searchCounts();
+    }
   }, 300),
 
   search: function(page) {
-    this.state.cancelRequest();
-
-    if (!this.isMounted()) {
-      return;
-    }
+    this.state.cancelSearch();
 
     if (!this.state.searchTerm) {
       return this.updateResults(null);
     }
 
-    var cancelRequest = searchAPI[this.state.filter]({
+    var cancelSearch = searchAPI[this.state.filter]({
       country: this.props.country,
       searchTerm: this.state.searchTerm,
       page: page || 1,
       pageSize: this.props.pageSize,
-      minimumScore: 0.1
+      minimumScore: this.props.minimumScore
     }, this.updateResults);
 
     this.setState({
       results: page > 1 ? this.state.results : [],
       isSearching: true,
-      cancelRequest: cancelRequest
+      cancelSearch: cancelSearch
     });
   },
 
@@ -147,23 +157,63 @@ module.exports = React.createClass({
     }
   },
 
+  searchCounts: function() {
+    var cancel = false;
+
+    this.setState({
+      counts: {},
+      cancelSearchCounts: function() { cancel = true; }
+    });
+
+    var searchParams = {
+      country: this.props.country,
+      searchTerm: this.state.searchTerm,
+      page: 1,
+      pageSize: 1,
+      minimumScore: this.props.minimumScore
+    };
+
+    var types = ['campaigns', 'charities', 'pages'];
+    async.map(types, function(type, callback) {
+      searchAPI[type](searchParams, function(data) {
+        callback(data ? null : 'error', data && data.meta.pagination.count);
+      });
+    }, function(error, results) {
+      if (!cancel) {
+        this.updateCounts(error ? null : _.zipObject(types, results));
+      }
+    }.bind(this));
+  },
+
+  updateCounts: function(counts) {
+    if (counts) {
+      this.setState({ counts: counts });
+    } else {
+      var timer = setTimeout(this.searchCounts, 5000);
+      this.setState({ cancelSearchCounts: function() { clearTimeout(timer); } });
+    }
+  },
+
   setFilter: function (filter, event) {
-    event.preventDefault();
     this.setState({ filter: filter }, this.search);
   },
 
   renderFilters: function() {
-    var categories = _.map(this.t('filterTypes'), function(name, key) {
-      var selected = key == this.state.filter;
+    var categories = _.map(this.t('filterTypes'), function(name, type) {
+      var selected = (type == this.state.filter);
       var classes = cx({
         'AggregateSearchModal__filters__type': true,
         'AggregateSearchModal__filters__type-selected': selected
       });
+      var onClick = this.setFilter.bind(this, selected ? 'all' : type);
+      var count = this.state.counts[type];
+      var numResults = count >= 0 ? this.t('numResults', { count: count }) : this.t('searching');
+
       return (
-        <div className={ classes } key={ key } onClick={ this.setFilter.bind(this, selected ? 'all' : key) }>
+        <div className={ classes } key={ type } onClick={ onClick }>
           { selected && <Icon icon="chevron-right" /> }
           <div className="AggregateSearchModal__filters__type__name">{ name }</div>
-          <div className="AggregateSearchModal__filters__type__results">0 results</div>
+          <div className="AggregateSearchModal__filters__type__results">{ numResults }</div>
         </div>
       );
     }, this);
@@ -186,7 +236,7 @@ module.exports = React.createClass({
   renderLoading: function () {
     return this.state.isSearching && (
       <p className="AggregateSearchModal__footer">
-        { this.t('loadingMore') }<Icon icon="refresh"/>
+        { this.t('searching') }<Icon icon="refresh"/>
       </p>
     );
   },

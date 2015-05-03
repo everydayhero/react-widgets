@@ -2,14 +2,18 @@
 
 var _                           = require('lodash');
 var React                       = require('react');
+var cx                          = require('react/lib/cx');
 var I18n                        = require('../../mixins/I18n');
 var Input                       = require('../../forms/Input');
 var Icon                        = require('../../helpers/Icon');
 var Overlay                     = require('../../helpers/Overlay');
-var searchAPI                   = require('../../../api/search');
-var charitiesAPI                = require('../../../api/charities');
-var campaignsAPI                = require('../../../api/campaigns');
-var pagesAPI                    = require('../../../api/pages');
+
+var searchAPI = {
+  campaigns: require('../../../api/campaigns').search,
+  charities: require('../../../api/charities').search,
+  pages: require('../../../api/pages').search,
+  all: require('../../../api/search').aggregate
+};
 
 var resultTypes = {
   campaign: require('../AggregateSearchResultCampaign'),
@@ -41,10 +45,20 @@ module.exports = React.createClass({
         campaignAction: 'Get Started',
         charityAction: 'Visit Charity',
         supporterAction: 'Support',
-        emptyLabel: "We couldn't find any matching supporters, charities or events.",
-        noMore: "No more results",
-        loadMore: "Show more",
-        loadingMore: "Searching"
+        emptyLabel: {
+          pages: "We couldn't find any matching supporters",
+          charities: "We couldn't find any matching charities",
+          campaigns: "We couldn't find any matching events",
+          all: "We couldn't find any matching supporters, charities or events"
+        },
+        noMore: 'No more results',
+        loadMore: 'Show more',
+        loadingMore: 'Searching',
+        filterTypes: {
+          pages: 'Supporters',
+          charities: 'Charities',
+          campaigns: 'Events'
+        }
       },
       pageSize: 10
     };
@@ -55,13 +69,14 @@ module.exports = React.createClass({
       searchTerm: this.props.searchTerm,
       cancelRequest: function() {},
       results: null,
-      isSearching: false
+      isSearching: false,
+      filter: 'all'
     };
   },
 
   componentDidMount: function() {
-    if (this.props.searchTerm) {
-      this.aggregateSearch(this.props.searchTerm, 1);
+    if (this.state.searchTerm) {
+      this.search();
     }
   },
 
@@ -71,53 +86,34 @@ module.exports = React.createClass({
 
   inputChanged: function(searchTerm) {
     this.state.cancelRequest();
-
-    this.setState({
-      searchTerm: searchTerm
-    });
-
-    this.delayedSearch(searchTerm, 1);
+    this.setState({ searchTerm: searchTerm }, this.delayedSearch);
   },
 
-  delayedSearch: _.debounce(function(searchTerm, page) {
-    this.aggregateSearch(searchTerm, page);
+  delayedSearch: _.debounce(function(page) {
+    this.search(page);
   }, 300),
 
-  aggregateSearch: function(searchTerm, page) {
+  search: function(page) {
+    this.state.cancelRequest();
+
     if (!this.isMounted()) {
       return;
     }
 
-    if (!searchTerm) {
-      this.updateResults(null);
-      return;
+    if (!this.state.searchTerm) {
+      return this.updateResults(null);
     }
 
-    var cancelRequest = searchAPI.aggregate({
+    var cancelRequest = searchAPI[this.state.filter]({
       country: this.props.country,
-      searchTerm: searchTerm,
+      searchTerm: this.state.searchTerm,
       page: page || 1,
       pageSize: this.props.pageSize,
       minimumScore: 0.1
     }, this.updateResults);
 
     this.setState({
-      results: null,
-      isSearching: true,
-      cancelRequest: cancelRequest
-    });
-  },
-
-  loadMore: function() {
-    var cancelRequest = searchAPI.aggregate({
-      country: this.props.country,
-      searchTerm: this.state.searchTerm,
-      page: this.state.currentPage + 1,
-      pageSize: this.props.pageSize,
-      minimumScore: 0.1
-    }, this.updateResults);
-
-    this.setState({
+      results: page > 1 ? this.state.results : [],
       isSearching: true,
       cancelRequest: cancelRequest
     });
@@ -126,7 +122,14 @@ module.exports = React.createClass({
   updateResults: function(data) {
     if (data) {
       var pagination = data.meta.pagination;
-      var results = pagination.first_page ? data.results : this.state.results.concat(data.results);
+      var results = data[this.state.filter] || data.results;
+
+      if (!pagination.first_page) {
+        results = this.state.results.concat(results);
+        results = _.uniq(results, function(result) {
+          return result._type + result.id;
+        });
+      }
 
       this.setState({
         results: results,
@@ -144,13 +147,39 @@ module.exports = React.createClass({
     }
   },
 
+  setFilter: function (filter, event) {
+    event.preventDefault();
+    this.setState({ filter: filter }, this.search);
+  },
+
   renderFilters: function() {
-    return false;
+    var categories = _.map(this.t('filterTypes'), function(name, key) {
+      var selected = key == this.state.filter;
+      var classes = cx({
+        'AggregateSearchModal__filters__type': true,
+        'AggregateSearchModal__filters__type-selected': selected
+      });
+      return (
+        <div className={ classes } key={ key } onClick={ this.setFilter.bind(this, selected ? 'all' : key) }>
+          { selected && <Icon icon="chevron-right" /> }
+          <div className="AggregateSearchModal__filters__type__name">{ name }</div>
+          <div className="AggregateSearchModal__filters__type__results">0 results</div>
+        </div>
+      );
+    }, this);
+
+    return this.state.results && (
+      <div className="AggregateSearchModal__filters">
+       { categories}
+      </div>
+    );
   },
 
   renderEmpty: function () {
     return _.isEmpty(this.state.results) && (
-      <p className="AggregateSearchModal__footer">{ this.t('emptyLabel') }</p>
+      <p className="AggregateSearchModal__footer">
+        { this.t(this.state.filter, { scope: 'emptyLabel' }) }
+      </p>
     );
   },
 
@@ -162,37 +191,36 @@ module.exports = React.createClass({
     );
   },
 
-  renderNoMore: function () {
-    return this.state.lastPage && (
-      <p className="AggregateSearchModal__footer">{ this.t('noMore') }</p>
-    );
-  },
-
   renderLoadMore: function () {
-    return (
+    return !this.state.lastPage && (
       <p className="AggregateSearchModal__footer">
-        <a href="#" onClick={ this.loadMore }>{ this.t('loadMore') }</a>
+        <a href="#" onClick={ this.search.bind(this, this.state.currentPage + 1) }>{ this.t('loadMore') }</a>
       </p>
     );
   },
 
-  renderFooter: function () {
-    return this.renderEmpty() || this.renderLoading() || this.renderNoMore() || this.renderLoadMore();
+  renderNoMore: function () {
+    return (
+      <p className="AggregateSearchModal__footer">{ this.t('noMore') }</p>
+    );
   },
 
-  renderResults: function() {
-    var selectHandler = this.props.onClose;
+  renderFooter: function () {
+    return this.renderLoading() || this.renderEmpty() || this.renderLoadMore() || this.renderNoMore();
+  },
 
-    return this.state.results.map(function(result) {
+  getResults: function() {
+    var selectHandler = this.props.onClose;
+    return _.map(this.state.results, function(result) {
       var El = resultTypes[result._type];
       return El && <El key={ result._type + result.id } result={ result } onSelect={ selectHandler }/>;
     });
   },
 
-  renderContent: function() {
+  renderResults: function() {
     return this.state.results && (
-      <div className="AggregateSearchModal__content">
-        { this.renderResults() }
+      <div className="AggregateSearchModal__results">
+        { this.getResults() }
         { this.renderFooter() }
       </div>
     );
@@ -227,8 +255,10 @@ module.exports = React.createClass({
           { this.renderInput() }
         </div>
         <div ref="body" className="AggregateSearchModal__body">
-          { this.renderFilters() }
-          { this.renderContent() }
+          <div className="AggregateSearchModal__content">
+            { this.renderFilters() }
+            { this.renderResults() }
+          </div>
         </div>
       </ Overlay>
     );

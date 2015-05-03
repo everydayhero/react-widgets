@@ -5,7 +5,7 @@ jest.mock('../../../../api/totals');
 describe('FundsRaised', function() {
   var React       = require('react/addons');
   var FundsRaised = require('../');
-  var totals   = require('../../../../api/totals');
+  var totals      = require('../../../../api/totals');
   var TestUtils   = React.addons.TestUtils;
   var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
@@ -78,7 +78,7 @@ describe('FundsRaised', function() {
     };
 
     beforeEach(function() {
-      fundsRaised = <FundsRaised i18n={ translation } renderIcon={ false } />;
+      fundsRaised = <FundsRaised i18n={ translation } renderIcon={ false } offset={ 100000 } format={ '0,0' } />;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
 
@@ -93,7 +93,14 @@ describe('FundsRaised', function() {
       element.setState({ isLoading: false });
       var total = findByClass(element, 'FundsRaised__total');
 
-      expect(total.getDOMNode().textContent).toContain('£0.00');
+      expect(total.getDOMNode().textContent).toContain('1,000');
+    });
+
+    it('check for a total with offset', function() {
+      element.setState({ total: 100000, isLoading: false });
+      var total = findByClass(element, 'FundsRaised__total');
+
+      expect(total.getDOMNode().textContent).toContain('2,000');
     });
   });
 

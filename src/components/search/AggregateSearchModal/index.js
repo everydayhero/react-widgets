@@ -260,10 +260,9 @@ module.exports = React.createClass({
   },
 
   getResults: function() {
-    var selectHandler = this.props.onClose;
     return _.map(this.state.results, function(result) {
       var El = resultTypes[result._type];
-      return El && <El key={ result._type + result.id } result={ result } onSelect={ selectHandler }/>;
+      return El && <El key={ result._type + result.id } result={ result } />;
     });
   },
 

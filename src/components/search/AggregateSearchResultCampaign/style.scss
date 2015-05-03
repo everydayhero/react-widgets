@@ -12,6 +12,7 @@
 
   list-style: none;
   text-transform: uppercase;
+  letter-spacing: 0.1em;
   font-size: 11px;
   font-weight: lighter;
   color: white;
@@ -30,19 +31,22 @@
 }
 
 .AggregateSearchResultCampaign__header {
-  text-transform: uppercase;
-  font-size: 13px;
-  letter-spacing: 0.1em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 20px;
+  line-height: 1.2;
   color: white;
+
+  @include media-max($breakpoint-s) {
+    font-size: 17px;
+  }
 }
 
 .AggregateSearchResultCampaign__subheader {
   text-transform: uppercase;
-  font-size: 10px;
   letter-spacing: 0.1em;
+  font-size: 10px;
   margin-bottom: $x-1;
   white-space: nowrap;
   overflow: hidden;

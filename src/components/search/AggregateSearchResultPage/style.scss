@@ -21,7 +21,6 @@
 .AggregateSearchResultPage__content {
   display: block;
   overflow: hidden;
-  letter-spacing: 0.1em;
   padding-top: 2px;
 }
 
@@ -30,13 +29,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 20px;
+  line-height: 1.2;
   color: white;
+
+  @include media-max($breakpoint-s) {
+    font-size: 17px;
+  }
 }
 
 .AggregateSearchResultPage__subheader {
   font-size: 0.7em;
   color: $ehw-grey-light;
   text-transform: uppercase;
+  letter-spacing: 0.1em;
   margin-left: 0.5em;
   font-weight: lighter;
 }
@@ -70,4 +75,5 @@
 .AggregateSearchResultPage__amount, .AggregateSearchResultPage__for {
   font-size: 10px;
   text-transform: uppercase;
+  letter-spacing: 0.1em;
 }

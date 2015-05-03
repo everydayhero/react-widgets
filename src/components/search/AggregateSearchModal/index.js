@@ -194,7 +194,7 @@ module.exports = React.createClass({
     }
   },
 
-  setFilter: function (filter, event) {
+  setFilter: function(filter, event) {
     this.setState({ filter: filter }, this.search);
   },
 
@@ -225,7 +225,7 @@ module.exports = React.createClass({
     );
   },
 
-  renderEmpty: function () {
+  renderEmpty: function() {
     return _.isEmpty(this.state.results) && (
       <p className="AggregateSearchModal__footer">
         { this.t(this.state.filter, { scope: 'emptyLabel' }) }
@@ -233,7 +233,7 @@ module.exports = React.createClass({
     );
   },
 
-  renderLoading: function () {
+  renderLoading: function() {
     return this.state.isSearching && (
       <p className="AggregateSearchModal__footer">
         { this.t('searching') }<Icon icon="refresh"/>
@@ -241,7 +241,7 @@ module.exports = React.createClass({
     );
   },
 
-  renderLoadMore: function () {
+  renderLoadMore: function() {
     return !this.state.lastPage && (
       <p className="AggregateSearchModal__footer">
         <a href="#" onClick={ this.search.bind(this, this.state.currentPage + 1) }>{ this.t('loadMore') }</a>
@@ -249,13 +249,13 @@ module.exports = React.createClass({
     );
   },
 
-  renderNoMore: function () {
+  renderNoMore: function() {
     return (
       <p className="AggregateSearchModal__footer">{ this.t('noMore') }</p>
     );
   },
 
-  renderFooter: function () {
+  renderFooter: function() {
     return this.renderLoading() || this.renderEmpty() || this.renderLoadMore() || this.renderNoMore();
   },
 
@@ -276,13 +276,13 @@ module.exports = React.createClass({
     );
   },
 
-  renderCloseButton: function () {
+  renderCloseButton: function() {
     return (
       <a href="#" className="AggregateSearchModal__close" onClick={ this.props.onClose }>&times;</a>
     );
   },
 
-  renderInput: function () {
+  renderInput: function() {
     return (
       <Input
         className='AggregateSearchModal__input'

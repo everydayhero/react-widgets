@@ -23,7 +23,7 @@ describe('search', function() {
       expect(getJSONP).lastCalledWith(
         'https://everydayhero.com/api/v2/search/aggregate.jsonp' +
           '?q=bar&country_code=xy&page=2&page_size=7&minimum_score=0.1',
-        callback
+        callback, {timeout: 10000}
       );
       expect(callback).toBeCalledWith(results);
     });

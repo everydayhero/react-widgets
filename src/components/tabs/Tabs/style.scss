@@ -5,5 +5,16 @@
 .Tabs__tab-list {
   @extend %clearfix;
   white-space: nowrap;
-  display: inline-block;
+  display: block;
+}
+
+.Tabs__drawer {
+  display: none;
+}
+
+.Tabs--medium,
+.Tabs--small,
+.Tabs--tiny {
+  .Tabs__tab-list { display: none; }
+  .Tabs__drawer { display: block; }
 }

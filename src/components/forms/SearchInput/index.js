@@ -44,7 +44,9 @@ module.exports = React.createClass({
 
   componentDidMount: function() {
     var value = this.refs.input.getDOMNode().value;
-    this.setState({ value: value });
+    if (value) {
+      this.setState({ value: value });
+    }
   },
 
   componentWillReceiveProps: function(nextProps) {

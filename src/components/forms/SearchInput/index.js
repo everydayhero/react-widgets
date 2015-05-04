@@ -42,6 +42,13 @@ module.exports = React.createClass({
     });
   },
 
+  componentDidMount: function() {
+    var value = this.refs.input.getDOMNode().value;
+    if (value) {
+      this.setState({ value: value });
+    }
+  },
+
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.value) {
       this.setState({
@@ -66,6 +73,7 @@ module.exports = React.createClass({
       <div className="ehw-SearchInput">
         <div className="ehw-SearchInput__input">
           <Input {...props}
+            ref="input"
             value={ state.value }
             output={ this.handleChange }
             onEnter={ this.handleSubmit }

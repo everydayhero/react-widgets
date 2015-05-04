@@ -79,7 +79,7 @@ describe('pages', function() {
       expect(getJSONP).lastCalledWith(
         'https://everydayhero.com/api/v2/search/pages.jsonp' +
           '?q=bar&country_code=xy&campaign_id=xy-12,xy-42&charity_id=xy-123&type=foo&page=2&page_size=7',
-        callback
+        callback, {timeout: 10000}
       );
       expect(callback).toBeCalledWith(results);
     });

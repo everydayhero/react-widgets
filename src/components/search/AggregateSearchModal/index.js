@@ -42,7 +42,7 @@ module.exports = React.createClass({
       searchTerm: '',
       defaultI18n: {
         title: 'Search',
-        inputLabel: 'Search for a supporter, charity or event',
+        inputLabel: 'Enter keywords',
         campaignAction: 'Get Started',
         charityAction: 'Visit Charity',
         supporterAction: 'Support',
@@ -111,7 +111,7 @@ module.exports = React.createClass({
     this.state.cancelSearch();
 
     if (!this.state.searchTerm) {
-      return this.updateResults(null);
+      return this.clearResults();
     }
 
     var cancelSearch = searchAPI[this.state.filter]({
@@ -125,7 +125,16 @@ module.exports = React.createClass({
     this.setState({
       results: page > 1 ? this.state.results : [],
       isSearching: true,
+      searchPage: page || 1,
       cancelSearch: cancelSearch
+    });
+  },
+
+  clearResults: function() {
+    this.setState({
+      results: null,
+      isSearching: false,
+      counts: {}
     });
   },
 
@@ -148,12 +157,7 @@ module.exports = React.createClass({
         currentPage: pagination.current_page
       });
     } else {
-      this.setState({
-        results: null,
-        isSearching: false,
-        lastPage: true,
-        currentPage: 0
-      });
+      this.search(this.state.searchPage);
     }
   },
 

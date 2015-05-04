@@ -19,6 +19,18 @@
     font-size: 36px;
     padding-left: 1px;
     padding-top: 2px;
+
+    @include media-max($breakpoint-xs) {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+    }
+  }
+
+  @include media-max($breakpoint-xs) {
+    border-radius: 25px;
+    width: 50px;
+    min-height: 50px;
   }
 }
 
@@ -50,6 +62,12 @@
     margin: 0;
     border: none;
   }
+
+  @include media-max($breakpoint-xs) {
+    width: 50px;
+    height: 50px;
+    padding: 3px;
+  }
 }
 
 .AggregateSearchResultCharity__content {
@@ -66,6 +84,14 @@
 
   @include media-max($breakpoint-s) {
     font-size: 17px;
+  }
+
+  @include media-max($breakpoint-xs) {
+    font-size: 15px;
+  }
+
+  @include media-max($breakpoint-xxxs) {
+    font-size: 13px;
   }
 }
 

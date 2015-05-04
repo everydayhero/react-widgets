@@ -22,13 +22,21 @@ describe('SearchInput', function() {
   });
 
   it('renders an input', function() {
-    var input = scryByClass(element, 'ehw-SearchInput');
+    var input = findByClass(element, 'Input__input')
+
+    expect(input).toBeDefined();
+  });
+
+  it('contains initial value', function() {
+    var inputNode = findByClass(element, 'Input__input').getDOMNode();
+
+    expect(inputNode.value).toBe(initialValue);
   });
 
   it('returns a value on enter', function() {
     var inputNode = findByClass(element, 'Input__input').getDOMNode();
 
-    React.addons.TestUtils.Simulate.keyUp(inputNode, {key: "Enter"});
+    TestUtils.Simulate.keyUp(inputNode, {key: "Enter"});
 
     expect(submittedValue).toBe(initialValue);
   });
@@ -37,8 +45,8 @@ describe('SearchInput', function() {
     var button    = findByClass(element, 'hui-Button').getDOMNode();
     var inputNode = findByClass(element, 'Input__input').getDOMNode();
 
-    React.addons.TestUtils.Simulate.change(inputNode, { target: { value: 'bar' } });
-    React.addons.TestUtils.Simulate.mouseUp(button);
+    TestUtils.Simulate.change(inputNode, { target: { value: 'bar' } });
+    TestUtils.Simulate.mouseUp(button);
 
     expect(submittedValue).toBe('bar');
   });

@@ -202,7 +202,7 @@ describe('campaigns', function() {
 
       expect(getJSONP).toBeCalledWith(
         'https://everydayhero.com/api/v2/search/campaigns.jsonp?q=bar&country_code=xy&page=2&page_size=7',
-        callback
+        callback, {timeout: 10000}
       );
       expect(callback).toBeCalledWith(results);
     });

@@ -1,15 +1,20 @@
 "use strict";
 
-var _                           = require('lodash');
-var React                       = require('react');
-var I18n                        = require('../../mixins/I18n');
-var Input                       = require('../../forms/Input');
-var Icon                        = require('../../helpers/Icon');
-var Overlay                     = require('../../helpers/Overlay');
-var searchAPI                   = require('../../../api/search');
-var charitiesAPI                = require('../../../api/charities');
-var campaignsAPI                = require('../../../api/campaigns');
-var pagesAPI                    = require('../../../api/pages');
+var _       = require('lodash');
+var async   = require('async');
+var React   = require('react');
+var cx      = require('react/lib/cx');
+var I18n    = require('../../mixins/I18n');
+var Input   = require('../../forms/Input');
+var Icon    = require('../../helpers/Icon');
+var Overlay = require('../../helpers/Overlay');
+
+var searchAPI = {
+  campaigns: require('../../../api/campaigns').search,
+  charities: require('../../../api/charities').search,
+  pages: require('../../../api/pages').search,
+  all: require('../../../api/search').aggregate
+};
 
 var resultTypes = {
   campaign: require('../AggregateSearchResultCampaign'),
@@ -41,11 +46,26 @@ module.exports = React.createClass({
         campaignAction: 'Get Started',
         charityAction: 'Visit Charity',
         supporterAction: 'Support',
-        emptyLabel: "We couldn't find any matching supporters, charities or events.",
-        noMore: "No more results",
-        loadMore: "Show more",
-        loadingMore: "Searching"
+        emptyLabel: {
+          pages: "We couldn't find any matching supporters",
+          charities: "We couldn't find any matching charities",
+          campaigns: "We couldn't find any matching events",
+          all: "We couldn't find any matching supporters, charities or events"
+        },
+        noMore: 'No more results',
+        loadMore: 'Show more',
+        searching: 'Searching',
+        filterTypes: {
+          pages: 'Supporters',
+          charities: 'Charities',
+          campaigns: 'Events'
+        },
+        numResults: {
+          one: '{count} result',
+          other: '{count} results'
+        }
       },
+      minimumScore: 0.1,
       pageSize: 10
     };
   },
@@ -53,75 +73,73 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       searchTerm: this.props.searchTerm,
-      cancelRequest: function() {},
+      cancelSearch: function() {},
+      cancelSearchCounts: function() {},
       results: null,
-      isSearching: false
+      isSearching: false,
+      filter: 'all',
+      counts: {}
     };
   },
 
-  componentWillMount: function() {
-    if (this.props.searchTerm) {
-      this.aggregateSearch(this.props.searchTerm, 1);
+  componentDidMount: function() {
+    if (this.state.searchTerm) {
+      this.search();
+      this.searchCounts();
     }
   },
 
-  keyHandler: function(event) {
-    if (event.key === 'Escape') {
-      this.props.onClose(event);
-    }
+  componentWillUnmount: function() {
+    this.state.cancelSearch();
+    this.state.cancelSearchCounts();
   },
 
   inputChanged: function(searchTerm) {
-    this.delayedChange(searchTerm, 1);
+    this.state.cancelSearch();
+    this.state.cancelSearchCounts();
+    this.setState({ searchTerm: searchTerm }, this.delayedSearch);
   },
 
-  delayedChange: _.debounce(function(searchTerm, page) {
-    this.aggregateSearch(searchTerm, page);
-  }, 500),
+  delayedSearch: _.debounce(function() {
+    if (this.isMounted()) {
+      this.search();
+      this.searchCounts();
+    }
+  }, 300),
 
-  aggregateSearch: function(searchTerm, page) {
-    this.state.cancelRequest();
+  search: function(page) {
+    this.state.cancelSearch();
 
-    if (!searchTerm) {
-      this.updateResults(null);
-      return;
+    if (!this.state.searchTerm) {
+      return this.updateResults(null);
     }
 
-    var cancelRequest = searchAPI.aggregate({
-      country: this.props.country,
-      searchTerm: searchTerm,
-      page: page || 1,
-      pageSize: this.props.pageSize,
-      minimumScore: 0.1
-    }, this.updateResults);
-
-    this.setState({
-      results: null,
-      isSearching: true,
-      searchTerm: searchTerm,
-      cancelRequest: cancelRequest
-    });
-  },
-
-  loadMore: function() {
-    var cancelRequest = searchAPI.aggregate({
+    var cancelSearch = searchAPI[this.state.filter]({
       country: this.props.country,
       searchTerm: this.state.searchTerm,
-      page: this.state.currentPage + 1,
+      page: page || 1,
       pageSize: this.props.pageSize,
-      minimumScore: 0.1
+      minimumScore: this.props.minimumScore
     }, this.updateResults);
 
     this.setState({
+      results: page > 1 ? this.state.results : [],
       isSearching: true,
-      cancelRequest: cancelRequest
+      cancelSearch: cancelSearch
     });
   },
 
   updateResults: function(data) {
     if (data) {
       var pagination = data.meta.pagination;
-      var results = pagination.first_page ? data.results : this.state.results.concat(data.results);
+      var results = data[this.state.filter] || data.results;
+
+      if (!pagination.first_page) {
+        results = this.state.results.concat(results);
+        results = _.uniq(results, function(result) {
+          return result._type + result.id;
+        });
+      }
 
       this.setState({
         results: results,
@@ -130,77 +148,166 @@ module.exports = React.createClass({
         currentPage: pagination.current_page
       });
     } else {
-      this.setState(this.getInitialState());
+      this.setState({
+        results: null,
+        isSearching: false,
+        lastPage: true,
+        currentPage: 0
+      });
     }
+  },
+
+  searchCounts: function() {
+    var cancel = false;
+
+    this.setState({
+      counts: {},
+      cancelSearchCounts: function() { cancel = true; }
+    });
+
+    var searchParams = {
+      country: this.props.country,
+      searchTerm: this.state.searchTerm,
+      page: 1,
+      pageSize: 1,
+      minimumScore: this.props.minimumScore
+    };
+
+    var types = ['campaigns', 'charities', 'pages'];
+    async.map(types, function(type, callback) {
+      searchAPI[type](searchParams, function(data) {
+        callback(data ? null : 'error', data && data.meta.pagination.count);
+      });
+    }, function(error, results) {
+      if (!cancel) {
+        this.updateCounts(error ? null : _.zipObject(types, results));
+      }
+    }.bind(this));
+  },
+
+  updateCounts: function(counts) {
+    if (counts) {
+      this.setState({ counts: counts });
+    } else {
+      var timer = setTimeout(this.searchCounts, 5000);
+      this.setState({ cancelSearchCounts: function() { clearTimeout(timer); } });
+    }
+  },
+
+  setFilter: function(filter, event) {
+    this.setState({ filter: filter }, this.search);
   },
 
   renderFilters: function() {
-    return false;
-  },
+    var categories = _.map(this.t('filterTypes'), function(name, type) {
+      var selected = (type == this.state.filter);
+      var classes = cx({
+        'AggregateSearchModal__filters__type': true,
+        'AggregateSearchModal__filters__type-selected': selected
+      });
+      var onClick = this.setFilter.bind(this, selected ? 'all' : type);
+      var count = this.state.counts[type];
+      var numResults = count >= 0 ? this.t('numResults', { count: count }) : this.t('searching');
 
-  renderResultsEmpty: function () {
-    return <p className="AggregateSearchModal__results__empty">{ this.t('emptyLabel') }</p>;
-  },
+      return (
+        <div className={ classes } key={ type } onClick={ onClick }>
+          { selected && <Icon icon="chevron-right" /> }
+          <div className="AggregateSearchModal__filters__type__name">{ name }</div>
+          <div className="AggregateSearchModal__filters__type__results">{ numResults }</div>
+        </div>
+      );
+    }, this);
 
-  renderResultsMore: function () {
-    var content = this.state.isSearching ? [ this.t('loadingMore'), <Icon icon="refresh"/>] :
-      this.state.lastPage ? this.t('noMore') : <a href="#" onClick={ this.loadMore }>{ this.t('loadMore') }</a>;
-
-    return <p className="AggregateSearchModal__results__more">{ content }</p>;
-  },
-
-  renderResults: function() {
-    var results = this.state.results;
-    if (!results) {
-      return;
-    }
-
-    if (_.isEmpty(results)) {
-      return this.renderResultsEmpty();
-    }
-
-    results = results.map(function(result) {
-      var El = resultTypes[result._type];
-      return El && <El result={ result } />;
-    });
-
-    return (
-      <div className="AggregateSearchModal__results">
-        { results }
-        { this.renderResultsMore() }
+    return this.state.results && (
+      <div className="AggregateSearchModal__filters">
+       { categories}
       </div>
     );
   },
 
-  render: function() {
-    var props = this.props;
+  renderEmpty: function() {
+    return _.isEmpty(this.state.results) && (
+      <p className="AggregateSearchModal__footer">
+        { this.t(this.state.filter, { scope: 'emptyLabel' }) }
+      </p>
+    );
+  },
 
-    var title = <span className="AggregateSearchModal__title">{ this.t('title') }</span>;
+  renderLoading: function() {
+    return this.state.isSearching && (
+      <p className="AggregateSearchModal__footer">
+        { this.t('searching') }<Icon icon="refresh"/>
+      </p>
+    );
+  },
 
-    var closeButton =
-      <a href="#" className="AggregateSearchModal__close" onClick={ this.props.onClose }><Icon icon="times" /></a>;
+  renderLoadMore: function() {
+    return !this.state.lastPage && (
+      <p className="AggregateSearchModal__footer">
+        <a href="#" onClick={ this.search.bind(this, this.state.currentPage + 1) }>{ this.t('loadMore') }</a>
+      </p>
+    );
+  },
 
-    var input =
+  renderNoMore: function() {
+    return (
+      <p className="AggregateSearchModal__footer">{ this.t('noMore') }</p>
+    );
+  },
+
+  renderFooter: function() {
+    return this.renderLoading() || this.renderEmpty() || this.renderLoadMore() || this.renderNoMore();
+  },
+
+  getResults: function() {
+    return _.map(this.state.results, function(result) {
+      var El = resultTypes[result._type];
+      return El && <El key={ result._type + result.id } result={ result } />;
+    });
+  },
+
+  renderResults: function() {
+    return this.state.results && (
+      <div className="AggregateSearchModal__results">
+        { this.getResults() }
+        { this.renderFooter() }
+      </div>
+    );
+  },
+
+  renderCloseButton: function() {
+    return (
+      <a href="#" className="AggregateSearchModal__close" onClick={ this.props.onClose }>&times;</a>
+    );
+  },
+
+  renderInput: function() {
+    return (
       <Input
         className='AggregateSearchModal__input'
         spacing="compact"
-        autoFocus={ props.autoFocus }
+        autoFocus={ this.props.autoFocus }
         i18n={{ label: this.t('inputLabel'), name: 'aggregate_search_input' }}
         output={ this.inputChanged }
         showIcon={ true }
         icon={ this.state.isSearching ? 'refresh' : '' }
-        value={ this.state.searchTerm } />;
+        value={ this.state.searchTerm } />
+    );
+  },
 
+  render: function() {
     return (
-      <Overlay className="AggregateSearchModal__overlay">
-        <div className='AggregateSearchModal__header' onKeyDown={ this.keyHandler }>
-          { title }
-          { closeButton }
-          { input }
+      <Overlay className="AggregateSearchModal__overlay" onClose={ this.props.onClose } showCloseButton={ false }>
+        <div className='AggregateSearchModal__header'>
+          <span className="AggregateSearchModal__title">{ this.t('title') }</span>
+          { this.renderCloseButton() }
+          { this.renderInput() }
         </div>
         <div ref="body" className="AggregateSearchModal__body">
-          { this.renderFilters() }
-          { this.renderResults() }
+          <div className="AggregateSearchModal__content">
+            { this.renderFilters() }
+            { this.renderResults() }
+          </div>
         </div>
       </ Overlay>
     );

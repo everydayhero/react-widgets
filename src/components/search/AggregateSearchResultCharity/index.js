@@ -13,6 +13,7 @@ module.exports = React.createClass({
 
   propTypes: {
     result: React.PropTypes.object.isRequired,
+    onSelect: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -23,44 +24,44 @@ module.exports = React.createClass({
     };
   },
 
-  render: function() {
-    var t = this.t;
-    var props = this.props;
-    var result = props.result;
-    var charity = result;
+  renderLogo: function () {
+    var charity = this.props.result;
 
-    var logo;
-    if (charity.logo_url) {
-      logo = (
-        <div className="AggregateSearchResultCharity__logo">
-          <img src={ charity.logo_url } />
-        </div>
-      );
-    } else {
-      logo = (
-        <div className='AggregateSearchResultCharity__avatar'>
-          <Icon icon='heart-o' fixedWidth={ true } />
-        </div>
-      );
-    }
+    return !!charity.logo_url && (
+      <div className="AggregateSearchResultCharity__logo">
+        <img src={ charity.logo_url } />
+      </div>
+    );
+  },
 
-    var name =
-      <span className="AggregateSearchResultCharity__name">{ charity.name }</span>;
+  renderAvatar: function () {
+    return (
+      <div className='AggregateSearchResultCharity__avatar'>
+        <Icon icon={ 'heart-o' } fixedWidth={ true } />
+      </div>
+    );
+  },
 
-    var supporters = charity.page_count >= 20 &&
+  renderNumSupporters: function () {
+    var charity = this.props.result;
+
+    return charity.page_count >= 20 && (
       <span className='AggregateSearchResultCharity__supporters'>
-        { t('numSupporters', { count: charity.page_count }) }
-      </span>;
+        { this.t('numSupporters', { count: charity.page_count }) }
+      </span>
+    );
+  },
+
+  render: function() {
+    var charity = this.props.result;
 
     return (
-      <AggregateSearchResult url={ charity.url }>
-        { logo }
+      <AggregateSearchResult url={ charity.url } onSelect={ this.props.onSelect }>
+        { this.renderLogo() || this.renderAvatar() }
         <div className='AggregateSearchResultCharity__content'>
-          <div className='AggregateSearchResultCharity__header'>
-            { name }
-          </div>
+          <div className='AggregateSearchResultCharity__header'>{ charity.name }</div>
           <div className='AggregateSearchResultCharity__subheader'>
-            { supporters }
+            { this.renderNumSupporters() }
           </div>
           <p className='AggregateSearchResultCharity__description'>{ charity.description }</p>
         </div>

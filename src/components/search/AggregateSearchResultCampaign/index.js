@@ -13,61 +13,71 @@ module.exports = React.createClass({
 
   propTypes: {
     result: React.PropTypes.object.isRequired,
+    onSelect: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
       defaultI18n: {
-        numSupporters: '{count:0,0} Supporters',
-        numCharities: '{count:0,0} Charities',
+        numSupporters: {
+          one: '1 Supporter',
+          other: '{count:0,0} Supporters'
+        },
+        numCharities: {
+          one: '1 Charity',
+          other: '{count:0,0} Charities'
+        },
         months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       }
     };
   },
 
-  render: function() {
-    var t = this.t;
-    var props = this.props;
-    var campaign = props.result;
-
-    var avatar;
-    if (campaign.display_start_at) {
-      var date = new Date(campaign.display_start_at);
-      avatar = (
-        <ul className="AggregateSearchResultCampaign__avatar">
-          <li>{ date.getDate() }</li>
-          <li>{ t('months')[date.getMonth()] }</li>
-          <li>{ date.getFullYear() }</li>
-        </ul>
-      );
-    } else {
-      avatar =
-        <div className="AggregateSearchResultCampaign__avatar" />;
+  renderDate: function () {
+    var campaign = this.props.result;
+    if (!campaign.display_start_at) {
+      return <div className="AggregateSearchResultCampaign__date" />;
     }
 
-    var name =
-      <span className="AggregateSearchResultCampaign__name">{ campaign.name }</span>;
+    var date = new Date(campaign.display_start_at);
+    return (
+      <ul className="AggregateSearchResultCampaign__date">
+        <li>{ date.getDate() }</li>
+        <li>{ this.t('months')[date.getMonth()] }</li>
+        <li>{ date.getFullYear() }</li>
+      </ul>
+    );
+  },
 
-    var supporters = campaign.page_count >= 20 &&
+  renderNumSupporters: function () {
+    var campaign = this.props.result;
+    return campaign.page_count >= 20 && (
       <span className='AggregateSearchResultCampaign__supporters'>
-        { t('numSupporters', { count: campaign.page_count }) }
-      </span>;
+        { this.t('numSupporters', { count: campaign.page_count }) }
+      </span>
+    );
+  },
 
-    var charities = campaign.charity_count >= 0 &&
+  renderNumCharities: function () {
+    var campaign = this.props.result;
+    return campaign.charity_count >= 0 && (
       <span className='AggregateSearchResultCampaign__charities'>
-        { t('numCharities', { count: campaign.charity_count }) }
-      </span>;
+        { this.t('numCharities', { count: campaign.charity_count }) }
+      </span>
+    );
+  },
+
+  render: function() {
+    var campaign = this.props.result;
+    var url = campaign.url || campaign.get_started_url;
 
     return (
-      <AggregateSearchResult url={ campaign.get_started_url }>
-        { avatar }
+      <AggregateSearchResult url={ url } onSelect={ this.props.onSelect }>
+        { this.renderDate() }
         <div className='AggregateSearchResultCampaign__content'>
-          <div className='AggregateSearchResultCampaign__header'>
-            { name }
-          </div>
+          <div className='AggregateSearchResultCampaign__header'>{ campaign.name }</div>
           <div className='AggregateSearchResultCampaign__subheader'>
-            { supporters }
-            { charities }
+            { this.renderNumSupporters() }
+            { this.renderNumCharities() }
           </div>
           <p className='AggregateSearchResultCampaign__description'>{ campaign.description }</p>
         </div>

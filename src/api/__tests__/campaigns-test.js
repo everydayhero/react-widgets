@@ -158,6 +158,18 @@ describe('campaigns', function() {
     });
   });
 
+  describe('leaderboardByUids', function() {
+    it('gets multiple campaign leaderboards by campaign uids', function() {
+      var callback = jest.genMockFunction();
+      campaigns.leaderboardByUids(['ab-123', 'cd-456'], 'foo', 12, callback, {});
+      expect(getJSONP.mock.calls.length).toBe(2);
+      expect(getJSONP.mock.calls[0][0]).toContain('ab-123');
+      expect(getJSONP.mock.calls[1][0]).toContain('cd-456');
+      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/campaigns/cd-456/leaderboard.jsonp?type=foo&limit=12', callback);
+      expect(callback.mock.calls.length).toBe(1);
+    });
+  });
+
   describe('leaderboardBySlug', function() {
     it('gets campaign leaderboard by country and slug', function() {
       var callback = jest.genMockFunction();

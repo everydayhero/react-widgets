@@ -18,6 +18,7 @@ module.exports = React.createClass({
   propTypes: {
     campaignSlug: React.PropTypes.string,
     campaignUid: React.PropTypes.string,
+    campaignUids: React.PropTypes.array,
     charitySlug: React.PropTypes.string,
     charityUid: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),

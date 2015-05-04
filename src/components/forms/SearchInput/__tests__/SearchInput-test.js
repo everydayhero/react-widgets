@@ -22,7 +22,7 @@ describe('SearchInput', function() {
   });
 
   it('renders an input', function() {
-    var input = findByClass(element, 'Input__input')
+    var input = findByClass(element, 'Input__input');
 
     expect(input).toBeDefined();
   });

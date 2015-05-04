@@ -1,7 +1,7 @@
 "use strict";
 
-var _ = require('lodash');
-var routes = require('./routes');
+var _        = require('lodash');
+var routes   = require('./routes');
 var getJSONP = require('../lib/getJSONP');
 
 var giveCampaignUids = {
@@ -52,7 +52,38 @@ module.exports = {
       type: type,
       limit: limit
     }, options);
+
     return getJSONP(routes.get('campaignLeaderboard', params), callback);
+  },
+
+  leaderboardByUids: function(campaignUids, type, limit, callback, options) {
+    if (_.isEmpty(campaignUids)) {
+      _.defer(callback, { campaigns: [] });
+      return;
+    }
+
+    var pages = [];
+
+    var done = _.after(campaignUids.length, function() {
+      var sortedPages = _.sortBy(pages, function(item) {
+        return -item.amount.cents;
+      });
+
+      return callback({ leaderboard: { pages: sortedPages } });
+    });
+
+    var storePages = function(result) {
+      if ("leaderboard" in result) {
+        _.forEach(result.leaderboard.pages, function(page) {
+          pages.push(page);
+        });
+      }
+      done();
+    };
+
+    _.forEach(campaignUids, function(campaignUid) {
+      this.leaderboard(campaignUid, type, limit, storePages, options);
+    }, this);
   },
 
   leaderboardBySlug: function(country, campaignSlug, type, limit, callback, options) {

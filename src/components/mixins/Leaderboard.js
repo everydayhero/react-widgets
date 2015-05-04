@@ -19,6 +19,7 @@ module.exports = {
       if (props.charitySlug)  { endpoint = charities.leaderboardBySlug.bind(charities, props.country, props.charitySlug); }
     } else {
       if (props.campaignUid)  { endpoint = campaigns.leaderboard.bind(campaigns, props.campaignUid); }
+      if (props.campaignUids) { endpoint = campaigns.leaderboardByUids.bind(campaigns, props.campaignUids); }
       if (props.charityUid)   { endpoint = charities.leaderboard.bind(charities, props.charityUid); }
     }
 
@@ -30,9 +31,7 @@ module.exports = {
   },
 
   loadLeaderboard: function(type) {
-    this.setState({
-      isLoading: true
-    });
+    this.setState({ isLoading: true });
 
     var endpoint = this.getEndpoint();
     endpoint(type, this.props.limit, this.processLeaderboard, { includePages: true });

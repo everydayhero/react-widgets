@@ -635,7 +635,8 @@ Displays an individuals leaderboard sorted by funds raised (highest first) for a
 
 ##### Options
 
-- `campaignUid`: *optional* string campaign uid to filter results by campaign.
+- `campaignUid`: *optional* string. Define a campaign uid to filter results by campaign.
+- `campaignUids`: *optional* array. Define multiple campaign uids to filter results by campaigns.
 - `campaignSlug`: *optional* string campaign slug to filter results by campaign. Requires `country`.
 - `charityUid`: *optional* string charity uid to filter results by charity.
 - `charitySlug`: *optional* string charity slug to filter results by charity. Requires `country`.

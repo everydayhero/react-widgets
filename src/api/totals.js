@@ -13,5 +13,10 @@ module.exports = {
   findByPage: function(pageId, callback, options) {
     var params = _.merge({ page: pageId }, options);
     return getJSONP(routes.get('totals', params), callback);
+  },
+
+  findByCharity: function(charityUid, callback, options) {
+    var params = _.merge({ charityUid: charityUid }, options);
+    return getJSONP(routes.get('totals', params), callback);
   }
 };

@@ -45,10 +45,53 @@ describe('FundsRaised', function() {
       element.setState({ isLoading: true });
       findByClass(element, 'FundsRaised__loading');
     });
+  });
+
+  describe('single campaign id', function() {
+    var fundsRaised;
+    var element;
+
+    beforeEach(function() {
+      totals.findByCampaign.mockClear();
+      fundsRaised = <FundsRaised campaignUid="us-22" />;
+      element = TestUtils.renderIntoDocument(fundsRaised);
+    });
 
     it('handles a single campaign id', function() {
       expect(totals.findByCampaign.mock.calls.length).toEqual(1);
       expect(totals.findByCampaign).toBeCalledWith("us-22", element.onSuccess);
+    });
+  });
+
+  describe('single page id', function() {
+    var fundsRaised;
+    var element;
+
+    beforeEach(function() {
+      totals.findByPage.mockClear();
+      fundsRaised = <FundsRaised pageId="848751" />;
+      element = TestUtils.renderIntoDocument(fundsRaised);
+    });
+
+    it('handles a single page id', function() {
+      expect(totals.findByPage.mock.calls.length).toEqual(1);
+      expect(totals.findByPage).toBeCalledWith("848751", element.onSuccess);
+    });
+  });
+
+  describe('single charity id', function() {
+    var fundsRaised;
+    var element;
+
+    beforeEach(function() {
+      totals.findByCharity.mockClear();
+      fundsRaised = <FundsRaised charityUid="au-31" />;
+      element = TestUtils.renderIntoDocument(fundsRaised);
+    });
+
+    it('handles a single charity id', function() {
+      expect(totals.findByCharity.mock.calls.length).toEqual(1);
+      expect(totals.findByCharity).toBeCalledWith("au-31", element.onSuccess);
     });
   });
 

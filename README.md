@@ -189,6 +189,7 @@ Displays the total funds raised for specified campaigns or page as a dollar amou
 - `campaignUid`: *optional* string campaign uid to filter results by campaign.
 - `campaignUids`: *optional* array of campaign uids to filter results by multiple campaigns.
 - `pageId`: *optional* string page id to filter results by page.
+- `charityUid`: *optional* string charity uid to filter results by charity.
 - `renderIcon`: *optional* boolean. Set to `true` by default.
 - `offset`: *optional* number. Set to `0` by default.
 - `backgroundColor`: *optional* string. Not set by default.

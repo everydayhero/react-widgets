@@ -4,6 +4,10 @@ var React               = require('react');
 var I18nMixin           = require('../../mixins/I18n');
 var CallToActionButton  = require('../../callstoaction/CallToActionButton');
 
+function _wholeRound(num) {
+  return num % 1 !== 0 ? num.toFixed(2) : num;
+}
+
 module.exports = React.createClass({
   displayName: 'SupporterCardGiveNow',
 
@@ -35,8 +39,8 @@ module.exports = React.createClass({
 
     return this.tm(props.current >= props.target ? 'achievedLabel' : 'label', {
       currency: this.t('currency'),
-      amount_raised: parseFloat(props.current.toFixed(2)),
-      amount_remaining: parseFloat((props.target - props.current).toFixed(2))
+      amount_raised: _wholeRound(props.current),
+      amount_remaining: _wholeRound(props.target - props.current)
     });
   },
 

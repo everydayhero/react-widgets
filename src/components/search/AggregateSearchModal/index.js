@@ -42,7 +42,7 @@ module.exports = React.createClass({
       searchTerm: '',
       defaultI18n: {
         title: 'Search',
-        inputLabel: 'Search for a supporter, charity or event',
+        inputLabel: 'Enter keywords',
         campaignAction: 'Get Started',
         charityAction: 'Visit Charity',
         supporterAction: 'Support',

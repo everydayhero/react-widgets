@@ -49,7 +49,6 @@
 .AggregateSearchModal__title {
   text-transform: uppercase;
   font-size: 16px;
-  font-weight: lighter;
   letter-spacing: 1px;
 }
 
@@ -59,6 +58,11 @@
   font-weight: bold;
   color: white;
   margin: -14px 0;
+
+  &:hover {
+    color: $ehw-green;
+    text-decoration: none;
+  }
 }
 
 .AggregateSearchModal__content {
@@ -168,8 +172,14 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
 
-  a { color: white; }
-  a:hover { color: $ehw-green; }
+  a {
+    color: white;
+
+    &:hover {
+      color: $ehw-green;
+      text-decoration: none;
+    }
+  }
 
   i { margin-left: $x-2; }
 }

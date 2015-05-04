@@ -14,14 +14,24 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 11px;
-  font-weight: lighter;
   color: white;
 
   li {
     &:first-child {
       font-size: 26px;
       margin-top: 0.4em;
+
+      @include media-max($breakpoint-xs) {
+        font-size: 20px;
+        margin-top: 0.2em;
+      }
     }
+  }
+
+  @include media-max($breakpoint-xs) {
+    width: 50px;
+    height: 50px;
+    font-size: 9px;
   }
 }
 
@@ -40,6 +50,14 @@
 
   @include media-max($breakpoint-s) {
     font-size: 17px;
+  }
+
+  @include media-max($breakpoint-xs) {
+    font-size: 15px;
+  }
+
+  @include media-max($breakpoint-xxxs) {
+    font-size: 13px;
   }
 }
 

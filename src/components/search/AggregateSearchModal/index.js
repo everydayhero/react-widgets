@@ -102,17 +102,17 @@ module.exports = React.createClass({
 
   delayedSearch: _.debounce(function() {
     if (this.isMounted()) {
-      this.search();
-      this.searchCounts();
+      if (this.state.searchTerm) {
+        this.search();
+        this.searchCounts();
+      } else {
+        this.clearResults();
+      }
     }
   }, 300),
 
   search: function(page) {
     this.state.cancelSearch();
-
-    if (!this.state.searchTerm) {
-      return this.clearResults();
-    }
 
     var cancelSearch = searchAPI[this.state.filter]({
       country: this.props.country,

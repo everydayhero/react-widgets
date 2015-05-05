@@ -14,6 +14,7 @@ module.exports = React.createClass({
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
     pageId: React.PropTypes.string,
+    charityUid: React.PropTypes.string,
     offset: React.PropTypes.number,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
@@ -27,6 +28,7 @@ module.exports = React.createClass({
       campaignUid: '',
       campaignUids: [],
       pageId: '',
+      charityUid: '',
       offset: 0,
       renderIcon: true,
       backgroundColor: null,
@@ -65,13 +67,29 @@ module.exports = React.createClass({
   loadTotals: function() {
     this.setState({ isLoading: true });
 
-    if (this.props.pageId && (this.props.campaignUid || this.props.campaignUids.length > 0)) {
-      console.log('Please specify either a pageId or a campaignUid (not both).');
+    var propsCount = 0;
+    if (this.props.pageId) {
+      propsCount++;
+    }
+    if (this.props.charityUid) {
+      propsCount++;
+    }
+    if (this.props.campaignUid) {
+      propsCount++;
+    }
+    if (this.props.campaignUids.length > 0) {
+      propsCount++;
+    }
+
+    if (propsCount > 1) {
+      console.log('Please specify either a pageId, charityUid or a campaignUid.');
       return false;
     }
 
     if (this.props.pageId) {
       totals.findByPage(this.props.pageId, this.onSuccess);
+    } else if (this.props.charityUid) {
+      totals.findByCharity(this.props.charityUid, this.onSuccess);
     } else {
       this.sumCampaigns(this.setUids());
     }

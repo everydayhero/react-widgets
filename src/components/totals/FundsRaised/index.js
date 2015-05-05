@@ -81,7 +81,7 @@ module.exports = React.createClass({
       propsCount++;
     }
 
-    if (propsCount>1) {
+    if (propsCount > 1) {
       console.log('Please specify either a pageId, charityUid or a campaignUid.');
       return false;
     }

@@ -1,5 +1,6 @@
 "use strict";
 
+var _ = require('lodash');
 var jsonp = require('jsonp');
 var DEFAULT_TIMEOUT = 20000;
 var IS_CLIENT = typeof window !== 'undefined';
@@ -8,7 +9,7 @@ var cache = {};
 
 function getJSONP(url, callback, options) {
   if (cache[url]) {
-    setTimeout(function() { callback(cache[url]); }, 0);
+    _.defer(callback, cache[url]);
     return noop;
   }
 
@@ -20,7 +21,7 @@ function getJSONP(url, callback, options) {
       callback(null);
     } else {
       cache[url] = data;
-      callback(data);
+      _.defer(callback, data);
     }
   });
 }

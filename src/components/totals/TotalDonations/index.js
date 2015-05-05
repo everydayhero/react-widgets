@@ -22,8 +22,8 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      campaignUid: '',
-      campaignUids: [],
+      campaignUid: null,
+      campaignUids: null,
       renderIcon: true,
       backgroundColor: '',
       textColor: '',
@@ -67,12 +67,8 @@ module.exports = React.createClass({
   loadTotals: function() {
     this.setState({ isLoading: true });
 
-    var campaignUids = this.setUids();
-    var props = this.props;
-
-    _.each(campaignUids, function(campaignUid) {
-      totals.findByCampaign(campaignUid, this.onSuccess);
-    }, this);
+    var campaignUids = this.props.campaignUid || this.props.campaignUids;
+    totals.findByCampaigns(campaignUids, this.onSuccess);
   },
 
   renderTotal: function() {

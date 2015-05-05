@@ -14,7 +14,9 @@ module.exports = React.createClass({
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
     pageId: React.PropTypes.string,
+    pageIds: React.PropTypes.array,
     charityUid: React.PropTypes.string,
+    charityUids: React.PropTypes.array,
     offset: React.PropTypes.number,
     renderIcon: React.PropTypes.bool,
     backgroundColor: React.PropTypes.string,
@@ -25,10 +27,12 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      campaignUid: '',
-      campaignUids: [],
-      pageId: '',
-      charityUid: '',
+      campaignUid: null,
+      campaignUids: null,
+      pageId: null,
+      pageIds: null,
+      charityUid: null,
+      charityUids: null,
       offset: 0,
       renderIcon: true,
       backgroundColor: null,
@@ -52,48 +56,20 @@ module.exports = React.createClass({
     this.loadTotals();
   },
 
-  setUids: function() {
-    var campaignUids = [];
-
-    if (this.props.campaignUid) {
-      campaignUids.push(this.props.campaignUid);
-    } else {
-      campaignUids = this.props.campaignUids;
-    }
-
-    return campaignUids;
-  },
-
   loadTotals: function() {
     this.setState({ isLoading: true });
 
-    var props      = this.props;
-    var propsCount = 0;
+    var props        = this.props;
+    var campaignUids = props.campaignUid || props.campaignUids;
+    var charityUids  = props.charityUid || props.charityUids;
+    var pageIds      = props.pageId || props.pageIds;
 
-    if (props.pageId) {
-      propsCount++;
-    }
-    if (props.charityUid) {
-      propsCount++;
-    }
-    if (props.campaignUid) {
-      propsCount++;
-    }
-    if (props.campaignUids.length > 0) {
-      propsCount++;
-    }
-
-    if (propsCount > 1) {
-      console.log('Please specify either a pageId, charityUid or campaignUid(s).');
-      return;
-    }
-
-    if (props.pageId) {
-      totals.findByPage(props.pageId, this.onSuccess);
-    } else if (props.charityUid) {
-      totals.findByCharity(props.charityUid, this.onSuccess);
-    } else {
-      totals.findByCampaigns(this.setUids(), this.onSuccess);
+    if (pageIds) {
+      totals.findByPages(pageIds, this.onSuccess);
+    } else if (charityUids) {
+      totals.findByCharities(charityUids, this.onSuccess);
+    } else if (campaignUids) {
+      totals.findByCampaigns(campaignUids, this.onSuccess);
     }
   },
 
@@ -123,9 +99,7 @@ module.exports = React.createClass({
   },
 
   renderIcon: function() {
-    var renderIcon = this.props.renderIcon;
-
-    if (renderIcon) {
+    if (this.props.renderIcon) {
       return <Icon className="FundsRaised__icon" icon="money"/>;
     }
   },

@@ -281,7 +281,7 @@ module.exports = React.createClass({
 
   renderCloseButton: function() {
     return (
-      <a href="#" className="AggregateSearchModal__close" onClick={ this.props.onClose }>&times;</a>
+      <div className="AggregateSearchModal__close" onClick={ this.props.onClose }>&times;</div>
     );
   },
 

@@ -67,57 +67,48 @@ module.exports = React.createClass({
   loadTotals: function() {
     this.setState({ isLoading: true });
 
+    var props      = this.props;
     var propsCount = 0;
-    if (this.props.pageId) {
+
+    if (props.pageId) {
       propsCount++;
     }
-    if (this.props.charityUid) {
+    if (props.charityUid) {
       propsCount++;
     }
-    if (this.props.campaignUid) {
+    if (props.campaignUid) {
       propsCount++;
     }
-    if (this.props.campaignUids.length > 0) {
+    if (props.campaignUids.length > 0) {
       propsCount++;
     }
 
     if (propsCount > 1) {
-      console.log('Please specify either a pageId, charityUid or a campaignUid.');
-      return false;
+      console.log('Please specify either a pageId, charityUid or campaignUid(s).');
+      return;
     }
 
-    if (this.props.pageId) {
-      totals.findByPage(this.props.pageId, this.onSuccess);
-    } else if (this.props.charityUid) {
-      totals.findByCharity(this.props.charityUid, this.onSuccess);
+    if (props.pageId) {
+      totals.findByPage(props.pageId, this.onSuccess);
+    } else if (props.charityUid) {
+      totals.findByCharity(props.charityUid, this.onSuccess);
     } else {
-      this.sumCampaigns(this.setUids());
+      totals.findByCampaigns(this.setUids(), this.onSuccess);
     }
-  },
-
-  sumCampaigns: function(campaignUids) {
-    for (var i = 0; i < campaignUids.length; i++) {
-      if (i === (campaignUids.length-1)) {
-        totals.findByCampaign(campaignUids[i], this.onSuccess);
-      } else {
-        totals.findByCampaign(campaignUids[i], this.onSuccessSum);
-      }
-    }
-  },
-
-  onSuccessSum: function(result) {
-    this.setState({total: this.state.total + result.total_amount_cents.sum});
   },
 
   onSuccess: function(result) {
-    this.setState({total: this.state.total + result.total_amount_cents.sum, isLoading: false});
+    this.setState({
+      total: this.state.total + result.total_amount_cents.sum,
+      isLoading: false
+    });
   },
 
   renderTotal: function() {
-    var symbol = this.t('symbol');
-    var totalDollars = (this.state.total + this.props.offset) / 100;
+    var symbol         = this.t('symbol');
+    var totalDollars   = (this.state.total + this.props.offset) / 100;
     var formattedTotal = symbol + numeral(totalDollars).format(this.props.format);
-    var title = this.t('title');
+    var title          = this.t('title');
 
     if (this.state.isLoading) {
       return <Icon className="FundsRaised__loading" icon="refresh" />;

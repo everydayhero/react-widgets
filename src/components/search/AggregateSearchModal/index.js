@@ -65,7 +65,7 @@ module.exports = React.createClass({
           other: '{count} results'
         }
       },
-      minimumScore: 0.1,
+      minimumScore: 0.01,
       pageSize: 10
     };
   },

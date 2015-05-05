@@ -11,11 +11,15 @@ module.exports = React.createClass({
   displayName: "Tabs",
   mixins: [DOMInfoMixin],
   propTypes: {
-    children: React.PropTypes.array
+    children: React.PropTypes.array,
+    collapse: React.PropTypes.node
   },
 
   getDefaultProps: function() {
-    return { children: [] };
+    return {
+      children: [],
+      collapse: 'auto'
+    };
   },
 
   getInitialState: function() {
@@ -99,8 +103,16 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var sizeOutput = " Tabs--" + this.state.size;
+
+    if (this.props.collapse === true) {
+      sizeOutput = " Tabs--collapsed";
+    } else if (this.props.collapse === false) {
+      sizeOutput = "";
+    }
+
     return (
-      <div className={ "Tabs" + " Tabs--" + this.state.size }>
+      <div className={ "Tabs" + sizeOutput }>
         <div className="Tabs__tab-list" ref="tabList" role="tablist">
           { this.renderTabs() }
         </div>

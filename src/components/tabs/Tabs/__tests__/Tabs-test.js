@@ -25,7 +25,7 @@ describe('Tabs', function() {
     var component;
 
     beforeEach(function() {
-      tabs = <Tabs children={ data } />;
+      tabs = <Tabs children={ data } collapse={ 'auto' } />;
       component = TestUtils.renderIntoDocument(tabs);
     });
 
@@ -76,6 +76,30 @@ describe('Tabs', function() {
       var firstTab = scryByClass(component, 'Tab')[1].getDOMNode();
       TestUtils.Simulate.keyDown(firstTab, { keyCode: 37 });
       expect(component.state.current).toBe(0);
+    });
+
+    it('auto collapses when collapse property = "auto"', function() {
+      tabs = <Tabs children={ data } collapse={ 'auto' } />;
+      component = TestUtils.renderIntoDocument(tabs);
+
+      var tabsElement = findByClass(component, 'Tabs').getDOMNode();
+      expect(tabsElement.className).toBe('Tabs Tabs--tiny');
+    });
+
+    it('does not collapse when collapse property = false', function() {
+      tabs = <Tabs children={ data } collapse={ false } />;
+      component = TestUtils.renderIntoDocument(tabs);
+
+      var tabsElement = findByClass(component, 'Tabs').getDOMNode();
+      expect(tabsElement.className).toBe('Tabs');
+    });
+
+    it('collapses when collapse property = true', function() {
+      tabs = <Tabs children={ data } collapse={ true } />;
+      component = TestUtils.renderIntoDocument(tabs);
+
+      var tabsElement = findByClass(component, 'Tabs').getDOMNode();
+      expect(tabsElement.className).toBe('Tabs Tabs--collapsed');
     });
   });
 });

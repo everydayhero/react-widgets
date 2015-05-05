@@ -22,7 +22,7 @@ describe('SearchInput', function() {
   });
 
   it('renders an input', function() {
-    var input = findByClass(element, 'Input__input')
+    var input = findByClass(element, 'Input__input');
 
     expect(input).toBeDefined();
   });
@@ -36,7 +36,7 @@ describe('SearchInput', function() {
   it('returns a value on enter', function() {
     var inputNode = findByClass(element, 'Input__input').getDOMNode();
 
-    TestUtils.Simulate.keyUp(inputNode, {key: "Enter"});
+    TestUtils.Simulate.keyUp(inputNode, { key: "Enter" });
 
     expect(submittedValue).toBe(initialValue);
   });
@@ -49,5 +49,14 @@ describe('SearchInput', function() {
     TestUtils.Simulate.mouseUp(button);
 
     expect(submittedValue).toBe('bar');
+  });
+
+  it('clears the search input on submit', function() {
+    var inputNode = findByClass(element, 'Input__input').getDOMNode();
+
+    TestUtils.Simulate.change(inputNode, { target: { value: 'bar' } });
+    TestUtils.Simulate.keyUp(inputNode, { key: "Enter" });
+
+    expect(inputNode.value).toBe('');
   });
 });

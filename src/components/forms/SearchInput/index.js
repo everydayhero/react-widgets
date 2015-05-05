@@ -37,9 +37,7 @@ module.exports = React.createClass({
   },
 
   handleChange: function(value) {
-    this.setState({
-      value: value
-    });
+    this.setState({ value: value });
   },
 
   componentDidMount: function() {
@@ -51,15 +49,14 @@ module.exports = React.createClass({
 
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.value) {
-      this.setState({
-        value: nextProps.value || ''
-      });
+      this.setState({ value: nextProps.value || '' });
     }
   },
 
   handleSubmit: function() {
-    if(this.props.onSubmit) {
+    if (this.props.onSubmit) {
       this.props.onSubmit(this.state.value);
+      this.setState({ value: '' });
     }
   },
 

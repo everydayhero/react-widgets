@@ -15,6 +15,7 @@ module.exports = React.createClass({
     name: React.PropTypes.string.isRequired,
     date: React.PropTypes.object.isRequired,
     campaignUrl: React.PropTypes.string.isRequired,
+    donateUrl: React.PropTypes.string.isRequired,
     getStartedUrl: React.PropTypes.string.isRequired,
     backgroundImageUrl: React.PropTypes.string,
     backgroundBlurUrl: React.PropTypes.string,
@@ -27,6 +28,7 @@ module.exports = React.createClass({
     return {
       defaultI18n: {
         joinLabel: 'Join Event',
+        donateLabel: 'Give Now',
         supportersLabel: 'Supporters',
         months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       }
@@ -70,6 +72,9 @@ module.exports = React.createClass({
     var bg = cssUrl(props.backgroundImageUrl);
     var blur = cssUrl(props.backgroundBlurUrl);
     var t = this.t;
+    var isAppeal = !props.getStartedUrl;
+    var url = isAppeal ? props.donateUrl : props.getStartedUrl;
+    var buttonLabel = isAppeal ? t('donateLabel') : t('joinLabel');
 
     return (
       <div className="Event" style={ this.eventStyles() }
@@ -86,8 +91,8 @@ module.exports = React.createClass({
             <li>{ date.getFullYear() }</li>
           </ul>
           <a href={ props.campaignUrl } className="Event__name">{ props.name }</a>
-          <p className="Event__supporter-count">{ (props.supporterCount || 0) + ' ' + t('supportersLabel') }</p>
-          <CallToActionButton kind="secondary" reverse={ true } href={ props.getStartedUrl } className="Event__join-event">{ t('joinLabel') }</CallToActionButton>
+          { !isAppeal && <p className="Event__supporter-count">{ (props.supporterCount || 0) + ' ' + t('supportersLabel') }</p> }
+          <CallToActionButton kind="secondary" reverse={ true } href={ url } className="Event__join-event">{ buttonLabel }</CallToActionButton>
         </div>
       </div>
     );

@@ -66,6 +66,7 @@ module.exports = React.createClass({
         name: e.name,
         date: new Date(e.display_start_at),
         campaignUrl: e.url,
+        donateUrl: e.donate_url,
         getStartedUrl: e.get_started_url,
         backgroundImageUrl: e.widget_background_image_url,
         backgroundBlurUrl: e.widget_blurred_background_image_url,

@@ -15,6 +15,7 @@ describe('Event', function() {
       name: 'A Name',
       date: new Date('2015-01-01'),
       campaignUrl: 'http://google.com/',
+      donateUrl: 'http://google.com/',
       getStartedUrl: 'http://google.com/',
       backgroundColor: '#fc0',
       backgroundImageUrl: 'http://google.com/images/srpr/logo11w.png',
@@ -26,6 +27,7 @@ describe('Event', function() {
                     name={ props.name }
                     date={ props.date }
                     campaignUrl={ props.campaignUrl }
+                    donateUrl={ props.donateUrl }
                     getStartedUrl={ props.getStartedUrl }
                     backgroundColor={ props.backgroundColor }
                     backgroundImageUrl={ props.backgroundImageUrl }
@@ -68,6 +70,43 @@ describe('Event', function() {
     it('renders an join event button', function() {
       var thing = findByClass(element, 'Event__join-event').getDOMNode().textContent;
       expect(thing).toContain('Join Event');
+    });
+  });
+
+  describe('is an appeal', function() {
+    var element;
+    var props = {
+      id: '1234',
+      name: 'A Name',
+      date: new Date('2015-01-01'),
+      campaignUrl: 'http://google.com/',
+      donateUrl: 'http://google.com/',
+      getStartedUrl: '',
+      backgroundColor: '#fc0',
+      backgroundImageUrl: 'http://google.com/images/srpr/logo11w.png',
+      supporterCount: 50
+    };
+
+    beforeEach(function() {
+      var event = <Event key={ props.id }
+                    name={ props.name }
+                    date={ props.date }
+                    campaignUrl={ props.campaignUrl }
+                    donateUrl={ props.donateUrl }
+                    getStartedUrl={ props.getStartedUrl }
+                    backgroundColor={ props.backgroundColor }
+                    backgroundImageUrl={ props.backgroundImageUrl }
+                    supporterCount={ props.supporterCount } />;
+      element = TestUtils.renderIntoDocument(event);
+    });
+
+    it('renders something', function() {
+      expect(element).not.toBeNull();
+    });
+
+    it('renders an join event button', function() {
+      var thing = findByClass(element, 'Event__join-event').getDOMNode().textContent;
+      expect(thing).toContain('Give Now');
     });
   });
 });

@@ -19,7 +19,20 @@ describe('totals', function() {
       var callback = jest.genMockFunction();
       totals.findByCampaign('us-22', callback);
 
-      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/search/totals.jsonp?campaign_id=us-22', callback);
+      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/search/totals.jsonp?campaign_id[]=us-22', callback);
+      expect(callback).toBeCalledWith(results);
+      expect(callback.mock.calls.length).toBe(1);
+    });
+  });
+
+  describe('findByCampaigns', function() {
+    it('gets total from multiple campaign uids', function() {
+      var callback = jest.genMockFunction();
+      totals.findByCampaigns(['xx-123','yy-123'], callback);
+
+      expect(getJSONP).lastCalledWith(
+        'https://everydayhero.com/api/v2/search/totals.jsonp?campaign_id[]=xx-123&campaign_id[]=yy-123', callback
+      );
       expect(callback).toBeCalledWith(results);
       expect(callback.mock.calls.length).toBe(1);
     });

@@ -10,6 +10,12 @@ module.exports = {
     return getJSONP(routes.get('totals', params), callback);
   },
 
+  findByCampaigns: function(campaignUids, callback) {
+    var uids = campaignUids.length > 1 ? campaignUids.join('&campaign_id[]=') : campaignUids[0];
+    var params = _.merge({ campaignUid: uids });
+    return getJSONP(routes.get('totals', params), callback);
+  },
+
   findByPage: function(pageId, callback, options) {
     var params = _.merge({ page: pageId }, options);
     return getJSONP(routes.get('totals', params), callback);

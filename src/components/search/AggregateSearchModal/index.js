@@ -65,7 +65,7 @@ module.exports = React.createClass({
           other: '{count} results'
         }
       },
-      minimumScore: 0.1,
+      minimumScore: 0.01,
       pageSize: 10
     };
   },
@@ -281,7 +281,7 @@ module.exports = React.createClass({
 
   renderCloseButton: function() {
     return (
-      <a href="#" className="AggregateSearchModal__close" onClick={ this.props.onClose }>&times;</a>
+      <div className="AggregateSearchModal__close" onClick={ this.props.onClose }>&times;</div>
     );
   },
 

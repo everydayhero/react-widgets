@@ -53,6 +53,7 @@
 }
 
 .AggregateSearchModal__close {
+  cursor: pointer;
   float: right;
   font-size: 38px;
   font-weight: bold;
@@ -61,13 +62,11 @@
 
   &:hover {
     color: $ehw-green;
-    text-decoration: none;
   }
 }
 
 .AggregateSearchModal__content {
   @extend %clearfix;
-  position: relative;
   margin: {
     left: auto;
     right: auto;

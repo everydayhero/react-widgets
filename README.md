@@ -1331,6 +1331,7 @@ Displays a set of tabs that transform to an accordion depending on browser windo
 ##### Options
 
 - `children`: *required* array. Array of objects containing a `label` and `content` field to represent each tab, or array of react components.
+- `collapse`: *optional* string / boolean. Set to `'auto'` for automatic collapsing, `true` to force collapsing and `false` to disable collapsing. Set to `'auto'` by default.
 
 ##### Example
 
@@ -1358,7 +1359,8 @@ Displays a set of tabs that transform to an accordion depending on browser windo
             label: 'Last Tab',
             content: '<p>An image:</p> <img src="http://placehold.it/200x100">'
           }
-        ]
+        ],
+        collapse: 'auto'
       });
     </script>
   </body>

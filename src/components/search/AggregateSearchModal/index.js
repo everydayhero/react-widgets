@@ -65,7 +65,10 @@ module.exports = React.createClass({
           other: '{count} results'
         }
       },
-      minimumScore: 0.01,
+      minimumScore: {
+        all: 0.1,
+        other: 0.01
+      },
       pageSize: 10
     };
   },
@@ -119,7 +122,7 @@ module.exports = React.createClass({
       searchTerm: this.state.searchTerm,
       page: page || 1,
       pageSize: this.props.pageSize,
-      minimumScore: this.props.minimumScore
+      minimumScore: this.props.minimumScore[this.state.filter] || this.props.minimumScore.other
     }, this.updateResults);
 
     this.setState({
@@ -174,7 +177,7 @@ module.exports = React.createClass({
       searchTerm: this.state.searchTerm,
       page: 1,
       pageSize: 1,
-      minimumScore: this.props.minimumScore
+      minimumScore: this.props.minimumScore.other
     };
 
     var types = ['campaigns', 'charities', 'pages'];

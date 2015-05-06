@@ -39,12 +39,17 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      pages: []
+      pages: [],
+      cancelLoad: function() {}
     };
   },
 
   componentWillMount: function() {
     this.loadPages();
+  },
+
+  componentWillUnmount: function() {
+    this.state.cancelLoad();
   },
 
   getEndpoint: function() {
@@ -68,7 +73,8 @@ module.exports = React.createClass({
 
   loadPages: function() {
     var endpoint = this.getEndpoint();
-    endpoint(this.props.type, 20, this.onSuccess, { includePages: true, includeFootprint: true });
+    var cancelLoad = endpoint(this.props.type, 20, this.onSuccess, { includePages: true, includeFootprint: true });
+    this.setState({ cancelLoad: cancelLoad });
   },
 
   onSuccess: function(result) {

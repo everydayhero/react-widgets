@@ -30,18 +30,20 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      events: []
+      events: [],
+      cancelLoad: function() {}
     };
   },
 
   loadEvents: function() {
-    campaign.findByCharity(this.props.charityUid, 1, null, this.onLoaded, {
+    var cancelLoad = campaign.findByCharity(this.props.charityUid, 1, null, this.onLoaded, {
       status: 'active',
       sortBy: 'start_at',
       excludeBau: true,
       excludePages: true,
       excludeCharities: true
     });
+    this.setState({ cancelLoad: cancelLoad });
   },
 
   onLoaded: function(result) {
@@ -55,6 +57,10 @@ module.exports = React.createClass({
 
   componentWillMount: function() {
     this.loadEvents();
+  },
+
+  componentWillUnmount: function() {
+    this.state.cancelLoad();
   },
 
   renderEvents: function() {

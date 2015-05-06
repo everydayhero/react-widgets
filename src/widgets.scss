@@ -1,9 +1,10 @@
 @import "scss/variables";
 @import "scss/mixins";
 @import "scss/modules";
-@import "node_modules/HUI/sass/_colors.scss";
 
-@import "node_modules/HUI/buttons/Button/style";
+@import "node_modules/hui/sass/_colors.scss";
+@import "node_modules/hui/buttons/Button/style";
+
 @import "components/helpers/FlagIcon/style";
 @import "components/helpers/Icon/style";
 @import "components/helpers/Overlay/style";

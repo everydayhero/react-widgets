@@ -8,8 +8,9 @@
   "dependencies": {
     "async": "^0.9.0",
     "es5-shim": "~4.0.5",
+    "hui": "git://github.com/everydayhero/hui#0.7.3",
     "jsonp": "webmodules/jsonp",
-    "lodash": "~2.4.1",
+    "lodash": "^3.8.0",
     "moment": "^2.10.2",
     "numeral": "~1.5.3",
     "paths-js": "^0.3.0",
@@ -18,7 +19,6 @@
     "remarkable": "^1.6.0"
   },
   "devDependencies": {
-    "hui": "git://github.com/everydayhero/hui#0.7.3",
     "browserify": "~6.3.3",
     "compression": "~1.2.1",
     "express": "~4.10.4",
@@ -38,7 +38,7 @@
     "jshint-stylish": "~1.0.0",
     "morgan": "~1.5.0",
     "react-page-objects": "~0.1.2",
-    "react-tools": "~0.12.1",
+    "react-tools": "~0.12.2",
     "reactify": "~0.17.1",
     "simple-spinner": "~0.0.2",
     "superagent": "~0.21.0",

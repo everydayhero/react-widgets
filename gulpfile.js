@@ -5,6 +5,7 @@ var gutil        = require('gulp-util');
 var concat       = require('gulp-concat');
 var awspublish   = require('gulp-awspublish');
 var rename       = require('gulp-rename');
+var replace      = require('gulp-replace');
 var pkg          = require('./package');
 var request      = require('superagent');
 var fs           = require('fs');
@@ -116,6 +117,13 @@ gulp.task('examples', [ 'styles', 'scripts' ], function() {
       }
     }))
     .pipe(rename('widgets-' + pkg.version + '.html'))
+    .pipe(gulp.dest('public'));
+});
+
+gulp.task('docs', function() {
+  return gulp
+    .src('src/docs.md')
+    .pipe(replace("{{ latest-version }}", 'widgets-' + pkg.version))
     .pipe(gulp.dest('public'));
 });
 

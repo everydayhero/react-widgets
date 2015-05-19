@@ -5,4 +5,6 @@ set -e
 git checkout master
 git pull
 bin/version_check
+gulp docs
+bin/update_docs
 gulp deploy_assets

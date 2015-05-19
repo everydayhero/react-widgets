@@ -4,3 +4,4 @@
 .awspublish-shared-scripts
 .DS_Store
 npm-debug.log
+/docs

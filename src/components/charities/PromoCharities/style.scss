@@ -1,9 +1,12 @@
 .PromoCharities {
   @extend %clearfix;
   background: $ehw-grey-dark;
+  font-size: 0;
   font-family: $ehw-sans-serif-fonts;
-  font-size: $ehw-default-font-size;
   border-radius: $ehw-border-radius $ehw-border-radius 0 0;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 100%;
   color: #fff;
   text-align: center;
 }
@@ -14,11 +17,12 @@
 }
 
 .PromoCharities__heading {
-  @extend %tile-heading;
+  @extend %ehw-tile-heading;
 }
 
 .PromoCharities__subheading {
   margin: 0;
+  font-size: $ehw-default-font-size;
 }
 
 .PromoCharities__empty-label {

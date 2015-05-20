@@ -5,7 +5,7 @@
 .Tabs__tab-list {
   @extend %clearfix;
   white-space: nowrap;
-  display: block;
+  display: inline-block;
 }
 
 .Tabs__drawer {

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+export DOCS_REPO=https://github.com/everydayhero/public-api-docs.git
+
+rm -rf docs
+git clone $DOCS_REPO docs 2>&1
+
+cp docs.md docs/source/index.md
+
+export COMMENT=`git log -n 1 --format='%h %s'`
+
+pushd docs
+git add -A
+git commit -m "Add docs from React Widgets: commit – $COMMENT" || echo 'nothing to commit'
+git push origin master
+popd
+
+rm -rf docs

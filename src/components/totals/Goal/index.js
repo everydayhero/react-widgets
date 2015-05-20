@@ -9,7 +9,7 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "Goal",
   propTypes: {
-    goal: React.PropTypes.string,
+    goal: React.PropTypes.number,
     renderIcon: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,

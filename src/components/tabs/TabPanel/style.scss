@@ -1,5 +1,7 @@
 .TabPanel {
   @extend %clearfix;
+  box-sizing: border-box;
+  width: 100%;
   display: none;
   padding: $x-4;
   background: $ehw-grey-light;

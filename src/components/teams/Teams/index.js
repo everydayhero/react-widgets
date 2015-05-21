@@ -1,20 +1,21 @@
 "use strict";
 
-var _                 = require('lodash');
-var React             = require('react');
-var I18nMixin         = require('../../mixins/I18n');
-var pages             = require('../../../api/pages');
-var Icon              = require('../../helpers/Icon');
-var Team              = require('../Team');
+var _         = require('lodash');
+var React     = require('react');
+var I18nMixin = require('../../mixins/I18n');
+var pages     = require('../../../api/pages');
+var Icon      = require('../../helpers/Icon');
+var Team      = require('../Team');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "Teams",
   propTypes: {
     campaignUid: React.PropTypes.string,
+    campaignUids: React.PropTypes.array,
     type: React.PropTypes.string,
-    limit: React.PropTypes.string,
-    page: React.PropTypes.string,
+    page_count: React.PropTypes.number,
+    page_size: React.PropTypes.number,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     i18n: React.PropTypes.object
@@ -22,9 +23,10 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      campaignUid: '',
-      page_count: '1',
-      page_size: '12',
+      campaignUid: null,
+      campaignUids: null,
+      page_count: 1,
+      page_size: 12,
       type: 'team',
       backgroundColor: null,
       textColor: null,
@@ -44,13 +46,19 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    this.setState({
-      isLoading: true
-    });
+    this.loadPages();
+  },
+
+  loadPages: function() {
+    this.setState({ isLoading: true });
 
     var props = this.props;
 
-    pages.findByCampaign(props.campaignUid, props.type, props.page_size, props.page_count, this.onSuccess);
+    if (props.campaignUids) {
+      pages.findByCampaigns(props.campaignUids, props.type, props.page_size, props.page_count, this.onSuccess);
+    } else {
+      pages.findByCampaign(props.campaignUid, props.type, props.page_size, props.page_count, this.onSuccess);
+    }
   },
 
   onSuccess: function(result) {
@@ -61,9 +69,7 @@ module.exports = React.createClass({
 
     function() {
       if (!_.isEmpty(this.state.pageResults)) {
-        this.setState({
-          hasResults: true
-        });
+        this.setState({ hasResults: true });
       }
     }.bind(this));
   },

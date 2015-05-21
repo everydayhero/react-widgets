@@ -1106,8 +1106,11 @@ Displays a set of fundraiser profile images (that have a page) for a single spec
 }
 ```
 
-`campaignUid` (string) <span class="required">Required</span> <br>
+`campaignUid` (string)<br>
 Campaign uid to filter results by campaign.
+
+`campaignUids` (array)<br>
+Define multiple campaign uids to filter results by campaigns.
 
 `backgroundColor` (string) <br>
 Accepts a CSS color value. Not set by default.
@@ -1526,8 +1529,11 @@ Displays a set of teams for a single specified campaign.
 }
 ```
 
-`campaignUid` (string) <span class="required">Required</span><br>
+`campaignUid` (string)<br>
 Campaign uid to filter results by campaign.
+
+`campaignUids` (array)<br>
+Define multiple campaign uids to filter results by campaigns.
 
 `page_size` (number)<br>
 Set to `12` by default. Determines how many results are returned.

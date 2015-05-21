@@ -12,17 +12,17 @@ module.exports = React.createClass({
   displayName: "RecentFundraisers",
   propTypes: {
     campaignUid: React.PropTypes.string,
-    page: React.PropTypes.string,
-    pageSize: React.PropTypes.string,
+    campaignUids: React.PropTypes.array,
+    page: React.PropTypes.number,
+    pageSize: React.PropTypes.number,
     renderIcon: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
     return {
-      campaignUid: '',
-      page: '1',
-      pageSize: '6',
+      page: 1,
+      pageSize: 6,
       type: 'individual',
       backgroundColor: null,
       textColor: null,
@@ -41,13 +41,19 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    this.setState({
-      isLoading: true
-    });
+    this.loadPages();
+  },
+
+  loadPages: function() {
+    this.setState({ isLoading: true });
 
     var props = this.props;
 
-    pages.findByCampaign(props.campaignUid, props.type, props.pageSize, props.page, this.onSuccess);
+    if (props.campaignUids) {
+      pages.findByCampaigns(props.campaignUids, props.type, props.pageSize, props.page, this.onSuccess);
+    } else {
+      pages.findByCampaign(props.campaignUid, props.type, props.pageSize, props.page, this.onSuccess);
+    }
   },
 
   onSuccess: function(result) {

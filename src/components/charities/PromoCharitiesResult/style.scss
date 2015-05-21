@@ -21,6 +21,19 @@
   }
 }
 
+.Tabs--xxHuge .PromoCharitiesResult {
+  width: 16.666%;
+}
+.Tabs--xHuge .PromoCharitiesResult, .Tabs--huge .PromoCharitiesResult {
+  width: 25%;
+}
+.Tabs--large .PromoCharitiesResult, .Tabs--medium .PromoCharitiesResult {
+  width: 50%;
+}
+.Tabs--small .PromoCharitiesResult, .Tabs--tiny .PromoCharitiesResult {
+  width: 100%;
+}
+
 .PromoCharitiesResult__link {
   @extend %clearfix;
   position: relative;

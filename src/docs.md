@@ -1529,8 +1529,8 @@ Displays a set of teams for a single specified campaign.
 `campaignUid` (string) <span class="required">Required</span><br>
 Campaign uid to filter results by campaign.
 
-`page_size` (string)<br>
-Set to `'12'` by default. Determines how many results are returned.
+`page_size` (number)<br>
+Set to `12` by default. Determines how many results are returned.
 
 `backgroundColor` (string)<br>
 Accepts a CSS color value. Not set by default.

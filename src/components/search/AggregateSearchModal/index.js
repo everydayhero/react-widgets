@@ -159,6 +159,10 @@ module.exports = React.createClass({
         lastPage: pagination.last_page,
         currentPage: pagination.current_page
       });
+
+      if (this.refs.body && pagination.current_page == 1) {
+        this.refs.body.getDOMNode().scrollTop = 0;
+      }
     } else {
       this.search(this.state.searchPage);
     }

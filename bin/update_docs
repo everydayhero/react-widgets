@@ -7,7 +7,7 @@ export DOCS_REPO=https://github.com/everydayhero/public-api-docs.git
 rm -rf docs
 git clone $DOCS_REPO docs 2>&1
 
-cp docs.md docs/source/index.md
+cp public/docs.md docs/source/index.md
 
 export COMMENT=`git log -n 1 --format='%h %s'`
 

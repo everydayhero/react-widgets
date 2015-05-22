@@ -159,6 +159,10 @@ module.exports = React.createClass({
         lastPage: pagination.last_page,
         currentPage: pagination.current_page
       });
+
+      if (this.refs.body && pagination.current_page === 1) {
+        this.refs.body.getDOMNode().scrollTop = 0;
+      }
     } else {
       this.search(this.state.searchPage);
     }
@@ -309,10 +313,10 @@ module.exports = React.createClass({
           <span className="AggregateSearchModal__title">{ this.t('title') }</span>
           { this.renderCloseButton() }
           { this.renderInput() }
+          { this.renderFilters() }
         </div>
         <div ref="body" className="AggregateSearchModal__body">
           <div className="AggregateSearchModal__content">
-            { this.renderFilters() }
             { this.renderResults() }
           </div>
         </div>

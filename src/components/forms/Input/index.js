@@ -13,6 +13,8 @@ module.exports = React.createClass({
 
   propTypes: {
     autoComplete: React.PropTypes.bool,
+    autoCorrect: React.PropTypes.bool,
+    spellCheck: React.PropTypes.bool,
     autoFocus: React.PropTypes.bool,
     autoSelect: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
@@ -37,6 +39,8 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       autoComplete: false,
+      autoCorrect: false,
+      spellCheck: false,
       autoFocus: false,
       autoSelect: false,
       disabled: false,
@@ -219,6 +223,8 @@ module.exports = React.createClass({
           <span className="label__text"> { t('label') } </span>
           <input
             autoComplete={ props.autoComplete ? 'on' : 'off' }
+            autoCorrect={ props.autoCorrect ? 'on' : 'off' }
+            spellCheck={ props.spellCheck ? 'on' : 'off' }
             className="Input__input"
             disabled={ props.disabled }
             id={ t('name') }

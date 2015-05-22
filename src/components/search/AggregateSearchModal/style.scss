@@ -26,11 +26,19 @@
     .label__text {
       top: 3px;
     }
+
+    @include media-max($breakpoint-xxs) {
+      margin-top: $x-2;
+    }
   }
 
   .Input__label {
     border-radius: 1px;
     border-width: 0;
+  }
+
+  @include media-max($breakpoint-xxs) {
+    padding-top: $x-2;
   }
 }
 
@@ -41,15 +49,26 @@
   top: 107px;
   right: 0px;
   overflow-x: hidden;
-  transition: all 0.3s;
   -webkit-overflow-scrolling: touch;
   color: white;
+
+  @include media-max($breakpoint-xs) {
+    top: 150px;
+  }
+
+  @include media-max($breakpoint-xxs) {
+    top: 127px;
+  }
 }
 
 .AggregateSearchModal__title {
   text-transform: uppercase;
   font-size: 16px;
   letter-spacing: 1px;
+
+  @include media-max($breakpoint-xxs) {
+    font-size: 14px;
+  }
 }
 
 .AggregateSearchModal__close {
@@ -63,6 +82,11 @@
   &:hover {
     color: $ehw-green;
   }
+
+  @include media-max($breakpoint-xxs) {
+    font-size: 32px;
+    margin: -10px 0;
+  }
 }
 
 .AggregateSearchModal__content {
@@ -75,30 +99,39 @@
   max-width: $x-229;
   padding: 0 $x-8;
 
-  @include media-max($breakpoint-s) {
+  @include media-max($breakpoint-l) {
     padding: 0 $x-4;
   }
 }
 
 .AggregateSearchModal__filters {
   @extend %clearfix;
-  float: left;
-  width: 25%;
-  margin-top: 2px;
-  margin-bottom: $x-4;
+  position: absolute;
+  top: 107px;
+  left: $x-8;
+  z-index: 1;
+
+  @include media-max($breakpoint-l) {
+    left: $x-4;
+  }
 
   @include media-max($breakpoint-xs) {
-    float: none;
+    position: initial;
+    float: left;
     width: 100%;
+    margin-top: $x-2;
+    text-align: center;
   }
 }
 
 .AggregateSearchModal__filters__type {
   text-transform: uppercase;
-  padding: 10px 0;
+  padding: $x-2 0;
   position: relative;
   cursor: pointer;
   color: $ehw-grey-light;
+  border: 2px solid transparent;
+  border-radius: 2px;
 
   &:hover {
     color: white;
@@ -106,7 +139,7 @@
 
   .Icon {
     position: absolute;
-    left: 110px;
+    left: 105%;
     top: 15px;
     color: $ehw-grey;
     font-size: 20px;
@@ -117,17 +150,19 @@
   }
 
   @include media-max($breakpoint-xs) {
-    float: left;
     text-align: center;
-    width: 33%;
+    display: inline-block;
+    padding: $x-1 $x-2;
+  }
+
+  @include media-max($breakpoint-xxs) {
+    padding: $x-1 $x-1;
   }
 }
 
 .AggregateSearchModal__filters__type-selected {
   @include media-max($breakpoint-xs) {
-    border: 2px solid $ehw-green-light;
-    border-radius: 2px;
-    padding: 8px 0;
+    border-color: $ehw-green-light;
   }
 }
 
@@ -138,7 +173,7 @@
   overflow: hidden;
 
   @include media-max($breakpoint-xxs) {
-    font-size: 11px;
+    font-size: 10px;
   }
 }
 
@@ -150,17 +185,26 @@
   color: $ehw-green-light;
 
   @include media-max($breakpoint-xxs) {
-    font-size: 9px;
+    font-size: 8px;
   }
 }
 
 .AggregateSearchModal__results {
   float: left;
-  width: 75%;
+  width: 100%;
+  padding-left: 25%;
   padding-bottom: 100px;
 
+  @include media-max($breakpoint-m) {
+    padding-left: 30%;
+  }
+
+  @include media-max($breakpoint-s) {
+    padding-left: 35%;
+  }
+
   @include media-max($breakpoint-xs) {
-    width: 100%;
+    padding-left: 0;
   }
 }
 

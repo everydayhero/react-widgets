@@ -1,52 +1,53 @@
 "use strict";
 
 var React        = require('react');
-var campaigns    = require('../../../api/campaigns');
-var charities    = require('../../../api/charities');
+var totals       = require('../../../api/totals');
 var GoalProgress = require('../GoalProgress');
 
 module.exports = React.createClass({
   displayName: 'EntityGoalProgress',
 
   propTypes: {
-    campaignUid: React.PropTypes.string,
-    charityUid: React.PropTypes.string,
+    campaignUid: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.arrayOf(React.PropTypes.string)
+    ]),
+    charityUid: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.arrayOf(React.PropTypes.string)
+    ]),
+    goal: React.PropTypes.number
+  },
+
+  getDefaultProps: function() {
+    return { goal: null };
   },
 
   getInitialState: function() {
-    return {
-      isLoading: true
-    };
+    return { isLoading: true };
   },
 
   componentWillMount: function() {
-    this.loadData();
+    this.loadTotals();
   },
 
-  loadData: function() {
+  loadTotals: function() {
     if (this.props.campaignUid) {
-      return campaigns.find(this.props.campaignUid, this.onSuccess);
-    } else {
-      return charities.find(this.props.charityUid, this.onSuccess);
+      return totals.findByCampaigns(this.props.campaignUid, this.onSuccess);
+    } else if (this.props.charityUid) {
+      return totals.findByCharities(this.props.charityUid, this.onSuccess);
     }
   },
 
   onSuccess: function(res) {
-    var entity = this.props.campaignUid ? 'campaign' : 'charity';
-    var data = res[entity];
-    var funds_raised = data.funds_raised;
-
     this.setState({
       isLoading: false,
-      total: funds_raised.cents || 0,
-      goal: data.goal,
-      currencySymbol: funds_raised.currency.symbol
+      total: res.total_amount_cents.sum || 0,
+      goal: res.goal
     });
   },
 
   render: function() {
-    var props = this.props;
-
     if (this.state.isLoading) { return false; }
 
     return (

@@ -1,11 +1,11 @@
 "use strict";
 jest.autoMockOff();
-jest.mock('../../../../api/campaigns');
+jest.mock('../../../../api/totals');
 
 describe('FundsRaised', function() {
   var React               = require('react/addons');
   var EntityGoalProgress  = require('../');
-  var campaigns           = require('../../../../api/campaigns');
+  var totals              = require('../../../../api/totals');
   var TestUtils           = React.addons.TestUtils;
   var findByClass         = TestUtils.findRenderedDOMComponentWithClass;
 
@@ -14,7 +14,7 @@ describe('FundsRaised', function() {
 
   describe('Component defaults', function() {
     beforeEach(function() {
-      campaigns.find.mockClear();
+      totals.findByCampaigns.mockClear();
       element = TestUtils.renderIntoDocument(<EntityGoalProgress campaignUid="us-22" />);
     });
 
@@ -34,13 +34,35 @@ describe('FundsRaised', function() {
     });
 
     it('handles a single campaign id', function() {
-      expect(campaigns.find).toBeCalledWith("us-22", element.onSuccess);
+      expect(totals.findByCampaigns).toBeCalledWith("us-22", element.onSuccess);
+    });
+  });
+
+  describe('Handle multiple campaign uids', function() {
+    beforeEach(function() {
+      totals.findByCampaigns.mockClear();
+      element = TestUtils.renderIntoDocument(<EntityGoalProgress campaignUid={ ["us-22", "us-24", "us-19"] } />);
+    });
+
+    it('finds a total for multiple campaigns', function() {
+      expect(totals.findByCampaigns).toBeCalledWith(["us-22", "us-24", "us-19"], element.onSuccess);
+    });
+  });
+
+  describe('Handle multiple charity uids', function() {
+    beforeEach(function() {
+      totals.findByCharities.mockClear();
+      element = TestUtils.renderIntoDocument(<EntityGoalProgress charityUid={ ["xx-11", "xx-22", "xx-33"] } />);
+    });
+
+    it('finds a total for multiple charities', function() {
+      expect(totals.findByCharities).toBeCalledWith(["xx-11", "xx-22", "xx-33"], element.onSuccess);
     });
   });
 
   describe('Goal as property', function() {
     beforeEach(function() {
-      campaigns.find.mockClear();
+      totals.findByCampaigns.mockClear();
       element = TestUtils.renderIntoDocument(<EntityGoalProgress campaignUid="us-22" goal={ 55500 }  />);
     });
 
@@ -55,7 +77,7 @@ describe('FundsRaised', function() {
     var state = { isLoading: false, total: 15000 };
 
     beforeEach(function() {
-      campaigns.find.mockClear();
+      totals.findByCampaigns.mockClear();
       element = TestUtils.renderIntoDocument(<EntityGoalProgress campaignUid="us-22" />);
     });
 

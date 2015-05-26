@@ -8,6 +8,7 @@ describe('TotalHeroes', function() {
   var pages       = require('../../../../api/pages');
   var TestUtils   = React.addons.TestUtils;
   var findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component defaults', function() {
     var totalHeroes;
@@ -123,6 +124,22 @@ describe('TotalHeroes', function() {
 
       var total = findByClass(element, 'TotalHeroes__total');
       expect(total.getDOMNode().textContent).toBe('10050.00');
+    });
+  });
+
+  describe('Displaying an icon', function() {
+    it('renders no icon when renderIcon set to false', function() {
+      var totalHeroes = <TotalHeroes campaignUid="au-0" renderIcon={ false } />;
+      var element = TestUtils.renderIntoDocument(totalHeroes);
+      var icon = scryByClass(element, 'TotalHeroes__icon');
+      expect(icon.length).toEqual(0);
+    });
+
+    it('renders a custom icon when passed a valid FontAwesome string', function() {
+      var totalHeroes = <TotalHeroes campaignUid="au-0" renderIcon="paw" />;
+      var element = TestUtils.renderIntoDocument(totalHeroes);
+      var icon = findByClass(element, 'fa-paw');
+      expect(icon).not.toBeNull();
     });
   });
 });

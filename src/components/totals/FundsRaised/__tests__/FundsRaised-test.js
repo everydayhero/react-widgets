@@ -8,6 +8,7 @@ describe('FundsRaised', function() {
   var totals      = require('../../../../api/totals');
   var TestUtils   = React.addons.TestUtils;
   var findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('component defaults', function() {
     var fundsRaised;
@@ -173,4 +174,22 @@ describe('FundsRaised', function() {
       expect(total.getDOMNode().textContent).toBe('$10000');
     });
   });
+
+
+  describe('Displaying an icon', function() {
+    it('renders no icon when renderIcon set to false', function() {
+      var fundsRaised = <FundsRaised campaignUid="au-0" renderIcon={ false } />;
+      var element = TestUtils.renderIntoDocument(fundsRaised);
+      var icon = scryByClass(element, 'FundsRaised__icon');
+      expect(icon.length).toEqual(0);
+    });
+
+    it('renders a custom icon when passed a valid FontAwesome string', function() {
+      var fundsRaised = <FundsRaised campaignUid="au-0" renderIcon="paw" />;
+      var element = TestUtils.renderIntoDocument(fundsRaised);
+      var icon = findByClass(element, 'fa-paw');
+      expect(icon).not.toBeNull();
+    });
+  });
+
 });

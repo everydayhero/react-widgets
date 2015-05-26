@@ -15,7 +15,7 @@ module.exports = React.createClass({
     campaignUids: React.PropTypes.array,
     pageCount: React.PropTypes.number,
     pageSize: React.PropTypes.number,
-    renderIcon: React.PropTypes.bool,
+    renderIcon: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     format: React.PropTypes.string,
@@ -100,8 +100,12 @@ module.exports = React.createClass({
   renderIcon: function() {
     var renderIcon = this.props.renderIcon;
 
+    if (renderIcon === true) {
+      renderIcon = "bolt";
+    }
+
     if (renderIcon) {
-      return <Icon className="TotalHeroes__icon" icon="bolt"/>;
+      return <Icon className="TotalHeroes__icon" icon={ renderIcon } />;
     }
   },
 

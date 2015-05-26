@@ -13,7 +13,7 @@ module.exports = React.createClass({
   propTypes: {
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
-    renderIcon: React.PropTypes.bool,
+    renderIcon: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     format: React.PropTypes.string,
@@ -91,8 +91,12 @@ module.exports = React.createClass({
   renderIcon: function() {
     var renderIcon = this.props.renderIcon;
 
+    if (renderIcon === true) {
+      renderIcon = "life-saver";
+    }
+
     if (renderIcon) {
-      return <Icon className="TotalDonations__icon" icon="life-saver"/>;
+      return <Icon className="TotalDonations__icon" icon={ renderIcon } />;
     }
   },
 

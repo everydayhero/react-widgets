@@ -574,6 +574,45 @@ Set to `true` by default. Determines whether the supplied `goal` is divided by 1
 Contains localised text.
 
 
+## Goal Progress
+
+Display the progress towards a fund raising goal for charities or campaigns.
+
+### Demo
+
+```html
+<div id="EntityGoalProgressExample"></div>
+<script>
+  edh.widgets.renderWidget('EntityGoalProgressExample', 'EntityGoalProgress', {
+    campaignUid: 'us-22',
+    goal: 15000000
+  });
+</script>
+```
+
+<p id="EntityGoalProgressExample"></p>
+
+<script>
+  edh.widgets.renderWidget('EntityGoalProgressExample', 'EntityGoalProgress', {
+    campaignUid: 'us-22',
+    goal: 15000000
+  });
+</script>
+
+### Options
+
+`goal` (number) <span class="required">Required</span><br>
+Set a goal in cents. Renders as a dollar value by default.
+
+`campaignUid` (string or array)<br>
+Campaign uid or uids to filter results by campaigns.
+
+`charityUid` (string or array)<br>
+Charity uid or uids to filter results by charities.
+
+`format` (string)<br>
+Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
+
 
 ## Total Distance
 

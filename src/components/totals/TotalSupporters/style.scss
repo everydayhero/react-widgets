@@ -1,15 +1,15 @@
-.TotalHeroes {
+.TotalSupporters {
   @extend %ehw-tile;
 }
 
-.TotalHeroes__total {
+.TotalSupporters__total {
   @extend %ehw-tile-total;
 }
 
-.TotalHeroes__loading {
+.TotalSupporters__loading {
   @extend %ehw-tile-loading-icon;
 }
 
-.TotalHeroes__icon {
+.TotalSupporters__icon {
   @extend %ehw-tile-icon;
 }

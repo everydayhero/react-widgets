@@ -11,7 +11,7 @@ var consoleShim = require('./lib/consoleShim');
 var renderModal = require('./lib/renderModal');
 var widgets = {
   FundsRaised: require('./components/totals/FundsRaised'),
-  TotalHeroes: require('./components/totals/TotalHeroes'),
+  TotalSupporters: require('./components/totals/TotalSupporters'),
   TotalCharities: require('./components/totals/TotalCharities'),
   Goal: require('./components/totals/Goal'),
   EntityGoalProgress: require('./components/totals/EntityGoalProgress'),

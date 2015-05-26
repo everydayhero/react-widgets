@@ -8,6 +8,7 @@ describe('TotalDistance', function() {
   var campaigns   = require('../../../../api/campaigns');
   var TestUtils   = React.addons.TestUtils;
   var findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component when handed multiple uids', function() {
     var totalHours;
@@ -105,6 +106,22 @@ describe('TotalDistance', function() {
 
       var total = findByClass(element, 'TotalHours__total');
       expect(total.getDOMNode().textContent).toBe('10.50');
+    });
+  });
+
+  describe('Displaying an icon', function() {
+    it('renders no icon when renderIcon set to false', function() {
+      var totalHours = <TotalHours campaignUid="au-0" renderIcon={ false } />;
+      var element = TestUtils.renderIntoDocument(totalHours);
+      var icon = scryByClass(element, 'Goal__icon');
+      expect(icon.length).toEqual(0);
+    });
+
+    it('renders a custom icon when passed a valid FontAwesome string', function() {
+      var totalHours = <TotalHours campaignUid="au-0" renderIcon="paw" />;
+      var element = TestUtils.renderIntoDocument(totalHours);
+      var icon = findByClass(element, 'fa-paw');
+      expect(icon).not.toBeNull();
     });
   });
 });

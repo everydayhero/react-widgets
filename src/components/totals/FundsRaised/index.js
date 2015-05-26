@@ -18,7 +18,7 @@ module.exports = React.createClass({
     charityUid: React.PropTypes.string,
     charityUids: React.PropTypes.array,
     offset: React.PropTypes.number,
-    renderIcon: React.PropTypes.bool,
+    renderIcon: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     format: React.PropTypes.string,
@@ -99,8 +99,14 @@ module.exports = React.createClass({
   },
 
   renderIcon: function() {
-    if (this.props.renderIcon) {
-      return <Icon className="FundsRaised__icon" icon="money"/>;
+    var renderIcon = this.props.renderIcon;
+
+    if (renderIcon === true) {
+      renderIcon = "money";
+    }
+
+    if (renderIcon) {
+      return <Icon className="FundsRaised__icon" icon={ renderIcon } />;
     }
   },
 

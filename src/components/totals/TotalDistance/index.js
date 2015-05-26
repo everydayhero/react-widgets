@@ -14,7 +14,7 @@ module.exports = React.createClass({
   propTypes: {
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
-    renderIcon: React.PropTypes.bool,
+    renderIcon: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     unit: React.PropTypes.oneOf(['km', 'miles']),
@@ -122,8 +122,12 @@ module.exports = React.createClass({
   renderIcon: function() {
     var renderIcon = this.props.renderIcon;
 
+    if (renderIcon === true) {
+      renderIcon = "angle-double-right";
+    }
+
     if (renderIcon) {
-      return <Icon className="TotalDistance__icon" icon="angle-double-right"/>;
+      return <Icon className="TotalDistance__icon" icon={ renderIcon } />;
     }
   },
 

@@ -9,7 +9,7 @@ var numeral   = require('numeral');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
-  displayName: "TotalHeroes",
+  displayName: "TotalSupporters",
   propTypes: {
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
@@ -34,7 +34,7 @@ module.exports = React.createClass({
       textColor: null,
       format: '0,0',
       defaultI18n: {
-        title: 'Heroes'
+        title: 'Supporters'
       }
     };
   },
@@ -81,18 +81,18 @@ module.exports = React.createClass({
   },
 
   renderTotal: function() {
-    var totalHeroes = this.state.total;
-    var formattedTotal = numeral(totalHeroes).format(this.props.format);
+    var totalSupporters = this.state.total;
+    var formattedTotal = numeral(totalSupporters).format(this.props.format);
     var title = this.t('title');
 
     if (this.state.isLoading) {
-      return <Icon className="TotalHeroes__loading" icon="refresh" />;
+      return <Icon className="TotalSupporters__loading" icon="refresh" />;
     }
 
     return (
       <div>
-        <div className="TotalHeroes__total">{ formattedTotal }</div>
-        <div className="TotalHeroes__title">{ title }</div>
+        <div className="TotalSupporters__total">{ formattedTotal }</div>
+        <div className="TotalSupporters__title">{ title }</div>
       </div>
     );
   },
@@ -101,11 +101,11 @@ module.exports = React.createClass({
     var renderIcon = this.props.renderIcon;
 
     if (renderIcon === true) {
-      renderIcon = "bolt";
+      renderIcon = "user";
     }
 
     if (renderIcon) {
-      return <Icon className="TotalHeroes__icon" icon={ renderIcon } />;
+      return <Icon className="TotalSupporters__icon" icon={ renderIcon } />;
     }
   },
 
@@ -116,7 +116,7 @@ module.exports = React.createClass({
     };
 
     return (
-      <div className="TotalHeroes" style={ customStyle }>
+      <div className="TotalSupporters" style={ customStyle }>
         { this.renderIcon() }
         { this.renderTotal() }
       </div>

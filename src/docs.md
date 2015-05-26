@@ -347,12 +347,12 @@ Set to `'0.00 a'` by default. [More format strings](http://numeraljs.com/).
 Contains localised text.
 
 
-## Total Heroes
+## Total Supporters
 
 ```html
-<div id="TotalHeroesExample"></div>
+<div id="TotalSupportersExample"></div>
 <script>
-  edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', {
+  edh.widgets.renderWidget('TotalSupportersExample', 'TotalSupporters', {
     campaignUids: ['us-0','us-1']
   });
 </script>
@@ -362,10 +362,10 @@ Displays the total number of fundraisers (that have an everydayhero page) for sp
 
 ### Demo
 
-<p id="TotalHeroesExample"></p>
+<p id="TotalSupportersExample"></p>
 
 <script>
-  edh.widgets.renderWidget('TotalHeroesExample', 'TotalHeroes', {
+  edh.widgets.renderWidget('TotalSupportersExample', 'TotalSupporters', {
     campaignUids: ['us-0','us-1']
   });
 </script>
@@ -376,7 +376,7 @@ Displays the total number of fundraisers (that have an everydayhero page) for sp
 
 ```js
 {
-  title: 'Heroes'
+  title: 'Supporters'
 }
 ```
 
@@ -1192,7 +1192,7 @@ Displays an SVG map. Each plotted point represents a supporter page.
 ```js
 {
   heading: 'Program Reach',
-  legend: 'Heroes'
+  legend: 'Supporters'
 }
 ```
 

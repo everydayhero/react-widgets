@@ -29,7 +29,7 @@ module.exports = React.createClass({
       color: '#525252',
       defaultI18n: {
         heading: 'Program Reach',
-        legend: 'Heroes'
+        legend: 'Supporters'
       }
     };
   },

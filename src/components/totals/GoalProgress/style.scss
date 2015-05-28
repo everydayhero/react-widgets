@@ -8,8 +8,8 @@ $ehw-animation-speed: 200ms;
 }
 
 @keyframes progress-bar-loaded {
-  from {width: 0%;}
-  to {width: 100%;}
+  from { width: 0%; }
+  to { width: 100%; }
 }
 
 .GoalProgress {
@@ -18,8 +18,6 @@ $ehw-animation-speed: 200ms;
   color: #FFFFFF;
   overflow: hidden;
 }
-
-/* edit pattern at http://ptrn.it/1x0nFEh */
 
 .GoalProgress__icon,
 .GoalProgress__icon--achieved {
@@ -57,6 +55,7 @@ $ehw-animation-speed: 200ms;
 .GoalProgress__bar {
   position: absolute;
   animation: progress-bar-loaded 1s ease-out forwards;
+  width: 100%;
 }
 
 .GoalProgress__barFill {

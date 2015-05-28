@@ -328,8 +328,8 @@ Charity uid to filter results by charity.
 `charityUids` (array)<br>
 Charity uids to filter results by multiple charities.
 
-`renderIcon` (boolean)<br>
-Set to `true` by default.
+`renderIcon` (string or boolean)<br>
+Set to `true` by default. Pass in a valid [FontAwesome](http://fortawesome.github.io/Font-Awesome/icons/) icon name (without the _fa_ prefix) to override the default. Set to `false` to render no icon.
 
 `offset` (number)<br>
 Set to `0` by default.
@@ -392,8 +392,8 @@ Accepts a CSS color value. Not set by default.
 `textColor` (string)<br>
 Accepts a CSS color value. Not set by default.
 
-`renderIcon` (boolean)<br>
-Set to `true` by default.
+`renderIcon` (string or boolean)<br>
+Set to `true` by default. Pass in a valid [FontAwesome](http://fortawesome.github.io/Font-Awesome/icons/) icon name (without the _fa_ prefix) to override the default. Set to `false` to render no icon.
 
 `format` (string)
 Set to `'0,0'` by default. [More format strings](http://numeraljs.com/).
@@ -445,8 +445,8 @@ Accepts a CSS color value. Not set by default.
 `textColor` (string).<br>
 Accepts a CSS color value. Not set by default.
 
-`renderIcon` (boolean)<br>
-Set to `true` by default.
+`renderIcon` (string or boolean)<br>
+Set to `true` by default. Pass in a valid [FontAwesome](http://fortawesome.github.io/Font-Awesome/icons/) icon name (without the _fa_ prefix) to override the default. Set to `false` to render no icon.
 
 `format` (string)<br>
 Set to `'0,0'` by default. [More format strings](http://numeraljs.com/).
@@ -500,8 +500,8 @@ Accepts a CSS color value. Not set by default.
 `textColor` (string)<br>
 Accepts a CSS color value. Not set by default.
 
-`renderIcon` (boolean)<br>
-Set to `true` by default.
+`renderIcon` (string or boolean)<br>
+Set to `true` by default. Pass in a valid [FontAwesome](http://fortawesome.github.io/Font-Awesome/icons/) icon name (without the _fa_ prefix) to override the default. Set to `false` to render no icon.
 
 `format` (string).<br>
 Set to `'0,0 a'` by default. [More format strings](http://numeraljs.com/).
@@ -661,8 +661,8 @@ Campaign uids to filter results by multiple campaigns.
 `unit` (string)<br>
 Can be set to either `'km'` or `'miles'`. Converts input to whichever is defined. Set to `'miles'` by default.
 
-`renderIcon` (boolean)
-Set to `true` by default.
+`renderIcon` (string or boolean)<br>
+Set to `true` by default. Pass in a valid [FontAwesome](http://fortawesome.github.io/Font-Awesome/icons/) icon name (without the _fa_ prefix) to override the default. Set to `false` to render no icon.
 
 `backgroundColor` (string)
 Accepts a CSS color value. Not set by default.
@@ -719,8 +719,8 @@ Campaign uid to filter results by campaign.
 `campaignUids` (array)<br>
 Campaign uids to filter results by multiple campaigns.
 
-`renderIcon` (boolean)<br>
-Set to `true` by default.
+`renderIcon` (string or boolean)<br>
+Set to `true` by default. Pass in a valid [FontAwesome](http://fortawesome.github.io/Font-Awesome/icons/) icon name (without the _fa_ prefix) to override the default. Set to `false` to render no icon.
 
 `backgroundColor` (string)<br>
 Accepts a CSS color value. Not set by default.

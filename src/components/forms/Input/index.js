@@ -209,7 +209,8 @@ module.exports = React.createClass({
       'Input--narrow': width === 'narrow',
       'Input--compact': spacing === 'compact',
       'Input--tight': spacing === 'tight',
-      'Input--loose': spacing === 'loose'
+      'Input--loose': spacing === 'loose',
+      'Input--hasIcon': props.icon || props.showIcon
     });
 
     var labelClasses = cx({

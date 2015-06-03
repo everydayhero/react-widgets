@@ -44,7 +44,7 @@ module.exports = React.createClass({
     };
   },
 
-  componentWillMount: function() {
+  componentDidMount: function() {
     this.loadPages();
   },
 

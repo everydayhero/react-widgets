@@ -55,7 +55,7 @@ module.exports = React.createClass({
     this.setState({ events: sortedEvents });
   },
 
-  componentWillMount: function() {
+  componentDidMount: function() {
     this.loadEvents();
   },
 

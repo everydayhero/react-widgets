@@ -11,11 +11,13 @@ module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "Teams",
   propTypes: {
-    campaignUid: React.PropTypes.string,
-    campaignUids: React.PropTypes.array,
+    campaignUid: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.arrayOf(React.PropTypes.string)
+    ]),
     type: React.PropTypes.string,
-    page_count: React.PropTypes.number,
-    page_size: React.PropTypes.number,
+    page: React.PropTypes.number,
+    pageSize: React.PropTypes.number,
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     i18n: React.PropTypes.object
@@ -24,9 +26,8 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       campaignUid: null,
-      campaignUids: null,
-      page_count: 1,
-      page_size: 12,
+      page: 1,
+      pageSize: 12,
       type: 'team',
       backgroundColor: null,
       textColor: null,
@@ -53,12 +54,7 @@ module.exports = React.createClass({
     this.setState({ isLoading: true });
 
     var props = this.props;
-
-    if (props.campaignUids) {
-      pages.findByCampaigns(props.campaignUids, props.type, props.page_size, props.page_count, this.onSuccess);
-    } else {
-      pages.findByCampaign(props.campaignUid, props.type, props.page_size, props.page_count, this.onSuccess);
-    }
+    pages.findByCampaign(props.campaignUid, props.type, props.pageSize, props.page, this.onSuccess);
   },
 
   onSuccess: function(result) {

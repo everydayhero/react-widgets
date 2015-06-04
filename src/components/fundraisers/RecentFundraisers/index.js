@@ -1,18 +1,20 @@
 "use strict";
 
-var _                 = require('lodash');
-var React             = require('react');
-var I18nMixin         = require('../../mixins/I18n');
-var pages             = require('../../../api/pages');
-var Icon              = require('../../helpers/Icon');
-var FundraiserImage   = require('../FundraiserImage');
+var _               = require('lodash');
+var React           = require('react');
+var I18nMixin       = require('../../mixins/I18n');
+var pages           = require('../../../api/pages');
+var Icon            = require('../../helpers/Icon');
+var FundraiserImage = require('../FundraiserImage');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "RecentFundraisers",
   propTypes: {
-    campaignUid: React.PropTypes.string,
-    campaignUids: React.PropTypes.array,
+    campaignUid: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.arrayOf(React.PropTypes.string)
+    ]),
     page: React.PropTypes.number,
     pageSize: React.PropTypes.number,
     renderIcon: React.PropTypes.bool,
@@ -21,6 +23,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
+      campaignUid: null,
       page: 1,
       pageSize: 6,
       type: 'individual',
@@ -48,12 +51,7 @@ module.exports = React.createClass({
     this.setState({ isLoading: true });
 
     var props = this.props;
-
-    if (props.campaignUids) {
-      pages.findByCampaigns(props.campaignUids, props.type, props.pageSize, props.page, this.onSuccess);
-    } else {
-      pages.findByCampaign(props.campaignUid, props.type, props.pageSize, props.page, this.onSuccess);
-    }
+    pages.findByCampaign(props.campaignUid, props.type, props.pageSize, props.page, this.onSuccess);
   },
 
   onSuccess: function(result) {

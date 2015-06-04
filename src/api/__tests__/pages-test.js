@@ -70,25 +70,6 @@ describe('pages', function() {
     });
   });
 
-  describe('findByCampaigns', function() {
-    it('gets pages by campaign uids and type', function() {
-      var callback = jest.genMockFunction();
-      pages.findByCampaigns(['xy-12', 'xy-40', 'xy-33'], 'foo', 7, 2, callback);
-      expect(getJSONP).toBeCalled();
-      expect(getJSONP.mock.calls.length).toBe(3);
-      expect(getJSONP.mock.calls[0][0]).toContain('campaign_id=xy-12');
-      expect(getJSONP.mock.calls[1][0]).toContain('campaign_id=xy-40');
-      expect(getJSONP.mock.calls[2][0]).toContain('campaign_id=xy-33');
-      expect(callback.mock.calls.length).toBe(1);
-    });
-
-    it('accepts options', function() {
-      var callback = jest.genMockFunction();
-      pages.findByCampaigns('xy-12', 'foo', 7, 2, callback, { includeFootprint: true });
-      expect(getJSONP.mock.calls[0][0]).toContain('&include_footprint=true');
-    });
-  });
-
   describe('search', function() {
     it('searches for pages', function() {
       var query = { searchTerm: 'bar', country: 'xy', campaignUid: ['xy-12', 'xy-42'], charityUid: 'xy-123', type: 'foo', page: 2, pageSize: 7 };

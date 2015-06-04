@@ -1109,6 +1109,9 @@ Displays a set of fundraiser profile images (that have a page) for a single spec
 `campaignUid` (string or array)<br>
 Campaign uid (or uids) to filter results by campaign.
 
+`pageSize` (number)<br>
+Set to `6` by default. Determines how many results are returned.
+
 `backgroundColor` (string) <br>
 Accepts a CSS color value. Not set by default.
 

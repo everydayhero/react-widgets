@@ -161,4 +161,25 @@ describe('Input', function() {
 
     expect(input.length).toBeLessThan(1);
   });
+
+  it("adds the 'Input--hasIcon' class when an icon is rendered", function() {
+    var element = TestUtils.renderIntoDocument(<Input showIcon={ true } disabled={ true } />);
+    var element2 = TestUtils.renderIntoDocument(<Input showIcon={ true } icon="phone" />);
+    findByClass(element, 'Input--hasIcon');
+    findByClass(element2, 'Input--hasIcon');
+  });
+
+  it("does not add the 'Input--hasIcon' class when no icon is rendered", function() {
+    var element = TestUtils.renderIntoDocument(<Input showIcon={ false } disabled={ true } />);
+    var element2 = TestUtils.renderIntoDocument(<Input showIcon={ false } icon="phone" />);
+    var element3 = TestUtils.renderIntoDocument(<Input showIcon={ true } />);
+
+    var input = scryByClass(element, 'Input--hasIcon');
+    var input2 = scryByClass(element2, 'Input--hasIcon');
+    var input3 = scryByClass(element3, 'Input--hasIcon');
+
+    expect(input.length).toBeLessThan(1);
+    expect(input2.length).toBeLessThan(1);
+    expect(input3.length).toBeLessThan(1);
+  });
 });

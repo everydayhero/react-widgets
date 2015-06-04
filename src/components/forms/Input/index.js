@@ -166,10 +166,10 @@ module.exports = React.createClass({
     }
   },
 
-  renderIcon: function() {
+  getIcon: function() {
     var props = this.props;
     var state = this.state;
-    var icon = !props.showIcon ? false
+    var icon  = !props.showIcon ? false
                : state.waiting ? 'refresh'
                : state.valid ? 'check'
                : state.error ? 'times'
@@ -177,6 +177,12 @@ module.exports = React.createClass({
                : props.icon ? props.icon
                : (props.required && !state.value) ? 'caret-left'
                : false;
+
+    return icon;
+  },
+
+  renderIcon: function() {
+    var icon = this.getIcon();
     return icon && <Icon icon={ icon } className="Input__icon" fixedWidth={ true } />;
   },
 
@@ -209,7 +215,8 @@ module.exports = React.createClass({
       'Input--narrow': width === 'narrow',
       'Input--compact': spacing === 'compact',
       'Input--tight': spacing === 'tight',
-      'Input--loose': spacing === 'loose'
+      'Input--loose': spacing === 'loose',
+      'Input--hasIcon': this.getIcon()
     });
 
     var labelClasses = cx({

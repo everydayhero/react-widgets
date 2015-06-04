@@ -134,6 +134,10 @@
   top: 0;
 }
 
+.Input--hasIcon .Input__label {
+  padding-right: $x-8;
+}
+
 .Input--full { width: 100%; }
 .Input--wide { width: 66%; }
 .Input--half { width: 50%; }

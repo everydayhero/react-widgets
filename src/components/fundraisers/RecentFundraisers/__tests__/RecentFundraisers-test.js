@@ -45,7 +45,7 @@ describe('RecentFundraisers', function() {
     });
 
     it('renders if handed default campaign id, page type, count and size', function() {
-      expect(pages.findByCampaign).toBeCalledWith('au-0','individual','6','1', element.onSuccess);
+      expect(pages.findByCampaign).toBeCalledWith('au-0','individual', 6, 1, element.onSuccess);
     });
   });
 

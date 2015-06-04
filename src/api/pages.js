@@ -1,8 +1,8 @@
 "use strict";
 
-var _ = require('lodash');
-var routes = require('./routes');
-var getJSONP = require('../lib/getJSONP');
+var _         = require('lodash');
+var routes    = require('./routes');
+var getJSONP  = require('../lib/getJSONP');
 var campaigns = require('./campaigns');
 
 module.exports = {
@@ -23,6 +23,7 @@ module.exports = {
       page: page,
       limit: limit
     }, options);
+
     return getJSONP(routes.get('pages', params), callback);
   },
 

@@ -1,28 +1,31 @@
 "use strict";
 
-var _                 = require('lodash');
-var React             = require('react');
-var I18nMixin         = require('../../mixins/I18n');
-var pages             = require('../../../api/pages');
-var Icon              = require('../../helpers/Icon');
-var FundraiserImage   = require('../FundraiserImage');
+var _               = require('lodash');
+var React           = require('react');
+var I18nMixin       = require('../../mixins/I18n');
+var pages           = require('../../../api/pages');
+var Icon            = require('../../helpers/Icon');
+var FundraiserImage = require('../FundraiserImage');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "RecentFundraisers",
   propTypes: {
-    campaignUid: React.PropTypes.string,
-    page: React.PropTypes.string,
-    pageSize: React.PropTypes.string,
+    campaignUid: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.arrayOf(React.PropTypes.string)
+    ]),
+    page: React.PropTypes.number,
+    pageSize: React.PropTypes.number,
     renderIcon: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
     return {
-      campaignUid: '',
-      page: '1',
-      pageSize: '6',
+      campaignUid: null,
+      page: 1,
+      pageSize: 6,
       type: 'individual',
       backgroundColor: null,
       textColor: null,
@@ -41,12 +44,13 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    this.setState({
-      isLoading: true
-    });
+    this.loadPages();
+  },
+
+  loadPages: function() {
+    this.setState({ isLoading: true });
 
     var props = this.props;
-
     pages.findByCampaign(props.campaignUid, props.type, props.pageSize, props.page, this.onSuccess);
   },
 

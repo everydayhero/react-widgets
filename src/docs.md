@@ -1498,7 +1498,7 @@ Renders search style input and allow onSubmit callback which returns the value
 <script>
   edh.widgets.renderWidget('SearchInput', 'SearchInput', {
     onSubmit: function(value) {
-      alert('Your search term is "' + value + '"');
+      edh.widgets.showModal('AggregateSearch', { searchTerm: value, country: 'uk' });
     }
   });
 </script>
@@ -1509,7 +1509,7 @@ Renders search style input and allow onSubmit callback which returns the value
 <script>
   edh.widgets.renderWidget('SearchInput', 'SearchInput', {
     onSubmit: function(value) {
-      alert('Your search term is "' + value + '"');
+      edh.widgets.showModal('AggregateSearch', { searchTerm: value, country: 'uk' });
     }
   });
 </script>

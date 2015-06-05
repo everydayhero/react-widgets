@@ -6,6 +6,7 @@ var TestUtils   = React.addons.TestUtils;
 var SearchInput = require('../');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+var findByProp  = require('../../../../test/helpers/scryRenderedDOMComponentsWithProp').findRenderedDOMComponentWithProp;
 
 describe('SearchInput', function() {
 
@@ -22,7 +23,19 @@ describe('SearchInput', function() {
   });
 
   it('renders an input', function() {
+    var i18n = {
+      name: 'test_input',
+      label: 'Test Input'
+    };
+
+    var element = TestUtils.renderIntoDocument(<SearchInput onSubmit={ onSubmit } value={ initialValue } i18n={ i18n } />);
     var input = findByClass(element, 'Input__input');
+
+    var inputWithName = findByProp(element, 'name', 'test_input');
+    expect(inputWithName).toBeDefined();
+
+    var label = findByClass(element, 'Input__label').getDOMNode();
+    expect(label.textContent).toContain('Test Input');
 
     expect(input).toBeDefined();
   });

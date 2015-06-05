@@ -1,12 +1,15 @@
 "use strict";
 
-var React  = require('react');
-var Icon   = require('../../helpers/Icon');
-var Input  = require('../Input');
-var Button = require('hui/buttons/Button');
+var React     = require('react');
+var Icon      = require('../../helpers/Icon');
+var Input     = require('../Input');
+var I18nMixin = require('../../mixins/I18n');
+var Button    = require('hui/buttons/Button');
 
 module.exports = React.createClass({
   displayName: "SearchInput",
+
+  mixins: [I18nMixin],
 
   propTypes: {
     autoFocus: React.PropTypes.bool,
@@ -14,8 +17,8 @@ module.exports = React.createClass({
     onSubmit: React.PropTypes.func,
     value: React.PropTypes.string,
     width: React.PropTypes.string,
-    label: React.PropTypes.string,
-    animateLabel: React.PropTypes.bool
+    animateLabel: React.PropTypes.bool,
+    i18n: React.PropTypes.object
   },
 
   getInitialState: function() {
@@ -31,8 +34,11 @@ module.exports = React.createClass({
       onSubmit: null,
       value: '',
       width: 'full',
-      label: 'Search',
-      animateLabel: true
+      animateLabel: true,
+      defaultI18n: {
+        name: 'searchInput',
+        label: 'Search'
+      }
     };
   },
 
@@ -64,7 +70,7 @@ module.exports = React.createClass({
     var props = this.props;
     var state = this.state;
     var width = props.width;
-    var i18n  = { label: props.label };
+    var i18n  = { name: this.t('name'), label: this.t('label') };
 
     return (
       <div className="ehw-SearchInput">

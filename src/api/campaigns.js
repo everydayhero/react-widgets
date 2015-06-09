@@ -69,7 +69,7 @@ module.exports = {
         return -item.amount.cents;
       });
 
-      sortedPages = _.slice(sortedPages, 0, limit);
+      sortedPages = _.slice(sortedPages, 0, limit); // Force Limit
 
       return callback({ leaderboard: { pages: sortedPages } });
     });

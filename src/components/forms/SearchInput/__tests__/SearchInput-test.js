@@ -59,7 +59,7 @@ describe('SearchInput', function() {
     var inputNode = findByClass(element, 'Input__input').getDOMNode();
 
     TestUtils.Simulate.change(inputNode, { target: { value: 'bar' } });
-    TestUtils.Simulate.mouseUp(button);
+    TestUtils.Simulate.click(button);
 
     expect(submittedValue).toBe('bar');
   });

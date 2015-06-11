@@ -1660,8 +1660,7 @@ Displays a list of upcoming events/campaigns.
 <div id="UpcomingEventsExample"></div>
 <script>
   edh.widgets.renderWidget('UpcomingEventsExample', 'UpcomingEvents', {
-    charityUid: 'gb-1',
-    charitySlug: 'walk-the-walk'
+    charityUid: 'gb-1'
   });
 </script>
 ```
@@ -1670,8 +1669,7 @@ Displays a list of upcoming events/campaigns.
 
 <script>
   edh.widgets.renderWidget('UpcomingEventsExample', 'UpcomingEvents', {
-    charityUid: 'gb-1',
-    charitySlug: 'walk-the-walk'
+    charityUid: 'gb-1'
   });
 </script>
 
@@ -1687,9 +1685,6 @@ Displays a list of upcoming events/campaigns.
 
 `charityUid` (string) <span class="required">Required</span><br>
 Charity uid to filter campaigns results.
-
-`charitySlug` (string) <span class="required">Required</span><br>
-Charity slug for given charity uid.
 
 `i18n` (object)<br>
 Contains localised.

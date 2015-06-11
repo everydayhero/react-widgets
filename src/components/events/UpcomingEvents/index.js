@@ -16,7 +16,6 @@ module.exports = React.createClass({
 
   propTypes: {
     charityUid: React.PropTypes.string.isRequired,
-    charitySlug: React.PropTypes.string.isRequired,
     i18n: React.PropTypes.object
   },
 

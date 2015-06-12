@@ -6,6 +6,13 @@ var PromoCharitiesResult = require('../PromoCharitiesResult');
 
 module.exports = React.createClass({
   displayName: "PromoCharitiesResults",
+  propTypes: {
+    loaded: React.PropTypes.bool,
+    actionLabel: React.PropTypes.string,
+    onSelect: React.PropTypes.func,
+    fetchUrl: React.PropTypes.func,
+    content: React.PropTypes.arrayOf(React.PropTypes.object)
+  },
 
   renderCharityResults: function() {
     if (this.props.loaded) {
@@ -15,7 +22,8 @@ module.exports = React.createClass({
             key={ d.id }
             result={ d }
             onSelect={ this.props.onSelect }
-            actionLabel={ this.props.actionLabel } />
+            actionLabel={ this.props.actionLabel }
+            url={ this.props.fetchUrl(d) } />
         );
       }, this);
     }

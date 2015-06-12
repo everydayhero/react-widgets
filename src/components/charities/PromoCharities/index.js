@@ -85,12 +85,15 @@ module.exports = React.createClass({
     return charities;
   },
 
+  fetchUrl: function(charity) {
+    return charities[this.props.action + 'Url'](charity, null) || charity.url;
+  },
+
   selectHandler: function(charity) {
     if (this.props.action == 'custom') {
       this.props.onSelect(charity);
     } else {
-      var redirect = charities[this.props.action + 'Url'](charity, this.props.campaignSlug);
-      document.location = redirect;
+      document.location = this.fetchUrl(charity);
     }
   },
 
@@ -102,6 +105,7 @@ module.exports = React.createClass({
           content={ d.contents }
           loaded={ this.state.isLoaded }
           onSelect={ this.selectHandler }
+          fetchUrl={ this.fetchUrl }
           actionLabel={ this.t(this.props.action + 'Action') }
           key={ "charity-result-" + d.tabName } />
       );

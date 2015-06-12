@@ -19,4 +19,8 @@ describe('format', function() {
   it('supports numeral placeholder formatting', function() {
     expect(format('{count:0,0}', {count: 1234567890})).toBe('1,234,567,890');
   });
+
+  it('allows placeholders to be padded with whitespace', function() {
+    expect(format('{ count : 0,0 }', {count: 1234567890})).toBe('1,234,567,890');
+  });
 });

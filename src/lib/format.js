@@ -11,8 +11,8 @@ function format(template, data, strip) {
 
   return template.replace(/{([^{}]+)}/g, function(a, b) {
     var parts = b.split(':');
-    var format = parts[1];
-    var key = parts[0];
+    var format = parts[1] ? parts[1].trim() : '';
+    var key = parts[0].trim();
     var value = data[key];
     if (value == null) {
       return strip ? '' : a;

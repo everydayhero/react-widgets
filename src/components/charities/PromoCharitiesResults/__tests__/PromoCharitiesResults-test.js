@@ -8,6 +8,7 @@ var findByClass           = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass           = TestUtils.scryRenderedDOMComponentsWithClass;
 
 describe('PromoCharitiesResults', function() {
+  var mockFunction = jest.genMockFunction();
   var contents = [
     {
       category:     'test tab 1',
@@ -32,7 +33,7 @@ describe('PromoCharitiesResults', function() {
   ];
 
   it('renders all charities results', function() {
-    var promoCharitiesResults = <PromoCharitiesResults content={ contents } loaded={ true }/>;
+    var promoCharitiesResults = <PromoCharitiesResults content={ contents } loaded={ true } fetchUrl={ mockFunction } />;
     var element = TestUtils.renderIntoDocument(promoCharitiesResults);
     var resultsElement = findByClass(element, 'PromoCharitiesResults');
     var resultElements = scryByClass(element, 'PromoCharitiesResult');

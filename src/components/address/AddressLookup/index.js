@@ -52,14 +52,18 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     var iso = this.props.country === 'UK' ? 'GB' : this.props.country;
+    var country = _.find(countryList, { iso: iso });
+    var lookupEnabled = this.props.country !== 'IE';
+    var customEntry = !lookupEnabled && !this.props.address;
     return {
+      lookupEnabled: lookupEnabled,
       focusOnMount: false,
       choosingCountry: false,
-      country: _.find(countryList, { iso: iso }),
+      country: country,
       input: '',
       addressList: null,
       address: this.props.address,
-      custom: null,
+      custom: customEntry ? this.getEmptyAddress(country) : null,
       loading: false,
       error: false,
       fauxFocus: 0,
@@ -161,19 +165,23 @@ module.exports = React.createClass({
     }.bind(this);
   },
 
+  getEmptyAddress: function(country) {
+    return {
+      street_address: '',
+      extended_address: '',
+      locality: '',
+      postal_code: '',
+      region: '',
+      country_name: country.name,
+      paf_validated: false
+    };
+  },
+
   setManualEntry: function() {
     this.setState({
       addressList: null,
       error: false,
-      custom: {
-        street_address: '',
-        extended_address: '',
-        locality: '',
-        postal_code: '',
-        region: '',
-        country_name: this.state.country.name,
-        paf_validated: false
-      }
+      custom: this.getEmptyAddress(this.state.country)
     });
   },
 
@@ -299,7 +307,7 @@ module.exports = React.createClass({
   },
 
   renderResetButton: function() {
-    return (
+    return this.state.lookupEnabled && (
       <div className="AddressLookup__reset" tabIndex='0' onClick={ this.reset } onKeyPress={ this.reset }>
         { this.t('resetButton') }
       </div>

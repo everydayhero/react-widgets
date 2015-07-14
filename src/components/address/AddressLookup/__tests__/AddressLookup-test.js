@@ -9,6 +9,7 @@ _.debounce = function(callback) { return callback; };
 var React = require('react/addons');
 var TestUtils   = React.addons.TestUtils;
 var AddressLookup = require('../');
+var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 var findByProp = require('../../../../test/helpers/scryRenderedDOMComponentsWithProp').findRenderedDOMComponentWithProp;
 var addressSearchResult = {addresses: [
@@ -200,5 +201,14 @@ describe('AddressLookup', function() {
     var resetButton = findByClass(element, 'AddressLookup__reset').getDOMNode();
     TestUtils.Simulate.click(resetButton);
     expect(callback).toHaveBeenCalled();
+  });
+
+  it('disables address lookup for Ireland', function() {
+    var callback = jasmine.createSpy();
+    var element = TestUtils.renderIntoDocument(<AddressLookup country="IE" />);
+    var breakdown = findByClass(element, 'AddressBreakdown').getDOMNode();
+    expect(breakdown).not.toBeNull();
+    var resetButton = scryByClass(element, 'AddressLookup__reset');
+    expect(resetButton.length).toBeLessThan(1);
   });
 });

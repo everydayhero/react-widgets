@@ -29,6 +29,8 @@ module.exports = React.createClass({
     childWidth: React.PropTypes.number,
     currencyFormat: React.PropTypes.string,
     i18n: React.PropTypes.object,
+    altTemplate: React.PropTypes.bool,
+    renderImage: React.PropTypes.bool,
     onHasContent: React.PropTypes.func
   },
 
@@ -40,6 +42,7 @@ module.exports = React.createClass({
       textColor: null,
       childWidth: 250,
       altTemplate: false,
+      renderImage: true,
       currencyFormat: '0[.]00 a',
       defaultI18n: {
         raisedTitle: 'Raised',

@@ -27,7 +27,7 @@
 .LeaderboardItem__content {
   box-sizing: border-box;
   width: 100%;
-  padding: $x-4 $x-16;
+  padding: $x-4;
 
   .LeaderboardItem__name {
     box-sizing: border-box;
@@ -62,5 +62,9 @@
     max-width: 100%;
     border-radius: 50%;
     border: 0;
+  }
+
+  & + .LeaderboardItem__content {
+    padding: $x-4 $x-16;
   }
 }

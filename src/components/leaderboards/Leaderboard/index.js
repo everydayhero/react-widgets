@@ -28,6 +28,7 @@ module.exports = React.createClass({
     textColor: React.PropTypes.string,
     childWidth: React.PropTypes.number,
     currencyFormat: React.PropTypes.string,
+    renderImage: React.PropTypes.bool,
     i18n: React.PropTypes.object,
     onHasContent: React.PropTypes.func
   },
@@ -39,6 +40,7 @@ module.exports = React.createClass({
       backgroundColor: null,
       textColor: null,
       childWidth: 250,
+      renderImage: true,
       currencyFormat: '0,0[.]00',
       defaultI18n: {
         symbol: '$',
@@ -52,7 +54,7 @@ module.exports = React.createClass({
       isLoading: false,
       boardData: [],
       currentPage: 1,
-      childWidth: this.props.childWidth,
+      childWidth: this.props.childWidth
     };
   },
 
@@ -83,9 +85,7 @@ module.exports = React.createClass({
     var currentPage = this.state.currentPage - 1;
     var board = this.state.boardData[currentPage];
 
-    if (!board) {
-      return;
-    }
+    if (!board) return;
 
     return board.map(function(d,i) {
       var formattedAmount = this.formatAmount(d.amount);
@@ -100,9 +100,9 @@ module.exports = React.createClass({
           isoCode={ d.isoCode }
           amount={ formattedAmount }
           imgSrc={ d.medImgSrc }
-          width={ this.state.childWidth } />
+          width={ this.state.childWidth }
+          renderImage={ this.props.renderImage } />
       );
-
     }, this);
   },
 

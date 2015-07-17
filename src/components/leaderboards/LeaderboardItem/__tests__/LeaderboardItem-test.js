@@ -6,6 +6,7 @@ describe('LeaderboardItem', function() {
   var LeaderboardItem = require('../');
   var TestUtils       = React.addons.TestUtils;
   var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
+  var scryByClass     = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component defaults', function() {
     var leaderboardItem;
@@ -26,11 +27,6 @@ describe('LeaderboardItem', function() {
       expect(parentNode.getAttribute('href')).toEqual('hello-world.com');
     });
 
-    it('renders a profile image', function() {
-      var elementImg = findByClass(element, 'LeaderboardItem__image');
-      expect(elementImg).not.toBeNull();
-    });
-
     it('renders funds raised', function() {
       var elementFunds = findByClass(element, 'LeaderboardItem__amount');
       expect(elementFunds).not.toBeNull();
@@ -44,6 +40,26 @@ describe('LeaderboardItem', function() {
     it('renders a rank', function() {
       var elementRank = findByClass(element, 'LeaderboardItem__rank');
       expect(elementRank).not.toBeNull();
+    });
+  });
+
+  describe('Render image option', function() {
+    var leaderboardItem;
+    var element;
+    var elementImg;
+
+    it('renders a profile image if set to true', function() {
+      leaderboardItem = <LeaderboardItem renderImage={ true } />;
+      element = TestUtils.renderIntoDocument(leaderboardItem);
+      elementImg = scryByClass(element, 'LeaderboardItem__image');
+      expect(elementImg.length).toEqual(1);
+    });
+
+    it('renders wont render an image if set to false', function() {
+      leaderboardItem = <LeaderboardItem renderImage={ false } />;
+      element = TestUtils.renderIntoDocument(leaderboardItem);
+      elementImg = scryByClass(element, 'LeaderboardItem__image');
+      expect(elementImg.length).toEqual(0);
     });
   });
 });

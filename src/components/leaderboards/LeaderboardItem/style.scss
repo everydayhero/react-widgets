@@ -4,6 +4,7 @@
   padding: $x-1;
   float: left;
   position: relative;
+  text-decoration: none;
 
   @include media-max($breakpoint-xl) {
     width: 50%;

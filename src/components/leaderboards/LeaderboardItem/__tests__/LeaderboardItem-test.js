@@ -12,12 +12,18 @@ describe('LeaderboardItem', function() {
     var element;
 
     beforeEach(function() {
-      leaderboardItem = <LeaderboardItem campaignUid="au-0" />;
+      leaderboardItem = <LeaderboardItem url="hello-world.com" />;
       element = TestUtils.renderIntoDocument(leaderboardItem);
     });
 
     it('renders something', function() {
       expect(element).not.toBeNull();
+    });
+
+    it('is a link', function() {
+      var parentNode = element.getDOMNode();
+      expect(parentNode.tagName).toBe('A');
+      expect(parentNode.getAttribute('href')).toEqual('hello-world.com');
     });
 
     it('renders a profile image', function() {

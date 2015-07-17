@@ -14,7 +14,7 @@ module.exports = React.createClass({
   propTypes: {
     name: React.PropTypes.string.isRequired,
     date: React.PropTypes.object.isRequired,
-    campaignUrl: React.PropTypes.string.isRequired,
+    campaignUrl: React.PropTypes.string,
     donateUrl: React.PropTypes.string,
     getStartedUrl: React.PropTypes.string,
     backgroundImageUrl: React.PropTypes.string,

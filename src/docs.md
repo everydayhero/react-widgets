@@ -881,6 +881,9 @@ Accepts a CSS color value. Not set by default.
 `childWidth` (number)<br>
 Set to `250` by default. Sets the minimum width for leaderboard items to display.
 
+`renderImage` (boolean)<br>
+Set to `true` by default. Determines whether a profile image is rendered for each leaderboard item.
+
 `currencyFormat` (string)<br>
 Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
 
@@ -961,6 +964,9 @@ Set to `250` by default. Sets the minimum width for leaderboard items to display
 
 `altTemplate` (boolean)<br>
 Set to `false` by default. Renders an alternate template set when set to `true`.
+
+`renderImage` (boolean)<br>
+Set to `true` by default. Determines whether a profile image is rendered for each leaderboard item.
 
 `currencyFormat` (string)<br>
 Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).

@@ -21,11 +21,11 @@ module.exports = React.createClass({
     };
 
     return (
-      <div className="LeaderboardItem" style={ style }>
+      <a href={ this.props.url } className="LeaderboardItem" style={ style }>
         <div className="LeaderboardItem__skin">
-          <a href={ this.props.url } className="LeaderboardItem__image">
+          <div className="LeaderboardItem__image">
             <img src={ this.props.imgSrc } />
-          </a>
+          </div>
           <div className="LeaderboardItem__content">
             <div className="LeaderboardItem__name">
               { this.props.name }
@@ -38,7 +38,7 @@ module.exports = React.createClass({
             { this.props.rank }
           </div>
         </div>
-      </div>
+      </a>
     );
   }
 });

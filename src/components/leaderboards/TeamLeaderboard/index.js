@@ -109,7 +109,8 @@ module.exports = React.createClass({
         imgSrc: d.imgSrc,
         raisedTitle: this.t('raisedTitle'),
         membersTitle: this.t('membersTitle'),
-        width: this.state.childWidth
+        width: this.state.childWidth,
+        renderImage: this.props.renderImage
       };
 
       return (

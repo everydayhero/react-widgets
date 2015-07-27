@@ -66,7 +66,7 @@ module.exports = React.createClass({
         }
       },
       minimumScore: {
-        all: 0.05,
+        all: 0.15,
         other: 0.01
       },
       pageSize: 10

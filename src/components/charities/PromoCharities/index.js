@@ -72,21 +72,9 @@ module.exports = React.createClass({
   },
 
   orderCharities: function(charities, keys) {
-    var tempObj = {};
-
-    _.forEach(charities, function(charity) {
-      tempObj[charity.id] = charity;
+    return _.sortBy(charities, function(charity) {
+      return keys.indexOf(charity.id);
     });
-
-    _.forEach(keys, function(key, i) {
-      if (charities[i]) {
-        charities[i] = tempObj[key];
-      }
-    });
-
-    console.log(charities);
-
-    return charities;
   },
 
   fetchUrl: function(charity) {

@@ -79,8 +79,12 @@ module.exports = React.createClass({
     });
 
     _.forEach(keys, function(key, i) {
-      charities[i] = tempObj[key];
+      if (charities[i]) {
+        charities[i] = tempObj[key];
+      }
     });
+
+    console.log(charities);
 
     return charities;
   },

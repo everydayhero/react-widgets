@@ -734,6 +734,65 @@ Set to `'0,0[.]0[0]'` by default. [More format strings](http://numeraljs.com/).
 `i18n` (object)<br>
 Contains localised text.
 
+
+## Total Calories
+
+```html
+<div id="TotalCaloriesExample"></div>
+<script>
+  edh.widgets.renderWidget('TotalCaloriesExample', 'TotalCalories', {
+    campaignUids: ['us-0','us-1']
+  });
+</script>
+```
+
+Displays the total calories recorded by fundraisers (using MapMyFitness) for a single specified campaign or multiple campaigns.
+
+
+### Demo
+
+<p id="TotalCaloriesExample"></p>
+
+<script>
+  edh.widgets.renderWidget('TotalCaloriesExample', 'TotalCalories', {
+    campaignUids: ['us-0','us-1']
+  });
+</script>
+
+
+### Options
+
+> Default `i18n` translation object:
+
+```js
+{
+  title: 'Calories',
+  emptyLabel: 'No data to display.'
+}
+```
+
+`campaignUid` (string)<br>
+Campaign uid to filter results by campaign.
+
+`campaignUids` (array)<br>
+Campaign uids to filter results by multiple campaigns.
+
+`renderIcon` (string or boolean)<br>
+Set to `true` by default. Pass in a valid [FontAwesome](http://fortawesome.github.io/Font-Awesome/icons/) icon name (without the _fa_ prefix) to override the default. Set to `false` to render no icon.
+
+`backgroundColor` (string)
+Accepts a CSS color value. Not set by default.
+
+`textColor` (string)
+Accepts a CSS color value. Not set by default.
+
+`format` (string).
+Set to `'0,0'` by default. [More format strings](http://numeraljs.com/).
+
+`i18n` (object)
+Contains localised text.
+
+
 # Charities
 
 ## Promoted Charities

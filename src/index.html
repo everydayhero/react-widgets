@@ -59,7 +59,8 @@
     }
 
     #TotalDistanceExample,
-    #TotalHoursExample {
+    #TotalHoursExample,
+    #TotalCaloriesExample {
       padding: 0 15px 15px;
     }
 
@@ -217,6 +218,7 @@
         <h3 class="title">Collective Effort</h3>
         <div id="TotalDistanceExample">Loading...</div>
         <div id="TotalHoursExample">Loading...</div>
+        <div id="TotalCaloriesExample">Loading...</div>
       </div>
     </div>
   </div>
@@ -299,6 +301,9 @@
     edh.widgets.renderWidget('MapExample', 'Map', { campaignUid: 'us-22', region:'US' });
     edh.widgets.renderWidget('TotalDistanceExample', 'TotalDistance', { campaignUids: ['us-22','us-24'] });
     edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUids: ['us-22', 'us-24'] });
+
+    edh.widgets.renderWidget('TotalCaloriesExample', 'TotalCalories', { campaignUids: ['au-9674'] });
+
     edh.widgets.renderWidget('AddressLookupExample', 'AddressLookup', { country: 'GB' });
     edh.widgets.renderWidget('AmountExample', 'Amount');
     edh.widgets.renderWidget('InputExample', 'Input', { i18n: { name: 'input_example', label: 'Input Example', hint: 'What is this input for?', error: 'This input is required'}, required: true });

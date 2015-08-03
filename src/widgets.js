@@ -27,6 +27,7 @@ var widgets = {
   Map: require('./components/maps/Map'),
   TotalDistance: require('./components/totals/TotalDistance'),
   TotalHours: require('./components/totals/TotalHours'),
+  TotalCalories: require('./components/totals/TotalCalories'),
   TotalDonations: require('./components/totals/TotalDonations'),
   CallToActionBox: require('./components/callstoaction/CallToActionBox'),
   PromoCharities: require('./components/charities/PromoCharities'),

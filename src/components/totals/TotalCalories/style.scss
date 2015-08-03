@@ -1,0 +1,27 @@
+.TotalCalories {
+  @extend %ehw-tile;
+  padding: 45px 8px;
+}
+
+.TotalCalories__total {
+  @extend %ehw-tile-total;
+}
+
+.TotalCalories__loading {
+  @extend %ehw-tile-loading-icon;
+}
+
+.TotalCalories__icon {
+  @extend %ehw-tile-icon;
+  font-size: 60px;
+  padding: 0;
+  margin-right: 15px;
+}
+
+.TotalCalories__content,
+.TotalCalories__icon,
+.TotalCalories__empty-label,
+.TotalCalories__loading {
+  display: inline-block;
+  vertical-align: middle;
+}

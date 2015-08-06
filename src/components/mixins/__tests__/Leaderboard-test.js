@@ -2,11 +2,11 @@
 jest.autoMockOff();
 
 describe('LeaderboardMixin', function() {
-  var _                 = require('lodash');
-  var React             = require('react/addons');
-  var Leaderboard       = require('../Leaderboard');
-  var TestUtils         = React.addons.TestUtils;
-  var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
+  var _           = require('lodash');
+  var React       = require('react/addons');
+  var Leaderboard = require('../Leaderboard');
+  var TestUtils   = React.addons.TestUtils;
+  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('getLeaderboard', function() {
     it('should remove pages with amount equals 0', function() {

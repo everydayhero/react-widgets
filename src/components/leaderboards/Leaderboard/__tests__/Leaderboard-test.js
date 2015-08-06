@@ -117,7 +117,10 @@ describe('Leaderboard', function() {
     it('renders a paging component if multiple pages are available', function() {
       var leaderboard = <Leaderboard campaignUid="au-0" limit={ 10 } pageSize={ 5 } />;
       var element = TestUtils.renderIntoDocument(leaderboard);
-      element.setState({ isLoading: false });
+      element.setState({
+        isLoading: false,
+        resultCount: 10
+      });
 
       var paging = <LeaderboardPaging />;
       var pagingFunction = element.renderPaging();

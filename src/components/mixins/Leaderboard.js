@@ -46,6 +46,7 @@ module.exports = {
 
     this.setState({
       isLoading: false,
+      resultCount: pages.length,
       boardData: this.paginateLeaderboard(leaderboard),
       childWidth: this.getChildrenWidth(this.props.childWidth, this.props.pageSize)
     });
@@ -122,7 +123,7 @@ module.exports = {
   },
 
   renderPaging: function() {
-    var pageCount = this.props.limit / this.props.pageSize;
+    var pageCount = Math.ceil(this.state.resultCount / this.props.pageSize);
 
     if (!this.state.isLoading && pageCount > 1) {
       return (

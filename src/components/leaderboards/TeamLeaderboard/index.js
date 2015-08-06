@@ -135,7 +135,7 @@ module.exports = React.createClass({
             { this.renderLeaderboardItems() }
           </ReactCSSTransitionGroup>
         </ol>
-        { this.renderPaging(this.state.resultCount, this.props.pageSize) }
+        { this.renderPaging() }
       </div>
     );
   },

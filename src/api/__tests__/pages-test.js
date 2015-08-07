@@ -72,7 +72,7 @@ describe('pages', function() {
 
   describe('search', function() {
     it('searches for pages', function() {
-      var query = { searchTerm: 'bar', country: 'xy', campaignUid: ['xy-12', 'xy-42'], charityUid: 'xy-123', type: 'foo', page: 2, pageSize: 7 };
+      var query = { searchTerm: 'bar', country: 'xy', campaignUid: ['xy-12', 'xy-42'], charityUid: 'xy-123', pageType: 'foo', page: 2, pageSize: 7 };
       var callback = jest.genMockFunction();
       pages.search(query, callback);
 

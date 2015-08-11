@@ -30,6 +30,7 @@ var widgets = {
   TotalCalories: require('./components/totals/TotalCalories'),
   TotalDonations: require('./components/totals/TotalDonations'),
   CallToActionBox: require('./components/callstoaction/CallToActionBox'),
+  CallToActionButton: require('./components/callstoaction/CallToActionButton'),
   PromoCharities: require('./components/charities/PromoCharities'),
   AddressLookup: require('./components/address/AddressLookup'),
   Amount: require('./components/amount/Amount'),

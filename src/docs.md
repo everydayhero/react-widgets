@@ -439,6 +439,12 @@ Campaign uid to filter results by campaign.
 `campaignUids` (array)<br>
 Campaign uids to filter results by multiple campaigns.
 
+`charityUid` (string)<br>
+Charity uid to filter results by charity.
+
+`charityUids` (array)<br>
+Charity uids to filter results by multiple charities.
+
 `backgroundColor` (string)<br>
 Accepts a CSS color value. Not set by default.
 

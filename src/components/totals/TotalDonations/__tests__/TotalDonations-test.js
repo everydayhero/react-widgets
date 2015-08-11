@@ -71,6 +71,37 @@ describe('TotalDonations', function() {
     });
   });
 
+  describe('single charity id', function() {
+    var totalDonations;
+    var element;
+
+    beforeEach(function() {
+      totals.findByCharities.mockClear();
+      totalDonations = <TotalDonations charityUids="au-24" />;
+      element = TestUtils.renderIntoDocument(totalDonations);
+    });
+
+    it('handles a single charity id', function() {
+      expect(totals.findByCharities.mock.calls.length).toEqual(1);
+      expect(totals.findByCharities).toBeCalledWith("au-24", element.onSuccess);
+    });
+  });
+
+  describe('multiple charity ids', function() {
+    var totalDonations;
+    var element;
+
+    beforeEach(function() {
+      totals.findByCharities.mockClear();
+      totalDonations = <TotalDonations charityUids={ ["au-24", "au-27"] } />;
+      element = TestUtils.renderIntoDocument(totalDonations);
+    });
+
+    it('handles multiple charity ids', function() {
+      expect(totals.findByCharities.mock.calls.length).toEqual(1);
+    });
+  });
+
   describe('Custom component props', function() {
     var totalDonations;
     var element;

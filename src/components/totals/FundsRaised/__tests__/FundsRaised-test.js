@@ -96,6 +96,22 @@ describe('FundsRaised', function() {
     });
   });
 
+  describe('multiple charity ids', function() {
+    var fundsRaised;
+    var element;
+
+    beforeEach(function() {
+      totals.findByCharities.mockClear();
+      fundsRaised = <FundsRaised charityUids={ ["au-27", "au-28"] } />;
+      element = TestUtils.renderIntoDocument(fundsRaised);
+    });
+
+    it('handles multiple charity ids', function() {
+      expect(totals.findByCharities.mock.calls.length).toEqual(1);
+      expect(totals.findByCharities).toBeCalledWith(["au-27", "au-28"], element.onSuccess);
+    });
+  });
+
   describe('working with multiple uids', function() {
     var fundsRaised;
     var element;

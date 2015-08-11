@@ -6,7 +6,7 @@ var compression = require('compression');
 var morgan      = require('morgan');
 
 var staticPath  = __dirname + '/public/';
-var port        = Number(5000);
+var port        = Number(7500);
 var pkg         = require('./package.json');
 
 

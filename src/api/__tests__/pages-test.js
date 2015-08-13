@@ -70,6 +70,20 @@ describe('pages', function() {
     });
   });
 
+  describe('findByCharity', function() {
+    it('gets total from charity id', function() {
+      var callback = jest.genMockFunction();
+      pages.findByCharity('au-24', 'foo', 7, 2, callback);
+
+      expect(getJSONP).lastCalledWith(
+        'https://everydayhero.com/api/v2/pages.jsonp?charity_ids=au-24&type=foo&page=2&limit=7',
+        callback
+      );
+      expect(callback).toBeCalledWith(results);
+      expect(callback.mock.calls.length).toBe(1);
+    });
+  });
+
   describe('search', function() {
     it('searches for pages', function() {
       var query = { searchTerm: 'bar', country: 'xy', campaignUid: ['xy-12', 'xy-42'], charityUid: 'xy-123', pageType: 'foo', page: 2, pageSize: 7 };

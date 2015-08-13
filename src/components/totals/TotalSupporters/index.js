@@ -13,6 +13,8 @@ module.exports = React.createClass({
   propTypes: {
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
+    charityUid: React.PropTypes.string,
+    charityUids: React.PropTypes.array,
     pageCount: React.PropTypes.number,
     pageSize: React.PropTypes.number,
     renderIcon: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
@@ -26,6 +28,8 @@ module.exports = React.createClass({
     return {
       campaignUid: '',
       campaignUids: [],
+      charityUid: '',
+      charityUids: [],
       pageCount: 1,
       pageSize: 1,
       pageType: 'individual',
@@ -57,7 +61,7 @@ module.exports = React.createClass({
     this.loadPages();
   },
 
-  setUids: function() {
+  setCampaignUids: function() {
     var campaignUids = [];
 
     if (this.props.campaignUid) {
@@ -69,15 +73,35 @@ module.exports = React.createClass({
     return campaignUids;
   },
 
+  setCharityUids: function() {
+    var charityUids = [];
+
+    if (this.props.charityUid) {
+      charityUids.push(this.props.charityUid);
+    } else {
+      charityUids = this.props.charityUids;
+    }
+
+    return charityUids;
+  },
+
   loadPages: function() {
     this.setState({ isLoading: true });
 
-    var campaignUids = this.setUids();
+    var campaignUids = this.setCampaignUids();
     var props = this.props;
+    var charityUids  = this.setCharityUids();
 
-    _.each(campaignUids, function(campaignUid) {
-      pages.findByCampaign(campaignUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess);
-    }, this);
+
+    if (campaignUids.length > 0) {
+      _.each(campaignUids, function(campaignUid) {
+        pages.findByCampaign(campaignUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess);
+      }, this);
+    } else if (charityUids.length > 0) {
+      _.each(charityUids, function(charityUid) {
+        pages.findByCharity(charityUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess);
+      }, this);
+    }
   },
 
   renderTotal: function() {

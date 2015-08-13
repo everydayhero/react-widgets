@@ -77,7 +77,7 @@ module.exports = React.createClass({
 
     if (campaignUids) {
       totals.findByCampaigns(campaignUids, this.onSuccess);
-    } else if (charityUids)  {
+    } else if (charityUids) {
       totals.findByCharities(charityUids, this.onSuccess);
     }
   },

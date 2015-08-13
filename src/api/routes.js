@@ -16,7 +16,7 @@ var baseRoutes = {
   charityLeaderboard:   '{baseUrl}/api/v2/charities/{charityUid}/leaderboard.jsonp?type={type}&limit={limit}&include_pages={includePages}&include_footprint={includeFootprint}',
   charities:            '{baseUrl}/api/v2/charities.jsonp?ids={charityUids}&campaign_ids={campaignUid}&page={page}&limit={limit}',
   page:                 '{baseUrl}/api/v2/pages/{pageId}.jsonp?include_footprint={includeFootprint}',
-  pages:                '{baseUrl}/api/v2/pages.jsonp?ids={pageIds}&campaign_id={campaignUid}&type={type}&include_footprint={includeFootprint}&page={page}&limit={limit}',
+  pages:                '{baseUrl}/api/v2/pages.jsonp?ids={pageIds}&campaign_id={campaignUid}&charity_ids={charityUid}&type={type}&include_footprint={includeFootprint}&page={page}&limit={limit}',
 
   searchAggregate:      '{baseUrl}/api/v2/search/aggregate.jsonp?q={searchTerm}&country_code={country}&page={page}&page_size={pageSize}&minimum_score={minimumScore}',
   searchCampaigns:      '{baseUrl}/api/v2/search/campaigns.jsonp?q={searchTerm}&country_code={country}&page={page}&page_size={pageSize}&minimum_score={minimumScore}',

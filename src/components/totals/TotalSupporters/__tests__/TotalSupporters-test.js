@@ -55,7 +55,7 @@ describe('TotalSupporters', function() {
     });
   });
 
-  describe('Working with multiple uids', function() {
+  describe('Working with multiple campaign uids', function() {
     var totalSupporters;
     var element;
 
@@ -69,6 +69,39 @@ describe('TotalSupporters', function() {
       expect(pages.findByCampaign.mock.calls.length).toEqual(2);
       expect(pages.findByCampaign).toBeCalledWith("us-22", 'individual', 1, 1, element.onSuccess);
       expect(pages.findByCampaign).toBeCalledWith("us-24", 'individual', 1, 1, element.onSuccess);
+    });
+  });
+
+  describe('single charity id', function() {
+    var totalSupporters;
+    var element;
+
+    beforeEach(function() {
+      pages.findByCharity.mockClear();
+      totalSupporters = <TotalSupporters charityUid="au-24" />;
+      element = TestUtils.renderIntoDocument(totalSupporters);
+    });
+
+    it('handles a single charity id', function() {
+      expect(pages.findByCharity.mock.calls.length).toEqual(1);
+      expect(pages.findByCharity).toBeCalledWith("au-24", 'individual', 1, 1, element.onSuccess);
+    });
+  });
+
+  describe('Working with multiple charity uids', function() {
+    var totalSupporters;
+    var element;
+
+    beforeEach(function() {
+      pages.findByCharity.mockClear();
+      totalSupporters = <TotalSupporters charityUids={ ["au-24", "au-31"] } />;
+      element = TestUtils.renderIntoDocument(totalSupporters);
+    });
+
+    it('makes multiple calls to fetch api data', function() {
+      expect(pages.findByCharity.mock.calls.length).toEqual(2);
+      expect(pages.findByCharity).toBeCalledWith("au-24", 'individual', 1, 1, element.onSuccess);
+      expect(pages.findByCharity).toBeCalledWith("au-31", 'individual', 1, 1, element.onSuccess);
     });
   });
 

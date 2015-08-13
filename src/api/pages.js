@@ -27,6 +27,17 @@ module.exports = {
     return getJSONP(routes.get('pages', params), callback);
   },
 
+  findByCharity: function(charityUid, type, limit, page, callback, options) {
+    var params = _.merge({
+      charityUid: charityUid,
+      type: type,
+      page: page,
+      limit: limit
+    }, options);
+
+    return getJSONP(routes.get('pages', params), callback);
+  },
+
   search: function(params, callback) {
     params = _.merge({ page: 1, pageSize: 10 }, params);
     params.searchTerm = encodeURIComponent(params.searchTerm);

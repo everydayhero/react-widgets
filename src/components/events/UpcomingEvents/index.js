@@ -11,8 +11,6 @@ var charity = require('../../../api/charities');
 
 var blacklist = ['au-18856', 'au-18881', 'au-18882', 'au-18883', 'au-18884', 'au-18885', 'au-18886', 'au-18887', 'au-18888', 'au-18889', 'au-18890', 'au-18891', 'au-18892', 'au-18893', 'au-18894', 'au-18895', 'au-18896', 'au-18897', 'au-18898', 'au-18899', 'au-18900', 'au-18901', 'au-18902', 'au-18904', 'au-18905', 'au-18906', 'au-18907', 'au-18908', 'au-18909', 'au-18910', 'au-18911', 'au-18912', 'au-18913', 'au-18918', 'au-18919', 'au-18920', 'au-18921', 'au-6045', 'au-3042', 'au-18012', 'au-10631'];
 
-var whitelist = [];
-
 module.exports = React.createClass({
   displayName: 'UpcomingEvents',
 
@@ -20,15 +18,15 @@ module.exports = React.createClass({
 
   propTypes: {
     charityUid: React.PropTypes.string.isRequired,
-    excludeEvents: React.PropTypes.string,
-    featureEvents: React.PropTypes.string,
+    excludeEvents: React.PropTypes.array,
+    events: React.PropTypes.array,
     i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
     return {
-      excludeEvents: null,
-      featureEvents: null,
+      excludeEvents: [],
+      events: [],
       defaultI18n: {
         title: 'Upcoming Events'
       }
@@ -36,17 +34,10 @@ module.exports = React.createClass({
   },
 
   getInitialState: function() {
-    if (this.props.excludeEvents) {
-      blacklist = blacklist.concat(this.props.excludeEvents.split(','));
-    }
-
-    if (this.props.featureEvents) {
-      whitelist = whitelist.concat(this.props.featureEvents.split(','));
-    }
-
     return {
       events: [],
-      cancelLoad: function() {}
+      cancelLoad: function() {},
+      excludeEvents: blacklist ? this.props.excludeEvents.concat(blacklist) : this.props.excludeEvents
     };
   },
 
@@ -78,12 +69,12 @@ module.exports = React.createClass({
     this.state.cancelLoad();
   },
 
-  isBlacklisted: function(id) {
-    return blacklist.indexOf(id) !== -1;
+  isExcluded: function(id) {
+    return this.state.excludeEvents.indexOf(id) !== -1;
   },
 
-  isWhitelisted: function(id) {
-    return whitelist.indexOf(id) !== -1;
+  isIncluded: function(id) {
+    return this.props.events.indexOf(id) !== -1;
   },
 
   renderEvents: function() {
@@ -103,12 +94,12 @@ module.exports = React.createClass({
         width: width
       };
 
-      if (whitelist.length > 0) {
-        if (this.isWhitelisted(e.id)) {
+      if (this.props.events.length > 0) {
+        if (this.isIncluded(e.id)) {
           return <Event { ...props } />;
         }
       } else {
-        return !this.isBlacklisted(e.id) && <Event { ...props } />;
+        return !this.isExcluded(e.id) && <Event { ...props } />;
       }
     }, this);
   },

@@ -2,7 +2,9 @@
 jest.autoMockOff();
 
 jest.mock('../../../../api/charities');
+jest.mock('../../../../api/campaigns');
 var charities = require('../../../../api/charities');
+var campaigns = require('../../../../api/campaigns');
 
 var React       = require('react/addons');
 var TestUtils   = React.addons.TestUtils;
@@ -49,5 +51,19 @@ describe('Supporters', function() {
         expect(cards.length).toBeGreaterThan(0);
       });
     });
+  });
+});
+
+describe('multiple campaignUids', function() {
+  var element;
+
+  beforeEach(function() {
+    campaigns.leaderboardByUids.mockClear();
+    supporters = <Supporters campaignUids={ ["us-22", "us-19"] } />;
+    element = TestUtils.renderIntoDocument(supporters);
+  });
+
+  it('handles multiple campaignUids', function() {
+    expect(campaigns.leaderboardByUids.mock.calls.length).toEqual(1);
   });
 });

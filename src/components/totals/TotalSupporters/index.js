@@ -15,6 +15,8 @@ module.exports = React.createClass({
     campaignUids: React.PropTypes.array,
     charityUid: React.PropTypes.string,
     charityUids: React.PropTypes.array,
+    startAt: React.PropTypes.string,
+    endAt: React.PropTypes.string,
     pageCount: React.PropTypes.number,
     pageSize: React.PropTypes.number,
     renderIcon: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
@@ -30,6 +32,8 @@ module.exports = React.createClass({
       campaignUids: [],
       charityUid: '',
       charityUids: [],
+      startAt: null,
+      endAt: null,
       pageCount: 1,
       pageSize: 1,
       pageType: 'individual',
@@ -92,14 +96,23 @@ module.exports = React.createClass({
     var props = this.props;
     var charityUids  = this.setCharityUids();
 
+    var options = {};
+
+    if (props.startAt) {
+      options.start = props.startAt;
+    }
+
+    if (props.endAt) {
+      options.end = props.endAt;
+    }
 
     if (campaignUids.length > 0) {
       _.each(campaignUids, function(campaignUid) {
-        pages.findByCampaign(campaignUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess);
+        pages.findByCampaign(campaignUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess, options);
       }, this);
     } else if (charityUids.length > 0) {
       _.each(charityUids, function(charityUid) {
-        pages.findByCharity(charityUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess);
+        pages.findByCharity(charityUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess, options);
       }, this);
     }
   },

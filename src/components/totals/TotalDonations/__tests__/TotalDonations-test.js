@@ -51,7 +51,7 @@ describe('TotalDonations', function() {
 
     it('makes a single call using to fetch api data', function() {
       expect(totals.findByCampaigns.mock.calls.length).toEqual(1);
-      expect(totals.findByCampaigns).toBeCalledWith("us-22", element.onSuccess);
+      expect(totals.findByCampaigns).toBeCalledWith("us-22", element.onSuccess, {});
     });
   });
 
@@ -67,7 +67,7 @@ describe('TotalDonations', function() {
 
     it('makes multiple calls to fetch api data', function() {
       expect(totals.findByCampaigns.mock.calls.length).toEqual(1);
-      expect(totals.findByCampaigns).toBeCalledWith(["us-22", "us-24"], element.onSuccess);
+      expect(totals.findByCampaigns).toBeCalledWith(["us-22", "us-24"], element.onSuccess, {});
     });
   });
 
@@ -83,7 +83,7 @@ describe('TotalDonations', function() {
 
     it('handles a single charity id', function() {
       expect(totals.findByCharities.mock.calls.length).toEqual(1);
-      expect(totals.findByCharities).toBeCalledWith("au-24", element.onSuccess);
+      expect(totals.findByCharities).toBeCalledWith("au-24", element.onSuccess, {});
     });
   });
 
@@ -170,6 +170,38 @@ describe('TotalDonations', function() {
       var element = TestUtils.renderIntoDocument(totalDonations);
       var icon = findByClass(element, 'fa-paw');
       expect(icon).not.toBeNull();
+    });
+  });
+
+  describe('takes startAt property', function() {
+    var totalDonations;
+    var element;
+
+    beforeEach(function() {
+      totals.findByCharities.mockClear();
+      totalDonations = <TotalDonations charityUid="au-31" startAt="2015-01-01" />;
+      element = TestUtils.renderIntoDocument(totalDonations);
+    });
+
+    it('handles a startAt property', function() {
+      expect(totals.findByCharities.mock.calls.length).toEqual(1);
+      expect(totals.findByCharities).toBeCalledWith("au-31", element.onSuccess, {start:'2015-01-01'});
+    });
+  });
+
+  describe('takes endAt property', function() {
+    var totalDonations;
+    var element;
+
+    beforeEach(function() {
+      totals.findByCharities.mockClear();
+      totalDonations = <TotalDonations charityUid="au-24" endAt="2015-06-01" />;
+      element = TestUtils.renderIntoDocument(totalDonations);
+    });
+
+    it('handles a endAt property', function() {
+      expect(totals.findByCharities.mock.calls.length).toEqual(1);
+      expect(totals.findByCharities).toBeCalledWith("au-24", element.onSuccess, {end:'2015-06-01'});
     });
   });
 });

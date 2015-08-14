@@ -34,7 +34,7 @@ describe('FundsRaised', function() {
     });
 
     it('handles a single campaign id', function() {
-      expect(totals.findByCampaigns).toBeCalledWith("us-22", element.onSuccess);
+      expect(totals.findByCampaigns).toBeCalledWith("us-22", element.onSuccess, {});
     });
   });
 
@@ -45,7 +45,7 @@ describe('FundsRaised', function() {
     });
 
     it('finds a total for multiple campaigns', function() {
-      expect(totals.findByCampaigns).toBeCalledWith(["us-22", "us-24", "us-19"], element.onSuccess);
+      expect(totals.findByCampaigns).toBeCalledWith(["us-22", "us-24", "us-19"], element.onSuccess, {});
     });
   });
 
@@ -56,7 +56,7 @@ describe('FundsRaised', function() {
     });
 
     it('finds a total for multiple charities', function() {
-      expect(totals.findByCharities).toBeCalledWith(["xx-11", "xx-22", "xx-33"], element.onSuccess);
+      expect(totals.findByCharities).toBeCalledWith(["xx-11", "xx-22", "xx-33"], element.onSuccess, {});
     });
   });
 
@@ -85,6 +85,38 @@ describe('FundsRaised', function() {
       element.setState(state);
       var text = findByClass(element, 'GoalProgress__text');
       expect(text.getDOMNode().textContent).toContain('$150 raised');
+    });
+  });
+
+  describe('takes startAt property', function() {
+    var entityGoalProgress;
+    var element;
+
+    beforeEach(function() {
+      totals.findByCharities.mockClear();
+      entityGoalProgress = <EntityGoalProgress charityUid="au-31" startAt="2015-01-01" />;
+      element = TestUtils.renderIntoDocument(entityGoalProgress);
+    });
+
+    it('handles a startAt property', function() {
+      expect(totals.findByCharities.mock.calls.length).toEqual(1);
+      expect(totals.findByCharities).toBeCalledWith("au-31", element.onSuccess, {start:'2015-01-01'});
+    });
+  });
+
+  describe('takes endAt property', function() {
+    var entityGoalProgress;
+    var element;
+
+    beforeEach(function() {
+      totals.findByCharities.mockClear();
+      entityGoalProgress = <EntityGoalProgress charityUid="au-24" endAt="2015-06-01" />;
+      element = TestUtils.renderIntoDocument(entityGoalProgress);
+    });
+
+    it('handles a endAt property', function() {
+      expect(totals.findByCharities.mock.calls.length).toEqual(1);
+      expect(totals.findByCharities).toBeCalledWith("au-24", element.onSuccess, {end:'2015-06-01'});
     });
   });
 });

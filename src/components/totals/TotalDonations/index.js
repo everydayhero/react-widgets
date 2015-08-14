@@ -15,6 +15,8 @@ module.exports = React.createClass({
     campaignUids: React.PropTypes.array,
     charityUid: React.PropTypes.string,
     charityUids: React.PropTypes.array,
+    startAt: React.PropTypes.string,
+    endAt: React.PropTypes.string,
     renderIcon: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -28,6 +30,8 @@ module.exports = React.createClass({
       campaignUids: null,
       charityUid: null,
       charityUids: null,
+      startAt: null,
+      endAt: null,
       renderIcon: true,
       backgroundColor: '',
       textColor: '',
@@ -75,10 +79,18 @@ module.exports = React.createClass({
     var campaignUids = this.props.campaignUid || this.props.campaignUids;
     var charityUids  = props.charityUid || props.charityUids;
 
+    var options = {};
+    if (props.startAt) {
+      options.start = props.startAt;
+    }
+    if (props.endAt) {
+      options.end = props.endAt;
+    }
+
     if (campaignUids) {
-      totals.findByCampaigns(campaignUids, this.onSuccess);
+      totals.findByCampaigns(campaignUids, this.onSuccess, options);
     } else if (charityUids) {
-      totals.findByCharities(charityUids, this.onSuccess);
+      totals.findByCharities(charityUids, this.onSuccess, options);
     }
   },
 

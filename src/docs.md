@@ -1832,7 +1832,7 @@ Charity uid to filter campaigns results.
 `excludeEvents` (string)
 CSV of events to exclude.
 
-`featureEvents` (string)
+`events` (string)
 CSV of events to feature. Only these events will be shown. These events must exist in the results returned from the API via campaignID(s) / charityID(s)
 
 `i18n` (object)<br>

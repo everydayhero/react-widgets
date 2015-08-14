@@ -328,6 +328,12 @@ Charity uid to filter results by charity.
 `charityUids` (array)<br>
 Charity uids to filter results by multiple charities.
 
+`startAt` (string)<br>
+YYYY-MM-DD date string to get results on or after this date.
+
+`endAt` (string)<br>
+YYYY-MM-DD date string to get results on or before this date.
+
 `renderIcon` (string or boolean)<br>
 Set to `true` by default. Pass in a valid [FontAwesome](http://fortawesome.github.io/Font-Awesome/icons/) icon name (without the _fa_ prefix) to override the default. Set to `false` to render no icon.
 
@@ -385,6 +391,18 @@ Campaign uid to filter results by campaign.
 
 `campaignUids` (array)<br>
 Campaign uids to filter results by multiple campaigns.
+
+`charityUid` (string)<br>
+Charity uid to filter results by charity.
+
+`charityUids` (array)<br>
+Charity uids to filter results by multiple charities.
+
+`startAt` (string)<br>
+YYYY-MM-DD date string to get results on or after this date.
+
+`endAt` (string)<br>
+YYYY-MM-DD date string to get results on or before this date.
 
 `backgroundColor` (string)<br>
 Accepts a CSS color value. Not set by default.
@@ -444,6 +462,12 @@ Charity uid to filter results by charity.
 
 `charityUids` (array)<br>
 Charity uids to filter results by multiple charities.
+
+`startAt` (string)<br>
+YYYY-MM-DD date string to get results on or after this date.
+
+`endAt` (string)<br>
+YYYY-MM-DD date string to get results on or before this date.
 
 `backgroundColor` (string)<br>
 Accepts a CSS color value. Not set by default.
@@ -615,6 +639,12 @@ Campaign uid or uids to filter results by campaigns.
 
 `charityUid` (string or array)<br>
 Charity uid or uids to filter results by charities.
+
+`startAt` (string)<br>
+YYYY-MM-DD date string to get results on or after this date.
+
+`endAt` (string)<br>
+YYYY-MM-DD date string to get results on or before this date.
 
 `format` (string)<br>
 Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
@@ -1798,6 +1828,12 @@ Displays a list of upcoming events/campaigns.
 
 `charityUid` (string) <span class="required">Required</span><br>
 Charity uid to filter campaigns results.
+
+`excludeEvents` (array)
+Array of events to exclude.
+
+`events` (array)
+Array of events to feature. Only these events will be shown. These events must exist in the results returned from the API via campaignID(s) / charityID(s)
 
 `i18n` (object)<br>
 Contains localised.

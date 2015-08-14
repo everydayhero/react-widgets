@@ -16,11 +16,17 @@ module.exports = React.createClass({
       React.PropTypes.string,
       React.PropTypes.arrayOf(React.PropTypes.string)
     ]),
-    goal: React.PropTypes.number
+    goal: React.PropTypes.number,
+    startAt: React.PropTypes.string,
+    endAt: React.PropTypes.string
   },
 
   getDefaultProps: function() {
-    return { goal: null };
+    return {
+      goal: null,
+      startAt: null,
+      endAt: null
+    };
   },
 
   getInitialState: function() {
@@ -32,10 +38,20 @@ module.exports = React.createClass({
   },
 
   loadTotals: function() {
+    var props = this.props;
+
+    var options = {};
+    if (props.startAt) {
+      options.start = props.startAt;
+    }
+    if (props.endAt) {
+      options.end = props.endAt;
+    }
+
     if (this.props.campaignUid) {
-      return totals.findByCampaigns(this.props.campaignUid, this.onSuccess);
+      return totals.findByCampaigns(props.campaignUid, this.onSuccess, options);
     } else if (this.props.charityUid) {
-      return totals.findByCharities(this.props.charityUid, this.onSuccess);
+      return totals.findByCharities(props.charityUid, this.onSuccess, options);
     }
   },
 

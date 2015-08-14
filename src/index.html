@@ -233,10 +233,10 @@
         edh.widgets.showModal('AggregateSearch', { searchTerm: value, country: 'uk' });
       }
     });
-    edh.widgets.renderWidget('EntityGoalProgressExample', 'EntityGoalProgress', { campaignUid: 'us-22', goal: 15000000 });
-    edh.widgets.renderWidget('FundsRaisedExample','FundsRaised', { campaignUids: ['us-22', 'us-24'] });
-    edh.widgets.renderWidget('TotalSupportersExample', 'TotalSupporters', { charityUids: ['au-24', 'au-31'] });
-    edh.widgets.renderWidget('TotalDonationsExample', 'TotalDonations', { charityUids: ['au-24'] });
+    edh.widgets.renderWidget('EntityGoalProgressExample', 'EntityGoalProgress', { campaignUid: 'us-22', goal: 15000000, startAt: '2015-01-01', endAt: '2015-06-01' });
+    edh.widgets.renderWidget('FundsRaisedExample','FundsRaised', { campaignUids: ['us-22', 'us-24'], startAt: '2015-01-01', endAt: '2015-06-01' });
+    edh.widgets.renderWidget('TotalSupportersExample', 'TotalSupporters', { charityUids: ['au-24', 'au-31'], startAt: '2015-01-01', endAt: '2015-06-01' });
+    edh.widgets.renderWidget('TotalDonationsExample', 'TotalDonations', { charityUids: ['au-24'], startAt: '2015-01-01', endAt: '2015-06-01' });
     edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUids: ['us-22', 'us-24'] });
     edh.widgets.renderWidget('GoalExample', 'Goal', { goal: 5000000, i18n: { title: '2015 Goal' } });
     edh.widgets.renderWidget('CountDownExample', 'CountDown', {
@@ -246,9 +246,9 @@
     edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('TeamLeaderboardExample', 'TeamLeaderboard', { campaignUid: 'us-22', altTemplate: true, limit: 12, pageSize: 4 });
     edh.widgets.renderWidget('FitnessLeaderboardExample', 'FitnessLeaderboard', { campaignUid: 'us-22' });
-    edh.widgets.renderWidget('UpcomingEventsExample', 'UpcomingEvents', { charityUid: 'au-31', charitySlug: 'australian-red-cross' });
+    edh.widgets.renderWidget('UpcomingEventsExample', 'UpcomingEvents', { charityUid: 'au-31', charitySlug: 'australian-red-cross', events: ['au-755', 'au-753'] });
     edh.widgets.renderWidget('RecentFundraisersExample', 'RecentFundraisers', { campaignUid: 'us-22' });
-    edh.widgets.renderWidget('SupportersExample', 'Supporters', { charityUid: 'au-31' });
+    edh.widgets.renderWidget('SupportersExample', 'Supporters', { campaignUids: ['us-22','us-19'] });
     edh.widgets.renderWidget('TeamsExample', 'Teams', { campaignUid: 'us-22' });
     edh.widgets.renderWidget('CharitiesExample', 'PromoCharities', {
       action: 'fundraise',

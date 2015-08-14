@@ -10,9 +10,9 @@ function customJoin(ids, joinString) {
 }
 
 module.exports = {
-  findByCampaigns: function(campaignUids, callback) {
+  findByCampaigns: function(campaignUids, callback, options) {
     campaignUids = customJoin(campaignUids, '&campaign_id[]=');
-    var params = _.merge({ campaignUid: campaignUids });
+    var params = _.merge({ campaignUid: campaignUids }, options);
     return getJSONP(routes.get('totals', params), callback);
   },
 

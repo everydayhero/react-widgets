@@ -18,11 +18,15 @@ module.exports = React.createClass({
 
   propTypes: {
     charityUid: React.PropTypes.string.isRequired,
+    excludeEvents: React.PropTypes.array,
+    events: React.PropTypes.array,
     i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
     return {
+      excludeEvents: [],
+      events: [],
       defaultI18n: {
         title: 'Upcoming Events'
       }
@@ -32,7 +36,8 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       events: [],
-      cancelLoad: function() {}
+      cancelLoad: function() {},
+      excludeEvents: blacklist ? this.props.excludeEvents.concat(blacklist) : this.props.excludeEvents
     };
   },
 
@@ -64,8 +69,12 @@ module.exports = React.createClass({
     this.state.cancelLoad();
   },
 
-  isBlacklisted: function(id) {
-    return blacklist.indexOf(id) !== -1;
+  isExcluded: function(id) {
+    return this.state.excludeEvents.indexOf(id) !== -1;
+  },
+
+  isIncluded: function(id) {
+    return this.props.events.indexOf(id) !== -1;
   },
 
   renderEvents: function() {
@@ -84,7 +93,14 @@ module.exports = React.createClass({
         supporterCount: e.page_count,
         width: width
       };
-      return !this.isBlacklisted(e.id) && <Event { ...props } />;
+
+      if (this.props.events.length > 0) {
+        if (this.isIncluded(e.id)) {
+          return <Event { ...props } />;
+        }
+      } else {
+        return !this.isExcluded(e.id) && <Event { ...props } />;
+      }
     }, this);
   },
 

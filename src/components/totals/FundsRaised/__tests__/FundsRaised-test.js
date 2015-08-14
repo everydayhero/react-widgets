@@ -60,7 +60,7 @@ describe('FundsRaised', function() {
 
     it('handles a single campaign id', function() {
       expect(totals.findByCampaigns.mock.calls.length).toEqual(1);
-      expect(totals.findByCampaigns).toBeCalledWith("us-22", element.onSuccess);
+      expect(totals.findByCampaigns).toBeCalledWith("us-22", element.onSuccess, {});
     });
   });
 
@@ -76,7 +76,7 @@ describe('FundsRaised', function() {
 
     it('handles a single page id', function() {
       expect(totals.findByPages.mock.calls.length).toEqual(1);
-      expect(totals.findByPages).toBeCalledWith("848751", element.onSuccess);
+      expect(totals.findByPages).toBeCalledWith("848751", element.onSuccess, {});
     });
   });
 
@@ -92,7 +92,7 @@ describe('FundsRaised', function() {
 
     it('handles a single charity id', function() {
       expect(totals.findByCharities.mock.calls.length).toEqual(1);
-      expect(totals.findByCharities).toBeCalledWith("au-31", element.onSuccess);
+      expect(totals.findByCharities).toBeCalledWith("au-31", element.onSuccess, {});
     });
   });
 
@@ -108,7 +108,7 @@ describe('FundsRaised', function() {
 
     it('handles multiple charity ids', function() {
       expect(totals.findByCharities.mock.calls.length).toEqual(1);
-      expect(totals.findByCharities).toBeCalledWith(["au-27", "au-28"], element.onSuccess);
+      expect(totals.findByCharities).toBeCalledWith(["au-27", "au-28"], element.onSuccess, {});
     });
   });
 
@@ -124,7 +124,7 @@ describe('FundsRaised', function() {
 
     it('handles a multiple campaign ids', function() {
       expect(totals.findByCampaigns.mock.calls.length).toEqual(1);
-      expect(totals.findByCampaigns).toBeCalledWith(["us-22", "us-24"], element.onSuccess);
+      expect(totals.findByCampaigns).toBeCalledWith(["us-22", "us-24"], element.onSuccess, {});
     });
   });
 
@@ -191,7 +191,6 @@ describe('FundsRaised', function() {
     });
   });
 
-
   describe('Displaying an icon', function() {
     it('renders no icon when renderIcon set to false', function() {
       var fundsRaised = <FundsRaised campaignUid="au-0" renderIcon={ false } />;
@@ -205,6 +204,38 @@ describe('FundsRaised', function() {
       var element = TestUtils.renderIntoDocument(fundsRaised);
       var icon = findByClass(element, 'fa-paw');
       expect(icon).not.toBeNull();
+    });
+  });
+
+  describe('takes startAt property', function() {
+    var fundsRaised;
+    var element;
+
+    beforeEach(function() {
+      totals.findByCharities.mockClear();
+      fundsRaised = <FundsRaised charityUid="au-31" startAt="2015-01-01" />;
+      element = TestUtils.renderIntoDocument(fundsRaised);
+    });
+
+    it('handles a startAt property', function() {
+      expect(totals.findByCharities.mock.calls.length).toEqual(1);
+      expect(totals.findByCharities).toBeCalledWith("au-31", element.onSuccess, {start:'2015-01-01'});
+    });
+  });
+
+  describe('takes endAt property', function() {
+    var fundsRaised;
+    var element;
+
+    beforeEach(function() {
+      totals.findByCharities.mockClear();
+      fundsRaised = <FundsRaised charityUid="au-31" endAt="2015-06-01" />;
+      element = TestUtils.renderIntoDocument(fundsRaised);
+    });
+
+    it('handles a endAt property', function() {
+      expect(totals.findByCharities.mock.calls.length).toEqual(1);
+      expect(totals.findByCharities).toBeCalledWith("au-31", element.onSuccess, {end:'2015-06-01'});
     });
   });
 

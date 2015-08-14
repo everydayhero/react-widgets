@@ -56,6 +56,7 @@ describe('Supporters', function() {
 
 describe('multiple campaignUids', function() {
   var element;
+  var supporters;
 
   beforeEach(function() {
     campaigns.leaderboardByUids.mockClear();

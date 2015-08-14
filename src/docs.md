@@ -1829,11 +1829,11 @@ Displays a list of upcoming events/campaigns.
 `charityUid` (string) <span class="required">Required</span><br>
 Charity uid to filter campaigns results.
 
-`excludeEvents` (string)
-CSV of events to exclude.
+`excludeEvents` (array)
+Array of events to exclude.
 
-`events` (string)
-CSV of events to feature. Only these events will be shown. These events must exist in the results returned from the API via campaignID(s) / charityID(s)
+`events` (array)
+Array of events to feature. Only these events will be shown. These events must exist in the results returned from the API via campaignID(s) / charityID(s)
 
 `i18n` (object)<br>
 Contains localised.

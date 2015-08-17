@@ -17,6 +17,7 @@ module.exports = React.createClass({
   propTypes: {
     campaignSlug: React.PropTypes.string,
     campaignUid: React.PropTypes.string,
+    campaignUids: React.PropTypes.array,
     charitySlug: React.PropTypes.string,
     charityUid: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
@@ -61,7 +62,7 @@ module.exports = React.createClass({
       if (props.charitySlug)  { endpoint = charities.leaderboardBySlug.bind(charities, props.country, props.charitySlug); }
     } else {
       if (props.campaignUid)  { endpoint = campaigns.leaderboard.bind(campaigns, props.campaignUid); }
-      if (props.campaignUids)  { endpoint = campaigns.leaderboardByUids.bind(campaigns, props.campaignUids); }
+      if (props.campaignUids) { endpoint = campaigns.leaderboardByUids.bind(campaigns, props.campaignUids); }
       if (props.charityUid)   { endpoint = charities.leaderboard.bind(charities, props.charityUid); }
     }
 

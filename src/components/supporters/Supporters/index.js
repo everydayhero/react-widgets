@@ -80,9 +80,6 @@ module.exports = React.createClass({
   },
 
   onSuccess: function(result) {
-
-    console.log(result);
-
     var pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : [];
 
     this.setState({

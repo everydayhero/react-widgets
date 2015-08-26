@@ -15,6 +15,7 @@
     "numeral": "~1.5.3",
     "paths-js": "^0.3.0",
     "react": "^0.12.2",
+    "reactify": "~0.17.1",
     "react-tween-state": "0.0.4",
     "remarkable": "^1.6.0"
   },
@@ -40,7 +41,6 @@
     "morgan": "~1.5.0",
     "react-page-objects": "~0.1.2",
     "react-tools": "~0.12.2",
-    "reactify": "~0.17.1",
     "simple-spinner": "~0.0.2",
     "superagent": "~0.21.0",
     "vinyl-buffer": "~1.0.0",

@@ -46,9 +46,10 @@ module.exports = {
     return getJSONP(routes.get('campaigns', params), callback);
   },
 
-  leaderboard: function(campaignUid, type, limit, callback, options) {
+  leaderboard: function(campaignUid, charityUid, type, limit, callback, options) {
     var params = _.merge({
       campaignUid: campaignUid,
+      charityUid: charityUid,
       type: type,
       limit: limit
     }, options);
@@ -56,7 +57,7 @@ module.exports = {
     return getJSONP(routes.get('campaignLeaderboard', params), callback);
   },
 
-  leaderboardByUids: function(campaignUids, type, limit, callback, options) {
+  leaderboardByUids: function(campaignUids, charityUid, type, limit, callback, options) {
     if (_.isEmpty(campaignUids)) {
       _.defer(callback, { campaigns: [] });
       return;
@@ -84,12 +85,12 @@ module.exports = {
     };
 
     _.forEach(campaignUids, function(campaignUid) {
-      this.leaderboard(campaignUid, type, limit, storePages, options);
+      this.leaderboard(campaignUid, charityUid, type, limit, storePages, options);
     }, this);
   },
 
   leaderboardBySlug: function(country, campaignSlug, type, limit, callback, options) {
-    return this.leaderboard(country + '/' + campaignSlug, type, limit, callback, options);
+    return this.leaderboard(country + '/' + campaignSlug, '', type, limit, callback, options);
   },
 
   search: function(params, callback) {

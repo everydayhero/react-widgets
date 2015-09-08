@@ -27,8 +27,7 @@ describe('charities', function() {
       var callback = jest.genMockFunction();
       charities.find('xy-12', callback);
 
-      expect(getJSONP).lastCalledWith(
-        'https://everydayhero.com/api/v2/charities/xy-12.jsonp', callback);
+      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/charities/xy-12.jsonp', callback);
       expect(callback).toBeCalledWith(results);
     });
   });
@@ -38,8 +37,7 @@ describe('charities', function() {
       var callback = jest.genMockFunction();
       charities.findBySlug('xy', 'slugs-for-pugs', callback);
 
-      expect(getJSONP).lastCalledWith(
-        'https://everydayhero.com/api/v2/charities/xy/slugs-for-pugs.jsonp', callback);
+      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/charities/xy/slugs-for-pugs.jsonp', callback);
       expect(callback).toBeCalledWith(results);
     });
   });
@@ -49,8 +47,7 @@ describe('charities', function() {
       var callback = jest.genMockFunction();
       charities.findByUids(['xy-123', 'xy-456'], callback);
 
-      expect(getJSONP).lastCalledWith(
-        'https://everydayhero.com/api/v2/charities.jsonp?ids=xy-123,xy-456', callback);
+      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/charities.jsonp?ids=xy-123,xy-456', callback);
       expect(callback).toBeCalledWith(results);
     });
 
@@ -81,10 +78,7 @@ describe('charities', function() {
       var callback = jest.genMockFunction();
       charities.findByCampaign('xy-12', 7, 2, callback);
 
-      expect(getJSONP).lastCalledWith(
-        'https://everydayhero.com/api/v2/charities.jsonp?campaign_ids=xy-12&page=2&limit=7',
-        callback
-      );
+      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/charities.jsonp?campaign_ids=xy-12&page=2&limit=7', callback);
       expect(callback).toBeCalledWith(results);
     });
   });
@@ -94,10 +88,7 @@ describe('charities', function() {
       var callback = jest.genMockFunction();
       charities.leaderboard('xy-123', 'foo', 12, callback);
 
-      expect(getJSONP).lastCalledWith(
-        'https://everydayhero.com/api/v2/charities/xy-123/leaderboard.jsonp?type=foo&limit=12',
-        callback
-      );
+      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/charities/xy-123/leaderboard.jsonp?type=foo&limit=12', callback);
       expect(callback).toBeCalledWith(results);
     });
 
@@ -118,10 +109,7 @@ describe('charities', function() {
       var callback = jest.genMockFunction();
       charities.leaderboardBySlug('xy', 'slugs-for-pugs', 'foo', 12, callback);
 
-      expect(getJSONP).lastCalledWith(
-        'https://everydayhero.com/api/v2/charities/xy/slugs-for-pugs/leaderboard.jsonp?type=foo&limit=12',
-        callback
-      );
+      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/charities/xy/slugs-for-pugs/leaderboard.jsonp?type=foo&limit=12', callback);
       expect(callback).toBeCalledWith(results);
     });
 
@@ -143,10 +131,7 @@ describe('charities', function() {
       var callback = jest.genMockFunction();
       charities.search(query, callback);
 
-      expect(getJSONP).toBeCalledWith(
-        'https://everydayhero.com/api/v2/search/charities.jsonp?q=bar&country_code=xy&campaign_id=12,42&page=2&page_size=7',
-        callback, {timeout: 10000}
-      );
+      expect(getJSONP).toBeCalledWith('https://everydayhero.com/api/v2/search/charities.jsonp?q=bar&country_code=xy&campaign_id=12,42&page=2&page_size=7', callback, {timeout: 10000});
       expect(callback).toBeCalledWith(results);
     });
   });

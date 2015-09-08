@@ -137,18 +137,15 @@ describe('campaigns', function() {
   describe('leaderboard', function() {
     it('gets campaign leaderboard by campaign uid', function() {
       var callback = jest.genMockFunction();
-      campaigns.leaderboard('xy-123', 'foo', 12, callback);
+      campaigns.leaderboard('xy-123', 'abcd', 'foo', 12, callback);
 
-      expect(getJSONP).lastCalledWith(
-        'https://everydayhero.com/api/v2/campaigns/xy-123/leaderboard.jsonp?type=foo&limit=12',
-        callback
-      );
+      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/campaigns/xy-123/leaderboard.jsonp?type=foo&limit=12&charity_ids=abcd', callback);
       expect(callback).toBeCalledWith(results);
     });
 
     it('accepts options', function() {
       var callback = jest.genMockFunction();
-      campaigns.leaderboard('xy-123', 'foo', 12, callback, {
+      campaigns.leaderboard('xy-123', 'abcd', 'foo', 12, callback, {
         includePages: true,
         includeFootprint: true
       });
@@ -161,11 +158,11 @@ describe('campaigns', function() {
   describe('leaderboardByUids', function() {
     it('gets multiple campaign leaderboards by campaign uids', function() {
       var callback = jest.genMockFunction();
-      campaigns.leaderboardByUids(['ab-123', 'cd-456'], 'foo', 12, callback, {});
+      campaigns.leaderboardByUids(['ab-123', 'cd-456'], 'abcd', 'foo', 12, callback, {});
       expect(getJSONP.mock.calls.length).toBe(2);
       expect(getJSONP.mock.calls[0][0]).toContain('ab-123');
       expect(getJSONP.mock.calls[1][0]).toContain('cd-456');
-      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/campaigns/cd-456/leaderboard.jsonp?type=foo&limit=12', callback);
+      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/campaigns/cd-456/leaderboard.jsonp?type=foo&limit=12&charity_ids=abcd', callback);
       expect(callback.mock.calls.length).toBe(1);
     });
   });
@@ -175,10 +172,7 @@ describe('campaigns', function() {
       var callback = jest.genMockFunction();
       campaigns.leaderboardBySlug('xy', 'slugathon-2015', 'foo', 12, callback);
 
-      expect(getJSONP).lastCalledWith(
-        'https://everydayhero.com/api/v2/campaigns/xy/slugathon-2015/leaderboard.jsonp?type=foo&limit=12',
-        callback
-      );
+      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/campaigns/xy/slugathon-2015/leaderboard.jsonp?type=foo&limit=12', callback);
       expect(callback).toBeCalledWith(results);
     });
 
@@ -200,10 +194,7 @@ describe('campaigns', function() {
       var callback = jest.genMockFunction();
       campaigns.search(query, callback);
 
-      expect(getJSONP).toBeCalledWith(
-        'https://everydayhero.com/api/v2/search/campaigns.jsonp?q=bar&country_code=xy&page=2&page_size=7',
-        callback, {timeout: 10000}
-      );
+      expect(getJSONP).toBeCalledWith('https://everydayhero.com/api/v2/search/campaigns.jsonp?q=bar&country_code=xy&page=2&page_size=7', callback, {timeout: 10000});
       expect(callback).toBeCalledWith(results);
     });
   });

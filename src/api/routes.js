@@ -10,7 +10,7 @@ var baseRoutes = {
   fundraise:            '{protocol}://{campaignSlug}.{hostname}/{country}/{charitySlug}/get-started',
 
   campaign:             '{baseUrl}/api/v2/campaigns/{campaignUid}.jsonp?exclude_charities={excludeCharities}&exclude_pages={excludePages}',
-  campaignLeaderboard:  '{baseUrl}/api/v2/campaigns/{campaignUid}/leaderboard.jsonp?type={type}&limit={limit}&include_pages={includePages}&include_footprint={includeFootprint}',
+  campaignLeaderboard:  '{baseUrl}/api/v2/campaigns/{campaignUid}/leaderboard.jsonp?type={type}&limit={limit}&include_pages={includePages}&include_footprint={includeFootprint}&charity_ids={charityUid}',
   campaigns:            '{baseUrl}/api/v2/campaigns.jsonp?ids={campaignUids}&charity_id={charityUid}&sort_by={sortBy}&status={status}&exclude_bau={excludeBau}&exclude_charities={excludeCharities}&exclude_pages={excludePages}&page={page}&limit={limit}',
   charity:              '{baseUrl}/api/v2/charities/{charityUid}.jsonp',
   charityLeaderboard:   '{baseUrl}/api/v2/charities/{charityUid}/leaderboard.jsonp?type={type}&limit={limit}&include_pages={includePages}&include_footprint={includeFootprint}',

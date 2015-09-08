@@ -16,11 +16,11 @@ module.exports = {
 
     if (props.country) {
       if (props.campaignSlug) { endpoint = campaigns.leaderboardBySlug.bind(campaigns, props.country, props.campaignSlug); }
-      if (props.charitySlug)  { endpoint = charities.leaderboardBySlug.bind(charities, props.country, props.charitySlug); }
+      else if (props.charitySlug) { endpoint = charities.leaderboardBySlug.bind(charities, props.country, props.charitySlug); }
     } else {
-      if (props.campaignUid)  { endpoint = campaigns.leaderboard.bind(campaigns, props.campaignUid); }
-      if (props.campaignUids) { endpoint = campaigns.leaderboardByUids.bind(campaigns, props.campaignUids); }
-      if (props.charityUid)   { endpoint = charities.leaderboard.bind(charities, props.charityUid); }
+      if (props.campaignUids) { endpoint = campaigns.leaderboardByUids.bind(campaigns, props.campaignUids, props.charityUid); }
+      else if (props.campaignUid) { endpoint = campaigns.leaderboard.bind(campaigns, props.campaignUid, props.charityUid); }
+      else if (props.charityUid)  { endpoint = charities.leaderboard.bind(charities, props.charityUid); }
     }
 
     if (!endpoint && console && console.log) {

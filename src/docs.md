@@ -953,7 +953,7 @@ Define multiple campaign uids to filter results by campaigns.
 Campaign slug to filter results by campaign. Requires `country`.
 
 `charityUid` (string)<br>
-Charity uid to filter results by charity. If used with `campaignUid` or `campaignUids`, multiple charity uids can be passed as a CSV. This will return pages for these charities within the specified campaign(s).
+Charity uid to filter results by charity. If used with `campaignUid` or `campaignUids`, multiple charity uids can be passed as a comma separated list. This will return pages for these charities within the specified campaign(s).
 
 `charitySlug` (string)<br>
 Charity slug to filter results by charity. Requires `country`.
@@ -1034,7 +1034,7 @@ Campaign uid to filter results by campaign.
 Campaign slug to filter results by campaign. Requires `country`.
 
 `charityUid` (string) <br>
-Charity uid to filter results by charity. If used with `campaignUid` or `campaignUids`, multiple charity uids can be passed as a CSV. This will return pages for these charities within the specified campaign(s).
+Charity uid to filter results by charity. If used with `campaignUid` or `campaignUids`, multiple charity uids can be passed as a comma separated list. This will return pages for these charities within the specified campaign(s).
 
 `charitySlug` (string)<br>
 Charity slug to filter results by charity. Requires `country`.
@@ -1118,7 +1118,7 @@ Campaign uid to filter results by campaign.
 Campaign slug to filter results by campaign. Requires `country`.
 
 `charityUid` (string)<br>
-Charity uid to filter results by charity. If used with `campaignUid`, multiple charity uids can be passed as a CSV. This will return pages for these charities within the specified campaign.
+Charity uid to filter results by charity. If used with `campaignUid`, multiple charity uids can be passed as a comma separated list. This will return pages for these charities within the specified campaign.
 
 `charitySlug` (string)<br>
 Charity slug to filter results by charity. Requires `country`.

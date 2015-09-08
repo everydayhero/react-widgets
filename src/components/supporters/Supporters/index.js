@@ -56,8 +56,6 @@ module.exports = React.createClass({
   getEndpoint: function() {
     var endpoint;
 
-    console.log('GET ENDPOINT');
-
     var props = this.props;
     if (props.country) {
       if (props.campaignSlug) { endpoint = campaigns.leaderboardBySlug.bind(campaigns, props.country, props.campaignSlug); }

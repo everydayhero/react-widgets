@@ -1189,11 +1189,14 @@ Displays a set of supporter cards (fundraising page summary with donate call to 
 `campaignUid` (string)
 Campaign uid to filter results by campaign.
 
+`campaignUids` (array)<br>
+Campaign uids to filter results by multiple campaigns.
+
 `campaignSlug` (string)
 Campaign slug to filter results by campaign. Requires `country`.
 
 `charityUid` (string)
-Charity uid to filter results by charity.
+Charity uid to filter results by charity. If used with `campaignUid`, multiple charity uids can be passed as a comma separated list. This will return pages for these charities within the specified campaign.
 
 `charitySlug` (string)
 Charity slug to filter results by charity. Requires `country`.

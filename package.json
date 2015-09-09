@@ -45,6 +45,7 @@
     "superagent": "~0.21.0",
     "vinyl-buffer": "~1.0.0",
     "vinyl-source-stream": "~1.0.0",
+    "watchify": "^3.4.0",
     "wget": "~0.0.1"
   },
   "repository": {
@@ -80,8 +81,7 @@
     "setup": "npm install && npm run build && npm test",
     "build": "gulp",
     "build-dev": "NODE_ENV=development gulp --debug",
-    "watch": "npm run build && gulp watch",
-    "watch-dev": "npm run build-dev && gulp watch --debug",
+    "watch": "npm run build-dev && gulp watch --debug",
     "jshint": "gulp jshint",
     "scripts": "gulp scripts",
     "scripts-dev": "gulp scripts --debug",

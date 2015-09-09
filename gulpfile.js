@@ -17,6 +17,7 @@ var minifyCss    = require('gulp-minify-css');
 
 // javascripts
 var browserify   = require('browserify');
+var watchify     = require('watchify');
 var uglify       = require('gulp-uglify');
 var react        = require('gulp-react');
 var jshint       = require('gulp-jshint');
@@ -35,10 +36,9 @@ if (debug) {
 
 gulp.task('default', [ 'assets', 'styles', 'scripts', 'examples', 'markdown' ]);
 
-gulp.task('watch', function() {
+gulp.task('watch', ['scripts'], function() {
   gulp.watch('src/images/*', [ 'assets' ]);
   gulp.watch('src/**/*.scss', [ 'styles' ]);
-  gulp.watch('src/**/*.js', [ 'scripts' ]);
   gulp.watch('src/index.html', [ 'examples' ]);
   gulp.watch(['README.md', 'src/README-template.html'], [ 'markdown' ]);
 });
@@ -84,21 +84,40 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('scripts', [ 'jshint' ], function() {
-  var processor = debug ? gutil.noop : uglify;
-
   var bundler = browserify({
     entries: ['./src/widgets.js'],
     standalone: 'edh.widgets',
-    debug: debug
+    debug: debug,
+    fullPaths: debug,
+    cache: {},
+    packageCache: {}
   });
 
-  return bundler
-    .bundle()
-    .on('error', console.log.bind(console))
-    .pipe(source('widgets-' + pkg.version + '.js'))
-    .pipe(buffer())
-    .pipe(processor())
-    .pipe(gulp.dest('public'));
+  var rebundle = function() {
+    var processor = debug ? gutil.noop : uglify;
+
+    return bundler.bundle()
+      .on('error', console.log.bind(console))
+      .pipe(source('widgets-' + pkg.version + '.js'))
+      .pipe(buffer())
+      .pipe(processor())
+      .pipe(gulp.dest('public'));
+  };
+
+  if (debug) {
+    bundler = watchify(bundler);
+
+    bundler.on('update', function() {
+      gulp.start('jshint');
+      rebundle();
+    });
+
+    bundler.on('log', function(msg) {
+      gutil.log('Rebundled:', msg);
+    });
+  }
+
+  return rebundle();
 });
 
 gulp.task('examples', [ 'styles', 'scripts' ], function() {

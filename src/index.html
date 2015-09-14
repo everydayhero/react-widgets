@@ -223,108 +223,108 @@
     </div>
   </div>
   <script>
-    edh.widgets.initModal('CharitySearchVisit', 'CharitySearch', { country: 'uk' });
-    edh.widgets.initModal('CharitySearchDonate', 'CharitySearch', { country: 'uk', action: 'donate' });
-    edh.widgets.initModal('CharitySearchFundraise', 'CharitySearch', { country: 'uk', action: 'fundraise' });
-    edh.widgets.initModal('PageSearchExample', 'PageSearch', { country: 'uk' });
-    edh.widgets.initModal('AggregateSearchExample', 'AggregateSearch', { country: 'uk' });
-    edh.widgets.renderWidget('SearchInput', 'SearchInput', {
-      onSubmit: function(value) {
-        edh.widgets.showModal('AggregateSearch', { searchTerm: value, country: 'uk' });
-      }
-    });
-    edh.widgets.renderWidget('EntityGoalProgressExample', 'EntityGoalProgress', { campaignUid: 'us-22', goal: 15000000, startAt: '2015-01-01', endAt: '2015-06-01' });
-    edh.widgets.renderWidget('FundsRaisedExample','FundsRaised', { campaignUids: ['us-22', 'us-24'], startAt: '2015-01-01', endAt: '2015-06-01' });
-    edh.widgets.renderWidget('TotalSupportersExample', 'TotalSupporters', { charityUids: ['au-24', 'au-31'], startAt: '2015-01-01', endAt: '2015-06-01' });
-    edh.widgets.renderWidget('TotalDonationsExample', 'TotalDonations', { charityUids: ['au-24'], startAt: '2015-01-01', endAt: '2015-06-01' });
-    edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUids: ['us-22', 'us-24'] });
-    edh.widgets.renderWidget('GoalExample', 'Goal', { goal: 5000000, i18n: { title: '2015 Goal' } });
-    edh.widgets.renderWidget('CountDownExample', 'CountDown', {
-      date: "2016-04-22",
-      linkUrl: 'https://everydayhero.com/us'
-    });
-    edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-22' });
-    edh.widgets.renderWidget('TeamLeaderboardExample', 'TeamLeaderboard', { campaignUid: 'us-22', altTemplate: true, limit: 12, pageSize: 4 });
-    edh.widgets.renderWidget('FitnessLeaderboardExample', 'FitnessLeaderboard', { campaignUid: 'us-22' });
-    edh.widgets.renderWidget('UpcomingEventsExample', 'UpcomingEvents', { charityUid: 'au-31', charitySlug: 'australian-red-cross', events: ['au-755', 'au-753'] });
-    edh.widgets.renderWidget('RecentFundraisersExample', 'RecentFundraisers', { campaignUid: 'us-22' });
-    edh.widgets.renderWidget('SupportersExample', 'Supporters', { campaignUids: ['us-22','us-24'] });
-    edh.widgets.renderWidget('TeamsExample', 'Teams', { campaignUid: 'us-22' });
-    edh.widgets.renderWidget('CharitiesExample', 'PromoCharities', {
-      action: 'fundraise',
-      tabs: [
-        {
-          category: 'Helping People',
-          charityUids: [
-            'au-3395',
-            'au-24',
-            'au-494',
-            'au-1558',
-            'au-28',
-            'au-27',
-            'au-9',
-            'au-3121',
-            'au-167',
-            'au-42'
-          ]
-        },
-        {
-          category: 'Helping Animals',
-          charityUids: [
-            'au-522',
-            'au-1661',
-            'au-914',
-            'au-408',
-            'au-853',
-            'au-666',
-            'au-1900',
-            'au-196',
-            'au-1184',
-            'au-241',
-            'au-1546'
-          ]
-        },
-        {
-          category: 'Helping Environment',
-          charityUids: [
-            'au-1546',
-            'au-389',
-            'au-937',
-            'au-303',
-            'au-311',
-            'au-1923',
-            'au-4033'
-          ]
-        }
-      ]
-    });
-    edh.widgets.renderWidget('MapExample', 'Map', { campaignUid: 'us-22', region:'US' });
-    edh.widgets.renderWidget('TotalDistanceExample', 'TotalDistance', { campaignUids: ['us-22','us-24'] });
-    edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUids: ['us-22', 'us-24'] });
+    edh.widgets.initModal('CharitySearchVisit', 'CharitySearch', { country: 'uk', searchTerm: 'John' });
+    // edh.widgets.initModal('CharitySearchDonate', 'CharitySearch', { country: 'uk', action: 'donate' });
+    // edh.widgets.initModal('CharitySearchFundraise', 'CharitySearch', { country: 'uk', action: 'fundraise' });
+    edh.widgets.initModal('PageSearchExample', 'PageSearch', { country: 'uk', searchTerm: 'John' });
+    edh.widgets.initModal('AggregateSearchExample', 'AggregateSearch', { country: 'uk', searchTerm: 'John' });
+    // edh.widgets.renderWidget('SearchInput', 'SearchInput', {
+    //   onSubmit: function(value) {
+    //     edh.widgets.showModal('AggregateSearch', { searchTerm: value, country: 'uk' });
+    //   }
+    // });
+    // edh.widgets.renderWidget('EntityGoalProgressExample', 'EntityGoalProgress', { campaignUid: 'us-22', goal: 15000000, startAt: '2015-01-01', endAt: '2015-06-01' });
+    // edh.widgets.renderWidget('FundsRaisedExample','FundsRaised', { campaignUids: ['us-22', 'us-24'], startAt: '2015-01-01', endAt: '2015-06-01' });
+    // edh.widgets.renderWidget('TotalSupportersExample', 'TotalSupporters', { charityUids: ['au-24', 'au-31'], startAt: '2015-01-01', endAt: '2015-06-01' });
+    // edh.widgets.renderWidget('TotalDonationsExample', 'TotalDonations', { charityUids: ['au-24'], startAt: '2015-01-01', endAt: '2015-06-01' });
+    // edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUids: ['us-22', 'us-24'] });
+    // edh.widgets.renderWidget('GoalExample', 'Goal', { goal: 5000000, i18n: { title: '2015 Goal' } });
+    // edh.widgets.renderWidget('CountDownExample', 'CountDown', {
+    //   date: "2016-04-22",
+    //   linkUrl: 'https://everydayhero.com/us'
+    // });
+    // edh.widgets.renderWidget('LeaderboardExample', 'Leaderboard', { campaignUid: 'us-22' });
+    // edh.widgets.renderWidget('TeamLeaderboardExample', 'TeamLeaderboard', { campaignUid: 'us-22', altTemplate: true, limit: 12, pageSize: 4 });
+    // edh.widgets.renderWidget('FitnessLeaderboardExample', 'FitnessLeaderboard', { campaignUid: 'us-22' });
+    // edh.widgets.renderWidget('UpcomingEventsExample', 'UpcomingEvents', { charityUid: 'au-31', charitySlug: 'australian-red-cross', events: ['au-755', 'au-753'] });
+    // edh.widgets.renderWidget('RecentFundraisersExample', 'RecentFundraisers', { campaignUid: 'us-22' });
+    // edh.widgets.renderWidget('SupportersExample', 'Supporters', { campaignUids: ['us-22','us-24'] });
+    // edh.widgets.renderWidget('TeamsExample', 'Teams', { campaignUid: 'us-22' });
+    // edh.widgets.renderWidget('CharitiesExample', 'PromoCharities', {
+    //   action: 'fundraise',
+    //   tabs: [
+    //     {
+    //       category: 'Helping People',
+    //       charityUids: [
+    //         'au-3395',
+    //         'au-24',
+    //         'au-494',
+    //         'au-1558',
+    //         'au-28',
+    //         'au-27',
+    //         'au-9',
+    //         'au-3121',
+    //         'au-167',
+    //         'au-42'
+    //       ]
+    //     },
+    //     {
+    //       category: 'Helping Animals',
+    //       charityUids: [
+    //         'au-522',
+    //         'au-1661',
+    //         'au-914',
+    //         'au-408',
+    //         'au-853',
+    //         'au-666',
+    //         'au-1900',
+    //         'au-196',
+    //         'au-1184',
+    //         'au-241',
+    //         'au-1546'
+    //       ]
+    //     },
+    //     {
+    //       category: 'Helping Environment',
+    //       charityUids: [
+    //         'au-1546',
+    //         'au-389',
+    //         'au-937',
+    //         'au-303',
+    //         'au-311',
+    //         'au-1923',
+    //         'au-4033'
+    //       ]
+    //     }
+    //   ]
+    // });
+    // edh.widgets.renderWidget('MapExample', 'Map', { campaignUid: 'us-22', region:'US' });
+    // edh.widgets.renderWidget('TotalDistanceExample', 'TotalDistance', { campaignUids: ['us-22','us-24'] });
+    // edh.widgets.renderWidget('TotalHoursExample', 'TotalHours', { campaignUids: ['us-22', 'us-24'] });
 
-    edh.widgets.renderWidget('TotalCaloriesExample', 'TotalCalories', { campaignUids: ['au-9674'] });
+    // edh.widgets.renderWidget('TotalCaloriesExample', 'TotalCalories', { campaignUids: ['au-9674'] });
 
-    edh.widgets.renderWidget('AddressLookupExample', 'AddressLookup', { country: 'GB' });
-    edh.widgets.renderWidget('AmountExample', 'Amount');
-    edh.widgets.renderWidget('InputExample', 'Input', { i18n: { name: 'input_example', label: 'Input Example', hint: 'What is this input for?', error: 'This input is required'}, required: true });
-    edh.widgets.renderWidget('CallToActionBoxExample', 'CallToActionBox', { campaignUid: 'us-22', registrationUrl: 'https://your-registration-url.com/' });
-    edh.widgets.renderWidget('ShareButtonExample', 'ShareButton');
-    edh.widgets.renderWidget('TabsExample', 'Tabs', {
-      children: [
-        {
-          label: 'Example Tab',
-          content: "<p>Tab content goes here.</p><p>Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec ullamcorper nulla non metus auctor fringilla.</p>"
-        },
-        {
-          label: 'Another Tab',
-          content: "<p>Lorem <strong>ipsum dolor</strong> sit amet, consectetur adipiscing elit. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus.</p>"
-        },
-        {
-          label: 'Last Tab',
-          content: '<p>An image:</p> <img src="http://placehold.it/200x100">'
-        }
-      ]
-    });
+    // edh.widgets.renderWidget('AddressLookupExample', 'AddressLookup', { country: 'GB' });
+    // edh.widgets.renderWidget('AmountExample', 'Amount');
+    // edh.widgets.renderWidget('InputExample', 'Input', { i18n: { name: 'input_example', label: 'Input Example', hint: 'What is this input for?', error: 'This input is required'}, required: true });
+    // edh.widgets.renderWidget('CallToActionBoxExample', 'CallToActionBox', { campaignUid: 'us-22', registrationUrl: 'https://your-registration-url.com/' });
+    // edh.widgets.renderWidget('ShareButtonExample', 'ShareButton');
+    // edh.widgets.renderWidget('TabsExample', 'Tabs', {
+    //   children: [
+    //     {
+    //       label: 'Example Tab',
+    //       content: "<p>Tab content goes here.</p><p>Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec ullamcorper nulla non metus auctor fringilla.</p>"
+    //     },
+    //     {
+    //       label: 'Another Tab',
+    //       content: "<p>Lorem <strong>ipsum dolor</strong> sit amet, consectetur adipiscing elit. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus.</p>"
+    //     },
+    //     {
+    //       label: 'Last Tab',
+    //       content: '<p>An image:</p> <img src="http://placehold.it/200x100">'
+    //     }
+    //   ]
+    // });
   </script>
 </body>
 </html>

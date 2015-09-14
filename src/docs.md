@@ -197,6 +197,9 @@ edh.widgets.initModal('CharitySearchExample', 'CharitySearch', { country: 'uk' }
 }
 ```
 
+`searchTerm` (string)<br>
+Initial search term value.
+
 `action` (string)<br>
 Action to perform on charity select, either 'visit' (default), 'donate', 'fundraise', or 'custom'. *Note: 'visit' and 'donate' actions are currently not supported for country 'us'.*
 
@@ -254,6 +257,9 @@ The supporter page search modal widget allows you to search for a supporter page
   emptyLabel: "We couldn't find any matching Supporter Pages."
 }
 ```
+
+`searchTerm` (string)<br>
+Initial search term value.
 
 `onSelect` (function)<br>
 Called on selecting a result. Default redirects to supporter page.

@@ -41,10 +41,10 @@ module.exports = React.createClass({
       output: function() {},
       validate: function() {},
       defaultI18n: {
-        inputLabel: 'Enter Your Address',
+        inputLabel: 'Enter Your Street Address',
         inputLabelGB: 'Enter Your Postcode',
-        manualEntryButton: 'Enter Manually',
-        resetButton: 'Reset Address',
+        manualEntryButton: 'Can\'t see your Address? Enter Manually',
+        resetButton: 'Clear and search again',
         error: "Sorry, we couldn't find that address"
       }
     };

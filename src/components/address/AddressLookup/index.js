@@ -302,20 +302,30 @@ module.exports = React.createClass({
     return bool && (
       <div className={ classes }>
         { this.renderListing() }
+        { this.renderManualButton() }
       </div>
     );
   },
 
-  renderResetButton: function() {
-    return this.state.lookupEnabled && (
-      <div className="AddressLookup__reset" tabIndex='0' onClick={ this.reset } onKeyPress={ this.reset }>
-        { this.t('resetButton') }
-      </div>
+  renderResetButton: function(address) {
+    return address && this.state.lookupEnabled && (
+      <button
+        className="hui-Button hui-Button--primary-borderless hui-Button--hasIcon hui-Button--iconLeft"
+        tabIndex='0'
+        onClick={ this.reset }
+        onKeyPress={ this.reset }>
+        <span className="hui-IconWrapper hui-Button__icon">
+          <i className="hui-Icon fa fa-remove" />
+        </span>
+        <span className="hui-Button__label">
+          { this.t('resetButton') }
+        </span>
+      </button>
     );
   },
 
-  renderManualButton: function(bool) {
-    return bool && (
+  renderManualButton: function() {
+    return (
       <div className="AddressLookup__manual" tabIndex='0' onClick={ this.setManualEntry } onKeyPress={ this.setManualEntry }>
         { this.t('manualEntryButton') }
       </div>

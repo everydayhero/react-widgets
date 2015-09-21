@@ -337,7 +337,6 @@ module.exports = React.createClass({
         spacing={ props.spacing }
         onCountryChange={ this.setCountry }
         onChange={ this.setCustom }>
-        { this.renderResetButton() }
       </AddressBreakdown>
     );
   },
@@ -356,7 +355,7 @@ module.exports = React.createClass({
         { this.renderStatus(!this.state.choosingCountry) }
         { this.renderInput(!address && !this.state.choosingCountry) }
         { this.renderList(this.state.addressList && !address) }
-        { this.renderManualButton(!!this.state.error || (this.state.addressList && !address)) }
+        { this.renderResetButton(address) }
         { this.renderAddress(address) }
       </div>
     );

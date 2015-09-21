@@ -37,32 +37,6 @@
   font-size: 13px;
 }
 
-.AddressLookup__manual,
-.AddressLookup__reset {
-  transition: all 80ms ease-out;
-  border-radius: $ehw-border-radius;
-  float: right;
-  padding: 5px 13px;
-  background-color: #fff;
-  color: $ehw-grey-dark;
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  font-weight: bold;
-  margin: 8px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.AddressLookup__manual:hover,
-.AddressLookup__manual:focus,
-.AddressLookup__reset:hover,
-.AddressLookup__reset:focus  {
-  background-color: $ehw-green-light;
-  color: #fff;
-  outline: none;
-}
-
 .AddressLookup--compact { padding: 0; }
 .AddressLookup--tight { padding: 0 $x-1 $x-2; }
 .AddressLookup--loose { padding: 0 ($x-8 / 2) $x-8; }

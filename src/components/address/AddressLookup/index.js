@@ -310,7 +310,7 @@ module.exports = React.createClass({
   renderResetButton: function(address) {
     return address && this.state.lookupEnabled && (
       <button
-        className="hui-Button hui-Button--primary-borderless hui-Button--hasIcon hui-Button--iconLeft"
+        className="AddressLookup__reset hui-Button hui-Button--primary-borderless hui-Button--hasIcon hui-Button--iconLeft"
         tabIndex='0'
         onClick={ this.reset }
         onKeyPress={ this.reset }>
@@ -326,8 +326,10 @@ module.exports = React.createClass({
 
   renderManualButton: function() {
     return (
-      <div className="AddressLookup__manual" tabIndex='0' onClick={ this.setManualEntry } onKeyPress={ this.setManualEntry }>
-        { this.t('manualEntryButton') }
+      <div className="hui-Button hui-Button--primary AddressLookup__manual" tabIndex='0' onClick={ this.setManualEntry } onKeyPress={ this.setManualEntry }>
+        <span className="hui-Button__label">
+          { this.t('manualEntryButton') }
+        </span>
       </div>
     );
   },

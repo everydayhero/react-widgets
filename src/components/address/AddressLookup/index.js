@@ -301,36 +301,43 @@ module.exports = React.createClass({
     });
     return bool && (
       <div className={ classes }>
-        { this.renderListing() }
-        { this.renderManualButton() }
+        <div className="AddressLookup__scroll-container">
+          { this.renderListing() }
+          { this.renderManualButton() }
+        </div>
       </div>
     );
   },
 
   renderResetButton: function(address) {
     return address && this.state.lookupEnabled && (
-      <button
-        className="AddressLookup__reset hui-Button hui-Button--primary-borderless hui-Button--hasIcon hui-Button--iconLeft"
-        tabIndex='0'
-        onClick={ this.reset }
-        onKeyPress={ this.reset }>
-        <span className="hui-IconWrapper hui-Button__icon">
-          <i className="hui-Icon fa fa-remove" />
-        </span>
-        <span className="hui-Button__label">
-          { this.t('resetButton') }
-        </span>
-      </button>
+      <div className="AddressLookup__reset-wrapper">
+        <button
+          className="AddressLookup__reset hui-Button hui-Button--primary-borderless hui-Button--hasIcon hui-Button--iconLeft"
+          tabIndex='0'
+          onClick={ this.reset }
+          onKeyPress={ this.reset }>
+          <span className="hui-IconWrapper hui-Button__icon">
+            <i className="hui-Icon fa fa-remove" />
+          </span>
+          <span className="hui-Button__label AddressLookup__reset-label">
+            { this.t('resetButton') }
+          </span>
+        </button>
+      </div>
     );
   },
 
   renderManualButton: function() {
     return (
-      <div className="hui-Button hui-Button--primary AddressLookup__manual" tabIndex='0' onClick={ this.setManualEntry } onKeyPress={ this.setManualEntry }>
-        <span className="hui-Button__label">
+      <button className="hui-Button hui-Button--primary-borderless hui-Button--hasIcon hui-Button--iconLeft AddressLookup__manual" tabIndex='0' onClick={ this.setManualEntry } onKeyPress={ this.setManualEntry }>
+        <span className="hui-IconWrapper hui-Button__icon">
+          <i className="hui-Icon fa fa-info-circle" />
+        </span>
+        <span className="hui-Button__label AddressLookup__manual-label">
           { this.t('manualEntryButton') }
         </span>
-      </div>
+      </button>
     );
   },
 

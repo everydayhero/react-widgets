@@ -1,7 +1,7 @@
 .AddressListing {
   transition: all 80ms ease-out;
   background-color: #fff;
-  padding: 8px 8px;
+  padding: 10px;
   cursor: pointer;
 }
 
@@ -9,7 +9,11 @@
   background-color: rgba(126,199,116,0.1);
 }
 
-.AddressListing + .AddressListing {
+.AddressListing {
+  border-bottom: 1px solid #eee;
+}
+
+.AddressListing:first-child {
   border-top: 1px solid #eee;
 }
 

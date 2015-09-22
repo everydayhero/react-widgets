@@ -81,7 +81,7 @@
     "setup": "npm install && npm run build && npm test",
     "build": "gulp",
     "build-dev": "NODE_ENV=development gulp --debug",
-    "watch": "npm run build-dev && gulp watch --debug",
+    "watch": "gulp watch --debug",
     "jshint": "gulp jshint",
     "scripts": "gulp scripts",
     "scripts-dev": "gulp scripts --debug",
@@ -90,6 +90,7 @@
     "test": "jest",
     "test-debug": "node --debug-brk --harmony ./node_modules/.bin/jest --runInBand",
     "start": "node server.js",
+    "dev": "npm run build-dev && npm run start & npm run watch",
     "deploy-assets": "bin/deploy_assets"
   },
   "browserify": {

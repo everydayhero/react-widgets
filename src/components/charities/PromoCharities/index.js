@@ -78,7 +78,11 @@ module.exports = React.createClass({
   },
 
   fetchUrl: function(charity) {
-    return charities[this.props.action + 'Url'](charity, null) || charity.url;
+    if (this.props.action == 'custom') {
+      return;
+    } else {
+      return charities[this.props.action + 'Url'](charity, null) || charity.url;
+    }
   },
 
   selectHandler: function(charity) {

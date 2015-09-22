@@ -14,18 +14,32 @@
 }
 
 .AddressLookup__list {
+  border: 1px solid $ehw-grey-light;
+  position: relative;
+  z-index: 1;
   border-radius: 0 0 $ehw-border-radius $ehw-border-radius;
   background-color: #fff;
   float: left;
   width: 100%;
+  margin-top: -9px;
+}
+
+.AddressLookup__scroll-container {
   overflow-y: scroll;
-  max-height: 300px;
-  margin-top: -8px;
+  max-height: 250px;
 }
 
 .AddressLookup__list-google {
-  padding-bottom: 18px;
-  background: #fff image-url( "widgets-powered-by-google" + $ehw-version + ".png" ) no-repeat left bottom;
+  padding-bottom: 32px;
+}
+
+.AddressLookup__list-google:before {
+  content: image-url( "widgets-powered-by-google" + $ehw-version + ".png" );
+  position: absolute;
+  display: block;
+  font-size: 0;
+  right: 8px;
+  bottom: 8px;
 }
 
 .AddressLookup__error {

@@ -15,7 +15,7 @@
 
 .CountrySelect__toggle {
   transition: all 80ms ease-out;
-  padding: 4px 8px;
+  padding: 4px 24px 4px 8px;
   cursor: pointer;
   background-color: #eee;
   line-height: 18px;
@@ -31,16 +31,30 @@
 }
 
 .CountrySelect__list {
+  border: 1px solid $ehw-grey-light;
   border-radius: 0 0 $ehw-border-radius $ehw-border-radius;
   background-color: #fff;
   max-height: 300px;
   overflow-y: scroll;
-  padding-top: 5px;
   float: left;
   width: 100%;
+  position: relative;
+  z-index: 1;
+  margin-top: -1px;
 }
 
 .CountrySelect__flag {
   vertical-align: top;
   margin: 1px 0 0 5px;
+}
+
+.CountrySelect__caret {
+  transition: none;
+  display: block;
+  width: 8px;
+  position: absolute;
+  right: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 1;
 }

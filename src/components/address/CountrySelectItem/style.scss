@@ -7,7 +7,11 @@
   font-size: 14px;
 }
 
-.CountrySelectItem + .CountrySelectItem {
+.CountrySelectItem {
+  border-bottom: 1px solid #eee;
+}
+
+.CountrySelectItem:first-child {
   border-top: 1px solid #eee;
 }
 

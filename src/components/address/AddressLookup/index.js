@@ -41,9 +41,9 @@ module.exports = React.createClass({
       output: function() {},
       validate: function() {},
       defaultI18n: {
-        inputLabel: 'Enter Your Street Address',
-        inputLabelGB: 'Enter Your Postcode',
-        manualEntryButton: 'Can\'t see your Address? Enter Manually',
+        inputLabel: 'Street Address',
+        inputLabelGB: 'Postcode',
+        manualEntryButton: 'Can\'t see your Address? Enter manually',
         resetButton: 'Clear and search again',
         error: "Sorry, we couldn't find that address"
       }

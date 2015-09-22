@@ -51,6 +51,35 @@
   font-size: 13px;
 }
 
+.AddressLookup__manual {
+  margin: 0;
+  padding: 0px 8px;
+  line-height: 36px;
+}
+
+.AddressLookup__manual-label {
+  font-size: 12px;
+  letter-spacing: initial;
+}
+
+.AddressLookup__reset-wrapper {
+  text-align: right;
+}
+
+.AddressLookup__reset {
+  line-height: 24px;
+  padding: 0;
+}
+
+.AddressLookup__reset-label {
+  font-size: 12px;
+  letter-spacing: initial;
+}
+
+.AddressLookup__reset .AddressLookup__reset-label {
+  padding-right: 0;
+}
+
 .AddressLookup--compact { padding: 0; }
 .AddressLookup--tight { padding: 0 $x-1 $x-2; }
 .AddressLookup--loose { padding: 0 ($x-8 / 2) $x-8; }

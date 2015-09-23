@@ -50,13 +50,13 @@ module.exports = React.createClass({
     var progress = props.target > 0 ? Math.floor(props.current / props.target * 100) : 0;
 
     return (
-      <a href={ props.url } className="SupporterCardGiveNow">
-        <CallToActionButton kind="secondary" className="SupporterCardGiveNow__cta">{ t('cta') }</CallToActionButton>
+      <div className="SupporterCardGiveNow">
+        <CallToActionButton kind="secondary" href={ props.url } className="SupporterCardGiveNow__cta">{ t('cta') }</CallToActionButton>
         <div className="SupporterCardGiveNow__progress">
           <div className="SupporterCardGiveNow__current" style={{ width: Math.min(progress, 100) + '%' }}></div>
         </div>
         <div className="SupporterCardGiveNow__label">{ this.getLabel() }</div>
-      </a>
+      </div>
     );
   }
 });

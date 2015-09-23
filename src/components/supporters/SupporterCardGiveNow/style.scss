@@ -6,19 +6,24 @@
 }
 
 .SupporterCardGiveNow {
+  display: inline-block;
   perspective: 600px;
   user-select: none;
   margin: 0 auto;
   position: relative;
   width: 100%;
   overflow: hidden;
-  cursor: pointer;
   text-decoration: none;
 }
 
 .SupporterCardGiveNow__cta {
-  margin-bottom: 0;
   width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  float: left;
+  width: 100%;
+  clear: both;
+  cursor: pointer;
 }
 
 .SupporterCardGiveNow__progress {
@@ -30,6 +35,9 @@
   margin: 0 $x-2;
   overflow: hidden;
   border-radius: 0 0 2px 2px;
+  float: left;
+  width: calc(100% - 16px);
+  clear: both;
 }
 
 .SupporterCardGiveNow__current {
@@ -42,7 +50,6 @@
 .SupporterCardGiveNow__label {
   transition: all 240ms 100ms ease-out;
   line-height: 13px;
-  margin-bottom: -13px;
   text-align: center;
   color: $ehw-grey-dark;
   font-size: 9px;
@@ -50,6 +57,9 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   white-space: nowrap;
+  float: left;
+  width: 100%;
+  clear: both;
 }
 
 .SupporterCardGiveNow__label p {

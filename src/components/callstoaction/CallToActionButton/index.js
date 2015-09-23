@@ -41,8 +41,10 @@ module.exports = React.createClass({
   },
 
   handleClick: function(e) {
-    e.preventDefault();
-    this.props.onClick(e);
+    if (this.props.onClick) {
+      e.preventDefault();
+      this.props.onClick(e);
+    }
   },
 
   render: function() {

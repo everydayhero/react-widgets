@@ -51,10 +51,14 @@
   font-size: 13px;
 }
 
+.AddressLookup__manual-wrapper {
+  padding: 8px 8px 0;
+}
+
 .AddressLookup__manual {
-  margin: 0;
-  padding: 0px 8px;
+  width: 100%;
   line-height: 36px;
+  margin: 0;
 }
 
 .AddressLookup__manual-label {

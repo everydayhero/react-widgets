@@ -34,7 +34,9 @@ if (debug) {
   process.env.NODE_ENV = 'development';
 }
 
-gulp.task('default', [ 'assets', 'styles', 'scripts', 'examples', 'markdown' ], function () {
+gulp.task('build', [ 'assets', 'styles', 'scripts', 'examples', 'markdown' ])
+
+gulp.task('default', ['build'], function () {
   process.exit(0)
 });
 
@@ -148,7 +150,7 @@ gulp.task('docs', function() {
     .pipe(gulp.dest('public'));
 });
 
-gulp.task('deploy_assets', ['default'], function() {
+gulp.task('deploy_assets', ['build'], function() {
   if (!process.env.AWS_KEY || !process.env.AWS_SECRET) {
     console.error('ERROR: No AWS credentials found.');
     return;

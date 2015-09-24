@@ -41,10 +41,10 @@ module.exports = React.createClass({
       output: function() {},
       validate: function() {},
       defaultI18n: {
-        inputLabel: 'Enter Your Address',
-        inputLabelGB: 'Enter Your Postcode',
-        manualEntryButton: 'Enter Manually',
-        resetButton: 'Reset Address',
+        inputLabel: 'Street Address',
+        inputLabelGB: 'Postcode',
+        manualEntryButton: 'Can\'t see your Address? Enter manually',
+        resetButton: 'Clear and search again',
         error: "Sorry, we couldn't find that address"
       }
     };
@@ -243,14 +243,16 @@ module.exports = React.createClass({
 
   renderListing: function() {
     return this.state.addressList.map(function(d, i) {
-      return <AddressListing
-        key={ d.id + i }
-        index={ i }
-        focused={ i === this.state.fauxFocus }
-        onMouseEnter={ this.setFauxFocus }
-        id={ d.id }
-        label={ d.label }
-        onClick={ this.getAddress }/>;
+      return (
+        <AddressListing
+          key={ d.id + i }
+          index={ i }
+          focused={ i === this.state.fauxFocus }
+          onMouseEnter={ this.setFauxFocus }
+          id={ d.id }
+          label={ d.label }
+          onClick={ this.getAddress }/>
+      );
     }, this);
   },
 
@@ -301,24 +303,46 @@ module.exports = React.createClass({
     });
     return bool && (
       <div className={ classes }>
-        { this.renderListing() }
+        <div className="AddressLookup__scroll-container">
+          { this.renderListing() }
+
+          <div className="AddressLookup__manual-wrapper">
+            { this.renderManualButton() }
+          </div>
+        </div>
       </div>
     );
   },
 
-  renderResetButton: function() {
-    return this.state.lookupEnabled && (
-      <div className="AddressLookup__reset" tabIndex='0' onClick={ this.reset } onKeyPress={ this.reset }>
-        { this.t('resetButton') }
+  renderResetButton: function(address) {
+    return address && this.state.lookupEnabled && (
+      <div className="AddressLookup__reset-wrapper">
+        <button
+          className="AddressLookup__reset hui-Button hui-Button--primary-borderless hui-Button--hasIcon hui-Button--iconLeft"
+          tabIndex='0'
+          onClick={ this.reset }
+          onKeyPress={ this.reset }>
+          <span className="hui-IconWrapper hui-Button__icon">
+            <i className="hui-Icon fa fa-remove" />
+          </span>
+          <span className="hui-Button__label AddressLookup__reset-label">
+            { this.t('resetButton') }
+          </span>
+        </button>
       </div>
     );
   },
 
-  renderManualButton: function(bool) {
-    return bool && (
-      <div className="AddressLookup__manual" tabIndex='0' onClick={ this.setManualEntry } onKeyPress={ this.setManualEntry }>
-        { this.t('manualEntryButton') }
-      </div>
+  renderManualButton: function() {
+    return (
+      <button className="hui-Button hui-Button--secondary hui-Button--hasIcon hui-Button--iconLeft AddressLookup__manual" tabIndex='0' onClick={ this.setManualEntry } onKeyPress={ this.setManualEntry }>
+        <span className="hui-IconWrapper hui-Button__icon">
+          <i className="hui-Icon fa fa-info-circle" />
+        </span>
+        <span className="hui-Button__label AddressLookup__manual-label">
+          { this.t('manualEntryButton') }
+        </span>
+      </button>
     );
   },
 
@@ -337,7 +361,6 @@ module.exports = React.createClass({
         spacing={ props.spacing }
         onCountryChange={ this.setCountry }
         onChange={ this.setCustom }>
-        { this.renderResetButton() }
       </AddressBreakdown>
     );
   },
@@ -356,7 +379,7 @@ module.exports = React.createClass({
         { this.renderStatus(!this.state.choosingCountry) }
         { this.renderInput(!address && !this.state.choosingCountry) }
         { this.renderList(this.state.addressList && !address) }
-        { this.renderManualButton(!!this.state.error || (this.state.addressList && !address)) }
+        { this.renderResetButton(address) }
         { this.renderAddress(address) }
       </div>
     );

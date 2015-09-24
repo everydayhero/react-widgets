@@ -123,6 +123,10 @@ module.exports = React.createClass({
       <div className="CountrySelect__toggle" onKeyPress={ this.props.onOpen } onClick={ this.props.onOpen } tabIndex="0">
         { iso }
         <FlagIcon className="CountrySelect__flag" country={ this.props.selected.iso } />
+
+        <span className="CountrySelect__caret hui-IconWrapper hui-Button__icon">
+          <i className="hui-Icon fa fa-caret-down" />
+        </span>
       </div>
     );
   },

@@ -34,7 +34,9 @@ if (debug) {
   process.env.NODE_ENV = 'development';
 }
 
-gulp.task('default', [ 'assets', 'styles', 'scripts', 'examples', 'markdown' ]);
+gulp.task('default', [ 'assets', 'styles', 'scripts', 'examples', 'markdown' ], function () {
+  process.exit(0)
+});
 
 gulp.task('watch', ['scripts'], function() {
   gulp.watch('src/images/*', [ 'assets' ]);

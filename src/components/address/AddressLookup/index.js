@@ -305,10 +305,10 @@ module.exports = React.createClass({
       <div className={ classes }>
         <div className="AddressLookup__scroll-container">
           { this.renderListing() }
+        </div>
 
-          <div className="AddressLookup__manual-wrapper">
-            { this.renderManualButton() }
-          </div>
+        <div className="AddressLookup__manual-wrapper">
+          { this.renderManualButton() }
         </div>
       </div>
     );

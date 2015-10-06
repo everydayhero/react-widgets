@@ -1,5 +1,6 @@
 .Overlay {
   @extend %ehw-defaults;
+  -webkit-overflow-scrolling: touch;
   position: fixed;
   background: #333;
   background: transparentize(#333, 0.2);
@@ -9,7 +10,7 @@
   width: 100%;
   z-index: 1000;
 
-  @include vendor(transform, translateZ(200px));
+  transform: translateZ(200px);
 }
 
 .Overlay__close {
@@ -30,7 +31,6 @@
 
 .Overlay-open {
   overflow: hidden;
-  position: fixed;
   top: 0;
   bottom: 0;
   width: 100%;

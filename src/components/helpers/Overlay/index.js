@@ -17,11 +17,17 @@ module.exports = React.createClass({
     showCloseButton: React.PropTypes.bool,
   },
 
-  getDefaultProps: function () {
+  getDefaultProps: function() {
     return {
       className: '',
       showCloseButton: true
     };
+  },
+
+  getInitialState: function() {
+    return {
+      scrollPosition: 0
+    }
   },
 
   keyHandler: function(event) {
@@ -38,11 +44,13 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
+    this.setState({ scrollPosition: document.documentElement.scrollTop || document.body.scrollTop });
     $.addClass(document.body, 'Overlay-open');
   },
 
   componentWillUnmount: function() {
     $.removeClass(document.body, 'Overlay-open');
+    document.documentElement.scrollTop = document.body.scrollTop = this.state.scrollPosition;
   },
 
   render: function() {

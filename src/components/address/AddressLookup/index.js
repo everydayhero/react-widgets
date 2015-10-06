@@ -43,7 +43,7 @@ module.exports = React.createClass({
       defaultI18n: {
         inputLabel: 'Street Address',
         inputLabelGB: 'Postcode',
-        manualEntryButton: 'Can\'t see your Address? Enter manually',
+        manualEntryButton: 'Enter address manually',
         resetButton: 'Clear and search again',
         error: "Sorry, we couldn't find that address"
       }
@@ -335,10 +335,7 @@ module.exports = React.createClass({
 
   renderManualButton: function() {
     return (
-      <button className="hui-Button hui-Button--secondary hui-Button--hasIcon hui-Button--iconLeft AddressLookup__manual" tabIndex='0' onClick={ this.setManualEntry } onKeyPress={ this.setManualEntry }>
-        <span className="hui-IconWrapper hui-Button__icon">
-          <i className="hui-Icon fa fa-info-circle" />
-        </span>
+      <button className="hui-Button hui-Button--secondary AddressLookup__manual" tabIndex='0' onClick={ this.setManualEntry } onKeyPress={ this.setManualEntry }>
         <span className="hui-Button__label AddressLookup__manual-label">
           { this.t('manualEntryButton') }
         </span>

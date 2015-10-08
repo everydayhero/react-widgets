@@ -33,6 +33,7 @@ module.exports = React.createClass({
       validations: {},
       validate: function() {},
       defaultI18n: {
+        blank_field_message: 'cannot be blank',
         street_address: 'Address',
         extended_address: 'Address 2',
         locality: 'Suburb',
@@ -73,7 +74,7 @@ module.exports = React.createClass({
   fieldErrorMessage: function (field, label) {
     var validations = this.props.validations[field];
     if (validations && validations.required) {
-      return label + ' cannot be blank';
+      return label + ' ' + this.t('blank_field_message');
     }
   },
 

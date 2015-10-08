@@ -24,6 +24,7 @@ module.exports = React.createClass({
     address: React.PropTypes.object,
     output: React.PropTypes.func,
     prefix: React.PropTypes.string,
+    validations: React.PropTypes.object,
     required: React.PropTypes.bool,
     validate: React.PropTypes.func,
     spacing: React.PropTypes.string,
@@ -35,6 +36,7 @@ module.exports = React.createClass({
     return {
       address: null,
       prefix: '',
+      validations: {},
       required: true,
       country: 'AU',
       spacing: 'loose',
@@ -352,6 +354,7 @@ module.exports = React.createClass({
         validate={ props.validate }
         autoFocus={ state.focusOnMount }
         prefix={ props.prefix }
+        validations={ props.validations }
         required={ props.required }
         address={ address }
         region={ state.country }

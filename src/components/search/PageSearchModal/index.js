@@ -1,5 +1,6 @@
 "use strict";
 
+var _                           = require('lodash');
 var React                       = require('react');
 var SearchModal                 = require('../SearchModal');
 var PageSearchResult            = require('../PageSearchResult');
@@ -14,6 +15,7 @@ module.exports = React.createClass({
 
   propTypes: {
     autoFocus: React.PropTypes.bool,
+    searchTerm: React.PropTypes.string,
     campaignUid: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
     i18n: React.PropTypes.object,
@@ -25,6 +27,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       autoFocus: true,
+      searchTerm: '',
       campaignUid: '',
       charityUid: '',
       defaultI18n: {
@@ -39,6 +42,7 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
+      searchTerm: this.props.searchTerm,
       cancelRequest: null,
       results: null,
       isSearching: false,
@@ -51,15 +55,40 @@ module.exports = React.createClass({
     };
   },
 
+  getBlankState: function() {
+    return {
+      searchTerm: '',
+      cancelRequest: null,
+      results: null,
+      isSearching: false,
+      pagination: {
+        count: 0,
+        page: 1,
+        pageSize: 1,
+        totalPages: 0,
+      }
+    };
+  },
+
+  componentDidMount: function() {
+    if (this.state.searchTerm) {
+      this.search(this.state.searchTerm, 1);
+    }
+  },
+
   pageChanged: function(page) {
     this.search(this.state.searchTerm, page);
   },
 
   inputChanged: function(searchTerm) {
+    this.setState({
+      searchTerm: searchTerm
+    });
+
     this.search(searchTerm, 1);
   },
 
-  search: function(searchTerm, page) {
+  search: _.debounce(function(searchTerm, page) {
     if (!searchTerm) {
       return this.updateResults(null);
     }
@@ -79,11 +108,10 @@ module.exports = React.createClass({
     }, this.updateResults);
 
     this.setState({
-      searchTerm: searchTerm,
       isSearching: true,
       cancelRequest: cancelRequest
     });
-  },
+  }, 300),
 
   updateResults: function(results) {
     if (results) {
@@ -99,7 +127,7 @@ module.exports = React.createClass({
         }
       });
     } else {
-      this.setState(this.getInitialState());
+      this.setState(this.getBlankState());
     }
   },
 
@@ -125,7 +153,8 @@ module.exports = React.createClass({
         onSelect={ this.selectHandler }
         pagination={ this.state.pagination }
         results={ this.state.results }
-        resultComponent={ PageSearchResult } />
+        resultComponent={ PageSearchResult }
+        value={ this.state.searchTerm } />
     );
   }
 });

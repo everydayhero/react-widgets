@@ -16,6 +16,7 @@ module.exports = React.createClass({
   propTypes: {
     action: React.PropTypes.oneOf(['visit', 'donate', 'fundraise', 'custom']),
     autoFocus: React.PropTypes.bool,
+    searchTerm: React.PropTypes.string,
     campaignUid: React.PropTypes.string,
     campaignSlug: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
@@ -29,6 +30,7 @@ module.exports = React.createClass({
     return {
       action: 'visit',
       autoFocus: true,
+      searchTerm: '',
       campaignUid: '',
       campaignSlug: null,
       defaultI18n: {
@@ -45,6 +47,22 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
+      searchTerm: this.props.searchTerm,
+      cancelRequest: null,
+      results: null,
+      isSearching: false,
+      pagination: {
+        count: 0,
+        page: 1,
+        pageSize: 1,
+        totalPages: 0,
+      }
+    };
+  },
+
+  getBlankState: function() {
+    return {
+      searchTerm: '',
       cancelRequest: null,
       results: null,
       isSearching: false,
@@ -66,7 +84,9 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    if (this.props.promotedCharityUids) {
+    if (this.state.searchTerm) {
+      this.search(this.state.searchTerm, 1);
+    } else if (this.props.promotedCharityUids) {
       this.loadPromotedCharities();
     } else {
       this.search('', 1);
@@ -87,10 +107,14 @@ module.exports = React.createClass({
   },
 
   inputChanged: function(searchTerm) {
+    this.setState({
+      searchTerm: searchTerm
+    });
+
     this.search(searchTerm, 1);
   },
 
-  search: function(searchTerm, page) {
+  search: _.debounce(function(searchTerm, page) {
     if (this.state.cancelRequest) {
       this.state.cancelRequest();
     }
@@ -113,7 +137,7 @@ module.exports = React.createClass({
       isSearching: true,
       cancelRequest: cancelRequest
     });
-  },
+  }, 300),
 
   updateResults: function(results) {
     if (results) {
@@ -129,7 +153,7 @@ module.exports = React.createClass({
         }
       });
     } else {
-      this.setState(this.getInitialState());
+      this.setState(this.getBlankState());
     }
   },
 
@@ -174,7 +198,8 @@ module.exports = React.createClass({
         pagination={ this.state.pagination }
         results={ this.getResults() }
         resultComponent={ CharitySearchResult }
-        selectAction={ this.selectAction() } />
+        selectAction={ this.selectAction() }
+        value={ this.state.searchTerm } />
     );
   }
 });

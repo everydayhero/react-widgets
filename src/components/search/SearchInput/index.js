@@ -8,7 +8,10 @@ module.exports = React.createClass({
   displayName: 'SearchInput',
 
   propTypes: {
-    autoFocus: React.PropTypes.bool
+    autoFocus: React.PropTypes.bool,
+    label: React.PropTypes.string,
+    value: React.PropTypes.string,
+    id: React.PropTypes.string
   },
 
   getDefaultProps: function() {
@@ -22,6 +25,7 @@ module.exports = React.createClass({
       var node = this.refs.input.getDOMNode();
       if (node.focus) {
         node.focus();
+        node.selectionStart = node.selectionEnd = node.value.length;
       }
     }
   },
@@ -33,14 +37,10 @@ module.exports = React.createClass({
   },
 
   onChange: function(e) {
-    this.delayedChange(e.target.value);
-  },
-
-  delayedChange: _.debounce(function(value) {
     if (this.props.onChange) {
-      this.props.onChange(value);
+      this.props.onChange(e.target.value);
     }
-  }, 500),
+  },
 
   progressSpinner: function() {
     if (this.props.isSearching) {
@@ -66,7 +66,8 @@ module.exports = React.createClass({
           ref="input"
           type="text"
           onChange={ this.onChange }
-          placeholder={ this.props.label } />
+          placeholder={ this.props.label }
+          value={ this.props.value } />
       </div>
     );
   }

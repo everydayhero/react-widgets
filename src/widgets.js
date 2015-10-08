@@ -44,6 +44,7 @@ var widgets = {
 var modals = {
   AggregateSearch: require('./components/search/AggregateSearchModal'),
   CharitySearch: require('./components/search/CharitySearchModal'),
+  CharitySearchModalCustom: require('./components/search/CharitySearchModalCustom'),
   PageSearch: require('./components/search/PageSearchModal'),
 };
 

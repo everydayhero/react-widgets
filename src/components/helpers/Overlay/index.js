@@ -27,7 +27,7 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       scrollPosition: 0
-    }
+    };
   },
 
   keyHandler: function(event) {

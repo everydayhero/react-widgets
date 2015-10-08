@@ -20,6 +20,7 @@ module.exports = React.createClass({
     onChange: React.PropTypes.func,
     prefix: React.PropTypes.string,
     required: React.PropTypes.bool,
+    validations: React.PropTypes.object,
     validate: React.PropTypes.func
   },
 
@@ -29,8 +30,10 @@ module.exports = React.createClass({
       autoFocus: false,
       prefix: '',
       required: false,
+      validations: {},
       validate: function() {},
       defaultI18n: {
+        blank_field_message: 'cannot be blank',
         street_address: 'Address',
         extended_address: 'Address 2',
         locality: 'Suburb',
@@ -68,6 +71,13 @@ module.exports = React.createClass({
     this.props.onCountryChange(obj);
   },
 
+  fieldErrorMessage: function (field, label) {
+    var validations = this.props.validations[field];
+    if (validations && validations.required) {
+      return label + ' ' + this.t('blank_field_message');
+    }
+  },
+
   render: function() {
     var t = this.t;
     var props = this.props;
@@ -76,6 +86,7 @@ module.exports = React.createClass({
     var onChange = props.onChange;
     var prefix = props.prefix;
     var required = props.required;
+    var validations = props.validations;
     var validate = props.validate;
     var classes = cx({
       'AddressBreakdown': true,
@@ -91,23 +102,26 @@ module.exports = React.createClass({
           key={ 'street_address' }
           i18n={{
             name: prefix + 'street_address',
-            label: t('street_address', { scope: iso })
+            label: t('street_address', { scope: iso }),
+            error: this.fieldErrorMessage('street_address', t('street_address', { scope: iso }))
           }}
           value={ address.street_address }
-          required={ required }
+          required={ (!!validations.street_address && validations.street_address.required) || required }
+          validate={ validate }
           showIcon={ false }
           spacing={ 'tight' }
-          validate={ validate }
           output={ onChange('street_address') } />
         <Input
           key={ 'extended_address' }
           ref={ 'extended_address' }
           i18n={{
             name: prefix + 'extended_address',
-            label: t('extended_address', { scope: iso })
+            label: t('extended_address', { scope: iso }),
+            error: this.fieldErrorMessage('extended_address', t('extended_address', { scope: iso }))
           }}
-          validate={ validate }
           value={ address.extended_address }
+          required={ !!validations.extended_address && validations.extended_address.required }
+          validate={ validate }
           showIcon={ false }
           spacing={ 'tight' }
           output={ onChange('extended_address') } />
@@ -116,12 +130,13 @@ module.exports = React.createClass({
           ref={ 'locality' }
           i18n={{
             name: prefix + 'locality',
-            label: t('locality', { scope: iso })
+            label: t('locality', { scope: iso }),
+            error: this.fieldErrorMessage('locality', t('locality', { scope: iso }))
           }}
-          validate={ validate }
           value={ address.locality }
+          required={ (!!validations.locality && validations.locality.required) || required }
+          validate={ validate }
           width={ 'wide' }
-          required={ required }
           showIcon={ false }
           spacing={ 'tight' }
           output={ onChange('locality') } />
@@ -130,8 +145,10 @@ module.exports = React.createClass({
           ref={ 'region' }
           i18n={{
             name: prefix + 'region',
-            label: t('region', { scope: iso })
+            label: t('region', { scope: iso }),
+            error: this.fieldErrorMessage('region', t('region', { scope: iso }))
           }}
+          required={ (!!validations.region && validations.region.required) || required }
           validate={ validate }
           value={ address.region }
           width={ 'narrow' }
@@ -143,11 +160,13 @@ module.exports = React.createClass({
           ref={ 'country_name' }
           i18n={{
             name: prefix + 'country_name',
-            label: t('country_name', { scope: iso })
+            label: t('country_name', { scope: iso }),
+            error: this.fieldErrorMessage('country_name', t('country_name', { scope: iso }))
           }}
           value={ address.country_name }
           width={ 'wide' }
-          required={ required }
+          required={ (!!validations.country_name && validations.country_name.required) || required }
+          validate={ validate }
           spacing={ 'tight' }
           options={ countryList }
           output={ this.handleCountryChange } />
@@ -156,12 +175,13 @@ module.exports = React.createClass({
           ref={ 'postal_code' }
           i18n={{
             name: prefix + 'postal_code',
-            label: t('postal_code', { scope: iso })
+            label: t('postal_code', { scope: iso }),
+            error: this.fieldErrorMessage('postal_code', t('postal_code', { scope: iso }))
           }}
           validate={ validate }
           value={ address.postal_code }
           width={ 'narrow' }
-          required={ required }
+          required={ (!!validations.postal_code && validations.postal_code.required) || required }
           showIcon={ false }
           spacing={ 'tight' }
           output={ onChange('postal_code') } />

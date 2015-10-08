@@ -19,6 +19,7 @@ module.exports = React.createClass({
     autoFocus: React.PropTypes.bool,
     onChange: React.PropTypes.func,
     prefix: React.PropTypes.string,
+    required: React.PropTypes.bool,
     validations: React.PropTypes.object,
     validate: React.PropTypes.func
   },
@@ -28,6 +29,7 @@ module.exports = React.createClass({
       address: null,
       autoFocus: false,
       prefix: '',
+      required: false,
       validations: {},
       validate: function() {},
       defaultI18n: {
@@ -82,6 +84,7 @@ module.exports = React.createClass({
     var iso = props.region.iso;
     var onChange = props.onChange;
     var prefix = props.prefix;
+    var required = props.required;
     var validations = props.validations;
     var validate = props.validate;
     var classes = cx({
@@ -102,7 +105,7 @@ module.exports = React.createClass({
             error: this.fieldErrorMessage('street_address', t('street_address', { scope: iso }))
           }}
           value={ address.street_address }
-          required={ !!validations.street_address && validations.street_address.required }
+          required={ (!!validations.street_address && validations.street_address.required) || required }
           showIcon={ false }
           spacing={ 'tight' }
           output={ onChange('street_address') } />
@@ -128,7 +131,7 @@ module.exports = React.createClass({
             error: this.fieldErrorMessage('locality', t('locality', { scope: iso }))
           }}
           value={ address.locality }
-          required={ !!validations.locality && validations.locality.required }
+          required={ (!!validations.locality && validations.locality.required) || required }
           width={ 'wide' }
           showIcon={ false }
           spacing={ 'tight' }
@@ -141,7 +144,7 @@ module.exports = React.createClass({
             label: t('region', { scope: iso }),
             error: this.fieldErrorMessage('region', t('region', { scope: iso }))
           }}
-          required={ !!validations.region && validations.region.required }
+          required={ (!!validations.region && validations.region.required) || required }
           value={ address.region }
           width={ 'narrow' }
           showIcon={ false }
@@ -157,7 +160,7 @@ module.exports = React.createClass({
           }}
           value={ address.country_name }
           width={ 'wide' }
-          required={ !!validations.country_name && validations.country_name.required }
+          required={ (!!validations.country_name && validations.country_name.required) || required }
           spacing={ 'tight' }
           options={ countryList }
           output={ this.handleCountryChange } />
@@ -172,7 +175,7 @@ module.exports = React.createClass({
           validate={ validate }
           value={ address.postal_code }
           width={ 'narrow' }
-          required={ !!validations.postal_code && validations.postal_code.required }
+          required={ (!!validations.postal_code && validations.postal_code.required) || required }
           showIcon={ false }
           spacing={ 'tight' }
           output={ onChange('postal_code') } />

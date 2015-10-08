@@ -106,6 +106,7 @@ module.exports = React.createClass({
           }}
           value={ address.street_address }
           required={ (!!validations.street_address && validations.street_address.required) || required }
+          validate={ validate }
           showIcon={ false }
           spacing={ 'tight' }
           output={ onChange('street_address') } />
@@ -119,6 +120,7 @@ module.exports = React.createClass({
           }}
           value={ address.extended_address }
           required={ !!validations.extended_address && validations.extended_address.required }
+          validate={ validate }
           showIcon={ false }
           spacing={ 'tight' }
           output={ onChange('extended_address') } />
@@ -132,6 +134,7 @@ module.exports = React.createClass({
           }}
           value={ address.locality }
           required={ (!!validations.locality && validations.locality.required) || required }
+          validate={ validate }
           width={ 'wide' }
           showIcon={ false }
           spacing={ 'tight' }
@@ -145,6 +148,7 @@ module.exports = React.createClass({
             error: this.fieldErrorMessage('region', t('region', { scope: iso }))
           }}
           required={ (!!validations.region && validations.region.required) || required }
+          validate={ validate }
           value={ address.region }
           width={ 'narrow' }
           showIcon={ false }
@@ -161,6 +165,7 @@ module.exports = React.createClass({
           value={ address.country_name }
           width={ 'wide' }
           required={ (!!validations.country_name && validations.country_name.required) || required }
+          validate={ validate }
           spacing={ 'tight' }
           options={ countryList }
           output={ this.handleCountryChange } />

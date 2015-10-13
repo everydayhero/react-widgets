@@ -47,7 +47,7 @@ module.exports = React.createClass({
         inputLabelGB: 'Postcode',
         manualEntryButton: 'Enter address manually',
         resetButton: 'Clear and search again',
-        emptyError: 'Address cannot be blank'
+        emptyError: 'Please enter an address'
       }
     };
   },
@@ -149,6 +149,7 @@ module.exports = React.createClass({
       addressList: [],
       address: null,
       custom: null,
+      showDropdown: false,
       focusOnMount: true
     }, this.resetComplete);
   },

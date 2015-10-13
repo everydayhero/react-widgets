@@ -1,0 +1,117 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "ecmaFeatures": {
+    "jsx": true
+  },
+  "rules": {
+    "valid-typeof": 0,
+    "no-alert": 0,
+    "array-bracket-spacing": [1, "never"],
+    "no-unused-expressions": 0,
+    "no-floating-decimal": 1,
+    "object-shorthand": 0,
+    "brace-style": [2, "1tbs", { "allowSingleLine": true }],
+    "indent": [2, 2],
+    "no-mixed-spaces-and-tabs": [1, "smart-tabs"],
+    "no-path-concat": 0,
+    "object-curly-spacing": [1, "always", {
+      "objectsInObjects": false,
+      "arraysInObjects": true
+    }],
+    "camelcase": 0,
+    "comma-dangle": 0,
+    "key-spacing": 1,
+    "no-multiple-empty-lines": [1, { "max": 1 }],
+    "curly": 0,
+    "semi": 0,
+    "new-cap": 0,
+    "no-multi-spaces": 0,
+    "quotes": [1, "single", "avoid-escape"],
+    "eol-last": [0],
+    "no-mixed-requires": [0],
+    "no-underscore-dangle": [0],
+    "react/display-name": 1,
+    "react/jsx-boolean-value": 1,
+    "react/jsx-no-undef": 1,
+    "react/jsx-quotes": [1, "double"],
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "react/no-did-update-set-state": 1,
+    "react/no-multi-comp": 1,
+    "react/no-unknown-property": 1,
+    "react/react-in-jsx-scope": 1,
+    "react/require-extension": [1, {"extensions": [".js"]}],
+    "react/self-closing-comp": 1,
+    "react/sort-comp": [1, {
+      "order": [
+        "lifecycle",
+        "everything-else",
+        "rendering"
+      ],
+      "groups": {
+        "lifecycle": [
+          "displayName",
+          "mixins",
+          "propTypes",
+          "defaultProps",
+          "contextTypes",
+          "childContextTypes",
+          "constructor",
+          "getDefaultProps",
+          "getInitialState",
+          "getChildContext",
+          "componentWillMount",
+          "componentDidMount",
+          "componentWillReceiveProps",
+          "shouldComponentUpdate",
+          "componentWillUpdate",
+          "componentDidUpdate",
+          "componentWillUnmount"
+        ],
+        "rendering": [
+          "/^render.+$/",
+          "render",
+          "statics"
+        ]
+      }
+    }],
+    "react/wrap-multilines": 1
+  },
+  "globals": {
+    "_": 1,
+    "describe": 1,
+    "context": 1,
+    "before": 1,
+    "beforeEach": 1,
+    "after": 1,
+    "it": 1,
+    "React": 1,
+    "chai": 1,
+    "should": 1,
+    "expect": 1,
+    "AssertionError": 1,
+    "sinon": 1,
+    "reactModulesToStub": 1,
+    "mockcomponent": 1,
+    "unmockcomponent": 1,
+    "mockrequire": 1,
+    "TestUtils": 1,
+    "renderIntoDocument": 1,
+    "Simulate": 1,
+    "scryByType": 1,
+    "findByType": 1,
+    "scryByClass": 1,
+    "findByClass": 1,
+    "scryByTag": 1,
+    "findByTag": 1,
+    "scryByProp": 1,
+    "findByProp": 1
+  }
+}

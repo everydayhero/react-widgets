@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var React           = require('react/addons');
 var PureRenderMixin = React.addons.PureRenderMixin;
@@ -7,7 +7,7 @@ var I18nMixin       = require('../../mixins/I18n');
 var Icon            = require('../../helpers/Icon');
 
 module.exports = React.createClass({
-  displayName: "Input",
+  displayName: 'Input',
 
   mixins: [I18nMixin, PureRenderMixin],
 
@@ -183,7 +183,7 @@ module.exports = React.createClass({
 
   renderIcon: function() {
     var icon = this.getIcon();
-    return icon && <Icon icon={ icon } className="Input__icon" fixedWidth={ true } />;
+    return icon && <Icon icon={ icon } className="Input__icon" fixedWidth />;
   },
 
   renderMessage: function(bool) {

@@ -52,7 +52,11 @@
 }
 
 .AddressLookup__manual-wrapper {
-  padding: 8px 8px 0;
+  padding: 8px;
+}
+
+.AddressLookup__list-google .AddressLookup__manual-wrapper {
+  padding-bottom: 0;
 }
 
 .AddressLookup__manual {

@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
 var React           = require('react/addons');
 var PureRenderMixin = React.addons.PureRenderMixin;
 var cx              = require('react/lib/cx');
 
 module.exports = React.createClass({
-  displayName: "AddressListing",
+  displayName: 'AddressListing',
 
   mixins: [PureRenderMixin],
 

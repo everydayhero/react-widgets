@@ -225,7 +225,7 @@ module.exports = React.createClass({
   setList: function(list) {
     this.setState({
       error: false,
-      addressList: list.addresses,
+      addressList: (list && list.addresses) || [],
       showDropdown: true,
       loading: false
     });
@@ -264,8 +264,11 @@ module.exports = React.createClass({
 
   validateSearch: _.debounce(function (value) {
     var address = this.state.address || this.state.custom
-    if (this.props.required && !address && !(!!value && !!value.trim())) {
+    if (this.props.required &&
+        !this.state.choosingCountry &&
+        !address) {
       this.setState({
+        showDropdown: true,
         error: true
       })
     }

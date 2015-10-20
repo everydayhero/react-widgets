@@ -26,6 +26,14 @@ describe('SearchInput', function() {
     expect(input.getDOMNode().getAttribute('placeholder')).toBe('foo');
   });
 
+  it('allows an optional searchTerm', function() {
+    var component = <SearchInput searchTerm="bar" />;
+    var element = TestUtils.renderIntoDocument(component);
+    var input = findByClass(element, 'SearchInput__input');
+
+    expect(input.getDOMNode().value).toBe('bar');
+  });
+
   it('show processing twirler when QueryInProgress', function() {
     var component = <SearchInput isSearching={ true } />;
     var element = TestUtils.renderIntoDocument(component);

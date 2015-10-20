@@ -49,7 +49,7 @@ module.exports = React.createClass({
     return {
       cancelRequest: null,
       results: null,
-      isSearching: this.props.isSearching,
+      isSearching: false,
       pagination: {
         count: 0,
         page: 1,

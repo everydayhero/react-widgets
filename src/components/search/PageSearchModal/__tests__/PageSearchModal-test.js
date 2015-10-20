@@ -78,6 +78,16 @@ describe('PageSearchModal', function() {
     expect(resultElements[0].getDOMNode().textContent).toContain(page.charity.name);
   });
 
+  it('searches for pages when provided with searchTerm prop', function() {
+    var query = { country: 'xy', searchTerm: 'bar', campaignUid: '', charityUid: '', page: 1, pageSize: 10, pageType: 'all' };
+    var pageSearchModal = <PageSearchModal searchTerm={ 'bar' } autoFocus={ false } action="donate" country="xy" />;
+    var element = TestUtils.renderIntoDocument(pageSearchModal);
+    var input = findByTag(element, 'input');
+
+    expect(input.getDOMNode().value).toEqual(query.searchTerm);
+    expect(pages.search).lastCalledWith(query, element.updateResults);
+  });
+
   it('searches for pages on input change', function() {
     var query = { country: 'xy', searchTerm: 'foo', campaignUid: '', charityUid: '', page: 1, pageSize: 10, pageType: 'all' };
     var pageSearchModal = <PageSearchModal autoFocus={ false } action="donate" country="xy" />;

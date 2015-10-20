@@ -8,7 +8,8 @@ module.exports = React.createClass({
   displayName: 'SearchInput',
 
   propTypes: {
-    autoFocus: React.PropTypes.bool
+    autoFocus: React.PropTypes.bool,
+    searchTerm: React.PropTypes.string,
   },
 
   getDefaultProps: function() {
@@ -17,11 +18,20 @@ module.exports = React.createClass({
     };
   },
 
+  getInitialState: function() {
+    return {
+      searchTerm: this.props.searchTerm || ''
+    };
+  },
+
   componentDidMount: function() {
     if (this.props.autoFocus) {
       var node = this.refs.input.getDOMNode();
       if (node.focus) {
         node.focus();
+        if (this.props.searchTerm) {
+          node.setSelectionRange(this.props.searchTerm.length,this.props.searchTerm.length);
+        }
       }
     }
   },
@@ -34,6 +44,7 @@ module.exports = React.createClass({
 
   onChange: function(e) {
     this.delayedChange(e.target.value);
+    this.setState({ searchTerm: e.target.value })
   },
 
   delayedChange: _.debounce(function(value) {
@@ -65,6 +76,7 @@ module.exports = React.createClass({
           className="SearchInput__input"
           ref="input"
           type="text"
+          value={ this.state.searchTerm }
           onChange={ this.onChange }
           placeholder={ this.props.label } />
       </div>

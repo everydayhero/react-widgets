@@ -20,6 +20,7 @@ module.exports = React.createClass({
     onClose: React.PropTypes.func.isRequired,
     onSelect: React.PropTypes.func,
     pageType: React.PropTypes.oneOf(['all', 'team', 'user']),
+    searchTerm: React.PropTypes.string
   },
 
   getDefaultProps: function() {
@@ -32,16 +33,23 @@ module.exports = React.createClass({
         selectAction: 'Support',
         emptyLabel: "We couldn't find any matching Supporter Pages."
       },
+      isSearching: false,
       pageSize: 10,
-      pageType: 'all',
+      pageType: 'all'
     };
+  },
+
+  componentDidMount: function() {
+    if (this.props.searchTerm) {
+      this.search(this.props.searchTerm)
+    }
   },
 
   getInitialState: function() {
     return {
       cancelRequest: null,
       results: null,
-      isSearching: false,
+      isSearching: this.props.isSearching,
       pagination: {
         count: 0,
         page: 1,
@@ -125,7 +133,8 @@ module.exports = React.createClass({
         onSelect={ this.selectHandler }
         pagination={ this.state.pagination }
         results={ this.state.results }
-        resultComponent={ PageSearchResult } />
+        resultComponent={ PageSearchResult }
+        searchTerm={ this.props.searchTerm } />
     );
   }
 });

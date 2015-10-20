@@ -23,7 +23,8 @@ module.exports = React.createClass({
     pagination: React.PropTypes.object,
     results: React.PropTypes.arrayOf(React.PropTypes.object),
     resultComponent: React.PropTypes.func.isRequired,
-    selectAction: React.PropTypes.string
+    selectAction: React.PropTypes.string,
+    searchTerm: React.PropTypes.string
   },
 
   getDefaultProps: function() {
@@ -51,7 +52,8 @@ module.exports = React.createClass({
         autoFocus={ props.autoFocus }
         label={ this.t('title') }
         onChange={ props.onInputChange }
-        isSearching= { props.isSearching } />;
+        isSearching= { props.isSearching }
+        searchTerm={ this.props.searchTerm } />;
 
     var pagination = false;
     if (props.pagination && props.pagination.totalPages > 1) {

@@ -41,7 +41,7 @@ module.exports = React.createClass({
 
   componentDidMount: function() {
     if (this.props.searchTerm) {
-      this.search(this.props.searchTerm)
+      this.search(this.props.searchTerm);
     }
   },
 

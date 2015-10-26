@@ -263,14 +263,14 @@ module.exports = React.createClass({
   },
 
   validateSearch: _.debounce(function (value) {
-    var address = this.state.address || this.state.custom
+    var address = this.state.address || this.state.custom;
     if (this.props.required &&
         !this.state.choosingCountry &&
         !address) {
       this.setState({
         showDropdown: true,
         error: true
-      })
+      });
     }
   }, 250),
 
@@ -280,7 +280,7 @@ module.exports = React.createClass({
         <div className="AddressListing">
           <em>{ this.state.emptyPrompt }</em>
         </div>
-      )
+      );
     }
 
     return this.state.addressList.map(function(d, i) {
@@ -341,7 +341,7 @@ module.exports = React.createClass({
       'AddressLookup__list': true,
       'AddressLookup__list-google': this.isGoogleLookup()
     });
-    var hasAddress = !!this.state.address || !!this.state.custom
+    var hasAddress = !!this.state.address || !!this.state.custom;
     return this.state.showDropdown && !hasAddress && (
       <div className={ classes }>
         <div className="AddressLookup__scroll-container">

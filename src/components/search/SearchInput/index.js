@@ -44,7 +44,7 @@ module.exports = React.createClass({
 
   onChange: function(e) {
     this.delayedChange(e.target.value);
-    this.setState({ searchTerm: e.target.value })
+    this.setState({ searchTerm: e.target.value });
   },
 
   delayedChange: _.debounce(function(value) {

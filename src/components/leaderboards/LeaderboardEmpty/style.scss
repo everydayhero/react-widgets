@@ -1,0 +1,11 @@
+.LeaderboardEmpty {
+  background: #fff;
+  color: $ehw-grey-dark;
+  border: 2px solid $ehw-grey-dark;
+  text-align: center;
+  padding: $x-8 $x-4;
+}
+
+.LeaderboardEmpty__content {
+  padding: 0 0 $x-3;
+}

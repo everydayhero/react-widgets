@@ -2,12 +2,14 @@
 
 var _                       = require('lodash');
 var React                   = require('react/addons');
+var cx                      = require('react/lib/cx');
 var I18nMixin               = require('../../mixins/I18n');
 var DOMInfoMixin            = require('../../mixins/DOMInfo');
 var LeaderboardMixin        = require('../../mixins/Leaderboard');
 var Icon                    = require('../../helpers/Icon');
 var LeaderboardItem         = require('../LeaderboardItem');
 var TeamLeaderboardItem     = require('../TeamLeaderboardItem');
+var LeaderboardEmpty        = require('../LeaderboardEmpty');
 var numeral                 = require('numeral');
 var addEventListener        = require('../../../lib/addEventListener');
 var removeEventListener     = require('../../../lib/removeEventListener');
@@ -48,7 +50,9 @@ module.exports = React.createClass({
         raisedTitle: 'Raised',
         membersTitle: 'Members',
         symbol: '$',
-        heading: 'Top Teams'
+        heading: 'Top Teams',
+        emptyText: 'There are no teams for this campaign yet. Be the first and create one now!',
+        emptyButtonText: 'Start a team'
       }
     };
   },
@@ -81,72 +85,78 @@ module.exports = React.createClass({
     });
   }, 100, { trailing: true }),
 
+  renderLoadingState: function() {
+    return <Icon className="TeamLeaderboard__loading" icon="refresh" />;
+  },
+
+  renderEmptyState: function() {
+    var emptyText       = this.t('emptyText');
+    var emptyButtonText = this.t('emptyButtonText');
+
+    return <LeaderboardEmpty emptyText={ emptyText } emptyButtonText={ emptyButtonText } { ...this.props } />;
+  },
+
   renderLeaderboardItems: function() {
     var currentPage = this.state.currentPage - 1;
     var board = this.state.boardData[currentPage];
 
-    if (this.state.isLoading) {
-      return <Icon className="TeamLeaderboard__loading" icon="refresh" />;
-    }
+    return (
+      <ReactCSSTransitionGroup
+        transitionName="TeamLeaderboard__animation"
+        component="ol"
+        className="TeamLeaderboard__items">
+        {
+          board.map(function(item) {
+            var formattedAmount = this.formatAmount(item.amount);
+            var formattedRank = numeral(item.rank).format('0o');
 
-    if (!board) {
-      return;
-    }
+            var El = this.props.altTemplate ? TeamLeaderboardItem : LeaderboardItem;
+            var props = {
+              key: item.id,
+              name: item.name,
+              rank: formattedRank,
+              url: item.url,
+              isoCode: item.isoCode,
+              amount: formattedAmount,
+              totalMembers: item.totalMembers,
+              imgSrc: item.imgSrc,
+              raisedTitle: this.t('raisedTitle'),
+              membersTitle: this.t('membersTitle'),
+              width: this.state.childWidth,
+              renderImage: this.props.renderImage
+            };
 
-    return board.map(function(d,i) {
-      var formattedAmount = this.formatAmount(d.amount);
-      var formattedRank = numeral(d.rank).format('0o');
-
-      var El = this.props.altTemplate ? TeamLeaderboardItem : LeaderboardItem;
-      var props = {
-        key: d.id,
-        name: d.name,
-        rank: formattedRank,
-        url: d.url,
-        isoCode: d.isoCode,
-        amount: formattedAmount,
-        totalMembers: d.totalMembers,
-        imgSrc: d.imgSrc,
-        raisedTitle: this.t('raisedTitle'),
-        membersTitle: this.t('membersTitle'),
-        width: this.state.childWidth,
-        renderImage: this.props.renderImage
-      };
-
-      return (
-        <El { ...props } />
-      );
-
-    }, this);
+            return <El { ...props } />;
+          }, this)
+        }
+      </ReactCSSTransitionGroup>
+    );
   },
 
-  renderLeaderboard: function() {
+  render: function() {
+    var state       = this.state;
     var heading     = this.t('heading');
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
     };
 
+    var classes = cx({
+      'TeamLeaderboard': true,
+      'TeamLeaderboard--loading': state.isLoading,
+      'TeamLeaderboard--empty': !state.boardData.length
+    });
+
+    var content = state.isLoading ? this.renderLoadingState :
+                  state.boardData.length ? this.renderLeaderboardItems :
+                  this.renderEmptyState;
+
     return (
-      <div className="TeamLeaderboard" style={ customStyle }>
+      <div className={ classes } style={ customStyle }>
         <h3 className="TeamLeaderboard__heading">{ heading }</h3>
-        <ol className="TeamLeaderboard__items">
-          <ReactCSSTransitionGroup transitionName="TeamLeaderboard__animation" component="div">
-            { this.renderLeaderboardItems() }
-          </ReactCSSTransitionGroup>
-        </ol>
+        { content() }
         { this.renderPaging() }
       </div>
     );
-  },
-
-  render: function() {
-    var state = this.state;
-
-    if (state.isLoading || state.boardData.length > 0) {
-      return (this.renderLeaderboard());
-    } else {
-      return null;
-    }
   }
 });

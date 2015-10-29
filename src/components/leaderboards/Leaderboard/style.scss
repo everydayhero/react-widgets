@@ -21,11 +21,15 @@
   .Leaderboard__loading {
     @extend %ehw-tile-loading-icon;
   }
+
+  &--empty {
+    padding: 0;
+  }
 }
 
 .Leaderboard__animation-enter {
   opacity: 0.01;
-  transition: opacity .6s ease-in;
+  transition: opacity .66s ease-in;
 }
 
 .Leaderboard__animation-enter-active {

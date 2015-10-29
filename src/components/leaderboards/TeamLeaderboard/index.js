@@ -106,20 +106,20 @@ module.exports = React.createClass({
         component="ol"
         className="TeamLeaderboard__items">
         {
-          board.map(function(d,i) {
-            var formattedAmount = this.formatAmount(d.amount);
-            var formattedRank = numeral(d.rank).format('0o');
+          board.map(function(item) {
+            var formattedAmount = this.formatAmount(item.amount);
+            var formattedRank = numeral(item.rank).format('0o');
 
             var El = this.props.altTemplate ? TeamLeaderboardItem : LeaderboardItem;
             var props = {
-              key: d.id,
-              name: d.name,
+              key: item.id,
+              name: item.name,
               rank: formattedRank,
-              url: d.url,
-              isoCode: d.isoCode,
+              url: item.url,
+              isoCode: item.isoCode,
               amount: formattedAmount,
-              totalMembers: d.totalMembers,
-              imgSrc: d.imgSrc,
+              totalMembers: item.totalMembers,
+              imgSrc: item.imgSrc,
               raisedTitle: this.t('raisedTitle'),
               membersTitle: this.t('membersTitle'),
               width: this.state.childWidth,

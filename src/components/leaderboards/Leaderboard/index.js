@@ -103,19 +103,19 @@ module.exports = React.createClass({
         transitionName="Leaderboard__animation"
         component="ol">
           {
-            board.map(function(d, i) {
-              var formattedAmount = this.formatAmount(d.amount);
-              var formattedRank   = numeral(d.rank).format('0o');
+            board.map(function(item) {
+              var formattedAmount = this.formatAmount(item.amount);
+              var formattedRank   = numeral(item.rank).format('0o');
 
               return (
                 <LeaderboardItem
-                  key={ d.id }
+                  key={ item.id }
                   rank={ formattedRank }
-                  name={ d.name }
-                  url={ d.url }
-                  isoCode={ d.isoCode }
+                  name={ item.name }
+                  url={ item.url }
+                  isoCode={ item.isoCode }
                   amount={ formattedAmount }
-                  imgSrc={ d.medImgSrc }
+                  imgSrc={ item.medImgSrc }
                   width={ this.state.childWidth }
                   renderImage={ this.props.renderImage } />
               );

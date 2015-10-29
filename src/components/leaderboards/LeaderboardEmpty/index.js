@@ -6,6 +6,10 @@ var CallToActionButton = require('../../callstoaction/CallToActionButton');
 
 module.exports = React.createClass({
   displayName: 'LeaderboardEmpty',
+  propTypes: {
+    emptyText: React.PropTypes.string.isRequired,
+    emptyButtonText: React.PropTypes.string.isRequired
+  },
 
   componentWillMount: function() {
     this.fetchGetStartedUrl();
@@ -42,10 +46,10 @@ module.exports = React.createClass({
     return (
       <div className="LeaderboardEmpty">
         <p className="LeaderboardEmpty__content">
-          There are no individual supporters for this campaign yet. Be the first and register now!
+          { this.props.emptyText }
         </p>
         <CallToActionButton kind="secondary" href={ this.state.getStartedUrl } className="LeaderboardEmpty__cta">
-          Register
+          { this.props.emptyButtonText }
         </CallToActionButton>
       </div>
     );

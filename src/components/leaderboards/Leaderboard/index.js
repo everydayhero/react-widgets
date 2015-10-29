@@ -47,7 +47,9 @@ module.exports = React.createClass({
       currencyFormat: '0,0[.]00',
       defaultI18n: {
         symbol: '$',
-        heading: 'Top Individuals'
+        heading: 'Top Individuals',
+        emptyText: 'There are no individual supporters for this campaign yet. Be the first and register now!',
+        emptyButtonText: 'Register'
       }
     };
   },
@@ -85,7 +87,10 @@ module.exports = React.createClass({
   },
 
   renderEmptyState: function() {
-    return <LeaderboardEmpty { ...this.props } />;
+    var emptyText       = this.t('emptyText');
+    var emptyButtonText = this.t('emptyButtonText');
+
+    return <LeaderboardEmpty emptyText={ emptyText } emptyButtonText={ emptyButtonText } { ...this.props } />;
   },
 
   renderLeaderboardItems: function() {

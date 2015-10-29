@@ -130,11 +130,9 @@ module.exports = React.createClass({
     return (
       <div className="TeamLeaderboard" style={ customStyle }>
         <h3 className="TeamLeaderboard__heading">{ heading }</h3>
-        <ol className="TeamLeaderboard__items">
-          <ReactCSSTransitionGroup transitionName="TeamLeaderboard__animation" component="div">
-            { this.renderLeaderboardItems() }
-          </ReactCSSTransitionGroup>
-        </ol>
+        <ReactCSSTransitionGroup transitionName="TeamLeaderboard__animation" component="ol" className="TeamLeaderboard__items">
+          { this.renderLeaderboardItems() }
+        </ReactCSSTransitionGroup>
         { this.renderPaging() }
       </div>
     );

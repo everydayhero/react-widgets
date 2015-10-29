@@ -939,7 +939,9 @@ Displays an individuals leaderboard sorted by funds raised (highest first) for a
 ```js
 {
   symbol: '$',
-  heading: 'Top Individuals'
+  heading: 'Top Individuals',
+  emptyText: 'There are no individual supporters for this campaign yet. Be the first and register now!',
+  emptyButtonText: 'Register'
 }
 ```
 
@@ -1023,7 +1025,9 @@ Displays a team leaderboard sorted by funds raised (highest first) for a campaig
   raisedTitle: 'Raised',
   membersTitle: 'Members',
   symbol: '$',
-  heading: 'Top Teams'
+  heading: 'Top Teams',
+  emptyText: 'There are no teams for this campaign yet. Be the first and create one now!',
+  emptyButtonText: 'Start a team'
 }
 ```
 

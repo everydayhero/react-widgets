@@ -8,7 +8,7 @@ describe('GoalProgress', function() {
   var findByClass  = TestUtils.findRenderedDOMComponentWithClass;
   var scryByClass  = TestUtils.scryRenderedDOMComponentsWithClass;
 
-  var props = { total: 15000, goal: 30000 };
+  var props = { total: 15000, goal: 30000, text: 'foobar' };
   var element;
 
   beforeEach(function() {
@@ -21,8 +21,7 @@ describe('GoalProgress', function() {
 
   it('renders progress text', function() {
     var text = findByClass(element, 'GoalProgress__text');
-    expect(text.getDOMNode().textContent).toContain('$150');
-    expect(text.getDOMNode().textContent).toContain('$300');
+    expect(text.getDOMNode().textContent).toContain('foobar');
   });
 
   it('renders a progress bar', function() {
@@ -37,16 +36,5 @@ describe('GoalProgress', function() {
   it('renders a trophy icon', function() {
     findByClass(element, 'GoalProgress__icon');
     findByClass(element, 'fa-trophy');
-  });
-
-  describe('using custom format', function() {
-    beforeEach(function() {
-      element = TestUtils.renderIntoDocument(<GoalProgress { ...props } format={ '0.00' } />);
-    });
-
-    it('renders the custom format goal', function() {
-      var text = findByClass(element, 'GoalProgress__text');
-      expect(text.getDOMNode().textContent).toContain('$300.00');
-    });
   });
 });

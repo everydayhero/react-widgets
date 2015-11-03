@@ -2,33 +2,18 @@
 
 var React           = require('react/addons');
 var PureRenderMixin = React.addons.PureRenderMixin;
-var I18nMixin       = require('../../mixins/I18n');
 var Icon            = require('../../helpers/Icon');
 var numeral         = require('numeral');
 
 module.exports = React.createClass({
   displayName: "GoalProgress",
 
-  mixins: [PureRenderMixin, I18nMixin],
+  mixins: [PureRenderMixin],
 
   propTypes: {
-    currencySymbol: React.PropTypes.string,
-    format: React.PropTypes.string,
-    goal: React.PropTypes.number,
-    i18n: React.PropTypes.object,
+    goal: React.PropTypes.number.isRequired,
+    text: React.PropTypes.string.isRequired,
     total: React.PropTypes.number.isRequired
-  },
-
-  getDefaultProps: function() {
-    return {
-      currencySymbol: '$',
-      format: '0,0',
-      goal: 0,
-      defaultI18n: {
-        goal_text: '**{total}** raised of **{goal}** goal',
-        no_goal_text: '**{total}** raised'
-      }
-    };
   },
 
   getInitialState: function() {
@@ -69,24 +54,10 @@ module.exports = React.createClass({
     );
   },
 
-  formatCurrency: function(cents) {
-    var props = this.props;
-    return props.currencySymbol + numeral(cents / 100).format(props.format);
-  },
-
-  getMessage: function() {
-    var props = this.props;
-
-    return this.tm(props.goal > 0 ? 'goal_text' : 'no_goal_text', {
-      total: this.formatCurrency(props.total),
-      goal: this.formatCurrency(props.goal)
-    });
-  },
-
   renderText: function() {
     return (
       <div className="GoalProgress__text">
-        { this.getMessage() }
+        { this.props.text }
       </div>
     );
   },

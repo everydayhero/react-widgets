@@ -631,6 +631,16 @@ Display the progress towards a fund raising goal for charities or campaigns.
 
 ### Options
 
+> Default `i18n` translation object:
+
+```js
+{
+  symbol: '$',
+  goal_text: '**{total}** raised of **{goal}** goal',
+  no_goal_text: '**{total}** raised'
+}
+```
+
 `goal` (number) <span class="required">Required</span><br>
 Set a goal in cents. Renders as a dollar value by default.
 

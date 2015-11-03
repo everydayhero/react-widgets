@@ -12,7 +12,7 @@ module.exports = React.createClass({
 
   propTypes: {
     goal: React.PropTypes.number.isRequired,
-    text: React.PropTypes.string.isRequired,
+    text: React.PropTypes.object.isRequired,
     total: React.PropTypes.number.isRequired
   },
 

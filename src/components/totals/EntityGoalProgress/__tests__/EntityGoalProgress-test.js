@@ -122,7 +122,7 @@ describe('FundsRaised', function() {
 
   describe('Currency symbol translation', function() {
     it('replaces the default currency symbol with a given string', function() {
-      var translation = { symbol: 'foo' }
+      var translation = { symbol: 'foo' };
       element = TestUtils.renderIntoDocument(<EntityGoalProgress campaignUid="us-22" i18n={ translation } />);
       element.setState({ isLoading: false, total: 10000 });
       var text = findByClass(element, 'GoalProgress__text').getDOMNode();

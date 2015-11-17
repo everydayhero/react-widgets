@@ -2,11 +2,14 @@
 
 var _                       = require('lodash');
 var React                   = require('react/addons');
+var cx                      = require('react/lib/cx');
 var I18nMixin               = require('../../mixins/I18n');
 var DOMInfoMixin            = require('../../mixins/DOMInfo');
 var LeaderboardMixin        = require('../../mixins/Leaderboard');
 var Icon                    = require('../../helpers/Icon');
 var LeaderboardItem         = require('../LeaderboardItem');
+var LeaderboardEmpty        = require('../LeaderboardEmpty');
+var CallToActionButton      = require('../../callstoaction/CallToActionButton');
 var numeral                 = require('numeral');
 var addEventListener        = require('../../../lib/addEventListener');
 var removeEventListener     = require('../../../lib/removeEventListener');
@@ -44,7 +47,9 @@ module.exports = React.createClass({
       currencyFormat: '0,0[.]00',
       defaultI18n: {
         symbol: '$',
-        heading: 'Top Individuals'
+        heading: 'Top Individuals',
+        emptyText: 'There are no individual supporters for this campaign yet. Be the first and register now!',
+        emptyButtonText: 'Register'
       }
     };
   },
@@ -77,62 +82,73 @@ module.exports = React.createClass({
     });
   }, 100, { trailing: true }),
 
-  renderLeaderboardItems: function() {
-    if (this.state.isLoading) {
-      return <Icon className="Leaderboard__loading" icon="refresh" />;
-    }
+  renderLoadingState: function() {
+    return <Icon className="Leaderboard__loading" icon="refresh" />;
+  },
 
+  renderEmptyState: function() {
+    var emptyText       = this.t('emptyText');
+    var emptyButtonText = this.t('emptyButtonText');
+
+    return <LeaderboardEmpty emptyText={ emptyText } emptyButtonText={ emptyButtonText } { ...this.props } />;
+  },
+
+  renderLeaderboardItems: function() {
     var currentPage = this.state.currentPage - 1;
     var board = this.state.boardData[currentPage];
 
-    if (!board) return;
+    return (
+      <ReactCSSTransitionGroup
+        className="Leaderboard__items"
+        transitionName="Leaderboard__animation"
+        component="ol">
+          {
+            board.map(function(item) {
+              var formattedAmount = this.formatAmount(item.amount);
+              var formattedRank   = numeral(item.rank).format('0o');
 
-    return board.map(function(d,i) {
-      var formattedAmount = this.formatAmount(d.amount);
-      var formattedRank = numeral(d.rank).format('0o');
-
-      return (
-        <LeaderboardItem
-          key={ d.id }
-          rank={ formattedRank }
-          name={ d.name }
-          url={ d.url }
-          isoCode={ d.isoCode }
-          amount={ formattedAmount }
-          imgSrc={ d.medImgSrc }
-          width={ this.state.childWidth }
-          renderImage={ this.props.renderImage } />
-      );
-    }, this);
+              return (
+                <LeaderboardItem
+                  key={ item.id }
+                  rank={ formattedRank }
+                  name={ item.name }
+                  url={ item.url }
+                  isoCode={ item.isoCode }
+                  amount={ formattedAmount }
+                  imgSrc={ item.medImgSrc }
+                  width={ this.state.childWidth }
+                  renderImage={ this.props.renderImage } />
+              );
+            }, this)
+          }
+      </ReactCSSTransitionGroup>
+    );
   },
 
-  renderLeaderboard: function() {
+  render: function() {
+    var state       = this.state;
     var heading     = this.t('heading');
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
     };
 
+    var classes = cx({
+      'Leaderboard': true,
+      'Leaderboard--loading': state.isLoading,
+      'Leaderboard--empty': !state.boardData.length
+    });
+
+    var content = state.isLoading ? this.renderLoadingState :
+                  state.boardData.length ? this.renderLeaderboardItems :
+                  this.renderEmptyState;
+
     return (
-      <div className="Leaderboard" style={ customStyle }>
+      <div className={ classes } style={ customStyle }>
         <h3 className="Leaderboard__heading">{ heading }</h3>
-        <ol className="Leaderboard__items">
-          <ReactCSSTransitionGroup transitionName="Leaderboard__animation" component="div">
-            { this.renderLeaderboardItems() }
-          </ReactCSSTransitionGroup>
-        </ol>
+        { content() }
         { this.renderPaging() }
       </div>
     );
-  },
-
-  render: function() {
-    var state = this.state;
-
-    if (state.isLoading || state.boardData.length > 0) {
-      return (this.renderLeaderboard());
-    } else {
-      return null;
-    }
   }
 });

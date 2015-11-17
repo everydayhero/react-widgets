@@ -3,9 +3,12 @@
 var React        = require('react');
 var totals       = require('../../../api/totals');
 var GoalProgress = require('../GoalProgress');
+var I18nMixin    = require('../../mixins/I18n');
+var numeral      = require('numeral');
 
 module.exports = React.createClass({
   displayName: 'EntityGoalProgress',
+  mixins: [I18nMixin],
 
   propTypes: {
     campaignUid: React.PropTypes.oneOfType([
@@ -18,14 +21,21 @@ module.exports = React.createClass({
     ]),
     goal: React.PropTypes.number,
     startAt: React.PropTypes.string,
-    endAt: React.PropTypes.string
+    endAt: React.PropTypes.string,
+    i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
     return {
       goal: null,
       startAt: null,
-      endAt: null
+      endAt: null,
+      format: '0,0',
+      defaultI18n: {
+        symbol: '$',
+        goal_text: '**{total}** raised of **{goal}** goal',
+        no_goal_text: '**{total}** raised'
+      }
     };
   },
 
@@ -63,6 +73,19 @@ module.exports = React.createClass({
     });
   },
 
+  formatCurrency: function(cents) {
+    return this.t('symbol') + numeral(cents / 100).format(this.props.format);
+  },
+
+  getText: function() {
+    var goal = this.props.goal || this.state.goal;
+
+    return this.tm(goal > 0 ? 'goal_text' : 'no_goal_text', {
+      total: this.formatCurrency(this.state.total),
+      goal: this.formatCurrency(goal)
+    });
+  },
+
   render: function() {
     if (this.state.isLoading) { return false; }
 
@@ -70,7 +93,8 @@ module.exports = React.createClass({
       <GoalProgress
         total={ this.state.total }
         goal={ this.props.goal || this.state.goal }
-        currencySymbol={ this.state.currencySymbol } />
+        format={ this.props.format }
+        text={ this.getText() } />
     );
   }
 });

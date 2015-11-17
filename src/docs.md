@@ -631,6 +631,16 @@ Display the progress towards a fund raising goal for charities or campaigns.
 
 ### Options
 
+> Default `i18n` translation object:
+
+```js
+{
+  symbol: '$',
+  goal_text: '**{total}** raised of **{goal}** goal',
+  no_goal_text: '**{total}** raised'
+}
+```
+
 `goal` (number) <span class="required">Required</span><br>
 Set a goal in cents. Renders as a dollar value by default.
 
@@ -939,7 +949,9 @@ Displays an individuals leaderboard sorted by funds raised (highest first) for a
 ```js
 {
   symbol: '$',
-  heading: 'Top Individuals'
+  heading: 'Top Individuals',
+  emptyText: 'There are no individual supporters for this campaign yet. Be the first and register now!',
+  emptyButtonText: 'Register'
 }
 ```
 
@@ -1023,7 +1035,9 @@ Displays a team leaderboard sorted by funds raised (highest first) for a campaig
   raisedTitle: 'Raised',
   membersTitle: 'Members',
   symbol: '$',
-  heading: 'Top Teams'
+  heading: 'Top Teams',
+  emptyText: 'There are no teams for this campaign yet. Be the first and create one now!',
+  emptyButtonText: 'Start a team'
 }
 ```
 

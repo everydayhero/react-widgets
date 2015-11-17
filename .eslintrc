@@ -90,6 +90,7 @@
     "context": 1,
     "before": 1,
     "beforeEach": 1,
+    "afterEach": 1,
     "after": 1,
     "it": 1,
     "React": 1,

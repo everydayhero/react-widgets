@@ -119,4 +119,23 @@ describe('FundsRaised', function() {
       expect(totals.findByCharities).toBeCalledWith("au-24", element.onSuccess, {end:'2015-06-01'});
     });
   });
+
+  describe('Currency symbol translation', function() {
+    it('replaces the default currency symbol with a given string', function() {
+      var translation = { symbol: 'foo' };
+      element = TestUtils.renderIntoDocument(<EntityGoalProgress campaignUid="us-22" i18n={ translation } />);
+      element.setState({ isLoading: false, total: 10000 });
+      var text = findByClass(element, 'GoalProgress__text').getDOMNode();
+      expect(text.textContent).toContain('foo100');
+    });
+  });
+
+  describe('Custom format property', function() {
+    it('renders the custom format goal', function() {
+      element = TestUtils.renderIntoDocument(<EntityGoalProgress goal={ 15000000 } format={ '0a' } />);
+      element.setState({ isLoading: false, total: 100000 });
+      var text = findByClass(element, 'GoalProgress__text');
+      expect(text.getDOMNode().textContent).toContain('$1k raised of $150k goal');
+    });
+  });
 });

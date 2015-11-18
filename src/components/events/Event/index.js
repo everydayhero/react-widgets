@@ -82,7 +82,7 @@ module.exports = React.createClass({
         onTouchCancel={ this.deactivate }
         onMouseEnter={ this.activate }
         onMouseLeave={ this.deactivate }>
-        <div className={ "Event__base " + this.state.activeClass } style={{ backgroundImage: bg }}>
+        <div className={ 'Event__base ' + this.state.activeClass } style={{ backgroundImage: bg }}>
           <div className="Event__blur" style={{ backgroundImage: blur }}></div>
           <div className="Event__gradient"></div>
           <ul className="Event__date">

@@ -158,6 +158,16 @@ Country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'.
 `i18n` (object)<br>
 Object containing localised text.
 
+`searchType` (string)<br>
+Optional string used to constrain search results to a given type. Set to either 'campaigns', 'charities', 'pages', or 'all'. Default is set to 'all'.
+
+`charityUids` (array)<br>
+Optional array used to filter campaign results by given charity uids.
+
+`onSelect` (function)<br>
+Optional function called on selecting a result. Takes a single argument that returns a full API response object for the selected result.
+
+
 ## CharitySearch
 
 > The button element acts as a trigger to open the CharitySearch widget.

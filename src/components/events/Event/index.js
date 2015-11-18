@@ -92,7 +92,7 @@ module.exports = React.createClass({
           </ul>
           <a href={ props.campaignUrl } className="Event__name">{ props.name }</a>
           { !isAppeal && <p className="Event__supporter-count">{ (props.supporterCount || 0) + ' ' + t('supportersLabel') }</p> }
-          <CallToActionButton kind="secondary" reverse={ true } href={ url } className="Event__join-event">{ buttonLabel }</CallToActionButton>
+          <CallToActionButton kind="secondary" reverse href={ url } className="Event__join-event">{ buttonLabel }</CallToActionButton>
         </div>
       </div>
     )

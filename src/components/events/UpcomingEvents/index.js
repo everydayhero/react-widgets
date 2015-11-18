@@ -41,6 +41,14 @@ module.exports = React.createClass({
     }
   },
 
+  componentDidMount: function() {
+    this.loadEvents()
+  },
+
+  componentWillUnmount: function() {
+    this.state.cancelLoad()
+  },
+
   loadEvents: function() {
     var cancelLoad = campaign.findByCharity(this.props.charityUid, 1, null, this.onLoaded, {
       status: 'active',

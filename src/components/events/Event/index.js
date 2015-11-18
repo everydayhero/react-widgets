@@ -1,11 +1,11 @@
-'use strict';
+'use strict'
 
-var React               = require('react');
-var I18n                = require('../../mixins/I18n');
-var CallToActionButton  = require('../../callstoaction/CallToActionButton');
+var React               = require('react')
+var I18n                = require('../../mixins/I18n')
+var CallToActionButton  = require('../../callstoaction/CallToActionButton')
 
 function cssUrl(url) {
-  return url ? 'url(' + url + ')' : 'none';
+  return url ? 'url(' + url + ')' : 'none'
 }
 
 module.exports = React.createClass({
@@ -32,49 +32,49 @@ module.exports = React.createClass({
         supportersLabel: 'Supporters',
         months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       }
-    };
+    }
   },
 
   getInitialState: function() {
     return {
       activeClass: ''
-    };
+    }
   },
 
   activate: function() {
-    this.setState({ activeClass: 'active' });
+    this.setState({ activeClass: 'active' })
   },
 
   activateAndTimeout: function() {
-    this.activate();
-    this.timeout();
+    this.activate()
+    this.timeout()
   },
 
   timeout: function() {
-    var component = this;
-    setTimeout(function() { component.deactivate(); }, 3000);
+    var component = this
+    setTimeout(function() { component.deactivate() }, 3000)
   },
 
   deactivate: function() {
-    this.setState({ activeClass: '' });
+    this.setState({ activeClass: '' })
   },
 
   eventStyles: function() {
     return {
       width: this.props.width
-    };
+    }
   },
 
   render: function() {
-    var props = this.props;
-    var state = this.state;
-    var date = props.date;
-    var bg = cssUrl(props.backgroundImageUrl);
-    var blur = cssUrl(props.backgroundBlurUrl);
-    var t = this.t;
-    var isAppeal = !props.getStartedUrl;
-    var url = isAppeal ? props.donateUrl : props.getStartedUrl;
-    var buttonLabel = isAppeal ? t('donateLabel') : t('joinLabel');
+    var props = this.props
+    var state = this.state
+    var date = props.date
+    var bg = cssUrl(props.backgroundImageUrl)
+    var blur = cssUrl(props.backgroundBlurUrl)
+    var t = this.t
+    var isAppeal = !props.getStartedUrl
+    var url = isAppeal ? props.donateUrl : props.getStartedUrl
+    var buttonLabel = isAppeal ? t('donateLabel') : t('joinLabel')
 
     return (
       <div className="Event" style={ this.eventStyles() }
@@ -95,6 +95,6 @@ module.exports = React.createClass({
           <CallToActionButton kind="secondary" reverse={ true } href={ url } className="Event__join-event">{ buttonLabel }</CallToActionButton>
         </div>
       </div>
-    );
+    )
   }
-});
+})

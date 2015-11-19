@@ -73,21 +73,18 @@ gulp.task('styles', function() {
     .pipe(autoprefixer())
     .pipe(processor())
     .pipe(rename('widgets-' + pkg.version + '.css'))
-    .pipe(gulp.dest('public'));
-});
+    .pipe(gulp.dest('public'))
+})
 
-gulp.task('jshint', function() {
-  var jshintConfig = pkg.jshintConfig;
-
+gulp.task('lint', function() {
   return gulp
-    .src([ 'src/**/*.js' ])
-    .pipe(react())
-    .on('error', console.log.bind(console))
-    .pipe(jshint(jshintConfig))
-    .pipe(jshint.reporter(stylish))
-});
+    .src(['src/**/*.js'])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
+})
 
-gulp.task('scripts', [ 'jshint' ], function() {
+gulp.task('scripts', ['lint'], function() {
   var bundler = browserify({
     entries: ['./src/widgets.js'],
     standalone: 'edh.widgets',

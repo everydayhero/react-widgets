@@ -52,32 +52,6 @@
     "type": "git",
     "url": "git://github.com/everydayhero/react-widgets.git"
   },
-  "jshintConfig": {
-    "eqnull": true,
-    "lookup": false,
-    "globalstrict": true,
-    "globals": {
-      "require": true,
-      "module": true,
-      "process": true,
-      "jest": true,
-      "describe": true,
-      "beforeEach": true,
-      "afterEach": true,
-      "it": true,
-      "expect": true,
-      "spyOn": true,
-      "document": true,
-      "window": true,
-      "jasmine": true,
-      "setTimeout": true,
-      "clearTimeout": true,
-      "setInterval": true,
-      "clearInterval": true,
-      "console": true,
-      "global": true
-    }
-  },
   "scripts": {
     "setup": "npm install && npm run build && npm test",
     "build": "gulp",

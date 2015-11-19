@@ -108,7 +108,7 @@ gulp.task('scripts', ['lint'], function() {
     bundler = watchify(bundler)
 
     bundler.on('update', function() {
-      gulp.start('eslint')
+      gulp.start('lint')
       rebundle()
     })
 

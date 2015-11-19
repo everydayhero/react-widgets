@@ -1,6 +1,7 @@
 .AggregateSearchResult {
   @extend %clearfix;
   display: block;
+  cursor: pointer;
   color: $ehw-grey;
   line-height: 1;
   font-size: 12px;

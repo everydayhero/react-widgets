@@ -73,9 +73,9 @@ module.exports = React.createClass({
       var google = window.google;
 
       var data = new google.visualization.DataTable();
-          data.addColumn('number', 'Lat');
-          data.addColumn('number', 'Long');
-          data.addColumn('number', 'Value');
+      data.addColumn('number', 'Lat');
+      data.addColumn('number', 'Long');
+      data.addColumn('number', 'Value');
 
       if (!this.state.isLoading) {
         _.each(this.state.pointData, function(d) {

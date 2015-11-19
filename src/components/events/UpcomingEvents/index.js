@@ -1,15 +1,15 @@
-'use strict'
+'use strict';
 
-var _ = require('lodash')
-var React = require('react')
-var DOMInfo = require('../../mixins/DOMInfo')
-var I18n = require('../../mixins/I18n')
-var Icon = require('../../helpers/Icon')
-var Event = require('../Event')
-var campaign = require('../../../api/campaigns')
-var charity = require('../../../api/charities')
+var _ = require('lodash');
+var React = require('react');
+var DOMInfo = require('../../mixins/DOMInfo');
+var I18n = require('../../mixins/I18n');
+var Icon = require('../../helpers/Icon');
+var Event = require('../Event');
+var campaign = require('../../../api/campaigns');
+var charity = require('../../../api/charities');
 
-var blacklist = ['au-18856', 'au-18881', 'au-18882', 'au-18883', 'au-18884', 'au-18885', 'au-18886', 'au-18887', 'au-18888', 'au-18889', 'au-18890', 'au-18891', 'au-18892', 'au-18893', 'au-18894', 'au-18895', 'au-18896', 'au-18897', 'au-18898', 'au-18899', 'au-18900', 'au-18901', 'au-18902', 'au-18904', 'au-18905', 'au-18906', 'au-18907', 'au-18908', 'au-18909', 'au-18910', 'au-18911', 'au-18912', 'au-18913', 'au-18918', 'au-18919', 'au-18920', 'au-18921', 'au-6045', 'au-3042', 'au-18012', 'au-10631', 'nz-753', 'au–19589']
+var blacklist = ['au-18856', 'au-18881', 'au-18882', 'au-18883', 'au-18884', 'au-18885', 'au-18886', 'au-18887', 'au-18888', 'au-18889', 'au-18890', 'au-18891', 'au-18892', 'au-18893', 'au-18894', 'au-18895', 'au-18896', 'au-18897', 'au-18898', 'au-18899', 'au-18900', 'au-18901', 'au-18902', 'au-18904', 'au-18905', 'au-18906', 'au-18907', 'au-18908', 'au-18909', 'au-18910', 'au-18911', 'au-18912', 'au-18913', 'au-18918', 'au-18919', 'au-18920', 'au-18921', 'au-6045', 'au-3042', 'au-18012', 'au-10631', 'nz-753', 'au–19589'];
 
 module.exports = React.createClass({
   displayName: 'UpcomingEvents',
@@ -30,7 +30,7 @@ module.exports = React.createClass({
       defaultI18n: {
         title: 'Upcoming Events'
       }
-    }
+    };
   },
 
   getInitialState: function() {
@@ -38,7 +38,7 @@ module.exports = React.createClass({
       events: [],
       cancelLoad: function() {},
       excludeEvents: blacklist ? this.props.excludeEvents.concat(blacklist) : this.props.excludeEvents
-    }
+    };
   },
 
   componentDidMount: function() {
@@ -56,31 +56,38 @@ module.exports = React.createClass({
       excludeBau: true,
       excludePages: true,
       excludeCharities: true
-    })
-    this.setState({ cancelLoad: cancelLoad })
+    });
+    this.setState({ cancelLoad: cancelLoad });
   },
 
   onLoaded: function(result) {
-    console.log(result)
-    this.setEvents(result ? result.campaigns : [])
+    this.setEvents(result ? result.campaigns : []);
   },
 
   setEvents: function (events) {
-    var sortedEvents = _.sortBy(events, function(e) { return new Date(e.display_start_at) })
-    this.setState({ events: sortedEvents })
+    var sortedEvents = _.sortBy(events, function(e) { return new Date(e.display_start_at); });
+    this.setState({ events: sortedEvents });
+  },
+
+  componentDidMount: function() {
+    this.loadEvents();
+  },
+
+  componentWillUnmount: function() {
+    this.state.cancelLoad();
   },
 
   isExcluded: function(id) {
-    return this.state.excludeEvents.indexOf(id) !== -1
+    return this.state.excludeEvents.indexOf(id) !== -1;
   },
 
   isIncluded: function(id) {
-    return this.props.events.indexOf(id) !== -1
+    return this.props.events.indexOf(id) !== -1;
   },
 
   renderEvents: function() {
-    var count = this.getChildCountFromWidth(200)
-    var width = this.getChildWidth(count)
+    var count = this.getChildCountFromWidth(200);
+    var width = this.getChildWidth(count);
     return _.map(this.state.events, function(e) {
       var props = {
         key: e.id,
@@ -93,26 +100,26 @@ module.exports = React.createClass({
         backgroundBlurUrl: e.widget_blurred_background_image_url,
         supporterCount: e.page_count,
         width: width
-      }
+      };
 
       if (this.props.events.length > 0) {
         if (this.isIncluded(e.id)) {
-          return <Event { ...props } />
+          return <Event { ...props } />;
         }
       } else {
-        return !this.isExcluded(e.id) && <Event { ...props } />
+        return !this.isExcluded(e.id) && <Event { ...props } />;
       }
-    }, this)
+    }, this);
   },
 
   render: function() {
-    var show = !_.isEmpty(this.state.events)
+    var show = !_.isEmpty(this.state.events);
 
     return (
       <div className={ 'UpcomingEvents ' + this.state.device }>
         { show && <h2 className="UpcomingEvents__title">{ this.t('title') }</h2> }
         { show && this.renderEvents() }
       </div>
-    )
+    );
   }
-})
+});

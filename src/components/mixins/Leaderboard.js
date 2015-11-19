@@ -15,12 +15,15 @@ module.exports = {
     var props = this.props;
 
     if (props.country) {
-      if (props.campaignSlug) { endpoint = campaigns.leaderboardBySlug.bind(campaigns, props.country, props.campaignSlug); }
-      else if (props.charitySlug) { endpoint = charities.leaderboardBySlug.bind(charities, props.country, props.charitySlug); }
+      if (props.campaignSlug) {
+        endpoint = campaigns.leaderboardBySlug.bind(campaigns, props.country, props.campaignSlug);
+      } else if (props.charitySlug) { endpoint = charities.leaderboardBySlug.bind(charities, props.country, props.charitySlug); }
     } else {
-      if (props.campaignUids) { endpoint = campaigns.leaderboardByUids.bind(campaigns, props.campaignUids, props.charityUid); }
-      else if (props.campaignUid) { endpoint = campaigns.leaderboard.bind(campaigns, props.campaignUid, props.charityUid); }
-      else if (props.charityUid)  { endpoint = charities.leaderboard.bind(charities, props.charityUid); }
+      if (props.campaignUids) {
+        endpoint = campaigns.leaderboardByUids.bind(campaigns, props.campaignUids, props.charityUid);
+      } else if (props.campaignUid) {
+        endpoint = campaigns.leaderboard.bind(campaigns, props.campaignUid, props.charityUid);
+      } else if (props.charityUid)  { endpoint = charities.leaderboard.bind(charities, props.charityUid); }
     }
 
     if (!endpoint && console && console.log) {

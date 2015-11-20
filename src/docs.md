@@ -159,7 +159,7 @@ Country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'.
 Object containing localised text.
 
 `minimumScore` (object)<br>
-Set the "fuzziness" of the search engine. A lower number will return more results. Default is set to minimumScore: `{ all: 0.15, other: 0.15 }`,
+Set the "fuzziness" of the search engine. A lower number will return more results. Default is set to: `{ all: 0.15, other: 0.15 }`,
 
 `searchType` (string)<br>
 Optional string used to constrain search results to a given type. Set to either 'campaigns', 'charities', 'pages', or 'all'. Default is set to 'all'.

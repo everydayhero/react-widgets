@@ -20,8 +20,10 @@
     "remarkable": "^1.6.0"
   },
   "devDependencies": {
+    "babel-eslint": "^4.1.5",
     "browserify": "~6.3.3",
     "compression": "~1.2.1",
+    "eslint-plugin-react": "^3.9.0",
     "express": "~4.10.4",
     "gulp": "~3.8.10",
     "gulp-autoprefixer": "~2.0.0",

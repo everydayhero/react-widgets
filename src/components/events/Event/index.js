@@ -3,6 +3,7 @@
 var React               = require('react');
 var I18n                = require('../../mixins/I18n');
 var CallToActionButton  = require('../../callstoaction/CallToActionButton');
+var numeral             = require('numeral')
 
 function cssUrl(url) {
   return url ? 'url(' + url + ')' : 'none';
@@ -20,6 +21,8 @@ module.exports = React.createClass({
     backgroundImageUrl: React.PropTypes.string,
     backgroundBlurUrl: React.PropTypes.string,
     supporterCount: React.PropTypes.number.isRequired,
+    centsRaised: React.PropTypes.number,
+    currencySymbol: React.PropTypes.string,
     width: React.PropTypes.string.isRequired,
     i18n: React.PropTypes.object,
   },
@@ -29,7 +32,10 @@ module.exports = React.createClass({
       defaultI18n: {
         joinLabel: 'Join Event',
         donateLabel: 'Give Now',
+        joinLabelShort: 'Join',
+        donateLabelShort: 'Give',
         supportersLabel: 'Supporters',
+        raisedLabel: 'Raised',
         months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       }
     };
@@ -65,6 +71,49 @@ module.exports = React.createClass({
     };
   },
 
+  renderCallToAction: function() {
+    var donateUrl = this.props.donateUrl
+    var getStartedUrl = this.props.getStartedUrl
+    var supporterCount = this.props.supporterCount
+    var centsRaised = this.props.centsRaised
+    var currencySymbol = this.props.currencySymbol
+
+    var donateLabel = donateUrl && getStartedUrl ? this.t('donateLabelShort') : this.t('donateLabel')
+    var joinLabel = donateUrl && getStartedUrl ? this.t('joinLabelShort') : this.t('joinLabel')
+    var formattedRasied = numeral((centsRaised || 0) / 100).format('(' + currencySymbol + '0a)')
+
+    return (
+      <div className="Event__calls-to-action">
+        { !!getStartedUrl &&
+          <div className="Event__call-to-action">
+            <div className="Event__call-to-action-stat">
+              { supporterCount } { this.t('supportersLabel') }
+            </div>
+            <CallToActionButton
+              kind="secondary"
+              reverse
+              href={ getStartedUrl }
+              className="Event__block-button">
+              { joinLabel }
+            </CallToActionButton>
+          </div> }
+        { !!donateUrl &&
+          <div className="Event__call-to-action">
+            <div className="Event__call-to-action-stat">
+              { formattedRasied } { this.t('raisedLabel') }
+            </div>
+            <CallToActionButton
+              kind="secondary"
+              reverse
+              href={ donateUrl }
+              className="Event__block-button">
+              { donateLabel }
+            </CallToActionButton>
+          </div> }
+      </div>
+    )
+  },
+
   render: function() {
     var props = this.props;
     var state = this.state;
@@ -74,7 +123,6 @@ module.exports = React.createClass({
     var t = this.t;
     var isAppeal = !props.getStartedUrl;
     var url = isAppeal ? props.donateUrl : props.getStartedUrl;
-    var buttonLabel = isAppeal ? t('donateLabel') : t('joinLabel');
 
     return (
       <div className="Event" style={ this.eventStyles() }
@@ -85,14 +133,16 @@ module.exports = React.createClass({
         <div className={ 'Event__base ' + this.state.activeClass } style={{ backgroundImage: bg }}>
           <div className="Event__blur" style={{ backgroundImage: blur }}></div>
           <div className="Event__gradient"></div>
-          <ul className="Event__date">
-            <li>{ date.getDate() }</li>
-            <li>{ t('months')[date.getMonth()] }</li>
-            <li>{ date.getFullYear() }</li>
+          <ul className="Event__date DateBox">
+            <li className="DateBox__day" >
+              { date.getDate() }
+            </li>
+            <li className="DateBox__month-year">
+              { t('months')[date.getMonth()] } { date.getFullYear() }
+            </li>
           </ul>
-          <a href={ props.campaignUrl } className="Event__name">{ props.name }</a>
-          { !isAppeal && <p className="Event__supporter-count">{ (props.supporterCount || 0) + ' ' + t('supportersLabel') }</p> }
-          <CallToActionButton kind="secondary" reverse href={ url } className="Event__join-event">{ buttonLabel }</CallToActionButton>
+          <a className="Event__name" href={ props.campaignUrl }>{ props.name }</a>
+          { this.renderCallToAction() }
         </div>
       </div>
     );

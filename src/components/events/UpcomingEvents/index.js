@@ -69,14 +69,6 @@ module.exports = React.createClass({
     this.setState({ events: sortedEvents });
   },
 
-  componentDidMount: function() {
-    this.loadEvents();
-  },
-
-  componentWillUnmount: function() {
-    this.state.cancelLoad();
-  },
-
   isExcluded: function(id) {
     return this.state.excludeEvents.indexOf(id) !== -1;
   },
@@ -86,8 +78,9 @@ module.exports = React.createClass({
   },
 
   renderEvents: function() {
-    var count = this.getChildCountFromWidth(200);
+    var count = this.getChildCountFromWidth(300);
     var width = this.getChildWidth(count);
+
     return _.map(this.state.events, function(e) {
       var props = {
         key: e.id,
@@ -98,6 +91,8 @@ module.exports = React.createClass({
         getStartedUrl: e.get_started_url,
         backgroundImageUrl: e.widget_background_image_url,
         backgroundBlurUrl: e.widget_blurred_background_image_url,
+        centsRaised: e.funds_raised.cents,
+        currencySymbol: e.funds_raised.currency.symbol,
         supporterCount: e.page_count,
         width: width
       };

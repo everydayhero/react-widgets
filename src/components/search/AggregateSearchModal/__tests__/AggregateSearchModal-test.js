@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 jest.autoMockOff();
 
@@ -35,18 +35,36 @@ describe('AggregateSearchModal', function() {
     element.setState({ results: { foo: 'bar' }, isSearching: false });
     expect(scryByClass(element, 'AggregateSearchModal__filters__type').length).toBe(3);
   });
+
+  it('selects a filter when a filter selection button is clicked', function() {
+    element.setState({ results: { foo: 'bar' }, isSearching: false });
+    var filterElements = scryByClass(element, 'AggregateSearchModal__filters__type');
+    expect(element.state.filter).toEqual('all');
+    TestUtils.Simulate.click(filterElements[1].getDOMNode());
+    expect(element.state.filter).toEqual('charities');
+    TestUtils.Simulate.click(filterElements[0].getDOMNode());
+    expect(element.state.filter).toEqual('pages');
+  });
 });
 
 describe('AggregateSearchModal with searchType prop set', function() {
-  it('renders a single filter based on the `searchType` prop', function() {
+  var filterElements;
+
+  beforeEach(function() {
     searchModal = <AggregateSearchModal autoFocus={ false } searchType="campaigns" />;
-    element     = TestUtils.renderIntoDocument(searchModal);
-
+    element = TestUtils.renderIntoDocument(searchModal);
     element.setState({ results: { foo: 'bar' }, isSearching: false });
+    filterElements = scryByClass(element, 'AggregateSearchModal__filters__type');
+  });
 
-    var filterElements = scryByClass(element, 'AggregateSearchModal__filters__type');
-
+  it('renders a single filter based on the `searchType` prop', function() {
     expect(filterElements.length).toBe(1);
     expect(filterElements[0].getDOMNode().textContent).toContain('Events');
+  });
+
+  it('the filter selection button is disabled (has no onclick behaviour)', function() {
+    expect(element.state.filter).toEqual('campaigns');
+    TestUtils.Simulate.click(filterElements[0].getDOMNode());
+    expect(element.state.filter).toEqual('campaigns');
   });
 });

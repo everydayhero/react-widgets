@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _       = require('lodash');
 var async   = require('async');
@@ -34,6 +34,10 @@ module.exports = React.createClass({
     i18n: React.PropTypes.object,
     onClose: React.PropTypes.func.isRequired,
     onSelect: React.PropTypes.func,
+    minimumScore: React.PropTypes.shape({
+      all: React.PropTypes.number,
+      other: React.PropTypes.number
+    }),
     searchType: React.PropTypes.oneOf(['campaigns', 'charities', 'pages', 'all']),
     charityUids: React.PropTypes.array
   },
@@ -49,10 +53,10 @@ module.exports = React.createClass({
         charityAction: 'Visit Charity',
         supporterAction: 'Support',
         emptyLabel: {
-          pages: "We couldn't find any matching supporters",
-          charities: "We couldn't find any matching charities",
-          campaigns: "We couldn't find any matching events",
-          all: "We couldn't find any matching supporters, charities or events"
+          pages: 'We couldn\'t find any matching supporters',
+          charities: 'We couldn\'t find any matching charities',
+          campaigns: 'We couldn\'t find any matching events',
+          all: 'We couldn\'t find any matching supporters, charities or events'
         },
         noMore: 'No more results',
         loadMore: 'Show more',
@@ -229,9 +233,10 @@ module.exports = React.createClass({
       var selected = (type == this.state.filter);
       var classes = cx({
         'AggregateSearchModal__filters__type': true,
-        'AggregateSearchModal__filters__type-selected': selected
+        'AggregateSearchModal__filters__type--selected': selected
       });
-      var onClick = this.setFilter.bind(this, selected ? 'all' : type);
+
+      var onClick = _.size(filters) > 1 && this.setFilter.bind(this, selected ? 'all' : type);
       var count = this.state.counts[type];
       var numResults = count >= 0 ? this.t('numResults', { count: count }) : this.t('searching');
 
@@ -310,7 +315,7 @@ module.exports = React.createClass({
   renderInput: function() {
     return (
       <Input
-        className='AggregateSearchModal__input'
+        className="AggregateSearchModal__input"
         spacing="compact"
         autoFocus={ this.props.autoFocus }
         i18n={{ label: this.t('inputLabel'), name: 'aggregate_search_input' }}
@@ -324,7 +329,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <Overlay className="AggregateSearchModal__overlay" onClose={ this.props.onClose } showCloseButton={ false }>
-        <div className='AggregateSearchModal__header'>
+        <div className="AggregateSearchModal__header">
           <span className="AggregateSearchModal__title">{ this.t('title') }</span>
           { this.renderCloseButton() }
           { this.renderInput() }

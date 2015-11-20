@@ -60,7 +60,7 @@ gulp.task('images', function() {
 gulp.task('styles', function() {
   var processor = debug ? gutil.noop : minifyCss
 
-  fs.writeFileSync('src/scss/_version.scss', '$ehw-version: "-' + pkg.version + '"')
+  fs.writeFileSync('src/scss/_version.scss', '$ehw-version: "-' + pkg.version + '";')
 
   return gulp
     .src(['src/widgets.scss'])

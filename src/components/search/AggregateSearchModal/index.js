@@ -34,6 +34,8 @@ module.exports = React.createClass({
     i18n: React.PropTypes.object,
     onClose: React.PropTypes.func.isRequired,
     onSelect: React.PropTypes.func,
+    searchType: React.PropTypes.oneOf(['campaigns', 'charities', 'pages', 'all']),
+    charityUids: React.PropTypes.array
   },
 
   getDefaultProps: function() {
@@ -69,7 +71,9 @@ module.exports = React.createClass({
         all: 0.15,
         other: 0.15
       },
-      pageSize: 10
+      pageSize: 10,
+      searchType: 'all',
+      charityUids: []
     };
   },
 
@@ -80,7 +84,7 @@ module.exports = React.createClass({
       cancelSearchCounts: function() {},
       results: null,
       isSearching: false,
-      filter: 'all',
+      filter: this.props.searchType,
       counts: {}
     };
   },
@@ -122,7 +126,8 @@ module.exports = React.createClass({
       searchTerm: this.state.searchTerm,
       page: page || 1,
       pageSize: this.props.pageSize,
-      minimumScore: this.props.minimumScore[this.state.filter] || this.props.minimumScore.other
+      minimumScore: this.props.minimumScore[this.state.filter] || this.props.minimumScore.other,
+      charityUids: this.props.charityUids
     }, this.updateResults);
 
     this.setState({
@@ -181,10 +186,12 @@ module.exports = React.createClass({
       searchTerm: this.state.searchTerm,
       page: 1,
       pageSize: 1,
-      minimumScore: this.props.minimumScore.other
+      minimumScore: this.props.minimumScore.other,
+      charityUids: this.props.charityUids
     };
 
-    var types = ['campaigns', 'charities', 'pages'];
+    var types = this.props.searchType === 'all' ? ['campaigns', 'charities', 'pages'] : [this.props.searchType];
+
     async.map(types, function(type, callback) {
       searchAPI[type](searchParams, function(data) {
         callback(data ? null : 'error', data && data.meta.pagination.count);
@@ -210,7 +217,15 @@ module.exports = React.createClass({
   },
 
   renderFilters: function() {
-    var categories = _.map(this.t('filterTypes'), function(name, type) {
+    var searchType = this.props.searchType;
+    var filterTypes = this.t('filterTypes');
+    var matchSearchType = function(item) {
+      return item === filterTypes[searchType];
+    };
+
+    var filters = searchType === 'all' ? filterTypes : _.pick(filterTypes, matchSearchType);
+
+    var categories = _.map(filters, function(name, type) {
       var selected = (type == this.state.filter);
       var classes = cx({
         'AggregateSearchModal__filters__type': true,
@@ -231,14 +246,14 @@ module.exports = React.createClass({
 
     return this.state.results && (
       <div className="AggregateSearchModal__filters">
-       { categories}
+        { categories }
       </div>
     );
   },
 
   renderEmpty: function() {
     return _.isEmpty(this.state.results) && (
-      <p className="AggregateSearchModal__footer">
+      <p className="AggregateSearchModal__footer AggregateSearchModal__footer--empty">
         { this.t(this.state.filter, { scope: 'emptyLabel' }) }
       </p>
     );
@@ -246,7 +261,7 @@ module.exports = React.createClass({
 
   renderLoading: function() {
     return this.state.isSearching && (
-      <p className="AggregateSearchModal__footer">
+      <p className="AggregateSearchModal__footer AggregateSearchModal__footer--loading">
         { this.t('searching') }<Icon icon="refresh"/>
       </p>
     );
@@ -273,8 +288,8 @@ module.exports = React.createClass({
   getResults: function() {
     return _.map(this.state.results, function(result) {
       var El = resultTypes[result._type];
-      return El && <El key={ result._type + result.id } result={ result } />;
-    });
+      return El && <El key={ result._type + result.id } result={ result } onSelect={ this.props.onSelect } />;
+    }, this);
   },
 
   renderResults: function() {
@@ -320,7 +335,7 @@ module.exports = React.createClass({
             { this.renderResults() }
           </div>
         </div>
-      </ Overlay>
+      </Overlay>
     );
   }
 });

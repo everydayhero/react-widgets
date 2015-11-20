@@ -46,7 +46,7 @@ describe('CallToActionBox', function() {
     });
   });
 
-describe('component props', function() {
+  describe('component props', function() {
     var callToActionBox;
     var element;
     var translation = {

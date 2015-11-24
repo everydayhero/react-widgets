@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _             = require('lodash');
 var React         = require('react');
@@ -36,8 +36,8 @@ module.exports = React.createClass({
 
   renderAvatar: function () {
     return (
-      <div className='AggregateSearchResultCharity__avatar'>
-        <Icon icon={ 'heart-o' } fixedWidth={ true } />
+      <div className="AggregateSearchResultCharity__avatar">
+        <Icon icon="heart-o" fixedWidth={ true } />
       </div>
     );
   },
@@ -46,7 +46,7 @@ module.exports = React.createClass({
     var charity = this.props.result;
 
     return charity.page_count >= 20 && (
-      <span className='AggregateSearchResultCharity__supporters'>
+      <span className="AggregateSearchResultCharity__supporters">
         { this.t('numSupporters', { count: charity.page_count }) }
       </span>
     );
@@ -58,12 +58,12 @@ module.exports = React.createClass({
     return (
       <AggregateSearchResult url={ charity.url } result={ charity } onSelect={ this.props.onSelect }>
         { this.renderLogo() || this.renderAvatar() }
-        <div className='AggregateSearchResultCharity__content'>
-          <div className='AggregateSearchResultCharity__header'>{ charity.name }</div>
-          <div className='AggregateSearchResultCharity__subheader'>
+        <div className="AggregateSearchResultCharity__content">
+          <div className="AggregateSearchResultCharity__header">{ charity.name }</div>
+          <div className="AggregateSearchResultCharity__subheader">
             { this.renderNumSupporters() }
           </div>
-          <p className='AggregateSearchResultCharity__description'>{ charity.description }</p>
+          <p className="AggregateSearchResultCharity__description">{ charity.description }</p>
         </div>
       </AggregateSearchResult>
     );

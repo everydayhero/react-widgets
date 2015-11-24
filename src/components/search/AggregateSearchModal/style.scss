@@ -160,7 +160,13 @@
   }
 }
 
-.AggregateSearchModal__filters__type-selected {
+.AggregateSearchModal__filters__type--selected {
+  cursor: default;
+
+  &:hover {
+    color: $ehw-grey-light;
+  }
+
   @include media-max($breakpoint-xs) {
     border-color: $ehw-green-light;
   }

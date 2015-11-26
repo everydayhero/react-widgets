@@ -76,8 +76,16 @@ module.exports = React.createClass({
     return this.props.events.indexOf(id) !== -1;
   },
 
-  filterEvents: function(event) {
-    return this.whitelisted(event.id) || !this.blacklisted(event.id);
+  filterEvents: function(events) {
+    return _.filter(events, function(e) {
+      return this.whitelisted(e.id) || !this.blacklisted(e.id);
+    }, this);
+  },
+
+  sortEvents: function(events) {
+    return _.sortByAll(events, 'charity_count', function(e) {
+      return new Date(e.display_start_at);
+    });
   },
 
   loadEvents: function() {
@@ -93,10 +101,7 @@ module.exports = React.createClass({
 
   onEventLoad: function(result) {
     if (!result.campaigns) { return; }
-    var sorted = _.sortBy(_.filter(result.campaigns, this.filterEvents), function(e) {
-      return new Date(e.display_start_at);
-    });
-    this.setState({ events: sorted });
+    this.setState({ events: this.sortEvents(this.filterEvents(result.campaigns)) });
   },
 
   renderEvents: function() {

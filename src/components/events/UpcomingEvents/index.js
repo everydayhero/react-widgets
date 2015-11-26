@@ -6,6 +6,7 @@ var DOMInfo = require('../../mixins/DOMInfo');
 var I18n = require('../../mixins/I18n');
 var Icon = require('../../helpers/Icon');
 var Event = require('../Event');
+var Button = require('../../callstoaction/CallToActionButton');
 var campaign = require('../../../api/campaigns');
 var charity = require('../../../api/charities');
 
@@ -29,15 +30,19 @@ module.exports = React.createClass({
     charityUid: React.PropTypes.string.isRequired,
     excludeEvents: React.PropTypes.array,
     events: React.PropTypes.array,
-    i18n: React.PropTypes.object
+    i18n: React.PropTypes.object,
+    showCount: React.PropTypes.number
   },
 
   getDefaultProps: function() {
     return {
       excludeEvents: [],
       events: [],
+      showCount: 10,
       defaultI18n: {
-        title: 'Upcoming Events'
+        title: 'Upcoming Events',
+        show_all: 'Show all events',
+        show_less: 'Show less events'
       }
     };
   },
@@ -45,29 +50,10 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       events: [],
+      showAll: false,
       cancelLoad: function() {},
-      excludeEvents: blacklist ? this.props.excludeEvents.concat(blacklist) : this.props.excludeEvents
+      blacklist: this.props.excludeEvents.concat(blacklist)
     };
-  },
-
-  loadEvents: function() {
-    var cancelLoad = campaign.findByCharity(this.props.charityUid, 1, null, this.onLoaded, {
-      status: 'active',
-      sortBy: 'start_at',
-      excludeBau: true,
-      excludePages: true,
-      excludeCharities: true
-    });
-    this.setState({ cancelLoad: cancelLoad });
-  },
-
-  onLoaded: function(result) {
-    this.setEvents(result ? result.campaigns : []);
-  },
-
-  setEvents: function (events) {
-    var sortedEvents = _.sortBy(events, function(e) { return new Date(e.display_start_at); });
-    this.setState({ events: sortedEvents });
   },
 
   componentDidMount: function() {
@@ -78,18 +64,46 @@ module.exports = React.createClass({
     this.state.cancelLoad();
   },
 
-  isExcluded: function(id) {
-    return this.state.excludeEvents.indexOf(id) !== -1;
+  setShowAll: function() {
+    this.setState({ showAll: !this.state.showAll });
   },
 
-  isIncluded: function(id) {
+  blacklisted: function(id) {
+    return this.state.blacklist.indexOf(id) !== -1;
+  },
+
+  whitelisted: function(id) {
     return this.props.events.indexOf(id) !== -1;
+  },
+
+  filterEvents: function(event) {
+    return this.whitelisted(event.id) || !this.blacklisted(event.id);
+  },
+
+  loadEvents: function() {
+    var cancelLoad = campaign.findByCharity(this.props.charityUid, 1, null, this.onEventLoad, {
+      status: 'active',
+      sortBy: 'start_at',
+      excludeBau: true,
+      excludePages: true,
+      excludeCharities: true
+    });
+    this.setState({ cancelLoad: cancelLoad });
+  },
+
+  onEventLoad: function(result) {
+    if (!result.campaigns) { return; }
+    var sorted = _.sortBy(_.filter(result.campaigns, this.filterEvents), function(e) {
+      return new Date(e.display_start_at);
+    });
+    this.setState({ events: sorted });
   },
 
   renderEvents: function() {
     var count = this.getChildCountFromWidth(200);
     var width = this.getChildWidth(count);
-    return _.map(this.state.events, function(e) {
+    var events = this.state.showAll ? this.state.events : this.state.events.slice(0, this.props.showCount);
+    return _.map(events, function(e) {
       var props = {
         key: e.id,
         name: e.name,
@@ -103,23 +117,26 @@ module.exports = React.createClass({
         width: width
       };
 
-      if (this.props.events.length > 0) {
-        if (this.isIncluded(e.id)) {
-          return <Event { ...props } />;
-        }
-      } else {
-        return !this.isExcluded(e.id) && <Event { ...props } />;
-      }
+      return <Event { ...props } />;
     }, this);
   },
 
-  render: function() {
-    var show = !_.isEmpty(this.state.events);
+  renderButton: function() {
+    return <Button
+      kind="primary"
+      label={ this.t(this.state.showAll ? 'show_less' : 'show_all') }
+      icon={ this.state.showAll ? "chevron-up" : "chevron-down" }
+      className="UpcomingEvents__showAllButton"
+      onClick={ this.setShowAll }/>
+  },
 
+  render: function() {
+    var eventCount = this.state.events.length;
     return (
       <div className={ 'UpcomingEvents ' + this.state.device }>
-        { show && <h2 className="UpcomingEvents__title">{ this.t('title') }</h2> }
-        { show && this.renderEvents() }
+        { !!eventCount && <h2 className="UpcomingEvents__title">{ this.t('title') }</h2> }
+        <div>{ !!eventCount && this.renderEvents() }</div>
+        { (!!eventCount && eventCount > this.props.showCount) && this.renderButton() }
       </div>
     );
   }

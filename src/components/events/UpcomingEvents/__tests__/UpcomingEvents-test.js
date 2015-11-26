@@ -46,14 +46,14 @@ describe('UpcomingEvents', function() {
     });
 
     it('renders events when results are returned', function() {
-      element.setEvents(campaigns);
+      element.onEventLoad({ campaigns: campaigns });
 
       var events = scryByClass(element, 'Event');
       expect(events.length).toBe(campaigns.length);
     });
 
     it('sorts events by display_start_date', function() {
-      element.setEvents(campaigns);
+      element.onEventLoad({ campaigns: campaigns });
 
       var events = scryByClass(element, 'Event');
       expect(findByClass(events[0], 'Event__name').getDOMNode().textContent).toContain('Bar');

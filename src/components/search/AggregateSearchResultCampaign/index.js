@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _             = require('lodash');
 var React         = require('react');
@@ -35,7 +35,11 @@ module.exports = React.createClass({
   renderDate: function () {
     var campaign = this.props.result;
     if (!campaign.display_start_at) {
-      return <div className="AggregateSearchResultCampaign__date" />;
+      return (
+        <div className="AggregateSearchResultCampaign__date">
+          <Icon icon="heart-o" className="AggregateSearchResultCampaign__icon" />
+        </div>
+      );
     }
 
     var date = new Date(campaign.display_start_at);
@@ -51,7 +55,7 @@ module.exports = React.createClass({
   renderNumSupporters: function () {
     var campaign = this.props.result;
     return campaign.page_count >= 20 && (
-      <span className='AggregateSearchResultCampaign__supporters'>
+      <span className="AggregateSearchResultCampaign__supporters">
         { this.t('numSupporters', { count: campaign.page_count }) }
       </span>
     );
@@ -60,7 +64,7 @@ module.exports = React.createClass({
   renderNumCharities: function () {
     var campaign = this.props.result;
     return campaign.charity_count >= 0 && (
-      <span className='AggregateSearchResultCampaign__charities'>
+      <span className="AggregateSearchResultCampaign__charities">
         { this.t('numCharities', { count: campaign.charity_count }) }
       </span>
     );
@@ -73,13 +77,13 @@ module.exports = React.createClass({
     return (
       <AggregateSearchResult url={ url } onSelect={ this.props.onSelect } result={ campaign }>
         { this.renderDate() }
-        <div className='AggregateSearchResultCampaign__content'>
-          <div className='AggregateSearchResultCampaign__header'>{ campaign.name }</div>
-          <div className='AggregateSearchResultCampaign__subheader'>
+        <div className="AggregateSearchResultCampaign__content">
+          <div className="AggregateSearchResultCampaign__header">{ campaign.name }</div>
+          <div className="AggregateSearchResultCampaign__subheader">
             { this.renderNumSupporters() }
             { this.renderNumCharities() }
           </div>
-          <p className='AggregateSearchResultCampaign__description'>{ campaign.description }</p>
+          <p className="AggregateSearchResultCampaign__description">{ campaign.description }</p>
         </div>
       </AggregateSearchResult>
     );

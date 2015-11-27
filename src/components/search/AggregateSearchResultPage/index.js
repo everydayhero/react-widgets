@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-var _                           = require('lodash');
-var React                       = require('react');
-var Icon                        = require('../../helpers/Icon');
-var I18n                        = require('../../mixins/I18n');
-var pagesAPI                    = require('../../../api/pages');
-var AggregateSearchResult       = require('../AggregateSearchResult');
+var _                     = require('lodash');
+var React                 = require('react');
+var Icon                  = require('../../helpers/Icon');
+var I18n                  = require('../../mixins/I18n');
+var pagesAPI              = require('../../../api/pages');
+var AggregateSearchResult = require('../AggregateSearchResult');
 
 module.exports = React.createClass({
   displayName: 'AggregateSearchResultPage',
@@ -29,12 +29,11 @@ module.exports = React.createClass({
 
   renderProgressBar: function () {
     var page = this.props.result;
-    var progress = page.amount && page.target_cents > 0 &&
-      Math.min(Math.floor(page.amount.cents / page.target_cents * 100), 100) || 0;
+    var progress = page.amount && page.target_cents > 0 && Math.min(Math.floor(page.amount.cents / page.target_cents * 100), 100) || 0;
 
     return (
-      <div className='AggregateSearchResultPage__progress'>
-        <div className='AggregateSearchResultPage__progress__bar' style={{ width: progress + '%' }} />
+      <div className="AggregateSearchResultPage__progress">
+        <div className="AggregateSearchResultPage__progress__bar" style={{ width: progress + '%' }} />
       </div>
     );
   },
@@ -48,7 +47,7 @@ module.exports = React.createClass({
         target: page.target_cents / 100
       });
 
-    return !!raised_amount && <div className='AggregateSearchResultPage__amount'>{ raised_amount }</div>;
+    return !!raised_amount && <div className="AggregateSearchResultPage__amount">{ raised_amount }</div>;
   },
 
   renderRaisedFor: function () {
@@ -59,7 +58,7 @@ module.exports = React.createClass({
         campaign: page.campaign.name
       });
 
-    return <div className='AggregateSearchResultPage__for'>{ raised_for }</div>;
+    return <div className="AggregateSearchResultPage__for">{ raised_for }</div>;
   },
 
   render: function() {
@@ -67,11 +66,11 @@ module.exports = React.createClass({
 
     return (
       <AggregateSearchResult url={ page.url } onSelect={ this.props.onSelect } result={ page }>
-        <div className='AggregateSearchResultPage__avatar'>
+        <div className="AggregateSearchResultPage__avatar">
           <img src={ page.image.medium_image_url } />
         </div>
-        <div className='AggregateSearchResultPage__content'>
-          <div className='AggregateSearchResultPage__header'>
+        <div className="AggregateSearchResultPage__content">
+          <div className="AggregateSearchResultPage__header">
             { page.supporter.name }
             <span className="AggregateSearchResultPage__subheader">{ page.name }</span>
           </div>

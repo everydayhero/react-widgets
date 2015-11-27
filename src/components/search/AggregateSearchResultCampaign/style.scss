@@ -88,3 +88,11 @@
   height: 42px;
   overflow: hidden;
 }
+
+.AggregateSearchResultCampaign__icon {
+  font-size: $x-5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

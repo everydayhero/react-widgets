@@ -18,7 +18,11 @@ var campaigns = [{
   url: 'http://foo.com',
   get_started_url: 'https://foo.edheroy.com/ie/get-started',
   background_image_url: null,
-  page_count: 2
+  page_count: 2,
+  funds_raised: {
+    cents: 0,
+    currency: { symbol: '$' }
+  }
 }, {
   id: 2,
   name: 'Bar',
@@ -27,7 +31,11 @@ var campaigns = [{
   url: 'http://bar.com',
   get_started_url: 'https://bar.edheroy.com/ie/get-started',
   background_image_url: null,
-  page_count: 2
+  page_count: 2,
+  funds_raised: {
+    cents: 0,
+    currency: { symbol: '$' }
+  }
 }];
 
 describe('UpcomingEvents', function() {
@@ -65,7 +73,7 @@ describe('UpcomingEvents', function() {
       expect(campaign.findByCharity).toBeCalledWith('au-1234', 1, null, jasmine.any(Function), options);
 
       var callback = campaign.findByCharity.mock.calls[0][3];
-      callback({campaigns: []});
+      callback({ campaigns: [] });
     });
   });
 });

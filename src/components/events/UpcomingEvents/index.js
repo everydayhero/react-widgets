@@ -105,8 +105,9 @@ module.exports = React.createClass({
   },
 
   renderEvents: function() {
-    var count = this.getChildCountFromWidth(200);
+    var count = this.getChildCountFromWidth(300);
     var width = this.getChildWidth(count);
+
     var events = this.state.showAll ? this.state.events : this.state.events.slice(0, this.props.showCount);
     return _.map(events, function(e) {
       var props = {
@@ -118,6 +119,8 @@ module.exports = React.createClass({
         getStartedUrl: e.get_started_url,
         backgroundImageUrl: e.widget_background_image_url,
         backgroundBlurUrl: e.widget_blurred_background_image_url,
+        centsRaised: e.funds_raised.cents,
+        currencySymbol: e.funds_raised.currency.symbol,
         supporterCount: e.page_count,
         width: width
       };

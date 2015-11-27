@@ -11,12 +11,7 @@ $ehw-animation-speed: 200ms;
   position: relative;
   text-align: center;
   width: 240px;
-  height: 252px;
   padding: 3px;
-
-  * {
-    transition: top $ehw-animation-speed ease-out;
-  }
 }
 
 .Event__blur, .Event__gradient,  {
@@ -28,10 +23,18 @@ $ehw-animation-speed: 200ms;
   top: 0;
 }
 
+.Event__date,
+.Event__name {
+  transition: top $ehw-animation-speed ease-out;
+}
+.Event__calls-to-action {
+  transition: bottom $ehw-animation-speed ease-out;
+}
+
 .Event__base {
   position: relative;
-  height: 100%;
   width: 100%;
+  height: 225px;
   background-color: $ehw-grey-dark;
   background-size: cover;
   overflow: hidden;
@@ -39,10 +42,9 @@ $ehw-animation-speed: 200ms;
 
   &.active {
     .Event__blur { opacity: 1; }
-    .Event__date { top: 25%; }
-    .Event__name { top: 42%; }
-    .Event__supporter-count { top: 64%; }
-    .Event__join-event { top: 80%; }
+    .Event__date { top: 25px; }
+    .Event__name { top: 90px; }
+    .Event__calls-to-action { bottom: 15px; }
     .Event__gradient {
       background-color: transparentize($ehw-grey-dark, 0.25);
     }
@@ -66,35 +68,41 @@ $ehw-animation-speed: 200ms;
 .Event__date {
   box-sizing: border-box;
   border: 1px $ehw-grey-light solid;
+  border-radius: $ehw-border-radius;
   background-color: transparentize($ehw-grey-dark, 0.5);
   display: block;
-  height: 50px;
-  width: 50px;
-
-  @extend %absolute-center;
-
+  height: 54px;
+  width: 54px;
   list-style: none;
   margin: 0;
   padding: 0;
   transition-delay: 125ms;
 
-  li {
-    font-size: 0.5em;
-    text-transform: uppercase;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
-    &:first-child {
-      font-size: 1em;
-      margin-top: 0.4em;
-    }
-  }
+.DateBox__day {
+  font-size: 1em;
+  line-height: 2.25em;
+  margin: 0;
+  margin-top: 0.25em;
+}
+
+.DateBox__month-year {
+  text-transform: uppercase;
+  font-size: 0.5em;
 }
 
 .Event__name {
   position: absolute;
   overflow: hidden;
   font-size: 1.2em;
+  line-height: 1.3em;
   font-weight: bold;
-  height: 42px;
+  height: 2.6em;
   width: 80%;
   left: 10%;
   top: 67%;
@@ -118,11 +126,39 @@ $ehw-animation-speed: 200ms;
   transition-delay: 175ms;
 }
 
-.Event__join-event {
+.Event__calls-to-action {
   position: absolute;
-  left: 50%;
-  top: 110%;
+  bottom: -100%;
+  left: 15px;
+  right: 15px;
   transition-delay: 200ms;
   margin: 0;
-  transform: translateX(-50%) translateY(-50%);
+  margin-left: -0.25em;
+  margin-right: -0.25em;
+}
+
+.Event__block-button {
+  float: none;
+  display: block;
+  margin: 0;
+}
+
+.Event__call-to-action {
+  display: block;
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+  padding: 0.25em;
+}
+
+.Event__call-to-action:first-child:last-child {
+  float: none;
+  width: 100%;
+}
+
+.Event__call-to-action-stat {
+  font-size: 0.8em;
+  line-height: 2.2em;
+  font-weight: 300;
+  text-transform: uppercase;
 }

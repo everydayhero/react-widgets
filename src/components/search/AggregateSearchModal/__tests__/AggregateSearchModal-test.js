@@ -68,3 +68,17 @@ describe('AggregateSearchModal with searchType prop set', function() {
     expect(element.state.filter).toEqual('campaigns');
   });
 });
+
+describe('AggregateSearchModal with custom onSelect function prop', function() {
+  it('will call the provided custom function and close the modal', function() {
+    var mockSelect = jest.genMockFunction();
+    var mockClose = jest.genMockFunction();
+    searchModal = <AggregateSearchModal autoFocus={ false } onSelect={ mockSelect } onClose={ mockClose } />;
+    var component = TestUtils.renderIntoDocument(searchModal);
+
+    component.handleSelect();
+
+    expect(mockSelect.mock.calls.length).toBe(1);
+    expect(mockClose.mock.calls.length).toBe(1);
+  });
+});

@@ -220,6 +220,16 @@ module.exports = React.createClass({
     this.setState({ filter: filter }, this.search);
   },
 
+  handleSelect: function(res) {
+    this.props.onClose();
+
+    if (this.props.onSelect) {
+      this.props.onSelect(res);
+    } else {
+      window.location = res.url;
+    }
+  },
+
   renderFilters: function() {
     var searchType = this.props.searchType;
     var filterTypes = this.t('filterTypes');
@@ -293,7 +303,7 @@ module.exports = React.createClass({
   getResults: function() {
     return _.map(this.state.results, function(result) {
       var El = resultTypes[result._type];
-      return El && <El key={ result._type + result.id } result={ result } onSelect={ this.props.onSelect } />;
+      return El && <El key={ result._type + result.id } result={ result } onSelect={ this.handleSelect } />;
     }, this);
   },
 

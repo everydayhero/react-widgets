@@ -9,25 +9,16 @@ var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
 describe('AggregateSearchResult', function() {
   var result = { id: '123', name: 'Enraged Potato' };
-  var url    = 'http://potato.com/';
 
   it('renders result with content', function() {
-    var searchResult = <Result url={ url } result={ result }>foo</Result>;
+    var searchResult = <Result result={ result }>foo</Result>;
     var component = TestUtils.renderIntoDocument(searchResult);
     var element = findByClass(component, 'AggregateSearchResult');
 
     expect(element.getDOMNode().textContent).toBe('foo');
   });
 
-  it('links to given url if onSelect callback not given', function() {
-    var searchResult = <Result result={ result } url={ url } />;
-    var component    = TestUtils.renderIntoDocument(searchResult);
-    var element      = findByClass(component, 'AggregateSearchResult');
-
-    expect(element.getDOMNode().href).toBe(url);
-  });
-
-  it('calls onSelect on click if given', function() {
+  it('calls onSelect on click', function() {
     var callback     = jest.genMockFunction();
     var searchResult = <Result result={ result } onSelect={ callback } />;
     var component    = TestUtils.renderIntoDocument(searchResult);

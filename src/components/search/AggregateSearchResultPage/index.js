@@ -65,7 +65,7 @@ module.exports = React.createClass({
     var page = this.props.result;
 
     return (
-      <AggregateSearchResult url={ page.url } onSelect={ this.props.onSelect } result={ page }>
+      <AggregateSearchResult onSelect={ this.props.onSelect } result={ page }>
         <div className="AggregateSearchResultPage__avatar">
           <img src={ page.image.medium_image_url } />
         </div>

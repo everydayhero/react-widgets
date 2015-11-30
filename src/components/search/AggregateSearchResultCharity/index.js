@@ -56,7 +56,7 @@ module.exports = React.createClass({
     var charity = this.props.result;
 
     return (
-      <AggregateSearchResult url={ charity.url } result={ charity } onSelect={ this.props.onSelect }>
+      <AggregateSearchResult result={ charity } onSelect={ this.props.onSelect }>
         { this.renderLogo() || this.renderAvatar() }
         <div className="AggregateSearchResultCharity__content">
           <div className="AggregateSearchResultCharity__header">{ charity.name }</div>

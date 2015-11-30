@@ -75,7 +75,7 @@ module.exports = React.createClass({
     var url = campaign.url || campaign.get_started_url;
 
     return (
-      <AggregateSearchResult url={ url } onSelect={ this.props.onSelect } result={ campaign }>
+      <AggregateSearchResult onSelect={ this.props.onSelect } result={ campaign }>
         { this.renderDate() }
         <div className="AggregateSearchResultCampaign__content">
           <div className="AggregateSearchResultCampaign__header">{ campaign.name }</div>

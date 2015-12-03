@@ -69,10 +69,17 @@ describe('UpcomingEvents', function() {
     });
 
     it('loads campaigns for given charity', function() {
-      var options = { status: 'active', sortBy: 'start_at', excludeCharities: true, excludePages: true, excludeBau: true };
-      expect(campaign.findByCharity).toBeCalledWith('au-1234', 1, null, jasmine.any(Function), options);
+      var options = {
+        searchTerm: '',
+        charityUids: 'au-1234',
+        page: 1,
+        pageSize: 100,
+        excludeBau: true,
+        includePagesActive: true
+      };
+      expect(campaign.search).toBeCalledWith(options, jasmine.any(Function));
 
-      var callback = campaign.findByCharity.mock.calls[0][3];
+      var callback = campaign.search.mock.calls[0][1];
       callback({ campaigns: [] });
     });
   });

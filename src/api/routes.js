@@ -19,7 +19,7 @@ var baseRoutes = {
   pages:                '{baseUrl}/api/v2/pages.jsonp?ids={pageIds}&campaign_id={campaignUid}&charity_ids={charityUid}&type={type}&include_footprint={includeFootprint}&page={page}&limit={limit}&start_created_at={start}&end_created_at={end}',
 
   searchAggregate:      '{baseUrl}/api/v2/search/aggregate.jsonp?q={searchTerm}&country_code={country}&page={page}&page_size={pageSize}&minimum_score={minimumScore}',
-  searchCampaigns:      '{baseUrl}/api/v2/search/campaigns.jsonp?q={searchTerm}&country_code={country}&page={page}&page_size={pageSize}&minimum_score={minimumScore}&charity_ids={charityUids}',
+  searchCampaigns:      '{baseUrl}/api/v2/search/campaigns.jsonp?q={searchTerm}&country_code={country}&page={page}&page_size={pageSize}&minimum_score={minimumScore}&charity_ids={charityUids}&exclude_bau={excludeBau}&include_pages_active={includePagesActive}&sort_by={sortBy}',
   searchCharities:      '{baseUrl}/api/v2/search/charities.jsonp?q={searchTerm}&country_code={country}&campaign_id={campaignUid}&page={page}&page_size={pageSize}&minimum_score={minimumScore}',
   searchPages:          '{baseUrl}/api/v2/search/pages.jsonp?q={searchTerm}&country_code={country}&campaign_id={campaignUid}&charity_id={charityUid}&type={pageType}&page={page}&page_size={pageSize}&minimum_score={minimumScore}',
 

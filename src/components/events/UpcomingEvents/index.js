@@ -8,7 +8,6 @@ var Icon = require('../../helpers/Icon');
 var Event = require('../Event');
 var Button = require('../../callstoaction/CallToActionButton');
 var campaign = require('../../../api/campaigns');
-var charity = require('../../../api/charities');
 
 var blacklist = [
   'au-18856', 'au-18881', 'au-18882', 'au-18883', 'au-18884', 'au-18885',
@@ -78,7 +77,7 @@ module.exports = React.createClass({
 
   filterEvents: function(events) {
     return _.filter(events, function(e) {
-      return this.whitelisted(e.id) || !this.blacklisted(e.id);
+      return this.whitelisted(e.uid) || !this.blacklisted(e.uid);
     }, this);
   },
 
@@ -89,13 +88,15 @@ module.exports = React.createClass({
   },
 
   loadEvents: function() {
-    var cancelLoad = campaign.findByCharity(this.props.charityUid, 1, null, this.onEventLoad, {
-      status: 'active',
-      sortBy: 'start_at',
+    var query = {
+      searchTerm: '',
+      charityUids: this.props.charityUid,
+      page: 1,
+      pageSize: 100,
       excludeBau: true,
-      excludePages: true,
-      excludeCharities: true
-    });
+      includePagesActive: true,
+    };
+    var cancelLoad = campaign.search(query, this.onEventLoad);
     this.setState({ cancelLoad: cancelLoad });
   },
 
@@ -115,7 +116,7 @@ module.exports = React.createClass({
         name: e.name,
         date: new Date(e.display_start_at),
         campaignUrl: e.url,
-        donateUrl: e.donate_url,
+        donateUrl: this.donateUrl(e.donate_url),
         getStartedUrl: e.get_started_url,
         backgroundImageUrl: e.widget_background_image_url,
         backgroundBlurUrl: e.widget_blurred_background_image_url,
@@ -127,6 +128,12 @@ module.exports = React.createClass({
 
       return <Event { ...props } />;
     }, this);
+  },
+
+  donateUrl: function(url) {
+    if (url) {
+      return url + '?charity_id=' + this.props.charityUid
+    }
   },
 
   renderButton: function() {

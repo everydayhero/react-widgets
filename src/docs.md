@@ -167,6 +167,9 @@ Optional string used to constrain search results to a given type. Set to either 
 `charityUids` (array)<br>
 Optional array used to filter campaign results by given charity uids.
 
+`charityUuids` (array)<br>
+Optional array used to filter campaign results by given charity uuids. Can be used as an alternative to using the regular `charityUids` parameter.
+
 `onSelect` (function)<br>
 Optional function called on selecting a result. Takes a single argument that returns a full API response object for the selected result.
 

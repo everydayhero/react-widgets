@@ -190,11 +190,17 @@ describe('campaigns', function() {
 
   describe('search', function() {
     it('searches for campaigns', function() {
-      var query = { searchTerm: 'bar', country: 'xy', page: 2, pageSize: 7 };
+      var query = {
+        searchTerm: 'bar',
+        country: 'xy',
+        page: 2,
+        pageSize: 7,
+        charityUuids: ['abc-123', 'xyz-456']
+      };
       var callback = jest.genMockFunction();
       campaigns.search(query, callback);
 
-      expect(getJSONP).toBeCalledWith('https://everydayhero.com/api/v2/search/campaigns.jsonp?q=bar&country_code=xy&page=2&page_size=7', callback, {timeout: 10000});
+      expect(getJSONP).toBeCalledWith('https://everydayhero.com/api/v2/search/campaigns.jsonp?q=bar&country_code=xy&page=2&page_size=7&charity_uuids=abc-123,xyz-456', callback, { timeout: 10000 });
       expect(callback).toBeCalledWith(results);
     });
   });

@@ -39,7 +39,8 @@ module.exports = React.createClass({
       other: React.PropTypes.number
     }),
     searchType: React.PropTypes.oneOf(['campaigns', 'charities', 'pages', 'all']),
-    charityUids: React.PropTypes.array
+    charityUids: React.PropTypes.array,
+    charityUuids: React.PropTypes.array
   },
 
   getDefaultProps: function() {
@@ -77,7 +78,8 @@ module.exports = React.createClass({
       },
       pageSize: 10,
       searchType: 'all',
-      charityUids: []
+      charityUids: [],
+      charityUuids: []
     };
   },
 
@@ -131,7 +133,8 @@ module.exports = React.createClass({
       page: page || 1,
       pageSize: this.props.pageSize,
       minimumScore: this.props.minimumScore[this.state.filter] || this.props.minimumScore.other,
-      charityUids: this.props.charityUids
+      charityUids: this.props.charityUids,
+      charityUuids: this.props.charityUuids
     }, this.updateResults);
 
     this.setState({
@@ -191,7 +194,8 @@ module.exports = React.createClass({
       page: 1,
       pageSize: 1,
       minimumScore: this.props.minimumScore.other,
-      charityUids: this.props.charityUids
+      charityUids: this.props.charityUids,
+      charityUuids: this.props.charityUuids
     };
 
     var types = this.props.searchType === 'all' ? ['campaigns', 'charities', 'pages'] : [this.props.searchType];

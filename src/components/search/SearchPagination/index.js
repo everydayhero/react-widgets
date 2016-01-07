@@ -59,7 +59,7 @@ module.exports = React.createClass({
         <button type="button" className='SearchPagination__button--left' onClick={ this.onPageLeft } disabled={ isFirstPage }>
           <Icon icon="chevron-left"/>
         </button>
-        <button  type="button" className='SearchPagination__button--right' onClick={ this.onPageRight } disabled={ isLastPage }>
+        <button type="button" className='SearchPagination__button--right' onClick={ this.onPageRight } disabled={ isLastPage }>
           <Icon icon="chevron-right"/>
         </button>
       </div>

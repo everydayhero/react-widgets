@@ -56,10 +56,10 @@ module.exports = React.createClass({
           <span className="SearchPagination__current">{ from } - { to } </span>
           <span className="SearchPagination__count">of { this.getCount() }</span>
         </div>
-        <button className='SearchPagination__button--left' onClick={ this.onPageLeft } disabled={ isFirstPage }>
+        <button type="button" className='SearchPagination__button--left' onClick={ this.onPageLeft } disabled={ isFirstPage }>
           <Icon icon="chevron-left"/>
         </button>
-        <button className='SearchPagination__button--right' onClick={ this.onPageRight } disabled={ isLastPage }>
+        <button  type="button" className='SearchPagination__button--right' onClick={ this.onPageRight } disabled={ isLastPage }>
           <Icon icon="chevron-right"/>
         </button>
       </div>

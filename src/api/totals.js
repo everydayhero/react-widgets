@@ -11,8 +11,8 @@ function customJoin(ids, joinString) {
 
 module.exports = {
   findByCampaigns: function(params, callback, options) {
-    var campaignUids = params.campaignUids ? customJoin(params.campaignUids, '&campaign_id[]=') : null;
-    var groupValues = params.groupValues ? customJoin(params.groupValues, '&group_value[]=') : null;
+    var campaignUids = params.campaignUids ? customJoin(params.campaignUids, '&campaign_id[]=') : undefined;
+    var groupValues = params.groupValues ? customJoin(params.groupValues, '&group_value[]=') : undefined;
     var mergedParams = _.merge({ campaignUid: campaignUids, groupValue: groupValues }, options);
 
     return getJSONP(routes.get('totals', mergedParams), callback);
@@ -26,8 +26,8 @@ module.exports = {
   },
 
   findByCharities: function(params, callback, options) {
-    var charityUids = params.charityUids ? customJoin(params.charityUids, '&charity_id[]=') : null;
-    var groupValues = params.groupValues ? customJoin(params.groupValues, '&group_value[]=') : null;
+    var charityUids = params.charityUids ? customJoin(params.charityUids, '&charity_id[]=') : undefined;
+    var groupValues = params.groupValues ? customJoin(params.groupValues, '&group_value[]=') : undefined;
     var mergedParams = _.merge({ charityUid: charityUids, groupValue: groupValues }, options);
 
     return getJSONP(routes.get('totals', mergedParams), callback);

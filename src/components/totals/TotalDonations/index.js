@@ -38,8 +38,6 @@ module.exports = React.createClass({
       backgroundColor: '',
       textColor: '',
       format: '0,0',
-      groupValue: null,
-      groupValues: null,
       defaultI18n: {
         title: 'Donations'
       }

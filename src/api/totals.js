@@ -10,21 +10,26 @@ function customJoin(ids, joinString) {
 }
 
 module.exports = {
-  findByCampaigns: function(campaignUids, callback, options) {
-    campaignUids = customJoin(campaignUids, '&campaign_id[]=');
-    var params = _.merge({ campaignUid: campaignUids }, options);
-    return getJSONP(routes.get('totals', params), callback);
+  findByCampaigns: function(params, callback, options) {
+    var campaignUids = params.campaignUids ? customJoin(params.campaignUids, '&campaign_id[]=') : null;
+    var groupValues = params.groupValues ? customJoin(params.groupValues, '&group_value[]=') : null;
+    var mergedParams = _.merge({ campaignUid: campaignUids, groupValue: groupValues }, options);
+
+    return getJSONP(routes.get('totals', mergedParams), callback);
   },
 
   findByPages: function(pageIds, callback, options) {
     pageIds = customJoin(pageIds, '&page_id[]=');
     var params = _.merge({ page: pageIds }, options);
+
     return getJSONP(routes.get('totals', params), callback);
   },
 
-  findByCharities: function(charityUids, callback, options) {
-    charityUids = customJoin(charityUids, '&charity_id[]=');
-    var params = _.merge({ charityUid: charityUids }, options);
-    return getJSONP(routes.get('totals', params), callback);
+  findByCharities: function(params, callback, options) {
+    var charityUids = params.charityUids ? customJoin(params.charityUids, '&charity_id[]=') : null;
+    var groupValues = params.groupValues ? customJoin(params.groupValues, '&group_value[]=') : null;
+    var mergedParams = _.merge({ charityUid: charityUids, groupValue: groupValues }, options);
+
+    return getJSONP(routes.get('totals', mergedParams), callback);
   }
 };

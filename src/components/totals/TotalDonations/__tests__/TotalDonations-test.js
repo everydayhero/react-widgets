@@ -51,7 +51,7 @@ describe('TotalDonations', function() {
 
     it('makes a single call using to fetch api data', function() {
       expect(totals.findByCampaigns.mock.calls.length).toEqual(1);
-      expect(totals.findByCampaigns).toBeCalledWith("us-22", element.onSuccess, {});
+      expect(totals.findByCampaigns).toBeCalledWith({campaignUids: "us-22"}, element.onSuccess, {});
     });
   });
 
@@ -67,7 +67,7 @@ describe('TotalDonations', function() {
 
     it('makes multiple calls to fetch api data', function() {
       expect(totals.findByCampaigns.mock.calls.length).toEqual(1);
-      expect(totals.findByCampaigns).toBeCalledWith(["us-22", "us-24"], element.onSuccess, {});
+      expect(totals.findByCampaigns).toBeCalledWith({campaignUids: ["us-22", "us-24"]}, element.onSuccess, {});
     });
   });
 
@@ -83,7 +83,7 @@ describe('TotalDonations', function() {
 
     it('handles a single charity id', function() {
       expect(totals.findByCharities.mock.calls.length).toEqual(1);
-      expect(totals.findByCharities).toBeCalledWith("au-24", element.onSuccess, {});
+      expect(totals.findByCharities).toBeCalledWith({charityUids: "au-24"}, element.onSuccess, {});
     });
   });
 
@@ -185,7 +185,7 @@ describe('TotalDonations', function() {
 
     it('handles a startAt property', function() {
       expect(totals.findByCharities.mock.calls.length).toEqual(1);
-      expect(totals.findByCharities).toBeCalledWith("au-31", element.onSuccess, {start:'2015-01-01'});
+      expect(totals.findByCharities).toBeCalledWith({charityUids: "au-31"}, element.onSuccess, {start:'2015-01-01'});
     });
   });
 
@@ -201,7 +201,7 @@ describe('TotalDonations', function() {
 
     it('handles a endAt property', function() {
       expect(totals.findByCharities.mock.calls.length).toEqual(1);
-      expect(totals.findByCharities).toBeCalledWith("au-24", element.onSuccess, {end:'2015-06-01'});
+      expect(totals.findByCharities).toBeCalledWith({charityUids: "au-24"}, element.onSuccess, {end:'2015-06-01'});
     });
   });
 });

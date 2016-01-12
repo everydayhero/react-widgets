@@ -7,6 +7,11 @@ var pages     = require('../../../api/pages');
 var Icon      = require('../../helpers/Icon');
 var numeral   = require('numeral');
 
+function customJoin(ids, joinString) {
+  ids = _.isString(ids) ? [ids] : ids;
+  return ids.length > 1 ? ids.join(joinString) : ids[0];
+}
+
 module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "TotalSupporters",
@@ -15,14 +20,15 @@ module.exports = React.createClass({
     campaignUids: React.PropTypes.array,
     charityUid: React.PropTypes.string,
     charityUids: React.PropTypes.array,
-    startAt: React.PropTypes.string,
-    endAt: React.PropTypes.string,
     pageCount: React.PropTypes.number,
     pageSize: React.PropTypes.number,
     renderIcon: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     format: React.PropTypes.string,
+    groupValue: React.PropTypes.string,
+    groupValues: React.PropTypes.array,
+    searchTerm: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
 
@@ -32,8 +38,6 @@ module.exports = React.createClass({
       campaignUids: [],
       charityUid: '',
       charityUids: [],
-      startAt: null,
-      endAt: null,
       pageCount: 1,
       pageSize: 1,
       pageType: 'individual',
@@ -41,6 +45,7 @@ module.exports = React.createClass({
       backgroundColor: null,
       textColor: null,
       format: '0,0',
+      searchTerm: '',
       defaultI18n: {
         title: 'Supporters'
       }
@@ -57,7 +62,7 @@ module.exports = React.createClass({
   onSuccess: function(result) {
     this.setState({
       isLoading: false,
-      total: this.state.total + result.meta.count
+      total: this.state.total + result.meta.pagination.count
     });
   },
 
@@ -74,7 +79,7 @@ module.exports = React.createClass({
       campaignUids = this.props.campaignUids;
     }
 
-    return campaignUids;
+    return customJoin(campaignUids, '&campaign_id[]=');
   },
 
   setCharityUids: function() {
@@ -86,35 +91,36 @@ module.exports = React.createClass({
       charityUids = this.props.charityUids;
     }
 
-    return charityUids;
+    return customJoin(charityUids, '&charity_id[]=');
+  },
+
+  setGroupValues: function() {
+    var groupValues = [];
+
+    if (this.props.groupValue) {
+      groupValues.push(this.props.groupValue);
+    } else if (this.props.groupValues) {
+      groupValues = this.props.groupValues;
+    } else {
+      groupValues = [''];
+    }
+
+    return customJoin(groupValues, '&group_value[]=');
   },
 
   loadPages: function() {
     this.setState({ isLoading: true });
 
-    var campaignUids = this.setCampaignUids();
     var props = this.props;
-    var charityUids  = this.setCharityUids();
 
-    var options = {};
-
-    if (props.startAt) {
-      options.start = props.startAt;
-    }
-
-    if (props.endAt) {
-      options.end = props.endAt;
-    }
-
-    if (campaignUids.length > 0) {
-      _.each(campaignUids, function(campaignUid) {
-        pages.findByCampaign(campaignUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess, options);
-      }, this);
-    } else if (charityUids.length > 0) {
-      _.each(charityUids, function(charityUid) {
-        pages.findByCharity(charityUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess, options);
-      }, this);
-    }
+    pages.search({
+      campaignUid: this.setCampaignUids(),
+      charityUid: this.setCharityUids(),
+      groupValue: this.setGroupValues(),
+      pageSize: 1,
+      page: 1,
+      searchTerm: props.searchTerm
+    }, this.onSuccess);
   },
 
   renderTotal: function() {

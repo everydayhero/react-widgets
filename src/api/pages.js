@@ -4,6 +4,7 @@ var _         = require('lodash');
 var routes    = require('./routes');
 var getJSONP  = require('../lib/getJSONP');
 var campaigns = require('./campaigns');
+var paramJoin = require('../lib/paramJoin');
 
 module.exports = {
   find: function(pageId, callback, options) {
@@ -39,8 +40,12 @@ module.exports = {
   },
 
   search: function(params, callback) {
+    params.charityUid = params.charityUid ? paramJoin(params.charityUid, '&charity_id[]=') : '';
+    params.campaignUid = params.campaignUid ? paramJoin(params.campaignUid, '&campaign_id[]=') : '';
+    params.groupValue = params.groupValue ? paramJoin(params.groupValue, '&group_value[]=') : '';
     params = _.merge({ page: 1, pageSize: 10 }, params);
     params.searchTerm = encodeURIComponent(params.searchTerm);
+
     return getJSONP(routes.get('searchPages', params), callback, {timeout: 10000});
   },
 

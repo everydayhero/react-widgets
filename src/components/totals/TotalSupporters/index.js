@@ -15,14 +15,15 @@ module.exports = React.createClass({
     campaignUids: React.PropTypes.array,
     charityUid: React.PropTypes.string,
     charityUids: React.PropTypes.array,
-    startAt: React.PropTypes.string,
-    endAt: React.PropTypes.string,
     pageCount: React.PropTypes.number,
     pageSize: React.PropTypes.number,
     renderIcon: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
     format: React.PropTypes.string,
+    groupValue: React.PropTypes.string,
+    groupValues: React.PropTypes.array,
+    searchTerm: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
 
@@ -32,8 +33,8 @@ module.exports = React.createClass({
       campaignUids: [],
       charityUid: '',
       charityUids: [],
-      startAt: null,
-      endAt: null,
+      groupValue: '',
+      groupValues: [],
       pageCount: 1,
       pageSize: 1,
       pageType: 'individual',
@@ -41,6 +42,7 @@ module.exports = React.createClass({
       backgroundColor: null,
       textColor: null,
       format: '0,0',
+      searchTerm: '',
       defaultI18n: {
         title: 'Supporters'
       }
@@ -57,7 +59,7 @@ module.exports = React.createClass({
   onSuccess: function(result) {
     this.setState({
       isLoading: false,
-      total: this.state.total + result.meta.count
+      total: this.state.total + result.meta.pagination.count
     });
   },
 
@@ -89,32 +91,31 @@ module.exports = React.createClass({
     return charityUids;
   },
 
+  setGroupValues: function() {
+    var groupValues = [];
+
+    if (this.props.groupValue) {
+      groupValues.push(this.props.groupValue);
+    } else {
+      groupValues = this.props.groupValues;
+    }
+
+    return groupValues;
+  },
+
   loadPages: function() {
     this.setState({ isLoading: true });
 
-    var campaignUids = this.setCampaignUids();
     var props = this.props;
-    var charityUids  = this.setCharityUids();
 
-    var options = {};
-
-    if (props.startAt) {
-      options.start = props.startAt;
-    }
-
-    if (props.endAt) {
-      options.end = props.endAt;
-    }
-
-    if (campaignUids.length > 0) {
-      _.each(campaignUids, function(campaignUid) {
-        pages.findByCampaign(campaignUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess, options);
-      }, this);
-    } else if (charityUids.length > 0) {
-      _.each(charityUids, function(charityUid) {
-        pages.findByCharity(charityUid, props.pageType, props.pageCount, props.pageSize, this.onSuccess, options);
-      }, this);
-    }
+    pages.search({
+      campaignUid: this.setCampaignUids(),
+      charityUid: this.setCharityUids(),
+      groupValue: this.setGroupValues(),
+      pageSize: 1,
+      page: 1,
+      searchTerm: props.searchTerm
+    }, this.onSuccess);
   },
 
   renderTotal: function() {

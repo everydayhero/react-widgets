@@ -15,7 +15,7 @@ describe('TotalSupporters', function() {
     var element;
 
     beforeEach(function() {
-      pages.findByCampaign.mockClear();
+      pages.search.mockClear();
       totalSupporters = <TotalSupporters campaignUid="us-22" />;
       element = TestUtils.renderIntoDocument(totalSupporters);
     });
@@ -50,8 +50,15 @@ describe('TotalSupporters', function() {
     });
 
     it('makes a single call using to fetch api data', function() {
-      expect(pages.findByCampaign.mock.calls.length).toEqual(1);
-      expect(pages.findByCampaign).toBeCalledWith("us-22", 'individual', 1, 1, element.onSuccess, {});
+      expect(pages.search.mock.calls.length).toEqual(1);
+      expect(pages.search).toBeCalledWith({
+        campaignUid: ["us-22"],
+        charityUid: [],
+        groupValue: [],
+        pageSize: 1,
+        page: 1,
+        searchTerm: ""
+      }, element.onSuccess);
     });
   });
 
@@ -60,15 +67,21 @@ describe('TotalSupporters', function() {
     var element;
 
     beforeEach(function() {
-      pages.findByCampaign.mockClear();
+      pages.search.mockClear();
       totalSupporters = <TotalSupporters campaignUids={ ["us-22", "us-24"] } />;
       element = TestUtils.renderIntoDocument(totalSupporters);
     });
 
-    it('makes multiple calls to fetch api data', function() {
-      expect(pages.findByCampaign.mock.calls.length).toEqual(2);
-      expect(pages.findByCampaign).toBeCalledWith("us-22", 'individual', 1, 1, element.onSuccess, {});
-      expect(pages.findByCampaign).toBeCalledWith("us-24", 'individual', 1, 1, element.onSuccess, {});
+    it('makes a single call to fetch api data', function() {
+      expect(pages.search.mock.calls.length).toEqual(1);
+      expect(pages.search).toBeCalledWith({
+        campaignUid: ["us-22", "us-24"],
+        charityUid: [],
+        groupValue: [],
+        pageSize: 1,
+        page: 1,
+        searchTerm: ""
+      }, element.onSuccess);
     });
   });
 
@@ -77,14 +90,21 @@ describe('TotalSupporters', function() {
     var element;
 
     beforeEach(function() {
-      pages.findByCharity.mockClear();
+      pages.search.mockClear();
       totalSupporters = <TotalSupporters charityUid="au-24" />;
       element = TestUtils.renderIntoDocument(totalSupporters);
     });
 
     it('handles a single charity id', function() {
-      expect(pages.findByCharity.mock.calls.length).toEqual(1);
-      expect(pages.findByCharity).toBeCalledWith("au-24", 'individual', 1, 1, element.onSuccess, {});
+      expect(pages.search.mock.calls.length).toEqual(1);
+      expect(pages.search).toBeCalledWith({
+        campaignUid: [],
+        charityUid: ["au-24"],
+        groupValue: [],
+        pageSize: 1,
+        page: 1,
+        searchTerm: ""
+      }, element.onSuccess);
     });
   });
 
@@ -93,47 +113,67 @@ describe('TotalSupporters', function() {
     var element;
 
     beforeEach(function() {
-      pages.findByCharity.mockClear();
+      pages.search.mockClear();
       totalSupporters = <TotalSupporters charityUids={ ["au-24", "au-31"] } />;
       element = TestUtils.renderIntoDocument(totalSupporters);
     });
 
-    it('makes multiple calls to fetch api data', function() {
-      expect(pages.findByCharity.mock.calls.length).toEqual(2);
-      expect(pages.findByCharity).toBeCalledWith("au-24", 'individual', 1, 1, element.onSuccess, {});
-      expect(pages.findByCharity).toBeCalledWith("au-31", 'individual', 1, 1, element.onSuccess, {});
+    it('makes a single call to fetch api data', function() {
+      expect(pages.search.mock.calls.length).toEqual(1);
+      expect(pages.search).toBeCalledWith({
+        campaignUid: [],
+        charityUid: ["au-24", "au-31"],
+        groupValue: [],
+        pageSize: 1,
+        page: 1,
+        searchTerm: ""
+      }, element.onSuccess);
     });
   });
 
-  describe('takes a startAt property', function() {
+  describe('Working with a single group value', function() {
     var totalSupporters;
     var element;
 
     beforeEach(function() {
-      pages.findByCharity.mockClear();
-      totalSupporters = <TotalSupporters charityUid="au-24" startAt="2015-01-01" />;
+      pages.search.mockClear();
+      totalSupporters = <TotalSupporters charityUids={ ["au-24", "au-31"] } groupValue={ "ABC" } />;
       element = TestUtils.renderIntoDocument(totalSupporters);
     });
 
-    it('handles a startAt property', function() {
-      expect(pages.findByCharity.mock.calls.length).toEqual(1);
-      expect(pages.findByCharity).toBeCalledWith("au-24", 'individual', 1, 1, element.onSuccess, {start: "2015-01-01"});
+    it('makes a single call to fetch data with a single group value', function() {
+      expect(pages.search.mock.calls.length).toEqual(1);
+      expect(pages.search).toBeCalledWith({
+        campaignUid: [],
+        charityUid: ["au-24", "au-31"],
+        groupValue: ["ABC"],
+        pageSize: 1,
+        page: 1,
+        searchTerm: ""
+      }, element.onSuccess);
     });
   });
 
-  describe('takes a endAt property', function() {
+  describe('Working with a multiple group values', function() {
     var totalSupporters;
     var element;
 
     beforeEach(function() {
-      pages.findByCharity.mockClear();
-      totalSupporters = <TotalSupporters charityUid="au-24" endAt="2015-01-01" />;
+      pages.search.mockClear();
+      totalSupporters = <TotalSupporters charityUids={ ["au-24", "au-31"] } groupValues={ ["ABC", "DEF"] } />;
       element = TestUtils.renderIntoDocument(totalSupporters);
     });
 
-    it('handles a endAt property', function() {
-      expect(pages.findByCharity.mock.calls.length).toEqual(1);
-      expect(pages.findByCharity).toBeCalledWith("au-24", 'individual', 1, 1, element.onSuccess, {end: "2015-01-01"});
+    it('makes a single call to fetch data with multiple group values', function() {
+      expect(pages.search.mock.calls.length).toEqual(1);
+      expect(pages.search).toBeCalledWith({
+        campaignUid: [],
+        charityUid: ["au-24", "au-31"],
+        groupValue: ["ABC", "DEF"],
+        pageSize: 1,
+        page: 1,
+        searchTerm: ""
+      }, element.onSuccess);
     });
   });
 

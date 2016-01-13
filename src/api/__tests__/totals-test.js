@@ -17,7 +17,7 @@ describe('totals', function() {
   describe('findByCampaigns', function() {
     it('gets total from campaign id', function() {
       var callback = jest.genMockFunction();
-      totals.findByCampaigns('us-22', callback);
+      totals.findByCampaigns({campaignUids: 'us-22'}, callback);
 
       expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/search/totals.jsonp?campaign_id[]=us-22', callback);
       expect(callback).toBeCalledWith(results);
@@ -26,7 +26,7 @@ describe('totals', function() {
 
     it('gets total from multiple campaign uids', function() {
       var callback = jest.genMockFunction();
-      totals.findByCampaigns(['xx-123','yy-123'], callback);
+      totals.findByCampaigns({campaignUids: ['xx-123','yy-123']}, callback);
 
       expect(getJSONP).lastCalledWith(
         'https://everydayhero.com/api/v2/search/totals.jsonp?campaign_id[]=xx-123&campaign_id[]=yy-123', callback
@@ -50,9 +50,35 @@ describe('totals', function() {
   describe('findByCharity', function() {
     it('gets total from charity id', function() {
       var callback = jest.genMockFunction();
-      totals.findByCharities('au-31', callback);
+      totals.findByCharities({charityUids: 'au-31'}, callback);
 
       expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/search/totals.jsonp?charity_id[]=au-31', callback);
+      expect(callback).toBeCalledWith(results);
+      expect(callback.mock.calls.length).toBe(1);
+    });
+  });
+
+  describe('filterOnGroups', function() {
+    it('gets total from charity id, filtered on a group', function() {
+      var callback = jest.genMockFunction();
+      totals.findByCharities({
+        charityUids: 'au-31',
+        groupValues: 'SchoolName'
+      }, callback);
+
+      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/search/totals.jsonp?charity_id[]=au-31&group_value[]=SchoolName', callback);
+      expect(callback).toBeCalledWith(results);
+      expect(callback.mock.calls.length).toBe(1);
+    });
+
+    it('gets total from charity id, filtered on multiple groups', function() {
+      var callback = jest.genMockFunction();
+      totals.findByCharities({
+        charityUids: 'au-31',
+        groupValues: ['SchoolName', 'ABC']
+      }, callback);
+
+      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/search/totals.jsonp?charity_id[]=au-31&group_value[]=SchoolName&group_value[]=ABC', callback);
       expect(callback).toBeCalledWith(results);
       expect(callback.mock.calls.length).toBe(1);
     });

@@ -4,11 +4,7 @@ var _         = require('lodash');
 var routes    = require('./routes');
 var getJSONP  = require('../lib/getJSONP');
 var campaigns = require('./campaigns');
-
-function customJoin(ids, joinString) {
-  ids = _.isString(ids) ? [ids] : ids;
-  return ids.length > 1 ? ids.join(joinString) : ids[0];
-}
+var paramJoin = require('../lib/paramJoin');
 
 module.exports = {
   find: function(pageId, callback, options) {
@@ -44,9 +40,9 @@ module.exports = {
   },
 
   search: function(params, callback) {
-    params.charityUid = params.charityUid ? customJoin(params.charityUid, '&charity_id[]=') : '';
-    params.campaignUid = params.campaignUid ? customJoin(params.campaignUid, '&campaign_id[]=') : '';
-    params.groupValue = params.groupValue ? customJoin(params.groupValue, '&group_value[]=') : '';
+    params.charityUid = params.charityUid ? paramJoin(params.charityUid, '&charity_id[]=') : '';
+    params.campaignUid = params.campaignUid ? paramJoin(params.campaignUid, '&campaign_id[]=') : '';
+    params.groupValue = params.groupValue ? paramJoin(params.groupValue, '&group_value[]=') : '';
     params = _.merge({ page: 1, pageSize: 10 }, params);
     params.searchTerm = encodeURIComponent(params.searchTerm);
 

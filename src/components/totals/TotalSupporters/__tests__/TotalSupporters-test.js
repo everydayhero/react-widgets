@@ -50,9 +50,15 @@ describe('TotalSupporters', function() {
     });
 
     it('makes a single call using to fetch api data', function() {
-      console.log(pages.search.mock.calls);
       expect(pages.search.mock.calls.length).toEqual(1);
-      expect(pages.search).toBeCalledWith({ campaignUid: "us-22" }, element.onSuccess);
+      expect(pages.search).toBeCalledWith({
+        campaignUid: ["us-22"],
+        charityUid: [],
+        groupValue: [],
+        pageSize: 1,
+        page: 1,
+        searchTerm: ""
+      }, element.onSuccess);
     });
   });
 
@@ -68,7 +74,14 @@ describe('TotalSupporters', function() {
 
     it('makes a single call to fetch api data', function() {
       expect(pages.search.mock.calls.length).toEqual(1);
-      expect(pages.search).toBeCalledWith({ campaignUid: "us-22&campaign_id[]=us-24" }, element.onSuccess);
+      expect(pages.search).toBeCalledWith({
+        campaignUid: ["us-22", "us-24"],
+        charityUid: [],
+        groupValue: [],
+        pageSize: 1,
+        page: 1,
+        searchTerm: ""
+      }, element.onSuccess);
     });
   });
 
@@ -84,7 +97,14 @@ describe('TotalSupporters', function() {
 
     it('handles a single charity id', function() {
       expect(pages.search.mock.calls.length).toEqual(1);
-      expect(pages.search).toBeCalledWith({charityUid: "au-24" }, element.onSuccess);
+      expect(pages.search).toBeCalledWith({
+        campaignUid: [],
+        charityUid: ["au-24"],
+        groupValue: [],
+        pageSize: 1,
+        page: 1,
+        searchTerm: ""
+      }, element.onSuccess);
     });
   });
 
@@ -100,7 +120,60 @@ describe('TotalSupporters', function() {
 
     it('makes a single call to fetch api data', function() {
       expect(pages.search.mock.calls.length).toEqual(1);
-      expect(pages.search).toBeCalledWith({ charityUid: "au-24&charityUid[]=au-31" }, element.onSuccess);
+      expect(pages.search).toBeCalledWith({
+        campaignUid: [],
+        charityUid: ["au-24", "au-31"],
+        groupValue: [],
+        pageSize: 1,
+        page: 1,
+        searchTerm: ""
+      }, element.onSuccess);
+    });
+  });
+
+  describe('Working with a single group value', function() {
+    var totalSupporters;
+    var element;
+
+    beforeEach(function() {
+      pages.search.mockClear();
+      totalSupporters = <TotalSupporters charityUids={ ["au-24", "au-31"] } groupValue={ "ABC" } />;
+      element = TestUtils.renderIntoDocument(totalSupporters);
+    });
+
+    it('makes a single call to fetch data with a single group value', function() {
+      expect(pages.search.mock.calls.length).toEqual(1);
+      expect(pages.search).toBeCalledWith({
+        campaignUid: [],
+        charityUid: ["au-24", "au-31"],
+        groupValue: ["ABC"],
+        pageSize: 1,
+        page: 1,
+        searchTerm: ""
+      }, element.onSuccess);
+    });
+  });
+
+  describe('Working with a multiple group values', function() {
+    var totalSupporters;
+    var element;
+
+    beforeEach(function() {
+      pages.search.mockClear();
+      totalSupporters = <TotalSupporters charityUids={ ["au-24", "au-31"] } groupValues={ ["ABC", "DEF"] } />;
+      element = TestUtils.renderIntoDocument(totalSupporters);
+    });
+
+    it('makes a single call to fetch data with multiple group values', function() {
+      expect(pages.search.mock.calls.length).toEqual(1);
+      expect(pages.search).toBeCalledWith({
+        campaignUid: [],
+        charityUid: ["au-24", "au-31"],
+        groupValue: ["ABC", "DEF"],
+        pageSize: 1,
+        page: 1,
+        searchTerm: ""
+      }, element.onSuccess);
     });
   });
 

@@ -7,11 +7,6 @@ var pages     = require('../../../api/pages');
 var Icon      = require('../../helpers/Icon');
 var numeral   = require('numeral');
 
-function customJoin(ids, joinString) {
-  ids = _.isString(ids) ? [ids] : ids;
-  return ids.length > 1 ? ids.join(joinString) : ids[0];
-}
-
 module.exports = React.createClass({
   mixins: [I18nMixin],
   displayName: "TotalSupporters",
@@ -38,6 +33,8 @@ module.exports = React.createClass({
       campaignUids: [],
       charityUid: '',
       charityUids: [],
+      groupValue: '',
+      groupValues: [],
       pageCount: 1,
       pageSize: 1,
       pageType: 'individual',
@@ -79,7 +76,7 @@ module.exports = React.createClass({
       campaignUids = this.props.campaignUids;
     }
 
-    return customJoin(campaignUids, '&campaign_id[]=');
+    return campaignUids;
   },
 
   setCharityUids: function() {
@@ -91,7 +88,7 @@ module.exports = React.createClass({
       charityUids = this.props.charityUids;
     }
 
-    return customJoin(charityUids, '&charity_id[]=');
+    return charityUids;
   },
 
   setGroupValues: function() {
@@ -99,13 +96,11 @@ module.exports = React.createClass({
 
     if (this.props.groupValue) {
       groupValues.push(this.props.groupValue);
-    } else if (this.props.groupValues) {
-      groupValues = this.props.groupValues;
     } else {
-      groupValues = [''];
+      groupValues = this.props.groupValues;
     }
 
-    return customJoin(groupValues, '&group_value[]=');
+    return groupValues;
   },
 
   loadPages: function() {

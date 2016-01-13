@@ -414,11 +414,11 @@ Charity uid to filter results by charity.
 `charityUids` (array)<br>
 Charity uids to filter results by multiple charities.
 
-`startAt` (string)<br>
-YYYY-MM-DD date string to get results on or after this date.
+`groupValue` (string)<br>
+Group value to filter results by a group.
 
-`endAt` (string)<br>
-YYYY-MM-DD date string to get results on or before this date.
+`groupValues` (array)<br>
+Group values to filter results by multiple groups.
 
 `backgroundColor` (string)<br>
 Accepts a CSS color value. Not set by default.

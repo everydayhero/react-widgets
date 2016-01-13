@@ -48,7 +48,6 @@ module.exports = {
     params.campaignUid = params.campaignUid ? customJoin(params.campaignUid, '&campaign_id[]=') : '';
     params.groupValue = params.groupValue ? customJoin(params.groupValue, '&group_value[]=') : '';
     params = _.merge({ page: 1, pageSize: 10 }, params);
-
     params.searchTerm = encodeURIComponent(params.searchTerm);
 
     return getJSONP(routes.get('searchPages', params), callback, {timeout: 10000});

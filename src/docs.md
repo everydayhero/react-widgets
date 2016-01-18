@@ -344,6 +344,12 @@ Charity uid to filter results by charity.
 `charityUids` (array)<br>
 Charity uids to filter results by multiple charities.
 
+`groupValue` (string)<br>
+Group value to filter results by a group.
+
+`groupValues` (array)<br>
+Group values to filter results by multiple groups.
+
 `startAt` (string)<br>
 YYYY-MM-DD date string to get results on or after this date.
 
@@ -666,6 +672,12 @@ Campaign uid or uids to filter results by campaigns.
 `charityUid` (string or array)<br>
 Charity uid or uids to filter results by charities.
 
+`groupValue` (string)<br>
+Group value to filter results by a group.
+
+`groupValues` (array)<br>
+Group values to filter results by multiple groups.
+
 `startAt` (string)<br>
 YYYY-MM-DD date string to get results on or after this date.
 
@@ -985,6 +997,12 @@ Charity uid to filter results by charity. If used with `campaignUid` or `campaig
 
 `charitySlug` (string)<br>
 Charity slug to filter results by charity. Requires `country`.
+
+`groupValue` (string)<br>
+Group value to filter results by a group.
+
+`groupValues` (array)<br>
+Group values to filter results by multiple groups.
 
 `country` (string)<br>
 Country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.

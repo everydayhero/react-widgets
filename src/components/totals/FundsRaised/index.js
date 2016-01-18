@@ -81,9 +81,9 @@ module.exports = React.createClass({
     if (pageIds) {
       totals.findByPages(pageIds, this.onSuccess, options);
     } else if (charityUids) {
-      totals.findByCharities(charityUids, this.onSuccess, options);
+      totals.findByCharities({charityUids: charityUids}, this.onSuccess, options);
     } else if (campaignUids) {
-      totals.findByCampaigns(campaignUids, this.onSuccess, options);
+      totals.findByCampaigns({campaignUids: campaignUids}, this.onSuccess, options);
     }
   },
 

@@ -24,6 +24,8 @@ module.exports = React.createClass({
     campaignUids: React.PropTypes.array,
     charitySlug: React.PropTypes.string,
     charityUid: React.PropTypes.string,
+    groupValues: React.PropTypes.array,
+    groupValue: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
     limit: React.PropTypes.number,
     pageSize: React.PropTypes.number,
@@ -45,6 +47,8 @@ module.exports = React.createClass({
       childWidth: 250,
       renderImage: true,
       currencyFormat: '0,0[.]00',
+      groupValue: '',
+      groupValues: [],
       defaultI18n: {
         symbol: '$',
         heading: 'Top Individuals',

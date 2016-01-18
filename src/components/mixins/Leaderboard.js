@@ -8,22 +8,27 @@ var numeral           = require('numeral');
 var campaigns         = require('../../api/campaigns');
 var charities         = require('../../api/charities');
 var LeaderboardPaging = require('../leaderboards/LeaderboardPaging');
+var paramJoin         = require('../../lib/paramJoin');
 
 module.exports = {
   getEndpoint: function() {
     var endpoint;
     var props = this.props;
 
-    if (props.country) {
+    if(props.country) {
       if (props.campaignSlug) {
         endpoint = campaigns.leaderboardBySlug.bind(campaigns, props.country, props.campaignSlug);
-      } else if (props.charitySlug) { endpoint = charities.leaderboardBySlug.bind(charities, props.country, props.charitySlug); }
+      } else if (props.charitySlug) {
+        endpoint = charities.leaderboardBySlug.bind(charities, props.country, props.charitySlug);
+      }
     } else {
       if (props.campaignUids) {
         endpoint = campaigns.leaderboardByUids.bind(campaigns, props.campaignUids, props.charityUid);
       } else if (props.campaignUid) {
         endpoint = campaigns.leaderboard.bind(campaigns, props.campaignUid, props.charityUid);
-      } else if (props.charityUid)  { endpoint = charities.leaderboard.bind(charities, props.charityUid); }
+      } else if (props.charityUid) {
+        endpoint = charities.leaderboard.bind(charities, props.charityUid);
+      }
     }
 
     if (!endpoint && console && console.log) {
@@ -36,8 +41,16 @@ module.exports = {
   loadLeaderboard: function(type) {
     this.setState({ isLoading: true });
 
+    var groupValue = this.props.groupValue;
+    if (this.props.groupValues && this.props.groupValues.length > 0) {
+      groupValue = paramJoin(this.props.groupValues, '&groupValue[]');
+    }
+
     var endpoint = this.getEndpoint();
-    endpoint(type, this.props.limit, this.processLeaderboard, { includePages: true });
+    endpoint(type, this.props.limit, this.processLeaderboard, {
+      includePages: true,
+      groupValue: groupValue,
+    });
   },
 
   processLeaderboard: function(result) {

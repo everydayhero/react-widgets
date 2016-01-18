@@ -147,11 +147,13 @@ describe('campaigns', function() {
       var callback = jest.genMockFunction();
       campaigns.leaderboard('xy-123', 'abcd', 'foo', 12, callback, {
         includePages: true,
-        includeFootprint: true
+        includeFootprint: true,
+        groupValue: 'ABC&group_value[]=DEF'
       });
 
       expect(getJSONP.mock.calls[0][0]).toContain('&include_pages=true');
       expect(getJSONP.mock.calls[0][0]).toContain('&include_footprint=true');
+      expect(getJSONP.mock.calls[0][0]).toContain('&group_value[]=ABC&group_value[]=DEF');
     });
   });
 

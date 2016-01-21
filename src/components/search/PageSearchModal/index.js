@@ -20,6 +20,7 @@ module.exports = React.createClass({
     onClose: React.PropTypes.func.isRequired,
     onSelect: React.PropTypes.func,
     pageType: React.PropTypes.oneOf(['all', 'team', 'user']),
+    groupValues: React.PropTypes.array,
     searchTerm: React.PropTypes.string
   },
 
@@ -28,6 +29,7 @@ module.exports = React.createClass({
       autoFocus: true,
       campaignUid: '',
       charityUid: '',
+      groupValues: [],
       defaultI18n: {
         title: 'Search for a Supporter Page',
         selectAction: 'Support',
@@ -84,6 +86,7 @@ module.exports = React.createClass({
       page: page || 1,
       pageSize: this.props.pageSize,
       pageType: this.props.pageType,
+      groupValue: this.props.groupValues
     }, this.updateResults);
 
     this.setState({

@@ -79,7 +79,7 @@ describe('PageSearchModal', function() {
   });
 
   it('searches for pages when provided with searchTerm prop', function() {
-    var query = { country: 'xy', searchTerm: 'bar', campaignUid: '', charityUid: '', page: 1, pageSize: 10, pageType: 'all' };
+    var query = { country: 'xy', searchTerm: 'bar', campaignUid: '', charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
     var pageSearchModal = <PageSearchModal searchTerm={ 'bar' } autoFocus={ false } action="donate" country="xy" />;
     var element = TestUtils.renderIntoDocument(pageSearchModal);
     var input = findByTag(element, 'input');
@@ -89,7 +89,7 @@ describe('PageSearchModal', function() {
   });
 
   it('searches for pages on input change', function() {
-    var query = { country: 'xy', searchTerm: 'foo', campaignUid: '', charityUid: '', page: 1, pageSize: 10, pageType: 'all' };
+    var query = { country: 'xy', searchTerm: 'foo', campaignUid: '', charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
     var pageSearchModal = <PageSearchModal autoFocus={ false } action="donate" country="xy" />;
     var element = TestUtils.renderIntoDocument(pageSearchModal);
     var input = findByTag(element, 'input');
@@ -101,7 +101,7 @@ describe('PageSearchModal', function() {
   it('searches for more pages on page change', function() {
     pages.search.mockImplementation(function(query, callback) { callback(response); });
 
-    var query = { country: 'xy', searchTerm: 'foo', campaignUid: '', charityUid: '', page: 2, pageSize: 10, pageType: 'all' };
+    var query = { country: 'xy', searchTerm: 'foo', campaignUid: '', charityUid: '', page: 2, pageSize: 10, pageType: 'all', groupValue: [] };
     var pageSearchModal = <PageSearchModal autoFocus={ false } action="donate" country="xy" />;
     var element = TestUtils.renderIntoDocument(pageSearchModal);
     var input = findByTag(element, 'input');

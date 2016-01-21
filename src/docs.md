@@ -280,6 +280,9 @@ Campaign uid to filter page results.
 `charityUid` (string)<br>
 Charity uid to filter page results.
 
+`groupValues` (array)<br>
+Group values to filter page results.
+
 `country` (string)<br>
 Country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'.
 

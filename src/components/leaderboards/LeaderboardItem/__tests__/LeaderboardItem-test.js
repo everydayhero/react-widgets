@@ -62,4 +62,25 @@ describe('LeaderboardItem', function() {
       expect(elementImg.length).toEqual(0);
     });
   });
+
+  describe('Render charity name option', function() {
+    var leaderboardItem;
+    var element;
+    var elementCharity;
+
+    it('renders a charity name if present', function() {
+      leaderboardItem = <LeaderboardItem charityName='foo' />;
+      element = TestUtils.renderIntoDocument(leaderboardItem);
+      elementCharity = scryByClass(element, 'LeaderboardItem__charity');
+      expect(elementCharity.length).toEqual(1);
+      expect(elementCharity[0].getDOMNode().textContent).toEqual('foo');
+    });
+
+    it('won\'t render a charity name if not present', function() {
+      leaderboardItem = <LeaderboardItem />;
+      element = TestUtils.renderIntoDocument(leaderboardItem);
+      elementCharity = scryByClass(element, 'LeaderboardItem__charity');
+      expect(elementCharity.length).toEqual(0);
+    });
+  });
 });

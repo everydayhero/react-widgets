@@ -16,6 +16,16 @@
   }
 }
 
+%LeaderboardItem__text {
+  box-sizing: border-box;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  line-height: 1.2;
+}
+
 .LeaderboardItem__skin {
   @extend %clearfix;
   background: #fff;
@@ -30,14 +40,12 @@
   padding: $x-4;
 
   .LeaderboardItem__name {
-    box-sizing: border-box;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
+    @extend %LeaderboardItem__text;
     font-weight: bold;
-    line-height: 1.2;
+  }
+
+  .LeaderboardItem__charity {
+    @extend %LeaderboardItem__text;
   }
 }
 

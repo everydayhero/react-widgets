@@ -1028,6 +1028,9 @@ Set to `250` by default. Sets the minimum width for leaderboard items to display
 `renderImage` (boolean)<br>
 Set to `true` by default. Determines whether a profile image is rendered for each leaderboard item.
 
+`showCharity` (boolean)<br>
+Set to `false` by default. Determines whether the charity name is rendered for each leaderboard item.
+
 `currencyFormat` (string)<br>
 Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
 

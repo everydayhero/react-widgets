@@ -87,7 +87,8 @@ module.exports = {
           amount:  page.amount.cents,
           totalMembers: page.team_member_uids.length,
           imgSrc: page.image.large_image_url,
-          medImgSrc: page.image.medium_image_url
+          medImgSrc: page.image.medium_image_url,
+          charityName: page.charity_name
         });
       }
       return result;

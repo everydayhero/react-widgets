@@ -33,6 +33,7 @@ module.exports = React.createClass({
     textColor: React.PropTypes.string,
     childWidth: React.PropTypes.number,
     currencyFormat: React.PropTypes.string,
+    showCharity: React.PropTypes.bool,
     renderImage: React.PropTypes.bool,
     i18n: React.PropTypes.object,
     onHasContent: React.PropTypes.func
@@ -45,6 +46,7 @@ module.exports = React.createClass({
       backgroundColor: null,
       textColor: null,
       childWidth: 250,
+      showCharity: false,
       renderImage: true,
       currencyFormat: '0,0[.]00',
       groupValue: '',
@@ -116,6 +118,7 @@ module.exports = React.createClass({
                   key={ item.id }
                   rank={ formattedRank }
                   name={ item.name }
+                  charityName={ this.props.showCharity && item.charityName }
                   url={ item.url }
                   isoCode={ item.isoCode }
                   amount={ formattedAmount }

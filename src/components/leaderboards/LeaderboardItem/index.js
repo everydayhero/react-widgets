@@ -13,7 +13,8 @@ module.exports = React.createClass({
     isoCode: React.PropTypes.string.isRequired,
     amount: React.PropTypes.string.isRequired,
     width: React.PropTypes.string.isRequired,
-    renderImage: React.PropTypes.bool.isRequired
+    renderImage: React.PropTypes.bool.isRequired,
+    charityName: React.PropTypes.string
   },
 
   renderProfileImage: function() {
@@ -21,6 +22,16 @@ module.exports = React.createClass({
       return (
         <div className="LeaderboardItem__image">
           <img src={ this.props.imgSrc } />
+        </div>
+      );
+    }
+  },
+
+  renderCharityName: function() {
+    if (this.props.charityName) {
+      return (
+        <div className="LeaderboardItem__charity">
+          { this.props.charityName }
         </div>
       );
     }
@@ -40,6 +51,7 @@ module.exports = React.createClass({
             <div className="LeaderboardItem__amount">
               { this.props.amount }
             </div>
+            { this.renderCharityName() }
           </div>
           <div className="LeaderboardItem__rank">
             { this.props.rank }

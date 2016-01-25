@@ -14,7 +14,18 @@ module.exports = React.createClass({
     amount: React.PropTypes.string.isRequired,
     raisedTitle: React.PropTypes.string.isRequired,
     membersTitle: React.PropTypes.string.isRequired,
-    width: React.PropTypes.string.isRequired
+    width: React.PropTypes.string.isRequired,
+    charityName: React.PropTypes.string
+  },
+
+  renderCharityName: function() {
+    if (this.props.charityName) {
+      return (
+        <div className="LeaderboardItem__charity">
+          { this.props.charityName }
+        </div>
+      );
+    }
   },
 
   render: function() {
@@ -47,6 +58,7 @@ module.exports = React.createClass({
                   </div>
                 </div>
               </div>
+              { this.renderCharityName() }
             </div>
           </div>
         </div>

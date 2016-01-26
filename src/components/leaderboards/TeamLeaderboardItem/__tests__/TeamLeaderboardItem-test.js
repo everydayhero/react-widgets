@@ -32,7 +32,6 @@ describe('TeamLeaderboardItem', function() {
   });
 
   describe('Render charity name option', function() {
-    var leaderboardItem;
     var element;
     var elementCharity;
 

@@ -33,6 +33,7 @@ module.exports = React.createClass({
     i18n: React.PropTypes.object,
     altTemplate: React.PropTypes.bool,
     renderImage: React.PropTypes.bool,
+    showCharity: React.PropTypes.bool,
     onHasContent: React.PropTypes.func
   },
 
@@ -45,6 +46,7 @@ module.exports = React.createClass({
       childWidth: 250,
       altTemplate: false,
       renderImage: true,
+      showCharity: false,
       currencyFormat: '0[.]00 a',
       defaultI18n: {
         raisedTitle: 'Raised',
@@ -123,6 +125,7 @@ module.exports = React.createClass({
               raisedTitle: this.t('raisedTitle'),
               membersTitle: this.t('membersTitle'),
               width: this.state.childWidth,
+              charityName: this.props.showCharity && item.charityName,
               renderImage: this.props.renderImage
             };
 

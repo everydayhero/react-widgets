@@ -17,6 +17,7 @@ module.exports = React.createClass({
     pageIds: React.PropTypes.array,
     charityUid: React.PropTypes.string,
     charityUids: React.PropTypes.array,
+    groupValues: React.PropTypes.array,
     startAt: React.PropTypes.string,
     endAt: React.PropTypes.string,
     offset: React.PropTypes.number,
@@ -81,9 +82,15 @@ module.exports = React.createClass({
     if (pageIds) {
       totals.findByPages(pageIds, this.onSuccess, options);
     } else if (charityUids) {
-      totals.findByCharities({charityUids: charityUids}, this.onSuccess, options);
+      totals.findByCharities({
+        charityUids: charityUids,
+        groupValues: props.groupValues
+      }, this.onSuccess, options);
     } else if (campaignUids) {
-      totals.findByCampaigns({campaignUids: campaignUids}, this.onSuccess, options);
+      totals.findByCampaigns({
+        campaignUids: campaignUids,
+        groupValues: props.groupValues
+      }, this.onSuccess, options);
     }
   },
 

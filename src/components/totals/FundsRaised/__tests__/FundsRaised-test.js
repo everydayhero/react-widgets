@@ -239,7 +239,7 @@ describe('FundsRaised', function() {
     });
   });
 
-  describe('takes groupValues property', function() {
+  describe('Group value filtering', function() {
     var fundsRaised;
     var element;
 
@@ -249,7 +249,7 @@ describe('FundsRaised', function() {
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
 
-    it('handles a groupValues property', function() {
+    it('fetches data with a group value specified', function() {
       expect(totals.findByCharities.mock.calls.length).toEqual(1);
       expect(totals.findByCharities).toBeCalledWith({charityUids: "au-31", groupValues:["ABC"]}, element.onSuccess, {});
     });

@@ -239,4 +239,20 @@ describe('FundsRaised', function() {
     });
   });
 
+  describe('Group value filtering', function() {
+    var fundsRaised;
+    var element;
+
+    beforeEach(function() {
+      totals.findByCharities.mockClear();
+      fundsRaised = <FundsRaised charityUid="au-31" groupValues={["ABC"]}/>;
+      element = TestUtils.renderIntoDocument(fundsRaised);
+    });
+
+    it('fetches data with a group value specified', function() {
+      expect(totals.findByCharities.mock.calls.length).toEqual(1);
+      expect(totals.findByCharities).toBeCalledWith({charityUids: "au-31", groupValues:["ABC"]}, element.onSuccess, {});
+    });
+  });
+
 });

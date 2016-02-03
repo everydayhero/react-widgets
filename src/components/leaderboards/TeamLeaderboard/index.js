@@ -125,7 +125,7 @@ module.exports = React.createClass({
               raisedTitle: this.t('raisedTitle'),
               membersTitle: this.t('membersTitle'),
               width: this.state.childWidth,
-              charityName: this.props.showCharity && item.charityName,
+              charityName: this.props.showCharity && item.charityName ? item.charityName : null,
               renderImage: this.props.renderImage
             };
 

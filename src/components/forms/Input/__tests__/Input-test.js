@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
-var React       = require('react');
-var TestUtils   = require('react-addons-test-utils');
-var Input       = require('../');
-var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
-var findByAttribute  = require('../../../../test/helpers/scryRenderedDOMComponentsWithAttribute').findRenderedDOMComponentWithAttribute;
+var React           = require('react');
+var TestUtils       = require('react-addons-test-utils');
+var Input           = require('../');
+var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
+var scryByClass     = TestUtils.scryRenderedDOMComponentsWithClass;
+var findByAttribute = require('../../../../test/helpers/scryRenderedDOMComponentsWithAttribute').findRenderedDOMComponentWithAttribute;
 
 describe('Input', function() {
   it('renders an input', function() {
@@ -41,22 +41,22 @@ describe('Input', function() {
     expect(errorIcon).toBeDefined();
   });
 
-  it("will not alter input when readOnly", function() {
-    var element = TestUtils.renderIntoDocument(<Input value="oldValue" readOnly={ true } />);
+  it('will not alter input when readOnly', function() {
+    var element = TestUtils.renderIntoDocument(<Input value="oldValue" readOnly/>);
     var input = findByClass(element, 'Input__input');
-    TestUtils.Simulate.change(input, { target: { value: 'newValue' } });
+    TestUtils.Simulate.change(input, { target: { value: 'newValue' }});
     expect(input.value).toBe('oldValue');
   });
 
-  it("will not execute methods when disabled", function() {
+  it('will not execute methods when disabled', function() {
     var modal = jest.genMockFunction();
     var output = jest.genMockFunction();
     var mask = jest.genMockFunction();
     var validate = jest.genMockFunction();
-    var element = TestUtils.renderIntoDocument(<Input value="oldValue" disabled={ true } modal={ modal } mask={ mask } output={ output } validate={ validate } />);
+    var element = TestUtils.renderIntoDocument(<Input value="oldValue" disabled modal={ modal } mask={ mask } output={ output } validate={ validate } />);
     var input = findByClass(element, 'Input__input');
     TestUtils.Simulate.focus(input);
-    TestUtils.Simulate.change(input, { target: { value: 'newValue' } });
+    TestUtils.Simulate.change(input, { target: { value: 'newValue' }});
     TestUtils.Simulate.blur(input);
     expect(modal).not.toBeCalled();
     expect(output).not.toBeCalled();
@@ -65,7 +65,7 @@ describe('Input', function() {
     expect(input.value).toBe('oldValue');
   });
 
-  it("will execute modal function on focus", function() {
+  it('will execute modal function on focus', function() {
     var modal = jest.genMockFunction();
     var element = TestUtils.renderIntoDocument(<Input value="testValue" modal={ modal } />);
     var input = findByClass(element, 'Input__input');
@@ -78,24 +78,24 @@ describe('Input', function() {
     expect(modal).lastCalledWith(object);
   });
 
-  it("will execute output function on change", function() {
+  it('will execute output function on change', function() {
     var output = jest.genMockFunction();
     var element = TestUtils.renderIntoDocument(<Input value="oldValue" output={ output } />);
     var input = findByClass(element, 'Input__input');
-    TestUtils.Simulate.change(input, { target: { value: 'newValue' } });
+    TestUtils.Simulate.change(input, { target: { value: 'newValue' }});
     expect(output).lastCalledWith('newValue');
   });
 
-  it("will execute mask function on change", function() {
+  it('will execute mask function on change', function() {
     var mask = jest.genMockFunction().mockReturnValue('newValue--masked');
     var element = TestUtils.renderIntoDocument(<Input value="oldValue" mask={ mask } />);
     var input = findByClass(element, 'Input__input');
-    TestUtils.Simulate.change(input, { target: { value: 'newValue' } });
+    TestUtils.Simulate.change(input, { target: { value: 'newValue' }});
     expect(mask).lastCalledWith('newValue');
     expect(input.value).toBe('newValue--masked');
   });
 
-  it("will execute validate function, but not set state as invalid on blur if not required", function() {
+  it('will execute validate function, but not set state as invalid on blur if not required', function() {
     var validate = jest.genMockFunction();
     var setValid = jest.genMockFunction();
     var element = TestUtils.renderIntoDocument(<Input required={ false } validate={ validate } />);
@@ -106,11 +106,11 @@ describe('Input', function() {
     expect(validate).toBeCalled();
   });
 
-  it("will execute validate function on blur if required", function() {
+  it('will execute validate function on blur if required', function() {
     var validate = jest.genMockFunction();
-    var element = TestUtils.renderIntoDocument(<Input required={ true } validate={ validate } />);
+    var element = TestUtils.renderIntoDocument(<Input required validate={ validate } />);
     var input = findByClass(element, 'Input__input');
-    TestUtils.Simulate.change(input, { target: { value: 'testValue' } });
+    TestUtils.Simulate.change(input, { target: { value: 'testValue' }});
     TestUtils.Simulate.blur(input);
     expect(validate).lastCalledWith('testValue', element.setValid);
     var setValidCallback = validate.mock.calls[0][1];
@@ -120,9 +120,9 @@ describe('Input', function() {
     expect(element.state.valid).toBe(false);
   });
 
-  it("will execute validate function on load if has value", function() {
+  it('will execute validate function on load if has value', function() {
     var validate = jest.genMockFunction();
-    var element = TestUtils.renderIntoDocument(<Input required={ true } value="testValue" validate={ validate } />);
+    var element = TestUtils.renderIntoDocument(<Input required value="testValue" validate={ validate } />);
     expect(validate).lastCalledWith('testValue', element.setValid);
     var setValidCallback = validate.mock.calls[0][1];
     setValidCallback(true);
@@ -132,7 +132,7 @@ describe('Input', function() {
   });
 
   it("animates label to large hint when 'animateLabel' is true", function() {
-    var element = TestUtils.renderIntoDocument(<Input animateLabel={ true } />);
+    var element = TestUtils.renderIntoDocument(<Input animateLabel />);
     findByClass(element, 'Input__label--empty-blur');
   });
 
@@ -155,24 +155,24 @@ describe('Input', function() {
     expect(input.length).toBeLessThan(1);
   });
 
-  it("label is small if has value", function() {
-    var element = TestUtils.renderIntoDocument(<Input animateLabel={ true } value="foo" />);
+  it('label is small if has value', function() {
+    var element = TestUtils.renderIntoDocument(<Input animateLabel value="foo" />);
     var input = scryByClass(element, 'Input__label--empty-blur');
 
     expect(input.length).toBeLessThan(1);
   });
 
   it("adds the 'Input--hasIcon' class when an icon is rendered", function() {
-    var element = TestUtils.renderIntoDocument(<Input showIcon={ true } disabled={ true } />);
-    var element2 = TestUtils.renderIntoDocument(<Input showIcon={ true } icon="phone" />);
+    var element = TestUtils.renderIntoDocument(<Input showIcon disabled />);
+    var element2 = TestUtils.renderIntoDocument(<Input showIcon icon="phone" />);
     findByClass(element, 'Input--hasIcon');
     findByClass(element2, 'Input--hasIcon');
   });
 
   it("does not add the 'Input--hasIcon' class when no icon is rendered", function() {
-    var element = TestUtils.renderIntoDocument(<Input showIcon={ false } disabled={ true } />);
+    var element = TestUtils.renderIntoDocument(<Input showIcon={ false } disabled />);
     var element2 = TestUtils.renderIntoDocument(<Input showIcon={ false } icon="phone" />);
-    var element3 = TestUtils.renderIntoDocument(<Input showIcon={ true } />);
+    var element3 = TestUtils.renderIntoDocument(<Input showIcon />);
 
     var input = scryByClass(element, 'Input--hasIcon');
     var input2 = scryByClass(element2, 'Input--hasIcon');

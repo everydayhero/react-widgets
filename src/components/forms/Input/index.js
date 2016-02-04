@@ -129,7 +129,7 @@ module.exports = React.createClass({
     this.setState({ focused: true });
     if (this.props.modal) {
       this.props.modal({
-        element: ReactDOM.findDOMNode(this),
+        element: this,
         value: this.state.value,
         callback: this.setValue
       });

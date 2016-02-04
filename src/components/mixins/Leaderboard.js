@@ -24,6 +24,8 @@ module.exports = {
     } else {
       if (props.campaignUids) {
         endpoint = campaigns.leaderboardByUids.bind(campaigns, props.campaignUids, props.charityUid);
+      } else if (props.campaignUid && (props.groupValues || props.groupValue)) {
+        endpoint = campaigns.leaderboardDynamic.bind(campaigns, props.campaignUid, props.groupValue);
       } else if (props.campaignUid) {
         endpoint = campaigns.leaderboard.bind(campaigns, props.campaignUid, props.charityUid);
       } else if (props.charityUid) {
@@ -47,14 +49,27 @@ module.exports = {
     }
 
     var endpoint = this.getEndpoint();
-    endpoint(type, this.props.limit, this.processLeaderboard, {
-      includePages: true,
-      groupValue: groupValue,
-    });
+
+    if (groupValue && this.props.campaignUid) {
+      endpoint(this.processLeaderboard);
+    } else {
+      endpoint(type, this.props.limit, this.processLeaderboard, {
+        includePages: true,
+        groupValue: groupValue,
+      });
+    }
   },
 
   processLeaderboard: function(result) {
-    var pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : [];
+    var pages = [];
+    if (result.results) {
+      pages = result.results.map(function(object) {
+        return object = object.page;
+      });
+    } else {
+      // Static Leaderboard
+      pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : [];
+    }
     var leaderboard = this.getLeaderboard(pages);
 
     this.rankLeaderboard(leaderboard);
@@ -85,7 +100,7 @@ module.exports = {
           url: page.url,
           isoCode: page.amount.currency.iso_code,
           amount:  page.amount.cents,
-          totalMembers: page.team_member_uids.length,
+          totalMembers: (page.team_member_uids && page.team_member_uids.length) ? page.team_member_uids.length : null,
           imgSrc: page.image.large_image_url,
           medImgSrc: page.image.medium_image_url,
           charityName: page.charity_name

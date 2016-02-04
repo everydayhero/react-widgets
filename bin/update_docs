@@ -2,7 +2,7 @@
 
 set -e
 
-export DOCS_REPO=https://github.com/everydayhero/public-api-docs.git
+export DOCS_REPO=git@github.com:everydayhero/public-api-docs.git
 
 rm -rf docs
 git clone $DOCS_REPO docs 2>&1

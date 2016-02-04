@@ -100,7 +100,7 @@ function renderWidget(element, name, options) {
     return;
   }
 
-  React.render(React.createFactory(widget)(options), element);
+  ReactDOM.render(React.createElement(widget, options), element);
 }
 
 module.exports = {

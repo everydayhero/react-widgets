@@ -17,14 +17,14 @@ function simulateMouseOver(from, to) {
 }
 
 var model = [
-  {key:'cause_raised', group:'community', amount_formatted:'$0.00', percentile:10},
-  {key:'cause_engagement', group:'community', amount_formatted:'467k', percentile:20},
-  {key:'raised', group:'money', amount_formatted:'$4.8k', percentile:30},
-  {key:'given', group:'money', amount_formatted:'$9.8k', percentile:40},
-  {key:'page_views', group:'voice', amount_formatted:'36.8k', percentile:50},
-  {key:'sharing', group:'voice', amount_formatted:'4564', percentile:60},
-  {key:'duration_volunteered', group:'effort', amount_formatted:'64h', percentile:70},
-  {key:'duration_trained', group:'effort', amount_formatted:'356h', percentile:80}
+  { key: 'cause_raised', group: 'community', amount_formatted: '$0.00', percentile: 10 },
+  { key: 'cause_engagement', group: 'community', amount_formatted: '467k', percentile: 20 },
+  { key: 'raised', group: 'money', amount_formatted: '$4.8k', percentile: 30 },
+  { key: 'given', group: 'money', amount_formatted: '$9.8k', percentile: 40 },
+  { key: 'page_views', group: 'voice', amount_formatted: '36.8k', percentile: 50 },
+  { key: 'sharing', group: 'voice', amount_formatted: '4564', percentile: 60 },
+  { key: 'duration_volunteered', group: 'effort', amount_formatted: '64h', percentile: 70 },
+  { key: 'duration_trained', group: 'effort', amount_formatted: '356h', percentile: 80 }
 ];
 
 describe('Footprint', function() {

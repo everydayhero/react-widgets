@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 
 var React     = require('react');
 var Icon      = require('../../helpers/Icon');
 var Input     = require('../Input');
 var I18nMixin = require('../../mixins/I18n');
-var Button    = require('hui/buttons/Button');
+var Button    = require('../../callstoaction/CallToActionButton');
 
 module.exports = React.createClass({
-  displayName: "SearchInput",
+  displayName: 'SearchInput',
 
   mixins: [I18nMixin],
 
@@ -19,12 +19,6 @@ module.exports = React.createClass({
     width: React.PropTypes.string,
     animateLabel: React.PropTypes.bool,
     i18n: React.PropTypes.object
-  },
-
-  getInitialState: function() {
-    return {
-      value: this.props.value || ''
-    };
   },
 
   getDefaultProps: function() {
@@ -42,21 +36,24 @@ module.exports = React.createClass({
     };
   },
 
-  handleChange: function(value) {
-    this.setState({ value: value });
+  getInitialState: function() {
+    return {
+      value: this.props.value || ''
+    };
   },
 
   componentDidMount: function() {
-    var value = this.refs.input.getDOMNode().value;
-    if (value) {
-      this.setState({ value: value });
-    }
+    this.setState({ value: this.props.value });
   },
 
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.value) {
       this.setState({ value: nextProps.value || '' });
     }
+  },
+
+  handleChange: function(value) {
+    this.setState({ value: value });
   },
 
   handleSubmit: function() {
@@ -85,7 +82,7 @@ module.exports = React.createClass({
         </div>
         <div className="ehw-SearchInput__button">
           <Button onClick={ this.handleSubmit } kind="primary">
-            <Icon icon="search" className="ehw-SearchInput__icon" fixedWidth={ true } />
+            <Icon icon="search" className="ehw-SearchInput__icon" fixedWidth />
           </Button>
         </div>
       </div>

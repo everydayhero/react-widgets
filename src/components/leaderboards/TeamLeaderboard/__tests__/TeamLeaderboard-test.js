@@ -4,12 +4,12 @@ jest.autoMockOff();
 
 describe('TeamLeaderboard', function() {
   var _                   = require('lodash');
-  var React               = require('react/addons');
+  var React               = require('react');
   var TeamLeaderboard     = require('../');
   var LeaderboardItem     = require('../../LeaderboardItem/');
   var TeamLeaderboardItem = require('../../TeamLeaderboardItem/');
   var LeaderboardPaging   = require('../../LeaderboardPaging/');
-  var TestUtils           = React.addons.TestUtils;
+  var TestUtils           = require('react-addons-test-utils');
   var findByClass         = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('Component defaults', function() {

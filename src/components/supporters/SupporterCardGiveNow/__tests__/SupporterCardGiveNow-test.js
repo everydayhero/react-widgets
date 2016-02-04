@@ -1,10 +1,11 @@
 "use strict";
 jest.autoMockOff();
 
-var React                 = require('react/addons');
-var TestUtils             = React.addons.TestUtils;
+var React                 = require('react');
+var TestUtils             = require('react-addons-test-utils');
 var findByClass           = TestUtils.findRenderedDOMComponentWithClass;
 var SupporterCardGiveNow  = require('../');
+var ReactDOM              = require('react-dom')
 
 describe('SupporterCardGiveNow', function() {
   var element;

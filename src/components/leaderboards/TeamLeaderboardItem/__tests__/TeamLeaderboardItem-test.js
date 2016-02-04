@@ -2,9 +2,9 @@
 jest.autoMockOff();
 
 describe('TeamLeaderboardItem', function() {
-  var React               = require('react/addons');
+  var React               = require('react');
   var TeamLeaderboardItem = require('../');
-  var TestUtils           = React.addons.TestUtils;
+  var TestUtils           = require('react-addons-test-utils');
   var findByClass         = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {

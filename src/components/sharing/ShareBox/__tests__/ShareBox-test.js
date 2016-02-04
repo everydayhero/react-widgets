@@ -3,10 +3,10 @@
 jest.autoMockOff();
 
 describe('Share Box', function() {
-  var React                  = require('react/addons');
+  var React                  = require('react');
   var ShareBox               = require('../');
   var ShareIcon              = require('../../ShareIcon/');
-  var TestUtils              = React.addons.TestUtils;
+  var TestUtils              = require('react-addons-test-utils');
   var findByClass            = TestUtils.findRenderedDOMComponentWithClass;
   var scryRenderedComponents = TestUtils.scryRenderedComponentsWithType;
 

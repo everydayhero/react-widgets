@@ -3,7 +3,7 @@
 * This Mixin can only be called in/after ComponentDidMount(), as
 * getDOMNode() is unavailable until after the component is rendered.
 */
-
+var ReactDOM = require('react-dom')
 var _ = require('lodash');
 var addEventListener = require('../../lib/addEventListener');
 var breakpoints = {
@@ -98,7 +98,7 @@ module.exports = {
   },
 
   getComponentWidth: function () {
-    return this.getDOMNode().offsetWidth || 0;
+    return ReactDOM.findDOMNode(this).offsetWidth || 0;
   },
 
   getDevice: function() {

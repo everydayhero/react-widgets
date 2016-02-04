@@ -3,10 +3,10 @@
 jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
 
-var React          = require('react/addons');
+var React          = require('react');
 var UpcomingEvents = require('../');
 var campaign       = require('../../../../api/campaigns');
-var TestUtils      = React.addons.TestUtils;
+var TestUtils      = require('react-addons-test-utils');
 var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass    = TestUtils.scryRenderedDOMComponentsWithClass;
 

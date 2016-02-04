@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-var _             = require('lodash');
-var React         = require('react');
-var Icon          = require('../../helpers/Icon');
+var _     = require('lodash');
+var React = require('react');
+var Icon  = require('../../helpers/Icon');
 
 module.exports = React.createClass({
   displayName: 'SearchInput',

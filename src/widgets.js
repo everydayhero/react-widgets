@@ -5,6 +5,7 @@ require('es5-shim/es5-sham');
 
 var _ = require('lodash');
 var React = require('react');
+var ReactDOM = require('react-dom');
 var routes = require('./api/routes');
 var addEventListener = require('./lib/addEventListener');
 var consoleShim = require('./lib/consoleShim');

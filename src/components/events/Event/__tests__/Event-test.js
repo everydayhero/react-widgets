@@ -2,9 +2,9 @@
 jest.autoMockOff();
 
 describe('Event', function() {
-  var React       = require('react/addons');
+  var React       = require('react');
   var Event       = require('../');
-  var TestUtils   = React.addons.TestUtils;
+  var TestUtils   = require('react-addons-test-utils');
   var findByTag   = TestUtils.findRenderedDOMComponentWithTag;
   var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 

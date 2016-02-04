@@ -1,9 +1,9 @@
 "use strict";
 jest.autoMockOff();
 
-var React = require('react/addons');
-var TestUtils   = React.addons.TestUtils;
-var Input = require('../');
+var React       = require('react');
+var TestUtils   = require('react-addons-test-utils');
+var Input       = require('../');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 var findByProp = require('../../../../test/helpers/scryRenderedDOMComponentsWithProp').findRenderedDOMComponentWithProp;

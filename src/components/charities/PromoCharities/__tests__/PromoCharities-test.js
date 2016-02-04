@@ -3,10 +3,10 @@ jest.autoMockOff();
 jest.mock('../../../../api/charities');
 
 describe('PromoCharities', function() {
-  var React          = require('react/addons');
+  var React          = require('react');
   var PromoCharities = require('../');
   var charities      = require('../../../../api/charities');
-  var TestUtils      = React.addons.TestUtils;
+  var TestUtils      = require('react-addons-test-utils');
   var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('default behaviour for PromoCharities', function() {

@@ -1,20 +1,20 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
-var React = require('react/addons');
-var TestUtils   = React.addons.TestUtils;
-var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 var findByProp = require('../../../../test/helpers/scryRenderedDOMComponentsWithProp').findRenderedDOMComponentWithProp;
-var Amount = require('../');
+var React = require('react');
+var TestUtils       = require('react-addons-test-utils');
+var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
+var scryByClass     = TestUtils.scryRenderedDOMComponentsWithClass;
+var Amount          = require('../');
 
 describe('Amount', function() {
   it('defaults to second preset amount', function() {
     var element = TestUtils.renderIntoDocument(<Amount amounts={[10,20,30,40]}/>);
-    var selected = findByClass(element, 'AmountRadio--selected').getDOMNode();
+    var selected = findByClass(element, 'AmountRadio--selected');
     expect(selected.textContent).toBe('20');
 
-    var outputField = findByProp(element, 'name', 'amount').getDOMNode();
+    var outputField = findByAttribute(element, 'name', 'amount');
     expect(outputField.value).toBe('20');
   });
 

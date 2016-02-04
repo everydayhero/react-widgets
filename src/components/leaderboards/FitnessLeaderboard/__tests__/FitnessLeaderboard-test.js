@@ -5,9 +5,9 @@ jest.mock('../../../../api/campaigns');
 
 describe('FitnessLeaderboard', function() {
   var _                     = require('lodash');
-  var React                 = require('react/addons');
+  var React                 = require('react');
   var FitnessLeaderboard    = require('../');
-  var TestUtils             = React.addons.TestUtils;
+  var TestUtils             = require('react-addons-test-utils');
   var findByClass           = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('Component defaults', function() {

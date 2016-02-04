@@ -1,7 +1,7 @@
 "use strict";
 
-var React = require('react/addons');
-var cx    = require('react/lib/cx');
+var React = require('react');
+var cx    = require('classnames');
 
 module.exports = React.createClass({
   displayName: 'FootprintTip',

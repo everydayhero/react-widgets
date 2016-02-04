@@ -3,9 +3,10 @@
 jest.autoMockOff();
 
 describe('LeaderboardPaging', function() {
-  var React             = require('react/addons');
+  var React             = require('react');
+  var ReactDOM          = require('react-dom');
   var LeaderboardPaging = require('../');
-  var TestUtils         = React.addons.TestUtils;
+  var TestUtils         = require('react-addons-test-utils');
   var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {

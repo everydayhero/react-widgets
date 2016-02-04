@@ -3,10 +3,10 @@ jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
 
 describe('CallToActionBox', function() {
-  var React                       = require('react/addons');
+  var React                       = require('react');
   var CallToActionBox             = require('../');
   var campaigns                   = require('../../../../api/campaigns');
-  var TestUtils                   = React.addons.TestUtils;
+  var TestUtils                   = require('react-addons-test-utils');
   var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {

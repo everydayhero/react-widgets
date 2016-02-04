@@ -6,8 +6,8 @@ var address = require('../../../../api/address');
 var _ = require('lodash');
 _.debounce = function(callback) { return callback; };
 
-var React = require('react/addons');
-var TestUtils   = React.addons.TestUtils;
+var React = require('react');
+var TestUtils   = require('react-addons-test-utils');
 var AddressLookup = require('../');
 var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;

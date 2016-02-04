@@ -1,8 +1,8 @@
 "use strict";
 
-var React               = require('react/addons');
-var PureRenderMixin     = React.addons.PureRenderMixin;
-var cx                  = require('react/lib/cx');
+var React               = require('react');
+var PureRenderMixin     = require('react-addons-pure-render-mixin');
+var cx                  = require('classnames');
 var _                   = require('lodash');
 var countries           = require('./countries');
 var Input               = require('../../forms/Input');

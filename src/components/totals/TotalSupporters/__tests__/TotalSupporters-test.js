@@ -3,10 +3,10 @@ jest.autoMockOff();
 jest.mock('../../../../api/pages');
 
 describe('TotalSupporters', function() {
-  var React       = require('react/addons');
+  var React       = require('react');
   var TotalSupporters = require('../');
   var pages       = require('../../../../api/pages');
-  var TestUtils   = React.addons.TestUtils;
+  var TestUtils   = require('react-addons-test-utils');
   var findByClass = TestUtils.findRenderedDOMComponentWithClass;
   var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 

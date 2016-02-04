@@ -2,6 +2,7 @@
 
 var _              = require('lodash');
 var React          = require('react');
+var ReactDOM          = require('react-dom');
 var SearchResult   = require('../SearchResult');
 var I18nMixin      = require('../../mixins/I18n');
 

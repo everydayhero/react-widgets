@@ -3,10 +3,10 @@ jest.autoMockOff();
 jest.mock('../../../../api/totals');
 
 describe('FundsRaised', function() {
-  var React       = require('react/addons');
+  var React       = require('react');
   var FundsRaised = require('../');
   var totals      = require('../../../../api/totals');
-  var TestUtils   = React.addons.TestUtils;
+  var TestUtils   = require('react-addons-test-utils');
   var findByClass = TestUtils.findRenderedDOMComponentWithClass;
   var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 

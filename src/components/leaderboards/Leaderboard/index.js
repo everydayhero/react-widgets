@@ -1,8 +1,8 @@
 "use strict";
 
 var _                       = require('lodash');
-var React                   = require('react/addons');
-var cx                      = require('react/lib/cx');
+var React                   = require('react');
+var cx                      = require('classnames');
 var I18nMixin               = require('../../mixins/I18n');
 var DOMInfoMixin            = require('../../mixins/DOMInfo');
 var LeaderboardMixin        = require('../../mixins/Leaderboard');
@@ -13,7 +13,7 @@ var CallToActionButton      = require('../../callstoaction/CallToActionButton');
 var numeral                 = require('numeral');
 var addEventListener        = require('../../../lib/addEventListener');
 var removeEventListener     = require('../../../lib/removeEventListener');
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 module.exports = React.createClass({
   mixins: [I18nMixin, DOMInfoMixin, LeaderboardMixin],

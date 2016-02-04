@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
 var React = require('react');
-var cx    = require('react/lib/cx');
+var cx    = require('classnames');
 
 module.exports = React.createClass({
-  displayName: "AmountRadio",
+  displayName: 'AmountRadio',
 
   propTypes: {
     selected: React.PropTypes.number,
@@ -20,10 +20,6 @@ module.exports = React.createClass({
       onChange: function() {},
       name: 'AmountRadio'
     };
-  },
-
-  componentWillReceiveProps: function(nextProps) {
-    this.refs.radio.getDOMNode().checked = (nextProps.selected === this.props.amount);
   },
 
   handleClick: function() {

@@ -2,9 +2,9 @@
 jest.autoMockOff();
 
 describe('FundraiserImage', function() {
-  var React           = require('react/addons');
+  var React           = require('react');
   var FundraiserImage = require('../');
-  var TestUtils       = React.addons.TestUtils;
+  var TestUtils       = require('react-addons-test-utils');
   var findByTag       = TestUtils.findRenderedDOMComponentWithTag;
 
   describe('component defaults', function() {

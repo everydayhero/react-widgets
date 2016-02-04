@@ -1,12 +1,12 @@
 "use strict";
 
 var _                       = require('lodash');
-var React                   = require('react/addons');
+var React                   = require('react');
 var I18nMixin               = require('../../mixins/I18n');
 var Icon                    = require('../../helpers/Icon');
 var ShareBox                = require('../ShareBox');
 var format                  = require('../../../lib/format');
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 var addEventListener        = require('../../../lib/addEventListener');
 var removeEventListener     = require('../../../lib/removeEventListener');
 

@@ -1,8 +1,8 @@
 "use strict";
 jest.autoMockOff();
 
-var React       = require('react/addons');
-var TestUtils   = React.addons.TestUtils;
+var React       = require('react');
+var TestUtils   = require('react-addons-test-utils');
 var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 var Overlay     = require('../');

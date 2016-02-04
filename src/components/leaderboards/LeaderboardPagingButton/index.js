@@ -2,7 +2,7 @@
 
 var React = require('react');
 var Icon  = require('../../helpers/Icon');
-var cx    = require('react/lib/cx');
+var cx    = require('classnames');
 
 module.exports = React.createClass({
   displayName: 'LeaderboardPagingButton',

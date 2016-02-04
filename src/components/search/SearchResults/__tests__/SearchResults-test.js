@@ -1,9 +1,10 @@
 "use strict";
 jest.autoMockOff();
+var sinon = require('sinon')
 
-var React         = require('react/addons');
+var React         = require('react');
 var SearchResults = require('../');
-var TestUtils     = React.addons.TestUtils;
+var TestUtils     = require('react-addons-test-utils');
 var findByClass   = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass   = TestUtils.scryRenderedDOMComponentsWithClass;
 

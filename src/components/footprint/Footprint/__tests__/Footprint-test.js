@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
-var React       = require('react/addons');
-var TestUtils   = React.addons.TestUtils;
+var React       = require('react');
+var ReactDOM    = require('react-dom');
+var TestUtils   = require('react-addons-test-utils');
 var _           = require('lodash');
 var Footprint   = require('../');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 var findByTag   = TestUtils.findRenderedDOMComponentWithTag;
-var findByProp  = require('../../../../test/helpers/scryRenderedDOMComponentsWithProp').findRenderedDOMComponentWithProp;
 
 window.requestAnimationFrame = require('../../../../test/helpers/requestAnimationFrame');
 

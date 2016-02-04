@@ -4,9 +4,9 @@ jest.autoMockOff();
 var _           = require('lodash');
 _.debounce      = require('../../../../test/helpers/debounce'); // testable version of debounce
 
-var React       = require('react/addons');
+var React       = require('react');
 var SearchInput = require('../');
-var TestUtils   = React.addons.TestUtils;
+var TestUtils   = require('react-addons-test-utils');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 var findByTag   = TestUtils.findRenderedDOMComponentWithTag;
 

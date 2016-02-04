@@ -6,8 +6,9 @@ jest.mock('../../../../api/campaigns');
 var charities = require('../../../../api/charities');
 var campaigns = require('../../../../api/campaigns');
 
-var React       = require('react/addons');
-var TestUtils   = React.addons.TestUtils;
+var React       = require('react');
+var ReactDOM    = require('react-dom');
+var TestUtils   = require('react-addons-test-utils');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 var Supporters  = require('../');

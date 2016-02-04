@@ -7,8 +7,8 @@ var pages = require('../../../../api/pages');
 var _ = require('lodash');
 _.debounce = function(callback) { return callback; };
 
-var React              = require('react/addons');
-var TestUtils          = React.addons.TestUtils;
+var React              = require('react');
+var TestUtils          = require('react-addons-test-utils');
 var PageSearchModal    = require('../');
 var SearchModal        = require('../../SearchModal');
 var findByClass        = TestUtils.findRenderedDOMComponentWithClass;

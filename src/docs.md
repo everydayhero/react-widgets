@@ -335,6 +335,9 @@ Campaign uid to filter results by campaign.
 `campaignUids` (array)<br>
 Campaign uids to filter results by multiple campaigns.
 
+`groupValues` (array)<br>
+Group values to filter results by multiple groups.
+
 `pageId` (string) <br>
 Page id to filter results by page.
 

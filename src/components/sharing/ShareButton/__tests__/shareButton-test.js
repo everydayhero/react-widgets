@@ -24,13 +24,13 @@ describe('Share Button', function() {
     });
 
     it('displays a sharing icon by default', function() {
-      var icon = findByClass(component, 'ShareButton__icon').getDOMNode();
+      var icon = findByClass(component, 'ShareButton__icon');
       expect(icon).toBeDefined();
       expect(component.renderIcon()).toBeTruthy();
     });
 
     it('has default button label text', function() {
-      var label = findByClass(component, 'ShareButton__label').getDOMNode();
+      var label = findByClass(component, 'ShareButton__label');
       expect(label).toBeDefined();
       expect(label.textContent).toBe('Share this page');
     });

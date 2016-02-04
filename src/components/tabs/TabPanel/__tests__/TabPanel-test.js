@@ -15,7 +15,7 @@ describe('TabPanel', function() {
   beforeEach(function() {
     tabPanel = <TabPanel content="Hello world!" active={ true } index={ 1 } labelledBy="tab-1" />;
     component = TestUtils.renderIntoDocument(tabPanel);
-    element   = findByClass(component, 'TabPanel').getDOMNode();
+    element   = findByClass(component, 'TabPanel');
   });
 
   it('calls renders a tab panel with content', function() {

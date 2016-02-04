@@ -28,14 +28,14 @@ describe('TotalCharities', function() {
       element.setState({ isLoading: false });
       var total = findByClass(element, 'TotalCharities__total');
 
-      expect(total.getDOMNode().textContent).toContain('0');
+      expect(total.textContent).toContain('0');
     });
 
     it('renders a default title', function() {
       element.setState({ isLoading: false });
       var title = findByClass(element, 'TotalCharities__title');
 
-      expect(title.getDOMNode().textContent).toBe('Non Profits');
+      expect(title.textContent).toBe('Non Profits');
     });
 
     it('renders an icon by default', function() {
@@ -71,14 +71,14 @@ describe('TotalCharities', function() {
       element.setState({ isLoading: false });
       var title = findByClass(element, 'TotalCharities__title');
 
-      expect(title.getDOMNode().textContent).toBe(translation.title);
+      expect(title.textContent).toBe(translation.title);
     });
 
     it('renders a default total', function() {
       element.setState({ isLoading: false });
       var total = findByClass(element, 'TotalCharities__total');
 
-      expect(total.getDOMNode().textContent).toContain('0');
+      expect(total.textContent).toContain('0');
     });
   });
 
@@ -93,7 +93,7 @@ describe('TotalCharities', function() {
       });
 
       var total = findByClass(element, 'TotalCharities__total');
-      expect(total.getDOMNode().textContent).toBe('10 k');
+      expect(total.textContent).toBe('10 k');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
@@ -106,7 +106,7 @@ describe('TotalCharities', function() {
       });
 
       var total = findByClass(element, 'TotalCharities__total');
-      expect(total.getDOMNode().textContent).toBe('10,000');
+      expect(total.textContent).toBe('10,000');
     });
   });
 

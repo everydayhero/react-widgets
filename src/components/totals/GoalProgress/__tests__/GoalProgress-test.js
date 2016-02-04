@@ -21,7 +21,7 @@ describe('GoalProgress', function() {
 
   it('renders progress text', function() {
     var text = findByClass(element, 'GoalProgress__text');
-    expect(text.getDOMNode().textContent).toContain('foobar');
+    expect(text.textContent).toContain('foobar');
   });
 
   it('renders a progress bar', function() {

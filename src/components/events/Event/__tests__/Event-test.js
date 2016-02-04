@@ -37,17 +37,17 @@ describe('Event', function() {
     });
 
     it('renders an anchor for campaignUrl', function() {
-      var anchor = findByClass(element, 'Event__name').getDOMNode().href;
+      var anchor = findByClass(element, 'Event__name').href;
       expect(anchor).toBe(props.campaignUrl);
     });
 
     it('renders an event name', function() {
-      var subject = findByClass(element, 'Event__name').getDOMNode().textContent;
+      var subject = findByClass(element, 'Event__name').textContent;
       expect(subject).toContain(props.name);
     });
 
     it('renders an event date', function() {
-      var subject = findByClass(element, 'Event__date').getDOMNode().textContent;
+      var subject = findByClass(element, 'Event__date').textContent;
       expect(subject).toContain('1');
       expect(subject).toContain('Jan');
       expect(subject).toContain('2015');
@@ -89,7 +89,7 @@ describe('Event', function() {
       });
 
       it('renders the donate call to action', function () {
-        var subject = findByClass(element, 'CallToActionButton__label').getDOMNode().textContent;
+        var subject = findByClass(element, 'CallToActionButton__label').textContent;
         expect(subject).toBe('Give Now');
       });
     });
@@ -128,7 +128,7 @@ describe('Event', function() {
       });
 
       it('renders the get started call to action', function () {
-        var subject = findByClass(element, 'CallToActionButton__label').getDOMNode().textContent;
+        var subject = findByClass(element, 'CallToActionButton__label').textContent;
         expect(subject).toBe('Join Event');
       });
     });
@@ -167,12 +167,12 @@ describe('Event', function() {
       });
 
       it('renders the donate call to action', function () {
-        var subject = TestUtils.scryRenderedDOMComponentsWithClass(element, 'CallToActionButton__label')[1].getDOMNode().textContent;
+        var subject = TestUtils.scryRenderedDOMComponentsWithClass(element, 'CallToActionButton__label')[1].textContent;
         expect(subject).toBe('Give');
       });
 
       it('renders the join call to action', function () {
-        var subject = TestUtils.scryRenderedDOMComponentsWithClass(element, 'CallToActionButton__label')[0].getDOMNode().textContent;
+        var subject = TestUtils.scryRenderedDOMComponentsWithClass(element, 'CallToActionButton__label')[0].textContent;
         expect(subject).toBe('Join');
       });
 

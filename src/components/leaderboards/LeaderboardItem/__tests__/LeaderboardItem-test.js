@@ -23,7 +23,7 @@ describe('LeaderboardItem', function() {
     });
 
     it('is a link', function() {
-      var parentNode = element.getDOMNode();
+      var parentNode = ReactDOM.findDOMNode(element);
       expect(parentNode.tagName).toBe('A');
       expect(parentNode.getAttribute('href')).toEqual('hello-world.com');
     });
@@ -74,7 +74,7 @@ describe('LeaderboardItem', function() {
       element = TestUtils.renderIntoDocument(leaderboardItem);
       elementCharity = scryByClass(element, 'LeaderboardItem__charity');
       expect(elementCharity.length).toEqual(1);
-      expect(elementCharity[0].getDOMNode().textContent).toEqual('foo');
+      expect(elementCharity[0].textContent).toEqual('foo');
     });
 
     it('won\'t render a charity name if not present', function() {

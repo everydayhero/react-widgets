@@ -25,7 +25,7 @@ describe('FitnessLeaderboard', function() {
 
     it('renders a default heading', function() {
       var heading = findByClass(component, 'FitnessLeaderboard__heading');
-      expect(heading.getDOMNode().textContent).toBe('Top Individuals');
+      expect(heading.textContent).toBe('Top Individuals');
     });
 
     it('renders a loading icon', function() {
@@ -49,7 +49,7 @@ describe('FitnessLeaderboard', function() {
 
     it('renders a custom heading', function() {
       var heading = findByClass(component, 'FitnessLeaderboard__heading');
-      expect(heading.getDOMNode().textContent).toBe(translation.heading);
+      expect(heading.textContent).toBe(translation.heading);
     });
   });
 

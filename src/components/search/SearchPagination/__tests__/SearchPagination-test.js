@@ -13,7 +13,7 @@ describe('SearchPagination', function() {
     );
 
     var details = findByClass(element, 'SearchPagination__counter');
-    expect(details.getDOMNode().textContent).toBe('11 - 12 of 12');
+    expect(details.textContent).toBe('11 - 12 of 12');
   });
 
   it('uses abbreviation for thousands of results', function() {
@@ -22,7 +22,7 @@ describe('SearchPagination', function() {
     );
 
     var details = findByClass(element, 'SearchPagination__counter');
-    expect(details.getDOMNode().textContent).toBe('11 - 20 of 1K+');
+    expect(details.textContent).toBe('11 - 20 of 1K+');
   });
 
   it('uses abbreviation for millions of results', function() {
@@ -31,6 +31,6 @@ describe('SearchPagination', function() {
     );
 
     var details = findByClass(element, 'SearchPagination__counter');
-    expect(details.getDOMNode().textContent).toBe('11 - 20 of 1M+');
+    expect(details.textContent).toBe('11 - 20 of 1M+');
   });
 });

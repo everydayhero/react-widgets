@@ -24,7 +24,7 @@ describe('SupporterCard', function() {
   });
 
   it('renders', function() {
-    expect(element.getDOMNode()).not.toBeNull();
+    expect(element).not.toBeNull();
   });
 
   it('contains a SupporterCard element', function() {

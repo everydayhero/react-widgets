@@ -34,7 +34,7 @@ describe('Supporters', function() {
     });
 
     it('renders', function() {
-      expect(element.getDOMNode()).not.toBeNull();
+      expect(ReactDOM.findDOMNode(element)).not.toBeNull();
     });
 
     it('renders a Supporters element', function() {

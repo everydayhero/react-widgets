@@ -37,7 +37,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function(nextProps, nextState) {
-    this.setState({ menu: this.getDOMNode() }, this.scrollMenu);
+    this.setState({ menu: ReactDOM.findDOMNode(this) }, this.scrollMenu);
     addEventListener('keydown', this.keyHandler);
     addEventListener('mousedown', this.clickHandler);
   },

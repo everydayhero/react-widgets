@@ -14,7 +14,7 @@ describe('SearchResult', function() {
     var component = TestUtils.renderIntoDocument(searchResult);
     var element = findByClass(component, 'SearchResult');
 
-    expect(element.getDOMNode().textContent).toBe('foo');
+    expect(element.textContent).toBe('foo');
   });
 
   it('links to given url if onSelect callback not given', function() {
@@ -23,7 +23,7 @@ describe('SearchResult', function() {
     var component = TestUtils.renderIntoDocument(searchResult);
     var element = findByClass(component, 'SearchResult');
 
-    expect(element.getDOMNode().href).toBe(result.url);
+    expect(element.href).toBe(result.url);
   });
 
   it('calls onSelect callback on click if given', function() {

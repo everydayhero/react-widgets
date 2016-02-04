@@ -20,8 +20,8 @@ describe('TabDrawer', function() {
   });
 
   it('calls renders a tab drawer with a name', function() {
-    expect(element.getDOMNode().textContent).toBe('barbaz');
-    expect(element.getDOMNode().className).toContain('active');
+    expect(element.textContent).toBe('barbaz');
+    expect(element.className).toContain('active');
   });
 
   it('calls an on click with an index', function() {

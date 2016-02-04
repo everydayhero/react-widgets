@@ -28,14 +28,14 @@ describe('TotalSupporters', function() {
       element.setState({ isLoading: false });
       var total = findByClass(element, 'TotalSupporters__total');
 
-      expect(total.getDOMNode().textContent).toContain('0');
+      expect(total.textContent).toContain('0');
     });
 
     it('renders a default title', function() {
       element.setState({ isLoading: false });
       var title = findByClass(element, 'TotalSupporters__title');
 
-      expect(title.getDOMNode().textContent).toBe('Supporters');
+      expect(title.textContent).toBe('Supporters');
     });
 
     it('renders an icon by default', function() {
@@ -193,14 +193,14 @@ describe('TotalSupporters', function() {
       element.setState({ isLoading: false });
       var title = findByClass(element, 'TotalSupporters__title');
 
-      expect(title.getDOMNode().textContent).toBe(translation.title);
+      expect(title.textContent).toBe(translation.title);
     });
 
     it('renders a default total', function() {
       element.setState({ isLoading: false });
       var total = findByClass(element, 'TotalSupporters__total');
 
-      expect(total.getDOMNode().textContent).toContain('0');
+      expect(total.textContent).toContain('0');
     });
   });
 
@@ -215,7 +215,7 @@ describe('TotalSupporters', function() {
       });
 
       var total = findByClass(element, 'TotalSupporters__total');
-      expect(total.getDOMNode().textContent).toBe('10,050');
+      expect(total.textContent).toBe('10,050');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
@@ -228,7 +228,7 @@ describe('TotalSupporters', function() {
       });
 
       var total = findByClass(element, 'TotalSupporters__total');
-      expect(total.getDOMNode().textContent).toBe('10050.00');
+      expect(total.textContent).toBe('10050.00');
     });
   });
 

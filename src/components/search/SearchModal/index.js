@@ -38,7 +38,7 @@ module.exports = React.createClass({
 
   componentWillUpdate: function(nextProps, nextState) {
     if (this.refs.body && this.props.results !== nextProps.results) {
-      this.refs.body.getDOMNode().scrollTop = 0;
+      this.refs.body.scrollTop = 0;
     }
   },
 

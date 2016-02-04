@@ -23,7 +23,7 @@ describe('SearchInput', function() {
     var element = TestUtils.renderIntoDocument(component);
     var input = findByClass(element, 'SearchInput__input');
 
-    expect(input.getDOMNode().getAttribute('placeholder')).toBe('foo');
+    expect(input.getAttribute('placeholder')).toBe('foo');
   });
 
   it('allows an optional searchTerm', function() {
@@ -31,7 +31,7 @@ describe('SearchInput', function() {
     var element = TestUtils.renderIntoDocument(component);
     var input = findByClass(element, 'SearchInput__input');
 
-    expect(input.getDOMNode().value).toBe('bar');
+    expect(input.value).toBe('bar');
   });
 
   it('show processing twirler when QueryInProgress', function() {
@@ -46,10 +46,10 @@ describe('SearchInput', function() {
     var element = TestUtils.renderIntoDocument(component);
     var input = findByTag(element, 'input');
 
-    expect(input.getDOMNode()).toBe(document.activeElement);
+    expect(input).toBe(document.activeElement);
 
     // teardown: must unfocus elements or other tests fail
-    input.getDOMNode().blur();
+    input.blur();
   });
 
   it('calls onChange on change', function() {

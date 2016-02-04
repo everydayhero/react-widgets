@@ -27,7 +27,7 @@ describe('Leaderboard', function() {
     it('renders a default heading', function() {
       var heading = findByClass(element, 'Leaderboard__heading');
 
-      expect(heading.getDOMNode().textContent).toBe('Top Individuals');
+      expect(heading.textContent).toBe('Top Individuals');
     });
 
     it('renders a loading icon', function() {
@@ -50,7 +50,7 @@ describe('Leaderboard', function() {
 
     it('renders a custom heading', function() {
       var heading = findByClass(element, 'Leaderboard__heading');
-      expect(heading.getDOMNode().textContent).toBe(translation.heading);
+      expect(heading.textContent).toBe(translation.heading);
     });
   });
 

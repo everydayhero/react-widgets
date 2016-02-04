@@ -73,9 +73,9 @@ describe('PageSearchModal', function() {
 
     var resultElements = scryByClass(element, 'SearchResult');
     expect(resultElements.length).toEqual(1);
-    expect(resultElements[0].getDOMNode().href).toBe(page.url);
-    expect(resultElements[0].getDOMNode().textContent).toContain(page.name);
-    expect(resultElements[0].getDOMNode().textContent).toContain(page.charity.name);
+    expect(resultElements[0].href).toBe(page.url);
+    expect(resultElements[0].textContent).toContain(page.name);
+    expect(resultElements[0].textContent).toContain(page.charity.name);
   });
 
   it('searches for pages when provided with searchTerm prop', function() {
@@ -84,7 +84,7 @@ describe('PageSearchModal', function() {
     var element = TestUtils.renderIntoDocument(pageSearchModal);
     var input = findByTag(element, 'input');
 
-    expect(input.getDOMNode().value).toEqual(query.searchTerm);
+    expect(input.value).toEqual(query.searchTerm);
     expect(pages.search).lastCalledWith(query, element.updateResults);
   });
 

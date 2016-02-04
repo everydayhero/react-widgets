@@ -15,7 +15,7 @@ describe('AggregateSearchResult', function() {
     var component = TestUtils.renderIntoDocument(searchResult);
     var element = findByClass(component, 'AggregateSearchResult');
 
-    expect(element.getDOMNode().textContent).toBe('foo');
+    expect(element.textContent).toBe('foo');
   });
 
   it('calls onSelect on click', function() {

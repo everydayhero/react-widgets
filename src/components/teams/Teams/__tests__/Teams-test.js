@@ -29,14 +29,14 @@ describe('Teams', function() {
       });
 
       var emptyLabel = findByClass(element, 'Teams__empty-label');
-      expect(emptyLabel.getDOMNode().textContent).toContain('No teams to display.');
+      expect(emptyLabel.textContent).toContain('No teams to display.');
     });
 
     it('renders a default heading', function() {
       element.setState({ isLoading: false });
       var heading = findByClass(element, 'Teams__heading');
 
-      expect(heading.getDOMNode().textContent).toBe('Teams');
+      expect(heading.textContent).toBe('Teams');
     });
 
     it('renders a loading icon', function() {
@@ -62,7 +62,7 @@ describe('Teams', function() {
       element.setState({isLoading: false});
       var heading = findByClass(element, 'Teams__heading');
 
-      expect(heading.getDOMNode().textContent).toBe(translation.heading);
+      expect(heading.textContent).toBe(translation.heading);
     });
 
     it('renders a custom empty label', function() {
@@ -72,7 +72,7 @@ describe('Teams', function() {
       });
       var emptyLabel = findByClass(element, 'Teams__empty-label');
 
-      expect(emptyLabel.getDOMNode().textContent).toBe(translation.emptyLabel);
+      expect(emptyLabel.textContent).toBe(translation.emptyLabel);
     });
   });
 });

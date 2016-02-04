@@ -37,13 +37,13 @@ describe('Share Icon component', function() {
   });
 
   it('renders an icon', function() {
-    var element = component.getDOMNode();
-    expect(element.className).toContain('ShareIcon');
-    expect(element.className).toContain(props.name);
+    var element = ReactDOM.findDOMNode(component);
+    expect(element.classList.contains('ShareIcon')).toBe(true);
+    expect(element.classList.contains('ShareIcon__' + props.name)).toBe(true);
   });
 
   it('opens a pop up when an icon is clicked', function() {
-    var element = component.getDOMNode();
+    var element = ReactDOM.findDOMNode(component);
     TestUtils.Simulate.click(element);
 
     expect(openPopup).lastCalledWith("http://mock-url.com/", popUpConfig);

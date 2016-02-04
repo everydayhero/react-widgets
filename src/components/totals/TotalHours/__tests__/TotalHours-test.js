@@ -75,7 +75,7 @@ describe('TotalDistance', function() {
       });
       var title = findByClass(element, 'TotalHours__title');
 
-      expect(title.getDOMNode().textContent).toBe(translation.title);
+      expect(title.textContent).toBe(translation.title);
     });
   });
 
@@ -91,7 +91,7 @@ describe('TotalDistance', function() {
       });
 
       var total = findByClass(element, 'TotalHours__total');
-      expect(total.getDOMNode().textContent).toBe('10.5');
+      expect(total.textContent).toBe('10.5');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
@@ -105,7 +105,7 @@ describe('TotalDistance', function() {
       });
 
       var total = findByClass(element, 'TotalHours__total');
-      expect(total.getDOMNode().textContent).toBe('10.50');
+      expect(total.textContent).toBe('10.50');
     });
   });
 

@@ -25,14 +25,14 @@ describe('Goal', function() {
       element.setState({isLoading: false});
       var total = findByClass(element, 'Goal__total');
 
-      expect(total.getDOMNode().textContent).toContain('$0');
+      expect(total.textContent).toContain('$0');
     });
 
     it('renders a default title', function() {
       element.setState({isLoading: false});
       var title = findByClass(element, 'Goal__title');
 
-      expect(title.getDOMNode().textContent).toBe('Goal');
+      expect(title.textContent).toBe('Goal');
     });
 
     it('renders an icon by default', function() {
@@ -59,14 +59,14 @@ describe('Goal', function() {
       element.setState({ isLoading: false });
       var title = findByClass(element, 'Goal__title');
 
-      expect(title.getDOMNode().textContent).toBe(translation.title);
+      expect(title.textContent).toBe(translation.title);
     });
 
     it('checks for a total with custom symbol and suffix', function() {
       element.setState({ isLoading: false });
       var total = findByClass(element, 'Goal__total');
 
-      expect(total.getDOMNode().textContent).toBe('£50 k abc');
+      expect(total.textContent).toBe('£50 k abc');
     });
   });
 
@@ -76,7 +76,7 @@ describe('Goal', function() {
       var element = TestUtils.renderIntoDocument(goal);
       var total = findByClass(element, 'Goal__total');
 
-      expect(total.getDOMNode().textContent).toBe('$50 k');
+      expect(total.textContent).toBe('$50 k');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
@@ -84,7 +84,7 @@ describe('Goal', function() {
       var element = TestUtils.renderIntoDocument(goal);
       var total = findByClass(element, 'Goal__total');
 
-      expect(total.getDOMNode().textContent).toBe('$50,000.00');
+      expect(total.textContent).toBe('$50,000.00');
     });
   });
 

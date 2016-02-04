@@ -1,32 +1,33 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
-var React = require('react/addons');
+var React = require('react');
 var Icon = require('../');
-var TestUtils = React.addons.TestUtils;
+var TestUtils = require('react-addons-test-utils');
+var findByClass = TestUtils.findRenderedDOMComponentWithClass
 
 describe('Icon', function() {
   it('renders an icon with default className', function() {
     var element = TestUtils.renderIntoDocument(
         <Icon icon="lock"/>
       );
-    var iconClass = element.getDOMNode().children[0].className;
-    expect(iconClass).toBe('Icon fa fa-lock');
+    var iconClasses = findByClass(element, 'Icon').classList;
+    expect(iconClasses.contains('fa-lock')).toBe(true);
   });
 
   it('renders an icon with fixedWidth className', function() {
     var element = TestUtils.renderIntoDocument(
-        <Icon icon="lock" fixedWidth={true}/>
+        <Icon icon="lock" fixedWidth/>
       );
-    var iconClass = element.getDOMNode().children[0].className;
-    expect(iconClass).toBe('Icon fa fa-fw fa-lock');
+    var iconClasses = findByClass(element, 'Icon').classList;
+    expect(iconClasses.contains('fa-fw')).toBe(true);
   });
 
   it('renders an icon with spin className', function() {
     var element = TestUtils.renderIntoDocument(
-        <Icon icon="lock" spin={true}/>
+        <Icon icon="lock" spin/>
       );
-    var iconClass = element.getDOMNode().children[0].className;
-    expect(iconClass).toBe('Icon fa fa-spin fa-lock');
+    var iconClasses = findByClass(element, 'Icon').classList;
+    expect(iconClasses.contains('fa-spin')).toBe(true);
   });
 });

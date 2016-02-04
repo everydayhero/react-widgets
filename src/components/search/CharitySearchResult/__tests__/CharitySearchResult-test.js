@@ -32,11 +32,11 @@ describe('CharitySearchResult', function() {
     var footer       = findByClass(component, 'CharitySearchResult__footer');
 
     expect(element).toBeDefined();
-    expect(element.getDOMNode().href).toBe(result.url);
-    expect(header.getDOMNode().textContent).toContain(charity.name);
-    expect(header.getDOMNode().textContent).toContain(charity.merchant_name);
-    expect(description.getDOMNode().textContent).toBe(charity.description);
-    expect(footer.getDOMNode().textContent).toBe(charity.locality + ', ' + charity.region);
+    expect(element.href).toBe(result.url);
+    expect(header.textContent).toContain(charity.name);
+    expect(header.textContent).toContain(charity.merchant_name);
+    expect(description.textContent).toBe(charity.description);
+    expect(footer.textContent).toBe(charity.locality + ', ' + charity.region);
   });
 
   it('does not render merchant name if contained in name', function() {
@@ -45,7 +45,7 @@ describe('CharitySearchResult', function() {
     var component = TestUtils.renderIntoDocument(searchResult);
     var header = findByClass(component, 'CharitySearchResult__header');
 
-    expect(header.getDOMNode().textContent).toBe(result.charity.name);
+    expect(header.textContent).toBe(result.charity.name);
   });
 
   it('does not render merchant name ignores case and punctuation', function() {
@@ -54,7 +54,7 @@ describe('CharitySearchResult', function() {
     var component = TestUtils.renderIntoDocument(searchResult);
     var header = findByClass(component, 'CharitySearchResult__header');
 
-    expect(header.getDOMNode().textContent).toBe(result.charity.name);
+    expect(header.textContent).toBe(result.charity.name);
   });
 
   it('includes charity logo if exist', function() {
@@ -84,6 +84,6 @@ describe('CharitySearchResult', function() {
     var component = TestUtils.renderIntoDocument(searchResult);
     var action = findByClass(component, 'CharitySearchResult__actions');
 
-    expect(action.getDOMNode().textContent).toBe('Blah');
+    expect(action.textContent).toBe('Blah');
   });
 });

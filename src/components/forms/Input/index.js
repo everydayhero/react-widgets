@@ -1,6 +1,7 @@
 'use strict';
 
 var React           = require('react');
+var ReactDOM        = require('react-dom');
 var PureRenderMixin = require('react-addons-pure-render-mixin');
 var cx              = require('classnames');
 var I18nMixin       = require('../../mixins/I18n');
@@ -76,7 +77,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    var node = this.refs.input.getDOMNode();
+    var node = this.refs.input;
     if (this.props.autoFocus) {
       node.focus();
       node.selectionStart = node.selectionEnd = node.value.length;
@@ -128,7 +129,7 @@ module.exports = React.createClass({
     this.setState({ focused: true });
     if (this.props.modal) {
       this.props.modal({
-        element: this.getDOMNode(),
+        element: ReactDOM.findDOMNode(this),
         value: this.state.value,
         callback: this.setValue
       });

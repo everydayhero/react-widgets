@@ -40,9 +40,9 @@ describe('AggregateSearchModal', function() {
     element.setState({ results: { foo: 'bar' }, isSearching: false });
     var filterElements = scryByClass(element, 'AggregateSearchModal__filters__type');
     expect(element.state.filter).toEqual('all');
-    TestUtils.Simulate.click(filterElements[1].getDOMNode());
+    TestUtils.Simulate.click(filterElements[1]);
     expect(element.state.filter).toEqual('charities');
-    TestUtils.Simulate.click(filterElements[0].getDOMNode());
+    TestUtils.Simulate.click(filterElements[0]);
     expect(element.state.filter).toEqual('pages');
   });
 });
@@ -59,12 +59,12 @@ describe('AggregateSearchModal with searchType prop set', function() {
 
   it('renders a single filter based on the `searchType` prop', function() {
     expect(filterElements.length).toBe(1);
-    expect(filterElements[0].getDOMNode().textContent).toContain('Events');
+    expect(filterElements[0].textContent).toContain('Events');
   });
 
   it('the filter selection button is disabled (has no onclick behaviour)', function() {
     expect(element.state.filter).toEqual('campaigns');
-    TestUtils.Simulate.click(filterElements[0].getDOMNode());
+    TestUtils.Simulate.click(filterElements[0]);
     expect(element.state.filter).toEqual('campaigns');
   });
 });

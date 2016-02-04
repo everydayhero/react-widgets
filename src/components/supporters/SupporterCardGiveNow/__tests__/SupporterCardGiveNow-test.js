@@ -20,7 +20,7 @@ describe('SupporterCardGiveNow', function() {
   });
 
   it('renders', function() {
-    expect(element.getDOMNode()).not.toBeNull();
+    expect(ReactDOM.findDOMNode(element)).not.toBeNull();
   });
 
   it('contains a SupporterCardGiveNow element', function() {
@@ -30,19 +30,19 @@ describe('SupporterCardGiveNow', function() {
   it('contains a call to action', function() {
     var cta = findByClass(element, 'SupporterCardGiveNow__cta');
     expect(cta).not.toBeNull();
-    expect(cta.getDOMNode().textContent).toContain('Give Now');
+    expect(cta.textContent).toContain('Give Now');
   });
 
   it('contains a progress bar', function() {
     var progress = findByClass(element, 'SupporterCardGiveNow__progress');
     expect(progress).not.toBeNull();
 
-    var current = findByClass(progress, 'SupporterCardGiveNow__current');
-    expect(current.getDOMNode().style.width).toBe('28%');
+    var current = findByClass(element, 'SupporterCardGiveNow__current');
+    expect(current.style.width).toBe('28%');
   });
 
   it('displays the amount remaining', function() {
     var label = findByClass(element, 'SupporterCardGiveNow__label');
-    expect(label.getDOMNode().textContent).toContain('Only $3087 to go');
+    expect(label.textContent).toContain('Only $3087 to go');
   });
 });

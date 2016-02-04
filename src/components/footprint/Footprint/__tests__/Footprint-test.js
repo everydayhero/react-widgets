@@ -32,13 +32,13 @@ describe('Footprint', function() {
   var props = {
     userUrl: 'http://everydayhero.com/us',
     userImage: 'http://thecatapi.com/?id=9h4',
-    userName: "Wonderful Person",
+    userName: 'Wonderful Person',
     data: model
   };
 
   it('renders with defaults', function() {
     element = TestUtils.renderIntoDocument(<Footprint { ...props }/>);
-    expect(element.getDOMNode()).not.toBeNull();
+    expect(element).not.toBeNull();
   });
 
   describe('FootprintTile', function() {
@@ -47,11 +47,11 @@ describe('Footprint', function() {
     });
 
     it('renders', function() {
-      expect(element.getDOMNode()).not.toBeNull();
+      expect(element).not.toBeNull();
     });
 
     it('displays an avatar with title which links to a page', function() {
-      var anchor = findByClass(element, 'FootprintAvatar').getDOMNode();
+      var anchor = findByClass(element, 'FootprintAvatar');
       expect(anchor.href).toBe(props.userUrl);
       expect(anchor.title).toBe(props.userName);
       expect(anchor.style.backgroundImage).toBe('url('+props.userImage+')');
@@ -65,25 +65,24 @@ describe('Footprint', function() {
 
     it('renders an svg', function() {
       var svg = findByTag(element, 'svg');
-      expect(svg.getDOMNode()).not.toBeNull();
+      expect(svg).not.toBeNull();
     });
 
     it('shows metric details on hover', function() {
       var svg = findByTag(element, 'svg');
-      var causeRaisedSector = findByClass(svg, 'FootprintMetric--cause_raised').getDOMNode();
+      var causeRaisedSector = findByClass(element, 'FootprintMetric--cause_raised');
       expect(causeRaisedSector).not.toBeNull();
-      simulateMouseOver(element.getDOMNode(), causeRaisedSector);
+      simulateMouseOver(ReactDOM.findDOMNode(element), causeRaisedSector);
 
-      var metricData = findByClass(element, 'FootprintTile--flip');
-      expect(metricData.getDOMNode()).not.toBeNull();
+      findByClass(element, 'FootprintTile--flip');
 
-      var metricDataPercent = findByClass(metricData, 'FootprintData').getDOMNode();
+      var metricDataPercent = findByClass(element, 'FootprintData');
       expect(metricDataPercent.textContent).toContain(model[0].percentile + '%');
 
       var tooltip = findByClass(element, 'FootprintTip');
-      var tooltipName = findByClass(tooltip, 'FootprintTip__name').getDOMNode();
-      var tooltipValue = findByClass(tooltip, 'FootprintTip__value').getDOMNode();
-      var tooltipDescription = findByClass(tooltip, 'FootprintTip__description').getDOMNode();
+      var tooltipName = findByClass(element, 'FootprintTip__name');
+      var tooltipValue = findByClass(element, 'FootprintTip__value');
+      var tooltipDescription = findByClass(element, 'FootprintTip__description');
       expect(tooltipName.textContent).toContain('Community Raised');
       expect(tooltipValue.textContent).toContain(model[0].amount_formatted);
       expect(tooltipDescription.textContent).toContain('The collective funds raised by the people who care about the same causes.');
@@ -92,25 +91,24 @@ describe('Footprint', function() {
 
   describe('FootprintGraph --compact', function() {
     beforeEach(function() {
-      element = TestUtils.renderIntoDocument(<Footprint { ...props } compact={ true }/>);
+      element = TestUtils.renderIntoDocument(<Footprint { ...props } compact />);
     });
 
     it('renders an svg', function() {
       var svg = findByTag(element, 'svg');
-      expect(svg.getDOMNode()).not.toBeNull();
+      expect(svg).not.toBeNull();
     });
 
     it('shows metric details in center on hover', function() {
       var svg = findByTag(element, 'svg');
-      var voiceEngagementSector = findByClass(svg, 'FootprintMetric--sharing').getDOMNode();
+      var voiceEngagementSector = findByClass(element, 'FootprintMetric--sharing');
       expect(voiceEngagementSector).not.toBeNull();
-      simulateMouseOver(element.getDOMNode(), voiceEngagementSector);
+      simulateMouseOver(ReactDOM.findDOMNode(element), voiceEngagementSector);
 
-      var metricData = findByClass(element, 'FootprintTile--flip');
-      expect(metricData.getDOMNode()).not.toBeNull();
+      findByClass(element, 'FootprintTile--flip');
 
-      var dataValue = findByClass(metricData, 'FootprintData__value').getDOMNode();
-      var dataName = findByClass(metricData, 'FootprintData__name').getDOMNode();
+      var dataValue = findByClass(element, 'FootprintData__value');
+      var dataName = findByClass(element, 'FootprintData__name');
       expect(dataValue.textContent).toContain(model[5].amount_formatted);
       expect(dataName.textContent).toContain('Sharing');
     });

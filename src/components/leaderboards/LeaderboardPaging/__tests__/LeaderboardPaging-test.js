@@ -21,8 +21,7 @@ describe('LeaderboardPaging', function() {
     });
 
     it('renders a component', function() {
-      expect(component).not.toBeNull();
-      expect(component.getDOMNode().className).toContain('LeaderboardPaging');
+      expect(ReactDOM.findDOMNode(component).classList.contains('LeaderboardPaging')).toBe(true);
     });
   });
 });

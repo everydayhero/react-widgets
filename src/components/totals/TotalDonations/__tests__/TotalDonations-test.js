@@ -29,14 +29,14 @@ describe('TotalDonations', function() {
       element.setState({ isLoading: false });
 
       var total = findByClass(element, 'TotalDonations__total');
-      expect(total.getDOMNode().textContent).toContain('0');
+      expect(total.textContent).toContain('0');
     });
 
     it('renders a default title', function() {
       element.setState({ isLoading: false });
 
       var title = findByClass(element, 'TotalDonations__title');
-      expect(title.getDOMNode().textContent).toBe('Donations');
+      expect(title.textContent).toBe('Donations');
     });
 
     it('renders an icon by default', function() {
@@ -118,14 +118,14 @@ describe('TotalDonations', function() {
       element.setState({ isLoading: false });
       var title = findByClass(element, 'TotalDonations__title');
 
-      expect(title.getDOMNode().textContent).toBe(translation.title);
+      expect(title.textContent).toBe(translation.title);
     });
 
     it('renders a default total', function() {
       element.setState({ isLoading: false });
       var total = findByClass(element, 'TotalDonations__total');
 
-      expect(total.getDOMNode().textContent).toContain('0');
+      expect(total.textContent).toContain('0');
     });
   });
 
@@ -140,7 +140,7 @@ describe('TotalDonations', function() {
       });
 
       var total = findByClass(element, 'TotalDonations__total');
-      expect(total.getDOMNode().textContent).toBe('1,000');
+      expect(total.textContent).toBe('1,000');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
@@ -153,7 +153,7 @@ describe('TotalDonations', function() {
       });
 
       var total = findByClass(element, 'TotalDonations__total');
-      expect(total.getDOMNode().textContent).toBe('1000');
+      expect(total.textContent).toBe('1000');
     });
   });
 

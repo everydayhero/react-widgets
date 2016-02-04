@@ -25,7 +25,7 @@ describe('FundsRaised', function() {
     it('renders GoalProgress text', function() {
       element.setState(state);
       var text = findByClass(element, 'GoalProgress__text');
-      expect(text.getDOMNode().textContent).toContain('$150 raised of $300 goal');
+      expect(text.textContent).toContain('$150 raised of $300 goal');
     });
 
     it('renders a GoalProgress bar', function() {
@@ -69,7 +69,7 @@ describe('FundsRaised', function() {
     it('goal as property', function() {
       element.setState(state);
       var text = findByClass(element, 'GoalProgress__text');
-      expect(text.getDOMNode().textContent).toContain('$150 raised of $555 goal');
+      expect(text.textContent).toContain('$150 raised of $555 goal');
     });
   });
 
@@ -84,7 +84,7 @@ describe('FundsRaised', function() {
     it('Shows funds raised message', function() {
       element.setState(state);
       var text = findByClass(element, 'GoalProgress__text');
-      expect(text.getDOMNode().textContent).toContain('$150 raised');
+      expect(text.textContent).toContain('$150 raised');
     });
   });
 
@@ -125,7 +125,7 @@ describe('FundsRaised', function() {
       var translation = { symbol: 'foo' };
       element = TestUtils.renderIntoDocument(<EntityGoalProgress campaignUid="us-22" i18n={ translation } />);
       element.setState({ isLoading: false, total: 10000 });
-      var text = findByClass(element, 'GoalProgress__text').getDOMNode();
+      var text = findByClass(element, 'GoalProgress__text');
       expect(text.textContent).toContain('foo100');
     });
   });
@@ -135,7 +135,7 @@ describe('FundsRaised', function() {
       element = TestUtils.renderIntoDocument(<EntityGoalProgress goal={ 15000000 } format={ '0a' } />);
       element.setState({ isLoading: false, total: 100000 });
       var text = findByClass(element, 'GoalProgress__text');
-      expect(text.getDOMNode().textContent).toContain('$1k raised of $150k goal');
+      expect(text.textContent).toContain('$1k raised of $150k goal');
     });
   });
 

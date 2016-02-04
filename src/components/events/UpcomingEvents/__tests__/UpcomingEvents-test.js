@@ -64,8 +64,8 @@ describe('UpcomingEvents', function() {
       element.onEventLoad({ campaigns: campaigns });
 
       var events = scryByClass(element, 'Event');
-      expect(findByClass(events[0], 'Event__name').getDOMNode().textContent).toContain('Bar');
-      expect(findByClass(events[1], 'Event__name').getDOMNode().textContent).toContain('Foo');
+      expect(scryByClass(element, 'Event__name')[0].textContent).toContain('Bar');
+      expect(scryByClass(element, 'Event__name')[1].textContent).toContain('Foo');
     });
 
     it('loads campaigns for given charity', function() {

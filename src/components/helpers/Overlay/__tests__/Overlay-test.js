@@ -11,7 +11,7 @@ describe('Overlay', function() {
   it('renders something', function() {
     var overlay = <Overlay />;
     var element = TestUtils.renderIntoDocument(overlay);
-    expect(element.getDOMNode()).toBeTruthy();
+    expect(element).toBeTruthy();
   });
 
   it('calls the onClose prop when clicking the close button', function() {

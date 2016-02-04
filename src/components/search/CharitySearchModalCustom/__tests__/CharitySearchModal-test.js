@@ -70,8 +70,8 @@ describe('CharitySearchModal', function() {
     var resultElements = scryByClass(element, 'SearchResult');
 
     expect(resultElements.length).toEqual(1);
-    expect(resultElements[0].getDOMNode().textContent).toContain(charity.name);
-    expect(resultElements[0].getDOMNode().textContent).toContain(charity.description);
+    expect(resultElements[0].textContent).toContain(charity.name);
+    expect(resultElements[0].textContent).toContain(charity.description);
   });
 
   it('searches for charities on input change', function() {
@@ -123,6 +123,6 @@ describe('CharitySearchModal', function() {
 
     var resultElements = scryByClass(element, 'SearchResult');
 
-    expect(resultElements[0].getDOMNode().href).toBe(charity.url);
+    expect(resultElements[0].href).toBe(charity.url);
   });
 });

@@ -20,8 +20,8 @@ describe('Tab', function() {
   });
 
   it('renders a tab with a name', function() {
-    expect(element.getDOMNode().textContent).toBe('foobar');
-    expect(element.getDOMNode().className).toContain('active');
+    expect(element.textContent).toBe('foobar');
+    expect(element.className).toContain('active');
   });
 
   it('calls an on click with an index', function() {

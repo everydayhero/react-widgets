@@ -6,7 +6,7 @@ var TestUtils   = require('react-addons-test-utils');
 var Input       = require('../');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
-var findByProp = require('../../../../test/helpers/scryRenderedDOMComponentsWithProp').findRenderedDOMComponentWithProp;
+var findByAttribute  = require('../../../../test/helpers/scryRenderedDOMComponentsWithAttribute').findRenderedDOMComponentWithAttribute;
 
 describe('Input', function() {
   it('renders an input', function() {
@@ -20,13 +20,13 @@ describe('Input', function() {
     var input = findByClass(element, 'Input__input');
     expect(input).toBeDefined();
 
-    var inputWithName = findByProp(element, 'name', 'test_input');
+    var inputWithName = findByAttribute(element, 'name', 'test_input');
     expect(inputWithName).toBeDefined();
 
-    var label = findByClass(element, 'Input__label').getDOMNode();
+    var label = findByClass(element, 'Input__label');
     expect(label.textContent).toContain('Test Input');
 
-    var hint = findByClass(element, 'Input__message').getDOMNode();
+    var hint = findByClass(element, 'Input__message');
     expect(hint.textContent).toContain('This is a test');
 
     var icon = findByClass(element, 'fa-bolt');
@@ -34,7 +34,7 @@ describe('Input', function() {
 
     element.setValid(false);
 
-    var error = findByClass(element, 'Input__message').getDOMNode();
+    var error = findByClass(element, 'Input__message');
     expect(error.textContent).toContain('This input errored correctly');
 
     var errorIcon = findByClass(element, 'fa-times');
@@ -43,7 +43,7 @@ describe('Input', function() {
 
   it("will not alter input when readOnly", function() {
     var element = TestUtils.renderIntoDocument(<Input value="oldValue" readOnly={ true } />);
-    var input = findByClass(element, 'Input__input').getDOMNode();
+    var input = findByClass(element, 'Input__input');
     TestUtils.Simulate.change(input, { target: { value: 'newValue' } });
     expect(input.value).toBe('oldValue');
   });
@@ -54,7 +54,7 @@ describe('Input', function() {
     var mask = jest.genMockFunction();
     var validate = jest.genMockFunction();
     var element = TestUtils.renderIntoDocument(<Input value="oldValue" disabled={ true } modal={ modal } mask={ mask } output={ output } validate={ validate } />);
-    var input = findByClass(element, 'Input__input').getDOMNode();
+    var input = findByClass(element, 'Input__input');
     TestUtils.Simulate.focus(input);
     TestUtils.Simulate.change(input, { target: { value: 'newValue' } });
     TestUtils.Simulate.blur(input);
@@ -68,10 +68,10 @@ describe('Input', function() {
   it("will execute modal function on focus", function() {
     var modal = jest.genMockFunction();
     var element = TestUtils.renderIntoDocument(<Input value="testValue" modal={ modal } />);
-    var input = findByClass(element, 'Input__input').getDOMNode();
+    var input = findByClass(element, 'Input__input');
     TestUtils.Simulate.focus(input);
     var object = {
-      element: element.getDOMNode(),
+      element: element,
       value: 'testValue',
       callback: element.setValue
     };
@@ -81,7 +81,7 @@ describe('Input', function() {
   it("will execute output function on change", function() {
     var output = jest.genMockFunction();
     var element = TestUtils.renderIntoDocument(<Input value="oldValue" output={ output } />);
-    var input = findByClass(element, 'Input__input').getDOMNode();
+    var input = findByClass(element, 'Input__input');
     TestUtils.Simulate.change(input, { target: { value: 'newValue' } });
     expect(output).lastCalledWith('newValue');
   });
@@ -89,7 +89,7 @@ describe('Input', function() {
   it("will execute mask function on change", function() {
     var mask = jest.genMockFunction().mockReturnValue('newValue--masked');
     var element = TestUtils.renderIntoDocument(<Input value="oldValue" mask={ mask } />);
-    var input = findByClass(element, 'Input__input').getDOMNode();
+    var input = findByClass(element, 'Input__input');
     TestUtils.Simulate.change(input, { target: { value: 'newValue' } });
     expect(mask).lastCalledWith('newValue');
     expect(input.value).toBe('newValue--masked');
@@ -100,7 +100,7 @@ describe('Input', function() {
     var setValid = jest.genMockFunction();
     var element = TestUtils.renderIntoDocument(<Input required={ false } validate={ validate } />);
     element.setValid = setValid;
-    var input = findByClass(element, 'Input__input').getDOMNode();
+    var input = findByClass(element, 'Input__input');
     TestUtils.Simulate.blur(input);
     expect(setValid).not.toBeCalled();
     expect(validate).toBeCalled();
@@ -109,7 +109,7 @@ describe('Input', function() {
   it("will execute validate function on blur if required", function() {
     var validate = jest.genMockFunction();
     var element = TestUtils.renderIntoDocument(<Input required={ true } validate={ validate } />);
-    var input = findByClass(element, 'Input__input').getDOMNode();
+    var input = findByClass(element, 'Input__input');
     TestUtils.Simulate.change(input, { target: { value: 'testValue' } });
     TestUtils.Simulate.blur(input);
     expect(validate).lastCalledWith('testValue', element.setValid);

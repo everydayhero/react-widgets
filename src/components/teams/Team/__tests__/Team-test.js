@@ -39,12 +39,12 @@ describe('Team', function() {
     });
 
     it('renders an anchor with custom url and title prop', function() {
-      var anchor = findByTag(element, 'a').getDOMNode();
+      var anchor = findByTag(element, 'a');
       expect(anchor.href).toBe(props.pageUrl);
     });
 
     it('renders an image with alt tag including custom title prop', function() {
-      var image = findByTag(element, 'img').getDOMNode();
+      var image = findByTag(element, 'img');
       expect(image.alt).toBe(props.title);
     });
   });

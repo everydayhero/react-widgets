@@ -78,7 +78,7 @@
     "start": "node server.js",
     "dev": "npm run build-dev && npm run start & npm run watch",
     "deploy-assets": "bin/deploy_assets",
-    "install": "npm run styles"
+    "install": "bin/write-version-sass-var"
   },
   "browserify": {
     "transform": [

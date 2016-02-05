@@ -138,4 +138,20 @@ describe('FundsRaised', function() {
       expect(text.getDOMNode().textContent).toContain('$1k raised of $150k goal');
     });
   });
+
+  describe('Custom offset value', function() {
+    it('renders with the default offset of 0', function() {
+      element = TestUtils.renderIntoDocument(<EntityGoalProgress goal={ 15000000 } />);
+      element.onSuccess({ isLoading: false, total_amount_cents: { sum: 100000 }, goal: 15000000 });
+      var text = findByClass(element, 'GoalProgress__text');
+      expect(text.getDOMNode().textContent).toContain('$1,000 raised of $150,000 goal');
+    });
+
+    it('renders with a custom offset', function() {
+      element = TestUtils.renderIntoDocument(<EntityGoalProgress goal={ 15000000 } offset={ 200000 }  />);
+      element.onSuccess({ isLoading: false, total_amount_cents: { sum: 300000 }, goal: 15000000 });
+      var text = findByClass(element, 'GoalProgress__text');
+      expect(text.getDOMNode().textContent).toContain('$5,000 raised of $150,000 goal');
+    });
+  });
 });

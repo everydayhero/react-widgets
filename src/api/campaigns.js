@@ -57,6 +57,15 @@ module.exports = {
     return getJSONP(routes.get('campaignLeaderboard', params), callback);
   },
 
+  leaderboardDynamic: function(campaignUid, groupValue, callback) {
+    var params = {
+      campaignUid: campaignUid,
+      groupValue: groupValue
+    };
+
+    return getJSONP(routes.get('campaignLeaderboardDynamic', params), callback);
+  },
+
   leaderboardByUids: function(campaignUids, charityUid, type, limit, callback, options) {
     if (_.isEmpty(campaignUids)) {
       _.defer(callback, { campaigns: [] });

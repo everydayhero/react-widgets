@@ -672,6 +672,9 @@ Display the progress towards a fund raising goal for charities or campaigns.
 `goal` (number) <span class="required">Required</span><br>
 Set a goal in cents. Renders as a dollar value by default.
 
+`offset` (number) <br>
+Add to the goal in cents.
+
 `campaignUid` (string or array)<br>
 Campaign uid or uids to filter results by campaigns.
 

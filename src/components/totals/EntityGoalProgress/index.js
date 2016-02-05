@@ -20,6 +20,7 @@ module.exports = React.createClass({
       React.PropTypes.arrayOf(React.PropTypes.string)
     ]),
     goal: React.PropTypes.number,
+    offset: React.PropTypes.number,
     startAt: React.PropTypes.string,
     endAt: React.PropTypes.string,
     i18n: React.PropTypes.object
@@ -28,6 +29,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       goal: null,
+      offset: 0,
       startAt: null,
       endAt: null,
       format: '0,0',
@@ -68,7 +70,7 @@ module.exports = React.createClass({
   onSuccess: function(res) {
     this.setState({
       isLoading: false,
-      total: res.total_amount_cents.sum || 0,
+      total: res.total_amount_cents.sum ? res.total_amount_cents.sum + this.props.offset : 0,
       goal: res.goal
     });
   },

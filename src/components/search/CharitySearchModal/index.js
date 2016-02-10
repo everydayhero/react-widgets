@@ -22,6 +22,7 @@ module.exports = React.createClass({
     i18n: React.PropTypes.object,
     onClose: React.PropTypes.func.isRequired,
     onSelect: React.PropTypes.func,
+    resizeCallback: React.PropTypes.func,
     promotedCharityUids: React.PropTypes.arrayOf(React.PropTypes.string)
   },
 
@@ -31,6 +32,7 @@ module.exports = React.createClass({
       autoFocus: true,
       campaignUid: '',
       campaignSlug: null,
+      resizeCallback: function() {},
       defaultI18n: {
         title: 'Search for a Charity',
         visitAction: 'Visit Charity',
@@ -71,6 +73,7 @@ module.exports = React.createClass({
     } else {
       this.search('', 1);
     }
+    this.props.resizeCallback();
   },
 
   loadPromotedCharities: function() {
@@ -131,10 +134,16 @@ module.exports = React.createClass({
     } else {
       this.setState(this.getInitialState());
     }
+    this.props.resizeCallback();
+  },
+
+  onClose: function() {
+    this.props.onClose();
+    this.props.resizeCallback();
   },
 
   selectHandler: function(result) {
-    this.props.onClose();
+    this.onClose();
 
     if (this.props.action == 'custom' && this.props.onSelect) {
       this.props.onSelect(result.charity);
@@ -167,7 +176,7 @@ module.exports = React.createClass({
         autoFocus={ this.props.autoFocus }
         i18n={ this.getI18n() }
         isSearching={ this.state.isSearching }
-        onClose={ this.props.onClose }
+        onClose={ this.onClose }
         onInputChange={ this.inputChanged }
         onPageChange={ this.pageChanged }
         onSelect={ this.selectHandler }

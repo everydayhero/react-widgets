@@ -19,7 +19,6 @@ var mul_table = [
   289, 287, 285, 282, 280, 278, 275, 273, 271, 269, 267, 265, 263, 261, 259
 ];
 
-
 var shg_table = [
   9, 11, 12, 13, 13, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 17,
   17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 18, 19,
@@ -45,13 +44,13 @@ function blur(image, radius) {
   var w = image.width;
   var h = image.height;
 
-  var canvas = document.createElement("canvas");
+  var canvas = document.createElement('canvas');
   if (!canvas.getContext) return;
 
   canvas.width = w;
   canvas.height = h;
 
-  var ctx = canvas.getContext("2d");
+  var ctx = canvas.getContext('2d');
 
   ctx.drawImage(image, 0, 0);
 
@@ -64,7 +63,6 @@ function blurCanvas(canvas, ctx, width, height, radius) {
   var x, y, i, p, yp, yi, yw, r_sum, g_sum, b_sum, r_out_sum, g_out_sum, b_out_sum, r_in_sum, g_in_sum, b_in_sum, pr, pg, pb, rbs;
 
   var div = radius + radius + 1;
-  var w4 = width << 2;
   var widthMinus1  = width - 1;
   var heightMinus1 = height - 1;
   var radiusPlus1  = radius + 1;

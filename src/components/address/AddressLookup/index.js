@@ -262,7 +262,7 @@ module.exports = React.createClass({
     return !bool;
   },
 
-  validateSearch: _.debounce(function (value) {
+  validateSearch: _.debounce(function () {
     var address = this.state.address || this.state.custom;
     if (this.props.required &&
         !this.state.choosingCountry &&

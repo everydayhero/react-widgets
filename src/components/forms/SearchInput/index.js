@@ -66,7 +66,6 @@ module.exports = React.createClass({
   render: function() {
     var props = this.props;
     var state = this.state;
-    var width = props.width;
     var i18n  = { name: this.t('name'), label: this.t('label') };
 
     return (

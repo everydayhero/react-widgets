@@ -1,6 +1,5 @@
-"use strict";
+'use strict';
 
-var _            = require('lodash');
 var React        = require('react');
 var Tab          = require('../Tab');
 var TabDrawer    = require('../TabDrawer');
@@ -8,7 +7,7 @@ var TabPanel     = require('../TabPanel');
 var DOMInfoMixin = require('../../mixins/DOMInfo');
 
 module.exports = React.createClass({
-  displayName: "Tabs",
+  displayName: 'Tabs',
   mixins: [DOMInfoMixin],
   propTypes: {
     children: React.PropTypes.array,
@@ -63,8 +62,8 @@ module.exports = React.createClass({
           label={ d.label || d.props.tabLabel }
           index={ i }
           active={ this.state.current === i }
-          tabId={ "tab-" + i }
-          controls={ "panel-" + i }
+          tabId={ 'tab-' + i }
+          controls={ 'panel-' + i }
           key={ 'tab-' + i } />
       );
     }, this);
@@ -78,8 +77,8 @@ module.exports = React.createClass({
         label={ d.label || d.props.tabLabel }
         index={ i }
         active={ this.state.current === i }
-        tabId={ "tab-" + i }
-        controls={ "panel-" + i }
+        tabId={ 'tab-' + i }
+        controls={ 'panel-' + i }
         key={ 'drawer-' + i } />
     );
   },
@@ -94,8 +93,8 @@ module.exports = React.createClass({
           <TabPanel
             content={ d.content || d }
             index={ i }
-            panelId={ "panel-" + i }
-            labelledBy={ "tab-" + i }
+            panelId={ 'panel-' + i }
+            labelledBy={ 'tab-' + i }
             active={ this.state.current === i } />
         </div>
       );
@@ -103,16 +102,16 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var sizeOutput = " Tabs--" + this.state.size;
+    var sizeOutput = ' Tabs--' + this.state.size;
 
     if (this.props.collapse === true) {
-      sizeOutput = " Tabs--collapsed";
+      sizeOutput = ' Tabs--collapsed';
     } else if (this.props.collapse === false) {
-      sizeOutput = "";
+      sizeOutput = '';
     }
 
     return (
-      <div className={ "Tabs" + sizeOutput }>
+      <div className={ 'Tabs' + sizeOutput }>
         <div className="Tabs__tab-list" ref="tabList" role="tablist">
           { this.renderTabs() }
         </div>

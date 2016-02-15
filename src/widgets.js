@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
 require('es5-shim');
 require('es5-shim/es5-sham');
+require('./lib/consoleShim');
 
 var _ = require('lodash');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var routes = require('./api/routes');
 var addEventListener = require('./lib/addEventListener');
-var consoleShim = require('./lib/consoleShim');
 var renderModal = require('./lib/renderModal');
 var widgets = {
   FundsRaised: require('./components/totals/FundsRaised'),

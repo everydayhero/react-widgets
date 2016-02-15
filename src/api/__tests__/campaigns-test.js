@@ -1,12 +1,11 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
 jest.mock('../../lib/getJSONP');
 var getJSONP = require('../../lib/getJSONP');
-var results = { results: [], meta: {} };
+var results = { results: [], meta: {}};
 getJSONP.mockImplementation(function(_, callback) { callback(results); });
 
-var routes = require('../routes');
 var campaigns = require('../campaigns');
 
 describe('campaigns', function() {

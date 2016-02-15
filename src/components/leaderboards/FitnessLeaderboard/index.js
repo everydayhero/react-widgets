@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _                         = require('lodash');
 var React                     = require('react');
@@ -13,7 +13,7 @@ var METERS_TO_MILES           = 0.000621371192;
 
 module.exports = React.createClass({
   mixins: [I18nMixin],
-  displayName: "FitnessLeaderboard",
+  displayName: 'FitnessLeaderboard',
   propTypes: {
     campaignSlug: React.PropTypes.string,
     campaignUid: React.PropTypes.string,
@@ -144,7 +144,6 @@ module.exports = React.createClass({
 
   renderLeaderboardItems: function() {
     var boardData = this.state.boardData;
-    var symbol    = this.t('symbol');
 
     if (this.state.isLoading) {
       return (
@@ -175,12 +174,9 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var limit           = this.props.limit;
     var heading         = this.t('heading');
     var raisedTitle     = this.t('raisedTitle');
     var distanceTitle   = this.t('distanceTitle');
-    var backgroundColor = this.props.backgroundColor;
-    var textColor       = this.props.textColor;
 
     var customStyle = {
       backgroundColor: this.props.backgroundColor,

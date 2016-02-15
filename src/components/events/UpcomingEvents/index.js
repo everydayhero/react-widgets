@@ -4,11 +4,9 @@ var _ = require('lodash');
 var React = require('react');
 var DOMInfo = require('../../mixins/DOMInfo');
 var I18n = require('../../mixins/I18n');
-var Icon = require('../../helpers/Icon');
 var Event = require('../Event');
 var Button = require('../../callstoaction/CallToActionButton');
 var campaign = require('../../../api/campaigns');
-var charity = require('../../../api/charities');
 
 var blacklist = [
   'au-18856', 'au-18881', 'au-18882', 'au-18883', 'au-18884', 'au-18885',
@@ -133,7 +131,7 @@ module.exports = React.createClass({
     return <Button
       kind="primary"
       label={ this.t(this.state.showAll ? 'show_less' : 'show_all') }
-      icon={ this.state.showAll ? "chevron-up" : "chevron-down" }
+      icon={ this.state.showAll ? 'chevron-up' : 'chevron-down' }
       className="UpcomingEvents__showAllButton"
       onClick={ this.setShowAll }/>
   },

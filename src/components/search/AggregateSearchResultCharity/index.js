@@ -1,6 +1,5 @@
 'use strict';
 
-var _             = require('lodash');
 var React         = require('react');
 var Icon          = require('../../helpers/Icon');
 var I18n          = require('../../mixins/I18n');
@@ -37,7 +36,7 @@ module.exports = React.createClass({
   renderAvatar: function () {
     return (
       <div className="AggregateSearchResultCharity__avatar">
-        <Icon icon="heart-o" fixedWidth={ true } />
+        <Icon icon="heart-o" fixedWidth />
       </div>
     );
   },

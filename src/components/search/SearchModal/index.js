@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var React                       = require('react');
 var SearchInput                 = require('../SearchInput');
@@ -36,7 +36,7 @@ module.exports = React.createClass({
     };
   },
 
-  componentWillUpdate: function(nextProps, nextState) {
+  componentWillUpdate: function(nextProps) {
     if (this.refs.body && this.props.results !== nextProps.results) {
       this.refs.body.scrollTop = 0;
     }

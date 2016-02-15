@@ -4,7 +4,6 @@ jest.autoMockOff();
 var React       = require('react');
 var ReactDOM    = require('react-dom');
 var TestUtils   = require('react-addons-test-utils');
-var _           = require('lodash');
 var Footprint   = require('../');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 var findByTag   = TestUtils.findRenderedDOMComponentWithTag;
@@ -69,7 +68,6 @@ describe('Footprint', function() {
     });
 
     it('shows metric details on hover', function() {
-      var svg = findByTag(element, 'svg');
       var causeRaisedSector = findByClass(element, 'FootprintMetric--cause_raised');
       expect(causeRaisedSector).not.toBeNull();
       simulateMouseOver(ReactDOM.findDOMNode(element), causeRaisedSector);
@@ -79,7 +77,6 @@ describe('Footprint', function() {
       var metricDataPercent = findByClass(element, 'FootprintData');
       expect(metricDataPercent.textContent).toContain(model[0].percentile + '%');
 
-      var tooltip = findByClass(element, 'FootprintTip');
       var tooltipName = findByClass(element, 'FootprintTip__name');
       var tooltipValue = findByClass(element, 'FootprintTip__value');
       var tooltipDescription = findByClass(element, 'FootprintTip__description');
@@ -100,7 +97,6 @@ describe('Footprint', function() {
     });
 
     it('shows metric details in center on hover', function() {
-      var svg = findByTag(element, 'svg');
       var voiceEngagementSector = findByClass(element, 'FootprintMetric--sharing');
       expect(voiceEngagementSector).not.toBeNull();
       simulateMouseOver(ReactDOM.findDOMNode(element), voiceEngagementSector);

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var React           = require('react');
 var PureRenderMixin = require('react-addons-pure-render-mixin');
@@ -9,7 +9,7 @@ var Input           = require('../Input');
 var SelectOptions   = require('../SelectOptions');
 
 module.exports = React.createClass({
-  displayName: "Select",
+  displayName: 'Select',
 
   mixins: [I18nMixin, PureRenderMixin],
 
@@ -86,10 +86,10 @@ module.exports = React.createClass({
 
   getFilteredOptions: function() {
     var key = this.props.labelKey;
-    var exactMatches = this.props.options.filter(function(d, i) {
+    var exactMatches = this.props.options.filter(function(d) {
       return this.isExactMatch(d[key]);
     }, this);
-    return !_.isEmpty(exactMatches) ? exactMatches : this.props.options.filter(function(d, i) {
+    return !_.isEmpty(exactMatches) ? exactMatches : this.props.options.filter(function(d) {
       return this.isFuzzyMatch(d[key]);
     }, this);
   },

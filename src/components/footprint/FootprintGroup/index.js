@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var React           = require('react');
 var cx              = require('classnames');
@@ -7,9 +7,9 @@ var sector          = require('paths-js/sector');
 var FootprintSector = require('../FootprintSector');
 
 module.exports = React.createClass({
-  mixins: [tweenState.Mixin],
-
   displayName: 'FootprintGroup',
+
+  mixins: [tweenState.Mixin],
 
   propTypes: {
     index: React.PropTypes.number.isRequired,
@@ -63,7 +63,7 @@ module.exports = React.createClass({
   },
 
   renderSectors: function() {
-    return this.props.data.map(function(d, i) {
+    return this.props.data.map(function(d) {
       var start = this.props.options.arc * (d.id);
       var end = start + this.props.options.arc;
       var min = this.props.options.min + this.getTweeningValue('offset');

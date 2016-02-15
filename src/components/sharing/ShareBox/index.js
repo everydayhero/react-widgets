@@ -1,12 +1,11 @@
-"use strict";
+'use strict';
 
-var _         = require('lodash');
 var React     = require('react');
 var Input     = require('../../forms/Input');
 var ShareIcon = require('../ShareIcon');
 
 module.exports = React.createClass({
-  displayName: "ShareBox",
+  displayName: 'ShareBox',
 
   renderShareIcons: function() {
     return this.props.services.map(function(service) {
@@ -44,8 +43,8 @@ module.exports = React.createClass({
     return (
       <div className="ShareBox">
         <Input
-          readOnly={ true }
-          autoSelect={ true }
+          readOnly
+          autoSelect
           type="url"
           icon="link"
           value={ this.props.shareUrl }

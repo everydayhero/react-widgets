@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var React               = require('react');
 var ReactDOM            = require('react-dom');
@@ -14,9 +14,9 @@ var FootprintTip        = require('../FootprintTip');
 var FootprintTipLine    = require('../FootprintTipLine');
 
 module.exports = React.createClass({
-  mixins: [tweenState.Mixin, I18nMixin],
+  displayName: 'Footprint',
 
-  displayName: "Footprint",
+  mixins: [tweenState.Mixin, I18nMixin],
 
   propTypes: {
     userUrl: React.PropTypes.string,
@@ -117,7 +117,7 @@ module.exports = React.createClass({
     });
   },
 
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps: function() {
     this.processData();
   },
 

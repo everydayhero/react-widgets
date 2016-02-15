@@ -1,10 +1,9 @@
-"use strict";
+'use strict';
 
 jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
 
 describe('FitnessLeaderboard', function() {
-  var _                     = require('lodash');
   var React                 = require('react');
   var FitnessLeaderboard    = require('../');
   var TestUtils             = require('react-addons-test-utils');

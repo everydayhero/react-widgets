@@ -5,7 +5,6 @@ var React       = require('react');
 var TestUtils   = require('react-addons-test-utils');
 var SearchInput = require('../');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 var findByAttribute  = require('../../../../test/helpers/scryRenderedDOMComponentsWithAttribute').findRenderedDOMComponentWithAttribute;
 
 describe('SearchInput', function() {

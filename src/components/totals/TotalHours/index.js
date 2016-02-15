@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _                = require('lodash');
 var React            = require('react');
@@ -9,8 +9,8 @@ var numeral          = require('numeral');
 var SECONDS_TO_HOURS = 1 / 3600;
 
 module.exports = React.createClass({
+  displayName: 'TotalHours',
   mixins: [I18nMixin],
-  displayName: "TotalHours",
   propTypes: {
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
@@ -89,7 +89,6 @@ module.exports = React.createClass({
   },
 
   renderTotal: function() {
-    var symbol         = this.t('symbol');
     var totalHours     = this.state.total * SECONDS_TO_HOURS;
     var formattedTotal = numeral(totalHours).format(this.props.format);
     var title          = this.t('title');
@@ -115,7 +114,7 @@ module.exports = React.createClass({
     var renderIcon = this.props.renderIcon;
 
     if (renderIcon === true) {
-      renderIcon = "clock-o";
+      renderIcon = 'clock-o';
     }
 
     if (renderIcon) {

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _                     = require('lodash');
 var React                 = require('react');
@@ -8,8 +8,8 @@ var Tabs                  = require('../../tabs/Tabs');
 var PromoCharitiesResults = require('../PromoCharitiesResults');
 
 module.exports = React.createClass({
+  displayName: 'PromoCharities',
   mixins: [I18nMixin],
-  displayName: "PromoCharities",
   propTypes: {
     action: React.PropTypes.oneOf(['donate', 'fundraise', 'custom']).isRequired,
     tabs: React.PropTypes.array.isRequired,
@@ -94,7 +94,7 @@ module.exports = React.createClass({
   },
 
   renderCharityResults: function() {
-    return this.state.tabs.map(function(d, i) {
+    return this.state.tabs.map(function(d) {
       return (
         <PromoCharitiesResults
           tabLabel={ d.tabName }
@@ -103,7 +103,7 @@ module.exports = React.createClass({
           onSelect={ this.selectHandler }
           fetchUrl={ this.fetchUrl }
           actionLabel={ this.t(this.props.action + 'Action') }
-          key={ "charity-result-" + d.tabName } />
+          key={ 'charity-result-' + d.tabName } />
       );
     }, this);
   },
@@ -111,7 +111,6 @@ module.exports = React.createClass({
   render: function() {
     var heading    = this.t('heading');
     var subheading = this.t('subheading');
-    var emptyLabel = this.t('emptyLabel');
 
     var renderSubheading = function() {
       if (subheading) {

@@ -1,7 +1,6 @@
 'use strict';
 
 var React           = require('react');
-var ReactDOM        = require('react-dom');
 var PureRenderMixin = require('react-addons-pure-render-mixin');
 var cx              = require('classnames');
 var I18nMixin       = require('../../mixins/I18n');

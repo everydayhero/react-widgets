@@ -1,8 +1,6 @@
 'use strict';
 
-var _                     = require('lodash');
 var React                 = require('react');
-var Icon                  = require('../../helpers/Icon');
 var I18n                  = require('../../mixins/I18n');
 var pagesAPI              = require('../../../api/pages');
 var AggregateSearchResult = require('../AggregateSearchResult');

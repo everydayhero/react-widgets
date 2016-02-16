@@ -7,7 +7,6 @@ var React          = require('react');
 var UpcomingEvents = require('../');
 var campaign       = require('../../../../api/campaigns');
 var TestUtils      = require('react-addons-test-utils');
-var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass    = TestUtils.scryRenderedDOMComponentsWithClass;
 
 var campaigns = [{
@@ -63,7 +62,6 @@ describe('UpcomingEvents', function() {
     it('sorts events by display_start_date', function() {
       element.onEventLoad({ campaigns: campaigns });
 
-      var events = scryByClass(element, 'Event');
       expect(scryByClass(element, 'Event__name')[0].textContent).toContain('Bar');
       expect(scryByClass(element, 'Event__name')[1].textContent).toContain('Foo');
     });

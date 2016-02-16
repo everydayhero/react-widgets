@@ -5,7 +5,6 @@ describe('Event', function() {
   var React       = require('react');
   var Event       = require('../');
   var TestUtils   = require('react-addons-test-utils');
-  var findByTag   = TestUtils.findRenderedDOMComponentWithTag;
   var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {

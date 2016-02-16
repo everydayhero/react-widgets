@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 jest.autoMockOff();
 jest.mock('../../../../lib/openPopup');
@@ -6,7 +6,6 @@ jest.mock('../../../../lib/openPopup');
 var React     = require('react');
 var ReactDOM  = require('react-dom');
 var ShareIcon = require('../');
-var Icon      = require('../../../helpers/Icon');
 var TestUtils = require('react-addons-test-utils');
 var openPopup = require('../../../../lib/openPopup');
 

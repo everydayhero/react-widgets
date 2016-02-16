@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 jest.autoMockOff();
 jest.mock('../../../../api/totals');
@@ -89,12 +89,11 @@ describe('TotalDonations', function() {
 
   describe('multiple charity ids', function() {
     var totalDonations;
-    var element;
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
       totalDonations = <TotalDonations charityUids={ ["au-24", "au-27"] } />;
-      element = TestUtils.renderIntoDocument(totalDonations);
+      TestUtils.renderIntoDocument(totalDonations);
     });
 
     it('handles multiple charity ids', function() {

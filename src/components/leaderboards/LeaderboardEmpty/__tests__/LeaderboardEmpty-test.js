@@ -6,7 +6,6 @@ var React            = require('react');
 var LeaderboardEmpty = require('../');
 var campaigns        = require('../../../../api/campaigns');
 var TestUtils        = require('react-addons-test-utils');
-var findByClass      = TestUtils.findRenderedDOMComponentWithClass;
 
 var mockCampaignResponse = {
   campaign: {

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 var sinon = require('sinon')
 
@@ -24,8 +24,7 @@ describe('SearchResults', function() {
   it.only('uses renderComponent to render each result', function() {
     var component = sinon.spy(() => <p/>);
     var searchResults = <SearchResults results={ results } resultComponent={ component }/>;
-    var element = TestUtils.renderIntoDocument(searchResults);
-    var resultElements = scryByClass(element, 'SearchResult');
+    TestUtils.renderIntoDocument(searchResults);
 
     expect(component.calledTwice).toBe(true);
   });

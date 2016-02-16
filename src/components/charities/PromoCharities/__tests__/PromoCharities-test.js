@@ -1,11 +1,10 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 jest.mock('../../../../api/charities');
 
 describe('PromoCharities', function() {
   var React          = require('react');
   var PromoCharities = require('../');
-  var charities      = require('../../../../api/charities');
   var TestUtils      = require('react-addons-test-utils');
   var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
 

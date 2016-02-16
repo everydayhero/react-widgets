@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
 var React       = require('react');
@@ -18,7 +18,6 @@ describe('SearchResult', function() {
   });
 
   it('links to given url if onSelect callback not given', function() {
-    var callback = jest.genMockFunction();
     var searchResult = <Result result={ result } />;
     var component = TestUtils.renderIntoDocument(searchResult);
     var element = findByClass(component, 'SearchResult');

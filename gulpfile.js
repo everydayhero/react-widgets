@@ -78,7 +78,7 @@ gulp.task('styles', function() {
 gulp.task('lint', function() {
   return gulp
     .src(['src/**/*.js'])
-    .pipe(eslint())
+    .pipe(eslint({ quiet: true }))
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
 })

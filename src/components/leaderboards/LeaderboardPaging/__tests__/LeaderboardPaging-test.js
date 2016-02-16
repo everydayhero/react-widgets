@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 jest.autoMockOff();
 
@@ -7,7 +7,6 @@ describe('LeaderboardPaging', function() {
   var ReactDOM          = require('react-dom');
   var LeaderboardPaging = require('../');
   var TestUtils         = require('react-addons-test-utils');
-  var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
     var leaderboardPaging;

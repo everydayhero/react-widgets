@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
 
@@ -6,8 +6,6 @@ describe('Leaderboard', function() {
   var _                 = require('lodash');
   var React             = require('react');
   var Leaderboard       = require('../');
-  var LeaderboardItem   = require('../../LeaderboardItem/');
-  var LeaderboardPaging = require('../../LeaderboardPaging/');
   var TestUtils         = require('react-addons-test-utils');
   var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
 
@@ -122,7 +120,6 @@ describe('Leaderboard', function() {
         resultCount: 10
       });
 
-      var paging = <LeaderboardPaging />;
       var pagingFunction = element.renderPaging();
       expect(pagingFunction).toBeDefined();
     });
@@ -132,7 +129,6 @@ describe('Leaderboard', function() {
       var element = TestUtils.renderIntoDocument(leaderboard);
       element.setState({ isLoading: false });
 
-      var paging = <LeaderboardPaging />;
       var pagingFunction = element.renderPaging();
       expect(pagingFunction).toBeUndefined();
     });

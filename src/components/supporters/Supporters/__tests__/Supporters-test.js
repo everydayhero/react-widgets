@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
 jest.mock('../../../../api/charities');
@@ -13,7 +13,6 @@ var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 var Supporters  = require('../');
 
-var emptyData = { leaderboard: { pages: [] } };
 var leaderboardData = require('./Supporters-data.json');
 
 describe('Supporters', function() {
@@ -56,13 +55,12 @@ describe('Supporters', function() {
 });
 
 describe('multiple campaignUids', function() {
-  var element;
   var supporters;
 
   beforeEach(function() {
     campaigns.leaderboardByUids.mockClear();
     supporters = <Supporters campaignUids={ ["us-22", "us-19"] } />;
-    element = TestUtils.renderIntoDocument(supporters);
+    TestUtils.renderIntoDocument(supporters);
   });
 
   it('handles multiple campaignUids', function() {

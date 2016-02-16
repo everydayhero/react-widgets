@@ -1,11 +1,10 @@
-"use strict";
+'use strict';
 
 var React                       = require('react');
 var SearchModal                 = require('../SearchModal');
 var PageSearchResult            = require('../PageSearchResult');
 var I18nMixin                   = require('../../mixins/I18n');
 var pages                       = require('../../../api/pages');
-var campaigns                   = require('../../../api/campaigns');
 
 module.exports = React.createClass({
   displayName: 'PageSearchModal',

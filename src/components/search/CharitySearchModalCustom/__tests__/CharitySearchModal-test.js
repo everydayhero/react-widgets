@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
 jest.mock('../../../../api/frolCharities');
@@ -28,15 +28,6 @@ var charity = {
   url: 'http://foo.com/'
 };
 
-var charity2 = {
-  uid: 'xy-42',
-  slug: 'bar',
-  name: 'Bar',
-  description: 'Bary',
-  country_code: 'xy',
-  url: 'http://bar.com/'
-};
-
 var searchResponse = {
   charities: [charity],
   meta: {
@@ -47,7 +38,6 @@ var searchResponse = {
     }
   }
 };
-
 
 describe('CharitySearchModal', function() {
   beforeEach(function() {

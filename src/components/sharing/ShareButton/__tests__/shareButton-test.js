@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 jest.autoMockOff();
 
@@ -46,14 +46,14 @@ describe('Share Button', function() {
     });
 
     it('can toggle state to be open', function() {
-      var result = component.open();
+      component.open();
       expect(component.state.open).toBe(true);
     });
 
     it('can toggle state to be close', function() {
       component.setState({ open: true });
 
-      var result = component.close();
+      component.close();
       expect(component.state.open).toBe(false);
     });
   });

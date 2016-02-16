@@ -3,10 +3,10 @@ jest.autoMockOff();
 jest.mock('../../../../api/totals');
 
 describe('FundsRaised', function() {
-  var React       = require('react/addons');
+  var React       = require('react');
   var FundsRaised = require('../');
   var totals      = require('../../../../api/totals');
-  var TestUtils   = React.addons.TestUtils;
+  var TestUtils   = require('react-addons-test-utils');
   var findByClass = TestUtils.findRenderedDOMComponentWithClass;
   var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
@@ -27,14 +27,14 @@ describe('FundsRaised', function() {
     it('renders a default total', function() {
       element.setState({ isLoading: false });
       var total = findByClass(element, 'FundsRaised__total');
-      expect(total.getDOMNode().textContent).toContain('$0.00');
+      expect(total.textContent).toContain('$0.00');
     });
 
     it('renders a default title', function() {
       element.setState({ isLoading: false });
       var title = findByClass(element, 'FundsRaised__title');
 
-      expect(title.getDOMNode().textContent).toBe('Raised To Date');
+      expect(title.textContent).toBe('Raised To Date');
     });
 
     it('renders an icon by default', function() {
@@ -145,21 +145,21 @@ describe('FundsRaised', function() {
       element.setState({ isLoading: false });
       var title = findByClass(element, 'FundsRaised__title');
 
-      expect(title.getDOMNode().textContent).toBe(translation.title);
+      expect(title.textContent).toBe(translation.title);
     });
 
     it('check for a default total', function() {
       element.setState({ isLoading: false });
       var total = findByClass(element, 'FundsRaised__total');
 
-      expect(total.getDOMNode().textContent).toContain('1,000');
+      expect(total.textContent).toContain('1,000');
     });
 
     it('check for a total with offset', function() {
       element.setState({ total: 100000, isLoading: false });
       var total = findByClass(element, 'FundsRaised__total');
 
-      expect(total.getDOMNode().textContent).toContain('2,000');
+      expect(total.textContent).toContain('2,000');
     });
   });
 
@@ -174,7 +174,7 @@ describe('FundsRaised', function() {
       });
 
       var total = findByClass(element, 'FundsRaised__total');
-      expect(total.getDOMNode().textContent).toBe('$10.00 k');
+      expect(total.textContent).toBe('$10.00 k');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
@@ -187,7 +187,7 @@ describe('FundsRaised', function() {
       });
 
       var total = findByClass(element, 'FundsRaised__total');
-      expect(total.getDOMNode().textContent).toBe('$10000');
+      expect(total.textContent).toBe('$10000');
     });
   });
 

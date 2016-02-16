@@ -1,8 +1,8 @@
 'use strict';
 
-var React               = require('react/addons');
-var PureRenderMixin     = React.addons.PureRenderMixin;
-var cx                  = require('react/lib/cx');
+var React               = require('react');
+var PureRenderMixin     = require('react-addons-pure-render-mixin');
+var cx                  = require('classnames');
 var I18nMixin           = require('../../mixins/I18n');
 var _                   = require('lodash');
 var Input               = require('../../forms/Input');
@@ -262,7 +262,7 @@ module.exports = React.createClass({
     return !bool;
   },
 
-  validateSearch: _.debounce(function (value) {
+  validateSearch: _.debounce(function () {
     var address = this.state.address || this.state.custom;
     if (this.props.required &&
         !this.state.choosingCountry &&

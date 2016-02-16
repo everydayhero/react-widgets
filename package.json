@@ -7,20 +7,29 @@
   "main": "src/widgets.js",
   "dependencies": {
     "async": "^0.9.0",
+    "classnames": "^2.2.3",
     "es5-shim": "~4.0.5",
+    "highlight.js": "^8.9.1",
     "hui": "git://github.com/everydayhero/hui#v1.1.23",
     "jsonp": "webmodules/jsonp",
     "lodash": "^3.8.0",
     "moment": "^2.10.2",
     "numeral": "~1.5.3",
     "paths-js": "^0.3.0",
-    "react": "^0.12.2",
-    "reactify": "~0.17.1",
+    "react": "^0.14.7",
+    "react-addons-css-transition-group": "^0.14.7",
+    "react-addons-pure-render-mixin": "^0.14.7",
+    "react-addons-test-utils": "^0.14.7",
+    "react-dom": "^0.14.7",
     "react-tween-state": "0.0.4",
+    "reactify": "~0.17.1",
     "remarkable": "^1.6.0"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.5",
+    "babel-jest": "^6.0.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
     "browserify": "~6.3.3",
     "compression": "~1.2.1",
     "eslint-plugin-react": "^3.9.0",
@@ -29,21 +38,21 @@
     "gulp-autoprefixer": "~2.0.0",
     "gulp-awspublish": "~0.0.23",
     "gulp-concat": "~2.4.2",
+    "gulp-cssnano": "^2.1.1",
     "gulp-eslint": "^1.1.0",
     "gulp-inject": "~1.0.2",
-    "gulp-minify-css": "~0.3.11",
     "gulp-react": "~2.0.0",
     "gulp-rename": "~1.2.0",
     "gulp-replace": "^0.5.3",
-    "gulp-sass": "~1.1.0",
+    "gulp-sass": "^2.1.1",
     "gulp-uglify": "~0.3.1",
     "gulp-util": "~3.0.1",
-    "jest-cli": "~0.1.18",
+    "jest-cli": "^0.8.2",
     "jshint-stylish": "~1.0.0",
     "morgan": "~1.5.0",
     "react-page-objects": "~0.1.2",
-    "react-tools": "~0.12.2",
     "simple-spinner": "~0.0.2",
+    "sinon": "^1.17.3",
     "superagent": "~0.21.0",
     "vinyl-buffer": "~1.0.0",
     "vinyl-source-stream": "~1.0.0",
@@ -59,7 +68,7 @@
     "build": "gulp",
     "build-dev": "NODE_ENV=development gulp --debug",
     "watch": "gulp watch --debug",
-    "jshint": "gulp jshint",
+    "lint": "gulp lint",
     "scripts": "gulp scripts",
     "scripts-dev": "gulp scripts --debug",
     "styles": "gulp styles",
@@ -68,7 +77,8 @@
     "test-debug": "node --debug-brk --harmony ./node_modules/.bin/jest --runInBand",
     "start": "node server.js",
     "dev": "npm run build-dev && npm run start & npm run watch",
-    "deploy-assets": "bin/deploy_assets"
+    "deploy-assets": "bin/deploy_assets",
+    "install": "bin/write-version-sass-var"
   },
   "browserify": {
     "transform": [
@@ -76,7 +86,14 @@
     ]
   },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/config/jest_preprocessor.js",
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "testFileExtensions": [
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json"
+    ],
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react"
     ]

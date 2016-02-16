@@ -3,10 +3,10 @@ jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
 
 describe('TotalCalories', function() {
-  var React         = require('react/addons');
+  var React         = require('react');
   var TotalCalories = require('../');
   var campaigns     = require('../../../../api/campaigns');
-  var TestUtils     = React.addons.TestUtils;
+  var TestUtils     = require('react-addons-test-utils');
   var findByClass   = TestUtils.findRenderedDOMComponentWithClass;
   var scryByClass   = TestUtils.scryRenderedDOMComponentsWithClass;
 
@@ -74,7 +74,7 @@ describe('TotalCalories', function() {
 
     it('renders a custom title', function() {
       var title = findByClass(element, 'TotalCalories__title');
-      expect(title.getDOMNode().textContent).toBe(translation.title);
+      expect(title.textContent).toBe(translation.title);
     });
 
     it('renders no icon', function() {
@@ -93,7 +93,7 @@ describe('TotalCalories', function() {
       });
 
       var total = findByClass(element, 'TotalCalories__total');
-      expect(total.getDOMNode().textContent).toBe('1,000,050');
+      expect(total.textContent).toBe('1,000,050');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
@@ -106,7 +106,7 @@ describe('TotalCalories', function() {
       });
 
       var total = findByClass(element, 'TotalCalories__total');
-      expect(total.getDOMNode().textContent).toBe('1000050.00');
+      expect(total.textContent).toBe('1000050.00');
     });
   });
 

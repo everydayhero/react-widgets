@@ -1,7 +1,8 @@
-"use strict";
+'use strict';
 
-var React               = require('react/addons');
-var cx                  = require('react/lib/cx');
+var React               = require('react');
+var ReactDOM            = require('react-dom');
+var cx                  = require('classnames');
 var _                   = require('lodash');
 var tweenState          = require('react-tween-state');
 var addEventListener    = require('../../../lib/addEventListener');
@@ -13,9 +14,9 @@ var FootprintTip        = require('../FootprintTip');
 var FootprintTipLine    = require('../FootprintTipLine');
 
 module.exports = React.createClass({
-  mixins: [tweenState.Mixin, I18nMixin],
+  displayName: 'Footprint',
 
-  displayName: "Footprint",
+  mixins: [tweenState.Mixin, I18nMixin],
 
   propTypes: {
     userUrl: React.PropTypes.string,
@@ -116,7 +117,7 @@ module.exports = React.createClass({
     });
   },
 
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps: function() {
     this.processData();
   },
 
@@ -140,7 +141,7 @@ module.exports = React.createClass({
 
   setCompact: function(e) {
     if (!this.state.compact) this.setState({ compact: true });
-    if (!this.getDOMNode().contains(e.target)) {
+    if (!ReactDOM.findDOMNode(this).contains(e.target)) {
       this.setMetric(null);
       this.showTip(false);
     }

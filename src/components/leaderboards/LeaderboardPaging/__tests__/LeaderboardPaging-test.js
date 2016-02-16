@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
 jest.autoMockOff();
 
 describe('LeaderboardPaging', function() {
-  var React             = require('react/addons');
+  var React             = require('react');
+  var ReactDOM          = require('react-dom');
   var LeaderboardPaging = require('../');
-  var TestUtils         = React.addons.TestUtils;
-  var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
+  var TestUtils         = require('react-addons-test-utils');
 
   describe('component defaults', function() {
     var leaderboardPaging;
@@ -20,8 +20,7 @@ describe('LeaderboardPaging', function() {
     });
 
     it('renders a component', function() {
-      expect(component).not.toBeNull();
-      expect(component.getDOMNode().className).toContain('LeaderboardPaging');
+      expect(ReactDOM.findDOMNode(component).classList.contains('LeaderboardPaging')).toBe(true);
     });
   });
 });

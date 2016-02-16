@@ -3,9 +3,9 @@
 jest.autoMockOff();
 
 describe('Tabs', function() {
-  var React              = require('react/addons');
+  var React              = require('react');
   var Tabs               = require('../');
-  var TestUtils          = React.addons.TestUtils;
+  var TestUtils          = require('react-addons-test-utils');
   var findByClass        = TestUtils.findRenderedDOMComponentWithClass;
   var scryByClass        = TestUtils.scryRenderedDOMComponentsWithClass;
 
@@ -35,20 +35,20 @@ describe('Tabs', function() {
 
       expect(tabsContainer).toBeDefined();
       expect(tabsElements.length).toBe(data.length);
-      expect(tabsElements[0].getDOMNode().textContent).toBe('foo');
-      expect(tabsElements[1].getDOMNode().textContent).toBe('bar');
+      expect(tabsElements[0].textContent).toBe('foo');
+      expect(tabsElements[1].textContent).toBe('bar');
     });
 
     it('renders a tab list', function() {
-      var tabList = findByClass(component, 'Tabs__tab-list').getDOMNode();
+      var tabList = findByClass(component, 'Tabs__tab-list');
       expect(tabList.getAttribute('role')).toBe('tablist');
     });
 
     it('renders tab content areas', function() {
       var contents = scryByClass(component, 'Tabs__content');
       expect(contents.length).toBe(data.length);
-      expect(contents[0].getDOMNode().textContent).toContain('blah');
-      expect(contents[1].getDOMNode().textContent).toContain('Dummy html content.');
+      expect(contents[0].textContent).toContain('blah');
+      expect(contents[1].textContent).toContain('Dummy html content.');
     });
 
     it('defaults to displaying the first tab', function() {
@@ -67,13 +67,13 @@ describe('Tabs', function() {
     });
 
     it('can switch tabs using right key', function() {
-      var firstTab = scryByClass(component, 'Tab')[0].getDOMNode();
+      var firstTab = scryByClass(component, 'Tab')[0];
       TestUtils.Simulate.keyDown(firstTab, { keyCode: 39 });
       expect(component.state.current).toBe(1);
     });
 
     it('can switch tabs using left key', function() {
-      var firstTab = scryByClass(component, 'Tab')[1].getDOMNode();
+      var firstTab = scryByClass(component, 'Tab')[1];
       TestUtils.Simulate.keyDown(firstTab, { keyCode: 37 });
       expect(component.state.current).toBe(0);
     });
@@ -82,7 +82,7 @@ describe('Tabs', function() {
       tabs = <Tabs children={ data } collapse={ 'auto' } />;
       component = TestUtils.renderIntoDocument(tabs);
 
-      var tabsElement = findByClass(component, 'Tabs').getDOMNode();
+      var tabsElement = findByClass(component, 'Tabs');
       expect(tabsElement.className).toBe('Tabs Tabs--tiny');
     });
 
@@ -90,7 +90,7 @@ describe('Tabs', function() {
       tabs = <Tabs children={ data } collapse={ false } />;
       component = TestUtils.renderIntoDocument(tabs);
 
-      var tabsElement = findByClass(component, 'Tabs').getDOMNode();
+      var tabsElement = findByClass(component, 'Tabs');
       expect(tabsElement.className).toBe('Tabs');
     });
 
@@ -98,7 +98,7 @@ describe('Tabs', function() {
       tabs = <Tabs children={ data } collapse={ true } />;
       component = TestUtils.renderIntoDocument(tabs);
 
-      var tabsElement = findByClass(component, 'Tabs').getDOMNode();
+      var tabsElement = findByClass(component, 'Tabs');
       expect(tabsElement.className).toBe('Tabs Tabs--collapsed');
     });
   });

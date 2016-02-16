@@ -2,7 +2,6 @@
 
 var gulp         = require('gulp')
 var gutil        = require('gulp-util')
-var concat       = require('gulp-concat')
 var awspublish   = require('gulp-awspublish')
 var rename       = require('gulp-rename')
 var replace      = require('gulp-replace')
@@ -13,13 +12,12 @@ var fs           = require('fs')
 // stylesheets
 var sass         = require('gulp-sass')
 var autoprefixer = require('gulp-autoprefixer')
-var minifyCss    = require('gulp-minify-css')
+var minifyCss    = require('gulp-cssnano')
 
 // javascripts
 var browserify   = require('browserify')
 var watchify     = require('watchify')
 var uglify       = require('gulp-uglify')
-var react        = require('gulp-react')
 var eslint       = require('gulp-eslint')
 var buffer       = require('vinyl-buffer')
 var source       = require('vinyl-source-stream')
@@ -78,7 +76,7 @@ gulp.task('styles', function() {
 gulp.task('lint', function() {
   return gulp
     .src(['src/**/*.js'])
-    .pipe(eslint())
+    .pipe(eslint({ quiet: true }))
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
 })

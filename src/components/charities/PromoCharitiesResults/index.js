@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
 var React                = require('react');
 var Icon                 = require('../../helpers/Icon');
 var PromoCharitiesResult = require('../PromoCharitiesResult');
 
 module.exports = React.createClass({
-  displayName: "PromoCharitiesResults",
+  displayName: 'PromoCharitiesResults',
   propTypes: {
     loaded: React.PropTypes.bool,
     actionLabel: React.PropTypes.string,
@@ -16,7 +16,7 @@ module.exports = React.createClass({
 
   renderCharityResults: function() {
     if (this.props.loaded) {
-      return this.props.content.map(function(d, i) {
+      return this.props.content.map(function(d) {
         return (
           <PromoCharitiesResult
             key={ d.id }

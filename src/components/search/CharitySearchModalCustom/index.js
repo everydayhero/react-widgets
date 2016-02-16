@@ -1,6 +1,5 @@
-"use strict";
+'use strict';
 
-var _                   = require('lodash');
 var React               = require('react');
 var SearchModal         = require('../SearchModal');
 var CharitySearchResult = require('../CharitySearchResult');
@@ -111,7 +110,6 @@ module.exports = React.createClass({
   },
 
   getResults: function() {
-    var props = this.props;
     var results = this.state.results;
 
     return results && results.map(function(charity) {

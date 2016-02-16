@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _               = require('lodash');
 var React           = require('react');
@@ -9,8 +9,8 @@ var numeral         = require('numeral');
 var METERS_TO_MILES = 0.000621371192;
 
 module.exports = React.createClass({
+  displayName: 'TotalDistance',
   mixins: [I18nMixin],
-  displayName: "TotalDistance",
   propTypes: {
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
@@ -98,7 +98,6 @@ module.exports = React.createClass({
   },
 
   renderTotal: function() {
-    var symbol         = this.t('symbol');
     var title          = this.t('title');
     var emptyLabel     = this.t('emptyLabel');
     var formattedTotal = this.formatDistance(this.state.total);
@@ -123,7 +122,7 @@ module.exports = React.createClass({
     var renderIcon = this.props.renderIcon;
 
     if (renderIcon === true) {
-      renderIcon = "angle-double-right";
+      renderIcon = 'angle-double-right';
     }
 
     if (renderIcon) {

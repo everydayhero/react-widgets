@@ -1,13 +1,12 @@
-"use strict";
+'use strict';
 
 jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
 
 describe('FitnessLeaderboard', function() {
-  var _                     = require('lodash');
-  var React                 = require('react/addons');
+  var React                 = require('react');
   var FitnessLeaderboard    = require('../');
-  var TestUtils             = React.addons.TestUtils;
+  var TestUtils             = require('react-addons-test-utils');
   var findByClass           = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('Component defaults', function() {
@@ -25,7 +24,7 @@ describe('FitnessLeaderboard', function() {
 
     it('renders a default heading', function() {
       var heading = findByClass(component, 'FitnessLeaderboard__heading');
-      expect(heading.getDOMNode().textContent).toBe('Top Individuals');
+      expect(heading.textContent).toBe('Top Individuals');
     });
 
     it('renders a loading icon', function() {
@@ -49,7 +48,7 @@ describe('FitnessLeaderboard', function() {
 
     it('renders a custom heading', function() {
       var heading = findByClass(component, 'FitnessLeaderboard__heading');
-      expect(heading.getDOMNode().textContent).toBe(translation.heading);
+      expect(heading.textContent).toBe(translation.heading);
     });
   });
 

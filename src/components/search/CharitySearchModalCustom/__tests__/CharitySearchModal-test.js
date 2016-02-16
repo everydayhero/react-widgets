@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
 jest.mock('../../../../api/frolCharities');
@@ -10,8 +10,8 @@ charities.search.mockReturnValue(searchResponse);
 var _ = require('lodash');
 _.debounce = function(callback) { return callback; };
 
-var React              = require('react/addons');
-var TestUtils          = React.addons.TestUtils;
+var React              = require('react');
+var TestUtils          = require('react-addons-test-utils');
 var CharitySearchModal = require('../');
 var SearchModal        = require('../../SearchModal');
 var findByClass        = TestUtils.findRenderedDOMComponentWithClass;
@@ -28,15 +28,6 @@ var charity = {
   url: 'http://foo.com/'
 };
 
-var charity2 = {
-  uid: 'xy-42',
-  slug: 'bar',
-  name: 'Bar',
-  description: 'Bary',
-  country_code: 'xy',
-  url: 'http://bar.com/'
-};
-
 var searchResponse = {
   charities: [charity],
   meta: {
@@ -47,7 +38,6 @@ var searchResponse = {
     }
   }
 };
-
 
 describe('CharitySearchModal', function() {
   beforeEach(function() {
@@ -70,8 +60,8 @@ describe('CharitySearchModal', function() {
     var resultElements = scryByClass(element, 'SearchResult');
 
     expect(resultElements.length).toEqual(1);
-    expect(resultElements[0].getDOMNode().textContent).toContain(charity.name);
-    expect(resultElements[0].getDOMNode().textContent).toContain(charity.description);
+    expect(resultElements[0].textContent).toContain(charity.name);
+    expect(resultElements[0].textContent).toContain(charity.description);
   });
 
   it('searches for charities on input change', function() {
@@ -123,6 +113,6 @@ describe('CharitySearchModal', function() {
 
     var resultElements = scryByClass(element, 'SearchResult');
 
-    expect(resultElements[0].getDOMNode().href).toBe(charity.url);
+    expect(resultElements[0].href).toBe(charity.url);
   });
 });

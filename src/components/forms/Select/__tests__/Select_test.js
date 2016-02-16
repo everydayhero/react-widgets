@@ -1,11 +1,11 @@
 "use strict";
 jest.autoMockOff();
 
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var TestUtils = require('react-addons-test-utils');
 var Select = require('../');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-var findByProp = require('../../../../test/helpers/scryRenderedDOMComponentsWithProp').findRenderedDOMComponentWithProp;
+var findByAttribute = require('../../../../test/helpers/scryRenderedDOMComponentsWithAttribute').findRenderedDOMComponentWithAttribute;
 
 var i18n = {
   name: 'test_Select',
@@ -25,27 +25,27 @@ describe('Select', function() {
     var select = findByClass(element, 'Select');
     expect(select).toBeDefined();
 
-    var selectWithName = findByProp(element, 'name', 'test_Select');
+    var selectWithName = findByAttribute(element, 'name', 'test_Select');
     expect(selectWithName).toBeDefined();
 
-    var selectInput = findByClass(element, 'Input__input').getDOMNode();
+    var selectInput = findByClass(element, 'Input__input');
     expect(selectInput.value).toBe('option1');
 
-    var label = findByClass(element, 'Input__label').getDOMNode();
+    var label = findByClass(element, 'Input__label');
     expect(label.textContent).toContain('Test Select');
 
     var icon = findByClass(element, 'fa-caret-down');
     expect(icon).toBeDefined();
 
     TestUtils.Simulate.focus(selectInput);
-    var optionList = findByClass(element, 'SelectOptions').getDOMNode();
+    var optionList = findByClass(element, 'SelectOptions');
     expect(optionList).toBeDefined();
   });
 
   it("will not execute methods when disabled", function() {
     var output = jest.genMockFunction();
     var element = TestUtils.renderIntoDocument(<Select value="oldValue" disabled={ true } output={ output } options={ options } />);
-    var selectInput = findByClass(element, 'Input__input').getDOMNode();
+    var selectInput = findByClass(element, 'Input__input');
     TestUtils.Simulate.focus(selectInput);
     TestUtils.Simulate.change(selectInput, { target: { value: 'newValue' } });
     TestUtils.Simulate.blur(selectInput);
@@ -56,14 +56,14 @@ describe('Select', function() {
   it("will execute output function on option selected", function() {
     var output = jest.genMockFunction();
     var element = TestUtils.renderIntoDocument(<Select options={ options } output={ output } />);
-    var selectInput = findByClass(element, 'Input__input').getDOMNode();
+    var selectInput = findByClass(element, 'Input__input');
     TestUtils.Simulate.change(selectInput, { target: { value: 'option3' } });
-    var option3 = findByClass(element, 'SelectOption--focused').getDOMNode();
+    var option3 = findByClass(element, 'SelectOption--focused');
     TestUtils.Simulate.click(option3);
     expect(output).lastCalledWith('option3', { name: 'option3' });
 
     TestUtils.Simulate.change(selectInput, { target: { value: '2' } });
-    var option2 = findByClass(element, 'SelectOption--focused').getDOMNode();
+    var option2 = findByClass(element, 'SelectOption--focused');
     TestUtils.Simulate.click(option2);
     expect(output).lastCalledWith('option2', { name: 'option2' });
   });

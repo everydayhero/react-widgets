@@ -1,15 +1,12 @@
-"use strict";
+'use strict';
 
 jest.autoMockOff();
 
 describe('TeamLeaderboard', function() {
   var _                   = require('lodash');
-  var React               = require('react/addons');
+  var React               = require('react');
   var TeamLeaderboard     = require('../');
-  var LeaderboardItem     = require('../../LeaderboardItem/');
-  var TeamLeaderboardItem = require('../../TeamLeaderboardItem/');
-  var LeaderboardPaging   = require('../../LeaderboardPaging/');
-  var TestUtils           = React.addons.TestUtils;
+  var TestUtils           = require('react-addons-test-utils');
   var findByClass         = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('Component defaults', function() {
@@ -27,7 +24,7 @@ describe('TeamLeaderboard', function() {
 
     it('renders a default heading', function() {
       var heading = findByClass(element, 'TeamLeaderboard__heading');
-      expect(heading.getDOMNode().textContent).toBe('Top Teams');
+      expect(heading.textContent).toBe('Top Teams');
     });
 
     it('renders a loading icon', function() {
@@ -50,7 +47,7 @@ describe('TeamLeaderboard', function() {
 
     it('renders a custom heading', function() {
       var heading = findByClass(element, 'TeamLeaderboard__heading');
-      expect(heading.getDOMNode().textContent).toBe(translation.heading);
+      expect(heading.textContent).toBe(translation.heading);
     });
   });
 
@@ -117,14 +114,12 @@ describe('TeamLeaderboard', function() {
     it('renders LeaderboardItem component for children by default', function() {
       var leaderboard = <TeamLeaderboard campaignUid="au-0" />;
       var element = TestUtils.renderIntoDocument(leaderboard);
-      var template = TestUtils.scryRenderedComponentsWithType(element, LeaderboardItem);
       expect(element.props.altTemplate).toBeFalsy();
     });
 
     it('renders TeamLeaderboardItem component for children when set', function() {
-      var leaderboard = <TeamLeaderboard campaignUid="au-0" altTemplate={ true } />;
+      var leaderboard = <TeamLeaderboard campaignUid="au-0" altTemplate />;
       var element = TestUtils.renderIntoDocument(leaderboard);
-      var template = TestUtils.scryRenderedComponentsWithType(element, TeamLeaderboardItem);
       expect(element.props.altTemplate).toBeTruthy();
     });
   });
@@ -138,7 +133,6 @@ describe('TeamLeaderboard', function() {
         resultCount: 10
       });
 
-      var paging = <LeaderboardPaging />;
       var pagingFunction = element.renderPaging();
       expect(pagingFunction).toBeDefined();
     });
@@ -148,7 +142,6 @@ describe('TeamLeaderboard', function() {
       var element = TestUtils.renderIntoDocument(leaderboard);
       element.setState({ isLoading: false });
 
-      var paging = <LeaderboardPaging />;
       var pagingFunction = element.renderPaging();
       expect(pagingFunction).toBeUndefined();
     });

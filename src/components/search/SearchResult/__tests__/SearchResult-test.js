@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
-var React       = require('react/addons');
+var React       = require('react');
 var Result      = require('../');
-var TestUtils   = React.addons.TestUtils;
+var TestUtils   = require('react-addons-test-utils');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
 describe('SearchResult', function() {
@@ -14,16 +14,15 @@ describe('SearchResult', function() {
     var component = TestUtils.renderIntoDocument(searchResult);
     var element = findByClass(component, 'SearchResult');
 
-    expect(element.getDOMNode().textContent).toBe('foo');
+    expect(element.textContent).toBe('foo');
   });
 
   it('links to given url if onSelect callback not given', function() {
-    var callback = jest.genMockFunction();
     var searchResult = <Result result={ result } />;
     var component = TestUtils.renderIntoDocument(searchResult);
     var element = findByClass(component, 'SearchResult');
 
-    expect(element.getDOMNode().href).toBe(result.url);
+    expect(element.href).toBe(result.url);
   });
 
   it('calls onSelect callback on click if given', function() {

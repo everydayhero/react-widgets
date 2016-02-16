@@ -1,12 +1,11 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
 jest.mock('../../lib/getJSONP');
 var getJSONP = require('../../lib/getJSONP');
-var results = { results: [], meta: {} };
+var results = { results: [], meta: {}};
 getJSONP.mockImplementation(function(_, callback) { callback(results); });
 
-var routes = require('../routes');
 var pages = require('../pages');
 
 describe('pages', function() {
@@ -44,7 +43,7 @@ describe('pages', function() {
 
     it('accepts options', function() {
       var callback = jest.genMockFunction();
-      pages.findByIds(['123', '456'], callback, {includeFootprint: true});
+      pages.findByIds(['123', '456'], callback, { includeFootprint: true });
 
       expect(getJSONP.mock.calls[0][0]).toContain('&include_footprint=true');
     });
@@ -64,7 +63,7 @@ describe('pages', function() {
 
     it('accepts options', function() {
       var callback = jest.genMockFunction();
-      pages.findByCampaign('xy-12', 'foo', 7, 2, callback, {includeFootprint: true});
+      pages.findByCampaign('xy-12', 'foo', 7, 2, callback, { includeFootprint: true });
 
       expect(getJSONP.mock.calls[0][0]).toContain('&include_footprint=true');
     });
@@ -93,7 +92,7 @@ describe('pages', function() {
       expect(getJSONP).lastCalledWith(
         'https://everydayhero.com/api/v2/search/pages.jsonp' +
           '?q=bar&country_code=xy&campaign_id[]=xy-12&campaign_id[]=xy-42&charity_id[]=xy-123&group_value[]=ABC&group_value[]=DEF&type=foo&page=2&page_size=7',
-        callback, {timeout: 10000}
+        callback, { timeout: 10000 }
       );
       expect(callback).toBeCalledWith(results);
     });

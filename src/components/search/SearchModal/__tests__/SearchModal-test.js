@@ -1,8 +1,8 @@
 "use strict";
 jest.autoMockOff();
 
-var React       = require('react/addons');
-var TestUtils   = React.addons.TestUtils;
+var React       = require('react');
+var TestUtils   = require('react-addons-test-utils');
 var SearchModal = require('../');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
@@ -19,7 +19,7 @@ describe('SearchModal', function() {
     var searchModal = <SearchModal autoFocus={ false } />;
     var element = TestUtils.renderIntoDocument(searchModal);
     var headerElement = findByClass(element, 'SearchModal__header');
-    var inputElement = findByClass(headerElement, 'SearchInput');
+    var inputElement = findByClass(element, 'SearchInput');
 
     expect(headerElement).toBeDefined();
     expect(inputElement).toBeDefined();
@@ -29,7 +29,7 @@ describe('SearchModal', function() {
     var searchModal = <SearchModal autoFocus={ false } />;
     var element = TestUtils.renderIntoDocument(searchModal);
     var bodyElement = findByClass(element, 'SearchModal__body');
-    var resultsElement = findByClass(bodyElement, 'SearchResults');
+    var resultsElement = findByClass(element, 'SearchResults');
 
     expect(bodyElement).toBeDefined();
     expect(resultsElement).toBeDefined();
@@ -39,11 +39,11 @@ describe('SearchModal', function() {
     var searchModal = <SearchModal autoFocus={ false } pagination={{ totalPages: 2 }} />;
     var element = TestUtils.renderIntoDocument(searchModal);
     var headerElement = findByClass(element, 'SearchModal__header');
-    var paginationElement = findByClass(headerElement, 'SearchPagination');
+    var paginationElement = findByClass(element, 'SearchPagination');
     var bodyElement = findByClass(element, 'SearchModal__body');
 
     expect(headerElement).toBeDefined();
     expect(paginationElement).toBeDefined();
-    expect(bodyElement.getDOMNode().getAttribute('class')).toContain('SearchModal__body--paginated');
+    expect(bodyElement.getAttribute('class')).toContain('SearchModal__body--paginated');
   });
 });

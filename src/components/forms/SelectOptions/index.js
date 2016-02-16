@@ -1,14 +1,15 @@
-"use strict";
+'use strict';
 
 var _                   = require('lodash');
-var React               = require('react/addons');
-var PureRenderMixin     = React.addons.PureRenderMixin;
+var React               = require('react');
+var ReactDOM            = require('react-dom');
+var PureRenderMixin     = require('react-addons-pure-render-mixin');
 var SelectOption        = require('../SelectOption');
 var addEventListener    = require('../../../lib/addEventListener');
 var removeEventListener = require('../../../lib/removeEventListener');
 
 module.exports = React.createClass({
-  displayName: "SelectOptions",
+  displayName: 'SelectOptions',
 
   mixins: [PureRenderMixin],
 
@@ -35,8 +36,8 @@ module.exports = React.createClass({
     this.setFauxFocus(nextProps.selected || 0);
   },
 
-  componentDidMount: function(nextProps, nextState) {
-    this.setState({ menu: this.getDOMNode() }, this.scrollMenu);
+  componentDidMount: function() {
+    this.setState({ menu: ReactDOM.findDOMNode(this) }, this.scrollMenu);
     addEventListener('keydown', this.keyHandler);
     addEventListener('mousedown', this.clickHandler);
   },

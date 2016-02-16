@@ -2,9 +2,9 @@
 
 jest.autoMockOff();
 
-var React       = require('react/addons');
+var React       = require('react');
 var Result      = require('../');
-var TestUtils   = React.addons.TestUtils;
+var TestUtils   = require('react-addons-test-utils');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
 describe('AggregateSearchResult', function() {
@@ -15,7 +15,7 @@ describe('AggregateSearchResult', function() {
     var component = TestUtils.renderIntoDocument(searchResult);
     var element = findByClass(component, 'AggregateSearchResult');
 
-    expect(element.getDOMNode().textContent).toBe('foo');
+    expect(element.textContent).toBe('foo');
   });
 
   it('calls onSelect on click', function() {

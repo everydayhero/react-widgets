@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
 jest.autoMockOff();
 
 describe('Share Button', function() {
-  var React                  = require('react/addons');
+  var React                  = require('react');
   var ShareButton            = require('../');
   var ShareBox               = require('../../ShareBox');
-  var TestUtils              = React.addons.TestUtils;
+  var TestUtils              = require('react-addons-test-utils');
   var findByClass            = TestUtils.findRenderedDOMComponentWithClass;
   var findRenderedComponent  = TestUtils.findRenderedComponentWithType;
 
@@ -24,13 +24,13 @@ describe('Share Button', function() {
     });
 
     it('displays a sharing icon by default', function() {
-      var icon = findByClass(component, 'ShareButton__icon').getDOMNode();
+      var icon = findByClass(component, 'ShareButton__icon');
       expect(icon).toBeDefined();
       expect(component.renderIcon()).toBeTruthy();
     });
 
     it('has default button label text', function() {
-      var label = findByClass(component, 'ShareButton__label').getDOMNode();
+      var label = findByClass(component, 'ShareButton__label');
       expect(label).toBeDefined();
       expect(label.textContent).toBe('Share this page');
     });
@@ -46,14 +46,14 @@ describe('Share Button', function() {
     });
 
     it('can toggle state to be open', function() {
-      var result = component.open();
+      component.open();
       expect(component.state.open).toBe(true);
     });
 
     it('can toggle state to be close', function() {
       component.setState({ open: true });
 
-      var result = component.close();
+      component.close();
       expect(component.state.open).toBe(false);
     });
   });

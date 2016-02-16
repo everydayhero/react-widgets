@@ -1,7 +1,7 @@
 "use strict";
 
-var React           = require('react/addons');
-var PureRenderMixin = React.addons.PureRenderMixin;
+var React           = require('react');
+var PureRenderMixin = require('react-addons-pure-render-mixin');
 var Icon            = require('../../helpers/Icon');
 var numeral         = require('numeral');
 

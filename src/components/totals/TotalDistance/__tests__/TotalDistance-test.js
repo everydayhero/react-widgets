@@ -3,10 +3,10 @@ jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
 
 describe('TotalDistance', function() {
-  var React         = require('react/addons');
+  var React         = require('react');
   var TotalDistance = require('../');
   var campaigns     = require('../../../../api/campaigns');
-  var TestUtils     = React.addons.TestUtils;
+  var TestUtils     = require('react-addons-test-utils');
   var findByClass   = TestUtils.findRenderedDOMComponentWithClass;
   var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
@@ -93,7 +93,7 @@ describe('TotalDistance', function() {
 
     it('renders a custom title', function() {
       var title = findByClass(element, 'TotalDistance__title');
-      expect(title.getDOMNode().textContent).toBe(translation.title);
+      expect(title.textContent).toBe(translation.title);
     });
 
     it('renders no icon', function() {
@@ -112,7 +112,7 @@ describe('TotalDistance', function() {
       });
 
       var total = findByClass(element, 'TotalDistance__total');
-      expect(total.getDOMNode().textContent).toBe('1,000.05');
+      expect(total.textContent).toBe('1,000.05');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
@@ -125,7 +125,7 @@ describe('TotalDistance', function() {
       });
 
       var total = findByClass(element, 'TotalDistance__total');
-      expect(total.getDOMNode().textContent).toBe('1000.05');
+      expect(total.textContent).toBe('1000.05');
     });
   });
 

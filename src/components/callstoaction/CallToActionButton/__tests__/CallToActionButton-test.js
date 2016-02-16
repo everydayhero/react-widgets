@@ -1,11 +1,11 @@
 "use strict";
 jest.autoMockOff();
 
-var React       = require('react/addons');
-var CallToActionButton      = require('../');
-var TestUtils   = React.addons.TestUtils;
-var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-var scryByTag = TestUtils.scryRenderedDOMComponentsWithTag;
+var React               = require('react');
+var CallToActionButton  = require('../');
+var TestUtils           = require('react-addons-test-utils');
+var findByClass         = TestUtils.findRenderedDOMComponentWithClass;
+var scryByTag           = TestUtils.scryRenderedDOMComponentsWithTag;
 
 describe('CallToActionButton', function() {
   var component;

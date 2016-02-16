@@ -1,12 +1,11 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 jest.mock('../../../../api/charities');
 
 describe('PromoCharities', function() {
-  var React          = require('react/addons');
+  var React          = require('react');
   var PromoCharities = require('../');
-  var charities      = require('../../../../api/charities');
-  var TestUtils      = React.addons.TestUtils;
+  var TestUtils      = require('react-addons-test-utils');
   var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('default behaviour for PromoCharities', function() {
@@ -32,8 +31,8 @@ describe('PromoCharities', function() {
         subheading: 'Choose a tab below to view promoted charities within each category.',
       };
 
-      expect(heading.getDOMNode().textContent).toBe(translation.heading);
-      expect(subHeading.getDOMNode().textContent).toBe(translation.subheading);
+      expect(heading.textContent).toBe(translation.heading);
+      expect(subHeading.textContent).toBe(translation.subheading);
     });
   });
 
@@ -56,8 +55,8 @@ describe('PromoCharities', function() {
       var heading = findByClass(element, 'PromoCharities__heading');
       var subHeading  = findByClass(element, 'PromoCharities__subheading');
 
-      expect(heading.getDOMNode().textContent).toBe(translation.heading);
-      expect(subHeading.getDOMNode().textContent).toBe(translation.subheading);
+      expect(heading.textContent).toBe(translation.heading);
+      expect(subHeading.textContent).toBe(translation.subheading);
     });
   });
 

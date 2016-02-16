@@ -1,8 +1,8 @@
 "use strict";
 jest.autoMockOff();
 
-var React       = require('react/addons');
-var TestUtils   = React.addons.TestUtils;
+var React       = require('react');
+var TestUtils   = require('react-addons-test-utils');
 var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 var Overlay     = require('../');
@@ -11,7 +11,7 @@ describe('Overlay', function() {
   it('renders something', function() {
     var overlay = <Overlay />;
     var element = TestUtils.renderIntoDocument(overlay);
-    expect(element.getDOMNode()).toBeTruthy();
+    expect(element).toBeTruthy();
   });
 
   it('calls the onClose prop when clicking the close button', function() {

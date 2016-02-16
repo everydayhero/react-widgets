@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-var ReactTestUtils = require('react/addons').addons.TestUtils;
+var ReactTestUtils = require('react-addons-test-utils');
 
 function scryRenderedDOMComponentsWithProp(root, propName, propValue) {
   return ReactTestUtils.findAllInRenderedTree(root, function(inst) {

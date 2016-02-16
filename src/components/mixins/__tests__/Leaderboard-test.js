@@ -1,16 +1,8 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
 describe('LeaderboardMixin', function() {
-  var _           = require('lodash');
-  var React       = require('react/addons');
   var Leaderboard = require('../Leaderboard');
-
-  var campaigns   = require('../../../api/campaigns');
-  var charities   = require('../../../api/charities');
-
-  var TestUtils   = React.addons.TestUtils;
-  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('getLeaderboard', function() {
     it('should remove pages with amount equals 0', function() {
@@ -29,7 +21,7 @@ describe('LeaderboardMixin', function() {
             medium_image_url: ''
           }
         },
-        { amount: { cents: 0 } }
+        { amount: { cents: 0 }}
       ];
       var leaderboard = Leaderboard.getLeaderboard(pages);
 

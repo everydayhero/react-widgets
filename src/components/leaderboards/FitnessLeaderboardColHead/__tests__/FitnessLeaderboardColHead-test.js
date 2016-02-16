@@ -1,25 +1,44 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
-describe('FitnessLeaderboardColHead', function() {
-  var React                 = require('react/addons');
-  var FitnessLeaderboardColHead = require('../');
-  var TestUtils             = React.addons.TestUtils;
-  var findByClass           = TestUtils.findRenderedDOMComponentWithClass;
+var React                 = require('react');
+var TestUtils             = require('react-addons-test-utils');
+var findByClass           = TestUtils.findRenderedDOMComponentWithClass;
 
+var FitnessLeaderboardColHead = require('../');
+
+class TestWrapper extends React.Component {
+  render () {
+    return (
+      <table>
+        <tbody>
+          <tr>
+            <FitnessLeaderboardColHead { ...this.props }/>
+          </tr>
+        </tbody>
+      </table>
+    )
+  }
+}
+
+describe('FitnessLeaderboardColHead', function() {
   describe('Default behaviour', function() {
     it('calls a function onclick', function() {
-      var callback    = jest.genMockFunction();
-      var leaderboard = <FitnessLeaderboardColHead onClick={ callback } sort="amount" active={ false } />;
-      var component   = TestUtils.renderIntoDocument(leaderboard);
-      var element     = findByClass(component, 'FitnessLeaderboardColHead');
+      var callback  = jest.genMockFunction();
+      var component = TestUtils.renderIntoDocument(
+        <TestWrapper
+          onClick={ callback }
+          sort="amount"
+          active={ false } />
+      );
+      var element = findByClass(component, 'FitnessLeaderboardColHead');
       TestUtils.Simulate.click(element);
 
       expect(callback).toBeCalledWith("amount");
     });
 
     it('renders a caret if the element is active', function() {
-      var leaderboard = <FitnessLeaderboardColHead active={ true } />;
+      var leaderboard = <TestWrapper active={ true } />;
       var component   = TestUtils.renderIntoDocument(leaderboard);
       var element     = findByClass(component, 'FitnessLeaderboardColHead__icon');
 

@@ -2,9 +2,9 @@
 jest.autoMockOff();
 
 describe('GoalProgress', function() {
-  var React        = require('react/addons');
+  var React        = require('react');
   var GoalProgress = require('../');
-  var TestUtils    = React.addons.TestUtils;
+  var TestUtils    = require('react-addons-test-utils');
   var findByClass  = TestUtils.findRenderedDOMComponentWithClass;
   var scryByClass  = TestUtils.scryRenderedDOMComponentsWithClass;
 
@@ -21,7 +21,7 @@ describe('GoalProgress', function() {
 
   it('renders progress text', function() {
     var text = findByClass(element, 'GoalProgress__text');
-    expect(text.getDOMNode().textContent).toContain('foobar');
+    expect(text.textContent).toContain('foobar');
   });
 
   it('renders a progress bar', function() {

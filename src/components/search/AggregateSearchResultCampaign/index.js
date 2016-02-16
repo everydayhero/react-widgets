@@ -1,6 +1,5 @@
 'use strict';
 
-var _             = require('lodash');
 var React         = require('react');
 var Icon          = require('../../helpers/Icon');
 var I18n          = require('../../mixins/I18n');
@@ -72,7 +71,6 @@ module.exports = React.createClass({
 
   render: function() {
     var campaign = this.props.result;
-    var url = campaign.url || campaign.get_started_url;
 
     return (
       <AggregateSearchResult onSelect={ this.props.onSelect } result={ campaign }>

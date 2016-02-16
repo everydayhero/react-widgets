@@ -1,10 +1,11 @@
-"use strict";
+'use strict';
 
 jest.autoMockOff();
 
-var React                   = require('react/addons');
+var React                   = require('react');
+var ReactDOM                = require('react-dom');
 var LeaderboardPagingButton = require('../');
-var TestUtils               = React.addons.TestUtils;
+var TestUtils               = require('react-addons-test-utils');
 var findByClass             = TestUtils.findRenderedDOMComponentWithClass;
 
 describe('LeaderboardPagingButton', function() {
@@ -39,7 +40,7 @@ describe('LeaderboardPagingButton', function() {
       leaderboardPagingButton = <LeaderboardPagingButton type="next" action={ callback } currentPage={ 1 } pageCount={ 4 } />;
       component = TestUtils.renderIntoDocument(leaderboardPagingButton);
 
-      var nextIcon = findByClass(component, 'fa-caret-right').getDOMNode();
+      var nextIcon = findByClass(component, 'fa-caret-right');
       expect(nextIcon).not.toBeNull();
     });
 
@@ -47,14 +48,14 @@ describe('LeaderboardPagingButton', function() {
       leaderboardPagingButton = <LeaderboardPagingButton type="next" action={ callback } currentPage={ 1 } pageCount={ 4 } />;
 
       component = TestUtils.renderIntoDocument(leaderboardPagingButton);
-      expect(component.getDOMNode().className).toContain(nextActiveClass);
+      expect(ReactDOM.findDOMNode(component).classList.contains(nextActiveClass)).toBe(true);
     });
 
     it('has no active modifier class if the last page is displayed', function() {
       leaderboardPagingButton = <LeaderboardPagingButton type="next" action={ callback } currentPage={ 4 } pageCount={ 4 } />;
 
       component = TestUtils.renderIntoDocument(leaderboardPagingButton);
-      expect(component.getDOMNode().className).not.toContain(nextActiveClass);
+      expect(ReactDOM.findDOMNode(component).classList.contains(nextActiveClass)).toBe(false);
     });
   });
 
@@ -63,7 +64,7 @@ describe('LeaderboardPagingButton', function() {
       leaderboardPagingButton = <LeaderboardPagingButton type="prev" action={ callback } currentPage={ 4 } pageCount={ 4 } />;
       component = TestUtils.renderIntoDocument(leaderboardPagingButton);
 
-      var prevIcon = findByClass(component, 'fa-caret-left').getDOMNode();
+      var prevIcon = findByClass(component, 'fa-caret-left');
       expect(prevIcon).not.toBeNull();
     });
 
@@ -71,14 +72,14 @@ describe('LeaderboardPagingButton', function() {
       leaderboardPagingButton = <LeaderboardPagingButton type="prev" action={ callback } currentPage={ 1 } pageCount={ 4 } />;
 
       component = TestUtils.renderIntoDocument(leaderboardPagingButton);
-      expect(component.getDOMNode().className).not.toContain(prevActiveClass);
+      expect(ReactDOM.findDOMNode(component).classList.contains(prevActiveClass)).toBe(false);
     });
 
     it('has an active modifier class if the last page is displayed', function() {
       leaderboardPagingButton = <LeaderboardPagingButton type="prev" action={ callback } currentPage={ 4 } pageCount={ 4 } />;
 
       component = TestUtils.renderIntoDocument(leaderboardPagingButton);
-      expect(component.getDOMNode().className).toContain(prevActiveClass);
+      expect(ReactDOM.findDOMNode(component).classList.contains(prevActiveClass)).toBe(true);
     });
   });
 });

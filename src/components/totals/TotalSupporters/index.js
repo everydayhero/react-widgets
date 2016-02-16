@@ -1,6 +1,5 @@
-"use strict";
+'use strict';
 
-var _         = require('lodash');
 var React     = require('react');
 var I18nMixin = require('../../mixins/I18n');
 var pages     = require('../../../api/pages');
@@ -8,8 +7,8 @@ var Icon      = require('../../helpers/Icon');
 var numeral   = require('numeral');
 
 module.exports = React.createClass({
+  displayName: 'TotalSupporters',
   mixins: [I18nMixin],
-  displayName: "TotalSupporters",
   propTypes: {
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
@@ -139,7 +138,7 @@ module.exports = React.createClass({
     var renderIcon = this.props.renderIcon;
 
     if (renderIcon === true) {
-      renderIcon = "user";
+      renderIcon = 'user';
     }
 
     if (renderIcon) {

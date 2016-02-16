@@ -116,13 +116,10 @@ module.exports = React.createClass({
 
   render: function() {
     var props = this.props;
-    var state = this.state;
     var date = props.date;
     var bg = cssUrl(props.backgroundImageUrl);
     var blur = cssUrl(props.backgroundBlurUrl);
     var t = this.t;
-    var isAppeal = !props.getStartedUrl;
-    var url = isAppeal ? props.donateUrl : props.getStartedUrl;
 
     return (
       <div className="Event" style={ this.eventStyles() }

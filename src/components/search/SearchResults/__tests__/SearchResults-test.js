@@ -1,9 +1,10 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
+var sinon = require('sinon')
 
-var React         = require('react/addons');
+var React         = require('react');
 var SearchResults = require('../');
-var TestUtils     = React.addons.TestUtils;
+var TestUtils     = require('react-addons-test-utils');
 var findByClass   = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass   = TestUtils.scryRenderedDOMComponentsWithClass;
 
@@ -20,13 +21,12 @@ describe('SearchResults', function() {
     expect(resultElements.length).toBe(results.length);
   });
 
-  it('uses renderComponent to render each result', function() {
-    var component = jest.genMockFunction();
+  it.only('uses renderComponent to render each result', function() {
+    var component = sinon.spy(() => <p/>);
     var searchResults = <SearchResults results={ results } resultComponent={ component }/>;
-    var element = TestUtils.renderIntoDocument(searchResults);
-    var resultElements = scryByClass(element, 'SearchResult');
+    TestUtils.renderIntoDocument(searchResults);
 
-    expect(component.mock.calls.length).toEqual(results.length);
+    expect(component.calledTwice).toBe(true);
   });
 
   it('shows "no results" when empty', function() {
@@ -34,7 +34,7 @@ describe('SearchResults', function() {
     var element = TestUtils.renderIntoDocument(searchResults);
     var noResultsElement = findByClass(element, 'SearchResults--empty');
 
-    expect(noResultsElement.getDOMNode().textContent).toBe('No results');
+    expect(noResultsElement.textContent).toBe('No results');
   });
 
   it('does not show "no results" when null', function() {

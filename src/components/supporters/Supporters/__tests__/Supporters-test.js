@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
 jest.mock('../../../../api/charities');
@@ -6,13 +6,13 @@ jest.mock('../../../../api/campaigns');
 var charities = require('../../../../api/charities');
 var campaigns = require('../../../../api/campaigns');
 
-var React       = require('react/addons');
-var TestUtils   = React.addons.TestUtils;
+var React       = require('react');
+var ReactDOM    = require('react-dom');
+var TestUtils   = require('react-addons-test-utils');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 var Supporters  = require('../');
 
-var emptyData = { leaderboard: { pages: [] } };
 var leaderboardData = require('./Supporters-data.json');
 
 describe('Supporters', function() {
@@ -33,7 +33,7 @@ describe('Supporters', function() {
     });
 
     it('renders', function() {
-      expect(element.getDOMNode()).not.toBeNull();
+      expect(ReactDOM.findDOMNode(element)).not.toBeNull();
     });
 
     it('renders a Supporters element', function() {
@@ -55,13 +55,12 @@ describe('Supporters', function() {
 });
 
 describe('multiple campaignUids', function() {
-  var element;
   var supporters;
 
   beforeEach(function() {
     campaigns.leaderboardByUids.mockClear();
     supporters = <Supporters campaignUids={ ["us-22", "us-19"] } />;
-    element = TestUtils.renderIntoDocument(supporters);
+    TestUtils.renderIntoDocument(supporters);
   });
 
   it('handles multiple campaignUids', function() {

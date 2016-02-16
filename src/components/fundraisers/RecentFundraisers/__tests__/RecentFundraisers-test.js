@@ -3,10 +3,10 @@ jest.autoMockOff();
 jest.mock('../../../../api/pages');
 
 describe('RecentFundraisers', function() {
-  var React             = require('react/addons');
+  var React             = require('react');
   var RecentFundraisers = require('../');
   var pages             = require('../../../../api/pages');
-  var TestUtils         = React.addons.TestUtils;
+  var TestUtils         = require('react-addons-test-utils');
   var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
@@ -29,14 +29,14 @@ describe('RecentFundraisers', function() {
       });
 
       var emptyLabel = findByClass(element, 'RecentFundraisers__empty-label');
-      expect(emptyLabel.getDOMNode().textContent).toContain('No fundraisers to display.');
+      expect(emptyLabel.textContent).toContain('No fundraisers to display.');
     });
 
     it('renders a default heading', function() {
       element.setState({ isLoading: false });
       var heading = findByClass(element, 'RecentFundraisers__heading');
 
-      expect(heading.getDOMNode().textContent).toBe('Fundraisers');
+      expect(heading.textContent).toBe('Fundraisers');
     });
 
     it('renders a loading icon', function() {
@@ -66,7 +66,7 @@ describe('RecentFundraisers', function() {
       element.setState({isLoading: false});
       var heading = findByClass(element, 'RecentFundraisers__heading');
 
-      expect(heading.getDOMNode().textContent).toBe(translation.heading);
+      expect(heading.textContent).toBe(translation.heading);
     });
 
     it('renders a custom empty label', function() {
@@ -76,7 +76,7 @@ describe('RecentFundraisers', function() {
       });
       var emptyLabel = findByClass(element, 'RecentFundraisers__empty-label');
 
-      expect(emptyLabel.getDOMNode().textContent).toBe(translation.emptyLabel);
+      expect(emptyLabel.textContent).toBe(translation.emptyLabel);
     });
   });
 });

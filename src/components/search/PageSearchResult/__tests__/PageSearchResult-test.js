@@ -1,9 +1,9 @@
 "use strict";
 jest.autoMockOff();
 
-var React            = require('react/addons');
+var React            = require('react');
 var PageSearchResult = require('../');
-var TestUtils        = React.addons.TestUtils;
+var TestUtils        = require('react-addons-test-utils');
 var findByClass      = TestUtils.findRenderedDOMComponentWithClass;
 var findByTag        = TestUtils.findRenderedDOMComponentWithTag;
 
@@ -36,12 +36,12 @@ describe('it renders a result', function() {
     var supporterName = findByClass(component, 'PageSearchResult__subheader');
 
     expect(element).toBeDefined();
-    expect(element.getDOMNode().href).toBe(result.url);
-    expect(avatar.getDOMNode().getAttribute('src')).toBe(result.image.medium_image_url);
-    expect(header.getDOMNode().textContent).toContain(result.name);
-    expect(description.getDOMNode().textContent).toBe(result.charity.name);
-    expect(footer.getDOMNode().textContent).toBe(result.campaign.name);
-    expect(supporterName.getDOMNode().textContent).toContain(result.supporter.name);
+    expect(element.href).toBe(result.url);
+    expect(avatar.getAttribute('src')).toBe(result.image.medium_image_url);
+    expect(header.textContent).toContain(result.name);
+    expect(description.textContent).toBe(result.charity.name);
+    expect(footer.textContent).toBe(result.campaign.name);
+    expect(supporterName.textContent).toContain(result.supporter.name);
   });
 
   it('includes selectAction', function() {
@@ -49,6 +49,6 @@ describe('it renders a result', function() {
     var component = TestUtils.renderIntoDocument(searchResult);
     var action = findByClass(component, 'PageSearchResult__actions');
 
-    expect(action.getDOMNode().textContent).toBe('Blah');
+    expect(action.textContent).toBe('Blah');
   });
 });

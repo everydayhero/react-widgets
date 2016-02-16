@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 
 function renderModal(component, options) {
   var div = document.createElement('div');
@@ -11,7 +12,7 @@ function renderModal(component, options) {
     document.body.removeChild(div);
   };
 
-  React.render(React.createFactory(component)(options), div);
+  ReactDOM.render(React.createFactory(component)(options), div);
 }
 
 module.exports = renderModal;

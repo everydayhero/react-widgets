@@ -11,8 +11,8 @@ charities.fundraiseUrl.mockReturnValue(fundraiseUrl);
 var _ = require('lodash');
 _.debounce = function(callback) { return callback; };
 
-var React              = require('react/addons');
-var TestUtils          = React.addons.TestUtils;
+var React              = require('react');
+var TestUtils          = require('react-addons-test-utils');
 var CharitySearchModal = require('../');
 var SearchModal        = require('../../SearchModal');
 var findByClass        = TestUtils.findRenderedDOMComponentWithClass;
@@ -75,8 +75,8 @@ describe('CharitySearchModal', function() {
     var resultElements = scryByClass(element, 'SearchResult');
 
     expect(resultElements.length).toEqual(1);
-    expect(resultElements[0].getDOMNode().textContent).toContain(charity.name);
-    expect(resultElements[0].getDOMNode().textContent).toContain(charity.description);
+    expect(resultElements[0].textContent).toContain(charity.name);
+    expect(resultElements[0].textContent).toContain(charity.description);
   });
 
   it('search for all charities when search is empty', function() {
@@ -152,7 +152,7 @@ describe('CharitySearchModal', function() {
 
     var resultElements = scryByClass(element, 'SearchResult');
 
-    expect(resultElements[0].getDOMNode().href).toBe(charity.url);
+    expect(resultElements[0].href).toBe(charity.url);
   });
 
   it('links to fundraise url for fundraise action', function() {
@@ -164,7 +164,7 @@ describe('CharitySearchModal', function() {
     var resultElements = scryByClass(element, 'SearchResult');
 
     expect(charities.fundraiseUrl).lastCalledWith(charity, null);
-    expect(resultElements[0].getDOMNode().href).toBe(fundraiseUrl);
+    expect(resultElements[0].href).toBe(fundraiseUrl);
   });
 
   it('links to donate url for donate action', function() {
@@ -176,7 +176,7 @@ describe('CharitySearchModal', function() {
     var resultElements = scryByClass(element, 'SearchResult');
 
     expect(charities.donateUrl).lastCalledWith(charity, null);
-    expect(resultElements[0].getDOMNode().href).toBe(donateUrl);
+    expect(resultElements[0].href).toBe(donateUrl);
   });
 
   it('calls custom onSelect callback on charity select', function() {
@@ -221,8 +221,8 @@ describe('CharitySearchModal', function() {
     var resultElements = scryByClass(element, 'SearchResult');
 
     expect(resultElements.length).toEqual(1);
-    expect(resultElements[0].getDOMNode().textContent).toContain(charity2.name);
-    expect(resultElements[0].getDOMNode().textContent).toContain(charity2.description);
+    expect(resultElements[0].textContent).toContain(charity2.name);
+    expect(resultElements[0].textContent).toContain(charity2.description);
   });
 
   it('not show promoted charities when search is not empty', function() {
@@ -234,13 +234,13 @@ describe('CharitySearchModal', function() {
     var resultElements = scryByClass(element, 'SearchResult');
 
     expect(resultElements.length).toEqual(1);
-    expect(resultElements[0].getDOMNode().textContent).toContain(charity2.name);
+    expect(resultElements[0].textContent).toContain(charity2.name);
 
     var input = findByTag(element, 'input');
     TestUtils.Simulate.change(input, { target: { value: 'foo' } });
     resultElements = scryByClass(element, 'SearchResult');
 
     expect(resultElements.length).toEqual(1);
-    expect(resultElements[0].getDOMNode().textContent).toContain(charity.name);
+    expect(resultElements[0].textContent).toContain(charity.name);
   });
 });

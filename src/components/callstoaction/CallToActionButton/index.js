@@ -1,7 +1,7 @@
 "use strict";
 
 var React = require('react');
-var cx = require('react/lib/cx');
+var cx = require('classnames');
 var Icon = require('../../helpers/Icon');
 
 module.exports = React.createClass({

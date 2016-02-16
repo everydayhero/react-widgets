@@ -1,12 +1,11 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
 jest.mock('../../lib/getJSONP');
 var getJSONP = require('../../lib/getJSONP');
-var results = { results: [], meta: {} };
+var results = { results: [], meta: {}};
 getJSONP.mockImplementation(function(_, callback) { callback(results); });
 
-var routes = require('../routes');
 var charities = require('../charities');
 
 describe('charities', function() {
@@ -131,7 +130,7 @@ describe('charities', function() {
       var callback = jest.genMockFunction();
       charities.search(query, callback);
 
-      expect(getJSONP).toBeCalledWith('https://everydayhero.com/api/v2/search/charities.jsonp?q=bar&country_code=xy&campaign_id=12,42&page=2&page_size=7', callback, {timeout: 10000});
+      expect(getJSONP).toBeCalledWith('https://everydayhero.com/api/v2/search/charities.jsonp?q=bar&country_code=xy&campaign_id=12,42&page=2&page_size=7', callback, { timeout: 10000 });
       expect(callback).toBeCalledWith(results);
     });
   });

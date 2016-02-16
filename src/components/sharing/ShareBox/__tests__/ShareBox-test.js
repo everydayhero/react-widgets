@@ -1,13 +1,12 @@
-"use strict";
+'use strict';
 
 jest.autoMockOff();
 
 describe('Share Box', function() {
-  var React                  = require('react/addons');
+  var React                  = require('react');
   var ShareBox               = require('../');
   var ShareIcon              = require('../../ShareIcon/');
-  var TestUtils              = React.addons.TestUtils;
-  var findByClass            = TestUtils.findRenderedDOMComponentWithClass;
+  var TestUtils              = require('react-addons-test-utils');
   var scryRenderedComponents = TestUtils.scryRenderedComponentsWithType;
 
   var mockServices = [
@@ -31,7 +30,6 @@ describe('Share Box', function() {
 
     it('will attempt to render service buttons', function() {
       var result      = component.renderServiceButtons();
-      var iconWrapper = findByClass(component, 'ShareBox__icons');
       var icons       = scryRenderedComponents(component, ShareIcon);
 
       expect(result).toBeTruthy();

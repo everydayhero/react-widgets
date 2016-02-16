@@ -1,14 +1,12 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
 
 describe('Leaderboard', function() {
   var _                 = require('lodash');
-  var React             = require('react/addons');
+  var React             = require('react');
   var Leaderboard       = require('../');
-  var LeaderboardItem   = require('../../LeaderboardItem/');
-  var LeaderboardPaging = require('../../LeaderboardPaging/');
-  var TestUtils         = React.addons.TestUtils;
+  var TestUtils         = require('react-addons-test-utils');
   var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('Component defaults', function() {
@@ -27,7 +25,7 @@ describe('Leaderboard', function() {
     it('renders a default heading', function() {
       var heading = findByClass(element, 'Leaderboard__heading');
 
-      expect(heading.getDOMNode().textContent).toBe('Top Individuals');
+      expect(heading.textContent).toBe('Top Individuals');
     });
 
     it('renders a loading icon', function() {
@@ -50,7 +48,7 @@ describe('Leaderboard', function() {
 
     it('renders a custom heading', function() {
       var heading = findByClass(element, 'Leaderboard__heading');
-      expect(heading.getDOMNode().textContent).toBe(translation.heading);
+      expect(heading.textContent).toBe(translation.heading);
     });
   });
 
@@ -122,7 +120,6 @@ describe('Leaderboard', function() {
         resultCount: 10
       });
 
-      var paging = <LeaderboardPaging />;
       var pagingFunction = element.renderPaging();
       expect(pagingFunction).toBeDefined();
     });
@@ -132,7 +129,6 @@ describe('Leaderboard', function() {
       var element = TestUtils.renderIntoDocument(leaderboard);
       element.setState({ isLoading: false });
 
-      var paging = <LeaderboardPaging />;
       var pagingFunction = element.renderPaging();
       expect(pagingFunction).toBeUndefined();
     });

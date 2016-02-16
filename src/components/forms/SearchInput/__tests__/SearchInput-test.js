@@ -1,12 +1,11 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
-var React       = require('react/addons');
-var TestUtils   = React.addons.TestUtils;
+var React       = require('react');
+var TestUtils   = require('react-addons-test-utils');
 var SearchInput = require('../');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
-var findByProp  = require('../../../../test/helpers/scryRenderedDOMComponentsWithProp').findRenderedDOMComponentWithProp;
+var findByAttribute  = require('../../../../test/helpers/scryRenderedDOMComponentsWithAttribute').findRenderedDOMComponentWithAttribute;
 
 describe('SearchInput', function() {
 
@@ -31,44 +30,44 @@ describe('SearchInput', function() {
     var element = TestUtils.renderIntoDocument(<SearchInput onSubmit={ onSubmit } value={ initialValue } i18n={ i18n } />);
     var input = findByClass(element, 'Input__input');
 
-    var inputWithName = findByProp(element, 'name', 'test_input');
+    var inputWithName = findByAttribute(element, 'name', 'test_input');
     expect(inputWithName).toBeDefined();
 
-    var label = findByClass(element, 'Input__label').getDOMNode();
+    var label = findByClass(element, 'Input__label');
     expect(label.textContent).toContain('Test Input');
 
     expect(input).toBeDefined();
   });
 
   it('contains initial value', function() {
-    var inputNode = findByClass(element, 'Input__input').getDOMNode();
+    var inputNode = findByClass(element, 'Input__input');
 
     expect(inputNode.value).toBe(initialValue);
   });
 
   it('returns a value on enter', function() {
-    var inputNode = findByClass(element, 'Input__input').getDOMNode();
+    var inputNode = findByClass(element, 'Input__input');
 
-    TestUtils.Simulate.keyUp(inputNode, { key: "Enter" });
+    TestUtils.Simulate.keyUp(inputNode, { key: 'Enter' });
 
     expect(submittedValue).toBe(initialValue);
   });
 
   it('returns a value on click search', function() {
-    var button    = findByClass(element, 'hui-Button').getDOMNode();
-    var inputNode = findByClass(element, 'Input__input').getDOMNode();
+    var button    = findByClass(element, 'CallToActionButton');
+    var inputNode = findByClass(element, 'Input__input');
 
-    TestUtils.Simulate.change(inputNode, { target: { value: 'bar' } });
-    TestUtils.Simulate.click(button);
+    TestUtils.Simulate.change(inputNode, { target: { value: 'bar' }});
+    TestUtils.Simulate.mouseUp(button);
 
     expect(submittedValue).toBe('bar');
   });
 
   it('clears the search input on submit', function() {
-    var inputNode = findByClass(element, 'Input__input').getDOMNode();
+    var inputNode = findByClass(element, 'Input__input');
 
-    TestUtils.Simulate.change(inputNode, { target: { value: 'bar' } });
-    TestUtils.Simulate.keyUp(inputNode, { key: "Enter" });
+    TestUtils.Simulate.change(inputNode, { target: { value: 'bar' }});
+    TestUtils.Simulate.keyUp(inputNode, { key: 'Enter' });
 
     expect(inputNode.value).toBe('');
   });

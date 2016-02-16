@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
 jest.autoMockOff();
 jest.mock('../../../../lib/openPopup');
 
-var React     = require('react/addons');
+var React     = require('react');
+var ReactDOM  = require('react-dom');
 var ShareIcon = require('../');
-var Icon      = require('../../../helpers/Icon');
-var TestUtils = React.addons.TestUtils;
+var TestUtils = require('react-addons-test-utils');
 var openPopup = require('../../../../lib/openPopup');
 
 describe('Share Icon component', function() {
@@ -36,13 +36,13 @@ describe('Share Icon component', function() {
   });
 
   it('renders an icon', function() {
-    var element = component.getDOMNode();
-    expect(element.className).toContain('ShareIcon');
-    expect(element.className).toContain(props.name);
+    var element = ReactDOM.findDOMNode(component);
+    expect(element.classList.contains('ShareIcon')).toBe(true);
+    expect(element.classList.contains('ShareIcon__' + props.name)).toBe(true);
   });
 
   it('opens a pop up when an icon is clicked', function() {
-    var element = component.getDOMNode();
+    var element = ReactDOM.findDOMNode(component);
     TestUtils.Simulate.click(element);
 
     expect(openPopup).lastCalledWith("http://mock-url.com/", popUpConfig);

@@ -3,7 +3,7 @@
 var _       = require('lodash');
 var async   = require('async');
 var React   = require('react');
-var cx      = require('react/lib/cx');
+var cx      = require('classnames');
 var I18n    = require('../../mixins/I18n');
 var Input   = require('../../forms/Input');
 var Icon    = require('../../helpers/Icon');
@@ -173,7 +173,7 @@ module.exports = React.createClass({
       });
 
       if (this.refs.body && pagination.current_page === 1) {
-        this.refs.body.getDOMNode().scrollTop = 0;
+        this.refs.body.scrollTop = 0;
       }
     } else {
       this.search(this.state.searchPage);
@@ -216,11 +216,11 @@ module.exports = React.createClass({
       this.setState({ counts: counts });
     } else {
       var timer = setTimeout(this.searchCounts, 5000);
-      this.setState({ cancelSearchCounts: function() { clearTimeout(timer); } });
+      this.setState({ cancelSearchCounts: function() { clearTimeout(timer); }});
     }
   },
 
-  setFilter: function(filter, event) {
+  setFilter: function(filter) {
     this.setState({ filter: filter }, this.search);
   },
 
@@ -334,7 +334,7 @@ module.exports = React.createClass({
         autoFocus={ this.props.autoFocus }
         i18n={{ label: this.t('inputLabel'), name: 'aggregate_search_input' }}
         output={ this.inputChanged }
-        showIcon={ true }
+        showIcon
         icon={ this.state.isSearching ? 'refresh' : '' }
         value={ this.state.searchTerm } />
     );

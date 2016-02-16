@@ -2,9 +2,9 @@
 
 jest.autoMockOff();
 
-var React       = require('react/addons');
+var React       = require('react');
 var TabPanel    = require('../');
-var TestUtils   = React.addons.TestUtils;
+var TestUtils   = require('react-addons-test-utils');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
 describe('TabPanel', function() {
@@ -15,7 +15,7 @@ describe('TabPanel', function() {
   beforeEach(function() {
     tabPanel = <TabPanel content="Hello world!" active={ true } index={ 1 } labelledBy="tab-1" />;
     component = TestUtils.renderIntoDocument(tabPanel);
-    element   = findByClass(component, 'TabPanel').getDOMNode();
+    element   = findByClass(component, 'TabPanel');
   });
 
   it('calls renders a tab panel with content', function() {

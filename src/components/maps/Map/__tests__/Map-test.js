@@ -1,12 +1,11 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 jest.mock('../../../../api/pages');
 
 describe('Map', function() {
-  var React                       = require('react/addons');
+  var React                       = require('react');
   var Map                       = require('../');
-  var TestUtils                   = React.addons.TestUtils;
-  var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
+  var TestUtils                   = require('react-addons-test-utils');
 
   describe('component defaults', function() {
     var map;

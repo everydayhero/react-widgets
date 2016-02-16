@@ -2,9 +2,9 @@
 
 jest.autoMockOff();
 
-var React       = require('react/addons');
+var React       = require('react');
 var TabDrawer   = require('../');
-var TestUtils   = React.addons.TestUtils;
+var TestUtils   = require('react-addons-test-utils');
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
 describe('TabDrawer', function() {
@@ -20,8 +20,8 @@ describe('TabDrawer', function() {
   });
 
   it('calls renders a tab drawer with a name', function() {
-    expect(element.getDOMNode().textContent).toBe('barbaz');
-    expect(element.getDOMNode().className).toContain('active');
+    expect(element.textContent).toBe('barbaz');
+    expect(element.className).toContain('active');
   });
 
   it('calls an on click with an index', function() {

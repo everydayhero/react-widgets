@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
 var React = require('react');
-var cx    = require('react/lib/cx');
+var cx    = require('classnames');
 
 module.exports = React.createClass({
-  displayName: "AmountRadio",
+  displayName: 'AmountRadio',
 
   propTypes: {
     selected: React.PropTypes.number,
@@ -22,10 +22,6 @@ module.exports = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function(nextProps) {
-    this.refs.radio.getDOMNode().checked = (nextProps.selected === this.props.amount);
-  },
-
   handleClick: function() {
     this.props.onClick(this.props.amount);
   },
@@ -40,7 +36,14 @@ module.exports = React.createClass({
     return (
       <label className={ classes + order } onClick={ this.handleClick }>
         { this.props.amount }
-        <input ref="radio" type="radio" name={ this.props.name } value={ this.props.amount } id={ this.props.name + '-' + this.props.amount } />
+        <input
+          ref="radio"
+          type="radio"
+          readOnly
+          checked={ this.props.selected === this.props.amount }
+          name={ this.props.name }
+          value={ this.props.amount }
+          id={ this.props.name + '-' + this.props.amount } />
       </label>
     );
   }

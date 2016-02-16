@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _               = require('lodash');
 var React           = require('react');
@@ -8,8 +8,8 @@ var Icon            = require('../../helpers/Icon');
 var numeral         = require('numeral');
 
 module.exports = React.createClass({
+  displayName: 'TotalCalories',
   mixins: [I18nMixin],
-  displayName: "TotalCalories",
   propTypes: {
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
@@ -87,7 +87,6 @@ module.exports = React.createClass({
   },
 
   renderTotal: function() {
-    var symbol         = this.t('symbol');
     var title          = this.t('title');
     var emptyLabel     = this.t('emptyLabel');
     var formattedTotal = numeral(this.state.total).format(this.props.format);
@@ -112,7 +111,7 @@ module.exports = React.createClass({
     var renderIcon = this.props.renderIcon;
 
     if (renderIcon === true) {
-      renderIcon = "fire";
+      renderIcon = 'fire';
     }
 
     if (renderIcon) {

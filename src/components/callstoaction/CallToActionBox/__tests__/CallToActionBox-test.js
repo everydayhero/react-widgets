@@ -3,10 +3,10 @@ jest.autoMockOff();
 jest.mock('../../../../api/campaigns');
 
 describe('CallToActionBox', function() {
-  var React                       = require('react/addons');
+  var React                       = require('react');
   var CallToActionBox             = require('../');
   var campaigns                   = require('../../../../api/campaigns');
-  var TestUtils                   = React.addons.TestUtils;
+  var TestUtils                   = require('react-addons-test-utils');
   var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
@@ -31,14 +31,14 @@ describe('CallToActionBox', function() {
       element.setState({ isLoading: false });
       var heading = findByClass(element, 'CallToActionBox__title');
 
-      expect(heading.getDOMNode().textContent).toBe('Get Involved');
+      expect(heading.textContent).toBe('Get Involved');
     });
 
     it('renders default sign in link text', function() {
       element.setState({ isLoading: false });
       var link = findByClass(element, 'CallToActionBox__link');
 
-      expect(link.getDOMNode().textContent).toBe('Sign in');
+      expect(link.textContent).toBe('Sign in');
     });
 
     it('renders if handed default campaign id', function() {
@@ -63,14 +63,14 @@ describe('CallToActionBox', function() {
       element.setState({isLoading: false});
       var title = findByClass(element, 'CallToActionBox__title');
 
-      expect(title.getDOMNode().textContent).toBe(translation.title);
+      expect(title.textContent).toBe(translation.title);
     });
 
     it('renders a custom heading', function() {
       element.setState({isLoading: false});
       var signInLabel = findByClass(element, 'CallToActionBox__link');
 
-      expect(signInLabel.getDOMNode().textContent).toBe(translation.signInLabel);
+      expect(signInLabel.textContent).toBe(translation.signInLabel);
     });
   });
 });

@@ -1,8 +1,8 @@
 "use strict";
 jest.autoMockOff();
 
-var React         = require('react/addons');
-var TestUtils     = React.addons.TestUtils;
+var React         = require('react');
+var TestUtils     = require('react-addons-test-utils');
 var findByClass   = TestUtils.findRenderedDOMComponentWithClass;
 var SupporterCard = require('../');
 
@@ -24,7 +24,7 @@ describe('SupporterCard', function() {
   });
 
   it('renders', function() {
-    expect(element.getDOMNode()).not.toBeNull();
+    expect(element).not.toBeNull();
   });
 
   it('contains a SupporterCard element', function() {

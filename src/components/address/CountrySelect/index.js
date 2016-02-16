@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-var React               = require('react/addons');
-var PureRenderMixin     = React.addons.PureRenderMixin;
-var cx                  = require('react/lib/cx');
+var React               = require('react');
+var PureRenderMixin     = require('react-addons-pure-render-mixin');
+var cx                  = require('classnames');
 var _                   = require('lodash');
 var countries           = require('./countries');
 var Input               = require('../../forms/Input');
@@ -12,7 +12,7 @@ var addEventListener    = require('../../../lib/addEventListener');
 var removeEventListener = require('../../../lib/removeEventListener');
 
 module.exports = React.createClass({
-  displayName: "CountrySelect",
+  displayName: 'CountrySelect',
 
   mixins: [PureRenderMixin],
 
@@ -82,7 +82,7 @@ module.exports = React.createClass({
 
   setFilteredList: function(text) {
     if (!text) return null;
-    return _.filter(this.state.countries, function(d, i) {
+    return _.filter(this.state.countries, function(d) {
       return d.name.toLowerCase().indexOf(text.toLowerCase()) !== -1;
     });
   },
@@ -107,13 +107,15 @@ module.exports = React.createClass({
   renderCountries: function() {
     var countries = this.state.filteredList || this.state.countries;
     return _.map(countries, function(d, i) {
-      return <CountrySelectItem
-        key={ d.name + i }
-        index={ i }
-        focused={ i === this.state.fauxFocus }
-        onMouseEnter={ this.setFauxFocus }
-        country={ d }
-        onClick={ this.setCountry }/>;
+      return (
+        <CountrySelectItem
+          key={ d.name + i }
+          index={ i }
+          focused={ i === this.state.fauxFocus }
+          onMouseEnter={ this.setFauxFocus }
+          country={ d }
+          onClick={ this.setCountry }/>
+      )
     }, this);
   },
 
@@ -134,14 +136,14 @@ module.exports = React.createClass({
   renderInput: function(bool) {
     return bool && (
       <Input
-        autoFocus={ true }
-        ref={ 'countryFilter' }
-        key={ "countryFilter" }
+        autoFocus
+        ref="countryFilter"
+        key="countryFilter"
         i18n={{
           name: this.props.prefix + 'countryFilter',
-          label: "Find Country"
+          label: 'Find Country'
         }}
-        spacing={ "compact" }
+        spacing="compact"
         value={ this.state.filter }
         output={ this.setFilter } />
     );

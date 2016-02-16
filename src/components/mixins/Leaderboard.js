@@ -1,9 +1,7 @@
-"use strict";
+'use strict';
 
 var _                 = require('lodash');
 var React             = require('react');
-var cx                = require('react/lib/cx');
-var Icon              = require('../helpers/Icon');
 var numeral           = require('numeral');
 var campaigns         = require('../../api/campaigns');
 var charities         = require('../../api/charities');
@@ -99,7 +97,7 @@ module.exports = {
           name: page.name,
           url: page.url,
           isoCode: page.amount.currency.iso_code,
-          amount:  page.amount.cents,
+          amount: page.amount.cents,
           totalMembers: (page.team_member_uids && page.team_member_uids.length) ? page.team_member_uids.length : null,
           imgSrc: page.image.large_image_url,
           medImgSrc: page.image.medium_image_url,

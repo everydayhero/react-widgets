@@ -1,9 +1,9 @@
 "use strict";
 jest.autoMockOff();
 
-var React                = require('react/addons');
+var React                = require('react');
 var PromoCharitiesResult = require('../');
-var TestUtils            = React.addons.TestUtils;
+var TestUtils            = require('react-addons-test-utils');
 var findByClass          = TestUtils.findRenderedDOMComponentWithClass;
 
 var result = {
@@ -22,10 +22,10 @@ describe('PromoCharitiesResult component default rendering', function() {
     var promoCharitiesResult = <PromoCharitiesResult result={ result } actionLabel="test label" />;
     var component = TestUtils.renderIntoDocument(promoCharitiesResult);
     var element = findByClass(component, 'PromoCharitiesResult');
-    var button = findByClass(element, 'PromoCharitiesResult__btn');
+    var button = findByClass(component, 'PromoCharitiesResult__btn');
 
     expect(element).not.toBeNull();
-    expect(button.getDOMNode().textContent).toBe('test label');
+    expect(button.textContent).toBe('test label');
   });
 });
 

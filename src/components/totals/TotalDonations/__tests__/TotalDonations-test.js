@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 
 jest.autoMockOff();
 jest.mock('../../../../api/totals');
 
 describe('TotalDonations', function() {
-  var React          = require('react/addons');
+  var React          = require('react');
   var TotalDonations = require('../');
   var totals         = require('../../../../api/totals');
-  var TestUtils      = React.addons.TestUtils;
+  var TestUtils      = require('react-addons-test-utils');
   var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
   var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
@@ -29,14 +29,14 @@ describe('TotalDonations', function() {
       element.setState({ isLoading: false });
 
       var total = findByClass(element, 'TotalDonations__total');
-      expect(total.getDOMNode().textContent).toContain('0');
+      expect(total.textContent).toContain('0');
     });
 
     it('renders a default title', function() {
       element.setState({ isLoading: false });
 
       var title = findByClass(element, 'TotalDonations__title');
-      expect(title.getDOMNode().textContent).toBe('Donations');
+      expect(title.textContent).toBe('Donations');
     });
 
     it('renders an icon by default', function() {
@@ -89,12 +89,11 @@ describe('TotalDonations', function() {
 
   describe('multiple charity ids', function() {
     var totalDonations;
-    var element;
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
       totalDonations = <TotalDonations charityUids={ ["au-24", "au-27"] } />;
-      element = TestUtils.renderIntoDocument(totalDonations);
+      TestUtils.renderIntoDocument(totalDonations);
     });
 
     it('handles multiple charity ids', function() {
@@ -118,14 +117,14 @@ describe('TotalDonations', function() {
       element.setState({ isLoading: false });
       var title = findByClass(element, 'TotalDonations__title');
 
-      expect(title.getDOMNode().textContent).toBe(translation.title);
+      expect(title.textContent).toBe(translation.title);
     });
 
     it('renders a default total', function() {
       element.setState({ isLoading: false });
       var total = findByClass(element, 'TotalDonations__total');
 
-      expect(total.getDOMNode().textContent).toContain('0');
+      expect(total.textContent).toContain('0');
     });
   });
 
@@ -140,7 +139,7 @@ describe('TotalDonations', function() {
       });
 
       var total = findByClass(element, 'TotalDonations__total');
-      expect(total.getDOMNode().textContent).toBe('1,000');
+      expect(total.textContent).toBe('1,000');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
@@ -153,7 +152,7 @@ describe('TotalDonations', function() {
       });
 
       var total = findByClass(element, 'TotalDonations__total');
-      expect(total.getDOMNode().textContent).toBe('1000');
+      expect(total.textContent).toBe('1000');
     });
   });
 

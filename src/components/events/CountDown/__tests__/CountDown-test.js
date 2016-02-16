@@ -3,10 +3,10 @@
 jest.autoMockOff();
 
 describe('CountDown', function() {
-  var React       = require('react/addons');
+  var React       = require('react');
   var moment      = require('moment');
   var CountDown   = require('../');
-  var TestUtils   = React.addons.TestUtils;
+  var TestUtils   = require('react-addons-test-utils');
   var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
@@ -23,7 +23,7 @@ describe('CountDown', function() {
     });
 
     it('renders days', function() {
-      var element = findByClass(component, 'CountDown__days').getDOMNode();
+      var element = findByClass(component, 'CountDown__days');
       expect(element).toBeDefined();
     });
   });
@@ -39,7 +39,7 @@ describe('CountDown', function() {
     });
 
     it('renders anchor with provided text', function() {
-      var link = findByClass(component, 'CountDown__link').getDOMNode();
+      var link = findByClass(component, 'CountDown__link');
       expect(link.textContent).toBe('get foobarred');
     });
   });
@@ -56,17 +56,17 @@ describe('CountDown', function() {
     });
 
     it('renders days', function() {
-      var element = findByClass(component, 'CountDown__days').getDOMNode();
+      var element = findByClass(component, 'CountDown__days');
       expect(element.textContent).toBe("10");
     });
 
     it('renders a string using past tense', function() {
-      var label = findByClass(component, 'CountDown__label').getDOMNode();
+      var label = findByClass(component, 'CountDown__label');
       expect(label.textContent).toBe('days to go');
     });
 
     it('renders an anchor with a link url', function() {
-      var link = findByClass(component, 'CountDown__link').getDOMNode();
+      var link = findByClass(component, 'CountDown__link');
       expect(link.href).toBe(linkUrl);
     });
   });
@@ -83,17 +83,17 @@ describe('CountDown', function() {
     });
 
     it('renders days', function() {
-      var element = findByClass(component, 'CountDown__days').getDOMNode();
+      var element = findByClass(component, 'CountDown__days');
       expect(element.textContent).toBe("10");
     });
 
     it('renders a string using past tense', function() {
-      var label = findByClass(component, 'CountDown__label').getDOMNode();
+      var label = findByClass(component, 'CountDown__label');
       expect(label.textContent).toBe('days ago');
     });
 
     it('renders text telling the user the event is finished', function() {
-      var element = findByClass(component, 'CountDown__finished').getDOMNode();
+      var element = findByClass(component, 'CountDown__finished');
       expect(element.textContent).toBe('This event has now finished.');
     });
   });

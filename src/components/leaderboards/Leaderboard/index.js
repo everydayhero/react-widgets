@@ -1,23 +1,22 @@
-"use strict";
+'use strict';
 
 var _                       = require('lodash');
-var React                   = require('react/addons');
-var cx                      = require('react/lib/cx');
+var React                   = require('react');
+var cx                      = require('classnames');
 var I18nMixin               = require('../../mixins/I18n');
 var DOMInfoMixin            = require('../../mixins/DOMInfo');
 var LeaderboardMixin        = require('../../mixins/Leaderboard');
 var Icon                    = require('../../helpers/Icon');
 var LeaderboardItem         = require('../LeaderboardItem');
 var LeaderboardEmpty        = require('../LeaderboardEmpty');
-var CallToActionButton      = require('../../callstoaction/CallToActionButton');
 var numeral                 = require('numeral');
 var addEventListener        = require('../../../lib/addEventListener');
 var removeEventListener     = require('../../../lib/removeEventListener');
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 module.exports = React.createClass({
+  displayName: 'Leaderboard',
   mixins: [I18nMixin, DOMInfoMixin, LeaderboardMixin],
-  displayName: "Leaderboard",
   propTypes: {
     campaignSlug: React.PropTypes.string,
     campaignUid: React.PropTypes.string,

@@ -1,6 +1,6 @@
 "use strict";
 
-var React      = require('react/addons');
+var React      = require('react');
 var tweenState = require('react-tween-state');
 var line       = require('paths-js/path');
 

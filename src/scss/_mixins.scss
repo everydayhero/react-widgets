@@ -1,8 +1,8 @@
 @mixin vendor($property, $value, $vendors: webkit moz ms o) {
   @each $vendor in $vendors {
-    -#{$vendor}-#{$property}: unquote($value);
+    -#{$vendor}-#{$property}: unquote(#{$value});
   }
-  #{$property}: unquote($value);
+  #{$property}: unquote(#{$value});
 }
 
 @mixin vendor-value($property, $value, $vendors: webkit moz ms o) {

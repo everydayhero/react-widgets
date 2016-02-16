@@ -1,8 +1,7 @@
-"use strict";
+'use strict';
 
 var _             = require('lodash');
 var React         = require('react');
-var Icon          = require('../../helpers/Icon');
 var DOMInfo       = require('../../mixins/DOMInfo');
 var I18n          = require('../../mixins/I18n');
 var campaigns     = require('../../../api/campaigns');
@@ -10,7 +9,7 @@ var charities     = require('../../../api/charities');
 var SupporterCard = require('../SupporterCard');
 
 module.exports = React.createClass({
-  displayName: "Supporters",
+  displayName: 'Supporters',
 
   mixins: [I18n, DOMInfo],
 

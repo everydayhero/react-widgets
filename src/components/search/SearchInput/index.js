@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-var _             = require('lodash');
-var React         = require('react');
-var Icon          = require('../../helpers/Icon');
+var _     = require('lodash');
+var React = require('react');
+var Icon  = require('../../helpers/Icon');
 
 module.exports = React.createClass({
   displayName: 'SearchInput',
@@ -26,7 +26,7 @@ module.exports = React.createClass({
 
   componentDidMount: function() {
     if (this.props.autoFocus) {
-      var node = this.refs.input.getDOMNode();
+      var node = this.refs.input;
       if (node.focus) {
         node.focus();
         if (this.props.searchTerm) {
@@ -38,7 +38,7 @@ module.exports = React.createClass({
 
   keyHandler: function(event) {
     if (event.key === 'Escape') {
-      this.refs.input.getDOMNode().blur();
+      this.refs.input.blur();
     }
   },
 

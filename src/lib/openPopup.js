@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _ = require('lodash');
 
@@ -18,7 +18,7 @@ function openPopup(url, config) {
   config.left = windowLeft + (window.innerWidth / 2) - (config.width / 2);
   config      = toString(config);
 
-  var windowRef = window.open(url, 'shareWindow', config);
+  window.open(url, 'shareWindow', config);
 }
 
 module.exports = openPopup;

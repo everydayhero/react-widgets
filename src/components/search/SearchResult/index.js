@@ -11,8 +11,11 @@ module.exports = React.createClass({
   },
 
   clickHandler: function(event) {
-    event.preventDefault();
-    this.props.onSelect(this.props.result);
+    var selectAction = this.props.onSelect(this.props.result);
+
+    if (selectAction) {
+      event.preventDefault();
+    }
   },
 
   render: function() {

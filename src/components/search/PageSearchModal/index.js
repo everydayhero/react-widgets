@@ -119,7 +119,7 @@ module.exports = React.createClass({
     if(this.props.onSelect) {
       this.props.onSelect(page);
     } else {
-      window.location = page.url;
+      return null;
     }
   },
 

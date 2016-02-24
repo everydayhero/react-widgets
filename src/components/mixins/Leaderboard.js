@@ -22,7 +22,7 @@ module.exports = {
     } else {
       if (props.campaignUids) {
         endpoint = campaigns.leaderboardByUids.bind(campaigns, props.campaignUids, props.charityUid);
-      } else if (props.campaignUid && (props.groupValues || props.groupValue)) {
+      } else if (props.campaignUid && (!_.isEmpty(props.groupValues) || props.groupValue)) {
         endpoint = campaigns.leaderboardDynamic.bind(campaigns, props.campaignUid, props.groupValue);
       } else if (props.campaignUid) {
         endpoint = campaigns.leaderboard.bind(campaigns, props.campaignUid, props.charityUid);

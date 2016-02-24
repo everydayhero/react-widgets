@@ -125,7 +125,7 @@ module.exports = React.createClass({
 
   sortLeaderboard: function(sortField) {
     this.setState({
-      boardData: _.sortByOrder(this.state.boardData, [sortField, 'amount'], false),
+      boardData: _.orderBy(this.state.boardData, [sortField, 'amount'], 'desc'),
       currentSort: sortField
     });
   },

@@ -93,9 +93,9 @@ module.exports = {
       done();
     };
 
-    _.forEach(campaignUids, function(campaignUid) {
+    _.forEach(campaignUids, (campaignUid) => {
       this.leaderboard(campaignUid, charityUid, type, limit, storePages, options);
-    }, this);
+    });
   },
 
   leaderboardBySlug: function(country, campaignSlug, type, limit, callback, options) {

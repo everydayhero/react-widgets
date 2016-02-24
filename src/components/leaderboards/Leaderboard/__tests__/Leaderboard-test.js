@@ -68,7 +68,7 @@ describe('Leaderboard', function() {
       ];
 
       element.rankLeaderboard(data);
-      expect(_.pluck(data, 'rank')).toEqual([1, 2, 3]);
+      expect(_.map(data, 'rank')).toEqual([1, 2, 3]);
     });
 
     it('gives results with the same amount the same rank', function() {
@@ -78,7 +78,7 @@ describe('Leaderboard', function() {
       ];
 
       element.rankLeaderboard(data);
-      expect(_.pluck(data, 'rank')).toEqual([1, 1]);
+      expect(_.map(data, 'rank')).toEqual([1, 1]);
     });
 
     it('leaves a gap to compensate for items with the same rank', function(){
@@ -91,7 +91,7 @@ describe('Leaderboard', function() {
       ];
 
       element.rankLeaderboard(data);
-      expect(_.pluck(data, 'rank')).toEqual([1, 2, 2, 2, 5]);
+      expect(_.map(data, 'rank')).toEqual([1, 2, 2, 2, 5]);
     });
   });
 

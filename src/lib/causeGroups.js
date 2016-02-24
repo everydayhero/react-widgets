@@ -61,7 +61,7 @@ module.exports = {
 
   findByCause: function (cause) {
     return _.find(causeGroups, function(causeGroup) {
-      return _.contains(causeGroup.causes, cause);
+      return _.includes(causeGroup.causes, cause);
     });
   }
 };

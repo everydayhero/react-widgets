@@ -187,7 +187,7 @@ module.exports = React.createClass({
 
   renderGroups: function() {
     var options = this.getOptions();
-    return _.map(_.uniq(_.map(this.state.data, 'group')), (d, i) => {
+    return _.map(_.uniq(_.map(this.state.data, 'group')), function(d, i) {
       var metrics = _.filter(this.state.data, { 'group': d });
       return <FootprintGroup
         index={ i }
@@ -201,7 +201,7 @@ module.exports = React.createClass({
         onShowTip={ this.showTip }
         onHover={ this.setMetric }
         onClick={ this.sectorClick } />;
-    });
+    }.bind(this));
   },
 
   renderTip: function(bool) {

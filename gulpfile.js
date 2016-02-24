@@ -11,6 +11,7 @@ var fs           = require('fs')
 
 // stylesheets
 var sass         = require('gulp-sass')
+var sourcemaps   = require('gulp-sourcemaps')
 var autoprefixer = require('gulp-autoprefixer')
 var minifyCss    = require('gulp-cssnano')
 
@@ -62,14 +63,12 @@ gulp.task('styles', function() {
 
   return gulp
     .src(['src/widgets.scss'])
-    .pipe(sass({
-      sourceMap: 'scss',
-      sourceComments: 'normal',
-      precision: 10
-    }))
+    .pipe(sourcemaps.init())
+    .pipe(sass())
     .pipe(autoprefixer())
     .pipe(processor())
     .pipe(rename('widgets-' + pkg.version + '.css'))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('public'))
 })
 

@@ -94,7 +94,7 @@ gulp.task('scripts', ['lint'], function() {
     var processor = debug ? gutil.noop : uglify
 
     return bundler.bundle()
-      .on('error', console.log.bind(console))
+      .on('error', gutil.log)
       .pipe(source('widgets-' + pkg.version + '.js'))
       .pipe(buffer())
       .pipe(processor())

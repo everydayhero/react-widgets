@@ -75,9 +75,9 @@ module.exports = React.createClass({
   },
 
   filterEvents: function(events) {
-    return _.filter(events, function(e) {
+    return _.filter(events, (e) => {
       return this.whitelisted(e.id) || !this.blacklisted(e.id);
-    }, this);
+    });
   },
 
   sortEvents: function(events) {

@@ -106,7 +106,7 @@ module.exports = React.createClass({
 
   renderCountries: function() {
     var countries = this.state.filteredList || this.state.countries;
-    return _.map(countries, function(d, i) {
+    return _.map(countries, (d, i) => {
       return (
         <CountrySelectItem
           key={ d.name + i }
@@ -116,7 +116,7 @@ module.exports = React.createClass({
           country={ d }
           onClick={ this.setCountry }/>
       )
-    }, this);
+    });
   },
 
   renderToggle: function(bool) {

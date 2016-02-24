@@ -237,11 +237,7 @@ module.exports = React.createClass({
   renderFilters: function() {
     var searchType = this.props.searchType;
     var filterTypes = this.t('filterTypes');
-    var matchSearchType = function(item) {
-      return item === filterTypes[searchType];
-    };
-
-    var filters = searchType === 'all' ? filterTypes : _.pick(filterTypes, matchSearchType);
+    var filters = searchType === 'all' ? filterTypes : _.pick(filterTypes, searchType);
 
     var categories = _.map(filters, (name, type) => {
       var selected = (type == this.state.filter);

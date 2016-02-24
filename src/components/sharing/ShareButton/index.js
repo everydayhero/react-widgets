@@ -44,7 +44,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      buttons: _.pluck(serviceConfigs, 'name'),
+      buttons: _.map(serviceConfigs, 'name'),
       shareUrl: window.location.href,
       shareTitle: document.title,
       shareImage: '',
@@ -73,7 +73,7 @@ module.exports = React.createClass({
 
   filterServices: function() {
     return _.map(this.props.buttons, function(name) {
-      return _.findWhere(serviceConfigs, { 'name': name });
+      return _.find(serviceConfigs, { 'name': name });
     });
   },
 

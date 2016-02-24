@@ -81,7 +81,7 @@ module.exports = React.createClass({
   },
 
   sortEvents: function(events) {
-    return _.sortByAll(events, 'charity_count', function(e) {
+    return _.sortBy(events, 'charity_count', function(e) {
       return new Date(e.display_start_at);
     });
   },

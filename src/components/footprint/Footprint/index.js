@@ -187,21 +187,21 @@ module.exports = React.createClass({
 
   renderGroups: function() {
     var options = this.getOptions();
-    return _.map(_.uniq(_.pluck(this.state.data, 'group')), function(d, i) {
+    return _.map(_.uniq(_.map(this.state.data, 'group')), (d, i) => {
       var metrics = _.filter(this.state.data, { 'group': d });
       return <FootprintGroup
         index={ i }
         key={ i + d }
         id={ this.props.userName.replace(/\W/g, '') }
         name={ d }
-        active = { _.contains(metrics, this.state.metric) }
+        active = { _.includes(metrics, this.state.metric) }
         current={ this.state.metric }
         data={ metrics }
         options={ options }
         onShowTip={ this.showTip }
         onHover={ this.setMetric }
         onClick={ this.sectorClick } />;
-    }, this);
+    });
   },
 
   renderTip: function(bool) {

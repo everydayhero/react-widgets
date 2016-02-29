@@ -11,11 +11,7 @@ module.exports = React.createClass({
   },
 
   clickHandler: function(event) {
-    var selectAction = this.props.onSelect(this.props.result);
-
-    if (selectAction) {
-      event.preventDefault();
-    }
+    this.props.onSelect(this.props.result, event);
   },
 
   render: function() {
@@ -24,6 +20,7 @@ module.exports = React.createClass({
 
     return (
       <a href={ props.result.url || '#' }
+        target="_parent"
         className="SearchResult"
         onClick={ clickHandler }>
         { props.children }

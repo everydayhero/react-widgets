@@ -113,13 +113,12 @@ module.exports = React.createClass({
     }
   },
 
-  selectHandler: function(page) {
+  selectHandler: function(page, event) {
     this.props.onClose();
 
-    if(this.props.onSelect) {
+    if (this.props.onSelect) {
+      event.preventDefault();
       this.props.onSelect(page);
-    } else {
-      return null;
     }
   },
 

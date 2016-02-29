@@ -32,6 +32,6 @@ describe('SearchResult', function() {
     var element = findByClass(component, 'SearchResult');
     TestUtils.Simulate.click(element);
 
-    expect(callback).toBeCalledWith(result);
+    expect(callback).toBeCalled();
   });
 });

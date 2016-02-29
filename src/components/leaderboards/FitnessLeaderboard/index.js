@@ -170,7 +170,7 @@ module.exports = React.createClass({
             imgSrc={ d.imgSrc } />
         );
       }
-    }, this);
+    }.bind(this));
   },
 
   render: function() {

@@ -239,7 +239,7 @@ module.exports = React.createClass({
     var filterTypes = this.t('filterTypes');
     var filters = searchType === 'all' ? filterTypes : _.pick(filterTypes, searchType);
 
-    var categories = _.map(filters, (name, type) => {
+    var categories = _.map(filters, function(name, type) {
       var selected = (type == this.state.filter);
       var classes = cx({
         'AggregateSearchModal__filters__type': true,
@@ -257,7 +257,7 @@ module.exports = React.createClass({
           <div className="AggregateSearchModal__filters__type__results">{ numResults }</div>
         </div>
       );
-    });
+    }.bind(this));
 
     return this.state.results && (
       <div className="AggregateSearchModal__filters">

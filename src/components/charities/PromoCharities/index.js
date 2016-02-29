@@ -49,7 +49,7 @@ module.exports = React.createClass({
       }.bind(this));
 
       return data;
-    }, this);
+    }.bind(this));
 
     this.setState({
       isLoading: true,

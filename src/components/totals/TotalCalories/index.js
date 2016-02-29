@@ -74,7 +74,7 @@ module.exports = React.createClass({
 
     _.forEach(result.campaigns, function(campaign) {
       fitnessActivity += this.combineActivityData(campaign.fitness_activity_overview);
-    }, this);
+    }.bind(this));
 
     if (fitnessActivity){
       this.setState({

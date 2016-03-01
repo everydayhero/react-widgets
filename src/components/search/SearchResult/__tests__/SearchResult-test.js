@@ -25,13 +25,14 @@ describe('SearchResult', function() {
     expect(element.href).toBe(result.url);
   });
 
-  it('calls onSelect callback on click if given', function() {
+  it('calls onSelect callback on click if given, with the event click object', function() {
     var callback = jest.genMockFunction();
     var searchResult = <Result result={ result } onSelect={ callback } />;
     var component = TestUtils.renderIntoDocument(searchResult);
     var element = findByClass(component, 'SearchResult');
     TestUtils.Simulate.click(element);
 
-    expect(callback).toBeCalledWith(result);
+    expect(callback.mock.calls[0][0]).toBe(result);
+    expect(callback.mock.calls[0].length).toBe(2);
   });
 });

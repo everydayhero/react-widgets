@@ -149,9 +149,11 @@ gulp.task('deploy_assets', ['build'], function() {
     return
   }
   var publisher = awspublish.create({
-    key: process.env.AWS_KEY,
-    secret: process.env.AWS_SECRET,
-    bucket: 'shared-scripts'
+    accessKeyId: process.env.AWS_KEY,
+    secretAccessKey: process.env.AWS_SECRET,
+    params: {
+      Bucket: 'shared-scripts'
+    }
   })
 
   var headers = {

@@ -70,8 +70,6 @@ module.exports = React.createClass({
   },
 
   onSuccess: function(res) {
-    console.log(res)
-
     this.setState({
       isLoading: false,
       total: res.total_amount_cents.sum ? res.total_amount_cents.sum + this.props.offset : 0,

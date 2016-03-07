@@ -23,6 +23,7 @@ module.exports = React.createClass({
     offset: React.PropTypes.number,
     startAt: React.PropTypes.string,
     endAt: React.PropTypes.string,
+    onLoad: React.PropTypes.func,
     i18n: React.PropTypes.object
   },
 
@@ -32,6 +33,7 @@ module.exports = React.createClass({
       offset: 0,
       startAt: null,
       endAt: null,
+      onLoad: function() {},
       format: '0,0',
       defaultI18n: {
         symbol: '$',
@@ -68,11 +70,17 @@ module.exports = React.createClass({
   },
 
   onSuccess: function(res) {
+    console.log(res)
+
     this.setState({
       isLoading: false,
       total: res.total_amount_cents.sum ? res.total_amount_cents.sum + this.props.offset : 0,
       goal: res.goal
     });
+
+    if (typeof this.props.onLoad === 'function') {
+      this.props.onLoad(res);
+    }
   },
 
   formatCurrency: function(cents) {

@@ -3,11 +3,12 @@ jest.autoMockOff();
 jest.mock('../../../../api/totals');
 
 describe('FundsRaised', function() {
-  var React               = require('react');
-  var EntityGoalProgress  = require('../');
-  var totals              = require('../../../../api/totals');
-  var TestUtils           = require('react-addons-test-utils');
-  var findByClass         = TestUtils.findRenderedDOMComponentWithClass;
+  var React              = require('react');
+  var sinon              = require('sinon')
+  var EntityGoalProgress = require('../');
+  var totals             = require('../../../../api/totals');
+  var TestUtils          = require('react-addons-test-utils');
+  var findByClass        = TestUtils.findRenderedDOMComponentWithClass;
 
   var state = { isLoading: false, total: 15000, goal: 30000 };
   var element;
@@ -152,6 +153,29 @@ describe('FundsRaised', function() {
       element.onSuccess({ isLoading: false, total_amount_cents: { sum: 300000 }, goal: 15000000 });
       var text = findByClass(element, 'GoalProgress__text');
       expect(text.getDOMNode().textContent).toContain('$5,000 raised of $150,000 goal');
+    });
+  });
+
+  describe('Callback function', function() {
+    beforeEach(function() {
+      jest.dontMock('../../../../api/totals');
+      sinon.stub(totals, 'findByCharities', function(params, callback) {
+        callback({
+          total_amount_cents: {
+            sum: 10000
+          }
+        })
+      });
+    });
+
+    afterEach(function() {
+      totals.findByCharities.restore();
+    })
+
+    it('calls a callback function after data is fetched', function() {
+      var cb = jest.genMockFunction();
+      element = TestUtils.renderIntoDocument(<EntityGoalProgress charityUid="au-24" goal={ 15000000 } onLoad={ function(res) { cb(res) } } />);
+      expect(cb.mock.calls.length).toBe(1);
     });
   });
 });

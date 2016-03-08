@@ -944,6 +944,9 @@ Displays promoted charities that are passed in as a list of tabs and charity ids
 `tabs` (array) <span class="required">Required</span> <br>
 Array of objects. Each object requires a `category` and a `charityUids` array.
 
+`showCharities` (boolean)<br>
+Set to `false` by default. Shows the name of each charity.
+
 `action` (string)<br>
 Defines action to perform on charity select. Must be specified as either `'donate'`, `'fundraise'` or `'custom'`. **Note:** 'donate' action is currently not supported for country 'us'.
 

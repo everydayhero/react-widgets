@@ -71,6 +71,19 @@
   }
 }
 
+.PromoCharitiesResult__title {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  width: 80%;
+  font-size: $ehw-default-font-size;
+}
+
 .PromoCharitiesResult__image {
   box-sizing: border-box;
   color: $ehw-grey-darker;

@@ -12,7 +12,7 @@ module.exports = React.createClass({
     onSelect: React.PropTypes.func,
     fetchUrl: React.PropTypes.func,
     content: React.PropTypes.arrayOf(React.PropTypes.object),
-    showCharities: React.PropTypes.bool
+    showCharityTitle: React.PropTypes.bool
   },
 
   renderCharityResults: function() {
@@ -24,7 +24,7 @@ module.exports = React.createClass({
             result={ d }
             onSelect={ this.props.onSelect }
             actionLabel={ this.props.actionLabel }
-            showCharity={ this.props.showCharities }
+            showCharityTitle={ this.props.showCharityTitle }
             url={ this.props.fetchUrl(d) } />
         );
       }, this);

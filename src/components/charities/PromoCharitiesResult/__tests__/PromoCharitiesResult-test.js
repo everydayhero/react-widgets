@@ -49,7 +49,7 @@ describe('Component behaviour when clicked or tapped', function(){
 
 describe('Component optional values', function() {
   it('renders the charity title when showCharity is true', function() {
-    var promoCharitiesResult = <PromoCharitiesResult result={ result } showCharity={ true } />;
+    var promoCharitiesResult = <PromoCharitiesResult result={ result } showCharityTitle={ true } />;
     var component = TestUtils.renderIntoDocument(promoCharitiesResult);
     var title = findByClass(component, 'PromoCharitiesResult__title');
 

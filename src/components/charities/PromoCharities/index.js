@@ -13,14 +13,14 @@ module.exports = React.createClass({
   propTypes: {
     action: React.PropTypes.oneOf(['donate', 'fundraise', 'custom']).isRequired,
     tabs: React.PropTypes.array.isRequired,
-    charityTitle: React.PropTypes.bool,
+    showCharityTitle: React.PropTypes.bool,
     i18n: React.PropTypes.object
   },
 
   getDefaultProps: function() {
     return {
       tabs: [],
-      charityTitle: false,
+      showCharityTitle: false,
       defaultI18n: {
         heading: 'Promoted Charities',
         subheading: 'Choose a tab below to view promoted charities within each category.',
@@ -105,7 +105,7 @@ module.exports = React.createClass({
           onSelect={ this.selectHandler }
           fetchUrl={ this.fetchUrl }
           actionLabel={ this.t(this.props.action + 'Action') }
-          showCharities={ this.props.showCharities }
+          showCharityTitle={ this.props.showCharityTitle }
           key={ 'charity-result-' + d.tabName } />
       );
     }, this);

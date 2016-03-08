@@ -9,7 +9,7 @@ module.exports = React.createClass({
     onSelect: React.PropTypes.func,
     url: React.PropTypes.string,
     result: React.PropTypes.object,
-    showCharity: React.PropTypes.bool
+    showCharityTitle: React.PropTypes.bool
   },
 
   clickHandler: function(event) {
@@ -24,7 +24,7 @@ module.exports = React.createClass({
       <div className="PromoCharitiesResult">
         <a href={ this.props.url } className="PromoCharitiesResult__link" title={ result.name } onClick={ this.clickHandler }>
           <div className="PromoCharitiesResult__content">
-            { this.props.showCharity ? <h1 className="PromoCharitiesResult__title">{ result.name }</h1> : null }
+            { this.props.showCharityTitle ? <h1 className="PromoCharitiesResult__title">{ result.name }</h1> : null }
             <img className="PromoCharitiesResult__image" src={ result.logo_url } alt={ result.name } />
           </div>
         </a>

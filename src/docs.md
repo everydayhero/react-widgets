@@ -696,6 +696,9 @@ YYYY-MM-DD date string to get results on or before this date.
 `format` (string)<br>
 Set to `'0[.]00 a'` by default. [More format strings](http://numeraljs.com/).
 
+`onLoad` (function)<br>
+Function to call when data loaded. Passes endpoint resonse data as the first parameter.
+
 
 ## Total Distance
 

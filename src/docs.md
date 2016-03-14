@@ -368,6 +368,9 @@ Set to `true` by default. Pass in a valid [FontAwesome](http://fortawesome.githu
 `offset` (number)<br>
 Set to `0` by default.
 
+`onLoad` (function)<br>
+Function to call when data loaded. Passes endpoint resonse data as the first parameter.
+
 `backgroundColor` (string)<br>
 Accepts a CSS color value. Not set by default.
 

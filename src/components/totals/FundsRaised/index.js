@@ -20,6 +20,7 @@ module.exports = React.createClass({
     startAt: React.PropTypes.string,
     endAt: React.PropTypes.string,
     offset: React.PropTypes.number,
+    onLoad: React.PropTypes.func,
     renderIcon: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -98,6 +99,10 @@ module.exports = React.createClass({
       total: this.state.total + result.total_amount_cents.sum,
       isLoading: false
     });
+
+    if (typeof this.props.onLoad === 'function') {
+      this.props.onLoad(result);
+    }
   },
 
   renderTotal: function() {

@@ -4,6 +4,7 @@ jest.mock('../../../../api/totals');
 
 describe('FundsRaised', function() {
   var React       = require('react');
+  var sinon       = require('sinon');
   var FundsRaised = require('../');
   var totals      = require('../../../../api/totals');
   var TestUtils   = require('react-addons-test-utils');
@@ -255,4 +256,27 @@ describe('FundsRaised', function() {
     });
   });
 
+  describe('API Response Callback', function() {
+    beforeEach(function() {
+      jest.dontMock('../../../../api/totals');
+      sinon.stub(totals, 'findByCharities', function(params, callback) {
+        callback({
+          total_amount_cents: {
+            sum: 10000
+          }
+        })
+      });
+    });
+
+    afterEach(function() {
+      totals.findByCharities.restore();
+    })
+
+    it('fires the callback after API data is fetched', function() {
+      var cb = jest.genMockFunction();
+      var element = TestUtils.renderIntoDocument(<FundsRaised charityUid="au-24" onLoad={ function(res) { cb(res) } } />);
+      expect(cb.mock.calls.length).toBe(1);
+      expect(cb.mock.calls[0].length).toBe(1);
+    });
+  });
 });

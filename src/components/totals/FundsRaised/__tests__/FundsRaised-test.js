@@ -256,7 +256,7 @@ describe('FundsRaised', function() {
     });
   });
 
-  describe('Callback function', function() {
+  describe('API Response Callback', function() {
     beforeEach(function() {
       jest.dontMock('../../../../api/totals');
       sinon.stub(totals, 'findByCharities', function(params, callback) {
@@ -272,7 +272,7 @@ describe('FundsRaised', function() {
       totals.findByCharities.restore();
     })
 
-    it('calls a callback function after data is fetched', function() {
+    it('fires the callback after API data is fetched', function() {
       var cb = jest.genMockFunction();
       var element = TestUtils.renderIntoDocument(<FundsRaised charityUid="au-24" onLoad={ function(res) { cb(res) } } />);
       expect(cb.mock.calls.length).toBe(1);

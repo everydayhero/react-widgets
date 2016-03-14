@@ -276,6 +276,7 @@ describe('FundsRaised', function() {
       var cb = jest.genMockFunction();
       var element = TestUtils.renderIntoDocument(<FundsRaised charityUid="au-24" onLoad={ function(res) { cb(res) } } />);
       expect(cb.mock.calls.length).toBe(1);
+      expect(cb.mock.calls[0].length).toBe(1);
     });
   });
 });

@@ -47,17 +47,17 @@ describe('AggregateSearchModal', function() {
   });
 });
 
-describe('results', function() {
-  var searchModal;
-  var element;
-  var onSelect = jest.genMockFunction();
-
-  beforeEach(function() {
-    searchModal = <AggregateSearchModal autoFocus={ false } onSelect={ onSelect } onClose={ function () {} } />;
-    element     = TestUtils.renderIntoDocument(searchModal);
-  });
-
+describe('Selecting results', function() {
   it('renders selectable results', function() {
+    var onSelect = jest.genMockFunction();
+    var element = TestUtils.renderIntoDocument(
+      <AggregateSearchModal
+        autoFocus={ false }
+        onSelect={ onSelect }
+        onClose={ function () {} }
+      />
+    );
+
     element.setState({
       results: [
         {

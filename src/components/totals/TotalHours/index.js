@@ -5,7 +5,7 @@ var React            = require('react');
 var I18nMixin        = require('../../mixins/I18n');
 var campaigns        = require('../../../api/campaigns');
 var Icon             = require('../../helpers/Icon');
-var numeral          = require('numeral');
+var numeral          = require('numbro');
 var SECONDS_TO_HOURS = 1 / 3600;
 
 module.exports = React.createClass({

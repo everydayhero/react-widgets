@@ -1,6 +1,6 @@
 "use strict";
 
-var numeral = require('numeral');
+var numeral = require('numbro');
 
 function format(template, data, strip) {
   if (!data && !strip) {

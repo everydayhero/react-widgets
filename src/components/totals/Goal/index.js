@@ -3,7 +3,7 @@
 var React     = require('react');
 var I18nMixin = require('../../mixins/I18n');
 var Icon      = require('../../helpers/Icon');
-var numeral   = require('numeral');
+var numeral   = require('numbro');
 
 module.exports = React.createClass({
   mixins: [I18nMixin],

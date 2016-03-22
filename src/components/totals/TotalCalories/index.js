@@ -5,7 +5,7 @@ var React           = require('react');
 var I18nMixin       = require('../../mixins/I18n');
 var campaigns       = require('../../../api/campaigns');
 var Icon            = require('../../helpers/Icon');
-var numeral         = require('numeral');
+var numeral         = require('numbro');
 
 module.exports = React.createClass({
   displayName: 'TotalCalories',

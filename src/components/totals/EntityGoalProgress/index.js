@@ -4,7 +4,7 @@ var React        = require('react');
 var totals       = require('../../../api/totals');
 var GoalProgress = require('../GoalProgress');
 var I18nMixin    = require('../../mixins/I18n');
-var numeral      = require('numeral');
+var numeral      = require('numbro');
 
 module.exports = React.createClass({
   displayName: 'EntityGoalProgress',

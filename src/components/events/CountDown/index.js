@@ -2,7 +2,7 @@
 
 var React              = require('react');
 var moment             = require('moment');
-var numeral            = require('numeral');
+var numeral            = require('numbro');
 var I18nMixin          = require('../../mixins/I18n');
 var CallToActionButton = require('../../callstoaction/CallToActionButton');
 

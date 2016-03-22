@@ -5,7 +5,7 @@ var React           = require('react');
 var I18nMixin       = require('../../mixins/I18n');
 var campaigns       = require('../../../api/campaigns');
 var Icon            = require('../../helpers/Icon');
-var numeral         = require('numeral');
+var numeral         = require('numbro');
 var METERS_TO_MILES = 0.000621371192;
 
 module.exports = React.createClass({

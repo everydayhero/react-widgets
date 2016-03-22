@@ -3,7 +3,7 @@
 var React           = require('react');
 var PureRenderMixin = require('react-addons-pure-render-mixin');
 var Icon            = require('../../helpers/Icon');
-var numeral         = require('numeral');
+var numeral         = require('numbro');
 
 module.exports = React.createClass({
   displayName: "GoalProgress",

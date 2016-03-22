@@ -3,7 +3,7 @@
 var React               = require('react');
 var I18n                = require('../../mixins/I18n');
 var CallToActionButton  = require('../../callstoaction/CallToActionButton');
-var numeral             = require('numeral')
+var numeral             = require('numbro')
 
 function cssUrl(url) {
   return url ? 'url(' + url + ')' : 'none';

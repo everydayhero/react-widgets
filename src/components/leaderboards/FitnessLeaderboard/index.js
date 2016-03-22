@@ -8,7 +8,7 @@ var charities                 = require('../../../api/charities');
 var Icon                      = require('../../helpers/Icon');
 var FitnessLeaderboardItem    = require('../FitnessLeaderboardItem');
 var FitnessLeaderboardColHead = require('../FitnessLeaderboardColHead');
-var numeral                   = require('numeral');
+var numeral                   = require('numbro');
 var METERS_TO_MILES           = 0.000621371192;
 
 module.exports = React.createClass({

@@ -2,7 +2,7 @@
 
 var _                 = require('lodash');
 var React             = require('react');
-var numeral           = require('numeral');
+var numeral           = require('numbro');
 var campaigns         = require('../../api/campaigns');
 var charities         = require('../../api/charities');
 var LeaderboardPaging = require('../leaderboards/LeaderboardPaging');

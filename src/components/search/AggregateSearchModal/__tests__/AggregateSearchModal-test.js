@@ -47,6 +47,35 @@ describe('AggregateSearchModal', function() {
   });
 });
 
+describe('results', function() {
+  var searchModal;
+  var element;
+  var onSelect = jest.genMockFunction();
+
+  beforeEach(function() {
+    searchModal = <AggregateSearchModal autoFocus={ false } onSelect={ onSelect } onClose={ function () {} } />;
+    element     = TestUtils.renderIntoDocument(searchModal);
+  });
+
+  it('renders selectable results', function() {
+    element.setState({
+      results: [
+        {
+          _type: 'page',
+          name: 'Foo',
+          supporter: {},
+          image: {},
+          campaign: { uid: 'au-123' },
+          charity: {}
+        }
+      ]
+    });
+    var result = findByClass(element, 'AggregateSearchResult');
+    TestUtils.Simulate.click(result);
+    expect(onSelect.mock.calls.length).toBe(1)
+  });
+});
+
 describe('AggregateSearchModal with searchType prop set', function() {
   var filterElements;
 

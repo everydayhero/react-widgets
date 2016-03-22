@@ -435,6 +435,9 @@ Group value to filter results by a group.
 `groupValues` (array)<br>
 Group values to filter results by multiple groups.
 
+`type` (string)<br>
+Optional string to filter results by page type. Options are `team`, `individual`, or `all`. Set to `all` by default.
+
 `backgroundColor` (string)<br>
 Accepts a CSS color value. Not set by default.
 

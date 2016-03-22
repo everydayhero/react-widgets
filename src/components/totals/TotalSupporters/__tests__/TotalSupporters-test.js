@@ -247,4 +247,28 @@ describe('TotalSupporters', function() {
       expect(icon).not.toBeNull();
     });
   });
+
+  describe('Filtering by page type', function() {
+    var totalSupporters;
+    var element;
+
+    beforeEach(function() {
+      pages.search.mockClear();
+      totalSupporters = <TotalSupporters charityUids={ ["au-24", "au-31"] } type="team" />;
+      element = TestUtils.renderIntoDocument(totalSupporters);
+    });
+
+    it('requests pages only of type "team"', function() {
+      expect(pages.search.mock.calls.length).toEqual(1);
+      expect(pages.search).toBeCalledWith({
+        campaignUid: [],
+        charityUid: ["au-24", "au-31"],
+        groupValue: [],
+        pageSize: 1,
+        page: 1,
+        pageType: "team",
+        searchTerm: ""
+      }, element.onSuccess);
+    });
+  });
 });

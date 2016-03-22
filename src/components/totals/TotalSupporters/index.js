@@ -23,6 +23,7 @@ module.exports = React.createClass({
     groupValue: React.PropTypes.string,
     groupValues: React.PropTypes.array,
     searchTerm: React.PropTypes.string,
+    type: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
 
@@ -113,7 +114,8 @@ module.exports = React.createClass({
       groupValue: this.setGroupValues(),
       pageSize: 1,
       page: 1,
-      searchTerm: props.searchTerm
+      searchTerm: props.searchTerm,
+      pageType: props.type
     }, this.onSuccess);
   },
 

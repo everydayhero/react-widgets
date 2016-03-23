@@ -124,7 +124,7 @@ module.exports = React.createClass({
       };
 
       return <Event { ...props } />;
-    }, this);
+    });
   },
 
   renderButton: function() {

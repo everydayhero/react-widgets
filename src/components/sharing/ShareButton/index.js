@@ -90,7 +90,7 @@ module.exports = React.createClass({
         icon: service.icon,
         url: format(service.url, urlParams, true)
       };
-    }, this);
+    });
   },
 
   renderIcon: function() {

@@ -304,7 +304,7 @@ module.exports = React.createClass({
     return _.map(this.state.results, function(result) {
       var El = resultTypes[result._type];
       return El && <El key={ result._type + result.id } result={ result } onSelect={ this.handleSelect } />;
-    }, this);
+    }.bind(this));
   },
 
   renderResults: function() {

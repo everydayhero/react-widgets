@@ -22,12 +22,14 @@
   display: table-cell;
   vertical-align: top;
 
- .hui-Button {
+  .CallToActionButton {
+    font-size: $ehw-default-font-size;
+    border-width: 1px;
     padding: 1px 0;
     margin: 1px 0 0 0;
   }
 
-  .hui-Button__label {
+  .CallToActionButton__label {
     padding: 0 14px;
   }
 }

@@ -113,6 +113,22 @@ describe('FundsRaised', function() {
     });
   });
 
+  describe('campaign and charity Ids', function() {
+    var fundsRaised;
+    var element;
+
+    beforeEach(function() {
+      totals.findByAll.mockClear();
+      fundsRaised = <FundsRaised charityUids={ ["au-27", "au-28"] } campaignUids={ ["us-22"] } />;
+      element = TestUtils.renderIntoDocument(fundsRaised);
+    });
+
+    it('handles multiple charity and campaign Ids', function() {
+      expect(totals.findByAll.mock.calls.length).toEqual(1);
+      expect(totals.findByAll).toBeCalledWith({charityUids: ["au-27", "au-28"], campaignUids: ["us-22"]}, element.onSuccess, {});
+    });
+  });
+
   describe('working with multiple uids', function() {
     var fundsRaised;
     var element;

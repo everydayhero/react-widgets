@@ -55,19 +55,35 @@ describe('TotalDonations', function() {
     });
   });
 
-  describe('Working with multiple uids', function() {
+  describe('Working with multiple uid types', function() {
     var totalDonations;
     var element;
 
     beforeEach(function() {
-      totals.findByCampaigns.mockClear();
-      totalDonations = <TotalDonations campaignUids={ ["us-22", "us-24"] } />;
+      totals.findByAll.mockClear();
+      totalDonations = <TotalDonations campaignUids={ ["us-22", "us-24"] } charityUids={ ["au-24", "au-27"] } />;
       element = TestUtils.renderIntoDocument(totalDonations);
     });
 
     it('makes multiple calls to fetch api data', function() {
-      expect(totals.findByCampaigns.mock.calls.length).toEqual(1);
-      expect(totals.findByCampaigns).toBeCalledWith({campaignUids: ["us-22", "us-24"]}, element.onSuccess, {});
+      expect(totals.findByAll.mock.calls.length).toEqual(1);
+      expect(totals.findByAll).toBeCalledWith({campaignUids: ["us-22", "us-24"], charityUids: ["au-24", "au-27"]}, element.onSuccess, {});
+    });
+  });
+
+  describe('single charity id', function() {
+    var totalDonations;
+    var element;
+
+    beforeEach(function() {
+      totals.findByCharities.mockClear();
+      totalDonations = <TotalDonations charityUids="au-24" />;
+      element = TestUtils.renderIntoDocument(totalDonations);
+    });
+
+    it('handles a single charity id', function() {
+      expect(totals.findByCharities.mock.calls.length).toEqual(1);
+      expect(totals.findByCharities).toBeCalledWith({charityUids: "au-24"}, element.onSuccess, {});
     });
   });
 

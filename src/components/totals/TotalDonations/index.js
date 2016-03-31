@@ -89,7 +89,13 @@ module.exports = React.createClass({
       options.end = props.endAt;
     }
 
-    if (campaignUids) {
+    if (campaignUids && charityUids) {
+      totals.findByAll({
+        campaignUids: campaignUids,
+        charityUids: charityUids,
+        groupValues: groupValues
+      }, this.onSuccess, options);
+    } else if (campaignUids) {
       totals.findByCampaigns({
         campaignUids: campaignUids,
         groupValues: groupValues

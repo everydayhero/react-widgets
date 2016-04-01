@@ -66,7 +66,7 @@ gulp.task('styles', function() {
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(autoprefixer())
-    .pipe(processor())
+    .pipe(processor({ zindex: false }))
     .pipe(rename('widgets-' + pkg.version + '.css'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('public'))

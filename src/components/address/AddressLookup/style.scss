@@ -34,7 +34,7 @@
 }
 
 .AddressLookup__list-google:before {
-  content: image-url( "widgets-powered-by-google" + $ehw-version + ".png" );
+  content: url("widgets-powered-by-google" + $ehw-version + ".png");
   position: absolute;
   display: block;
   font-size: 0;

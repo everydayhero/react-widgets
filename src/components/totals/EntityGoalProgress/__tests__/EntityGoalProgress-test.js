@@ -61,6 +61,17 @@ describe('FundsRaised', function() {
     });
   });
 
+  describe('Handle multiple uid types', function() {
+    beforeEach(function() {
+      totals.findByAll.mockClear();
+      element = TestUtils.renderIntoDocument(<EntityGoalProgress charityUid="xx-11" campaignUid="us-22" />);
+    });
+
+    it('finds a total for a charity within a campaign', function() {
+      expect(totals.findByAll).toBeCalledWith({charityUids: "xx-11", campaignUids: "us-22"}, element.onSuccess, {});
+    });
+  });
+
   describe('Goal as property', function() {
     beforeEach(function() {
       totals.findByCampaigns.mockClear();

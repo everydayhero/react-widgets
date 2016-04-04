@@ -62,7 +62,12 @@ module.exports = React.createClass({
       options.end = props.endAt;
     }
 
-    if (this.props.campaignUid) {
+    if (this.props.campaignUid && this.props.charityUid) {
+      return totals.findByAll({
+        campaignUids: props.campaignUid,
+        charityUids: props.charityUid
+      }, this.onSuccess, options);
+    } else if (this.props.campaignUid) {
       return totals.findByCampaigns({campaignUids: props.campaignUid}, this.onSuccess, options);
     } else if (this.props.charityUid) {
       return totals.findByCharities({charityUids: props.charityUid}, this.onSuccess, options);

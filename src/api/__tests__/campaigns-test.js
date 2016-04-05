@@ -1,6 +1,8 @@
 'use strict';
 jest.autoMockOff();
 
+var last = require('lodash/last');
+
 jest.mock('../../lib/getJSONP');
 var getJSONP = require('../../lib/getJSONP');
 var results = { results: [], meta: {}};
@@ -62,8 +64,7 @@ describe('campaigns', function() {
       var callback = jest.genMockFunction();
       campaigns.findByUids(['xy-123', 'xy-456'], callback);
 
-      expect(getJSONP).lastCalledWith(
-        'https://everydayhero.com/api/v2/campaigns.jsonp?ids=xy-123,xy-456', callback);
+      expect(last(getJSONP.mock.calls)[0]).toEqual('https://everydayhero.com/api/v2/campaigns.jsonp?ids=xy-123,xy-456');
       expect(callback).toBeCalledWith(results);
     });
 
@@ -138,13 +139,12 @@ describe('campaigns', function() {
       var callback = jest.genMockFunction();
       campaigns.leaderboard('xy-123', 'abcd', 'foo', 12, callback);
 
-      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/campaigns/xy-123/leaderboard.jsonp?type=foo&limit=12&charity_ids=abcd', callback);
+      expect(last(getJSONP.mock.calls)[0]).toEqual('https://everydayhero.com/api/v2/campaigns/xy-123/leaderboard.jsonp?type=foo&limit=12&charity_ids=abcd');
       expect(callback).toBeCalledWith(results);
     });
 
     it('accepts options', function() {
-      var callback = jest.genMockFunction();
-      campaigns.leaderboard('xy-123', 'abcd', 'foo', 12, callback, {
+      campaigns.leaderboard('xy-123', 'abcd', 'foo', 12, function () {}, {
         includePages: true,
         includeFootprint: true,
         groupValue: 'ABC&group_value[]=DEF'
@@ -163,7 +163,7 @@ describe('campaigns', function() {
       expect(getJSONP.mock.calls.length).toBe(2);
       expect(getJSONP.mock.calls[0][0]).toContain('ab-123');
       expect(getJSONP.mock.calls[1][0]).toContain('cd-456');
-      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/campaigns/cd-456/leaderboard.jsonp?type=foo&limit=12&charity_ids=abcd', callback);
+      expect(last(getJSONP.mock.calls)[0]).toEqual('https://everydayhero.com/api/v2/campaigns/cd-456/leaderboard.jsonp?type=foo&limit=12&charity_ids=abcd');
       expect(callback.mock.calls.length).toBe(1);
     });
   });
@@ -173,7 +173,7 @@ describe('campaigns', function() {
       var callback = jest.genMockFunction();
       campaigns.leaderboardBySlug('xy', 'slugathon-2015', 'foo', 12, callback);
 
-      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/campaigns/xy/slugathon-2015/leaderboard.jsonp?type=foo&limit=12', callback);
+      expect(last(getJSONP.mock.calls)[0]).toEqual('https://everydayhero.com/api/v2/campaigns/xy/slugathon-2015/leaderboard.jsonp?type=foo&limit=12');
       expect(callback).toBeCalledWith(results);
     });
 
@@ -201,7 +201,7 @@ describe('campaigns', function() {
       var callback = jest.genMockFunction();
       campaigns.search(query, callback);
 
-      expect(getJSONP).toBeCalledWith('https://everydayhero.com/api/v2/search/campaigns.jsonp?q=bar&country_code=xy&page=2&page_size=7&charity_uuids=abc-123,xyz-456', callback, { timeout: 10000 });
+      expect(last(getJSONP.mock.calls)[0]).toEqual('https://everydayhero.com/api/v2/search/campaigns.jsonp?q=bar&country_code=xy&page=2&page_size=7&charity_uuids=abc-123,xyz-456');
       expect(callback).toBeCalledWith(results);
     });
   });

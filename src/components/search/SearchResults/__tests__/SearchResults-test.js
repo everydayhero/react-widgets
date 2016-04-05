@@ -21,7 +21,7 @@ describe('SearchResults', function() {
     expect(resultElements.length).toBe(results.length);
   });
 
-  it.only('uses renderComponent to render each result', function() {
+  it('uses renderComponent to render each result', function() {
     var component = sinon.spy(() => <p/>);
     var searchResults = <SearchResults results={ results } resultComponent={ component }/>;
     TestUtils.renderIntoDocument(searchResults);

@@ -1,14 +1,12 @@
 var React = require('react');
 var totals = require('../../../api/totals');
-var merge = require('lodash/object/merge');
-var Promise = require('bluebird');
 
 module.exports = React.createClass({
   displayName: 'CampaignGoals',
 
   getDefaultProps: function() {
     return {
-      campaignUids: []
+      campaigns: []
     }
   },
 
@@ -19,27 +17,48 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    var campaigns = [];
-    var reqs = this.props.campaignUids.map(function(campaignUid) {
+    var campaignTotals = [];
+    var campaignsLength = this.props.campaigns.length;
+    var handler = this.handleCampaignTotals;
+    this.props.campaigns.map(function(campaign) {
       return totals.findByCampaigns({
-        campaignUids: campaignUid
-      }).then(function(response) {
-        campaigns.push({
-          uid: campaignUid,
+        campaignUids: campaign.uid
+      }, function(response) {
+        campaignTotals.push({
+          uid: campaign.uid,
+          name: campaign.name,
+          goal: campaign.goal,
           count: response.total_amount_cents.count
         })
+
+        if (campaignTotals.length === campaignsLength) {
+          handler(campaignTotals);
+        }
       })
     })
+  },
 
-    Promise.all(reqs).then(function() {
-      this.props.onData(campaigns)
-      this.setState({
-        campaigns
+  handleCampaignTotals: function(campaignTotals) {
+    this.setState({
+      campaigns: campaignTotals
+    })
+  },
+
+  renderCampaigns: function() {
+    return (
+      this.state.campaigns.map(function(campaign) {
+        return (
+          <div key={ campaign.uid } className="CampaignGoals__item">{ campaign.count }</div>
+        )
       })
-    }.bind(this))
+    )
   },
 
   render: function() {
-    return <div />;
+    return (
+      <div>
+        { this.state.campaigns.length > 0 ? this.renderCampaigns() : null }
+      </div>
+    )
   }
 })

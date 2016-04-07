@@ -20,7 +20,6 @@ module.exports = React.createClass({
     charitySlug: React.PropTypes.string,
     charityUid: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
-    type: React.PropTypes.oneOf(['team', 'individual']),
     hideCharityName: React.PropTypes.bool,
     hideEventName: React.PropTypes.bool,
     i18n: React.PropTypes.object
@@ -28,7 +27,6 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      type: 'individual',
       hideCharityName: false,
       hideEventName: false,
       defaultI18n: {
@@ -71,12 +69,12 @@ module.exports = React.createClass({
       console.log("Supporters widget requires 'campaignUid' or 'charityUid'. If 'country' is given then 'campaignSlug' or 'charitySlug' may be used instead. ");
     }
 
-    return (endpoint || function(type, limit, callback) { callback(null); });
+    return (endpoint || function(limit, callback) { callback(null); });
   },
 
   loadPages: function() {
     var endpoint = this.getEndpoint();
-    var cancelLoad = endpoint(this.props.type, 20, this.onSuccess, { includePages: true, includeFootprint: true });
+    var cancelLoad = endpoint('individual', 20, this.onSuccess, { includePages: true, includeFootprint: true });
     this.setState({ cancelLoad: cancelLoad });
   },
 

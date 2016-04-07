@@ -1279,9 +1279,6 @@ Country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'. Required by `camp
 `limit` (number)
 Number of supporter cards to show. Default is 6.
 
-`type` string.
-Set a type of either `'team'` or `'individual'`. Set to `'individual'` by default.
-
 `i18n` (object)
 Contains localised text.
 

@@ -1,6 +1,8 @@
 'use strict';
 jest.autoMockOff();
 
+var last = require('lodash/last');
+
 jest.mock('../../lib/getJSONP');
 var getJSONP = require('../../lib/getJSONP');
 var results = { results: [], meta: {}};
@@ -46,7 +48,7 @@ describe('charities', function() {
       var callback = jest.genMockFunction();
       charities.findByUids(['xy-123', 'xy-456'], callback);
 
-      expect(getJSONP).lastCalledWith('https://everydayhero.com/api/v2/charities.jsonp?ids=xy-123,xy-456', callback);
+      expect(last(getJSONP.mock.calls)[0]).toEqual('https://everydayhero.com/api/v2/charities.jsonp?ids=xy-123,xy-456');
       expect(callback).toBeCalledWith(results);
     });
 

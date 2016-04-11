@@ -503,6 +503,9 @@ YYYY-MM-DD date string to get results on or after this date.
 `endAt` (string)<br>
 YYYY-MM-DD date string to get results on or before this date.
 
+`offset` (number) <br>
+Added to the total number of donations.
+
 `backgroundColor` (string)<br>
 Accepts a CSS color value. Not set by default.
 

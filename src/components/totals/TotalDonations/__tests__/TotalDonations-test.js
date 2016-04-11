@@ -219,4 +219,22 @@ describe('TotalDonations', function() {
       expect(totals.findByCharities).toBeCalledWith({charityUids: "au-24"}, element.onSuccess, {end:'2015-06-01'});
     });
   });
+
+  describe('custom offset', function() {
+    var totalDonations;
+    var element;
+
+    beforeEach(function() {
+      totals.findByCharities.mockClear();
+      totalDonations = <TotalDonations charityUid="au-24" offset={ 10000 } />;
+      element = TestUtils.renderIntoDocument(totalDonations);
+    });
+
+    it('renders with a custom donations offset', function() {
+      element.setState({ total: 10000, isLoading: false });
+      var total = findByClass(element, 'TotalDonations__total');
+
+      expect(total.textContent).toContain('20,000');
+    });
+  });
 });

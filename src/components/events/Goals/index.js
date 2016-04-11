@@ -1,5 +1,6 @@
 var React = require('react');
 var totals = require('../../../api/totals');
+var CampaignGoalItem = require('../GoalItem');
 
 module.exports = React.createClass({
   displayName: 'CampaignGoals',
@@ -25,7 +26,6 @@ module.exports = React.createClass({
         campaignUids: campaign.uid
       }, function(response) {
         campaignTotals.push({
-          uid: campaign.uid,
           name: campaign.name,
           goal: campaign.goal,
           count: response.total_amount_cents.count
@@ -48,7 +48,7 @@ module.exports = React.createClass({
     return (
       this.state.campaigns.map(function(campaign) {
         return (
-          <div key={ campaign.uid } className="CampaignGoals__item">{ campaign.count }</div>
+          <CampaignGoalItem name={ campaign.name } goal={ campaign.goal } count={ campaign.count } />
         )
       })
     )
@@ -56,7 +56,7 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className="CampaignGoals__container">
         { this.state.campaigns.length > 0 ? this.renderCampaigns() : null }
       </div>
     )

@@ -1,0 +1,51 @@
+.CampaignGoal__item {
+  height: 300px;
+  position: relative;
+}
+
+.CampaignGoal__title {
+  transform: rotate(70deg);
+  padding: 25px 0 27px;
+  white-space: nowrap;
+}
+
+.CampaignGoal__container {
+  float: left;
+  width: 50px;
+  color: #acacac;
+}
+
+.CampaignGoal__container:nth-child(2n) {
+  color: #878787;
+}
+
+.CampaignGoal__container:nth-child(3n) {
+  color: #686868;
+}
+
+.CampaignGoal__container:nth-child(5n) {
+  color: #4a4a4a;
+}
+
+.CampaignGoal__bar {
+  width: 50px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.CampaignGoal__container .CampaignGoal__bar {
+  background: rgba(172, 172, 172, 0.5);
+}
+
+.CampaignGoal__container:nth-child(2n) .CampaignGoal__bar  {
+  background: rgba(135, 135, 135, 0.5);
+}
+
+.CampaignGoal__container:nth-child(3n) .CampaignGoal__bar  {
+  background: rgba(104, 104, 104, 0.5);
+}
+
+.CampaignGoal__container:nth-child(5n) .CampaignGoal__bar  {
+  background: rgba(74, 74, 74, 0.5);
+}

@@ -2,48 +2,53 @@
 
 jest.autoMockOff();
 jest.mock('../../../../api/totals');
-var totals = require('../../../../api/totals');
-jest.mock('bluebird');
-var Promise = require('bluebird');
 
-var React = require('react');
+var CampaignGoals  = require('../')
+var totals         = require('../../../../api/totals');
+var React          = require('react');
 var ReactTestUtils = require('react-addons-test-utils');
+var findByClass    = ReactTestUtils.findRenderedDOMComponentWithClass;
 
-var Goals = require('../');
 
-describe('Goals', function() {
-  describe('props.onData', function() {
-    it('is called when campaign stats have been fetched', function() {
-      Promise.all = jest.genMockFunction().mockImplementation(function () {
-        return { then: function(cb) { cb() } }
-      });
+describe('Rendering default components', function() {
+  var campaignTotals;
+  var element;
+  totals.findByCampaigns.mockClear();
+  beforeEach(function(){
+    campaignTotals = <CampaignGoals campaigns={ [{
+      uid: 'us-22',
+      name: 'Campaign',
+      goal: 65000
+    }] } />;
+    element = ReactTestUtils.renderIntoDocument(campaignTotals);
+  });
 
-      var count = 2;
-      totals.findByCampaigns = jest.genMockFunction().mockImplementation(function() {
-        count++;
-        return {
-          then: function (cb) {
-            cb({ total_amount_cents: { count } })
-          }
-        }
-      })
+  it('will render a goals container', function() {
+    var container = findByClass(element, 'CampaignGoals__container');
+    expect(container).not.toBeNull();
+  });
+});
 
-      var expected = [
-        { uid: 'au-1', count: 3 },
-        { uid: 'au-2', count: 4 },
-        { uid: 'au-3', count: 5 }
-      ];
-      var onData = jest.genMockFunction();
+describe('API Calls', function() {
+  var campaignTotals;
+  var element;
+  beforeEach(function() {
+    totals.findByCampaigns.mockClear();
+    campaignTotals = <CampaignGoals campaigns={ [{
+      uid: 'us-22',
+      name: 'Campaign 1',
+      goal: 65000
+    }, {
+      uid: 'us-24',
+      name: 'Campaign 3',
+      goal: 8000
+    }] } />;
+    element = ReactTestUtils.renderIntoDocument(campaignTotals);
+  });
 
-      ReactTestUtils.renderIntoDocument(
-        <Goals
-          campaignUids={['au-1', 'au-2', 'au-3']}
-          onData={onData}
-        />
-      );
-
-      expect(onData.mock.calls[0][0]).toEqual(expected);
-    })
-  })
-})
-
+  it('will make one call for each specified campaign UID', function() {
+    expect(totals.findByCampaigns.mock.calls.length).toEqual(2);
+    expect(totals.findByCampaigns).toBeCalledWith({campaignUids: "us-22"}, element.onSuccess);
+    expect(totals.findByCampaigns).toBeCalledWith({campaignUids: "us-24"}, element.onSuccess);
+  });
+});

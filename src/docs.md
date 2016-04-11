@@ -1868,6 +1868,63 @@ Contains localised text.
 
 # Events
 
+## Campaign Goals
+
+Displays a bar graph of the percentage of donations towards a goal for multiple campaigns.
+
+### Demo
+
+```html
+<div id="CampaignGoalsExample"></div>
+<script>
+  edh.widgets.renderWidget('CampaignGoalsExample', 'CampaignGoals', { campaigns: [{
+      uid: 'au-9674',
+      name: 'Campaign 1',
+      goal: 65000
+    }, {
+      uid: 'us-22',
+      name: 'Campaign 2',
+      goal: 2100
+    }, {
+      uid: 'us-24',
+      name: 'Campaign 3',
+      goal: 8000
+    }]})
+</script>
+```
+
+<p id="CampaignGoalsExample"></p>
+
+<script>
+  edh.widgets.renderWidget('CampaignGoalsExample', 'CampaignGoals', { campaigns: [{
+      uid: 'au-9674',
+      name: 'Campaign 1',
+      goal: 65000
+    }, {
+      uid: 'us-22',
+      name: 'Campaign 2',
+      goal: 2100
+    }, {
+      uid: 'us-24',
+      name: 'Campaign 3',
+      goal: 8000
+    }]})
+</script>
+
+### Options
+
+`campaigns` (array) <span class="required">Required</span><br>
+Array of objects representing each campaign goal to display. Each object should contain the following:
+
+`uid` (string)
+Campaign UID to fetch data from
+
+`name` (string)
+Name to display below each campaign goal
+
+`goal` (integer)
+Intended donations goal
+
 ## Upcoming Events
 
 Displays a list of upcoming events/campaigns.

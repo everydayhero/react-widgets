@@ -1,0 +1,14 @@
+#CampaignGoals, #CampaignGoalsExample {
+  overflow-x: scroll;
+}
+
+#CampaignGoals:-webkit-scrollbar, #CampaignGoalsExample:-webkit-scrollbar {
+  display: none;
+}
+
+.CampaignGoals__container {
+  @extend %clearfix;
+  width: 1050px;
+  margin: 0 auto;
+}
+

@@ -16,6 +16,7 @@ module.exports = React.createClass({
     charityUids: React.PropTypes.array,
     startAt: React.PropTypes.string,
     endAt: React.PropTypes.string,
+    offset: React.PropTypes.number,
     renderIcon: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
     backgroundColor: React.PropTypes.string,
     textColor: React.PropTypes.string,
@@ -33,6 +34,7 @@ module.exports = React.createClass({
       charityUids: null,
       startAt: null,
       endAt: null,
+      offset: 0,
       renderIcon: true,
       backgroundColor: '',
       textColor: '',
@@ -109,7 +111,7 @@ module.exports = React.createClass({
   },
 
   renderTotal: function() {
-    var totalDonations = this.state.total;
+    var totalDonations = this.state.total + this.props.offset;
     var formattedTotal = numeral(totalDonations).format(this.props.format);
     var title          = this.t('title');
 

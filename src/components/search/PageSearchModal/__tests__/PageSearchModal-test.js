@@ -134,7 +134,7 @@ describe('PageSearchModal', function() {
   it('allows custom callback on page select', function() {
     var onClose = jest.genMockFunction();
     var callback = jest.genMockFunction();
-    var pageSearchModal = <PageSearchModal autoFocus={ false } onClose={ onClose } onSelect={ callback } />;
+    var pageSearchModal = <PageSearchModal autoFocus={ false } onClose={ onClose } action="custom" onSelect={ callback } />;
     var element = TestUtils.renderIntoDocument(pageSearchModal);
     element.setState({ results: [page] });
 

@@ -17,6 +17,7 @@ module.exports = React.createClass({
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
     i18n: React.PropTypes.object,
     onClose: React.PropTypes.func.isRequired,
+    action: React.PropTypes.oneOf(['visit', 'custom']),
     onSelect: React.PropTypes.func,
     pageType: React.PropTypes.oneOf(['all', 'team', 'user']),
     groupValues: React.PropTypes.array,
@@ -25,6 +26,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
+      action: 'visit',
       autoFocus: true,
       campaignUid: '',
       charityUid: '',
@@ -111,14 +113,21 @@ module.exports = React.createClass({
     } else {
       this.setState(this.getInitialState());
     }
+
+    this.props.resizeCallback();
   },
 
-  selectHandler: function(page, event) {
+  onClose: function() {
     this.props.onClose();
+    this.props.resizeCallback();
+  },
 
-    if (this.props.onSelect) {
+  selectHandler: function(event, result) {
+    this.onClose();
+
+    if (this.props.action === 'custom' && this.props.onSelect) {
       event.preventDefault();
-      this.props.onSelect(page);
+      this.props.onSelect(result);
     }
   },
 

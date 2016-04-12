@@ -19,6 +19,7 @@ module.exports = React.createClass({
     onClose: React.PropTypes.func.isRequired,
     action: React.PropTypes.oneOf(['visit', 'custom']),
     onSelect: React.PropTypes.func,
+    resizeCallback: React.PropTypes.func,
     pageType: React.PropTypes.oneOf(['all', 'team', 'user']),
     groupValues: React.PropTypes.array,
     searchTerm: React.PropTypes.string
@@ -31,6 +32,7 @@ module.exports = React.createClass({
       campaignUid: '',
       charityUid: '',
       groupValues: [],
+      resizeCallback: function() {},
       defaultI18n: {
         title: 'Search for a Supporter Page',
         selectAction: 'Support',
@@ -46,6 +48,8 @@ module.exports = React.createClass({
     if (this.props.searchTerm) {
       this.search(this.props.searchTerm);
     }
+
+    this.props.resizeCallback();
   },
 
   getInitialState: function() {

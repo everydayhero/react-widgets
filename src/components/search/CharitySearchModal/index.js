@@ -142,13 +142,12 @@ module.exports = React.createClass({
     this.props.resizeCallback();
   },
 
-  selectHandler: function(result) {
+  selectHandler: function(event, result) {
     this.onClose();
 
-    if (this.props.action == 'custom' && this.props.onSelect) {
+    if (this.props.action === 'custom' && this.props.onSelect) {
+      event.preventDefault();
       this.props.onSelect(result.charity);
-    } else {
-      window.location = result.url;
     }
   },
 

@@ -32,7 +32,8 @@ describe('SearchResult', function() {
     var element = findByClass(component, 'SearchResult');
     TestUtils.Simulate.click(element);
 
-    expect(callback.mock.calls[0][0]).toBe(result);
+    expect(callback.mock.calls[0][0]).toBeTruthy();
+    expect(callback.mock.calls[0][1]).toBe(result);
     expect(callback.mock.calls[0].length).toBe(2);
   });
 });

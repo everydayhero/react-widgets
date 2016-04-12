@@ -11,7 +11,7 @@ module.exports = React.createClass({
   },
 
   clickHandler: function(event) {
-    this.props.onSelect(this.props.result, event);
+    this.props.onSelect(event, this.props.result);
   },
 
   render: function() {

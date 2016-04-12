@@ -31,7 +31,7 @@ describe('Rendering default components', function() {
 
 describe('API Calls', function() {
   var campaignTotals;
-  var element;
+
   beforeEach(function() {
     totals.findByCampaigns.mockClear();
     campaignTotals = <CampaignGoals campaigns={ [{
@@ -43,12 +43,12 @@ describe('API Calls', function() {
       name: 'Campaign 3',
       goal: 8000
     }] } />;
-    element = ReactTestUtils.renderIntoDocument(campaignTotals);
+    ReactTestUtils.renderIntoDocument(campaignTotals);
   });
 
   it('will make one call for each specified campaign UID', function() {
     expect(totals.findByCampaigns.mock.calls.length).toEqual(2);
-    expect(totals.findByCampaigns).toBeCalledWith({campaignUids: "us-22"}, element.onSuccess);
-    expect(totals.findByCampaigns).toBeCalledWith({campaignUids: "us-24"}, element.onSuccess);
+    expect(totals.findByCampaigns.mock.calls[0][0]).toEqual({ campaignUids: "us-22" });
+    expect(totals.findByCampaigns.mock.calls[1][0]).toEqual({ campaignUids: "us-24" });
   });
 });

@@ -219,6 +219,9 @@ Action to perform on charity select, either 'visit' (default), 'donate', 'fundra
 `onSelect` (function)<br>
 Function called on selecting a result. `action` must be set to `'custom'`.<br>
 
+`resizeCallback` (function)<br>
+Function called when search results change. Useful for running code based on how many results are returned.
+
 `campaignUid` (string)<br>
 Campaign uid to filter charity results.
 
@@ -271,8 +274,14 @@ The supporter page search modal widget allows you to search for a supporter page
 }
 ```
 
+`action` (string)<br>
+Action to perform on charity select, either 'visit' (default) or 'custom'.
+
 `onSelect` (function)<br>
-Called on selecting a result. Default redirects to supporter page.
+Function called on selecting a result. `action` must be set to `'custom'`.<br>
+
+`resizeCallback` (function)<br>
+Function called when search results change. Useful for running code based on how many results are returned.
 
 `campaignUid` (string)<br>
 Campaign uid to filter page results.

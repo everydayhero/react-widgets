@@ -95,7 +95,8 @@ module.exports = React.createClass({
 
     return this.tm(goal > 0 ? 'goal_text' : 'no_goal_text', {
       total: this.formatCurrency(this.state.total),
-      goal: this.formatCurrency(goal)
+      goal: this.formatCurrency(goal),
+      remainder: this.formatCurrency(goal - this.state.total)
     });
   },
 

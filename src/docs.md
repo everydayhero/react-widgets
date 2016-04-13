@@ -682,7 +682,7 @@ Display the progress towards a fund raising goal for charities or campaigns.
 ```js
 {
   symbol: '$',
-  goal_text: '**{total}** raised of **{goal}** goal',
+  goal_text: '**{total}** raised of **{goal}** goal. **{remainder}** to go!',
   no_goal_text: '**{total}** raised'
 }
 ```

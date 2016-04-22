@@ -1,0 +1,32 @@
+---
+steps:
+  - type: "waiter"
+
+  - name: ":docker:"
+    command: ".buildkite/bin/build"
+    agents:
+      docker: builder
+      queue: native
+
+  - type: "waiter"
+
+  - name: ":pill:"
+    command: "bin/buildkite bin/ci run npm test"
+    agents:
+      queue: native
+
+  - type: "waiter"
+
+  - name: ":package: Deploy"
+    command: "bin/buildkite bin/only-for-version-releases bin/ci run bin/deploy"
+    branches: "master"
+    agents:
+      queue: native
+
+  - type: "waiter"
+
+  - name: ":loudspeaker:"
+    command: "bin/buildkite bin/only-for-version-releases bin/ci announce released"
+    branches: "master"
+    agents:
+      queue: native

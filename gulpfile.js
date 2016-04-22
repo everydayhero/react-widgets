@@ -9,6 +9,7 @@ var replace      = require('gulp-replace')
 var pkg          = require('./package')
 var request      = require('superagent')
 var fs           = require('fs')
+var babel = require("gulp-babel");
 
 // stylesheets
 var sass         = require('gulp-sass')
@@ -23,6 +24,9 @@ var react        = require('gulp-react')
 var eslint       = require('gulp-eslint')
 var buffer       = require('vinyl-buffer')
 var source       = require('vinyl-source-stream')
+
+//TASKS
+require('./gulp_tasks/transpile');
 
 // html
 var inject       = require('gulp-inject')

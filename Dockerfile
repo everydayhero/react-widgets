@@ -1,9 +1,8 @@
-FROM node:0.10.32
+FROM node:5.10.1
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+WORKDIR /usr/local/src
 
-ADD . /usr/src/app
+COPY package.json /usr/local/src
 RUN npm install
 
-CMD "bin/bash"
+COPY . /usr/local/src

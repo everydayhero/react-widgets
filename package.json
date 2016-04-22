@@ -15,8 +15,8 @@
     "numeral": "~1.5.3",
     "paths-js": "^0.3.0",
     "react": "^0.12.2",
-    "reactify": "~0.17.1",
     "react-tween-state": "0.0.4",
+    "reactify": "~0.17.1",
     "remarkable": "^1.6.0"
   },
   "devDependencies": {
@@ -35,7 +35,7 @@
     "gulp-react": "~2.0.0",
     "gulp-rename": "~1.2.0",
     "gulp-replace": "^0.5.3",
-    "gulp-sass": "~1.1.0",
+    "gulp-sass": "~2.3.1",
     "gulp-uglify": "~0.3.1",
     "gulp-util": "~3.0.1",
     "jest-cli": "~0.1.18",

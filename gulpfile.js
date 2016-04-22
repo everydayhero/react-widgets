@@ -65,8 +65,6 @@ gulp.task('styles', function() {
   return gulp
     .src(['src/widgets.scss'])
     .pipe(sass({
-      sourceMap: 'scss',
-      sourceComments: 'normal',
       precision: 10
     }))
     .pipe(autoprefixer())

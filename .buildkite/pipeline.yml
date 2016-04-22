@@ -11,7 +11,7 @@ steps:
   - type: "waiter"
 
   - name: ":pill:"
-    command: "bin/buildkite bin/ci run npm test"
+    command: ".buildkite/bin/test"
     agents:
       queue: native
 

@@ -1,0 +1,2 @@
+widgets:
+  image: quay.io/everydayhero/edh-widgets:${BUILDKITE_COMMIT}

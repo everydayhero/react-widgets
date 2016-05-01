@@ -49,7 +49,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "~1.5.3",
     "gulp-util": "~3.0.1",
-    "jest-cli": "^0.10.0",
+    "jest-cli": "^11.0.1",
     "jshint-stylish": "~2.1.0",
     "morgan": "~1.7.0",
     "react-page-objects": "~0.5.1",

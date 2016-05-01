@@ -30,7 +30,7 @@ describe('CountDown', function() {
 
   describe('component configurable', function() {
     var component;
-    var date = '2016-04-24';
+    var date = moment().add(10, 'days').format("YYYY-MM-DD");
     var linkUrl = 'http://www.google.com/';
 
     beforeEach(function() {

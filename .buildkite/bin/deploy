@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -eux
+
+docker-compose -f .buildkite/docker-compose.yml run widgets ./bin/deploy

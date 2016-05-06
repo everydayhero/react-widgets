@@ -1,2 +1,12 @@
 widgets:
   image: quay.io/everydayhero/edh-widgets:${BUILDKITE_COMMIT}
+  environment:
+    - AWS_KEY
+    - AWS_SECRET
+    - NPM_USER
+    - NPM_PASS
+    - NPM_EMAIL
+    - SLACK_WEBHOOK_URL
+    - BUILD_URL
+    - BUILDKITE_BUILD_URL
+    - BUILDKITE_BUILD_NUMBER

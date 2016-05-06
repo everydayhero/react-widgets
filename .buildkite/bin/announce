@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -eux
+
+arr[0]="balloon"
+arr[1]="alien"
+arr[2]="robot_face"
+arr[3]="tongue"
+arr[4]="bikini"
+
+rand=$[ $RANDOM % 5 ]
+
+curl \
+${SLACK_WEBHOOK_URL} \
+-X POST \
+-H 'Content-Type: application/json' \
+-d @/dev/stdin <<JSON
+{
+  "text": "[<${BUILDKITE_BUILD_URL}|react-widgets #${BUILDKITE_BUILD_NUMBER}>] :balloon: edh-widgets has been released! :partyparrot:",
+  "channel": "#javascript",
+  "username": "EDH-Widgets",
+  "icon_emoji": ":${arr[$rand]}:"
+}
+JSON

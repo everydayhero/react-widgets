@@ -15,18 +15,19 @@ steps:
     agents:
       queue: native
 
+  - name: ":rocket: Publish"
+    type: "manual"
+
   - type: "waiter"
 
   - name: ":package: Deploy"
-    command: "bin/buildkite bin/only-for-version-releases bin/ci run bin/deploy"
-    branches: "master"
+    command: "./.buildkite/bin/deploy"
     agents:
       queue: native
 
   - type: "waiter"
 
   - name: ":loudspeaker:"
-    command: "bin/buildkite bin/only-for-version-releases bin/ci announce released"
-    branches: "master"
+    command: "./.buildkite/bin/announce"
     agents:
       queue: native

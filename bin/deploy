@@ -1,8 +1,10 @@
-et -euo pipefail
+#!/bin/bash
+
+set -euo pipefail
 
 # Deploy assets
 node_modules/.bin/gulp deploy_assets
-bin/update_docs
+# bin/update_docs
 
 # Publish to npm
 echo -e "$NPM_USER\n$NPM_PASS\n$NPM_EMAIL" | npm login

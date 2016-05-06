@@ -7,6 +7,8 @@ export DOCS_REPO=git@github.com:everydayhero/public-api-docs.git
 rm -rf docs
 git clone $DOCS_REPO docs 2>&1
 
+gulp docs
+
 cp public/docs.md docs/source/index.md
 
 export COMMENT=`git log -n 1 --format='%h %s'`

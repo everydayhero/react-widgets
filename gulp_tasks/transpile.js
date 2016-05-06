@@ -9,8 +9,8 @@ gulp.task("transpile", ['build-transpile'], function() {
     .pipe(clean());
 });
 
-gulp.task("build-transpile", ['transpile-js', 'transpile-scss', 'transpile-images'], function() {
-  return gulp.src(['package.json', destination + '/src/**/*.*']).pipe(gulp.dest(destination));
+gulp.task("build-transpile", ['transpile-js', 'transpile-scss', 'copy-images', 'copy-bin-stubs'], function() {
+  return gulp.src(['package.json', 'README.md', 'index.html']).pipe(gulp.dest(destination));
 });
 
 
@@ -20,7 +20,7 @@ gulp.task("transpile-js", function () {
       `!src/**/*-test.js`,
     ])
     .pipe(babel())
-    .pipe(gulp.dest(destination));
+    .pipe(gulp.dest(destination + '/src'));
 });
 
 gulp.task('transpile-scss', function() {
@@ -29,8 +29,14 @@ gulp.task('transpile-scss', function() {
     .pipe(gulp.dest(destination))
 });
 
-gulp.task('transpile-images', function() {
+gulp.task('copy-images', function() {
   return gulp
-    .src('./images/*')
-    .pipe(gulp.dest(`${destination}/images`));
+    .src('./src/images/*')
+    .pipe(gulp.dest(`${destination}/src/images`));
+});
+
+gulp.task('copy-bin-stubs', function() {
+  return gulp
+    .src('./bin/*')
+    .pipe(gulp.dest(`${destination}/bin/`));
 });

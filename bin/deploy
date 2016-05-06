@@ -7,4 +7,4 @@ bin/update_docs
 # Publish to npm
 echo -e "$NPM_USER\n$NPM_PASS\n$NPM_EMAIL" | npm login
 node_modules/.bin/gulp transpile
-npm publish transpiled
+npm publish dist

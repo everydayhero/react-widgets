@@ -11,7 +11,6 @@ describe('CharitySearchResult', function() {
   var charity = {
     id: 1,
     name: 'Foo',
-    merchant_name: 'Bar',
     description: 'Blah blah blah',
     locality: 'Brisbane',
     region: 'Queensland'
@@ -34,13 +33,12 @@ describe('CharitySearchResult', function() {
     expect(element).toBeDefined();
     expect(element.href).toBe(result.url);
     expect(header.textContent).toContain(charity.name);
-    expect(header.textContent).toContain(charity.merchant_name);
     expect(description.textContent).toBe(charity.description);
     expect(footer.textContent).toBe(charity.locality + ', ' + charity.region);
   });
 
   it('does not render merchant name if contained in name', function() {
-    var result = { charity: { name: 'Foo Bar', merchant_name: 'Bar' } };
+    var result = { charity: { name: 'Foo Bar' } };
     var searchResult = <CharitySearchResult result={ result } />;
     var component = TestUtils.renderIntoDocument(searchResult);
     var header = findByClass(component, 'CharitySearchResult__header');
@@ -49,7 +47,7 @@ describe('CharitySearchResult', function() {
   });
 
   it('does not render merchant name ignores case and punctuation', function() {
-    var result = { charity: { name: '{Foo}?', merchant_name: '<fOO>!' } };
+    var result = { charity: { name: '{Foo}?' } };
     var searchResult = <CharitySearchResult result={ result } />;
     var component = TestUtils.renderIntoDocument(searchResult);
     var header = findByClass(component, 'CharitySearchResult__header');

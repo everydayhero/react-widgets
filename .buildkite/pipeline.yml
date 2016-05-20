@@ -1,0 +1,36 @@
+---
+steps:
+  - type: "waiter"
+
+  - name: ":docker:"
+    command: ".buildkite/bin/build"
+    agents:
+      docker: builder
+      queue: native
+
+  - type: "waiter"
+
+  - name: ":pill:"
+    command: ".buildkite/bin/test"
+    agents:
+      queue: native
+
+  - name: ":rocket: Publish"
+    type: "manual"
+    branches: master
+
+  - type: "waiter"
+
+  - name: ":package: Deploy"
+    command: "./.buildkite/bin/deploy"
+    agents:
+      queue: native
+    branches: master
+
+  - type: "waiter"
+
+  - name: ":loudspeaker:"
+    command: "./.buildkite/bin/announce"
+    agents:
+      queue: native
+    branches: master

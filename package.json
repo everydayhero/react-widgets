@@ -1,7 +1,7 @@
 {
   "author": "EverydayHero <edh-dev@everydayhero.com>",
   "name": "edh-widgets",
-  "version": "3.1.2",
+  "version": "3.1.7",
   "description": "Widgets are small Javascript components that integrate with EverydayHero's API. These include search components and components for showing leaderboard and fundraising totals for campaigns, charities, and networks. Unlike iframe snippets, using widgets allows you to customise the base-level styling to suit your needs.",
   "license": "MIT",
   "main": "src/widgets.js",
@@ -38,6 +38,8 @@
     "gulp": "~3.9.1",
     "gulp-autoprefixer": "~3.1.0",
     "gulp-awspublish": "~3.2.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-clean": "^0.3.2",
     "gulp-concat": "~2.6.0",
     "gulp-cssnano": "^2.1.1",
     "gulp-eslint": "^2.0.0",

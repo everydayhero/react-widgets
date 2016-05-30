@@ -13,7 +13,7 @@ steps:
   - name: ":pill:"
     command: ".buildkite/bin/test"
     agents:
-      queue: native
+      queue: elastic
 
   - name: ":rocket: Publish"
     type: "manual"
@@ -24,7 +24,7 @@ steps:
   - name: ":package: Deploy"
     command: "./.buildkite/bin/deploy"
     agents:
-      queue: native
+      queue: elastic
     branches: master
 
   - type: "waiter"
@@ -32,5 +32,5 @@ steps:
   - name: ":loudspeaker:"
     command: "./.buildkite/bin/announce"
     agents:
-      queue: native
+      queue: elastic
     branches: master

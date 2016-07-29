@@ -63,7 +63,7 @@ module.exports = React.createClass({
         count: 0,
         page: 1,
         pageSize: 1,
-        totalPages: 0,
+        totalPages: 0
       }
     };
   },
@@ -88,7 +88,7 @@ module.exports = React.createClass({
     var cancelRequest = pages.search({
       country: this.props.country,
       searchTerm: searchTerm,
-      campaignUid: this.props.campaignUid ? [this.props.campaignUid] : this.props.campaignUids,
+      campaignUid: this.props.campaignUid || this.props.campaignUids,
       charityUid: this.props.charityUid,
       page: page || 1,
       pageSize: this.props.pageSize,

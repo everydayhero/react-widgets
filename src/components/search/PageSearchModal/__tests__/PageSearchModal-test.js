@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 jest.autoMockOff();
 
 jest.mock('../../../../api/pages');
@@ -50,7 +50,7 @@ var response = {
   }
 };
 
-describe('PageSearchModal', function() {
+describe('Rendering', function() {
   beforeEach(function() {
     pages.search.mockClear();
   });
@@ -69,7 +69,7 @@ describe('PageSearchModal', function() {
     var pageSearchModal = <PageSearchModal autoFocus={ false } />;
     var element = TestUtils.renderIntoDocument(pageSearchModal);
     var input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
+    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
 
     var resultElements = scryByClass(element, 'SearchResult');
     expect(resultElements.length).toEqual(1);
@@ -77,9 +77,47 @@ describe('PageSearchModal', function() {
     expect(resultElements[0].textContent).toContain(page.name);
     expect(resultElements[0].textContent).toContain(page.charity.name);
   });
+});
+
+describe('ID Handling', function() {
+  beforeEach(function() {
+    pages.search.mockClear();
+  });
+
+  it('Queries with a single Campaign UID', function() {
+    pages.search.mockImplementation(function(query, callback) { callback(response); });
+
+    var query = { country: 'xy', searchTerm: 'foo', campaignUid: 'us-22', charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
+    var pageSearchModal = <PageSearchModal campaignUid="us-22" country="xy"/>;
+    var element = TestUtils.renderIntoDocument(pageSearchModal);
+    var input = findByTag(element, 'input');
+    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
+
+    expect(pages.search.mock.calls.length).toEqual(1);
+    expect(pages.search).lastCalledWith(query, element.updateResults);
+  })
+
+  it('Queries with multiple Campaign UIDs', function() {
+    pages.search.mockImplementation(function(query, callback) { callback(response); });
+
+    var query = { country: 'xy', searchTerm: 'foo', campaignUid: ['us-22', 'us-24'], charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
+    var pageSearchModal = <PageSearchModal campaignUids={ ['us-22', 'us-24'] } country="xy"/>;
+    var element = TestUtils.renderIntoDocument(pageSearchModal);
+    var input = findByTag(element, 'input');
+    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
+
+    expect(pages.search.mock.calls.length).toEqual(1);
+    expect(pages.search).lastCalledWith(query, element.updateResults);
+  })
+});
+
+describe('Searching', function() {
+  beforeEach(function() {
+    pages.search.mockClear();
+  });
 
   it('searches for pages when provided with searchTerm prop', function() {
-    var query = { country: 'xy', searchTerm: 'bar', campaignUid: '', charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
+    var query = { country: 'xy', searchTerm: 'bar', campaignUid: [], charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
     var pageSearchModal = <PageSearchModal searchTerm={ 'bar' } autoFocus={ false } action="donate" country="xy" />;
     var element = TestUtils.renderIntoDocument(pageSearchModal);
     var input = findByTag(element, 'input');
@@ -89,11 +127,11 @@ describe('PageSearchModal', function() {
   });
 
   it('searches for pages on input change', function() {
-    var query = { country: 'xy', searchTerm: 'foo', campaignUid: '', charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
+    var query = { country: 'xy', searchTerm: 'foo', campaignUid: [], charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
     var pageSearchModal = <PageSearchModal autoFocus={ false } action="donate" country="xy" />;
     var element = TestUtils.renderIntoDocument(pageSearchModal);
     var input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
+    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
 
     expect(pages.search).lastCalledWith(query, element.updateResults);
   });
@@ -101,11 +139,11 @@ describe('PageSearchModal', function() {
   it('searches for more pages on page change', function() {
     pages.search.mockImplementation(function(query, callback) { callback(response); });
 
-    var query = { country: 'xy', searchTerm: 'foo', campaignUid: '', charityUid: '', page: 2, pageSize: 10, pageType: 'all', groupValue: [] };
+    var query = { country: 'xy', searchTerm: 'foo', campaignUid: [], charityUid: '', page: 2, pageSize: 10, pageType: 'all', groupValue: [] };
     var pageSearchModal = <PageSearchModal autoFocus={ false } action="donate" country="xy" />;
     var element = TestUtils.renderIntoDocument(pageSearchModal);
     var input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
+    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
 
     var nextPageButton = findByClass(element, 'SearchPagination__button--right');
     TestUtils.Simulate.click(nextPageButton);
@@ -121,7 +159,7 @@ describe('PageSearchModal', function() {
 
     expect(element.state.isSearching).toBeFalsy();
 
-    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
+    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
 
     expect(element.state.isSearching).toBeTruthy();
 

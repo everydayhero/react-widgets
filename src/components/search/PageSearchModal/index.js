@@ -14,6 +14,7 @@ module.exports = React.createClass({
   propTypes: {
     autoFocus: React.PropTypes.bool,
     campaignUid: React.PropTypes.string,
+    campaignUids: React.PropTypes.array,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
     i18n: React.PropTypes.object,
     onClose: React.PropTypes.func.isRequired,
@@ -30,6 +31,7 @@ module.exports = React.createClass({
       action: 'visit',
       autoFocus: true,
       campaignUid: '',
+      campaignUids: [],
       charityUid: '',
       groupValues: [],
       resizeCallback: function() {},
@@ -86,7 +88,7 @@ module.exports = React.createClass({
     var cancelRequest = pages.search({
       country: this.props.country,
       searchTerm: searchTerm,
-      campaignUid: this.props.campaignUid,
+      campaignUid: this.props.campaignUid ? [this.props.campaignUid] : this.props.campaignUids,
       charityUid: this.props.charityUid,
       page: page || 1,
       pageSize: this.props.pageSize,

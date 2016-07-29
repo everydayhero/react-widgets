@@ -85,7 +85,11 @@ describe('campaigns', () => {
 
     describe('with empty array', () => {
       let _ = require('lodash');
-      let lodashStub = sinon.stub(_, "defer", () => {});
+      let lodashStub;
+
+      before(() => {
+        lodashStub = sinon.stub(_, "defer", () => {});
+      });
 
       beforeEach(() => {
         campaigns.findByUids([], callback);
@@ -196,7 +200,7 @@ describe('campaigns', () => {
 
   describe('search', () => {
     it('searches for campaigns', () => {
-      var query = {
+      const query = {
         searchTerm: 'bar',
         country: 'xy',
         page: 2,

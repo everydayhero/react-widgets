@@ -16,11 +16,10 @@ describe('campaigns', () => {
     it('gets a campaign by uid', () => {
       campaigns.find('xy-12', callback);
 
-      assert.calledWithExactly(
-        spy,
+      expect(spy).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/campaigns/xy-12.jsonp',
         callback
-      )
+      );
     });
 
     it('accepts options', () => {
@@ -38,11 +37,10 @@ describe('campaigns', () => {
     it('gets a campaign by country and slug', () => {
       campaigns.findBySlug('xy', 'slugathon-2015', callback);
 
-      assert.calledWith(
-        spy,
+      expect(spy).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/campaigns/xy/slugathon-2015.jsonp',
         callback
-      )
+      );
     });
 
     it('accepts options', () => {
@@ -60,11 +58,10 @@ describe('campaigns', () => {
     it('gets campaigns by uid', () => {
       campaigns.findByUids(['xy-123', 'xy-456'], callback);
 
-      assert.calledWithExactly(
-        spy,
+      expect(spy).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/campaigns.jsonp?ids=xy-123,xy-456',
         callback
-      )
+      );
     });
 
     it('accepts options', () => {
@@ -85,10 +82,9 @@ describe('campaigns', () => {
 
     describe('with empty array', () => {
       let _ = require('lodash');
-      let lodashStub;
 
       before(() => {
-        lodashStub = sinon.stub(_, "defer", () => {});
+        sinon.stub(_, "defer", () => {});
       });
 
       beforeEach(() => {
@@ -96,20 +92,19 @@ describe('campaigns', () => {
       });
 
       after(() => {
-        lodashStub.restore();
+        _.defer.restore();
       });
 
       it('does not fetch results', () => {
-        assert.notCalled(spy);
+        spy.should.have.callCount(0);
       });
 
       it('defers callback with empty results', () => {
-        assert.notCalled(callback);
-        assert.calledWithExactly(
-          lodashStub,
+        spy.should.have.callCount(0);
+        expect(_.defer).to.have.been.calledWith(
           callback,
           { campaigns: [] }
-        )
+        );
       });
     });
   });
@@ -118,11 +113,10 @@ describe('campaigns', () => {
     it('gets campaigns that include the given charity uid', () => {
       campaigns.findByCharity('xy-123', 1, 10, callback);
 
-      assert.calledWithExactly(
-        spy,
+      expect(spy).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/campaigns.jsonp?charity_id=xy-123&page=1&limit=10',
         callback
-      )
+      );
     });
 
     it('accepts options', () => {
@@ -146,11 +140,10 @@ describe('campaigns', () => {
     it('gets campaign leaderboard by campaign uid', () => {
       campaigns.leaderboard('xy-123', 'abcd', 'foo', 12, callback);
 
-      assert.calledWithExactly(
-        spy,
+      expect(spy).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/campaigns/xy-123/leaderboard.jsonp?type=foo&limit=12&charity_ids=abcd',
         callback
-      )
+      );
     });
 
     it('accepts options', () => {
@@ -180,11 +173,10 @@ describe('campaigns', () => {
     it('gets campaign leaderboard by country and slug', () => {
       campaigns.leaderboardBySlug('xy', 'slugathon-2015', 'foo', 12, callback);
 
-      assert.calledWithExactly(
-        spy,
+      expect(spy).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/campaigns/xy/slugathon-2015/leaderboard.jsonp?type=foo&limit=12',
         callback
-      )
+      );
     });
 
     it('accepts options', () => {

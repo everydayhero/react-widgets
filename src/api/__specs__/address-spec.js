@@ -15,11 +15,10 @@ describe('address', () => {
     it('gets an address by id', () => {
       address.find('123', 'uk', callback);
 
-      assert.calledWithExactly(
-        spy,
+      expect(spy).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/addresses/uk/123.jsonp',
         callback
-      )
+      );
     });
   });
 
@@ -27,11 +26,10 @@ describe('address', () => {
     it('searches for addresses', () => {
       address.search('blah', 'uk', callback);
 
-      assert.calledWithExactly(
-        spy,
+      expect(spy).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/addresses.jsonp?country_code=uk&q=blah',
         callback
-      )
+      );
     });
   });
 });

@@ -25,8 +25,7 @@ describe('charities', () => {
     it('gets a charity by uid', () => {
       charities.find('xy-12', callback);
 
-      assert.calledWithExactly(
-        spy,
+      expect(spy).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/charities/xy-12.jsonp',
         callback
       );
@@ -37,8 +36,7 @@ describe('charities', () => {
     it('gets a charity by country and slug', () => {
       charities.findBySlug('xy', 'slugs-for-pugs', callback);
 
-      assert.calledWithExactly(
-        spy,
+      expect(spy).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/charities/xy/slugs-for-pugs.jsonp',
         callback
       );
@@ -54,10 +52,9 @@ describe('charities', () => {
 
     describe('with empty array', () => {
       let _ = require('lodash');
-      let lodashStub;
 
       before(() => {
-        lodashStub = sinon.stub(_, "defer", () => {});
+        sinon.stub(_, "defer", () => {});
       });
 
       beforeEach(() => {
@@ -65,16 +62,15 @@ describe('charities', () => {
       });
 
       after(() => {
-        lodashStub.restore();
+        _.defer.restore();
       });
 
       it('does not fetch', () => {
-        assert.notCalled(spy);
+        spy.should.have.callCount(0);
       });
 
       it('defers callback with empty results', () => {
-        assert.calledWithExactly(
-          lodashStub,
+        expect(_.defer).to.have.been.calledWith(
           callback,
           { charities: [] }
         );
@@ -86,8 +82,7 @@ describe('charities', () => {
     it('gets charities by campaign uid', () => {
       charities.findByCampaign('xy-12', 7, 2, callback);
 
-      assert.calledWithExactly(
-        spy,
+      expect(spy).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/charities.jsonp?campaign_ids=xy-12&page=2&limit=7',
         callback
       );
@@ -98,8 +93,7 @@ describe('charities', () => {
     it('gets charity leaderboard by charity uid', () => {
       charities.leaderboard('xy-123', 'foo', 12, callback);
 
-      assert.calledWithExactly(
-        spy,
+      expect(spy).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/charities/xy-123/leaderboard.jsonp?type=foo&limit=12',
         callback
       );
@@ -120,8 +114,7 @@ describe('charities', () => {
     it('gets charity leaderboard by country and slug', () => {
       charities.leaderboardBySlug('xy', 'slugs-for-pugs', 'foo', 12, callback);
 
-      assert.calledWithExactly(
-        spy,
+      expect(spy).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/charities/xy/slugs-for-pugs/leaderboard.jsonp?type=foo&limit=12',
         callback
       );
@@ -143,8 +136,7 @@ describe('charities', () => {
       const query = { searchTerm: 'bar', country: 'xy', campaignUid: [12, 42], page: 2, pageSize: 7 };
       charities.search(query, callback);
 
-      assert.calledWithExactly(
-        spy,
+      expect(spy).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/search/charities.jsonp?q=bar&country_code=xy&campaign_id=12,42&page=2&page_size=7',
         callback,
         { timeout: 10000 }

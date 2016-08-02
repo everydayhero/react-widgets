@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -e
+
+node_modules/.bin/mocha --opts test/helpers/jsx.opts 'src/**/__specs__/*-spec.js'

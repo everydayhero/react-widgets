@@ -18,7 +18,7 @@
     "paths-js": "^0.4.3",
     "react": "^0.14.8",
     "react-addons-css-transition-group": "^0.14.7",
-    "react-addons-pure-render-mixin": "^0.14.7",
+    "react-addons-pure-render-mixin": "^15.0.0",
     "react-addons-test-utils": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-tween-state": "0.1.5",

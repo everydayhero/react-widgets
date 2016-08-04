@@ -5,7 +5,7 @@ module.exports = [
   { name: "Canada", iso: "CA" },
   { name: "Ireland", iso: "IE" },
   { name: "New Zealand", iso: "NZ" },
-  { name: "United Kingdom", iso: "GB" },
+  { name: "United Kingdom", iso: "UK" },
   { name: "United States", iso: "US" },
   { name: "Afghanistan", iso: "AF" },
   { name: "Åland Islands", iso: "AX" },

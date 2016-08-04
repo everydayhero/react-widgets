@@ -99,8 +99,8 @@ describe('pages', () => {
 
   describe('isGivePage', () => {
     it('tests if page belongs to give campaign', () => {
-      expect(pages.isGivePage({ campaign: { uid: 'au-0' }, country_code: 'au' })).to.be.true;
-      expect(pages.isGivePage({ campaign: { uid: 'au-1' }, country_code: 'au' })).to.be.false;
+      expect(pages.isGivePage({ campaign: { uid: 'au-0' }, country_code: 'au' })).to.eql(true);
+      expect(pages.isGivePage({ campaign: { uid: 'au-1' }, country_code: 'au' })).to.eql(false);
     });
   });
 });

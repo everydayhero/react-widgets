@@ -120,10 +120,9 @@ module.exports = React.createClass({
   },
 
   renderToggle: function(bool) {
-    var iso = this.props.selected.iso === 'GB' ? 'UK' : this.props.selected.iso;
     return bool && (
       <div className="CountrySelect__toggle" onKeyPress={ this.props.onOpen } onClick={ this.props.onOpen } tabIndex="0">
-        { iso }
+        { this.props.selected.iso }
         <FlagIcon className="CountrySelect__flag" country={ this.props.selected.iso } />
 
         <span className="CountrySelect__caret hui-IconWrapper hui-Button__icon">

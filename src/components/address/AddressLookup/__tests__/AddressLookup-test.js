@@ -47,7 +47,7 @@ describe('AddressLookup', function() {
     TestUtils.Simulate.change(input, { target: { value: 'king' }});
     var country = findByClass(element, 'CountrySelectItem--focused');
     TestUtils.Simulate.click(country);
-    expect(element.state.country.iso).toBe('GB');
+    expect(element.state.country.iso).toBe('UK');
   });
 
   it('accepts an existing address', function() {
@@ -67,13 +67,13 @@ describe('AddressLookup', function() {
   });
 
   it('UK postcode search requires at least 5 chars', function() {
-    var element = TestUtils.renderIntoDocument(<AddressLookup country="GB"/>);
+    var element = TestUtils.renderIntoDocument(<AddressLookup country="UK"/>);
     var input = findByClass(element, 'Input__input');
     TestUtils.Simulate.change(input, { target: { value: '1234' }});
     expect(address.search).not.toBeCalled();
 
     TestUtils.Simulate.change(input, { target: { value: '12345' }});
-    expect(address.search).lastCalledWith('12345', 'GB', jasmine.any(Function));
+    expect(address.search).lastCalledWith('12345', 'UK', jasmine.any(Function));
   });
 
   it('Address search requires at least 7 chars', function() {
@@ -143,13 +143,13 @@ describe('AddressLookup', function() {
       element.setList(addressSearchResult);
       listItem = findByClass(element, 'AddressListing--focused');
       TestUtils.Simulate.click(listItem);
-      expect(address.find).lastCalledWith('123', 'GB', jasmine.any(Function));
+      expect(address.find).lastCalledWith('123', 'UK', jasmine.any(Function));
       callback = address.find.mock.calls[0][2];
       callback(addressFindResult);
       expect(element.state.address).toBe(addressFindResult.address);
     });
 
-    it('breaks down a selected GB address', function() {
+    it('breaks down a selected UK address', function() {
       var pafValidated = findByAttribute(element, 'name', 'paf_validated');
       var streetAddress = findByAttribute(element, 'id', 'street_address');
       var locality = findByAttribute(element, 'id', 'locality');

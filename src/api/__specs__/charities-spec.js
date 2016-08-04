@@ -1,6 +1,5 @@
 'use strict';
 
-const last = require('lodash/last');
 const spy = sinon.spy();
 const callback = sinon.spy();
 

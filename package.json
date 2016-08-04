@@ -1,7 +1,7 @@
 {
   "author": "EverydayHero <edh-dev@everydayhero.com>",
   "name": "edh-widgets",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "Widgets are small Javascript components that integrate with EverydayHero's API. These include search components and components for showing leaderboard and fundraising totals for campaigns, charities, and networks. Unlike iframe snippets, using widgets allows you to customise the base-level styling to suit your needs.",
   "license": "MIT",
   "main": "src/widgets.js",
@@ -26,6 +26,7 @@
     "remarkable": "^1.6.0"
   },
   "devDependencies": {
+    "babel-core": "^6.11.4",
     "babel-eslint": "^6.0.4",
     "babel-jest": "^12.0.2",
     "babel-preset-es2015": "^6.3.13",

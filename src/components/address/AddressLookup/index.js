@@ -44,7 +44,7 @@ module.exports = React.createClass({
       validate: function() {},
       defaultI18n: {
         inputLabel: 'Street Address',
-        inputLabelGB: 'Postcode',
+        inputLabelUK: 'Postcode',
         manualEntryButton: 'Enter address manually',
         resetButton: 'Clear and search again',
         emptyError: 'Please enter an address'
@@ -53,7 +53,7 @@ module.exports = React.createClass({
   },
 
   getInitialState: function() {
-    var iso = this.props.country === 'UK' ? 'GB' : this.props.country;
+    var iso = this.props.country === 'UK' ? 'UK' : this.props.country;
     var country = _.find(countryList, { iso: iso });
     var lookupEnabled = this.props.country !== 'IE';
     var customEntry = !lookupEnabled && !this.props.address;
@@ -195,7 +195,7 @@ module.exports = React.createClass({
   },
 
   isPAFLookup: function () {
-    return this.state.country.iso === 'GB';
+    return this.state.country.iso === 'UK';
   },
 
   isGoogleLookup: function () {

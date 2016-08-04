@@ -1413,7 +1413,7 @@ Displays a form input field and country selector, which allows users to lookup t
 <div id="AddressLookupExample"></div>
 <script>
   edh.widgets.renderWidget('AddressLookupExample', 'AddressLookup', {
-    country: 'GB'
+    country: 'UK'
   });
 </script>
 ```
@@ -1422,7 +1422,7 @@ Displays a form input field and country selector, which allows users to lookup t
 
 <script>
   edh.widgets.renderWidget('AddressLookupExample', 'AddressLookup', {
-    country: 'GB'
+    country: 'UK'
   });
 </script>
 
@@ -1447,7 +1447,7 @@ Displays a form input field and country selector, which allows users to lookup t
 ```js
 {
   inputLabel: 'Address Lookup',
-  inputLabelGB: 'Postcode Lookup',
+  inputLabelUK: 'Postcode Lookup',
   manualEntryButton: 'Enter Manually',
   resetButton: 'Reset Address',
   error:"Sorry, we couldn't find that address"
@@ -1464,7 +1464,7 @@ Add a unique identifier to the input elements, for use when multiple AddressLook
 Specify the spacing around input. Valid options are: "compact", "loose", and "tight". Default is "loose".
 
 `country` (string)<br>
-Two-digit capitalized country ISO code (AU, GB, US, NZ, IE, etc). Default is 'US'.
+Two-digit capitalized country ISO code (AU, UK, US, NZ, IE, etc). Default is 'US'.
 
 `address` (object)<br>
 Object containing a pre-existing address to display. If provided, lookup functionality is not available. Use when user address already provided or when page reloads on form validation. Default is `null`.

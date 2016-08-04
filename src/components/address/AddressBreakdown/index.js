@@ -40,7 +40,7 @@ module.exports = React.createClass({
         region: 'State',
         postal_code: 'Postcode',
         country_name: 'Country',
-        GB: {
+        UK: {
           locality: 'City',
           region: 'County'
         },

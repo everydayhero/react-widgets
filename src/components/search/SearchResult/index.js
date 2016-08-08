@@ -20,7 +20,6 @@ module.exports = React.createClass({
 
     return (
       <a href={ props.result.url || '#' }
-        target="_parent"
         className="SearchResult"
         target="_parent"
         onClick={ clickHandler }>

@@ -16,7 +16,7 @@ ${SLACK_WEBHOOK_URL} \
 -H 'Content-Type: application/json' \
 -d @/dev/stdin <<JSON
 {
-  "text": "[<${BUILDKITE_BUILD_URL}|react-widgets #${BUILDKITE_BUILD_NUMBER}>] :balloon: edh-widgets has been released! :partyparrot:",
+  "text": "[<${BUILDKITE_BUILD_URL}|react-widgets #${BUILDKITE_BUILD_NUMBER}>] :balloon: edh-widgets has been released!",
   "channel": "#javascript",
   "username": "EDH-Widgets",
   "icon_emoji": ":${arr[$rand]}:"

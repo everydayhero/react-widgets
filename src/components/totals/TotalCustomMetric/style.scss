@@ -1,0 +1,15 @@
+.TotalCustomMetric {
+  @extend %ehw-tile;
+}
+
+.TotalCustomMetric__total {
+  @extend %ehw-tile-total;
+}
+
+.TotalCustomMetric__loading {
+  @extend %ehw-tile-loading-icon;
+}
+
+.TotalCustomMetric__icon {
+  @extend %ehw-tile-icon;
+}

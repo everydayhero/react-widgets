@@ -170,6 +170,7 @@
         <div id="TotalSupportersExample" class="main-metric">Loading...</div>
         <div id="TotalDonationsExample" class="main-metric">Loading...</div>
         <div id="TotalCharitiesExample" class="main-metric">Loading...</div>
+        <div id="TotalCustomMetricExample" class="main-metric">Loading...</div>
         <div id="GoalExample" class="main-metric">Loading...</div>
       </div>
 
@@ -245,6 +246,7 @@
     edh.widgets.renderWidget('TotalSupportersExample', 'TotalSupporters', { charityUids: ['au-24', 'au-31'], startAt: '2015-01-01', endAt: '2015-06-01' });
     edh.widgets.renderWidget('TotalDonationsExample', 'TotalDonations', { charityUids: ['au-24'], startAt: '2015-01-01', endAt: '2015-06-01' });
     edh.widgets.renderWidget('TotalCharitiesExample', 'TotalCharities', { campaignUids: ['us-22', 'us-24'] });
+    edh.widgets.renderWidget('TotalCustomMetricExample', 'TotalCustomMetric', { campaignUid: 'au-20938', i18n: { title: 'Laps' } });
     edh.widgets.renderWidget('GoalExample', 'Goal', { goal: 5000000, i18n: { title: '2015 Goal' } });
     edh.widgets.renderWidget('CountDownExample', 'CountDown', {
       date: "2016-04-22",

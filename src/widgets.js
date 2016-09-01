@@ -37,6 +37,7 @@ var widgets = {
   Teams:              require('./components/teams/Teams'),
   TotalCalories:      require('./components/totals/TotalCalories'),
   TotalCharities:     require('./components/totals/TotalCharities'),
+  TotalCustomMetric:  require('./components/totals/TotalCustomMetric'),
   TotalDistance:      require('./components/totals/TotalDistance'),
   TotalDonations:     require('./components/totals/TotalDonations'),
   TotalHours:         require('./components/totals/TotalHours'),

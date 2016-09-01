@@ -649,6 +649,65 @@ Set to `true` by default. Determines whether the supplied `goal` is divided by 1
 `i18n` (object)<br>
 Contains localised text.
 
+## Total Custom Metric
+
+```html
+<div id="TotalCustomMetricExample"></div>
+<script>
+  edh.widgets.renderWidget('TotalCustomMetricExample', 'TotalCustomMetric', {
+    campaignUid: 'au-123'
+  });
+</script>
+```
+
+Displays the total of a custom metric attributed to a charity.
+
+### Demo
+
+<p id="TotalCustomMetricExample"></p>
+
+<script>
+  edh.widgets.renderWidget('TotalCustomMetricExample', 'TotalCustomMetric', {
+    campaignUid: 'au-20938'
+    i18n: {
+      title: 'Laps'
+    }
+  });
+</script>
+
+### Options
+
+> Default `i18n` translation object. Note the `title` property is required:
+
+```js
+{
+  title: 'Laps'
+}
+```
+
+`campaignUid` (string)<br>
+Campaign uid to fetch the custom metric from.
+
+`backgroundColor` (string)<br>
+Accepts a CSS color value. Not set by default.
+
+`textColor` (string)<br>
+Accepts a CSS color value. Not set by default.
+
+`renderIcon` (boolean)<br>
+Set to `true` by default. Will render a FontAwesome icon, as specified in `icon`
+
+`icon` (string)<br>
+Pass in a valid [FontAwesome](http://fortawesome.github.io/Font-Awesome/icons/) icon name (without the _fa_ prefix) to override the default. Set to `false` to render no icon.
+
+`format` (string).<br>
+Set to `'0,0'` by default. [More format strings](http://numeraljs.com/).
+
+`i18n` (object) <span class="required">Required</span><br>
+Contains localised text.
+
+
+
 
 ## Goal Progress
 

@@ -14,7 +14,6 @@ describe('TotalCustomMetric', () => {
       find: spy
     }
   });
-  const callback = () => {};
 
   beforeEach(() => {
     spy.reset();
@@ -30,7 +29,7 @@ describe('TotalCustomMetric', () => {
     });
 
     it('has icon rendering enabled, and set to bar-chart', () => {
-      expect(mountedElement.props().renderIcon).to.be.true;
+      expect(mountedElement.props().renderIcon).to.equal(true);
       expect(mountedElement.props().icon).to.equal('bar-chart');
     });
 

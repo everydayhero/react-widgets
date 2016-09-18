@@ -8,10 +8,10 @@ function format(template, data, strip) {
   data = data || {};
 
   return template.replace(/{([^{}]+)}/g, function(a, b) {
-    var parts = b.split(':');
-    var format = parts[1] ? parts[1].trim() : '';
-    var key = parts[0].trim();
-    var value = data[key];
+    let parts = b.split(':');
+    let format = parts[1] ? parts[1].trim() : '';
+    let key = parts[0].trim();
+    let value = data[key];
     if (value == null) {
       return strip ? '' : a;
     }

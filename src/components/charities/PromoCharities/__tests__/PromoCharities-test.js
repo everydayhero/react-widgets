@@ -9,9 +9,9 @@ describe('PromoCharities', function() {
   let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('default behaviour for PromoCharities', function() {
-    var promoCharities;
-    var element;
-    var tabsData = [{ category: 'Tab One', charityUids: ['au-1'] }];
+    let promoCharities;
+    let element;
+    let tabsData = [{ category: 'Tab One', charityUids: ['au-1'] }];
 
     beforeEach(function() {
       promoCharities = <PromoCharities action="fundraise" tabs={ tabsData } />;
@@ -24,9 +24,9 @@ describe('PromoCharities', function() {
 
     it('renders a default heading and subheading', function() {
       element.setState({ isLoading: false });
-      var heading     = findByClass(element, 'PromoCharities__heading');
-      var subHeading  = findByClass(element, 'PromoCharities__subheading');
-      var translation = {
+      let heading     = findByClass(element, 'PromoCharities__heading');
+      let subHeading  = findByClass(element, 'PromoCharities__subheading');
+      let translation = {
         heading: 'Promoted Charities',
         subheading: 'Choose a tab below to view promoted charities within each category.',
       };
@@ -37,10 +37,10 @@ describe('PromoCharities', function() {
   });
 
   describe('custom behaviour for PromoCharities', function() {
-    var promoCharities;
-    var element;
-    var tabsData = [{category: 'Tab One', charityUids: ['au-1']}];
-    var translation = {
+    let promoCharities;
+    let element;
+    let tabsData = [{category: 'Tab One', charityUids: ['au-1']}];
+    let translation = {
       heading: 'Featured Charities',
       subheading: 'Pick a tab'
     };
@@ -52,8 +52,8 @@ describe('PromoCharities', function() {
 
     it('renders a custom heading and subheading', function() {
       element.setState({ isLoading: false });
-      var heading = findByClass(element, 'PromoCharities__heading');
-      var subHeading  = findByClass(element, 'PromoCharities__subheading');
+      let heading = findByClass(element, 'PromoCharities__heading');
+      let subHeading  = findByClass(element, 'PromoCharities__subheading');
 
       expect(heading.textContent).toBe(translation.heading);
       expect(subHeading.textContent).toBe(translation.subheading);
@@ -61,12 +61,12 @@ describe('PromoCharities', function() {
   });
 
   describe('Order of rendered items matches order of supplied uids', function() {
-    var promoCharities;
-    var element;
-    var tabsData = [{ category: 'Tab One', charityUids: ['au-1','au-2','au-3'] }];
-    var keys = tabsData[0].charityUids;
+    let promoCharities;
+    let element;
+    const keys = ['au-1','au-2','au-3'];
+    let tabsData = [{ category: 'Tab One', charityUids: keys }];
 
-    var charities = [
+    let charities = [
       { name: 'charity3', id: 'au-3' },
       { name: 'charity1', id: 'au-1' },
       { name: 'charity2', id: 'au-2' }
@@ -78,7 +78,7 @@ describe('PromoCharities', function() {
     });
 
     it('re-orders an array of charities to match the order of uids passed in', function() {
-      var reordered = [
+      let reordered = [
         { name: 'charity1', id: 'au-1' },
         { name: 'charity2', id: 'au-2' },
         { name: 'charity3', id: 'au-3' }

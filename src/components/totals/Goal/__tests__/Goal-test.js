@@ -9,8 +9,8 @@ describe('Goal', function() {
   let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component defaults', function() {
-    var goal;
-    var element;
+    let goal;
+    let element;
 
     beforeEach(function() {
       goal = <Goal />;
@@ -23,28 +23,28 @@ describe('Goal', function() {
 
     it('renders a default total', function() {
       element.setState({isLoading: false});
-      var total = findByClass(element, 'Goal__total');
+      let total = findByClass(element, 'Goal__total');
 
       expect(total.textContent).toContain('$0');
     });
 
     it('renders a default title', function() {
       element.setState({isLoading: false});
-      var title = findByClass(element, 'Goal__title');
+      let title = findByClass(element, 'Goal__title');
 
       expect(title.textContent).toBe('Goal');
     });
 
     it('renders an icon by default', function() {
-      var icon = findByClass(element, 'Goal__icon');
+      let icon = findByClass(element, 'Goal__icon');
       expect(icon).not.toBeNull();
     });
   });
 
   describe('Custom component props', function() {
-    var goal;
-    var element;
-    var translation = {
+    let goal;
+    let element;
+    let translation = {
       title: 'asdjasj',
       symbol: '£',
       suffix: ' abc'
@@ -57,14 +57,14 @@ describe('Goal', function() {
 
     it('renders a custom title', function() {
       element.setState({ isLoading: false });
-      var title = findByClass(element, 'Goal__title');
+      let title = findByClass(element, 'Goal__title');
 
       expect(title.textContent).toBe(translation.title);
     });
 
     it('checks for a total with custom symbol and suffix', function() {
       element.setState({ isLoading: false });
-      var total = findByClass(element, 'Goal__total');
+      let total = findByClass(element, 'Goal__total');
 
       expect(total.textContent).toBe('£50 k abc');
     });
@@ -72,17 +72,17 @@ describe('Goal', function() {
 
   describe('Number formatting options', function() {
     it('renders in a short format by default', function() {
-      var goal = <Goal goal="5000000" />;
-      var element = TestUtils.renderIntoDocument(goal);
-      var total = findByClass(element, 'Goal__total');
+      let goal = <Goal goal="5000000" />;
+      let element = TestUtils.renderIntoDocument(goal);
+      let total = findByClass(element, 'Goal__total');
 
       expect(total.textContent).toBe('$50 k');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var goal = <Goal goal="5000000" format="0,0.00" />;
-      var element = TestUtils.renderIntoDocument(goal);
-      var total = findByClass(element, 'Goal__total');
+      let goal = <Goal goal="5000000" format="0,0.00" />;
+      let element = TestUtils.renderIntoDocument(goal);
+      let total = findByClass(element, 'Goal__total');
 
       expect(total.textContent).toBe('$50,000.00');
     });
@@ -90,18 +90,17 @@ describe('Goal', function() {
 
   describe('Displaying an icon', function() {
     it('renders no icon when renderIcon set to false', function() {
-      var goal = <Goal goal="5000000" renderIcon={ false } />;
-      var element = TestUtils.renderIntoDocument(goal);
-      var icon = scryByClass(element, 'Goal__icon');
+      let goal = <Goal goal="5000000" renderIcon={ false } />;
+      let element = TestUtils.renderIntoDocument(goal);
+      let icon = scryByClass(element, 'Goal__icon');
       expect(icon.length).toEqual(0);
     });
 
     it('renders a custom icon when passed a valid FontAwesome string', function() {
-      var goal = <Goal goal="5000000" renderIcon="paw" />;
-      var element = TestUtils.renderIntoDocument(goal);
-      var icon = findByClass(element, 'fa-paw');
+      let goal = <Goal goal="5000000" renderIcon="paw" />;
+      let element = TestUtils.renderIntoDocument(goal);
+      let icon = findByClass(element, 'fa-paw');
       expect(icon).not.toBeNull();
     });
   });
-
 });

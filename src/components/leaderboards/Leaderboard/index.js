@@ -107,8 +107,8 @@ export default React.createClass({
         component="ol">
           {
             board.map(function(item) {
-              var formattedAmount = this.formatAmount(item.amount);
-              var formattedRank   = numeral(item.rank).format('0o');
+              let formattedAmount = this.formatAmount(item.amount);
+              let formattedRank   = numeral(item.rank).format('0o');
 
               return (
                 <LeaderboardItem
@@ -129,21 +129,21 @@ export default React.createClass({
     );
   },
 
-  render: function() {
-    var state       = this.state;
-    var heading     = this.t('heading');
-    var customStyle = {
+  render() {
+    let state       = this.state;
+    let heading     = this.t('heading');
+    let customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
     };
 
-    var classes = cx({
+    let classes = cx({
       'Leaderboard': true,
       'Leaderboard--loading': state.isLoading,
       'Leaderboard--empty': !state.boardData.length
     });
 
-    var content = state.isLoading ? this.renderLoadingState :
+    let content = state.isLoading ? this.renderLoadingState :
                   state.boardData.length ? this.renderLeaderboardItems :
                   this.renderEmptyState;
 

@@ -9,11 +9,11 @@ describe('CountDown', function() {
   let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
-    var component;
-    var date = '2016-04-24';
+    let component;
+    let date = '2016-04-24';
 
     beforeEach(function() {
-      var countDown = <CountDown date={ date } />;
+      let countDown = <CountDown date={ date } />;
       component = TestUtils.renderIntoDocument(countDown);
     });
 
@@ -22,32 +22,32 @@ describe('CountDown', function() {
     });
 
     it('renders days', function() {
-      var element = findByClass(component, 'CountDown__days');
+      let element = findByClass(component, 'CountDown__days');
       expect(element).toBeDefined();
     });
   });
 
   describe('component configurable', function() {
-    var component;
-    var date = moment().add(10, 'days').format("YYYY-MM-DD");
-    var linkUrl = 'http://www.google.com/';
+    let component;
+    let date = moment().add(10, 'days').format("YYYY-MM-DD");
+    let linkUrl = 'http://www.google.com/';
 
     beforeEach(function() {
-      var countDown = <CountDown date={ date } i18n={{ link_text: 'get foobarred' }} linkUrl={ linkUrl } />;
+      let countDown = <CountDown date={ date } i18n={{ link_text: 'get foobarred' }} linkUrl={ linkUrl } />;
       component = TestUtils.renderIntoDocument(countDown);
     });
 
     it('renders anchor with provided text', function() {
-      var link = findByClass(component, 'CountDown__link');
+      let link = findByClass(component, 'CountDown__link');
       expect(link.textContent).toBe('get foobarred');
     });
   });
 
   describe('when the event date is in the future', function() {
-    var countDown;
-    var component;
-    var linkUrl = "http://everydayhero.com/";
-    var date    = moment().add(10, 'days').format("YYYY-MM-DD");
+    let countDown;
+    let component;
+    let linkUrl = "http://everydayhero.com/";
+    let date    = moment().add(10, 'days').format("YYYY-MM-DD");
 
     beforeEach(function() {
       countDown = <CountDown date={ date } linkUrl={ linkUrl } />;
@@ -55,26 +55,26 @@ describe('CountDown', function() {
     });
 
     it('renders days', function() {
-      var element = findByClass(component, 'CountDown__days');
+      let element = findByClass(component, 'CountDown__days');
       expect(element.textContent).toBe("10");
     });
 
     it('renders a string using past tense', function() {
-      var label = findByClass(component, 'CountDown__label');
+      let label = findByClass(component, 'CountDown__label');
       expect(label.textContent).toBe('days to go');
     });
 
     it('renders an anchor with a link url', function() {
-      var link = findByClass(component, 'CountDown__link');
+      let link = findByClass(component, 'CountDown__link');
       expect(link.href).toBe(linkUrl);
     });
   });
 
   describe('when the event date is in the past', function() {
-    var countDown;
-    var component;
-    var linkUrl = "http://everydayhero.com/";
-    var date    = moment().subtract(10, 'days').format("YYYY-MM-DD");
+    let countDown;
+    let component;
+    let linkUrl = "http://everydayhero.com/";
+    let date    = moment().subtract(10, 'days').format("YYYY-MM-DD");
 
     beforeEach(function() {
       countDown = <CountDown date={ date } linkUrl={ linkUrl } />;
@@ -82,17 +82,17 @@ describe('CountDown', function() {
     });
 
     it('renders days', function() {
-      var element = findByClass(component, 'CountDown__days');
+      let element = findByClass(component, 'CountDown__days');
       expect(element.textContent).toBe("10");
     });
 
     it('renders a string using past tense', function() {
-      var label = findByClass(component, 'CountDown__label');
+      let label = findByClass(component, 'CountDown__label');
       expect(label.textContent).toBe('days ago');
     });
 
     it('renders text telling the user the event is finished', function() {
-      var element = findByClass(component, 'CountDown__finished');
+      let element = findByClass(component, 'CountDown__finished');
       expect(element.textContent).toBe('This event has now finished.');
     });
   });

@@ -1,6 +1,4 @@
-'use strict';
-
-var mul_table = [
+let mul_table = [
   512, 512, 456, 512, 328, 456, 335, 512, 405, 328, 271, 456, 388, 335, 292, 512,
   454, 405, 364, 328, 298, 271, 496, 456, 420, 388, 360, 335, 312, 292, 273, 512,
   482, 454, 428, 405, 383, 364, 345, 328, 312, 298, 284, 271, 259, 496, 475, 456,
@@ -19,7 +17,7 @@ var mul_table = [
   289, 287, 285, 282, 280, 278, 275, 273, 271, 269, 267, 265, 263, 261, 259
 ];
 
-var shg_table = [
+let shg_table = [
   9, 11, 12, 13, 13, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 17,
   17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 18, 19,
   19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20,
@@ -41,16 +39,16 @@ var shg_table = [
 function blur(image, radius) {
   if (isNaN(radius) || radius < 1) return;
 
-  var w = image.width;
-  var h = image.height;
+  let w = image.width;
+  let h = image.height;
 
-  var canvas = document.createElement('canvas');
+  let canvas = document.createElement('canvas');
   if (!canvas.getContext) return;
 
   canvas.width = w;
   canvas.height = h;
 
-  var ctx = canvas.getContext('2d');
+  let ctx = canvas.getContext('2d');
 
   ctx.drawImage(image, 0, 0);
 
@@ -58,31 +56,31 @@ function blur(image, radius) {
 }
 
 function blurCanvas(canvas, ctx, width, height, radius) {
-  var imgData = ctx.getImageData(0, 0, width, height);
-  var pixels = imgData.data;
-  var x, y, i, p, yp, yi, yw, r_sum, g_sum, b_sum, r_out_sum, g_out_sum, b_out_sum, r_in_sum, g_in_sum, b_in_sum, pr, pg, pb, rbs;
+  let imgData = ctx.getImageData(0, 0, width, height);
+  let pixels = imgData.data;
+  let x, y, i, p, yp, yi, yw, r_sum, g_sum, b_sum, r_out_sum, g_out_sum, b_out_sum, r_in_sum, g_in_sum, b_in_sum, pr, pg, pb, rbs;
 
-  var div = radius + radius + 1;
-  var widthMinus1  = width - 1;
-  var heightMinus1 = height - 1;
-  var radiusPlus1  = radius + 1;
-  var sumFactor = radiusPlus1 * ( radiusPlus1 + 1 ) / 2;
+  let div = radius + radius + 1;
+  let widthMinus1  = width - 1;
+  let heightMinus1 = height - 1;
+  let radiusPlus1  = radius + 1;
+  let sumFactor = radiusPlus1 * ( radiusPlus1 + 1 ) / 2;
 
-  var stackStart = new BlurStack();
-  var stackEnd;
-  var stack = stackStart;
+  let stackStart = new BlurStack();
+  let stackEnd;
+  let stack = stackStart;
   for ( i = 1; i < div; i++ ) {
     stack = stack.next = new BlurStack();
     if ( i == radiusPlus1 ) stackEnd = stack;
   }
   stack.next = stackStart;
-  var stackIn = null;
-  var stackOut = null;
+  let stackIn = null;
+  let stackOut = null;
 
   yw = yi = 0;
 
-  var mul_sum = mul_table[radius];
-  var shg_sum = shg_table[radius];
+  let mul_sum = mul_table[radius];
+  let shg_sum = shg_table[radius];
 
   for ( y = 0; y < height; y++ ) {
     r_in_sum = g_in_sum = b_in_sum = r_sum = g_sum = b_sum = 0;

@@ -14,11 +14,11 @@ function getJSONP(url, callback, options) {
   }
 
   options = options || {};
-  var timeout = options.timeout || DEFAULT_TIMEOUT;
-  var retries = options.retries || DEFAULT_RETRIES;
-  var cancelRequest;
+  let timeout = options.timeout || DEFAULT_TIMEOUT;
+  let retries = options.retries || DEFAULT_RETRIES;
+  let cancelRequest;
 
-  var requestHandler = function(error, data) {
+  let requestHandler = function(error, data) {
     if (error) {
       if (retries-- > 0) {
         cancelRequest = jsonp(url, {timeout: timeout}, requestHandler);
@@ -33,7 +33,7 @@ function getJSONP(url, callback, options) {
 
   cancelRequest = jsonp(url, {timeout: timeout}, requestHandler);
 
-  var cancelCallback = function() {
+  const cancelCallback = function() {
     cancelRequest();
   };
 

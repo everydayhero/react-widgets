@@ -9,8 +9,8 @@ describe('TeamLeaderboard', function() {
   let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('Component defaults', function() {
-    var teamLeaderboard;
-    var element;
+    let teamLeaderboard;
+    let element;
 
     beforeEach(function() {
       teamLeaderboard = <TeamLeaderboard campaignUid="au-0" />;
@@ -22,7 +22,7 @@ describe('TeamLeaderboard', function() {
     });
 
     it('renders a default heading', function() {
-      var heading = findByClass(element, 'TeamLeaderboard__heading');
+      let heading = findByClass(element, 'TeamLeaderboard__heading');
       expect(heading.textContent).toBe('Top Teams');
     });
 
@@ -33,9 +33,9 @@ describe('TeamLeaderboard', function() {
   });
 
   describe('Custom component props', function() {
-    var leaderboard;
-    var element;
-    var translation = {
+    let leaderboard;
+    let element;
+    let translation = {
       heading: 'Top Teams'
     };
 
@@ -45,14 +45,14 @@ describe('TeamLeaderboard', function() {
     });
 
     it('renders a custom heading', function() {
-      var heading = findByClass(element, 'TeamLeaderboard__heading');
+      let heading = findByClass(element, 'TeamLeaderboard__heading');
       expect(heading.textContent).toBe(translation.heading);
     });
   });
 
   describe('standard competition ranking system', function() {
-    var element;
-    var data;
+    let element;
+    let data;
 
     beforeEach(function() {
       element = TestUtils.renderIntoDocument(<TeamLeaderboard campaignUid="au-0" />);
@@ -95,15 +95,15 @@ describe('TeamLeaderboard', function() {
 
   describe('Number formatting options', function() {
     it('renders in a abbreviated format by default', function() {
-      var leaderboard = <TeamLeaderboard campaignUid="au-0" />;
-      var element = TestUtils.renderIntoDocument(leaderboard);
+      let leaderboard = <TeamLeaderboard campaignUid="au-0" />;
+      let element = TestUtils.renderIntoDocument(leaderboard);
 
       expect(element.formatAmount(100000)).toEqual('$1 k');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var leaderboard = <TeamLeaderboard campaignUid="au-0" currencyFormat="0.00" />;
-      var element = TestUtils.renderIntoDocument(leaderboard);
+      let leaderboard = <TeamLeaderboard campaignUid="au-0" currencyFormat="0.00" />;
+      let element = TestUtils.renderIntoDocument(leaderboard);
 
       expect(element.formatAmount(100000)).toEqual('$1000.00');
     });
@@ -111,48 +111,48 @@ describe('TeamLeaderboard', function() {
 
   describe('rendering different templates', function(){
     it('renders LeaderboardItem component for children by default', function() {
-      var leaderboard = <TeamLeaderboard campaignUid="au-0" />;
-      var element = TestUtils.renderIntoDocument(leaderboard);
+      let leaderboard = <TeamLeaderboard campaignUid="au-0" />;
+      let element = TestUtils.renderIntoDocument(leaderboard);
       expect(element.props.altTemplate).toBeFalsy();
     });
 
     it('renders TeamLeaderboardItem component for children when set', function() {
-      var leaderboard = <TeamLeaderboard campaignUid="au-0" altTemplate />;
-      var element = TestUtils.renderIntoDocument(leaderboard);
+      let leaderboard = <TeamLeaderboard campaignUid="au-0" altTemplate />;
+      let element = TestUtils.renderIntoDocument(leaderboard);
       expect(element.props.altTemplate).toBeTruthy();
     });
   });
 
   describe('paging button rendering', function() {
     it('renders a paging component if multiple pages are available', function() {
-      var leaderboard = <TeamLeaderboard campaignUid="au-0" limit={ 10 } pageSize={ 5 } />;
-      var element = TestUtils.renderIntoDocument(leaderboard);
+      let leaderboard = <TeamLeaderboard campaignUid="au-0" limit={ 10 } pageSize={ 5 } />;
+      let element = TestUtils.renderIntoDocument(leaderboard);
       element.setState({
         isLoading: false,
         resultCount: 10
       });
 
-      var pagingFunction = element.renderPaging();
+      let pagingFunction = element.renderPaging();
       expect(pagingFunction).toBeDefined();
     });
 
     it('does not render a paging component if only 1 page is available', function() {
-      var leaderboard = <TeamLeaderboard campaignUid="au-0" limit={ 5 } pageSize={ 5 } />;
-      var element = TestUtils.renderIntoDocument(leaderboard);
+      let leaderboard = <TeamLeaderboard campaignUid="au-0" limit={ 5 } pageSize={ 5 } />;
+      let element = TestUtils.renderIntoDocument(leaderboard);
       element.setState({ isLoading: false });
 
-      var pagingFunction = element.renderPaging();
+      let pagingFunction = element.renderPaging();
       expect(pagingFunction).toBeUndefined();
     });
   });
 
   describe('handleHasContentCallback', function() {
-    var element;
-    var onHasContent = jasmine.createSpy();
-    var board = [1];
+    let element;
+    let onHasContent = jasmine.createSpy();
+    let board = [1];
 
     describe('callback is not passed in', function() {
-      var leaderboard = <TeamLeaderboard campaignUid="au-0" />;
+      let leaderboard = <TeamLeaderboard campaignUid="au-0" />;
       beforeEach(function() {
         element = TestUtils.renderIntoDocument(leaderboard);
       });
@@ -164,7 +164,7 @@ describe('TeamLeaderboard', function() {
     });
 
     describe('callback is passed in', function() {
-      var leaderboard = <TeamLeaderboard campaignUid="au-0" onHasContent={ onHasContent } />;
+      let leaderboard = <TeamLeaderboard campaignUid="au-0" onHasContent={ onHasContent } />;
       beforeEach(function() {
         element = TestUtils.renderIntoDocument(leaderboard);
       });

@@ -3,7 +3,7 @@ jest.mock('../../../../api/frolCharities');
 
 import charities from '../../../../api/frolCharities';
 
-var charity = {
+const charity = {
   uid: 'xy-12',
   slug: 'foo',
   name: 'Foo',
@@ -12,7 +12,7 @@ var charity = {
   url: 'http://foo.com/'
 };
 
-var searchResponse = {
+const searchResponse = {
   charities: [charity],
   meta: {
     pagination: {
@@ -40,9 +40,9 @@ describe('CharitySearchModal', function() {
   });
 
   it('renders a SearchModal', function() {
-    var charitySearchModal = <CharitySearchModal autoFocus={ false } />;
-    var element = TestUtils.renderIntoDocument(charitySearchModal);
-    var searchModal = findByType(element, SearchModal);
+    let charitySearchModal = <CharitySearchModal autoFocus={ false } />;
+    let element = TestUtils.renderIntoDocument(charitySearchModal);
+    let searchModal = findByType(element, SearchModal);
 
     expect(searchModal).toBeDefined();
   });
@@ -50,9 +50,9 @@ describe('CharitySearchModal', function() {
   it('renders search results', function() {
     charities.search.mockImplementation(function(query, callback) { callback(searchResponse); });
 
-    var charitySearchModal = <CharitySearchModal autoFocus={ false } />;
-    var element = TestUtils.renderIntoDocument(charitySearchModal);
-    var resultElements = scryByClass(element, 'SearchResult');
+    let charitySearchModal = <CharitySearchModal autoFocus={ false } />;
+    let element = TestUtils.renderIntoDocument(charitySearchModal);
+    let resultElements = scryByClass(element, 'SearchResult');
 
     expect(resultElements.length).toEqual(1);
     expect(resultElements[0].textContent).toContain(charity.name);
@@ -60,10 +60,10 @@ describe('CharitySearchModal', function() {
   });
 
   it('searches for charities on input change', function() {
-    var query = { searchTerm: 'foo', page: 1, pageSize: 10 };
-    var charitySearchModal = <CharitySearchModal autoFocus={ false } country="xy" />;
-    var element = TestUtils.renderIntoDocument(charitySearchModal);
-    var input = findByTag(element, 'input');
+    let query = { searchTerm: 'foo', page: 1, pageSize: 10 };
+    let charitySearchModal = <CharitySearchModal autoFocus={ false } country="xy" />;
+    let element = TestUtils.renderIntoDocument(charitySearchModal);
+    let input = findByTag(element, 'input');
     TestUtils.Simulate.change(input, { target: { value: 'foo' } });
 
     expect(charities.search.mock.calls.length).toEqual(2);
@@ -73,10 +73,10 @@ describe('CharitySearchModal', function() {
   it('searches for more charities on page change', function() {
     charities.search.mockImplementation(function(query, callback) { callback(searchResponse); });
 
-    var query = { searchTerm: '', page: 2, pageSize: 10 };
-    var charitySearchModal = <CharitySearchModal autoFocus={ false } country="xy" />;
-    var element = TestUtils.renderIntoDocument(charitySearchModal);
-    var nextPageButton = findByClass(element, 'SearchPagination__button--right');
+    let query = { searchTerm: '', page: 2, pageSize: 10 };
+    let charitySearchModal = <CharitySearchModal autoFocus={ false } country="xy" />;
+    let element = TestUtils.renderIntoDocument(charitySearchModal);
+    let nextPageButton = findByClass(element, 'SearchPagination__button--right');
     TestUtils.Simulate.click(nextPageButton);
 
     expect(charities.search.mock.calls.length).toEqual(2);
@@ -84,29 +84,30 @@ describe('CharitySearchModal', function() {
   });
 
   it('updates isSearching accordingly', function() {
-    var charitySearchModal = <CharitySearchModal autoFocus={ false } country="xy" />;
-    var element = TestUtils.renderIntoDocument(charitySearchModal);
+    let charitySearchModal = <CharitySearchModal autoFocus={ false } country="xy" />;
+    let element = TestUtils.renderIntoDocument(charitySearchModal);
 
     expect(element.state.isSearching).toBeTruthy();
 
-    var searchCallback = charities.search.mock.calls[0][1];
+    let searchCallback = charities.search.mock.calls[0][1];
     searchCallback(searchResponse);
 
     expect(element.state.isSearching).toBeFalsy();
 
-    var input = findByTag(element, 'input');
+    let input = findByTag(element, 'input');
     TestUtils.Simulate.change(input, { target: { value: 'foo' } });
+    jest.runAllTimers();
 
     expect(element.state.isSearching).toBeTruthy();
   });
 
   it('links to charity url for default visit action', function() {
-    var onClose = jest.genMockFunction();
-    var charitySearchModal = <CharitySearchModal autoFocus={ false } onClose={ onClose } />;
-    var element = TestUtils.renderIntoDocument(charitySearchModal);
+    let onClose = jest.genMockFunction();
+    let charitySearchModal = <CharitySearchModal autoFocus={ false } onClose={ onClose } />;
+    let element = TestUtils.renderIntoDocument(charitySearchModal);
     element.setState({ results: [charity] });
 
-    var resultElements = scryByClass(element, 'SearchResult');
+    let resultElements = scryByClass(element, 'SearchResult');
 
     expect(resultElements[0].href).toBe(charity.url);
   });

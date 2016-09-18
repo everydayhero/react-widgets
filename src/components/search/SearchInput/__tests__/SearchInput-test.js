@@ -1,50 +1,46 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 
-var _           = require('lodash');
-_.debounce      = require('../../../../test/helpers/debounce'); // testable version of debounce
-
-var React       = require('react');
-var SearchInput = require('../');
-var TestUtils   = require('react-addons-test-utils');
-var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-var findByTag   = TestUtils.findRenderedDOMComponentWithTag;
+import React from 'react';
+import SearchInput from '../';
+import TestUtils from 'react-addons-test-utils';
+const findByClass = TestUtils.findRenderedDOMComponentWithClass;
+const findByTag   = TestUtils.findRenderedDOMComponentWithTag;
 
 describe('SearchInput', function() {
   it('allows custom className', function() {
-    var component = <SearchInput className="foo" />;
-    var element = TestUtils.renderIntoDocument(component);
+    let component = <SearchInput className="foo" />;
+    let element = TestUtils.renderIntoDocument(component);
 
     findByClass(element, 'foo');
   });
 
   it('allows an optional placeholder', function() {
-    var component = <SearchInput label="foo" />;
-    var element = TestUtils.renderIntoDocument(component);
-    var input = findByClass(element, 'SearchInput__input');
+    let component = <SearchInput label="foo" />;
+    let element = TestUtils.renderIntoDocument(component);
+    let input = findByClass(element, 'SearchInput__input');
 
     expect(input.getAttribute('placeholder')).toBe('foo');
   });
 
   it('allows an optional searchTerm', function() {
-    var component = <SearchInput searchTerm="bar" />;
-    var element = TestUtils.renderIntoDocument(component);
-    var input = findByClass(element, 'SearchInput__input');
+    let component = <SearchInput searchTerm="bar" />;
+    let element = TestUtils.renderIntoDocument(component);
+    let input = findByClass(element, 'SearchInput__input');
 
     expect(input.value).toBe('bar');
   });
 
   it('show processing twirler when QueryInProgress', function() {
-    var component = <SearchInput isSearching={ true } />;
-    var element = TestUtils.renderIntoDocument(component);
+    let component = <SearchInput isSearching={ true } />;
+    let element = TestUtils.renderIntoDocument(component);
 
     findByClass(element, 'SearchInput__progressSpinner');
   });
 
   it('auto focuses on autoFocus', function() {
-    var component = <SearchInput autoFocus={ true } />;
-    var element = TestUtils.renderIntoDocument(component);
-    var input = findByTag(element, 'input');
+    let component = <SearchInput autoFocus={ true } />;
+    let element = TestUtils.renderIntoDocument(component);
+    let input = findByTag(element, 'input');
 
     expect(input).toBe(document.activeElement);
 
@@ -53,10 +49,10 @@ describe('SearchInput', function() {
   });
 
   it('calls onChange on change', function() {
-    var callback = jest.genMockFunction();
-    var component = <SearchInput onChange={ callback } />;
-    var element = TestUtils.renderIntoDocument(component);
-    var input = findByTag(element, 'input');
+    let callback = jest.genMockFunction();
+    let component = <SearchInput onChange={ callback } />;
+    let element = TestUtils.renderIntoDocument(component);
+    let input = findByTag(element, 'input');
     TestUtils.Simulate.change(input, { target: { value: 'foo' } });
 
     expect(callback).not.toBeCalled();
@@ -67,10 +63,10 @@ describe('SearchInput', function() {
   });
 
   it('debounces input changes', function() {
-    var callback = jest.genMockFunction();
-    var component = <SearchInput onChange={ callback } />;
-    var element = TestUtils.renderIntoDocument(component);
-    var input = findByTag(element, 'input');
+    let callback = jest.genMockFunction();
+    let component = <SearchInput onChange={ callback } />;
+    let element = TestUtils.renderIntoDocument(component);
+    let input = findByTag(element, 'input');
     TestUtils.Simulate.change(input, { target: { value: 'foo' } });
     TestUtils.Simulate.change(input, { target: { value: 'bar' } });
 

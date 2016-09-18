@@ -18,7 +18,7 @@ const breakpoints = {
   wide: 1450,
   xWide: 1700
 };
-var sizes = {
+const sizes = {
   tiny: 200,
   small: 350,
   medium: 500,
@@ -26,7 +26,7 @@ var sizes = {
   huge: 800,
   xHuge: 950,
 };
-var resizeHandlers = [];
+let resizeHandlers = [];
 
 addEventListener('resize', function(e) {
   resizeHandlers.forEach(function(handler) {

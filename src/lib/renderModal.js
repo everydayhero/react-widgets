@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 
 function renderModal(component, options) {
-  var div = document.createElement('div');
+  let div = document.createElement('div');
   document.body.appendChild(div);
 
   options.onClose = function() {

@@ -1,5 +1,4 @@
-"use strict";
-var noop = function() {};
+let noop = function() {};
 
 if (typeof window.console === "undefined") {
   window.console = {

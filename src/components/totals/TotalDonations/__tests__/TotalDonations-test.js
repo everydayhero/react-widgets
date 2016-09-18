@@ -11,8 +11,8 @@ describe('TotalDonations', function() {
   let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component defaults', function() {
-    var totalDonations;
-    var element;
+    let totalDonations;
+    let element;
 
     beforeEach(function() {
       totals.findByCampaigns.mockClear();
@@ -27,19 +27,19 @@ describe('TotalDonations', function() {
     it('renders default total of donations', function() {
       element.setState({ isLoading: false });
 
-      var total = findByClass(element, 'TotalDonations__total');
+      let total = findByClass(element, 'TotalDonations__total');
       expect(total.textContent).toContain('0');
     });
 
     it('renders a default title', function() {
       element.setState({ isLoading: false });
 
-      var title = findByClass(element, 'TotalDonations__title');
+      let title = findByClass(element, 'TotalDonations__title');
       expect(title.textContent).toBe('Donations');
     });
 
     it('renders an icon by default', function() {
-      var icon = findByClass(element, 'TotalDonations__icon');
+      let icon = findByClass(element, 'TotalDonations__icon');
       expect(icon).not.toBeNull();
     });
 
@@ -55,8 +55,8 @@ describe('TotalDonations', function() {
   });
 
   describe('Working with multiple uid types', function() {
-    var totalDonations;
-    var element;
+    let totalDonations;
+    let element;
 
     beforeEach(function() {
       totals.findByAll.mockClear();
@@ -71,8 +71,8 @@ describe('TotalDonations', function() {
   });
 
   describe('single charity id', function() {
-    var totalDonations;
-    var element;
+    let totalDonations;
+    let element;
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
@@ -87,8 +87,8 @@ describe('TotalDonations', function() {
   });
 
   describe('single charity id', function() {
-    var totalDonations;
-    var element;
+    let totalDonations;
+    let element;
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
@@ -103,7 +103,7 @@ describe('TotalDonations', function() {
   });
 
   describe('multiple charity ids', function() {
-    var totalDonations;
+    let totalDonations;
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
@@ -117,9 +117,9 @@ describe('TotalDonations', function() {
   });
 
   describe('Custom component props', function() {
-    var totalDonations;
-    var element;
-    var translation = {
+    let totalDonations;
+    let element;
+    let translation = {
       title: 'foo'
     };
 
@@ -130,14 +130,14 @@ describe('TotalDonations', function() {
 
     it('renders a custom title', function() {
       element.setState({ isLoading: false });
-      var title = findByClass(element, 'TotalDonations__title');
+      let title = findByClass(element, 'TotalDonations__title');
 
       expect(title.textContent).toBe(translation.title);
     });
 
     it('renders a default total', function() {
       element.setState({ isLoading: false });
-      var total = findByClass(element, 'TotalDonations__total');
+      let total = findByClass(element, 'TotalDonations__total');
 
       expect(total.textContent).toContain('0');
     });
@@ -145,51 +145,51 @@ describe('TotalDonations', function() {
 
   describe('Number formatting options', function() {
     it('renders in a standard format by default', function() {
-      var totalDonations = <TotalDonations campaignUid="au-0" />;
-      var element = TestUtils.renderIntoDocument(totalDonations);
+      let totalDonations = <TotalDonations campaignUid="au-0" />;
+      let element = TestUtils.renderIntoDocument(totalDonations);
 
       element.setState({
         isLoading: false,
         total: 1000
       });
 
-      var total = findByClass(element, 'TotalDonations__total');
+      let total = findByClass(element, 'TotalDonations__total');
       expect(total.textContent).toBe('1,000');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var totalDonations = <TotalDonations campaignUid="au-0" format="0[.]00" />;
-      var element = TestUtils.renderIntoDocument(totalDonations);
+      let totalDonations = <TotalDonations campaignUid="au-0" format="0[.]00" />;
+      let element = TestUtils.renderIntoDocument(totalDonations);
 
       element.setState({
         isLoading: false,
         total: 1000
       });
 
-      var total = findByClass(element, 'TotalDonations__total');
+      let total = findByClass(element, 'TotalDonations__total');
       expect(total.textContent).toBe('1000');
     });
   });
 
   describe('Displaying an icon', function() {
     it('renders no icon when renderIcon set to false', function() {
-      var totalDonations = <TotalDonations campaignUid="au-0" renderIcon={ false } />;
-      var element = TestUtils.renderIntoDocument(totalDonations);
-      var icon = scryByClass(element, 'TotalDonations__icon');
+      let totalDonations = <TotalDonations campaignUid="au-0" renderIcon={ false } />;
+      let element = TestUtils.renderIntoDocument(totalDonations);
+      let icon = scryByClass(element, 'TotalDonations__icon');
       expect(icon.length).toEqual(0);
     });
 
     it('renders a custom icon when passed a valid FontAwesome string', function() {
-      var totalDonations = <TotalDonations campaignUid="au-0" renderIcon="paw" />;
-      var element = TestUtils.renderIntoDocument(totalDonations);
-      var icon = findByClass(element, 'fa-paw');
+      let totalDonations = <TotalDonations campaignUid="au-0" renderIcon="paw" />;
+      let element = TestUtils.renderIntoDocument(totalDonations);
+      let icon = findByClass(element, 'fa-paw');
       expect(icon).not.toBeNull();
     });
   });
 
   describe('takes startAt property', function() {
-    var totalDonations;
-    var element;
+    let totalDonations;
+    let element;
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
@@ -204,8 +204,8 @@ describe('TotalDonations', function() {
   });
 
   describe('takes endAt property', function() {
-    var totalDonations;
-    var element;
+    let totalDonations;
+    let element;
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
@@ -220,8 +220,8 @@ describe('TotalDonations', function() {
   });
 
   describe('custom offset', function() {
-    var totalDonations;
-    var element;
+    let totalDonations;
+    let element;
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
@@ -231,7 +231,7 @@ describe('TotalDonations', function() {
 
     it('renders with a custom donations offset', function() {
       element.setState({ total: 10000, isLoading: false });
-      var total = findByClass(element, 'TotalDonations__total');
+      let total = findByClass(element, 'TotalDonations__total');
 
       expect(total.textContent).toContain('20,000');
     });

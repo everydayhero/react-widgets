@@ -15,10 +15,10 @@ function getCharities(callback) {
   }
 
   getJSONP(url, function(data) {
-    var transformedData = [];
-    var entries = data.feed.entry;
+    let transformedData = [];
+    let entries = data.feed.entry;
 
-    for (var i = 0; i < entries.length; i++) {
+    for (let i = 0; i < entries.length; i++) {
       transformedData.push({
         name: entries[i].gsx$name.$t,
         frolId: entries[i].gsx$frolid.$t,
@@ -36,15 +36,15 @@ function getCharities(callback) {
 
 function search(properties, callback) {
   getCharities(function(charities) {
-    var results = properties.searchTerm === '' ? charities : _.filter(charities, function(charity){
+    let results = properties.searchTerm === '' ? charities : _.filter(charities, function(charity){
       return charity.name.search(new RegExp(properties.searchTerm, 'gim')) >= 0;
     });
 
-    var count = results.length;
-    var totalPages = count / properties.pageSize;
-    var endIndex = (properties.page * properties.pageSize);
-    var beginIndex =  endIndex - properties.pageSize;
-    var meta = {
+    let count = results.length;
+    let totalPages = count / properties.pageSize;
+    let endIndex = (properties.page * properties.pageSize);
+    let beginIndex =  endIndex - properties.pageSize;
+    let meta = {
       pagination: {
         current_page: properties.page,
         count: count,

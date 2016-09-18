@@ -39,12 +39,12 @@ export default {
   loadLeaderboard(type) {
     this.setState({ isLoading: true });
 
-    var groupValue = this.props.groupValue;
+    let groupValue = this.props.groupValue;
     if (this.props.groupValues && this.props.groupValues.length > 0) {
       groupValue = paramJoin(this.props.groupValues, '&groupValue[]');
     }
 
-    var endpoint = this.getEndpoint();
+    let endpoint = this.getEndpoint();
 
     if (groupValue && this.props.campaignUid) {
       endpoint(this.processLeaderboard);
@@ -66,7 +66,7 @@ export default {
       // Static Leaderboard
       pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : [];
     }
-    var leaderboard = this.getLeaderboard(pages);
+    let leaderboard = this.getLeaderboard(pages);
 
     this.rankLeaderboard(leaderboard);
     this.handleHasContentCallback(leaderboard);

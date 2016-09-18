@@ -8,8 +8,8 @@ describe('TeamLeaderboardItem', function() {
   let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
-    var teamLeaderboardItem;
-    var element;
+    let teamLeaderboardItem;
+    let element;
 
     beforeEach(function() {
       teamLeaderboardItem = <TeamLeaderboardItem campaignUid="au-0" />;
@@ -21,22 +21,22 @@ describe('TeamLeaderboardItem', function() {
     });
 
     it('renders a team image', function() {
-      var elementImg = findByClass(element, 'TeamLeaderboard__items-image');
+      let elementImg = findByClass(element, 'TeamLeaderboard__items-image');
       expect(elementImg).not.toBeNull();
     });
 
     it('renders a team name', function() {
-      var elementName = findByClass(element, 'TeamLeaderboard__items-name');
+      let elementName = findByClass(element, 'TeamLeaderboard__items-name');
       expect(elementName).not.toBeNull();
     });
   });
 
   describe('Render charity name option', function() {
-    var element;
-    var elementCharity;
+    let element;
+    let elementCharity;
 
     it('renders a charity name if present', function() {
-      var teamLeaderboardItem = <TeamLeaderboardItem charityName='foo' />;
+      let teamLeaderboardItem = <TeamLeaderboardItem charityName='foo' />;
       element = TestUtils.renderIntoDocument(teamLeaderboardItem);
       elementCharity = findByClass(element, 'LeaderboardItem__charity');
       expect(elementCharity).not.toBeNull();

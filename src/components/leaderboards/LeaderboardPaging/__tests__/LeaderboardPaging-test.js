@@ -7,9 +7,9 @@ import TestUtils from 'react-addons-test-utils';
 
 describe('LeaderboardPaging', function() {
   describe('component defaults', function() {
-    var leaderboardPaging;
-    var component;
-    var callback = jest.genMockFunction();
+    let leaderboardPaging;
+    let component;
+    let callback = jest.genMockFunction();
 
     beforeEach(function() {
       leaderboardPaging = <LeaderboardPaging nextPage={ callback } prevPage={ callback } currentPage={ 1 } pageCount={ 4 } />;

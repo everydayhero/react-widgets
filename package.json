@@ -92,13 +92,13 @@
     "install": "bin/write-version-sass-var"
   },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "moduleFileExtensions": [
       "js",
       "json"
     ],
     "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react"
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/enzyme/"
     ]
   }
 }

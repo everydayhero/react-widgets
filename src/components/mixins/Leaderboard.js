@@ -36,7 +36,7 @@ export default {
     return (endpoint || function(type, limit, callback) { callback(null); });
   },
 
-  loadLeaderboard: function(type) {
+  loadLeaderboard(type) {
     this.setState({ isLoading: true });
 
     var groupValue = this.props.groupValue;
@@ -56,8 +56,8 @@ export default {
     }
   },
 
-  processLeaderboard: function(result) {
-    var pages = [];
+  processLeaderboard(result) {
+    let pages = [];
     if (result.results) {
       pages = result.results.map(function(object) {
         return object = object.page;
@@ -79,15 +79,15 @@ export default {
     });
   },
 
-  handleHasContentCallback: function(leaderboard) {
-    var onHasContent = this.props.onHasContent;
+  handleHasContentCallback(leaderboard) {
+    let onHasContent = this.props.onHasContent;
 
     if (leaderboard.length > 0 && onHasContent) {
       onHasContent();
     }
   },
 
-  getLeaderboard: function(pages) {
+  getLeaderboard(pages) {
     return _.reduce(pages, function(result, page) {
       if (page.amount.cents > 0) {
         result.push({
@@ -106,9 +106,9 @@ export default {
     }, []);
   },
 
-  rankLeaderboard: function(leaderboard) {
-    var rank = 1;
-    var prevItem = null;
+  rankLeaderboard(leaderboard) {
+    let rank = 1;
+    let prevItem = null;
 
     _.forEach(leaderboard, function(item, i) {
       if (prevItem && item.amount != prevItem.amount) {
@@ -120,38 +120,38 @@ export default {
     });
   },
 
-  paginateLeaderboard: function(leaderboard) {
-    var pageSize         = this.props.pageSize;
-    var pagedLeaderboard = [];
+  paginateLeaderboard(leaderboard) {
+    let pageSize         = this.props.pageSize;
+    let pagedLeaderboard = [];
 
-    for (var i = 0; i < leaderboard.length; i += pageSize) {
+    for (let i = 0; i < leaderboard.length; i += pageSize) {
       pagedLeaderboard.push(leaderboard.slice(i,i + pageSize));
     }
 
     return pagedLeaderboard;
   },
 
-  formatAmount: function(amount) {
+  formatAmount(amount) {
     return this.t('symbol') + numeral(amount / 100).format(this.props.currencyFormat);
   },
 
-  prevPage: function() {
+  prevPage() {
     if (this.state.currentPage > 1) {
       this.setState({ currentPage: this.state.currentPage - 1 });
     }
   },
 
-  nextPage: function() {
-    var totalPages  = this.props.limit / this.props.pageSize;
-    var currentPage = this.state.currentPage;
+  nextPage() {
+    let totalPages  = this.props.limit / this.props.pageSize;
+    let currentPage = this.state.currentPage;
 
     if (currentPage < totalPages) {
       this.setState({ currentPage: currentPage + 1 });
     }
   },
 
-  renderPaging: function() {
-    var pageCount = Math.ceil(this.state.resultCount / this.props.pageSize);
+  renderPaging() {
+    let pageCount = Math.ceil(this.state.resultCount / this.props.pageSize);
 
     if (!this.state.isLoading && pageCount > 1) {
       return (

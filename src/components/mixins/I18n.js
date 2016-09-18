@@ -14,12 +14,12 @@ export default {
     return i18n;
   },
 
-  t: function(key, params) {
+  t(key, params) {
     return i18n.t(this.getI18n(), key, params);
   },
 
-  tm: function(key, params) {
-    var html = md.render(this.t(key, params));
+  tm(key, params) {
+    let html = md.render(this.t(key, params));
     return <span dangerouslySetInnerHTML={{ __html: html }} />;
   }
 };

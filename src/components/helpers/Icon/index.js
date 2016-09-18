@@ -12,9 +12,9 @@ export default React.createClass({
     type: React.PropTypes.string,
   },
 
-  render: function() {
-    var spin = this.props.icon === 'circle-o-notch' || this.props.icon === 'spinner' || this.props.icon === 'refresh' || this.props.spin;
-    var classes = _.compact([
+  render() {
+    let spin = this.props.icon === 'circle-o-notch' || this.props.icon === 'spinner' || this.props.icon === 'refresh' || this.props.spin;
+    let classes = _.compact([
       'Icon',
       this.props.type && ('Icon--' + this.props.type),
       'fa',

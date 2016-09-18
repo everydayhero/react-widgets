@@ -36,7 +36,7 @@ export default React.createClass({
     onHasContent: React.PropTypes.func
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       limit: 48,
       pageSize: 12,
@@ -57,7 +57,7 @@ export default React.createClass({
     };
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       isLoading: false,
       boardData: [],
@@ -66,16 +66,16 @@ export default React.createClass({
     };
   },
 
-  componentWillMount: function() {
+  componentWillMount() {
     this.loadLeaderboard('individual');
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     addEventListener('resize', this.setChildWidth);
     this.setChildWidth();
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     removeEventListener('resize', this.setChildWidth);
   },
 
@@ -85,20 +85,20 @@ export default React.createClass({
     });
   }, 100, { trailing: true }),
 
-  renderLoadingState: function() {
+  renderLoadingState() {
     return <Icon className="Leaderboard__loading" icon="refresh" />;
   },
 
-  renderEmptyState: function() {
-    var emptyText       = this.t('emptyText');
-    var emptyButtonText = this.t('emptyButtonText');
+  renderEmptyState() {
+    let emptyText       = this.t('emptyText');
+    let emptyButtonText = this.t('emptyButtonText');
 
     return <LeaderboardEmpty emptyText={ emptyText } emptyButtonText={ emptyButtonText } { ...this.props } />;
   },
 
-  renderLeaderboardItems: function() {
-    var currentPage = this.state.currentPage - 1;
-    var board = this.state.boardData[currentPage];
+  renderLeaderboardItems() {
+    let currentPage = this.state.currentPage - 1;
+    let board = this.state.boardData[currentPage];
 
     return (
       <ReactCSSTransitionGroup

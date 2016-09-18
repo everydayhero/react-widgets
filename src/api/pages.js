@@ -10,13 +10,13 @@ export default {
     return getJSONP(routes.get('page', params), callback);
   },
 
-  findByIds: function(pageIds, callback, options) {
-    var params = _.merge({ pageIds: pageIds }, options);
+  findByIds(pageIds, callback, options) {
+    let params = _.merge({ pageIds: pageIds }, options);
     return getJSONP(routes.get('pages', params), callback);
   },
 
-  findByCampaign: function(campaignUid, type, limit, page, callback, options) {
-    var params = _.merge({
+  findByCampaign(campaignUid, type, limit, page, callback, options) {
+    let params = _.merge({
       campaignUid: campaignUid,
       type: type,
       page: page,
@@ -26,8 +26,8 @@ export default {
     return getJSONP(routes.get('pages', params), callback);
   },
 
-  findByCharity: function(charityUid, type, limit, page, callback, options) {
-    var params = _.merge({
+  findByCharity(charityUid, type, limit, page, callback, options) {
+    let params = _.merge({
       charityUid: charityUid,
       type: type,
       page: page,
@@ -37,7 +37,7 @@ export default {
     return getJSONP(routes.get('pages', params), callback);
   },
 
-  search: function(params, callback) {
+  search(params, callback) {
     params.charityUid = params.charityUid ? paramJoin(params.charityUid, '&charity_id[]=') : '';
     params.campaignUid = params.campaignUid ? paramJoin(params.campaignUid, '&campaign_id[]=') : '';
     params.groupValue = params.groupValue ? paramJoin(params.groupValue, '&group_value[]=') : '';
@@ -47,7 +47,7 @@ export default {
     return getJSONP(routes.get('searchPages', params), callback, {timeout: 10000});
   },
 
-  isGivePage: function(page) {
+  isGivePage(page) {
     return page.campaign.uid &&
       page.campaign.uid == campaigns.giveCampaignUid(page.country_code);
   }

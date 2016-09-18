@@ -19,6 +19,7 @@ var minifyCss    = require('gulp-cssnano')
 // javascripts
 var browserify   = require('browserify')
 var watchify     = require('watchify')
+var babelify     = require('babelify')
 var uglify       = require('gulp-uglify')
 var eslint       = require('gulp-eslint')
 var buffer       = require('vinyl-buffer')
@@ -88,11 +89,12 @@ gulp.task('scripts', ['lint'], function() {
   var bundler = browserify({
     entries: ['./src/widgets.js'],
     standalone: 'edh.widgets',
+    transform: ['babelify'],
     debug: debug,
     fullPaths: debug,
     cache: {},
     packageCache: {}
-  })
+  });
 
   var rebundle = function() {
     var processor = debug ? gutil.noop : uglify

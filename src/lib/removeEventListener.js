@@ -1,8 +1,8 @@
-"use strict";
-var IS_CLIENT = typeof window !== 'undefined';
-var noop = function() {};
+const IS_CLIENT = typeof window !== 'undefined';
 
-function removeEventListener(eventName, handler, el) {
+export default function removeEventListener(eventName, handler, el) {
+  if (!IS_CLIENT) return;
+
   el = el || window;
   if (el.removeEventListener) {
     el.removeEventListener(eventName, handler);
@@ -12,5 +12,3 @@ function removeEventListener(eventName, handler, el) {
     });
   }
 }
-
-module.exports = IS_CLIENT ? removeEventListener : noop;

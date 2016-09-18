@@ -1,17 +1,15 @@
-'use strict';
-
-var _                         = require('lodash');
-var React                     = require('react');
-var I18nMixin                 = require('../../mixins/I18n');
-var campaigns                 = require('../../../api/campaigns');
-var charities                 = require('../../../api/charities');
-var Icon                      = require('../../helpers/Icon');
-var FitnessLeaderboardItem    = require('../FitnessLeaderboardItem');
-var FitnessLeaderboardColHead = require('../FitnessLeaderboardColHead');
-var numeral                   = require('numbro');
+import _ from 'lodash';
+import React from 'react';
+import I18nMixin from '../../mixins/I18n';
+import campaigns from '../../../api/campaigns';
+import charities from '../../../api/charities';
+import Icon from '../../helpers/Icon';
+import FitnessLeaderboardItem from '../FitnessLeaderboardItem';
+import FitnessLeaderboardColHead from '../FitnessLeaderboardColHead';
+import numeral from 'numbro';
 var METERS_TO_MILES           = 0.000621371192;
 
-module.exports = React.createClass({
+export default React.createClass({
   mixins: [I18nMixin],
   displayName: 'FitnessLeaderboard',
   propTypes: {

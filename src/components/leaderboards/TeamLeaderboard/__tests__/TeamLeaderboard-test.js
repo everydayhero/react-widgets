@@ -1,13 +1,12 @@
-'use strict';
+jest.disableAutomock();
 
-jest.autoMockOff();
+import _ from 'lodash';
+import React from 'react';
+import TeamLeaderboard from '../';
+import TestUtils from 'react-addons-test-utils';
 
 describe('TeamLeaderboard', function() {
-  var _                   = require('lodash');
-  var React               = require('react');
-  var TeamLeaderboard     = require('../');
-  var TestUtils           = require('react-addons-test-utils');
-  var findByClass         = TestUtils.findRenderedDOMComponentWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('Component defaults', function() {
     var teamLeaderboard;

@@ -1,21 +1,19 @@
-"use strict";
+import _ from 'lodash';
+import React from 'react';
+import cx from 'classnames';
+import I18nMixin from '../../mixins/I18n';
+import DOMInfoMixin from '../../mixins/DOMInfo';
+import LeaderboardMixin from '../../mixins/Leaderboard';
+import Icon from '../../helpers/Icon';
+import LeaderboardItem from '../LeaderboardItem';
+import TeamLeaderboardItem from '../TeamLeaderboardItem';
+import LeaderboardEmpty from '../LeaderboardEmpty';
+import numeral from 'numbro';
+import addEventListener from '../../../lib/addEventListener';
+import removeEventListener from '../../../lib/removeEventListener';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-var _                       = require('lodash');
-var React                   = require('react');
-var cx                      = require('classnames');
-var I18nMixin               = require('../../mixins/I18n');
-var DOMInfoMixin            = require('../../mixins/DOMInfo');
-var LeaderboardMixin        = require('../../mixins/Leaderboard');
-var Icon                    = require('../../helpers/Icon');
-var LeaderboardItem         = require('../LeaderboardItem');
-var TeamLeaderboardItem     = require('../TeamLeaderboardItem');
-var LeaderboardEmpty        = require('../LeaderboardEmpty');
-var numeral                 = require('numbro');
-var addEventListener        = require('../../../lib/addEventListener');
-var removeEventListener     = require('../../../lib/removeEventListener');
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-
-module.exports = React.createClass({
+export default React.createClass({
   mixins: [I18nMixin, DOMInfoMixin, LeaderboardMixin],
   displayName: "TeamLeaderboard",
   propTypes: {

@@ -1,8 +1,6 @@
-"use strict";
-
-var _        = require('lodash');
-var routes   = require('./routes');
-var getJSONP = require('../lib/getJSONP');
+import _ from 'lodash';
+import routes from './routes';
+import getJSONP from '../lib/getJSONP';
 
 var giveCampaignUids = {
   'au': 'au-0',
@@ -12,8 +10,8 @@ var giveCampaignUids = {
   'us': 'us-0'
 };
 
-module.exports = {
-  find: function(campaignUid, callback, options) {
+export default {
+  find(campaignUid, callback, options) {
     var params = _.merge({
       campaignUid: campaignUid
     }, options);

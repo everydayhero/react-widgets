@@ -1,5 +1,3 @@
-"use strict";
-
 function removeClass(el, className) {
   if (el.classList) {
     el.classList.remove(className);
@@ -8,4 +6,4 @@ function removeClass(el, className) {
   }
 }
 
-module.exports = removeClass;
+export default removeClass;

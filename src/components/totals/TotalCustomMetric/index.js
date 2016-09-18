@@ -1,12 +1,10 @@
-'use strict';
+import React from 'react';
+import I18nMixin from '../../mixins/I18n';
+import campaigns from '../../../api/campaigns';
+import Icon from '../../helpers/Icon';
+import numeral from 'numbro';
 
-const React     = require('react');
-const I18nMixin = require('../../mixins/I18n');
-const campaigns = require('../../../api/campaigns');
-const Icon      = require('../../helpers/Icon');
-const numeral   = require('numbro');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'TotalCustomMetric',
   mixins: [I18nMixin],
   propTypes: {

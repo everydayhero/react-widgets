@@ -1,12 +1,11 @@
-'use strict';
-jest.autoMockOff();
+jest.disableAutomock();
 
-var React           = require('react');
-var TestUtils       = require('react-addons-test-utils');
-var Input           = require('../');
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import Input from '../';
 var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass     = TestUtils.scryRenderedDOMComponentsWithClass;
-var findByAttribute = require('../../../../test/helpers/scryRenderedDOMComponentsWithAttribute').findRenderedDOMComponentWithAttribute;
+import {findRenderedDOMComponentWithAttribute as findByAttribute} from '../../../../test/helpers/scryRenderedDOMComponentsWithAttribute';
 
 describe('Input', function() {
   it('renders an input', function() {

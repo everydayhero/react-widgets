@@ -1,8 +1,6 @@
-'use strict';
-jest.autoMockOff();
+jest.disableAutomock();
 
-describe('LeaderboardMixin', function() {
-  var Leaderboard = require('../Leaderboard');
+import Leaderboard from '../Leaderboard';
 
   describe('getLeaderboard', function() {
     it('should remove pages with amount equals 0', function() {

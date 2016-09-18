@@ -1,4 +1,5 @@
-"use strict";
+import _ from 'lodash';
+import format from './format';
 
 var _         = require('lodash');
 var format    = require('./format');
@@ -26,6 +27,6 @@ function translate(i18n, key, params) {
   return value && format(value, params);
 }
 
-module.exports = {
+export default {
   t: translate
 };

@@ -1,12 +1,10 @@
-'use strict';
-
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/campaigns');
 
-var React          = require('react');
-var UpcomingEvents = require('../');
-var campaign       = require('../../../../api/campaigns');
-var TestUtils      = require('react-addons-test-utils');
+import React from 'react';
+import UpcomingEvents from '../';
+import campaign from '../../../../api/campaigns';
+import TestUtils from 'react-addons-test-utils';
 var scryByClass    = TestUtils.scryRenderedDOMComponentsWithClass;
 
 var campaigns = [{

@@ -1,15 +1,13 @@
-'use strict';
+import ReactTestUtils from 'react-addons-test-utils';
 
-var ReactTestUtils = require('react-addons-test-utils');
-
-function scryRenderedDOMComponentsWithValue(root, value) {
+export function scryRenderedDOMComponentsWithValue(root, value) {
   return ReactTestUtils.findAllInRenderedTree(root, function(elem) {
     return ReactTestUtils.isDOMComponent(elem) &&
       elem.value === value;
   });
 }
 
-function findRenderedDOMComponentWithValue(root, value) {
+export function findRenderedDOMComponentWithValue(root, value) {
   var all = scryRenderedDOMComponentsWithValue(
     root,
     value
@@ -22,7 +20,7 @@ function findRenderedDOMComponentWithValue(root, value) {
   return all[0];
 }
 
-module.exports = {
-  scryRenderedDOMComponentsWithValue: scryRenderedDOMComponentsWithValue,
-  findRenderedDOMComponentWithValue: findRenderedDOMComponentWithValue
+export default {
+  scryRenderedDOMComponentsWithValue,
+  findRenderedDOMComponentWithValue
 };

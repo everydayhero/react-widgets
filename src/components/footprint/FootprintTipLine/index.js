@@ -1,10 +1,8 @@
-"use strict";
+import React from 'react';
+import tweenState from 'react-tween-state';
+import line from 'paths-js/path';
 
-var React      = require('react');
-var tweenState = require('react-tween-state');
-var line       = require('paths-js/path');
-
-module.exports = React.createClass({
+export default React.createClass({
   mixins: [tweenState.Mixin],
 
   displayName: 'FootprintTipLine',

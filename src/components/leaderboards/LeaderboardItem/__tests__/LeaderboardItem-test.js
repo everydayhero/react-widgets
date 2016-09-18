@@ -1,13 +1,13 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import LeaderboardItem from '../';
+import TestUtils from 'react-addons-test-utils';
 
 describe('LeaderboardItem', function() {
-  var React           = require('react');
-  var ReactDOM        = require('react-dom');
-  var LeaderboardItem = require('../');
-  var TestUtils       = require('react-addons-test-utils');
-  var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass     = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component defaults', function() {
     var leaderboardItem;

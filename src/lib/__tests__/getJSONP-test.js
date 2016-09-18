@@ -1,11 +1,10 @@
-'use strict';
-jest.autoMockOff();
+jest.disableAutomock();
 
 jest.mock('jsonp');
-var jsonp = require('jsonp');
+import jsonp from 'jsonp';
 jsonp.mockImplementation(function(url, options, callback) { callback('error', null); });
 
-var getJSONP = require('../getJSONP');
+import getJSONP from '../getJSONP';
 
 describe('getJSONP', function() {
   beforeEach(function() {

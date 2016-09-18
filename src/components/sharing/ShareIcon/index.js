@@ -1,10 +1,8 @@
-"use strict";
+import React from 'react';
+import Icon from '../../helpers/Icon';
+import openPopup from '../../../lib/openPopup';
 
-var React     = require('react');
-var Icon      = require('../../helpers/Icon');
-var openPopup = require('../../../lib/openPopup');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "ShareIcon",
   propTypes: {
     name: React.PropTypes.oneOf(['facebook', 'twitter', 'googleplus', 'pinterest']).isRequired,

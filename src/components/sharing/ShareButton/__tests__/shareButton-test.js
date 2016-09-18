@@ -1,14 +1,13 @@
-'use strict';
+jest.disableAutomock();
 
-jest.autoMockOff();
+import React from 'react';
+import ShareButton from '../';
+import ShareBox from '../../ShareBox';
+import TestUtils from 'react-addons-test-utils';
 
 describe('Share Button', function() {
-  var React                  = require('react');
-  var ShareButton            = require('../');
-  var ShareBox               = require('../../ShareBox');
-  var TestUtils              = require('react-addons-test-utils');
-  var findByClass            = TestUtils.findRenderedDOMComponentWithClass;
-  var findRenderedComponent  = TestUtils.findRenderedComponentWithType;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let findRenderedComponent = TestUtils.findRenderedComponentWithType;
 
   describe('component defaults', function() {
     var shareBtn;

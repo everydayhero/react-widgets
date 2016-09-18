@@ -1,14 +1,12 @@
-"use strict";
+import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import cx from 'classnames';
+import I18nMixin from '../../mixins/I18n';
+import Input from '../../forms/Input';
+import Select from '../../forms/Select';
+import countryList from '../CountrySelect/countries';
 
-var React           = require('react');
-var PureRenderMixin = require('react-addons-pure-render-mixin');
-var cx              = require('classnames');
-var I18nMixin       = require('../../mixins/I18n');
-var Input           = require('../../forms/Input');
-var Select          = require('../../forms/Select');
-var countryList     = require('../CountrySelect/countries');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "AddressBreakdown",
 
   mixins: [I18nMixin, PureRenderMixin],

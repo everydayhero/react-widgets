@@ -1,5 +1,3 @@
-"use strict";
-
 var callbacksQueue = [];
 
 setInterval(function () {
@@ -16,4 +14,4 @@ var requestAnimationFrame = function (callback) {
   return callbacksQueue.push(callback) - 1;
 };
 
-module.exports = requestAnimationFrame;
+export default requestAnimationFrame;

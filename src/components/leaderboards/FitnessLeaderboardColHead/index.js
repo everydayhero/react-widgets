@@ -1,9 +1,7 @@
-"use strict";
+import React from 'react';
+import Icon from '../../helpers/Icon';
 
-var React = require('react');
-var Icon  = require('../../helpers/Icon');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'FitnessLeaderboardColHead',
 
   handleClick: function() {

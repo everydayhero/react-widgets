@@ -1,13 +1,13 @@
-'use strict';
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/campaigns');
 
+import _ from 'lodash';
+import React from 'react';
+import Leaderboard from '../';
+import TestUtils from 'react-addons-test-utils';
+
 describe('Leaderboard', function() {
-  var _                 = require('lodash');
-  var React             = require('react');
-  var Leaderboard       = require('../');
-  var TestUtils         = require('react-addons-test-utils');
-  var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('Component defaults', function() {
     var leaderboard;

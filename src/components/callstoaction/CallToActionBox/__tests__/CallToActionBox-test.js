@@ -1,13 +1,13 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/campaigns');
 
+import React from 'react';
+import CallToActionBox from '../';
+import campaigns from '../../../../api/campaigns';
+import TestUtils from 'react-addons-test-utils';
+
 describe('CallToActionBox', function() {
-  var React                       = require('react');
-  var CallToActionBox             = require('../');
-  var campaigns                   = require('../../../../api/campaigns');
-  var TestUtils                   = require('react-addons-test-utils');
-  var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
     var callToActionBox;

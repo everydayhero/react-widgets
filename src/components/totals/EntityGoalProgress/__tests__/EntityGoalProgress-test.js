@@ -1,6 +1,11 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/totals');
+
+import React from 'react';
+import sinon from 'sinon';
+import EntityGoalProgress from '../';
+import totals from '../../../../api/totals';
+import TestUtils from 'react-addons-test-utils';
 
 describe('FundsRaised', function() {
   var React              = require('react');

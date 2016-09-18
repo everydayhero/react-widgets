@@ -1,12 +1,10 @@
-"use strict";
+import React from 'react';
+import totals from '../../../api/totals';
+import GoalProgress from '../GoalProgress';
+import I18nMixin from '../../mixins/I18n';
+import numeral from 'numbro';
 
-var React        = require('react');
-var totals       = require('../../../api/totals');
-var GoalProgress = require('../GoalProgress');
-var I18nMixin    = require('../../mixins/I18n');
-var numeral      = require('numbro');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'EntityGoalProgress',
   mixins: [I18nMixin],
 

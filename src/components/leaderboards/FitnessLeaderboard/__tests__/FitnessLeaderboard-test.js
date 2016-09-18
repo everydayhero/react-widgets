@@ -1,13 +1,12 @@
-'use strict';
-
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/campaigns');
 
+import React from 'react';
+import FitnessLeaderboard from '../';
+import TestUtils from 'react-addons-test-utils';
+
 describe('FitnessLeaderboard', function() {
-  var React                 = require('react');
-  var FitnessLeaderboard    = require('../');
-  var TestUtils             = require('react-addons-test-utils');
-  var findByClass           = TestUtils.findRenderedDOMComponentWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('Component defaults', function() {
     var leaderboard;

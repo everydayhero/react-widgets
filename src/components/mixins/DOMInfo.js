@@ -1,12 +1,16 @@
-"use strict";
 /**
 * This Mixin can only be called in/after ComponentDidMount(), as
 * getDOMNode() is unavailable until after the component is rendered.
 */
-var ReactDOM = require('react-dom')
-var _ = require('lodash');
-var addEventListener = require('../../lib/addEventListener');
-var breakpoints = {
+/**
+* This Mixin can only be called in/after ComponentDidMount(), as
+* getDOMNode() is unavailable until after the component is rendered.
+*/
+import ReactDOM from 'react-dom';
+import _ from 'lodash';
+import addEventListener from '../../lib/addEventListener';
+
+const breakpoints = {
   mobile: 450,
   tablet: 700,
   laptop: 950,

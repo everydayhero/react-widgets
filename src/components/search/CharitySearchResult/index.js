@@ -1,11 +1,9 @@
-"use strict";
+import _ from 'lodash';
+import React from 'react';
+import SearchResult from '../SearchResult';
+import Icon from '../../helpers/Icon';
 
-var _             = require('lodash');
-var React         = require('react');
-var SearchResult  = require('../SearchResult');
-var Icon          = require('../../helpers/Icon');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'CharitySearchResult',
 
   propTypes: {

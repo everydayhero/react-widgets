@@ -1,15 +1,13 @@
-"use strict";
+import _ from 'lodash';
+import routes from './routes';
+import getJSONP from '../lib/getJSONP';
+import paramJoin from '../lib/paramJoin';
 
-var _         = require('lodash');
-var routes    = require('./routes');
-var getJSONP  = require('../lib/getJSONP');
-var paramJoin = require('../lib/paramJoin');
-
-module.exports = {
-  findByCampaigns: function(params, callback, options) {
-    var campaignUids = params.campaignUids ? paramJoin(params.campaignUids, '&campaign_id[]=') : undefined;
-    var groupValues = params.groupValues ? paramJoin(params.groupValues, '&group_value[]=') : undefined;
-    var mergedParams = _.merge({ campaignUid: campaignUids, groupValue: groupValues }, options);
+export default {
+  findByCampaigns(params, callback, options) {
+    let campaignUids = params.campaignUids ? paramJoin(params.campaignUids, '&campaign_id[]=') : undefined;
+    let groupValues = params.groupValues ? paramJoin(params.groupValues, '&group_value[]=') : undefined;
+    let mergedParams = _.merge({ campaignUid: campaignUids, groupValue: groupValues }, options);
 
     return getJSONP(routes.get('totals', mergedParams), callback);
   },

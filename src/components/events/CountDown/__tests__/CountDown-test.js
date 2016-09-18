@@ -1,13 +1,12 @@
-'use strict';
+jest.disableAutomock();
 
-jest.autoMockOff();
+import React from 'react';
+import moment from 'moment';
+import CountDown from '../';
+import TestUtils from 'react-addons-test-utils';
 
 describe('CountDown', function() {
-  var React       = require('react');
-  var moment      = require('moment');
-  var CountDown   = require('../');
-  var TestUtils   = require('react-addons-test-utils');
-  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
     var component;

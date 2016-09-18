@@ -1,8 +1,6 @@
-"use strict";
+import _ from 'lodash';
 
-var _ = require('lodash');
-
-var causeGroups = [
+const causeGroups = [
   {
     name: 'safety',
     icon: 'plus-square',
@@ -52,14 +50,14 @@ var causeGroups = [
   }
 ];
 
-module.exports = {
+export default {
   all: causeGroups,
 
-  findByName: function (name) {
+  findByName (name) {
     return _.find(causeGroups, 'name', name);
   },
 
-  findByCause: function (cause) {
+  findByCause (cause) {
     return _.find(causeGroups, function(causeGroup) {
       return _.includes(causeGroup.causes, cause);
     });

@@ -1,53 +1,50 @@
-"use strict";
-jest.autoMockOff();
-
+jest.disableAutomock();
 jest.mock('../../../../api/charities');
-var charities = require('../../../../api/charities');
-var donateUrl = 'http://donate.url/';
-var fundraiseUrl = 'http://fundraise.url/';
+
+import charities from '../../../../api/charities';
+const donateUrl = 'http://donate.url/';
+const fundraiseUrl = 'http://fundraise.url/';
 charities.donateUrl.mockReturnValue(donateUrl);
 charities.fundraiseUrl.mockReturnValue(fundraiseUrl);
 
-var _ = require('lodash');
-_.debounce = function(callback) { return callback; };
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import CharitySearchModal from '../';
+import SearchModal from '../../SearchModal';
+const findByClass = TestUtils.findRenderedDOMComponentWithClass;
+const findByType = TestUtils.findRenderedComponentWithType;
+const scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+const findByTag = TestUtils.findRenderedDOMComponentWithTag;
 
-var React              = require('react');
-var TestUtils          = require('react-addons-test-utils');
-var CharitySearchModal = require('../');
-var SearchModal        = require('../../SearchModal');
-var findByClass        = TestUtils.findRenderedDOMComponentWithClass;
-var findByType         = TestUtils.findRenderedComponentWithType;
-var scryByClass        = TestUtils.scryRenderedDOMComponentsWithClass;
-var findByTag          = TestUtils.findRenderedDOMComponentWithTag;
+describe('CharitySearchModal', function() {
+  const charity = {
+    uid: 'xy-12',
+    slug: 'foo',
+    name: 'Foo',
+    description: 'Fooy',
+    country_code: 'xy',
+    url: 'http://foo.com/'
+  };
 
-var charity = {
-  uid: 'xy-12',
-  slug: 'foo',
-  name: 'Foo',
-  description: 'Fooy',
-  country_code: 'xy',
-  url: 'http://foo.com/'
-};
+  const charity2 = {
+    uid: 'xy-42',
+    slug: 'bar',
+    name: 'Bar',
+    description: 'Bary',
+    country_code: 'xy',
+    url: 'http://bar.com/'
+  };
 
-var charity2 = {
-  uid: 'xy-42',
-  slug: 'bar',
-  name: 'Bar',
-  description: 'Bary',
-  country_code: 'xy',
-  url: 'http://bar.com/'
-};
-
-var searchResponse = {
-  charities: [charity],
-  meta: {
-    pagination: {
-      count: 1,
-      current_page: 1,
-      total_pages: 2
+  const searchResponse = {
+    charities: [charity],
+    meta: {
+      pagination: {
+        count: 1,
+        current_page: 1,
+        total_pages: 2
+      }
     }
-  }
-};
+  };
 
 var findByUidsResponse = {
   charities: [charity2]

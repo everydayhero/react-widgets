@@ -1,9 +1,7 @@
-'use strict';
+import _ from 'lodash';
+import React from 'react';
 
-var _      = require('lodash');
-var React  = require('react');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'Icon',
 
   propTypes: {

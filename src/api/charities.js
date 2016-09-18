@@ -1,12 +1,10 @@
-"use strict";
+import _ from 'lodash';
+import routes from './routes';
+import campaigns from './campaigns';
+import getJSONP from '../lib/getJSONP';
 
-var _ = require('lodash');
-var routes = require('./routes');
-var campaigns = require('./campaigns');
-var getJSONP = require('../lib/getJSONP');
-
-module.exports = {
-  find: function(charityUid, callback) {
+export default {
+  find(charityUid, callback) {
     return getJSONP(routes.get('charity', { charityUid: charityUid }), callback);
   },
 

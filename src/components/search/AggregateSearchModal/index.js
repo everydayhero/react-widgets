@@ -1,28 +1,35 @@
-'use strict';
+import _ from 'lodash';
+import async from 'async';
+import React from 'react';
+import cx from 'classnames';
+import I18n from '../../mixins/I18n';
+import Input from '../../forms/Input';
+import Icon from '../../helpers/Icon';
+import Overlay from '../../helpers/Overlay';
 
-var _       = require('lodash');
-var async   = require('async');
-var React   = require('react');
-var cx      = require('classnames');
-var I18n    = require('../../mixins/I18n');
-var Input   = require('../../forms/Input');
-var Icon    = require('../../helpers/Icon');
-var Overlay = require('../../helpers/Overlay');
+import campaigns from '../../../api/campaigns';
+import charities from '../../../api/charities';
+import pages from '../../../api/pages';
+import all from '../../../api/search';
+
+import AggregateSearchResultCampaign from '../AggregateSearchResultCampaign';
+import AggregateSearchResultCharity from '../AggregateSearchResultCharity';
+import AggregateSearchResultPage from '../AggregateSearchResultPage';
 
 var searchAPI = {
-  campaigns: require('../../../api/campaigns').search,
-  charities: require('../../../api/charities').search,
-  pages: require('../../../api/pages').search,
-  all: require('../../../api/search').aggregate
+  campaigns: campaigns.search,
+  charities: charities.search,
+  pages: pages.search,
+  all: all.aggregate
 };
 
 var resultTypes = {
-  campaign: require('../AggregateSearchResultCampaign'),
-  charity: require('../AggregateSearchResultCharity'),
-  page: require('../AggregateSearchResultPage')
+  campaign: AggregateSearchResultCampaign,
+  charity: AggregateSearchResultCharity,
+  page: AggregateSearchResultPage
 };
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'AggregateSearchModal',
 
   mixins: [I18n],

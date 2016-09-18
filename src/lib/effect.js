@@ -251,6 +251,6 @@ function BlurStack() {
   this.next = null;
 }
 
-module.exports = {
+export default {
   blurImage: blur
 };

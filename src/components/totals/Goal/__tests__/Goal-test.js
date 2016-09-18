@@ -1,12 +1,12 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
+
+import React from 'react';
+import Goal from '../';
+import TestUtils from 'react-addons-test-utils';
 
 describe('Goal', function() {
-  var React       = require('react');
-  var Goal        = require('../');
-  var TestUtils   = require('react-addons-test-utils');
-  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component defaults', function() {
     var goal;

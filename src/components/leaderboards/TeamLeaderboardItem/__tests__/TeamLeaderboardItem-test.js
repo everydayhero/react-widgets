@@ -1,11 +1,11 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
+
+import React from 'react';
+import TeamLeaderboardItem from '../';
+import TestUtils from 'react-addons-test-utils';
 
 describe('TeamLeaderboardItem', function() {
-  var React               = require('react');
-  var TeamLeaderboardItem = require('../');
-  var TestUtils           = require('react-addons-test-utils');
-  var findByClass         = TestUtils.findRenderedDOMComponentWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
     var teamLeaderboardItem;

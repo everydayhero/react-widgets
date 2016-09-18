@@ -1,19 +1,17 @@
-'use strict';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import cx from 'classnames';
+import _ from 'lodash';
+import tweenState from 'react-tween-state';
+import addEventListener from '../../../lib/addEventListener';
+import removeEventListener from '../../../lib/removeEventListener';
+import I18nMixin from '../../mixins/I18n';
+import FootprintGroup from '../FootprintGroup';
+import FootprintTile from '../FootprintTile';
+import FootprintTip from '../FootprintTip';
+import FootprintTipLine from '../FootprintTipLine';
 
-var React               = require('react');
-var ReactDOM            = require('react-dom');
-var cx                  = require('classnames');
-var _                   = require('lodash');
-var tweenState          = require('react-tween-state');
-var addEventListener    = require('../../../lib/addEventListener');
-var removeEventListener = require('../../../lib/removeEventListener');
-var I18nMixin           = require('../../mixins/I18n');
-var FootprintGroup      = require('../FootprintGroup');
-var FootprintTile       = require('../FootprintTile');
-var FootprintTip        = require('../FootprintTip');
-var FootprintTipLine    = require('../FootprintTipLine');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'Footprint',
 
   mixins: [tweenState.Mixin, I18nMixin],

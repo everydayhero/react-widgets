@@ -1,6 +1,4 @@
-"use strict";
-
-var numeral = require('numbro');
+import numeral from 'numbro';
 
 function format(template, data, strip) {
   if (!data && !strip) {
@@ -21,4 +19,4 @@ function format(template, data, strip) {
   });
 }
 
-module.exports = format;
+export default format;

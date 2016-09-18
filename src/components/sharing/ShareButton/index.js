@@ -1,14 +1,12 @@
-"use strict";
-
-var _                       = require('lodash');
-var React                   = require('react');
-var I18nMixin               = require('../../mixins/I18n');
-var Icon                    = require('../../helpers/Icon');
-var ShareBox                = require('../ShareBox');
-var format                  = require('../../../lib/format');
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-var addEventListener        = require('../../../lib/addEventListener');
-var removeEventListener     = require('../../../lib/removeEventListener');
+import _ from 'lodash';
+import React from 'react';
+import I18nMixin from '../../mixins/I18n';
+import Icon from '../../helpers/Icon';
+import ShareBox from '../ShareBox';
+import format from '../../../lib/format';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import addEventListener from '../../../lib/addEventListener';
+import removeEventListener from '../../../lib/removeEventListener';
 
 var serviceConfigs = [
   {
@@ -30,7 +28,7 @@ var serviceConfigs = [
   }
 ];
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "ShareButton",
   mixins: [I18nMixin],
   propTypes: {

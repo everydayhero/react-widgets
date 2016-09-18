@@ -1,5 +1,8 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
+
+import React from 'react';
+import Team from '../';
+import TestUtils from 'react-addons-test-utils';
 
 describe('Team', function() {
   var React     = require('react');

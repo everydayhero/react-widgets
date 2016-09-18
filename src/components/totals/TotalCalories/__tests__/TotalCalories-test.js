@@ -1,14 +1,14 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/campaigns');
 
+import React from 'react';
+import TotalCalories from '../';
+import campaigns from '../../../../api/campaigns';
+import TestUtils from 'react-addons-test-utils';
+
 describe('TotalCalories', function() {
-  var React         = require('react');
-  var TotalCalories = require('../');
-  var campaigns     = require('../../../../api/campaigns');
-  var TestUtils     = require('react-addons-test-utils');
-  var findByClass   = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass   = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component when handed multiple uids', function() {
     var totalCalories;

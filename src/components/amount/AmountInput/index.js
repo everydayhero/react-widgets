@@ -1,9 +1,7 @@
-"use strict";
+import React from 'react';
+import cx from 'classnames';
 
-var React = require('react');
-var cx    = require('classnames');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "AmountInput",
 
   propTypes: {

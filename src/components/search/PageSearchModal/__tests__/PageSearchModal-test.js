@@ -1,20 +1,11 @@
-'use strict';
-jest.autoMockOff();
-
+jest.disableAutomock();
 jest.mock('../../../../api/pages');
-var pages = require('../../../../api/pages');
 
-var _ = require('lodash');
-_.debounce = function(callback) { return callback; };
-
-var React              = require('react');
-var TestUtils          = require('react-addons-test-utils');
-var PageSearchModal    = require('../');
-var SearchModal        = require('../../SearchModal');
-var findByClass        = TestUtils.findRenderedDOMComponentWithClass;
-var findByType         = TestUtils.findRenderedComponentWithType;
-var scryByClass        = TestUtils.scryRenderedDOMComponentsWithClass;
-var findByTag          = TestUtils.findRenderedDOMComponentWithTag;
+import pages from '../../../../api/pages';
+import React from 'react';
+import { mount } from 'enzyme';
+import PageSearchModal from '../';
+import SearchModal from '../../SearchModal';
 
 var page = {
   id: 12,

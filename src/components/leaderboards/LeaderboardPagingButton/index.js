@@ -1,10 +1,8 @@
-"use strict";
+import React from 'react';
+import Icon from '../../helpers/Icon';
+import cx from 'classnames';
 
-var React = require('react');
-var Icon  = require('../../helpers/Icon');
-var cx    = require('classnames');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'LeaderboardPagingButton',
 
   handleClick: function() {

@@ -1,13 +1,12 @@
-"use strict";
+jest.disableAutomock();
 
-jest.autoMockOff();
+import React from 'react';
+import Tabs from '../';
+import TestUtils from 'react-addons-test-utils';
 
 describe('Tabs', function() {
-  var React              = require('react');
-  var Tabs               = require('../');
-  var TestUtils          = require('react-addons-test-utils');
-  var findByClass        = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass        = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   var data = [
     {

@@ -1,9 +1,8 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 
-var React            = require('react');
-var SearchPagination = require('../');
-var TestUtils        = require('react-addons-test-utils');
+import React from 'react';
+import SearchPagination from '../';
+import TestUtils from 'react-addons-test-utils';
 var findByClass      = TestUtils.findRenderedDOMComponentWithClass;
 
 describe('SearchPagination', function() {

@@ -12,4 +12,4 @@ if (typeof window.console === "undefined") {
   };
 }
 
-module.exports = window.console;
+export default window.console;

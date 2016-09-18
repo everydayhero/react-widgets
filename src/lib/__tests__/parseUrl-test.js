@@ -1,7 +1,6 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 
-var parseUrl = require('../parseUrl');
+import parseUrl from '../parseUrl';
 
 describe('parseUrl', function() {
   it('parses simple urls', function() {

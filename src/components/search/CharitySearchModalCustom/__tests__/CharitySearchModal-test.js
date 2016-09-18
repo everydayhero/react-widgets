@@ -1,23 +1,7 @@
-'use strict';
-jest.autoMockOff();
-
+jest.disableAutomock();
 jest.mock('../../../../api/frolCharities');
-var charities = require('../../../../api/frolCharities');
-var searchResponse = {};
 
-charities.search.mockReturnValue(searchResponse);
-
-var _ = require('lodash');
-_.debounce = function(callback) { return callback; };
-
-var React              = require('react');
-var TestUtils          = require('react-addons-test-utils');
-var CharitySearchModal = require('../');
-var SearchModal        = require('../../SearchModal');
-var findByClass        = TestUtils.findRenderedDOMComponentWithClass;
-var findByType         = TestUtils.findRenderedComponentWithType;
-var scryByClass        = TestUtils.scryRenderedDOMComponentsWithClass;
-var findByTag          = TestUtils.findRenderedDOMComponentWithTag;
+import charities from '../../../../api/frolCharities';
 
 var charity = {
   uid: 'xy-12',
@@ -38,6 +22,17 @@ var searchResponse = {
     }
   }
 };
+
+charities.search.mockReturnValue(searchResponse);
+
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import CharitySearchModal from '../';
+import SearchModal from '../../SearchModal';
+const findByClass = TestUtils.findRenderedDOMComponentWithClass;
+const findByType = TestUtils.findRenderedComponentWithType;
+const scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+const findByTag = TestUtils.findRenderedDOMComponentWithTag;
 
 describe('CharitySearchModal', function() {
   beforeEach(function() {

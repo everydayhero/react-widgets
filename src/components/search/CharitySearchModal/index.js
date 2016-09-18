@@ -1,14 +1,12 @@
-"use strict";
+import _ from 'lodash';
+import React from 'react';
+import SearchModal from '../SearchModal';
+import CharitySearchResult from '../CharitySearchResult';
+import I18nMixin from '../../mixins/I18n';
+import charitiesAPI from '../../../api/charities';
+import campaignsAPI from '../../../api/campaigns';
 
-var _                           = require('lodash');
-var React                       = require('react');
-var SearchModal                 = require('../SearchModal');
-var CharitySearchResult         = require('../CharitySearchResult');
-var I18nMixin                   = require('../../mixins/I18n');
-var charitiesAPI                = require('../../../api/charities');
-var campaignsAPI                = require('../../../api/campaigns');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'CharitySearchModal',
 
   mixins: [I18nMixin],

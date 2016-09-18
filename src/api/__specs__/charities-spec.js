@@ -1,13 +1,9 @@
-'use strict';
-
-const spy = sinon.spy();
-const callback = sinon.spy();
+import _ from 'lodash';
+import charities from '../charities';
+import * as getJSONP from '../../lib/getJSONP';
 
 describe('charities', () => {
-  const charities = mockrequire('../charities', {
-    '../lib/getJSONP': spy
-  });
-
+  const callback = sinon.spy();
   const data = {
     au: { country_code: 'au', uid: 'au-123', slug: 'bar' },
     ie: { country_code: 'ie', uid: 'ie-123', slug: 'bar' },
@@ -16,15 +12,19 @@ describe('charities', () => {
     us: { country_code: 'us', uid: 'us-123', slug: 'bar' },
   };
 
+  beforeEach(() => {
+    sinon.stub(getJSONP, 'default');
+  });
+
   afterEach(() => {
-    spy.reset();
+    getJSONP.default.restore();
   });
 
   describe('find', () => {
     it('gets a charity by uid', () => {
       charities.find('xy-12', callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/charities/xy-12.jsonp',
         callback
       );
@@ -35,7 +35,7 @@ describe('charities', () => {
     it('gets a charity by country and slug', () => {
       charities.findBySlug('xy', 'slugs-for-pugs', callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/charities/xy/slugs-for-pugs.jsonp',
         callback
       );
@@ -46,12 +46,10 @@ describe('charities', () => {
     it('gets charities by uid', () => {
       charities.findByUids(['xy-123', 'xy-456'], callback);
 
-      expect(spy.args[0][0]).to.include('https://everydayhero.com/api/v2/charities.jsonp?ids=xy-123,xy-456');
+      expect(getJSONP.default.args[0][0]).to.include('https://everydayhero.com/api/v2/charities.jsonp?ids=xy-123,xy-456');
     });
 
     describe('with empty array', () => {
-      let _ = require('lodash');
-
       before(() => {
         sinon.stub(_, "defer", () => {});
       });
@@ -65,7 +63,7 @@ describe('charities', () => {
       });
 
       it('does not fetch', () => {
-        spy.should.have.callCount(0);
+        getJSONP.default.should.have.callCount(0);
       });
 
       it('defers callback with empty results', () => {
@@ -81,7 +79,7 @@ describe('charities', () => {
     it('gets charities by campaign uid', () => {
       charities.findByCampaign('xy-12', 7, 2, callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/charities.jsonp?campaign_ids=xy-12&page=2&limit=7',
         callback
       );
@@ -92,7 +90,7 @@ describe('charities', () => {
     it('gets charity leaderboard by charity uid', () => {
       charities.leaderboard('xy-123', 'foo', 12, callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/charities/xy-123/leaderboard.jsonp?type=foo&limit=12',
         callback
       );
@@ -104,8 +102,8 @@ describe('charities', () => {
         includeFootprint: true
       });
 
-      expect(spy.args[0][0]).to.include('&include_pages=true');
-      expect(spy.args[0][0]).to.include('&include_footprint=true');
+      expect(getJSONP.default.args[0][0]).to.include('&include_pages=true');
+      expect(getJSONP.default.args[0][0]).to.include('&include_footprint=true');
     });
   });
 
@@ -113,7 +111,7 @@ describe('charities', () => {
     it('gets charity leaderboard by country and slug', () => {
       charities.leaderboardBySlug('xy', 'slugs-for-pugs', 'foo', 12, callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/charities/xy/slugs-for-pugs/leaderboard.jsonp?type=foo&limit=12',
         callback
       );
@@ -125,8 +123,8 @@ describe('charities', () => {
         includeFootprint: true
       });
 
-      expect(spy.args[0][0]).to.include('&include_pages=true');
-      expect(spy.args[0][0]).to.include('&include_footprint=true');
+      expect(getJSONP.default.args[0][0]).to.include('&include_pages=true');
+      expect(getJSONP.default.args[0][0]).to.include('&include_footprint=true');
     });
   });
 
@@ -135,7 +133,7 @@ describe('charities', () => {
       const query = { searchTerm: 'bar', country: 'xy', campaignUid: [12, 42], page: 2, pageSize: 7 };
       charities.search(query, callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/search/charities.jsonp?q=bar&country_code=xy&campaign_id=12,42&page=2&page_size=7',
         callback,
         { timeout: 10000 }

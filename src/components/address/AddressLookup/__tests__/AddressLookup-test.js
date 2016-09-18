@@ -1,17 +1,13 @@
-'use strict';
-jest.autoMockOff();
-
+jest.disableAutomock();
 jest.mock('../../../../api/address');
-var address = require('../../../../api/address');
-var _ = require('lodash');
-_.debounce = function(callback) { return callback; };
 
-var React = require('react');
-var TestUtils   = require('react-addons-test-utils');
-var AddressLookup = require('../');
-var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
-var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-var findByAttribute = require('../../../../test/helpers/scryRenderedDOMComponentsWithAttribute').findRenderedDOMComponentWithAttribute;
+import address from '../../../../api/address';
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import AddressLookup from '../';
+const scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+const findByClass = TestUtils.findRenderedDOMComponentWithClass;
+import {findRenderedDOMComponentWithAttribute as findByAttribute} from '../../../../test/helpers/scryRenderedDOMComponentsWithAttribute';
 var addressSearchResult = { addresses: [
   { id: '123', label: 'TestAddressListing' }
 ] };

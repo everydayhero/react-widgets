@@ -1,14 +1,12 @@
-"use strict";
+import _ from 'lodash';
+import routes from './routes';
+import getJSONP from '../lib/getJSONP';
+import campaigns from './campaigns';
+import paramJoin from '../lib/paramJoin';
 
-var _         = require('lodash');
-var routes    = require('./routes');
-var getJSONP  = require('../lib/getJSONP');
-var campaigns = require('./campaigns');
-var paramJoin = require('../lib/paramJoin');
-
-module.exports = {
-  find: function(pageId, callback, options) {
-    var params = _.merge({ pageId: pageId }, options);
+export default {
+  find(pageId, callback, options) {
+    let params = _.merge({ pageId: pageId }, options);
     return getJSONP(routes.get('page', params), callback);
   },
 

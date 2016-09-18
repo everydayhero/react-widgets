@@ -1,12 +1,11 @@
-"use strict";
+import _ from 'lodash';
+import jsonp from 'jsonp';
 
-var _ = require('lodash');
-var jsonp = require('jsonp');
-var DEFAULT_TIMEOUT = 20000;
-var IS_CLIENT = typeof window !== 'undefined';
-var DEFAULT_RETRIES = 2;
-var noop = function() {};
-var cache = {};
+const DEFAULT_TIMEOUT = 20000;
+const IS_CLIENT = typeof window !== 'undefined';
+const DEFAULT_RETRIES = 2;
+let noop = function() {};
+let cache = {};
 
 function getJSONP(url, callback, options) {
   if (cache[url]) {
@@ -41,4 +40,4 @@ function getJSONP(url, callback, options) {
   return cancelCallback;
 }
 
-module.exports = IS_CLIENT ? getJSONP : function() { return noop; };
+export default IS_CLIENT ? getJSONP : function() { return noop; };

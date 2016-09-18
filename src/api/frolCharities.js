@@ -1,10 +1,9 @@
-"use strict";
+import getJSONP from '../lib/getJSONP';
+import _ from 'lodash';
 
-var getJSONP     = require('../lib/getJSONP');
-var _            = require('lodash');
-var cachedResult;
+let cachedResult;
 
-var url = 'https://spreadsheets.google.com/feeds/list/1FnIPOD3M1lQXFkERRl_tdGz5XXZ3AmNdBCaLPpcClFI/od6/public/values?alt=json-in-script';
+const url = 'https://spreadsheets.google.com/feeds/list/1FnIPOD3M1lQXFkERRl_tdGz5XXZ3AmNdBCaLPpcClFI/od6/public/values?alt=json-in-script';
 
 function getCharities(callback) {
   if (cachedResult) {
@@ -62,6 +61,6 @@ function search(properties, callback) {
   });
 }
 
-module.exports = {
+export default {
   search: search
 };

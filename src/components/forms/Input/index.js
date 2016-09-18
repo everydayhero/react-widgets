@@ -1,12 +1,10 @@
-'use strict';
+import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import cx from 'classnames';
+import I18nMixin from '../../mixins/I18n';
+import Icon from '../../helpers/Icon';
 
-var React           = require('react');
-var PureRenderMixin = require('react-addons-pure-render-mixin');
-var cx              = require('classnames');
-var I18nMixin       = require('../../mixins/I18n');
-var Icon            = require('../../helpers/Icon');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'Input',
 
   mixins: [I18nMixin, PureRenderMixin],

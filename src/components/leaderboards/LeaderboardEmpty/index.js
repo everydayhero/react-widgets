@@ -1,10 +1,8 @@
-'use strict';
+import React from 'react';
+import campaigns from '../../../api/campaigns';
+import CallToActionButton from '../../callstoaction/CallToActionButton';
 
-var React              = require('react');
-var campaigns          = require('../../../api/campaigns');
-var CallToActionButton = require('../../callstoaction/CallToActionButton');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'LeaderboardEmpty',
   propTypes: {
     emptyText: React.PropTypes.string.isRequired,

@@ -1,15 +1,14 @@
-'use strict';
-
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/totals');
 
+import React from 'react';
+import TotalDonations from '../';
+import totals from '../../../../api/totals';
+import TestUtils from 'react-addons-test-utils';
+
 describe('TotalDonations', function() {
-  var React          = require('react');
-  var TotalDonations = require('../');
-  var totals         = require('../../../../api/totals');
-  var TestUtils      = require('react-addons-test-utils');
-  var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component defaults', function() {
     var totalDonations;

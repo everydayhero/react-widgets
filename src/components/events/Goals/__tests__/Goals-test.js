@@ -1,12 +1,10 @@
-'use strict';
-
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/totals');
 
-var CampaignGoals  = require('../')
-var totals         = require('../../../../api/totals');
-var React          = require('react');
-var ReactTestUtils = require('react-addons-test-utils');
+import CampaignGoals from '../';
+import totals from '../../../../api/totals';
+import React from 'react';
+import ReactTestUtils from 'react-addons-test-utils';
 var findByClass    = ReactTestUtils.findRenderedDOMComponentWithClass;
 
 

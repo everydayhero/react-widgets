@@ -1,14 +1,14 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/pages');
 
+import React from 'react';
+import TotalSupporters from '../';
+import pages from '../../../../api/pages';
+import TestUtils from 'react-addons-test-utils';
+
 describe('TotalSupporters', function() {
-  var React       = require('react');
-  var TotalSupporters = require('../');
-  var pages       = require('../../../../api/pages');
-  var TestUtils   = require('react-addons-test-utils');
-  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component defaults', function() {
     var totalSupporters;

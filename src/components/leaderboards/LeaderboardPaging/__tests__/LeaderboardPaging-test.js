@@ -1,13 +1,11 @@
-'use strict';
+jest.disableAutomock();
 
-jest.autoMockOff();
+import React from 'react';
+import ReactDOM from 'react-dom';
+import LeaderboardPaging from '../';
+import TestUtils from 'react-addons-test-utils';
 
 describe('LeaderboardPaging', function() {
-  var React             = require('react');
-  var ReactDOM          = require('react-dom');
-  var LeaderboardPaging = require('../');
-  var TestUtils         = require('react-addons-test-utils');
-
   describe('component defaults', function() {
     var leaderboardPaging;
     var component;

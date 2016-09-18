@@ -1,11 +1,9 @@
-'use strict';
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/pages');
 
-describe('Map', function() {
-  var React                       = require('react');
-  var Map                       = require('../');
-  var TestUtils                   = require('react-addons-test-utils');
+import React from 'react';
+import Map from '../';
+import TestUtils from 'react-addons-test-utils';
 
   describe('component defaults', function() {
     var map;

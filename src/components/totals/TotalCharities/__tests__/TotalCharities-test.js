@@ -1,14 +1,14 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/charities');
 
+import React from 'react';
+import TotalCharities from '../';
+import charities from '../../../../api/charities';
+import TestUtils from 'react-addons-test-utils';
+
 describe('TotalCharities', function() {
-  var React          = require('react');
-  var TotalCharities = require('../');
-  var charities      = require('../../../../api/charities');
-  var TestUtils      = require('react-addons-test-utils');
-  var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component defaults', function() {
     var totalCharities;

@@ -1,6 +1,6 @@
-var React = require('react');
+import React from 'react';
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'CampaignGoalItem',
 
   propTypes: {
@@ -21,4 +21,4 @@ module.exports = React.createClass({
       </div>
     )
   }
-})
+});

@@ -1,12 +1,12 @@
-'use strict';
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/charities');
 
+import React from 'react';
+import PromoCharities from '../';
+import TestUtils from 'react-addons-test-utils';
+
 describe('PromoCharities', function() {
-  var React          = require('react');
-  var PromoCharities = require('../');
-  var TestUtils      = require('react-addons-test-utils');
-  var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('default behaviour for PromoCharities', function() {
     var promoCharities;

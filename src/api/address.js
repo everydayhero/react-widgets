@@ -1,10 +1,8 @@
-"use strict";
+import routes from './routes';
+import getJSONP from '../lib/getJSONP';
 
-var routes = require('./routes');
-var getJSONP = require('../lib/getJSONP');
-
-module.exports = {
-  find: function(id, country, callback) {
+export default {
+  find(id, country, callback) {
     return getJSONP(routes.get('address', { id: id, country: country }), callback);
   },
 

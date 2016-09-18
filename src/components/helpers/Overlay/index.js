@@ -1,14 +1,11 @@
-"use strict";
+import React from 'react';
+import Icon from '../Icon';
+import addClass from '../../../lib/addClass';
+import removeClass from '../../../lib/removeClass';
 
-var React     = require('react');
-var Icon      = require('../Icon');
+const $ = { addClass, removeClass };
 
-var $ = {
-  addClass:     require('../../../lib/addClass'),
-  removeClass:  require('../../../lib/removeClass'),
-};
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'Overlay',
 
   propTypes: {

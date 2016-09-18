@@ -1,17 +1,15 @@
-'use strict';
+import _ from 'lodash';
+import React from 'react';
+import numeral from 'numbro';
+import campaigns from '../../api/campaigns';
+import charities from '../../api/charities';
+import LeaderboardPaging from '../leaderboards/LeaderboardPaging';
+import paramJoin from '../../lib/paramJoin';
 
-var _                 = require('lodash');
-var React             = require('react');
-var numeral           = require('numbro');
-var campaigns         = require('../../api/campaigns');
-var charities         = require('../../api/charities');
-var LeaderboardPaging = require('../leaderboards/LeaderboardPaging');
-var paramJoin         = require('../../lib/paramJoin');
-
-module.exports = {
-  getEndpoint: function() {
-    var endpoint;
-    var props = this.props;
+export default {
+  getEndpoint() {
+    let endpoint;
+    let props = this.props;
 
     if(props.country) {
       if (props.campaignSlug) {

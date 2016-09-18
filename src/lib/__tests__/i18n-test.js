@@ -1,7 +1,6 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 
-var i18n = require('../i18n');
+import i18n from '../i18n';
 
 describe('i18n', function() {
   it('returns undefined for missing simple key', function() {

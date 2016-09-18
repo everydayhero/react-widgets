@@ -1,10 +1,8 @@
-'use strict';
-jest.autoMockOff();
-var sinon = require('sinon')
-
-var React         = require('react');
-var SearchResults = require('../');
-var TestUtils     = require('react-addons-test-utils');
+jest.disableAutomock();
+import sinon from 'sinon';
+import React from 'react';
+import SearchResults from '../';
+import TestUtils from 'react-addons-test-utils';
 var findByClass   = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass   = TestUtils.scryRenderedDOMComponentsWithClass;
 

@@ -1,6 +1,4 @@
-'use strict';
-
-var _ = require('lodash');
+import _ from 'lodash';
 
 function toString(obj) {
   return _.map(obj, function(value, key) {
@@ -21,4 +19,4 @@ function openPopup(url, config) {
   window.open(url, 'shareWindow', config);
 }
 
-module.exports = openPopup;
+export default openPopup;

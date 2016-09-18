@@ -1,12 +1,12 @@
-'use strict';
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/pages');
 
+import React from 'react';
+import Teams from '../';
+import TestUtils from 'react-addons-test-utils';
+
 describe('Teams', function() {
-  var React       = require('react');
-  var Teams       = require('../');
-  var TestUtils   = require('react-addons-test-utils');
-  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
     var teams;

@@ -1,8 +1,8 @@
-var React = require('react');
-var totals = require('../../../api/totals');
-var CampaignGoalItem = require('../GoalItem');
+import React from 'react';
+import totals from '../../../api/totals';
+import CampaignGoalItem from '../GoalItem';
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'CampaignGoals',
 
   getDefaultProps: function() {
@@ -61,4 +61,4 @@ module.exports = React.createClass({
       </div>
     )
   }
-})
+});

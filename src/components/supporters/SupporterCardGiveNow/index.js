@@ -1,14 +1,12 @@
-"use strict";
-
-var React               = require('react');
-var I18nMixin           = require('../../mixins/I18n');
-var CallToActionButton  = require('../../callstoaction/CallToActionButton');
+import React from 'react';
+import I18nMixin from '../../mixins/I18n';
+import CallToActionButton from '../../callstoaction/CallToActionButton';
 
 function _wholeRound(num) {
   return num % 1 !== 0 ? num.toFixed(2) : num;
 }
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'SupporterCardGiveNow',
 
   mixins: [I18nMixin],

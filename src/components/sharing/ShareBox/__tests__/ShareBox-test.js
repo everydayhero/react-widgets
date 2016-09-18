@@ -1,13 +1,12 @@
-'use strict';
+jest.disableAutomock();
 
-jest.autoMockOff();
+import React from 'react';
+import ShareBox from '../';
+import ShareIcon from '../../ShareIcon/';
+import TestUtils from 'react-addons-test-utils';
 
 describe('Share Box', function() {
-  var React                  = require('react');
-  var ShareBox               = require('../');
-  var ShareIcon              = require('../../ShareIcon/');
-  var TestUtils              = require('react-addons-test-utils');
-  var scryRenderedComponents = TestUtils.scryRenderedComponentsWithType;
+  let scryRenderedComponents = TestUtils.scryRenderedComponentsWithType;
 
   var mockServices = [
     { name: 'facebuck', url: 'http://facebuck.com/' },

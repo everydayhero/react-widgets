@@ -1,15 +1,15 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
+
+import React from 'react';
+import FundraiserImage from '../';
+import TestUtils from 'react-addons-test-utils';
 
 describe('FundraiserImage', function() {
-  var React           = require('react');
-  var FundraiserImage = require('../');
-  var TestUtils       = require('react-addons-test-utils');
-  var findByTag       = TestUtils.findRenderedDOMComponentWithTag;
+  let findByTag = TestUtils.findRenderedDOMComponentWithTag;
 
   describe('component defaults', function() {
-    var fundraiserImage;
-    var element;
+    let fundraiserImage;
+    let element;
 
     beforeEach(function() {
       fundraiserImage = <FundraiserImage />;

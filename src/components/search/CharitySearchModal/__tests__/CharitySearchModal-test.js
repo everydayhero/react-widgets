@@ -97,6 +97,7 @@ describe('CharitySearchModal', function() {
     let element = TestUtils.renderIntoDocument(charitySearchModal);
     let input = findByTag(element, 'input');
     TestUtils.Simulate.change(input, { target: { value: 'foo' } });
+    jest.runAllTimers();
 
     expect(charities.search.mock.calls.length).toEqual(2);
     expect(charities.search).lastCalledWith(query, element.updateResults);
@@ -235,6 +236,7 @@ describe('CharitySearchModal', function() {
 
     let input = findByTag(element, 'input');
     TestUtils.Simulate.change(input, { target: { value: 'foo' } });
+    jest.runAllTimers();
     resultElements = scryByClass(element, 'SearchResult');
 
     expect(resultElements.length).toEqual(1);

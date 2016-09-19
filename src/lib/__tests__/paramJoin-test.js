@@ -1,7 +1,6 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 
-var paramJoin = require('../paramJoin');
+import paramJoin from '../paramJoin';
 
 describe('paramJoin', function() {
   it('converts a single array element to a string', function() {

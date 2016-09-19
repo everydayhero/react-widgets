@@ -1,13 +1,11 @@
-"use strict";
+import _ from 'lodash';
+import React from 'react';
+import I18nMixin from '../../mixins/I18n';
+import pages from '../../../api/pages';
+import Icon from '../../helpers/Icon';
+import FundraiserImage from '../FundraiserImage';
 
-var _               = require('lodash');
-var React           = require('react');
-var I18nMixin       = require('../../mixins/I18n');
-var pages           = require('../../../api/pages');
-var Icon            = require('../../helpers/Icon');
-var FundraiserImage = require('../FundraiserImage');
-
-module.exports = React.createClass({
+export default React.createClass({
   mixins: [I18nMixin],
   displayName: "RecentFundraisers",
   propTypes: {

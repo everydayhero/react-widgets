@@ -1,6 +1,4 @@
-"use strict";
-
-module.exports = [
+export default [
   { name: "Australia", iso: "AU" },
   { name: "Canada", iso: "CA" },
   { name: "Ireland", iso: "IE" },

@@ -1,5 +1,3 @@
-"use strict";
-
 function addClass(el, className) {
   if (el.classList) {
     el.classList.add(className);
@@ -8,4 +6,4 @@ function addClass(el, className) {
   }
 }
 
-module.exports = addClass;
+export default addClass;

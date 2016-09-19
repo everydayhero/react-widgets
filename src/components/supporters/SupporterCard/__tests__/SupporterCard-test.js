@@ -1,10 +1,9 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 
-var React         = require('react');
-var TestUtils     = require('react-addons-test-utils');
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 var findByClass   = TestUtils.findRenderedDOMComponentWithClass;
-var SupporterCard = require('../');
+import SupporterCard from '../';
 
 describe('SupporterCard', function() {
   var element;

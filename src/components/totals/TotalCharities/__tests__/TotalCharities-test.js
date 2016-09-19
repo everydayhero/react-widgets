@@ -1,18 +1,18 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/charities');
 
+import React from 'react';
+import TotalCharities from '../';
+import charities from '../../../../api/charities';
+import TestUtils from 'react-addons-test-utils';
+
 describe('TotalCharities', function() {
-  var React          = require('react');
-  var TotalCharities = require('../');
-  var charities      = require('../../../../api/charities');
-  var TestUtils      = require('react-addons-test-utils');
-  var findByClass    = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component defaults', function() {
-    var totalCharities;
-    var element;
+    let totalCharities;
+    let element;
 
     beforeEach(function() {
       charities.findByCampaign.mockClear();
@@ -26,20 +26,20 @@ describe('TotalCharities', function() {
 
     it('renders default total charities', function() {
       element.setState({ isLoading: false });
-      var total = findByClass(element, 'TotalCharities__total');
+      let total = findByClass(element, 'TotalCharities__total');
 
       expect(total.textContent).toContain('0');
     });
 
     it('renders a default title', function() {
       element.setState({ isLoading: false });
-      var title = findByClass(element, 'TotalCharities__title');
+      let title = findByClass(element, 'TotalCharities__title');
 
       expect(title.textContent).toBe('Non Profits');
     });
 
     it('renders an icon by default', function() {
-      var icon = findByClass(element, 'TotalCharities__icon');
+      let icon = findByClass(element, 'TotalCharities__icon');
 
       expect(icon).not.toBeNull();
     });
@@ -56,9 +56,9 @@ describe('TotalCharities', function() {
   });
 
   describe('Custom component props', function() {
-    var totalCharities;
-    var element;
-    var translation = {
+    let totalCharities;
+    let element;
+    let translation = {
       title: 'blahblah'
     };
 
@@ -69,14 +69,14 @@ describe('TotalCharities', function() {
 
     it('renders a custom title', function() {
       element.setState({ isLoading: false });
-      var title = findByClass(element, 'TotalCharities__title');
+      let title = findByClass(element, 'TotalCharities__title');
 
       expect(title.textContent).toBe(translation.title);
     });
 
     it('renders a default total', function() {
       element.setState({ isLoading: false });
-      var total = findByClass(element, 'TotalCharities__total');
+      let total = findByClass(element, 'TotalCharities__total');
 
       expect(total.textContent).toContain('0');
     });
@@ -84,44 +84,44 @@ describe('TotalCharities', function() {
 
   describe('Number formatting options', function() {
     it('renders in a short format by default', function() {
-      var totalCharities = <TotalCharities campaignUid="au-0" />;
-      var element = TestUtils.renderIntoDocument(totalCharities);
+      let totalCharities = <TotalCharities campaignUid="au-0" />;
+      let element = TestUtils.renderIntoDocument(totalCharities);
 
       element.setState({
         isLoading: false,
         total: 10000
       });
 
-      var total = findByClass(element, 'TotalCharities__total');
+      let total = findByClass(element, 'TotalCharities__total');
       expect(total.textContent).toBe('10 k');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var totalCharities = <TotalCharities campaignUid="au-0" format="0,0" />;
-      var element = TestUtils.renderIntoDocument(totalCharities);
+      let totalCharities = <TotalCharities campaignUid="au-0" format="0,0" />;
+      let element = TestUtils.renderIntoDocument(totalCharities);
 
       element.setState({
         isLoading: false,
         total: 10000
       });
 
-      var total = findByClass(element, 'TotalCharities__total');
+      let total = findByClass(element, 'TotalCharities__total');
       expect(total.textContent).toBe('10,000');
     });
   });
 
   describe('Displaying an icon', function() {
     it('renders no icon when renderIcon set to false', function() {
-      var totalCharities = <TotalCharities campaignUid="au-0" renderIcon={ false } />;
-      var element = TestUtils.renderIntoDocument(totalCharities);
-      var icon = scryByClass(element, 'TotalCharities__icon');
+      let totalCharities = <TotalCharities campaignUid="au-0" renderIcon={ false } />;
+      let element = TestUtils.renderIntoDocument(totalCharities);
+      let icon = scryByClass(element, 'TotalCharities__icon');
       expect(icon.length).toEqual(0);
     });
 
     it('renders a custom icon when passed a valid FontAwesome string', function() {
-      var totalCharities = <TotalCharities campaignUid="au-0" renderIcon="paw" />;
-      var element = TestUtils.renderIntoDocument(totalCharities);
-      var icon = findByClass(element, 'fa-paw');
+      let totalCharities = <TotalCharities campaignUid="au-0" renderIcon="paw" />;
+      let element = TestUtils.renderIntoDocument(totalCharities);
+      let icon = findByClass(element, 'fa-paw');
       expect(icon).not.toBeNull();
     });
   });

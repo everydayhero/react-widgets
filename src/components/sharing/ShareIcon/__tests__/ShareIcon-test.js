@@ -1,13 +1,11 @@
-'use strict';
-
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../lib/openPopup');
 
-var React     = require('react');
-var ReactDOM  = require('react-dom');
-var ShareIcon = require('../');
-var TestUtils = require('react-addons-test-utils');
-var openPopup = require('../../../../lib/openPopup');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ShareIcon from '../';
+import TestUtils from 'react-addons-test-utils';
+import openPopup from '../../../../lib/openPopup';
 
 describe('Share Icon component', function() {
   var shareIcon;

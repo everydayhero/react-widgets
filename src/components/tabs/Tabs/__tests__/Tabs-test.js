@@ -1,15 +1,14 @@
-"use strict";
+jest.disableAutomock();
 
-jest.autoMockOff();
+import React from 'react';
+import Tabs from '../';
+import TestUtils from 'react-addons-test-utils';
 
 describe('Tabs', function() {
-  var React              = require('react');
-  var Tabs               = require('../');
-  var TestUtils          = require('react-addons-test-utils');
-  var findByClass        = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass        = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
-  var data = [
+  let data = [
     {
       "label": "foo",
       "content": "blah"
@@ -21,8 +20,8 @@ describe('Tabs', function() {
   ];
 
   describe('Tabs', function() {
-    var tabs;
-    var component;
+    let tabs;
+    let component;
 
     beforeEach(function() {
       tabs = <Tabs children={ data } collapse={ 'auto' } />;
@@ -30,8 +29,8 @@ describe('Tabs', function() {
     });
 
     it('renders all the tabs', function() {
-      var tabsContainer = findByClass(component, 'Tabs');
-      var tabsElements = scryByClass(component, 'Tab');
+      let tabsContainer = findByClass(component, 'Tabs');
+      let tabsElements = scryByClass(component, 'Tab');
 
       expect(tabsContainer).toBeDefined();
       expect(tabsElements.length).toBe(data.length);
@@ -40,12 +39,12 @@ describe('Tabs', function() {
     });
 
     it('renders a tab list', function() {
-      var tabList = findByClass(component, 'Tabs__tab-list');
+      let tabList = findByClass(component, 'Tabs__tab-list');
       expect(tabList.getAttribute('role')).toBe('tablist');
     });
 
     it('renders tab content areas', function() {
-      var contents = scryByClass(component, 'Tabs__content');
+      let contents = scryByClass(component, 'Tabs__content');
       expect(contents.length).toBe(data.length);
       expect(contents[0].textContent).toContain('blah');
       expect(contents[1].textContent).toContain('Dummy html content.');
@@ -62,18 +61,18 @@ describe('Tabs', function() {
 
     it('renders tabdrawers if the window size is smaller when set to stacked', function() {
       component.setState({ stacked: true });
-      var tabDrawers = scryByClass(component, 'TabDrawer');
+      let tabDrawers = scryByClass(component, 'TabDrawer');
       expect(tabDrawers.length).toBe(data.length);
     });
 
     it('can switch tabs using right key', function() {
-      var firstTab = scryByClass(component, 'Tab')[0];
+      let firstTab = scryByClass(component, 'Tab')[0];
       TestUtils.Simulate.keyDown(firstTab, { keyCode: 39 });
       expect(component.state.current).toBe(1);
     });
 
     it('can switch tabs using left key', function() {
-      var firstTab = scryByClass(component, 'Tab')[1];
+      let firstTab = scryByClass(component, 'Tab')[1];
       TestUtils.Simulate.keyDown(firstTab, { keyCode: 37 });
       expect(component.state.current).toBe(0);
     });
@@ -82,7 +81,7 @@ describe('Tabs', function() {
       tabs = <Tabs children={ data } collapse={ 'auto' } />;
       component = TestUtils.renderIntoDocument(tabs);
 
-      var tabsElement = findByClass(component, 'Tabs');
+      let tabsElement = findByClass(component, 'Tabs');
       expect(tabsElement.className).toBe('Tabs Tabs--tiny');
     });
 
@@ -90,7 +89,7 @@ describe('Tabs', function() {
       tabs = <Tabs children={ data } collapse={ false } />;
       component = TestUtils.renderIntoDocument(tabs);
 
-      var tabsElement = findByClass(component, 'Tabs');
+      let tabsElement = findByClass(component, 'Tabs');
       expect(tabsElement.className).toBe('Tabs');
     });
 
@@ -98,7 +97,7 @@ describe('Tabs', function() {
       tabs = <Tabs children={ data } collapse={ true } />;
       component = TestUtils.renderIntoDocument(tabs);
 
-      var tabsElement = findByClass(component, 'Tabs');
+      let tabsElement = findByClass(component, 'Tabs');
       expect(tabsElement.className).toBe('Tabs Tabs--collapsed');
     });
   });

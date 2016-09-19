@@ -22,16 +22,17 @@
     "react-addons-test-utils": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-tween-state": "0.1.5",
-    "reactify": "~1.1.1",
     "remarkable": "^1.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.11.4",
     "babel-eslint": "^6.0.4",
-    "babel-jest": "^12.0.2",
+    "babel-jest": "^14.1.0",
+    "babel-plugin-transform-object-assign": "^6.8.0",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.14.0",
+    "babelify": "^7.3.0",
     "browserify": "~13.0.0",
     "chai": "^3.5.0",
     "compression": "~1.6.1",
@@ -91,19 +92,14 @@
     "deploy-assets": "bin/deploy_assets",
     "install": "bin/write-version-sass-var"
   },
-  "browserify": {
-    "transform": [
-      "reactify"
-    ]
-  },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "moduleFileExtensions": [
       "js",
       "json"
     ],
     "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react"
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/enzyme/"
     ]
   }
 }

@@ -1,15 +1,15 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
+
+import React from 'react';
+import Team from '../';
+import TestUtils from 'react-addons-test-utils';
 
 describe('Team', function() {
-  var React     = require('react');
-  var Team      = require('../');
-  var TestUtils = require('react-addons-test-utils');
-  var findByTag = TestUtils.findRenderedDOMComponentWithTag;
+  let findByTag = TestUtils.findRenderedDOMComponentWithTag;
 
   describe('component defaults', function() {
-    var team;
-    var element;
+    let team;
+    let element;
 
     beforeEach(function() {
       team = <Team />;
@@ -22,9 +22,9 @@ describe('Team', function() {
   });
 
   describe('component with custom props', function() {
-    var team;
-    var element;
-    var props = {
+    let team;
+    let element;
+    let props = {
       pageUrl: "http://everydayhero.com/us",
       title: "Wonderful Team"
     };
@@ -39,12 +39,12 @@ describe('Team', function() {
     });
 
     it('renders an anchor with custom url and title prop', function() {
-      var anchor = findByTag(element, 'a');
+      let anchor = findByTag(element, 'a');
       expect(anchor.href).toBe(props.pageUrl);
     });
 
     it('renders an image with alt tag including custom title prop', function() {
-      var image = findByTag(element, 'img');
+      let image = findByTag(element, 'img');
       expect(image.alt).toBe(props.title);
     });
   });

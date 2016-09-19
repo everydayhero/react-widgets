@@ -1,11 +1,10 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 
-var React       = require('react');
-var TestUtils   = require('react-addons-test-utils');
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-var Overlay     = require('../');
+import Overlay from '../';
 
 describe('Overlay', function() {
   it('renders something', function() {

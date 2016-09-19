@@ -1,19 +1,19 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/totals');
 
+import React from 'react';
+import sinon from 'sinon';
+import FundsRaised from '../';
+import totals from '../../../../api/totals';
+import TestUtils from 'react-addons-test-utils';
+
 describe('FundsRaised', function() {
-  var React       = require('react');
-  var sinon       = require('sinon');
-  var FundsRaised = require('../');
-  var totals      = require('../../../../api/totals');
-  var TestUtils   = require('react-addons-test-utils');
-  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('component defaults', function() {
-    var fundsRaised;
-    var element;
+    let fundsRaised;
+    let element;
 
     beforeEach(function() {
       totals.findByCampaigns.mockClear();
@@ -27,19 +27,19 @@ describe('FundsRaised', function() {
 
     it('renders a default total', function() {
       element.setState({ isLoading: false });
-      var total = findByClass(element, 'FundsRaised__total');
+      let total = findByClass(element, 'FundsRaised__total');
       expect(total.textContent).toContain('$0.00');
     });
 
     it('renders a default title', function() {
       element.setState({ isLoading: false });
-      var title = findByClass(element, 'FundsRaised__title');
+      let title = findByClass(element, 'FundsRaised__title');
 
       expect(title.textContent).toBe('Raised To Date');
     });
 
     it('renders an icon by default', function() {
-      var icon = findByClass(element, 'FundsRaised__icon');
+      let icon = findByClass(element, 'FundsRaised__icon');
       expect(icon).not.toBeNull();
     });
 
@@ -50,8 +50,8 @@ describe('FundsRaised', function() {
   });
 
   describe('single campaign id', function() {
-    var fundsRaised;
-    var element;
+    let fundsRaised;
+    let element;
 
     beforeEach(function() {
       totals.findByCampaigns.mockClear();
@@ -66,8 +66,8 @@ describe('FundsRaised', function() {
   });
 
   describe('single page id', function() {
-    var fundsRaised;
-    var element;
+    let fundsRaised;
+    let element;
 
     beforeEach(function() {
       totals.findByPages.mockClear();
@@ -82,8 +82,8 @@ describe('FundsRaised', function() {
   });
 
   describe('single charity id', function() {
-    var fundsRaised;
-    var element;
+    let fundsRaised;
+    let element;
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
@@ -98,8 +98,8 @@ describe('FundsRaised', function() {
   });
 
   describe('multiple charity ids', function() {
-    var fundsRaised;
-    var element;
+    let fundsRaised;
+    let element;
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
@@ -114,8 +114,8 @@ describe('FundsRaised', function() {
   });
 
   describe('campaign and charity Ids', function() {
-    var fundsRaised;
-    var element;
+    let fundsRaised;
+    let element;
 
     beforeEach(function() {
       totals.findByAll.mockClear();
@@ -130,8 +130,8 @@ describe('FundsRaised', function() {
   });
 
   describe('working with multiple uids', function() {
-    var fundsRaised;
-    var element;
+    let fundsRaised;
+    let element;
 
     beforeEach(function() {
       totals.findByCampaigns.mockClear();
@@ -146,9 +146,9 @@ describe('FundsRaised', function() {
   });
 
   describe('using component props', function() {
-    var fundsRaised;
-    var element;
-    var translation = {
+    let fundsRaised;
+    let element;
+    let translation = {
       title: 'asdjasj',
       symbol: '£'
     };
@@ -160,21 +160,21 @@ describe('FundsRaised', function() {
 
     it('renders a custom title', function() {
       element.setState({ isLoading: false });
-      var title = findByClass(element, 'FundsRaised__title');
+      let title = findByClass(element, 'FundsRaised__title');
 
       expect(title.textContent).toBe(translation.title);
     });
 
     it('check for a default total', function() {
       element.setState({ isLoading: false });
-      var total = findByClass(element, 'FundsRaised__total');
+      let total = findByClass(element, 'FundsRaised__total');
 
       expect(total.textContent).toContain('1,000');
     });
 
     it('check for a total with offset', function() {
       element.setState({ total: 100000, isLoading: false });
-      var total = findByClass(element, 'FundsRaised__total');
+      let total = findByClass(element, 'FundsRaised__total');
 
       expect(total.textContent).toContain('2,000');
     });
@@ -182,51 +182,51 @@ describe('FundsRaised', function() {
 
   describe('Number formatting options', function() {
     it('renders in a short format by default', function() {
-      var fundsRaised = <FundsRaised campaignUid="au-0" />;
-      var element = TestUtils.renderIntoDocument(fundsRaised);
+      let fundsRaised = <FundsRaised campaignUid="au-0" />;
+      let element = TestUtils.renderIntoDocument(fundsRaised);
 
       element.setState({
         isLoading: false,
         total: 1000000
       });
 
-      var total = findByClass(element, 'FundsRaised__total');
+      let total = findByClass(element, 'FundsRaised__total');
       expect(total.textContent).toBe('$10.00 k');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var fundsRaised = <FundsRaised campaignUid="au-0" format="0[.]0" />;
-      var element = TestUtils.renderIntoDocument(fundsRaised);
+      let fundsRaised = <FundsRaised campaignUid="au-0" format="0[.]0" />;
+      let element = TestUtils.renderIntoDocument(fundsRaised);
 
       element.setState({
         isLoading: false,
         total: 1000000
       });
 
-      var total = findByClass(element, 'FundsRaised__total');
+      let total = findByClass(element, 'FundsRaised__total');
       expect(total.textContent).toBe('$10000');
     });
   });
 
   describe('Displaying an icon', function() {
     it('renders no icon when renderIcon set to false', function() {
-      var fundsRaised = <FundsRaised campaignUid="au-0" renderIcon={ false } />;
-      var element = TestUtils.renderIntoDocument(fundsRaised);
-      var icon = scryByClass(element, 'FundsRaised__icon');
+      let fundsRaised = <FundsRaised campaignUid="au-0" renderIcon={ false } />;
+      let element = TestUtils.renderIntoDocument(fundsRaised);
+      let icon = scryByClass(element, 'FundsRaised__icon');
       expect(icon.length).toEqual(0);
     });
 
     it('renders a custom icon when passed a valid FontAwesome string', function() {
-      var fundsRaised = <FundsRaised campaignUid="au-0" renderIcon="paw" />;
-      var element = TestUtils.renderIntoDocument(fundsRaised);
-      var icon = findByClass(element, 'fa-paw');
+      let fundsRaised = <FundsRaised campaignUid="au-0" renderIcon="paw" />;
+      let element = TestUtils.renderIntoDocument(fundsRaised);
+      let icon = findByClass(element, 'fa-paw');
       expect(icon).not.toBeNull();
     });
   });
 
   describe('takes startAt property', function() {
-    var fundsRaised;
-    var element;
+    let fundsRaised;
+    let element;
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
@@ -241,8 +241,8 @@ describe('FundsRaised', function() {
   });
 
   describe('takes endAt property', function() {
-    var fundsRaised;
-    var element;
+    let fundsRaised;
+    let element;
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
@@ -257,8 +257,8 @@ describe('FundsRaised', function() {
   });
 
   describe('Group value filtering', function() {
-    var fundsRaised;
-    var element;
+    let fundsRaised;
+    let element;
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
@@ -289,7 +289,7 @@ describe('FundsRaised', function() {
     })
 
     it('fires the callback after API data is fetched', function() {
-      var cb = jest.genMockFunction();
+      let cb = jest.genMockFunction();
       TestUtils.renderIntoDocument(<FundsRaised charityUid="au-24" onLoad={ function(res) { cb(res) } } />);
       expect(cb.mock.calls.length).toBe(1);
       expect(cb.mock.calls[0].length).toBe(1);

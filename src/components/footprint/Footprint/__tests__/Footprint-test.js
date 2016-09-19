@@ -1,10 +1,9 @@
-'use strict';
-jest.autoMockOff();
+jest.disableAutomock();
 
-var React       = require('react');
-var ReactDOM    = require('react-dom');
-var TestUtils   = require('react-addons-test-utils');
-var Footprint   = require('../');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+import Footprint from '../';
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 var findByTag   = TestUtils.findRenderedDOMComponentWithTag;
 

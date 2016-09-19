@@ -1,13 +1,11 @@
-'use strict';
+import _ from 'lodash';
+import React from 'react';
+import I18nMixin from '../../mixins/I18n';
+import charities from '../../../api/charities';
+import Tabs from '../../tabs/Tabs';
+import PromoCharitiesResults from '../PromoCharitiesResults';
 
-var _                     = require('lodash');
-var React                 = require('react');
-var I18nMixin             = require('../../mixins/I18n');
-var charities             = require('../../../api/charities');
-var Tabs                  = require('../../tabs/Tabs');
-var PromoCharitiesResults = require('../PromoCharitiesResults');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'PromoCharities',
   mixins: [I18nMixin],
   propTypes: {

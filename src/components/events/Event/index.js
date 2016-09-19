@@ -1,15 +1,13 @@
-'use strict';
-
-var React               = require('react');
-var I18n                = require('../../mixins/I18n');
-var CallToActionButton  = require('../../callstoaction/CallToActionButton');
-var numeral             = require('numbro')
+import React from 'react';
+import I18n from '../../mixins/I18n';
+import CallToActionButton from '../../callstoaction/CallToActionButton';
+import numeral from 'numbro';
 
 function cssUrl(url) {
   return url ? 'url(' + url + ')' : 'none';
 }
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'Event',
   mixins: [I18n],
   propTypes: {

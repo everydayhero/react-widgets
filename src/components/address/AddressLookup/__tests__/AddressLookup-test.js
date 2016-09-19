@@ -1,17 +1,13 @@
-'use strict';
-jest.autoMockOff();
-
+jest.disableAutomock();
 jest.mock('../../../../api/address');
-var address = require('../../../../api/address');
-var _ = require('lodash');
-_.debounce = function(callback) { return callback; };
 
-var React = require('react');
-var TestUtils   = require('react-addons-test-utils');
-var AddressLookup = require('../');
-var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
-var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-var findByAttribute = require('../../../../test/helpers/scryRenderedDOMComponentsWithAttribute').findRenderedDOMComponentWithAttribute;
+import address from '../../../../api/address';
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import AddressLookup from '../';
+const scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+const findByClass = TestUtils.findRenderedDOMComponentWithClass;
+import {findRenderedDOMComponentWithAttribute as findByAttribute} from '../../../../test/helpers/scryRenderedDOMComponentsWithAttribute';
 var addressSearchResult = { addresses: [
   { id: '123', label: 'TestAddressListing' }
 ] };
@@ -45,6 +41,7 @@ describe('AddressLookup', function() {
     TestUtils.Simulate.click(countrySelect);
     var input = findByClass(element, 'Input__input');
     TestUtils.Simulate.change(input, { target: { value: 'king' }});
+    jest.runAllTimers();
     var country = findByClass(element, 'CountrySelectItem--focused');
     TestUtils.Simulate.click(country);
     expect(element.state.country.iso).toBe('UK');
@@ -70,9 +67,11 @@ describe('AddressLookup', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup country="UK"/>);
     var input = findByClass(element, 'Input__input');
     TestUtils.Simulate.change(input, { target: { value: '1234' }});
+    jest.runAllTimers();
     expect(address.search).not.toBeCalled();
 
     TestUtils.Simulate.change(input, { target: { value: '12345' }});
+    jest.runAllTimers();
     expect(address.search).lastCalledWith('12345', 'UK', jasmine.any(Function));
   });
 
@@ -80,9 +79,11 @@ describe('AddressLookup', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup country="US"/>);
     var input = findByClass(element, 'Input__input');
     TestUtils.Simulate.change(input, { target: { value: '123456' }});
+    jest.runAllTimers();
     expect(address.search).not.toBeCalled();
 
     TestUtils.Simulate.change(input, { target: { value: '1234567' }});
+    jest.runAllTimers();
     expect(address.search).lastCalledWith('1234567', 'US', jasmine.any(Function));
   });
 
@@ -90,6 +91,7 @@ describe('AddressLookup', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup />);
     var input = findByClass(element, 'Input__input');
     TestUtils.Simulate.change(input, { target: { value: 'TestAddress' }});
+    jest.runAllTimers();
     expect(address.search).lastCalledWith('TestAddress', 'AU', jasmine.any(Function));
 
     var callback = address.search.mock.calls[0][2];
@@ -104,6 +106,7 @@ describe('AddressLookup', function() {
     var element = TestUtils.renderIntoDocument(<AddressLookup />);
     var input = findByClass(element, 'Input__input');
     TestUtils.Simulate.change(input, { target: { value: 'TestAddress' }});
+    jest.runAllTimers();
 
     var callback = address.search.mock.calls[0][2];
     callback(addressSearchResult);
@@ -159,6 +162,7 @@ describe('AddressLookup', function() {
       expect(locality.value).toBe('Sydney');
 
       TestUtils.Simulate.change(streetAddress, { target: { value: '2 SomeOther St' }});
+      jest.runAllTimers();
       expect(pafValidated.value).toBe('false');
       expect(element.state.custom).not.toBeNull();
     });

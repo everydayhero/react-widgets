@@ -1,14 +1,12 @@
-'use strict';
+import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import cx from 'classnames';
+import _ from 'lodash';
+import I18nMixin from '../../mixins/I18n';
+import Input from '../Input';
+import SelectOptions from '../SelectOptions';
 
-var React           = require('react');
-var PureRenderMixin = require('react-addons-pure-render-mixin');
-var cx              = require('classnames');
-var _               = require('lodash');
-var I18nMixin       = require('../../mixins/I18n');
-var Input           = require('../Input');
-var SelectOptions   = require('../SelectOptions');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'Select',
 
   mixins: [I18nMixin, PureRenderMixin],

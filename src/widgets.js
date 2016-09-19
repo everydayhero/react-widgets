@@ -1,54 +1,94 @@
-'use strict';
+import 'es5-shim';
+import 'es5-shim/es5-sham';
+import './lib/consoleShim';
 
-require('es5-shim');
-require('es5-shim/es5-sham');
-require('./lib/consoleShim');
+import _ from 'lodash';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import routes from './api/routes';
+import addEventListener from './lib/addEventListener';
+import renderModal from './lib/renderModal';
 
-var _ = require('lodash');
-var React = require('react');
-var ReactDOM = require('react-dom');
-var routes = require('./api/routes');
-var addEventListener = require('./lib/addEventListener');
-var renderModal = require('./lib/renderModal');
-var widgets = {
-  AddressLookup:      require('./components/address/AddressLookup'),
-  Amount:             require('./components/amount/Amount'),
-  CallToActionBox:    require('./components/callstoaction/CallToActionBox'),
-  CallToActionButton: require('./components/callstoaction/CallToActionButton'),
-  CampaignGoals:      require('./components/events/Goals'),
-  CountDown:          require('./components/events/CountDown'),
-  EntityGoalProgress: require('./components/totals/EntityGoalProgress'),
-  Event:              require('./components/events/Event'),
-  FitnessLeaderboard: require('./components/leaderboards/FitnessLeaderboard'),
-  Footprint:          require('./components/footprint/Footprint'),
-  FundsRaised:        require('./components/totals/FundsRaised'),
-  Goal:               require('./components/totals/Goal'),
-  Input:              require('./components/forms/Input'),
-  Leaderboard:        require('./components/leaderboards/Leaderboard'),
-  LeaderboardPaging:  require('./components/leaderboards/LeaderboardPaging'),
-  Map:                require('./components/maps/Map'),
-  PromoCharities:     require('./components/charities/PromoCharities'),
-  RecentFundraisers:  require('./components/fundraisers/RecentFundraisers'),
-  SearchInput:        require('./components/forms/SearchInput'),
-  ShareButton:        require('./components/sharing/ShareButton'),
-  Supporters:         require('./components/supporters/Supporters'),
-  Tabs:               require('./components/tabs/Tabs'),
-  TeamLeaderboard:    require('./components/leaderboards/TeamLeaderboard'),
-  Teams:              require('./components/teams/Teams'),
-  TotalCalories:      require('./components/totals/TotalCalories'),
-  TotalCharities:     require('./components/totals/TotalCharities'),
-  TotalCustomMetric:  require('./components/totals/TotalCustomMetric'),
-  TotalDistance:      require('./components/totals/TotalDistance'),
-  TotalDonations:     require('./components/totals/TotalDonations'),
-  TotalHours:         require('./components/totals/TotalHours'),
-  TotalSupporters:    require('./components/totals/TotalSupporters'),
-  UpcomingEvents:     require('./components/events/UpcomingEvents')
+// Widgets
+import AddressLookup from './components/address/AddressLookup';
+import Amount from './components/amount/Amount';
+import CallToActionBox from './components/callstoaction/CallToActionBox';
+import CallToActionButton from './components/callstoaction/CallToActionButton';
+import CampaignGoals from './components/events/Goals';
+import CountDown from './components/events/CountDown';
+import EntityGoalProgress from './components/totals/EntityGoalProgress';
+import Event from './components/events/Event';
+import FitnessLeaderboard from './components/leaderboards/FitnessLeaderboard';
+import Footprint from './components/footprint/Footprint';
+import FundsRaised from './components/totals/FundsRaised';
+import Goal from './components/totals/Goal';
+import Input from './components/forms/Input';
+import Leaderboard from './components/leaderboards/Leaderboard';
+import LeaderboardPaging from './components/leaderboards/LeaderboardPaging';
+import Map from './components/maps/Map';
+import PromoCharities from './components/charities/PromoCharities';
+import RecentFundraisers from './components/fundraisers/RecentFundraisers';
+import SearchInput from './components/forms/SearchInput';
+import ShareButton from './components/sharing/ShareButton';
+import Supporters from './components/supporters/Supporters';
+import Tabs from './components/tabs/Tabs';
+import TeamLeaderboard from './components/leaderboards/TeamLeaderboard';
+import Teams from './components/teams/Teams';
+import TotalCalories from './components/totals/TotalCalories';
+import TotalCharities from './components/totals/TotalCharities';
+import TotalCustomMetric from './components/totals/TotalCustomMetric';
+import TotalDistance from './components/totals/TotalDistance';
+import TotalDonations from './components/totals/TotalDonations';
+import TotalHours from './components/totals/TotalHours';
+import TotalSupporters from './components/totals/TotalSupporters';
+import UpcomingEvents from './components/events/UpcomingEvents';
+
+// Modals
+import AggregateSearch from './components/search/AggregateSearchModal';
+import CharitySearch from './components/search/CharitySearchModal';
+import CharitySearchModalCustom from './components/search/CharitySearchModalCustom';
+import PageSearch from './components/search/PageSearchModal';
+
+const widgets = {
+  AddressLookup,
+  Amount,
+  CallToActionBox,
+  CallToActionButton,
+  CampaignGoals,
+  CountDown,
+  EntityGoalProgress,
+  Event,
+  FitnessLeaderboard,
+  Footprint,
+  FundsRaised,
+  Goal,
+  Input,
+  Leaderboard,
+  LeaderboardPaging,
+  Map,
+  PromoCharities,
+  RecentFundraisers,
+  SearchInput,
+  ShareButton,
+  Supporters,
+  Tabs,
+  TeamLeaderboard,
+  Teams,
+  TotalCalories,
+  TotalCharities,
+  TotalCustomMetric,
+  TotalDistance,
+  TotalDonations,
+  TotalHours,
+  TotalSupporters,
+  UpcomingEvents
 };
-var modals = {
-  AggregateSearch:          require('./components/search/AggregateSearchModal'),
-  CharitySearch:            require('./components/search/CharitySearchModal'),
-  CharitySearchModalCustom: require('./components/search/CharitySearchModalCustom'),
-  PageSearch:               require('./components/search/PageSearchModal'),
+
+const modals = {
+  AggregateSearch,
+  CharitySearch,
+  CharitySearchModalCustom,
+  PageSearch
 };
 
 function getElement(element) {
@@ -110,5 +150,5 @@ module.exports = {
   renderWidget: renderWidget,
   initModal: initModal,
   showModal: showModal,
-  widgets: widgets,
+  widgets: widgets
 };

@@ -1,18 +1,17 @@
-'use strict';
+jest.disableAutomock();
 
-jest.autoMockOff();
+import React from 'react';
+import ShareButton from '../';
+import ShareBox from '../../ShareBox';
+import TestUtils from 'react-addons-test-utils';
 
 describe('Share Button', function() {
-  var React                  = require('react');
-  var ShareButton            = require('../');
-  var ShareBox               = require('../../ShareBox');
-  var TestUtils              = require('react-addons-test-utils');
-  var findByClass            = TestUtils.findRenderedDOMComponentWithClass;
-  var findRenderedComponent  = TestUtils.findRenderedComponentWithType;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let findRenderedComponent = TestUtils.findRenderedComponentWithType;
 
   describe('component defaults', function() {
-    var shareBtn;
-    var component;
+    let shareBtn;
+    let component;
 
     beforeEach(function() {
       shareBtn = <ShareButton />;
@@ -24,13 +23,13 @@ describe('Share Button', function() {
     });
 
     it('displays a sharing icon by default', function() {
-      var icon = findByClass(component, 'ShareButton__icon');
+      let icon = findByClass(component, 'ShareButton__icon');
       expect(icon).toBeDefined();
       expect(component.renderIcon()).toBeTruthy();
     });
 
     it('has default button label text', function() {
-      var label = findByClass(component, 'ShareButton__label');
+      let label = findByClass(component, 'ShareButton__label');
       expect(label).toBeDefined();
       expect(label.textContent).toBe('Share this page');
     });
@@ -38,8 +37,8 @@ describe('Share Button', function() {
     it('displays a ShareBox when state is open', function() {
       component.setState({ open: true });
 
-      var result   = component.renderShareBox();
-      var shareBox = findRenderedComponent(component, ShareBox);
+      let result   = component.renderShareBox();
+      let shareBox = findRenderedComponent(component, ShareBox);
 
       expect(result).toBeTruthy();
       expect(shareBox).toBeDefined();
@@ -59,8 +58,8 @@ describe('Share Button', function() {
   });
 
   describe('showing only specific buttons', function() {
-    var shareBtn;
-    var component;
+    let shareBtn;
+    let component;
 
     beforeEach(function() {
       shareBtn = <ShareButton buttons={ ['facebook', 'twitter'] } />;
@@ -68,7 +67,7 @@ describe('Share Button', function() {
     });
 
     it('filters the list of services by the names of the button props', function() {
-      var result = component.filterServices();
+      let result = component.filterServices();
       expect(result.length).toBe(2);
       expect(result[0].name).toBe('facebook');
       expect(result[1].name).toBe('twitter');
@@ -76,8 +75,8 @@ describe('Share Button', function() {
   });
 
   describe('icon display option', function() {
-    var shareBtn;
-    var component;
+    let shareBtn;
+    let component;
 
     beforeEach(function() {
       shareBtn = <ShareButton renderIcon={ false } />;

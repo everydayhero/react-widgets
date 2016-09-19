@@ -1,11 +1,9 @@
-"use strict";
+import _ from 'lodash';
+import format from '../lib/format';
+import parseUrl from '../lib/parseUrl';
 
-var _ = require('lodash');
-var format = require('../lib/format');
-var parseUrl = require('../lib/parseUrl');
-
-var defaultBaseUrl = 'https://everydayhero.com';
-var baseRoutes = {
+const defaultBaseUrl = 'https://everydayhero.com';
+const baseRoutes = {
   donate:                      '{protocol}://{campaignSlug}.{hostname}/{country}/{charitySlug}/donate',
   fundraise:                   '{protocol}://{campaignSlug}.{hostname}/{country}/{charitySlug}/get-started',
 
@@ -28,14 +26,14 @@ var baseRoutes = {
   searchAddresses:             '{baseUrl}/api/v2/addresses.jsonp?country_code={country}&q={searchTerm}',
   totals:                      '{baseUrl}/api/v2/search/totals.jsonp?charity_id[]={charityUid}&campaign_id[]={campaignUid}&group_value[]={groupValue}&page_id[]={page}&start_at={start}&end_at={end}&kind={type}&country_code={country}'
 };
-var routes = {};
+let routes = {};
 
 function removeEmptyQueryParams(url) {
   return url.replace(/\w+(?:\W+|)=(&|$)/g, '').replace(/(\?|&)$/, '');
 }
 
 function getRoute(name, params) {
-  var route = routes[name];
+  let route = routes[name];
   if (!route) {
     return;
   }
@@ -54,13 +52,13 @@ function getRoute(name, params) {
 }
 
 function setBaseUrl(baseUrl) {
-  var splitUrl = parseUrl(baseUrl);
+  const splitUrl = parseUrl(baseUrl);
   if (!splitUrl) {
     console.error('Invalid base URL "' + baseUrl + '", expected URL such as "http://server.com" or "http://localhost:3000".');
     return false;
   }
 
-  var params = {
+  const params = {
     protocol: splitUrl.protocol,
     hostname: splitUrl.hostname,
     baseUrl: baseUrl
@@ -73,7 +71,7 @@ function setBaseUrl(baseUrl) {
 
 setBaseUrl(defaultBaseUrl);
 
-module.exports = {
+export default {
   get: getRoute,
   setBaseUrl: setBaseUrl
 };

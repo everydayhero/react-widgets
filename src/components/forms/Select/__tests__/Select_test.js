@@ -1,11 +1,10 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 
-var React = require('react');
-var TestUtils = require('react-addons-test-utils');
-var Select = require('../');
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import Select from '../';
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-var findByAttribute = require('../../../../test/helpers/scryRenderedDOMComponentsWithAttribute').findRenderedDOMComponentWithAttribute;
+import {findRenderedDOMComponentWithAttribute as findByAttribute} from '../../../../test/helpers/scryRenderedDOMComponentsWithAttribute';
 
 var i18n = {
   name: 'test_Select',
@@ -20,7 +19,6 @@ var options = [
 
 describe('Select', function() {
   it('renders a Select', function() {
-
     var element = TestUtils.renderIntoDocument(<Select i18n={ i18n } value={ 'option1' } options={ options } />);
     var select = findByClass(element, 'Select');
     expect(select).toBeDefined();

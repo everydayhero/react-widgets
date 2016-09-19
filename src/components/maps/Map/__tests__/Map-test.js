@@ -1,15 +1,14 @@
-'use strict';
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/pages');
 
-describe('Map', function() {
-  var React                       = require('react');
-  var Map                       = require('../');
-  var TestUtils                   = require('react-addons-test-utils');
+import React from 'react';
+import Map from '../';
+import TestUtils from 'react-addons-test-utils';
 
+describe('Map', function() {
   describe('component defaults', function() {
-    var map;
-    var element;
+    let map;
+    let element;
 
     beforeEach(function() {
       map = <Map campaignUid="au-0" />;

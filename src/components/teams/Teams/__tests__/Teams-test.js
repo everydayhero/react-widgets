@@ -1,16 +1,16 @@
-'use strict';
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/pages');
 
+import React from 'react';
+import Teams from '../';
+import TestUtils from 'react-addons-test-utils';
+
 describe('Teams', function() {
-  var React       = require('react');
-  var Teams       = require('../');
-  var TestUtils   = require('react-addons-test-utils');
-  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
-    var teams;
-    var element;
+    let teams;
+    let element;
 
     beforeEach(function() {
       teams = <Teams campaignUid="au-0" />;
@@ -27,13 +27,13 @@ describe('Teams', function() {
         hasResults: false
       });
 
-      var emptyLabel = findByClass(element, 'Teams__empty-label');
+      let emptyLabel = findByClass(element, 'Teams__empty-label');
       expect(emptyLabel.textContent).toContain('No teams to display.');
     });
 
     it('renders a default heading', function() {
       element.setState({ isLoading: false });
-      var heading = findByClass(element, 'Teams__heading');
+      let heading = findByClass(element, 'Teams__heading');
 
       expect(heading.textContent).toBe('Teams');
     });
@@ -45,9 +45,9 @@ describe('Teams', function() {
   });
 
   describe('component props', function() {
-    var teams;
-    var element;
-    var translation = {
+    let teams;
+    let element;
+    let translation = {
       heading: 'headings are cool',
       emptyLabel: 'empty labels are not cool'
     };
@@ -59,7 +59,7 @@ describe('Teams', function() {
 
     it('renders a custom heading', function() {
       element.setState({isLoading: false});
-      var heading = findByClass(element, 'Teams__heading');
+      let heading = findByClass(element, 'Teams__heading');
 
       expect(heading.textContent).toBe(translation.heading);
     });
@@ -69,7 +69,7 @@ describe('Teams', function() {
         isLoading: false,
         hasResults: false
       });
-      var emptyLabel = findByClass(element, 'Teams__empty-label');
+      let emptyLabel = findByClass(element, 'Teams__empty-label');
 
       expect(emptyLabel.textContent).toBe(translation.emptyLabel);
     });

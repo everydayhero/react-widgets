@@ -1,5 +1,3 @@
-"use strict";
-
 function ready(f) {
   if (document.readyState == 'complete') {
     f();
@@ -8,4 +6,4 @@ function ready(f) {
   }
 }
 
-module.exports = ready;
+export default ready;

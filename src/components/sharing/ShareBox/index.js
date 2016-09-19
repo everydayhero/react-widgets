@@ -1,10 +1,8 @@
-'use strict';
+import React from 'react';
+import Input from '../../forms/Input';
+import ShareIcon from '../ShareIcon';
 
-var React     = require('react');
-var Input     = require('../../forms/Input');
-var ShareIcon = require('../ShareIcon');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'ShareBox',
 
   renderShareIcons: function() {

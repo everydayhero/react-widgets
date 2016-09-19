@@ -1,19 +1,16 @@
-'use strict';
-jest.autoMockOff();
+jest.disableAutomock();
 
 jest.mock('../../../../api/charities');
 jest.mock('../../../../api/campaigns');
-var charities = require('../../../../api/charities');
-var campaigns = require('../../../../api/campaigns');
-
-var React       = require('react');
-var ReactDOM    = require('react-dom');
-var TestUtils   = require('react-addons-test-utils');
+import charities from '../../../../api/charities';
+import campaigns from '../../../../api/campaigns';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
-var Supporters  = require('../');
-
-var leaderboardData = require('./Supporters-data.json');
+import Supporters from '../';
+import leaderboardData from './Supporters-data.json';
 
 describe('Supporters', function() {
   var element;

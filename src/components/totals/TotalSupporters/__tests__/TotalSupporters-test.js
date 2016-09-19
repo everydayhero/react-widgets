@@ -1,18 +1,18 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/pages');
 
+import React from 'react';
+import TotalSupporters from '../';
+import pages from '../../../../api/pages';
+import TestUtils from 'react-addons-test-utils';
+
 describe('TotalSupporters', function() {
-  var React       = require('react');
-  var TotalSupporters = require('../');
-  var pages       = require('../../../../api/pages');
-  var TestUtils   = require('react-addons-test-utils');
-  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component defaults', function() {
-    var totalSupporters;
-    var element;
+    let totalSupporters;
+    let element;
 
     beforeEach(function() {
       pages.search.mockClear();
@@ -26,20 +26,20 @@ describe('TotalSupporters', function() {
 
     it('renders default total of pages', function() {
       element.setState({ isLoading: false });
-      var total = findByClass(element, 'TotalSupporters__total');
+      let total = findByClass(element, 'TotalSupporters__total');
 
       expect(total.textContent).toContain('0');
     });
 
     it('renders a default title', function() {
       element.setState({ isLoading: false });
-      var title = findByClass(element, 'TotalSupporters__title');
+      let title = findByClass(element, 'TotalSupporters__title');
 
       expect(title.textContent).toBe('Supporters');
     });
 
     it('renders an icon by default', function() {
-      var icon = findByClass(element, 'TotalSupporters__icon');
+      let icon = findByClass(element, 'TotalSupporters__icon');
 
       expect(icon).not.toBeNull();
     });
@@ -63,8 +63,8 @@ describe('TotalSupporters', function() {
   });
 
   describe('Working with multiple campaign uids', function() {
-    var totalSupporters;
-    var element;
+    let totalSupporters;
+    let element;
 
     beforeEach(function() {
       pages.search.mockClear();
@@ -86,8 +86,8 @@ describe('TotalSupporters', function() {
   });
 
   describe('single charity id', function() {
-    var totalSupporters;
-    var element;
+    let totalSupporters;
+    let element;
 
     beforeEach(function() {
       pages.search.mockClear();
@@ -109,8 +109,8 @@ describe('TotalSupporters', function() {
   });
 
   describe('Working with multiple charity uids', function() {
-    var totalSupporters;
-    var element;
+    let totalSupporters;
+    let element;
 
     beforeEach(function() {
       pages.search.mockClear();
@@ -132,8 +132,8 @@ describe('TotalSupporters', function() {
   });
 
   describe('Working with a single group value', function() {
-    var totalSupporters;
-    var element;
+    let totalSupporters;
+    let element;
 
     beforeEach(function() {
       pages.search.mockClear();
@@ -155,8 +155,8 @@ describe('TotalSupporters', function() {
   });
 
   describe('Working with a multiple group values', function() {
-    var totalSupporters;
-    var element;
+    let totalSupporters;
+    let element;
 
     beforeEach(function() {
       pages.search.mockClear();
@@ -178,9 +178,9 @@ describe('TotalSupporters', function() {
   });
 
   describe('Custom component props', function() {
-    var totalSupporters;
-    var element;
-    var translation = {
+    let totalSupporters;
+    let element;
+    let translation = {
       title: 'blahblah'
     };
 
@@ -191,14 +191,14 @@ describe('TotalSupporters', function() {
 
     it('renders a custom title', function() {
       element.setState({ isLoading: false });
-      var title = findByClass(element, 'TotalSupporters__title');
+      let title = findByClass(element, 'TotalSupporters__title');
 
       expect(title.textContent).toBe(translation.title);
     });
 
     it('renders a default total', function() {
       element.setState({ isLoading: false });
-      var total = findByClass(element, 'TotalSupporters__total');
+      let total = findByClass(element, 'TotalSupporters__total');
 
       expect(total.textContent).toContain('0');
     });
@@ -206,51 +206,51 @@ describe('TotalSupporters', function() {
 
   describe('Number formatting options', function() {
     it('renders in a standard format by default', function() {
-      var totalSupporters = <TotalSupporters campaignUid="au-0" />;
-      var element = TestUtils.renderIntoDocument(totalSupporters);
+      let totalSupporters = <TotalSupporters campaignUid="au-0" />;
+      let element = TestUtils.renderIntoDocument(totalSupporters);
 
       element.setState({
         isLoading: false,
         total: 10050
       });
 
-      var total = findByClass(element, 'TotalSupporters__total');
+      let total = findByClass(element, 'TotalSupporters__total');
       expect(total.textContent).toBe('10,050');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var totalSupporters = <TotalSupporters campaignUid="au-0" format="0.00" />;
-      var element = TestUtils.renderIntoDocument(totalSupporters);
+      let totalSupporters = <TotalSupporters campaignUid="au-0" format="0.00" />;
+      let element = TestUtils.renderIntoDocument(totalSupporters);
 
       element.setState({
         isLoading: false,
         total: 10050
       });
 
-      var total = findByClass(element, 'TotalSupporters__total');
+      let total = findByClass(element, 'TotalSupporters__total');
       expect(total.textContent).toBe('10050.00');
     });
   });
 
   describe('Displaying an icon', function() {
     it('renders no icon when renderIcon set to false', function() {
-      var totalSupporters = <TotalSupporters campaignUid="au-0" renderIcon={ false } />;
-      var element = TestUtils.renderIntoDocument(totalSupporters);
-      var icon = scryByClass(element, 'TotalSupporters__icon');
+      let totalSupporters = <TotalSupporters campaignUid="au-0" renderIcon={ false } />;
+      let element = TestUtils.renderIntoDocument(totalSupporters);
+      let icon = scryByClass(element, 'TotalSupporters__icon');
       expect(icon.length).toEqual(0);
     });
 
     it('renders a custom icon when passed a valid FontAwesome string', function() {
-      var totalSupporters = <TotalSupporters campaignUid="au-0" renderIcon="paw" />;
-      var element = TestUtils.renderIntoDocument(totalSupporters);
-      var icon = findByClass(element, 'fa-paw');
+      let totalSupporters = <TotalSupporters campaignUid="au-0" renderIcon="paw" />;
+      let element = TestUtils.renderIntoDocument(totalSupporters);
+      let icon = findByClass(element, 'fa-paw');
       expect(icon).not.toBeNull();
     });
   });
 
   describe('Filtering by page type', function() {
-    var totalSupporters;
-    var element;
+    let totalSupporters;
+    let element;
 
     beforeEach(function() {
       pages.search.mockClear();

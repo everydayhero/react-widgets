@@ -1,13 +1,13 @@
-'use strict';
+import search from '../search';
+import * as getJSONP from '../../lib/getJSONP';
 
 describe('search', () => {
-  const spy = sinon.spy()
-  const search = mockrequire('../search', {
-    '../lib/getJSONP': spy
-  })
+  beforeEach(() => {
+    sinon.stub(getJSONP, 'default');
+  });
 
   afterEach(() => {
-    spy.reset();
+    getJSONP.default.restore();
   });
 
   describe('aggregate', () => {
@@ -16,7 +16,7 @@ describe('search', () => {
       const callback = () => {};
       search.aggregate(query, callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/search/aggregate.jsonp' +
           '?q=bar&country_code=xy&page=2&page_size=7&minimum_score=0.05',
         callback, { timeout: 10000 }

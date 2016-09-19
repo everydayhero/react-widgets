@@ -1,17 +1,15 @@
-'use strict';
+import _ from 'lodash';
+import React from 'react';
+import numeral from 'numbro';
+import campaigns from '../../api/campaigns';
+import charities from '../../api/charities';
+import LeaderboardPaging from '../leaderboards/LeaderboardPaging';
+import paramJoin from '../../lib/paramJoin';
 
-var _                 = require('lodash');
-var React             = require('react');
-var numeral           = require('numbro');
-var campaigns         = require('../../api/campaigns');
-var charities         = require('../../api/charities');
-var LeaderboardPaging = require('../leaderboards/LeaderboardPaging');
-var paramJoin         = require('../../lib/paramJoin');
-
-module.exports = {
-  getEndpoint: function() {
-    var endpoint;
-    var props = this.props;
+export default {
+  getEndpoint() {
+    let endpoint;
+    let props = this.props;
 
     if(props.country) {
       if (props.campaignSlug) {
@@ -38,15 +36,15 @@ module.exports = {
     return (endpoint || function(type, limit, callback) { callback(null); });
   },
 
-  loadLeaderboard: function(type) {
+  loadLeaderboard(type) {
     this.setState({ isLoading: true });
 
-    var groupValue = this.props.groupValue;
+    let groupValue = this.props.groupValue;
     if (this.props.groupValues && this.props.groupValues.length > 0) {
       groupValue = paramJoin(this.props.groupValues, '&groupValue[]');
     }
 
-    var endpoint = this.getEndpoint();
+    let endpoint = this.getEndpoint();
 
     if (groupValue && this.props.campaignUid) {
       endpoint(this.processLeaderboard);
@@ -58,8 +56,8 @@ module.exports = {
     }
   },
 
-  processLeaderboard: function(result) {
-    var pages = [];
+  processLeaderboard(result) {
+    let pages = [];
     if (result.results) {
       pages = result.results.map(function(object) {
         return object = object.page;
@@ -68,7 +66,7 @@ module.exports = {
       // Static Leaderboard
       pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : [];
     }
-    var leaderboard = this.getLeaderboard(pages);
+    let leaderboard = this.getLeaderboard(pages);
 
     this.rankLeaderboard(leaderboard);
     this.handleHasContentCallback(leaderboard);
@@ -81,15 +79,15 @@ module.exports = {
     });
   },
 
-  handleHasContentCallback: function(leaderboard) {
-    var onHasContent = this.props.onHasContent;
+  handleHasContentCallback(leaderboard) {
+    let onHasContent = this.props.onHasContent;
 
     if (leaderboard.length > 0 && onHasContent) {
       onHasContent();
     }
   },
 
-  getLeaderboard: function(pages) {
+  getLeaderboard(pages) {
     return _.reduce(pages, function(result, page) {
       if (page.amount.cents > 0) {
         result.push({
@@ -108,9 +106,9 @@ module.exports = {
     }, []);
   },
 
-  rankLeaderboard: function(leaderboard) {
-    var rank = 1;
-    var prevItem = null;
+  rankLeaderboard(leaderboard) {
+    let rank = 1;
+    let prevItem = null;
 
     _.forEach(leaderboard, function(item, i) {
       if (prevItem && item.amount != prevItem.amount) {
@@ -122,38 +120,38 @@ module.exports = {
     });
   },
 
-  paginateLeaderboard: function(leaderboard) {
-    var pageSize         = this.props.pageSize;
-    var pagedLeaderboard = [];
+  paginateLeaderboard(leaderboard) {
+    let pageSize         = this.props.pageSize;
+    let pagedLeaderboard = [];
 
-    for (var i = 0; i < leaderboard.length; i += pageSize) {
+    for (let i = 0; i < leaderboard.length; i += pageSize) {
       pagedLeaderboard.push(leaderboard.slice(i,i + pageSize));
     }
 
     return pagedLeaderboard;
   },
 
-  formatAmount: function(amount) {
+  formatAmount(amount) {
     return this.t('symbol') + numeral(amount / 100).format(this.props.currencyFormat);
   },
 
-  prevPage: function() {
+  prevPage() {
     if (this.state.currentPage > 1) {
       this.setState({ currentPage: this.state.currentPage - 1 });
     }
   },
 
-  nextPage: function() {
-    var totalPages  = this.props.limit / this.props.pageSize;
-    var currentPage = this.state.currentPage;
+  nextPage() {
+    let totalPages  = this.props.limit / this.props.pageSize;
+    let currentPage = this.state.currentPage;
 
     if (currentPage < totalPages) {
       this.setState({ currentPage: currentPage + 1 });
     }
   },
 
-  renderPaging: function() {
-    var pageCount = Math.ceil(this.state.resultCount / this.props.pageSize);
+  renderPaging() {
+    let pageCount = Math.ceil(this.state.resultCount / this.props.pageSize);
 
     if (!this.state.isLoading && pageCount > 1) {
       return (

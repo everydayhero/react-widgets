@@ -1,13 +1,11 @@
-'use strict';
+import React from 'react';
+import SearchInput from '../SearchInput';
+import SearchPagination from '../SearchPagination';
+import SearchResults from '../SearchResults';
+import I18nMixin from '../../mixins/I18n';
+import Overlay from '../../helpers/Overlay';
 
-var React                       = require('react');
-var SearchInput                 = require('../SearchInput');
-var SearchPagination            = require('../SearchPagination');
-var SearchResults               = require('../SearchResults');
-var I18nMixin                   = require('../../mixins/I18n');
-var Overlay                     = require('../../helpers/Overlay');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'SearchModal',
 
   mixins: [I18nMixin],

@@ -1,11 +1,9 @@
-'use strict';
+import React from 'react';
+import I18n from '../../mixins/I18n';
+import pagesAPI from '../../../api/pages';
+import AggregateSearchResult from '../AggregateSearchResult';
 
-var React                 = require('react');
-var I18n                  = require('../../mixins/I18n');
-var pagesAPI              = require('../../../api/pages');
-var AggregateSearchResult = require('../AggregateSearchResult');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'AggregateSearchResultPage',
 
   mixins: [I18n],

@@ -1,10 +1,8 @@
-'use strict';
+import React from 'react';
+import Icon from '../../helpers/Icon';
+import PromoCharitiesResult from '../PromoCharitiesResult';
 
-var React                = require('react');
-var Icon                 = require('../../helpers/Icon');
-var PromoCharitiesResult = require('../PromoCharitiesResult');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'PromoCharitiesResults',
   propTypes: {
     loaded: React.PropTypes.bool,

@@ -1,10 +1,8 @@
-"use strict";
+jest.disableAutomock();
 
-jest.autoMockOff();
-
-var React       = require('react');
-var TabDrawer   = require('../');
-var TestUtils   = require('react-addons-test-utils');
+import React from 'react';
+import TabDrawer from '../';
+import TestUtils from 'react-addons-test-utils';
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
 describe('TabDrawer', function() {

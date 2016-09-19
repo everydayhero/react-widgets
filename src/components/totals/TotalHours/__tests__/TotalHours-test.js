@@ -1,18 +1,18 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/campaigns');
 
+import React from 'react';
+import TotalHours from '../';
+import campaigns from '../../../../api/campaigns';
+import TestUtils from 'react-addons-test-utils';
+
 describe('TotalDistance', function() {
-  var React       = require('react');
-  var TotalHours  = require('../');
-  var campaigns   = require('../../../../api/campaigns');
-  var TestUtils   = require('react-addons-test-utils');
-  var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component when handed multiple uids', function() {
-    var totalHours;
-    var element;
+    let totalHours;
+    let element;
 
     beforeEach(function() {
       campaigns.findByUids.mockClear();
@@ -25,7 +25,7 @@ describe('TotalDistance', function() {
     });
 
     it('renders an icon by default', function() {
-      var icon = findByClass(element, 'TotalHours__icon');
+      let icon = findByClass(element, 'TotalHours__icon');
       expect(icon).not.toBeNull();
     });
 
@@ -41,8 +41,8 @@ describe('TotalDistance', function() {
   });
 
   describe('Component when handed one uid', function() {
-    var totalHours;
-    var element;
+    let totalHours;
+    let element;
 
     beforeEach(function() {
       campaigns.findByUids.mockClear();
@@ -57,9 +57,9 @@ describe('TotalDistance', function() {
   });
 
   describe('Custom component props', function() {
-    var totalHours;
-    var element;
-    var translation = {
+    let totalHours;
+    let element;
+    let translation = {
       title: 'Kilometers'
     };
 
@@ -73,7 +73,7 @@ describe('TotalDistance', function() {
         isLoading: false,
         total: 123
       });
-      var title = findByClass(element, 'TotalHours__title');
+      let title = findByClass(element, 'TotalHours__title');
 
       expect(title.textContent).toBe(translation.title);
     });
@@ -81,8 +81,8 @@ describe('TotalDistance', function() {
 
   describe('Number formatting options', function() {
     it('renders in a human readable format by default', function() {
-      var totalHours = <TotalHours campaignUid="au-0" />;
-      var element = TestUtils.renderIntoDocument(totalHours);
+      let totalHours = <TotalHours campaignUid="au-0" />;
+      let element = TestUtils.renderIntoDocument(totalHours);
 
       element.setState({
         isLoading: false,
@@ -90,13 +90,13 @@ describe('TotalDistance', function() {
         total: 37800
       });
 
-      var total = findByClass(element, 'TotalHours__total');
+      let total = findByClass(element, 'TotalHours__total');
       expect(total.textContent).toBe('10.5');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var totalHours = <TotalHours campaignUid="au-0" format="0,0[.]00" />;
-      var element = TestUtils.renderIntoDocument(totalHours);
+      let totalHours = <TotalHours campaignUid="au-0" format="0,0[.]00" />;
+      let element = TestUtils.renderIntoDocument(totalHours);
 
       element.setState({
         isLoading: false,
@@ -104,23 +104,23 @@ describe('TotalDistance', function() {
         total: 37800
       });
 
-      var total = findByClass(element, 'TotalHours__total');
+      let total = findByClass(element, 'TotalHours__total');
       expect(total.textContent).toBe('10.50');
     });
   });
 
   describe('Displaying an icon', function() {
     it('renders no icon when renderIcon set to false', function() {
-      var totalHours = <TotalHours campaignUid="au-0" renderIcon={ false } />;
-      var element = TestUtils.renderIntoDocument(totalHours);
-      var icon = scryByClass(element, 'Goal__icon');
+      let totalHours = <TotalHours campaignUid="au-0" renderIcon={ false } />;
+      let element = TestUtils.renderIntoDocument(totalHours);
+      let icon = scryByClass(element, 'Goal__icon');
       expect(icon.length).toEqual(0);
     });
 
     it('renders a custom icon when passed a valid FontAwesome string', function() {
-      var totalHours = <TotalHours campaignUid="au-0" renderIcon="paw" />;
-      var element = TestUtils.renderIntoDocument(totalHours);
-      var icon = findByClass(element, 'fa-paw');
+      let totalHours = <TotalHours campaignUid="au-0" renderIcon="paw" />;
+      let element = TestUtils.renderIntoDocument(totalHours);
+      let icon = findByClass(element, 'fa-paw');
       expect(icon).not.toBeNull();
     });
   });

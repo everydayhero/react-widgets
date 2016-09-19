@@ -1,8 +1,6 @@
-"use strict";
-
-var _        = require('lodash');
-var routes   = require('./routes');
-var getJSONP = require('../lib/getJSONP');
+import _ from 'lodash';
+import routes from './routes';
+import getJSONP from '../lib/getJSONP';
 
 var giveCampaignUids = {
   'au': 'au-0',
@@ -12,8 +10,8 @@ var giveCampaignUids = {
   'us': 'us-0'
 };
 
-module.exports = {
-  find: function(campaignUid, callback, options) {
+export default {
+  find(campaignUid, callback, options) {
     var params = _.merge({
       campaignUid: campaignUid
     }, options);
@@ -21,11 +19,11 @@ module.exports = {
     return getJSONP(routes.get('campaign', params), callback);
   },
 
-  findBySlug: function(country, campaignSlug, callback, options) {
+  findBySlug(country, campaignSlug, callback, options) {
     return this.find(country + '/' + campaignSlug, callback, options);
   },
 
-  findByUids: function(campaignUids, callback, options) {
+  findByUids(campaignUids, callback, options) {
     if (_.isEmpty(campaignUids)) {
       _.defer(callback, { campaigns: [] });
       return;
@@ -38,7 +36,7 @@ module.exports = {
     return getJSONP(routes.get('campaigns', params), callback);
   },
 
-  findByCharity: function(charityUid, page, limit, callback, options) {
+  findByCharity(charityUid, page, limit, callback, options) {
     var params = options || {};
     params.charityUid = charityUid;
     if (page) { params.page = page; }
@@ -46,7 +44,7 @@ module.exports = {
     return getJSONP(routes.get('campaigns', params), callback);
   },
 
-  leaderboard: function(campaignUid, charityUid, type, limit, callback, options) {
+  leaderboard(campaignUid, charityUid, type, limit, callback, options) {
     var params = _.merge({
       campaignUid: campaignUid,
       charityUid: charityUid,
@@ -57,7 +55,7 @@ module.exports = {
     return getJSONP(routes.get('campaignLeaderboard', params), callback);
   },
 
-  leaderboardDynamic: function(campaignUid, groupValue, callback) {
+  leaderboardDynamic(campaignUid, groupValue, callback) {
     var params = {
       campaignUid: campaignUid,
       groupValue: groupValue
@@ -66,7 +64,7 @@ module.exports = {
     return getJSONP(routes.get('campaignLeaderboardDynamic', params), callback);
   },
 
-  leaderboardByUids: function(campaignUids, charityUid, type, limit, callback, options) {
+  leaderboardByUids(campaignUids, charityUid, type, limit, callback, options) {
     if (_.isEmpty(campaignUids)) {
       _.defer(callback, { campaigns: [] });
       return;
@@ -98,21 +96,21 @@ module.exports = {
     }.bind(this));
   },
 
-  leaderboardBySlug: function(country, campaignSlug, type, limit, callback, options) {
+  leaderboardBySlug(country, campaignSlug, type, limit, callback, options) {
     return this.leaderboard(country + '/' + campaignSlug, '', type, limit, callback, options);
   },
 
-  search: function(params, callback) {
+  search(params, callback) {
     params = _.merge({ page: 1, pageSize: 10 }, params);
     params.searchTerm = encodeURIComponent(params.searchTerm);
     return getJSONP(routes.get('searchCampaigns', params), callback, {timeout: 10000});
   },
 
-  giveCampaignUid: function(country) {
+  giveCampaignUid(country) {
     return giveCampaignUids[country];
   },
 
-  giveCampaignSlug: function() {
+  giveCampaignSlug() {
     return 'give';
   }
 };

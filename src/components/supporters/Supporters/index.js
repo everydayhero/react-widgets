@@ -1,14 +1,12 @@
-'use strict';
+import _ from 'lodash';
+import React from 'react';
+import DOMInfo from '../../mixins/DOMInfo';
+import I18n from '../../mixins/I18n';
+import campaigns from '../../../api/campaigns';
+import charities from '../../../api/charities';
+import SupporterCard from '../SupporterCard';
 
-var _             = require('lodash');
-var React         = require('react');
-var DOMInfo       = require('../../mixins/DOMInfo');
-var I18n          = require('../../mixins/I18n');
-var campaigns     = require('../../../api/campaigns');
-var charities     = require('../../../api/charities');
-var SupporterCard = require('../SupporterCard');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'Supporters',
 
   mixins: [I18n, DOMInfo],

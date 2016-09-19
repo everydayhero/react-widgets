@@ -1,11 +1,9 @@
-"use strict";
+import React from 'react';
+import cx from 'classnames';
+import AmountInput from '../AmountInput';
+import AmountRadio from '../AmountRadio';
 
-var React        = require('react');
-var cx           = require('classnames');
-var AmountInput  = require('../AmountInput');
-var AmountRadio  = require('../AmountRadio');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "Amount",
 
   propTypes: {

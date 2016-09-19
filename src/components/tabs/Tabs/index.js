@@ -1,12 +1,10 @@
-'use strict';
+import React from 'react';
+import Tab from '../Tab';
+import TabDrawer from '../TabDrawer';
+import TabPanel from '../TabPanel';
+import DOMInfoMixin from '../../mixins/DOMInfo';
 
-var React        = require('react');
-var Tab          = require('../Tab');
-var TabDrawer    = require('../TabDrawer');
-var TabPanel     = require('../TabPanel');
-var DOMInfoMixin = require('../../mixins/DOMInfo');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'Tabs',
   mixins: [DOMInfoMixin],
   propTypes: {

@@ -1,13 +1,11 @@
-'use strict';
+import _ from 'lodash';
+import React from 'react';
+import I18nMixin from '../../mixins/I18n';
+import campaigns from '../../../api/campaigns';
+import Icon from '../../helpers/Icon';
+import numeral from 'numbro';
 
-var _               = require('lodash');
-var React           = require('react');
-var I18nMixin       = require('../../mixins/I18n');
-var campaigns       = require('../../../api/campaigns');
-var Icon            = require('../../helpers/Icon');
-var numeral         = require('numbro');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'TotalCalories',
   mixins: [I18nMixin],
   propTypes: {

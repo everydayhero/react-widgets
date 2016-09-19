@@ -1,4 +1,5 @@
-"use strict";
+// testable version of debounce as lodash.debounce() enforces wait time
+
 // testable version of debounce as lodash.debounce() enforces wait time
 
 function debounce(func, wait, immediate) {
@@ -20,4 +21,4 @@ function debounce(func, wait, immediate) {
   };
 }
 
-module.exports = debounce;
+export default debounce;

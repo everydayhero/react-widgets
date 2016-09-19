@@ -1,11 +1,9 @@
-"use strict";
+import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import cx from 'classnames';
+import FlagIcon from '../../helpers/FlagIcon';
 
-var React           = require('react');
-var PureRenderMixin = require('react-addons-pure-render-mixin');
-var cx              = require('classnames');
-var FlagIcon        = require('../../helpers/FlagIcon');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "CountrySelectItem",
 
   mixins: [PureRenderMixin],

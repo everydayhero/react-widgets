@@ -1,21 +1,22 @@
-'use strict';
+import address from '../address';
+import * as getJSONP from '../../lib/getJSONP';
 
 describe('address', () => {
-  const spy = sinon.spy()
-  const address = mockrequire('../address', {
-    '../lib/getJSONP': spy
-  })
   const callback = () => {};
 
+  beforeEach(() => {
+    sinon.stub(getJSONP, 'default');
+  });
+
   afterEach(() => {
-    spy.reset();
-  })
+    getJSONP.default.restore();
+  });
 
   describe('find', () => {
     it('gets an address by id', () => {
       address.find('123', 'uk', callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/addresses/uk/123.jsonp',
         callback
       );
@@ -26,7 +27,7 @@ describe('address', () => {
     it('searches for addresses', () => {
       address.search('blah', 'uk', callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/addresses.jsonp?country_code=uk&q=blah',
         callback
       );

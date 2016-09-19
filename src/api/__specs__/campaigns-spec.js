@@ -1,22 +1,24 @@
-'use strict';
+import _ from 'lodash';
+import campaigns from '../campaigns';
+import * as getJSONP from '../../lib/getJSONP';
 
 describe('campaigns', () => {
-  const spy = sinon.spy()
-  const campaigns = mockrequire('../campaigns', {
-    '../lib/getJSONP': spy
-  })
   const callback = sinon.spy();
 
+  beforeEach(() => {
+    sinon.stub(getJSONP, 'default');
+  });
+
   afterEach(() => {
-    spy.reset();
+    getJSONP.default.restore();
     callback.reset();
-  })
+  });
 
   describe('find', () => {
     it('gets a campaign by uid', () => {
       campaigns.find('xy-12', callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/campaigns/xy-12.jsonp',
         callback
       );
@@ -28,8 +30,8 @@ describe('campaigns', () => {
         excludePages: true
       });
 
-      expect(spy.args[0][0]).to.include('exclude_charities=true')
-      expect(spy.args[0][0]).to.include('exclude_pages=true')
+      expect(getJSONP.default.args[0][0]).to.include('exclude_charities=true')
+      expect(getJSONP.default.args[0][0]).to.include('exclude_pages=true')
     });
   });
 
@@ -37,7 +39,7 @@ describe('campaigns', () => {
     it('gets a campaign by country and slug', () => {
       campaigns.findBySlug('xy', 'slugathon-2015', callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/campaigns/xy/slugathon-2015.jsonp',
         callback
       );
@@ -49,8 +51,8 @@ describe('campaigns', () => {
         excludePages: true
       });
 
-      expect(spy.args[0][0]).include('exclude_charities=true');
-      expect(spy.args[0][0]).include('exclude_pages=true');
+      expect(getJSONP.default.args[0][0]).include('exclude_charities=true');
+      expect(getJSONP.default.args[0][0]).include('exclude_pages=true');
     });
   });
 
@@ -58,7 +60,7 @@ describe('campaigns', () => {
     it('gets campaigns by uid', () => {
       campaigns.findByUids(['xy-123', 'xy-456'], callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/campaigns.jsonp?ids=xy-123,xy-456',
         callback
       );
@@ -73,16 +75,14 @@ describe('campaigns', () => {
         excludeBau: true
       });
 
-      expect(spy.args[0][0]).include('status=active');
-      expect(spy.args[0][0]).include('sort_by=finish_at');
-      expect(spy.args[0][0]).include('exclude_charities=true');
-      expect(spy.args[0][0]).include('exclude_pages=true');
-      expect(spy.args[0][0]).include('exclude_bau=true');
+      expect(getJSONP.default.args[0][0]).include('status=active');
+      expect(getJSONP.default.args[0][0]).include('sort_by=finish_at');
+      expect(getJSONP.default.args[0][0]).include('exclude_charities=true');
+      expect(getJSONP.default.args[0][0]).include('exclude_pages=true');
+      expect(getJSONP.default.args[0][0]).include('exclude_bau=true');
     });
 
     describe('with empty array', () => {
-      let _ = require('lodash');
-
       before(() => {
         sinon.stub(_, "defer", () => {});
       });
@@ -96,11 +96,11 @@ describe('campaigns', () => {
       });
 
       it('does not fetch results', () => {
-        spy.should.have.callCount(0);
+        getJSONP.default.should.have.callCount(0);
       });
 
       it('defers callback with empty results', () => {
-        spy.should.have.callCount(0);
+        getJSONP.default.should.have.callCount(0);
         expect(_.defer).to.have.been.calledWith(
           callback,
           { campaigns: [] }
@@ -113,7 +113,7 @@ describe('campaigns', () => {
     it('gets campaigns that include the given charity uid', () => {
       campaigns.findByCharity('xy-123', 1, 10, callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/campaigns.jsonp?charity_id=xy-123&page=1&limit=10',
         callback
       );
@@ -128,11 +128,11 @@ describe('campaigns', () => {
         excludeBau: true
       });
 
-      expect(spy.args[0][0]).include('status=active');
-      expect(spy.args[0][0]).include('sort_by=finish_at');
-      expect(spy.args[0][0]).include('exclude_charities=true');
-      expect(spy.args[0][0]).include('exclude_pages=true');
-      expect(spy.args[0][0]).include('exclude_bau=true');
+      expect(getJSONP.default.args[0][0]).include('status=active');
+      expect(getJSONP.default.args[0][0]).include('sort_by=finish_at');
+      expect(getJSONP.default.args[0][0]).include('exclude_charities=true');
+      expect(getJSONP.default.args[0][0]).include('exclude_pages=true');
+      expect(getJSONP.default.args[0][0]).include('exclude_bau=true');
     });
   });
 
@@ -140,7 +140,7 @@ describe('campaigns', () => {
     it('gets campaign leaderboard by campaign uid', () => {
       campaigns.leaderboard('xy-123', 'abcd', 'foo', 12, callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/campaigns/xy-123/leaderboard.jsonp?type=foo&limit=12&charity_ids=abcd',
         callback
       );
@@ -153,9 +153,9 @@ describe('campaigns', () => {
         groupValue: 'ABC&group_value[]=DEF'
       });
 
-      expect(spy.args[0][0]).include('&include_pages=true');
-      expect(spy.args[0][0]).include('&include_footprint=true');
-      expect(spy.args[0][0]).include('&group_value[]=ABC&group_value[]=DEF');
+      expect(getJSONP.default.args[0][0]).include('&include_pages=true');
+      expect(getJSONP.default.args[0][0]).include('&include_footprint=true');
+      expect(getJSONP.default.args[0][0]).include('&group_value[]=ABC&group_value[]=DEF');
     });
   });
 
@@ -163,9 +163,9 @@ describe('campaigns', () => {
     it('gets multiple campaign leaderboards by campaign uids', () => {
       campaigns.leaderboardByUids(['ab-123', 'cd-456'], 'abcd', 'foo', 12, callback, {});
 
-      expect(spy.args.length).to.equal(2);
-      expect(spy.args[0][0]).include('ab-123');
-      expect(spy.args[1][0]).include('cd-456');
+      expect(getJSONP.default.args.length).to.equal(2);
+      expect(getJSONP.default.args[0][0]).include('ab-123');
+      expect(getJSONP.default.args[1][0]).include('cd-456');
     });
   });
 
@@ -173,7 +173,7 @@ describe('campaigns', () => {
     it('gets campaign leaderboard by country and slug', () => {
       campaigns.leaderboardBySlug('xy', 'slugathon-2015', 'foo', 12, callback);
 
-      expect(spy).to.have.been.calledWith(
+      expect(getJSONP.default).to.have.been.calledWith(
         'https://everydayhero.com/api/v2/campaigns/xy/slugathon-2015/leaderboard.jsonp?type=foo&limit=12',
         callback
       );
@@ -185,8 +185,8 @@ describe('campaigns', () => {
         includeFootprint: true
       });
 
-      expect(spy.args[0][0]).include('&include_pages=true');
-      expect(spy.args[0][0]).include('&include_footprint=true');
+      expect(getJSONP.default.args[0][0]).include('&include_pages=true');
+      expect(getJSONP.default.args[0][0]).include('&include_footprint=true');
     });
   });
 
@@ -201,7 +201,7 @@ describe('campaigns', () => {
       };
       campaigns.search(query, callback);
 
-      expect(spy.args[0][0]).to.equal('https://everydayhero.com/api/v2/search/campaigns.jsonp?q=bar&country_code=xy&page=2&page_size=7&charity_uuids=abc-123,xyz-456');
+      expect(getJSONP.default.args[0][0]).to.equal('https://everydayhero.com/api/v2/search/campaigns.jsonp?q=bar&country_code=xy&page=2&page_size=7&charity_uuids=abc-123,xyz-456');
     });
   });
 

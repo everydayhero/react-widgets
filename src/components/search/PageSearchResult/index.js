@@ -1,11 +1,9 @@
-'use strict';
+import React from 'react';
+import SearchResult from '../SearchResult';
+import Icon from '../../helpers/Icon';
+import pages from '../../../api/pages';
 
-var React                       = require('react');
-var SearchResult                = require('../SearchResult');
-var Icon                        = require('../../helpers/Icon');
-var pages                       = require('../../../api/pages');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'PageSearchResult',
 
   propTypes: {

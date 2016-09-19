@@ -1,13 +1,11 @@
-'use strict';
+jest.disableAutomock();
 
-jest.autoMockOff();
-
-var React          = require('react');
-var ReactTestUtils = require('react-addons-test-utils');
+import React from 'react';
+import ReactTestUtils from 'react-addons-test-utils';
 var findByClass    = ReactTestUtils.findRenderedDOMComponentWithClass;
 var scryByClass    = ReactTestUtils.scryRenderedDOMComponentsWithClass;
 
-var CampaignGoalItem = require('../')
+import CampaignGoalItem from '../';
 
 describe('Rendering default components', function() {
   var campaignGoalItem;

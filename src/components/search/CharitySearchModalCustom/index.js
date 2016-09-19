@@ -1,14 +1,12 @@
-'use strict';
+import React from 'react';
+import SearchModal from '../SearchModal';
+import CharitySearchResult from '../CharitySearchResult';
+import I18nMixin from '../../mixins/I18n';
+import frol from '../../../api/frolCharities';
 
-var React               = require('react');
-var SearchModal         = require('../SearchModal');
-var CharitySearchResult = require('../CharitySearchResult');
-var I18nMixin           = require('../../mixins/I18n');
-var apis = {
-  frol: require('../../../api/frolCharities')
-};
+const apis = { frol };
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'CharitySearchModalFROL',
 
   mixins: [I18nMixin],

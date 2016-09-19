@@ -1,12 +1,16 @@
-"use strict";
 /**
 * This Mixin can only be called in/after ComponentDidMount(), as
 * getDOMNode() is unavailable until after the component is rendered.
 */
-var ReactDOM = require('react-dom')
-var _ = require('lodash');
-var addEventListener = require('../../lib/addEventListener');
-var breakpoints = {
+/**
+* This Mixin can only be called in/after ComponentDidMount(), as
+* getDOMNode() is unavailable until after the component is rendered.
+*/
+import ReactDOM from 'react-dom';
+import _ from 'lodash';
+import addEventListener from '../../lib/addEventListener';
+
+const breakpoints = {
   mobile: 450,
   tablet: 700,
   laptop: 950,
@@ -14,7 +18,7 @@ var breakpoints = {
   wide: 1450,
   xWide: 1700
 };
-var sizes = {
+const sizes = {
   tiny: 200,
   small: 350,
   medium: 500,
@@ -22,7 +26,7 @@ var sizes = {
   huge: 800,
   xHuge: 950,
 };
-var resizeHandlers = [];
+let resizeHandlers = [];
 
 addEventListener('resize', function(e) {
   resizeHandlers.forEach(function(handler) {
@@ -36,20 +40,20 @@ function findSize(o, w) {
   });
 }
 
-module.exports = {
-  getInitialState: function() {
+export default {
+  getInitialState() {
     return {
       size: 'tiny',
       device: 'mobile' // Mobile first
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     resizeHandlers.push(this.setSizeAndDevice);
     this.setSizeAndDevice();
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     _.pull(resizeHandlers, this.setSizeAndDevice);
   },
 
@@ -57,34 +61,34 @@ module.exports = {
     this.setSizeAndDevice();
   }, 100, { trailing: true }),
 
-  getChildrenWidth: function(min_width, count) {
-    var child_count = Math.min(count, this.getChildCountFromWidth(min_width));
+  getChildrenWidth(min_width, count) {
+    let child_count = Math.min(count, this.getChildCountFromWidth(min_width));
     return this.getChildWidth(child_count);
   },
 
-  getChildWidth: function(count) {
+  getChildWidth(count) {
     return Math.floor(10000 / Math.max(1, count)) * 0.01 + '%';
   },
 
-  getChildCountFromWidth: function(min_width) {
+  getChildCountFromWidth(min_width) {
     return Math.max(1, Math.floor(this.getComponentWidth() / min_width));
   },
 
-  getDeviceFallback: function(device, obj) {
-    var devices = ['mobile', 'tablet', 'laptop', 'desktop', 'wide'];
-    var length = devices.length;
-    var i = devices.indexOf(device);
-    var fallback;
-    var inc = 0;
+  getDeviceFallback(device, obj) {
+    let devices = ['mobile', 'tablet', 'laptop', 'desktop', 'wide'];
+    let length = devices.length;
+    let i = devices.indexOf(device);
+    let fallback;
+    let inc = 0;
     while (!fallback && inc++ <= length) {
       fallback = obj[devices[i - inc]] || obj[devices[i + inc]];
     }
     return fallback;
   },
 
-  setSizeAndDevice: function() {
-    var size = this.getSize();
-    var device = this.getDevice();
+  setSizeAndDevice() {
+    let size = this.getSize();
+    let device = this.getDevice();
     if (size !== this.state.size || device !== this.state.device) {
       this.setState({
         size: size,
@@ -93,21 +97,21 @@ module.exports = {
     }
   },
 
-  getWindowWidth: function() {
+  getWindowWidth() {
     return document.body.clientWidth;
   },
 
-  getComponentWidth: function () {
+  getComponentWidth () {
     return ReactDOM.findDOMNode(this).offsetWidth || 0;
   },
 
-  getDevice: function() {
-    var w = this.getWindowWidth();
+  getDevice() {
+    let w = this.getWindowWidth();
     return findSize(breakpoints, w) || 'xxWide';
   },
 
-  getSize: function() {
-    var w = this.getComponentWidth();
+  getSize() {
+    let w = this.getComponentWidth();
     return findSize(sizes, w) || 'xxHuge';
   }
 };

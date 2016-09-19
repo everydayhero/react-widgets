@@ -1,10 +1,8 @@
-"use strict";
+import React from 'react';
+import SupporterCardGiveNow from '../SupporterCardGiveNow';
+import Footprint from '../../footprint/Footprint';
 
-var React                = require('react');
-var SupporterCardGiveNow = require('../SupporterCardGiveNow');
-var Footprint            = require('../../footprint/Footprint');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'SupporterCard',
 
   propTypes: {

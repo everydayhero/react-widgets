@@ -1,8 +1,8 @@
-"use strict";
-var IS_CLIENT = typeof window !== 'undefined';
-var noop = function() {};
+const IS_CLIENT = typeof window !== 'undefined';
 
-function addEventListener(eventName, handler, el) {
+export default function addEventListener(eventName, handler, el) {
+  if (!IS_CLIENT) return;
+
   el = el || window;
   if (el.addEventListener) {
     el.addEventListener(eventName, handler);
@@ -12,5 +12,3 @@ function addEventListener(eventName, handler, el) {
     });
   }
 }
-
-module.exports = IS_CLIENT ? addEventListener : noop;

@@ -1,12 +1,10 @@
-'use strict';
-
-var _ = require('lodash');
-var React = require('react');
-var DOMInfo = require('../../mixins/DOMInfo');
-var I18n = require('../../mixins/I18n');
-var Event = require('../Event');
-var Button = require('../../callstoaction/CallToActionButton');
-var campaign = require('../../../api/campaigns');
+import _ from 'lodash';
+import React from 'react';
+import DOMInfo from '../../mixins/DOMInfo';
+import I18n from '../../mixins/I18n';
+import Event from '../Event';
+import Button from '../../callstoaction/CallToActionButton';
+import campaign from '../../../api/campaigns';
 
 var blacklist = [
   'au-18856', 'au-18881', 'au-18882', 'au-18883', 'au-18884', 'au-18885',
@@ -19,7 +17,7 @@ var blacklist = [
   'au-19589', 'au-19651'
 ];
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'UpcomingEvents',
 
   mixins: [I18n, DOMInfo],

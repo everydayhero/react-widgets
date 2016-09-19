@@ -1,10 +1,8 @@
-"use strict";
+import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import Icon from '../../helpers/Icon';
 
-var React           = require('react');
-var PureRenderMixin = require('react-addons-pure-render-mixin');
-var Icon            = require('../../helpers/Icon');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "AddressStatus",
 
   mixins: [PureRenderMixin],

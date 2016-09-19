@@ -1,14 +1,12 @@
-'use strict';
+import _ from 'lodash';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import SelectOption from '../SelectOption';
+import addEventListener from '../../../lib/addEventListener';
+import removeEventListener from '../../../lib/removeEventListener';
 
-var _                   = require('lodash');
-var React               = require('react');
-var ReactDOM            = require('react-dom');
-var PureRenderMixin     = require('react-addons-pure-render-mixin');
-var SelectOption        = require('../SelectOption');
-var addEventListener    = require('../../../lib/addEventListener');
-var removeEventListener = require('../../../lib/removeEventListener');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'SelectOptions',
 
   mixins: [PureRenderMixin],

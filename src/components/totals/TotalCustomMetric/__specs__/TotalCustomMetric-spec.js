@@ -1,28 +1,27 @@
-'use strict';
+import React from 'react';
+import { mount } from 'enzyme';
+import jsdom from 'jsdom';
 
-const React = require('react');
-const enzyme = require('enzyme');
-const jsdom = require('jsdom');
+import TotalCustomMetric from '../';
+import campaigns from  '../../../../api/campaigns';
+
 const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
 global.document = doc;
 global.window = doc.defaultView;
 
 describe('TotalCustomMetric', () => {
-  const spy = sinon.spy();
-  const TotalCustomMetric = mockrequire('../', {
-    '../../../api/campaigns': {
-      find: spy
-    }
+  beforeEach(() => {
+    sinon.stub(campaigns, 'find');
   });
 
-  beforeEach(() => {
-    spy.reset();
+  afterEach(() => {
+    campaigns.find.restore();
   });
 
   const defaultElement = <TotalCustomMetric campaignUid="au-123" i18n={{title: 'Units'}} />;
 
   describe('default props', () => {
-    const mountedElement = enzyme.mount(defaultElement);
+    const mountedElement = mount(defaultElement);
 
     it('has an offset of 0', () => {
       expect(mountedElement.props().offset).to.equal(0);
@@ -45,8 +44,8 @@ describe('TotalCustomMetric', () => {
 
   describe('API call', () => {
     it('makes a call containing the campaign UID', () => {
-      enzyme.mount(defaultElement);
-      expect(spy).to.have.been.calledWith(
+      mount(defaultElement);
+      expect(campaigns.find).to.have.been.calledWith(
         'au-123'
       );
     });

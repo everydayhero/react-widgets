@@ -1,7 +1,6 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 
-var format = require('../format');
+import format from '../format';
 
 describe('format', function() {
   it('interpolates params', function() {

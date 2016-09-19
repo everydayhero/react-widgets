@@ -1,20 +1,11 @@
-'use strict';
-jest.autoMockOff();
-
+jest.disableAutomock();
 jest.mock('../../../../api/pages');
-var pages = require('../../../../api/pages');
 
-var _ = require('lodash');
-_.debounce = function(callback) { return callback; };
-
-var React              = require('react');
-var TestUtils          = require('react-addons-test-utils');
-var PageSearchModal    = require('../');
-var SearchModal        = require('../../SearchModal');
-var findByClass        = TestUtils.findRenderedDOMComponentWithClass;
-var findByType         = TestUtils.findRenderedComponentWithType;
-var scryByClass        = TestUtils.scryRenderedDOMComponentsWithClass;
-var findByTag          = TestUtils.findRenderedDOMComponentWithTag;
+import pages from '../../../../api/pages';
+import React from 'react';
+import { mount } from 'enzyme';
+import PageSearchModal from '../';
+import SearchModal from '../../SearchModal';
 
 var page = {
   id: 12,
@@ -56,26 +47,37 @@ describe('Rendering', function() {
   });
 
   it('renders a SearchModal', function() {
-    var pageSearchModal = <PageSearchModal autoFocus={ false } />;
-    var element = TestUtils.renderIntoDocument(pageSearchModal);
-    var searchModal = findByType(element, SearchModal);
+    const pageSearchModal = (
+      <PageSearchModal
+        autoFocus={ false }
+        onClose={ () => {} } />
+    );
+    const element = mount(pageSearchModal);
 
-    expect(searchModal).toBeDefined();
+    expect(element.find(SearchModal)).toBeDefined();
   });
 
   it('renders search results', function() {
-    pages.search.mockImplementation(function(query, callback) { callback(response); });
+    pages.search.mockImplementation(function(query, callback) {
+      callback(response);
+    });
 
-    var pageSearchModal = <PageSearchModal autoFocus={ false } />;
-    var element = TestUtils.renderIntoDocument(pageSearchModal);
-    var input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
+    const pageSearchModal = (
+      <PageSearchModal
+        autoFocus={ false }
+        onClose={ () => {} } />
+    );
+    const element = mount(pageSearchModal);
+    const input = element.find('input');
 
-    var resultElements = scryByClass(element, 'SearchResult');
+    input.simulate('change', { target: { value: 'foo' }});
+    jest.runAllTimers();
+
+    const resultElements = element.find('.SearchResult');
     expect(resultElements.length).toEqual(1);
-    expect(resultElements[0].href).toBe(page.url);
-    expect(resultElements[0].textContent).toContain(page.name);
-    expect(resultElements[0].textContent).toContain(page.charity.name);
+    expect(resultElements.first().prop('href')).toBe(page.url);
+    expect(resultElements.first().text()).toContain(page.name);
+    expect(resultElements.first().text()).toContain(page.charity.name);
   });
 });
 
@@ -87,27 +89,42 @@ describe('ID Handling', function() {
   it('Queries with a single Campaign UID', function() {
     pages.search.mockImplementation(function(query, callback) { callback(response); });
 
-    var query = { country: 'xy', searchTerm: 'foo', campaignUid: 'us-22', charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
-    var pageSearchModal = <PageSearchModal campaignUid="us-22" country="xy"/>;
-    var element = TestUtils.renderIntoDocument(pageSearchModal);
-    var input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
+    const query = { country: 'us', searchTerm: 'foo', campaignUid: 'us-22', charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
+    const pageSearchModal = (
+      <PageSearchModal
+        campaignUid="us-22"
+        country="us"
+        autoFocus={ false }
+        onClose={ () => {} } />
+    );
+    const element = mount(pageSearchModal);
+    const input = element.find('input');
+
+    input.simulate('change', { target: { value: 'foo' }});
+    jest.runAllTimers();
 
     expect(pages.search.mock.calls.length).toEqual(1);
-    expect(pages.search).lastCalledWith(query, element.updateResults);
+    expect(pages.search).lastCalledWith(query, element.instance().updateResults);
   })
 
   it('Queries with multiple Campaign UIDs', function() {
     pages.search.mockImplementation(function(query, callback) { callback(response); });
 
-    var query = { country: 'xy', searchTerm: 'foo', campaignUid: ['us-22', 'us-24'], charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
-    var pageSearchModal = <PageSearchModal campaignUids={ ['us-22', 'us-24'] } country="xy"/>;
-    var element = TestUtils.renderIntoDocument(pageSearchModal);
-    var input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
+    const query = { country: 'us', searchTerm: 'foo', campaignUid: ['us-22', 'us-24'], charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
+    const pageSearchModal = (
+      <PageSearchModal
+        campaignUids={ ['us-22', 'us-24'] }
+        country="us"
+        onClose={ () => {} } />
+    );
+    const element = mount(pageSearchModal);
+    const input = element.find('input');
+
+    input.simulate('change', { target: { value: 'foo' }});
+    jest.runAllTimers();
 
     expect(pages.search.mock.calls.length).toEqual(1);
-    expect(pages.search).lastCalledWith(query, element.updateResults);
+    expect(pages.search).lastCalledWith(query, element.instance().updateResults);
   })
 });
 
@@ -117,80 +134,121 @@ describe('Searching', function() {
   });
 
   it('searches for pages when provided with searchTerm prop', function() {
-    var query = { country: 'xy', searchTerm: 'bar', campaignUid: [], charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
-    var pageSearchModal = <PageSearchModal searchTerm={ 'bar' } autoFocus={ false } action="donate" country="xy" />;
-    var element = TestUtils.renderIntoDocument(pageSearchModal);
-    var input = findByTag(element, 'input');
+    const query = { country: 'us', searchTerm: 'bar', campaignUid: [], charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
+    const pageSearchModal = (
+      <PageSearchModal
+        searchTerm={ 'bar' }
+        autoFocus={ false }
+        action="visit"
+        country="us"
+        onClose={ () => {} } />
+    );
+    const element = mount(pageSearchModal);
+    const input = element.find('input');
 
-    expect(input.value).toEqual(query.searchTerm);
-    expect(pages.search).lastCalledWith(query, element.updateResults);
+    expect(input.prop('value')).toEqual(query.searchTerm);
+    expect(pages.search).lastCalledWith(query, element.instance().updateResults);
   });
 
   it('searches for pages on input change', function() {
-    var query = { country: 'xy', searchTerm: 'foo', campaignUid: [], charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
-    var pageSearchModal = <PageSearchModal autoFocus={ false } action="donate" country="xy" />;
-    var element = TestUtils.renderIntoDocument(pageSearchModal);
-    var input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
+    const query = { country: 'us', searchTerm: 'foo', campaignUid: [], charityUid: '', page: 1, pageSize: 10, pageType: 'all', groupValue: [] };
+    const pageSearchModal = (
+      <PageSearchModal
+        autoFocus={ false }
+        action="visit"
+        country="us"
+        onClose={ () => {} } />
+    );
+    const element = mount(pageSearchModal);
+    const input = element.find('input');
 
-    expect(pages.search).lastCalledWith(query, element.updateResults);
+    input.simulate('change', { target: { value: 'foo' }});
+    jest.runAllTimers();
+
+    expect(pages.search).lastCalledWith(query, element.instance().updateResults);
   });
 
   it('searches for more pages on page change', function() {
     pages.search.mockImplementation(function(query, callback) { callback(response); });
 
-    var query = { country: 'xy', searchTerm: 'foo', campaignUid: [], charityUid: '', page: 2, pageSize: 10, pageType: 'all', groupValue: [] };
-    var pageSearchModal = <PageSearchModal autoFocus={ false } action="donate" country="xy" />;
-    var element = TestUtils.renderIntoDocument(pageSearchModal);
-    var input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
+    const query = { country: 'us', searchTerm: 'foo', campaignUid: [], charityUid: '', page: 2, pageSize: 10, pageType: 'all', groupValue: [] };
+    const pageSearchModal = (
+      <PageSearchModal
+        autoFocus={ false }
+        action="visit"
+        country="us"
+        onClose={ () => {} } />
+    );
+    const element = mount(pageSearchModal);
+    const input = element.find('input');
 
-    var nextPageButton = findByClass(element, 'SearchPagination__button--right');
-    TestUtils.Simulate.click(nextPageButton);
+    input.simulate('change', { target: { value: 'foo' }});
+    jest.runAllTimers();
+
+    var nextPageButton = element.find('.SearchPagination__button--right');
+    nextPageButton.simulate('click');
 
     expect(pages.search.mock.calls.length).toEqual(2);
-    expect(pages.search).lastCalledWith(query, element.updateResults);
+    expect(pages.search).lastCalledWith(query, element.instance().updateResults);
   });
 
   it('updates isSearching accordingly', function() {
-    var pageSearchModal = <PageSearchModal autoFocus={ false } action="donate" country="xy" />;
-    var element = TestUtils.renderIntoDocument(pageSearchModal);
-    var input = findByTag(element, 'input');
+    const pageSearchModal = (
+      <PageSearchModal
+        autoFocus={ false }
+        action="visit"
+        country="us"
+        onClose={ () => {} } />
+    );
+    const element = mount(pageSearchModal);
+    const input = element.find('input');
 
-    expect(element.state.isSearching).toBeFalsy();
+    expect(element.state('isSearching')).toBeFalsy();
 
-    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
+    input.simulate('change', { target: { value: 'foo' }});
+    jest.runAllTimers();
 
-    expect(element.state.isSearching).toBeTruthy();
+    expect(element.state('isSearching')).toBeTruthy();
 
     var searchCallback = pages.search.mock.calls[0][1];
     searchCallback(response);
 
-    expect(element.state.isSearching).toBeFalsy();
+    expect(element.state('isSearching')).toBeFalsy();
   });
 
   it('allows custom callback on page select', function() {
-    var onClose = jest.genMockFunction();
-    var callback = jest.genMockFunction();
-    var pageSearchModal = <PageSearchModal autoFocus={ false } onClose={ onClose } action="custom" onSelect={ callback } />;
-    var element = TestUtils.renderIntoDocument(pageSearchModal);
+    const onClose = jest.genMockFunction();
+    const callback = jest.genMockFunction();
+    const pageSearchModal = (
+      <PageSearchModal
+        autoFocus={ false }
+        onClose={ onClose }
+        action="custom"
+        onSelect={ callback } />
+    );
+    const element = mount(pageSearchModal);
     element.setState({ results: [page] });
 
-    var resultElements = scryByClass(element, 'SearchResult');
-    TestUtils.Simulate.click(resultElements[0]);
+    const resultElements = element.find('.SearchResult');
+    resultElements.first().simulate('click');
 
     expect(callback).lastCalledWith(page);
   });
 
   it('calls onClose on page select', function() {
-    var onClose = jest.genMockFunction();
-    var callback = jest.genMockFunction();
-    var pageSearchModal = <PageSearchModal autoFocus={ false } onClose={ onClose } onSelect={ callback } />;
-    var element = TestUtils.renderIntoDocument(pageSearchModal);
+    const onClose = jest.genMockFunction();
+    const callback = jest.genMockFunction();
+    const pageSearchModal = (
+      <PageSearchModal
+        autoFocus={ false }
+        onClose={ onClose }
+        onSelect={ callback } />
+    );
+    const element = mount(pageSearchModal);
     element.setState({ results: [page] });
 
-    var resultElements = scryByClass(element, 'SearchResult');
-    TestUtils.Simulate.click(resultElements[0]);
+    const resultElements = element.find('.SearchResult');
+    resultElements.first().simulate('click');
 
     expect(onClose).toBeCalled();
   });

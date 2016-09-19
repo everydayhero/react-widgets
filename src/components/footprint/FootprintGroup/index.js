@@ -1,12 +1,10 @@
-'use strict';
+import React from 'react';
+import cx from 'classnames';
+import tweenState from 'react-tween-state';
+import sector from 'paths-js/sector';
+import FootprintSector from '../FootprintSector';
 
-var React           = require('react');
-var cx              = require('classnames');
-var tweenState      = require('react-tween-state');
-var sector          = require('paths-js/sector');
-var FootprintSector = require('../FootprintSector');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'FootprintGroup',
 
   mixins: [tweenState.Mixin],

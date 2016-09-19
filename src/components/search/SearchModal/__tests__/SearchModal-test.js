@@ -1,9 +1,8 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 
-var React       = require('react');
-var TestUtils   = require('react-addons-test-utils');
-var SearchModal = require('../');
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import SearchModal from '../';
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
 describe('SearchModal', function() {

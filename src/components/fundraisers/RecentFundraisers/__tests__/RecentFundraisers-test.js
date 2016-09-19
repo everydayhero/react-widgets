@@ -1,17 +1,17 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/pages');
 
+import React from 'react';
+import RecentFundraisers from '../';
+import pages from '../../../../api/pages';
+import TestUtils from 'react-addons-test-utils';
+
 describe('RecentFundraisers', function() {
-  var React             = require('react');
-  var RecentFundraisers = require('../');
-  var pages             = require('../../../../api/pages');
-  var TestUtils         = require('react-addons-test-utils');
-  var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
-    var recentFundraisers;
-    var element;
+    let recentFundraisers;
+    let element;
 
     beforeEach(function() {
       recentFundraisers = <RecentFundraisers campaignUid="au-0" />;
@@ -28,13 +28,13 @@ describe('RecentFundraisers', function() {
         hasResults: false
       });
 
-      var emptyLabel = findByClass(element, 'RecentFundraisers__empty-label');
+      let emptyLabel = findByClass(element, 'RecentFundraisers__empty-label');
       expect(emptyLabel.textContent).toContain('No fundraisers to display.');
     });
 
     it('renders a default heading', function() {
       element.setState({ isLoading: false });
-      var heading = findByClass(element, 'RecentFundraisers__heading');
+      let heading = findByClass(element, 'RecentFundraisers__heading');
 
       expect(heading.textContent).toBe('Fundraisers');
     });
@@ -50,9 +50,9 @@ describe('RecentFundraisers', function() {
   });
 
   describe('component props', function() {
-    var recentFundraisers;
-    var element;
-    var translation = {
+    let recentFundraisers;
+    let element;
+    let translation = {
       heading: 'headings are cool',
       emptyLabel: 'empty labels are not cool'
     };
@@ -64,7 +64,7 @@ describe('RecentFundraisers', function() {
 
     it('renders a custom heading', function() {
       element.setState({isLoading: false});
-      var heading = findByClass(element, 'RecentFundraisers__heading');
+      let heading = findByClass(element, 'RecentFundraisers__heading');
 
       expect(heading.textContent).toBe(translation.heading);
     });
@@ -74,7 +74,7 @@ describe('RecentFundraisers', function() {
         isLoading: false,
         hasResults: false
       });
-      var emptyLabel = findByClass(element, 'RecentFundraisers__empty-label');
+      let emptyLabel = findByClass(element, 'RecentFundraisers__empty-label');
 
       expect(emptyLabel.textContent).toBe(translation.emptyLabel);
     });

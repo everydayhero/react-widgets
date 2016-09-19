@@ -1,15 +1,15 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
+
+import React from 'react';
+import GoalProgress from '../';
+import TestUtils from 'react-addons-test-utils';
 
 describe('GoalProgress', function() {
-  var React        = require('react');
-  var GoalProgress = require('../');
-  var TestUtils    = require('react-addons-test-utils');
-  var findByClass  = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass  = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
-  var props = { total: 15000, goal: 30000, text: 'foobar' };
-  var element;
+  let props = { total: 15000, goal: 30000, text: 'foobar' };
+  let element;
 
   beforeEach(function() {
     element = TestUtils.renderIntoDocument(<GoalProgress { ...props } />);
@@ -20,7 +20,7 @@ describe('GoalProgress', function() {
   });
 
   it('renders progress text', function() {
-    var text = findByClass(element, 'GoalProgress__text');
+    let text = findByClass(element, 'GoalProgress__text');
     expect(text.textContent).toContain('foobar');
   });
 

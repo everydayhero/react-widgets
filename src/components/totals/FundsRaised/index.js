@@ -1,12 +1,10 @@
-'use strict';
+import React from 'react';
+import I18nMixin from '../../mixins/I18n';
+import totals from '../../../api/totals';
+import Icon from '../../helpers/Icon';
+import numeral from 'numbro';
 
-var React     = require('react');
-var I18nMixin = require('../../mixins/I18n');
-var totals    = require('../../../api/totals');
-var Icon      = require('../../helpers/Icon');
-var numeral   = require('numbro');
-
-module.exports = React.createClass({
+export default React.createClass({
   mixins: [I18nMixin],
   displayName: 'FundsRaised',
   propTypes: {

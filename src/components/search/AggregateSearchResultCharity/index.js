@@ -1,11 +1,9 @@
-'use strict';
+import React from 'react';
+import Icon from '../../helpers/Icon';
+import I18n from '../../mixins/I18n';
+import AggregateSearchResult from '../AggregateSearchResult';
 
-var React         = require('react');
-var Icon          = require('../../helpers/Icon');
-var I18n          = require('../../mixins/I18n');
-var AggregateSearchResult = require('../AggregateSearchResult');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'AggregateSearchResultCharity',
 
   mixins: [I18n],

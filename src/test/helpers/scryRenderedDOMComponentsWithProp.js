@@ -1,8 +1,6 @@
-'use strict';
+import ReactTestUtils from 'react-addons-test-utils';
 
-var ReactTestUtils = require('react-addons-test-utils');
-
-function scryRenderedDOMComponentsWithProp(root, propName, propValue) {
+export function scryRenderedDOMComponentsWithProp(root, propName, propValue) {
   return ReactTestUtils.findAllInRenderedTree(root, function(inst) {
     return ReactTestUtils.isDOMComponent(inst) &&
       inst.props.hasOwnProperty(propName) &&
@@ -10,7 +8,7 @@ function scryRenderedDOMComponentsWithProp(root, propName, propValue) {
   });
 }
 
-function findRenderedDOMComponentWithProp(root, propName, propValue) {
+export function findRenderedDOMComponentWithProp(root, propName, propValue) {
   var all = scryRenderedDOMComponentsWithProp(
     root,
     propName,
@@ -24,7 +22,7 @@ function findRenderedDOMComponentWithProp(root, propName, propValue) {
   return all[0];
 }
 
-module.exports = {
-  scryRenderedDOMComponentsWithProp: scryRenderedDOMComponentsWithProp,
-  findRenderedDOMComponentWithProp: findRenderedDOMComponentWithProp
+export default {
+  scryRenderedDOMComponentsWithProp,
+  findRenderedDOMComponentWithProp
 };

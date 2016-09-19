@@ -1,17 +1,17 @@
-'use strict';
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/campaigns');
 
+import _ from 'lodash';
+import React from 'react';
+import Leaderboard from '../';
+import TestUtils from 'react-addons-test-utils';
+
 describe('Leaderboard', function() {
-  var _                 = require('lodash');
-  var React             = require('react');
-  var Leaderboard       = require('../');
-  var TestUtils         = require('react-addons-test-utils');
-  var findByClass       = TestUtils.findRenderedDOMComponentWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('Component defaults', function() {
-    var leaderboard;
-    var element;
+    let leaderboard;
+    let element;
 
     beforeEach(function() {
       leaderboard = <Leaderboard campaignUid="au-0" />;
@@ -23,7 +23,7 @@ describe('Leaderboard', function() {
     });
 
     it('renders a default heading', function() {
-      var heading = findByClass(element, 'Leaderboard__heading');
+      let heading = findByClass(element, 'Leaderboard__heading');
 
       expect(heading.textContent).toBe('Top Individuals');
     });
@@ -35,9 +35,9 @@ describe('Leaderboard', function() {
   });
 
   describe('Custom component props', function() {
-    var leaderboard;
-    var element;
-    var translation = {
+    let leaderboard;
+    let element;
+    let translation = {
       heading: 'Top Teams'
     };
 
@@ -47,14 +47,14 @@ describe('Leaderboard', function() {
     });
 
     it('renders a custom heading', function() {
-      var heading = findByClass(element, 'Leaderboard__heading');
+      let heading = findByClass(element, 'Leaderboard__heading');
       expect(heading.textContent).toBe(translation.heading);
     });
   });
 
   describe('standard competition ranking system', function() {
-    var element;
-    var data;
+    let element;
+    let data;
 
     beforeEach(function() {
       element = TestUtils.renderIntoDocument(<Leaderboard campaignUid="au-0" />);
@@ -97,15 +97,15 @@ describe('Leaderboard', function() {
 
   describe('Number formatting options', function() {
     it('renders in a long format with commas by default', function() {
-      var leaderboard = <Leaderboard campaignUid="au-0" />;
-      var element = TestUtils.renderIntoDocument(leaderboard);
+      let leaderboard = <Leaderboard campaignUid="au-0" />;
+      let element = TestUtils.renderIntoDocument(leaderboard);
 
       expect(element.formatAmount(100000)).toEqual('$1,000');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var leaderboard = <Leaderboard campaignUid="au-0" currencyFormat="0.00" />;
-      var element = TestUtils.renderIntoDocument(leaderboard);
+      let leaderboard = <Leaderboard campaignUid="au-0" currencyFormat="0.00" />;
+      let element = TestUtils.renderIntoDocument(leaderboard);
 
       expect(element.formatAmount(10000)).toEqual('$100.00');
     });
@@ -113,34 +113,34 @@ describe('Leaderboard', function() {
 
   describe('paging button rendering', function() {
     it('renders a paging component if multiple pages are available', function() {
-      var leaderboard = <Leaderboard campaignUid="au-0" limit={ 10 } pageSize={ 5 } />;
-      var element = TestUtils.renderIntoDocument(leaderboard);
+      let leaderboard = <Leaderboard campaignUid="au-0" limit={ 10 } pageSize={ 5 } />;
+      let element = TestUtils.renderIntoDocument(leaderboard);
       element.setState({
         isLoading: false,
         resultCount: 10
       });
 
-      var pagingFunction = element.renderPaging();
+      let pagingFunction = element.renderPaging();
       expect(pagingFunction).toBeDefined();
     });
 
     it('does not render a paging component if only 1 page is available', function() {
-      var leaderboard = <Leaderboard campaignUid="au-0" limit={ 5 } pageSize={ 5 } />;
-      var element = TestUtils.renderIntoDocument(leaderboard);
+      let leaderboard = <Leaderboard campaignUid="au-0" limit={ 5 } pageSize={ 5 } />;
+      let element = TestUtils.renderIntoDocument(leaderboard);
       element.setState({ isLoading: false });
 
-      var pagingFunction = element.renderPaging();
+      let pagingFunction = element.renderPaging();
       expect(pagingFunction).toBeUndefined();
     });
   });
 
   describe('handleHasContentCallback', function() {
-    var element;
-    var onHasContent = jasmine.createSpy();
-    var board = [1];
+    let element;
+    let onHasContent = jasmine.createSpy();
+    let board = [1];
 
     describe('callback is not passed in', function() {
-      var leaderboard = <Leaderboard campaignUid="au-0" />;
+      let leaderboard = <Leaderboard campaignUid="au-0" />;
       beforeEach(function() {
         element = TestUtils.renderIntoDocument(leaderboard);
       });
@@ -152,7 +152,7 @@ describe('Leaderboard', function() {
     });
 
     describe('callback is passed in', function() {
-      var leaderboard = <Leaderboard campaignUid="au-0" onHasContent={ onHasContent } />;
+      let leaderboard = <Leaderboard campaignUid="au-0" onHasContent={ onHasContent } />;
       beforeEach(function() {
         element = TestUtils.renderIntoDocument(leaderboard);
       });

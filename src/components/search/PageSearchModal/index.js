@@ -1,12 +1,10 @@
-'use strict';
+import React from 'react';
+import SearchModal from '../SearchModal';
+import PageSearchResult from '../PageSearchResult';
+import I18nMixin from '../../mixins/I18n';
+import pages from '../../../api/pages';
 
-var React                       = require('react');
-var SearchModal                 = require('../SearchModal');
-var PageSearchResult            = require('../PageSearchResult');
-var I18nMixin                   = require('../../mixins/I18n');
-var pages                       = require('../../../api/pages');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'PageSearchModal',
 
   mixins: [I18nMixin],

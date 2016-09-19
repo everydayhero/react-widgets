@@ -1,9 +1,7 @@
-"use strict";
+import React from 'react';
+import LeaderboardPagingButton from '../LeaderboardPagingButton';
 
-var React                   = require('react');
-var LeaderboardPagingButton = require('../LeaderboardPagingButton');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'LeaderboardPaging',
 
   render: function() {

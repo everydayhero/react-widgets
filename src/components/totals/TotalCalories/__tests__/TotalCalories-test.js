@@ -1,18 +1,18 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/campaigns');
 
+import React from 'react';
+import TotalCalories from '../';
+import campaigns from '../../../../api/campaigns';
+import TestUtils from 'react-addons-test-utils';
+
 describe('TotalCalories', function() {
-  var React         = require('react');
-  var TotalCalories = require('../');
-  var campaigns     = require('../../../../api/campaigns');
-  var TestUtils     = require('react-addons-test-utils');
-  var findByClass   = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass   = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component when handed multiple uids', function() {
-    var totalCalories;
-    var element;
+    let totalCalories;
+    let element;
 
     beforeEach(function() {
       campaigns.findByUids.mockClear();
@@ -25,7 +25,7 @@ describe('TotalCalories', function() {
     });
 
     it('renders an icon by default', function() {
-      var icon = findByClass(element, 'TotalCalories__icon');
+      let icon = findByClass(element, 'TotalCalories__icon');
       expect(icon).not.toBeNull();
     });
 
@@ -41,8 +41,8 @@ describe('TotalCalories', function() {
   });
 
   describe('Component when handed one uid', function() {
-    var totalCalories;
-    var element;
+    let totalCalories;
+    let element;
 
     beforeEach(function() {
       campaigns.findByUids.mockClear();
@@ -57,9 +57,9 @@ describe('TotalCalories', function() {
   });
 
   describe('Custom component props', function() {
-    var totalCalories;
-    var element;
-    var translation = {
+    let totalCalories;
+    let element;
+    let translation = {
       title: 'Ground Covered'
     };
 
@@ -73,7 +73,7 @@ describe('TotalCalories', function() {
     });
 
     it('renders a custom title', function() {
-      var title = findByClass(element, 'TotalCalories__title');
+      let title = findByClass(element, 'TotalCalories__title');
       expect(title.textContent).toBe(translation.title);
     });
 
@@ -84,44 +84,44 @@ describe('TotalCalories', function() {
 
   describe('Number formatting options', function() {
     it('renders in a human readable format by default', function() {
-      var totalCalories = <TotalCalories campaignUid="au-0" />;
-      var element = TestUtils.renderIntoDocument(totalCalories);
+      let totalCalories = <TotalCalories campaignUid="au-0" />;
+      let element = TestUtils.renderIntoDocument(totalCalories);
 
       element.setState({
         isLoading: false,
         total: 1000050
       });
 
-      var total = findByClass(element, 'TotalCalories__total');
+      let total = findByClass(element, 'TotalCalories__total');
       expect(total.textContent).toBe('1,000,050');
     });
 
     it('renders a different format if given acceptable numeral.js string', function() {
-      var totalCalories = <TotalCalories campaignUid="au-0" format="0.00" />;
-      var element = TestUtils.renderIntoDocument(totalCalories);
+      let totalCalories = <TotalCalories campaignUid="au-0" format="0.00" />;
+      let element = TestUtils.renderIntoDocument(totalCalories);
 
       element.setState({
         isLoading: false,
         total: 1000050
       });
 
-      var total = findByClass(element, 'TotalCalories__total');
+      let total = findByClass(element, 'TotalCalories__total');
       expect(total.textContent).toBe('1000050.00');
     });
   });
 
   describe('Displaying an icon', function() {
     it('renders no icon when renderIcon set to false', function() {
-      var totalCalories = <TotalCalories campaignUid="au-0" renderIcon={ false } />;
-      var element = TestUtils.renderIntoDocument(totalCalories);
-      var icon = scryByClass(element, 'TotalCalories__icon');
+      let totalCalories = <TotalCalories campaignUid="au-0" renderIcon={ false } />;
+      let element = TestUtils.renderIntoDocument(totalCalories);
+      let icon = scryByClass(element, 'TotalCalories__icon');
       expect(icon.length).toEqual(0);
     });
 
     it('renders a custom icon when passed a valid FontAwesome string', function() {
-      var totalCalories = <TotalCalories campaignUid="au-0" renderIcon="paw" />;
-      var element = TestUtils.renderIntoDocument(totalCalories);
-      var icon = findByClass(element, 'fa-paw');
+      let totalCalories = <TotalCalories campaignUid="au-0" renderIcon="paw" />;
+      let element = TestUtils.renderIntoDocument(totalCalories);
+      let icon = findByClass(element, 'fa-paw');
       expect(icon).not.toBeNull();
     });
   });

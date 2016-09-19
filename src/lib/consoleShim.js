@@ -1,5 +1,4 @@
-"use strict";
-var noop = function() {};
+let noop = function() {};
 
 if (typeof window.console === "undefined") {
   window.console = {
@@ -12,4 +11,4 @@ if (typeof window.console === "undefined") {
   };
 }
 
-module.exports = window.console;
+export default window.console;

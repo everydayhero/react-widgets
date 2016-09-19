@@ -1,12 +1,10 @@
-'use strict';
+import React from 'react';
+import moment from 'moment';
+import numeral from 'numbro';
+import I18nMixin from '../../mixins/I18n';
+import CallToActionButton from '../../callstoaction/CallToActionButton';
 
-var React              = require('react');
-var moment             = require('moment');
-var numeral            = require('numbro');
-var I18nMixin          = require('../../mixins/I18n');
-var CallToActionButton = require('../../callstoaction/CallToActionButton');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'CountDown',
   mixins: [I18nMixin],
   propTypes: {

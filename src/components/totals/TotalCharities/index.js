@@ -1,12 +1,10 @@
-"use strict";
+import React from 'react';
+import I18nMixin from '../../mixins/I18n';
+import charities from '../../../api/charities';
+import Icon from '../../helpers/Icon';
+import numeral from 'numbro';
 
-var React     = require('react');
-var I18nMixin = require('../../mixins/I18n');
-var charities = require('../../../api/charities');
-var Icon      = require('../../helpers/Icon');
-var numeral   = require('numbro');
-
-module.exports = React.createClass({
+export default React.createClass({
   mixins: [I18nMixin],
   displayName: "TotalCharities",
   propTypes: {
@@ -19,7 +17,7 @@ module.exports = React.createClass({
     i18n: React.PropTypes.object
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       campaignUid: '',
       campaignUids: [],
@@ -33,19 +31,19 @@ module.exports = React.createClass({
     };
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       isLoading: false,
       total: 0
     };
   },
 
-  componentWillMount: function() {
+  componentWillMount() {
     this.loadCharities();
   },
 
-  setUids: function() {
-    var campaignUids = [];
+  setUids() {
+    let campaignUids = [];
 
     if (this.props.campaignUid) {
       campaignUids.push(this.props.campaignUid);
@@ -56,22 +54,22 @@ module.exports = React.createClass({
     return campaignUids;
   },
 
-  loadCharities: function() {
+  loadCharities() {
     this.setState({ isLoading: true });
     charities.findByCampaign(this.setUids(), 1, 1, this.onSuccess);
   },
 
-  onSuccess: function(result) {
+  onSuccess(result) {
     this.setState({
       isLoading: false,
       total: result.meta.count
     });
   },
 
-  renderTotal: function() {
-    var totalCharities = this.state.total;
-    var formattedTotal = numeral(totalCharities).format(this.props.format);
-    var title = this.t('title');
+  renderTotal() {
+    let totalCharities = this.state.total;
+    let formattedTotal = numeral(totalCharities).format(this.props.format);
+    let title = this.t('title');
 
     if (this.state.isLoading) {
       return <Icon className="TotalCharities__loading" icon="refresh" />;
@@ -85,8 +83,8 @@ module.exports = React.createClass({
     }
   },
 
-  renderIcon: function() {
-    var renderIcon = this.props.renderIcon;
+  renderIcon() {
+    let renderIcon = this.props.renderIcon;
 
     if (renderIcon === true) {
       renderIcon = "heart";
@@ -97,8 +95,8 @@ module.exports = React.createClass({
     }
   },
 
-  render: function() {
-    var customStyle = {
+  render() {
+    let customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
     };

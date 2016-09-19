@@ -1,20 +1,18 @@
-'use strict';
+import _ from 'lodash';
+import React from 'react';
+import cx from 'classnames';
+import I18nMixin from '../../mixins/I18n';
+import DOMInfoMixin from '../../mixins/DOMInfo';
+import LeaderboardMixin from '../../mixins/Leaderboard';
+import Icon from '../../helpers/Icon';
+import LeaderboardItem from '../LeaderboardItem';
+import LeaderboardEmpty from '../LeaderboardEmpty';
+import numeral from 'numbro';
+import addEventListener from '../../../lib/addEventListener';
+import removeEventListener from '../../../lib/removeEventListener';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-var _                       = require('lodash');
-var React                   = require('react');
-var cx                      = require('classnames');
-var I18nMixin               = require('../../mixins/I18n');
-var DOMInfoMixin            = require('../../mixins/DOMInfo');
-var LeaderboardMixin        = require('../../mixins/Leaderboard');
-var Icon                    = require('../../helpers/Icon');
-var LeaderboardItem         = require('../LeaderboardItem');
-var LeaderboardEmpty        = require('../LeaderboardEmpty');
-var numeral                 = require('numbro');
-var addEventListener        = require('../../../lib/addEventListener');
-var removeEventListener     = require('../../../lib/removeEventListener');
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'Leaderboard',
   mixins: [I18nMixin, DOMInfoMixin, LeaderboardMixin],
   propTypes: {
@@ -38,7 +36,7 @@ module.exports = React.createClass({
     onHasContent: React.PropTypes.func
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       limit: 48,
       pageSize: 12,
@@ -59,7 +57,7 @@ module.exports = React.createClass({
     };
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       isLoading: false,
       boardData: [],
@@ -68,16 +66,16 @@ module.exports = React.createClass({
     };
   },
 
-  componentWillMount: function() {
+  componentWillMount() {
     this.loadLeaderboard('individual');
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     addEventListener('resize', this.setChildWidth);
     this.setChildWidth();
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     removeEventListener('resize', this.setChildWidth);
   },
 
@@ -87,20 +85,20 @@ module.exports = React.createClass({
     });
   }, 100, { trailing: true }),
 
-  renderLoadingState: function() {
+  renderLoadingState() {
     return <Icon className="Leaderboard__loading" icon="refresh" />;
   },
 
-  renderEmptyState: function() {
-    var emptyText       = this.t('emptyText');
-    var emptyButtonText = this.t('emptyButtonText');
+  renderEmptyState() {
+    let emptyText       = this.t('emptyText');
+    let emptyButtonText = this.t('emptyButtonText');
 
     return <LeaderboardEmpty emptyText={ emptyText } emptyButtonText={ emptyButtonText } { ...this.props } />;
   },
 
-  renderLeaderboardItems: function() {
-    var currentPage = this.state.currentPage - 1;
-    var board = this.state.boardData[currentPage];
+  renderLeaderboardItems() {
+    let currentPage = this.state.currentPage - 1;
+    let board = this.state.boardData[currentPage];
 
     return (
       <ReactCSSTransitionGroup
@@ -109,8 +107,8 @@ module.exports = React.createClass({
         component="ol">
           {
             board.map(function(item) {
-              var formattedAmount = this.formatAmount(item.amount);
-              var formattedRank   = numeral(item.rank).format('0o');
+              let formattedAmount = this.formatAmount(item.amount);
+              let formattedRank   = numeral(item.rank).format('0o');
 
               return (
                 <LeaderboardItem
@@ -131,21 +129,21 @@ module.exports = React.createClass({
     );
   },
 
-  render: function() {
-    var state       = this.state;
-    var heading     = this.t('heading');
-    var customStyle = {
+  render() {
+    let state       = this.state;
+    let heading     = this.t('heading');
+    let customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
     };
 
-    var classes = cx({
+    let classes = cx({
       'Leaderboard': true,
       'Leaderboard--loading': state.isLoading,
       'Leaderboard--empty': !state.boardData.length
     });
 
-    var content = state.isLoading ? this.renderLoadingState :
+    let content = state.isLoading ? this.renderLoadingState :
                   state.boardData.length ? this.renderLeaderboardItems :
                   this.renderEmptyState;
 

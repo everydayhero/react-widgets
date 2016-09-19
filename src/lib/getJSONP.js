@@ -1,12 +1,11 @@
-"use strict";
+import _ from 'lodash';
+import jsonp from 'jsonp';
 
-var _ = require('lodash');
-var jsonp = require('jsonp');
-var DEFAULT_TIMEOUT = 20000;
-var IS_CLIENT = typeof window !== 'undefined';
-var DEFAULT_RETRIES = 2;
-var noop = function() {};
-var cache = {};
+const DEFAULT_TIMEOUT = 20000;
+const IS_CLIENT = typeof window !== 'undefined';
+const DEFAULT_RETRIES = 2;
+let noop = function() {};
+let cache = {};
 
 function getJSONP(url, callback, options) {
   if (cache[url]) {
@@ -15,11 +14,11 @@ function getJSONP(url, callback, options) {
   }
 
   options = options || {};
-  var timeout = options.timeout || DEFAULT_TIMEOUT;
-  var retries = options.retries || DEFAULT_RETRIES;
-  var cancelRequest;
+  let timeout = options.timeout || DEFAULT_TIMEOUT;
+  let retries = options.retries || DEFAULT_RETRIES;
+  let cancelRequest;
 
-  var requestHandler = function(error, data) {
+  let requestHandler = function(error, data) {
     if (error) {
       if (retries-- > 0) {
         cancelRequest = jsonp(url, {timeout: timeout}, requestHandler);
@@ -34,11 +33,11 @@ function getJSONP(url, callback, options) {
 
   cancelRequest = jsonp(url, {timeout: timeout}, requestHandler);
 
-  var cancelCallback = function() {
+  const cancelCallback = function() {
     cancelRequest();
   };
 
   return cancelCallback;
 }
 
-module.exports = IS_CLIENT ? getJSONP : function() { return noop; };
+export default IS_CLIENT ? getJSONP : function() { return noop; };

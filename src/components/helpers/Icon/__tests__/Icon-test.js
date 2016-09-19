@@ -1,9 +1,8 @@
-'use strict';
-jest.autoMockOff();
+jest.disableAutomock();
 
-var React = require('react');
-var Icon = require('../');
-var TestUtils = require('react-addons-test-utils');
+import React from 'react';
+import Icon from '../';
+import TestUtils from 'react-addons-test-utils';
 var findByClass = TestUtils.findRenderedDOMComponentWithClass
 
 describe('Icon', function() {

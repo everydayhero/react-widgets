@@ -1,21 +1,19 @@
-'use strict';
+import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import cx from 'classnames';
+import I18nMixin from '../../mixins/I18n';
+import _ from 'lodash';
+import Input from '../../forms/Input';
+import CountrySelect from '../CountrySelect';
+import countryList from '../CountrySelect/countries';
+import AddressStatus from '../AddressStatus';
+import AddressListing from '../AddressListing';
+import AddressBreakdown from '../AddressBreakdown';
+import addressAPI from '../../../api/address';
+import addEventListener from '../../../lib/addEventListener';
+import removeEventListener from '../../../lib/removeEventListener';
 
-var React               = require('react');
-var PureRenderMixin     = require('react-addons-pure-render-mixin');
-var cx                  = require('classnames');
-var I18nMixin           = require('../../mixins/I18n');
-var _                   = require('lodash');
-var Input               = require('../../forms/Input');
-var CountrySelect       = require('../CountrySelect');
-var countryList         = require('../CountrySelect/countries');
-var AddressStatus       = require('../AddressStatus');
-var AddressListing      = require('../AddressListing');
-var AddressBreakdown    = require('../AddressBreakdown');
-var addressAPI          = require('../../../api/address');
-var addEventListener    = require('../../../lib/addEventListener');
-var removeEventListener = require('../../../lib/removeEventListener');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'AddressLookup',
 
   mixins: [I18nMixin, PureRenderMixin],

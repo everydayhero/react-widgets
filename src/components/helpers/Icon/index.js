@@ -1,9 +1,7 @@
-'use strict';
+import _ from 'lodash';
+import React from 'react';
 
-var _      = require('lodash');
-var React  = require('react');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'Icon',
 
   propTypes: {
@@ -14,9 +12,9 @@ module.exports = React.createClass({
     type: React.PropTypes.string,
   },
 
-  render: function() {
-    var spin = this.props.icon === 'circle-o-notch' || this.props.icon === 'spinner' || this.props.icon === 'refresh' || this.props.spin;
-    var classes = _.compact([
+  render() {
+    let spin = this.props.icon === 'circle-o-notch' || this.props.icon === 'spinner' || this.props.icon === 'refresh' || this.props.spin;
+    let classes = _.compact([
       'Icon',
       this.props.type && ('Icon--' + this.props.type),
       'fa',
@@ -25,7 +23,7 @@ module.exports = React.createClass({
       'fa-' + (this.props.icon || 'rocket')
     ]).join(' ');
 
-    var wrapperClasses = _.compact(['IconWrapper', this.props.className]).join(' ');
+    let wrapperClasses = _.compact(['IconWrapper', this.props.className]).join(' ');
     return (
       <span className={ wrapperClasses }><i className={classes} /></span>
     );

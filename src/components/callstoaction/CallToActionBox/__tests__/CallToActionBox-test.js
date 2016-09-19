@@ -1,17 +1,17 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
 jest.mock('../../../../api/campaigns');
 
+import React from 'react';
+import CallToActionBox from '../';
+import campaigns from '../../../../api/campaigns';
+import TestUtils from 'react-addons-test-utils';
+
 describe('CallToActionBox', function() {
-  var React                       = require('react');
-  var CallToActionBox             = require('../');
-  var campaigns                   = require('../../../../api/campaigns');
-  var TestUtils                   = require('react-addons-test-utils');
-  var findByClass                 = TestUtils.findRenderedDOMComponentWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
 
   describe('component defaults', function() {
-    var callToActionBox;
-    var element;
+    let callToActionBox;
+    let element;
 
     beforeEach(function() {
       callToActionBox = <CallToActionBox campaignUid="au-0" registrationUrl="http://google.com.au/" />;
@@ -29,14 +29,14 @@ describe('CallToActionBox', function() {
 
     it('renders a default title', function() {
       element.setState({ isLoading: false });
-      var heading = findByClass(element, 'CallToActionBox__title');
+      let heading = findByClass(element, 'CallToActionBox__title');
 
       expect(heading.textContent).toBe('Get Involved');
     });
 
     it('renders default sign in link text', function() {
       element.setState({ isLoading: false });
-      var link = findByClass(element, 'CallToActionBox__link');
+      let link = findByClass(element, 'CallToActionBox__link');
 
       expect(link.textContent).toBe('Sign in');
     });
@@ -47,9 +47,9 @@ describe('CallToActionBox', function() {
   });
 
   describe('component props', function() {
-    var callToActionBox;
-    var element;
-    var translation = {
+    let callToActionBox;
+    let element;
+    let translation = {
       title: 'Get on with it',
       signInLabel: 'login'
     };
@@ -61,14 +61,14 @@ describe('CallToActionBox', function() {
 
     it('renders a custom heading', function() {
       element.setState({isLoading: false});
-      var title = findByClass(element, 'CallToActionBox__title');
+      let title = findByClass(element, 'CallToActionBox__title');
 
       expect(title.textContent).toBe(translation.title);
     });
 
     it('renders a custom heading', function() {
       element.setState({isLoading: false});
-      var signInLabel = findByClass(element, 'CallToActionBox__link');
+      let signInLabel = findByClass(element, 'CallToActionBox__link');
 
       expect(signInLabel.textContent).toBe(translation.signInLabel);
     });

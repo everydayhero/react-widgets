@@ -1,17 +1,15 @@
-'use strict';
+import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import cx from 'classnames';
+import _ from 'lodash';
+import countries from './countries';
+import Input from '../../forms/Input';
+import CountrySelectItem from '../CountrySelectItem';
+import FlagIcon from '../../helpers/FlagIcon';
+import addEventListener from '../../../lib/addEventListener';
+import removeEventListener from '../../../lib/removeEventListener';
 
-var React               = require('react');
-var PureRenderMixin     = require('react-addons-pure-render-mixin');
-var cx                  = require('classnames');
-var _                   = require('lodash');
-var countries           = require('./countries');
-var Input               = require('../../forms/Input');
-var CountrySelectItem   = require('../CountrySelectItem');
-var FlagIcon            = require('../../helpers/FlagIcon');
-var addEventListener    = require('../../../lib/addEventListener');
-var removeEventListener = require('../../../lib/removeEventListener');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'CountrySelect',
 
   mixins: [PureRenderMixin],

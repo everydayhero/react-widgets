@@ -1,17 +1,17 @@
-"use strict";
-jest.autoMockOff();
+jest.disableAutomock();
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import LeaderboardItem from '../';
+import TestUtils from 'react-addons-test-utils';
 
 describe('LeaderboardItem', function() {
-  var React           = require('react');
-  var ReactDOM        = require('react-dom');
-  var LeaderboardItem = require('../');
-  var TestUtils       = require('react-addons-test-utils');
-  var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
-  var scryByClass     = TestUtils.scryRenderedDOMComponentsWithClass;
+  let findByClass = TestUtils.findRenderedDOMComponentWithClass;
+  let scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 
   describe('Component defaults', function() {
-    var leaderboardItem;
-    var element;
+    let leaderboardItem;
+    let element;
 
     beforeEach(function() {
       leaderboardItem = <LeaderboardItem url="hello-world.com" />;
@@ -23,31 +23,31 @@ describe('LeaderboardItem', function() {
     });
 
     it('is a link', function() {
-      var parentNode = ReactDOM.findDOMNode(element);
+      let parentNode = ReactDOM.findDOMNode(element);
       expect(parentNode.tagName).toBe('A');
       expect(parentNode.getAttribute('href')).toEqual('hello-world.com');
     });
 
     it('renders funds raised', function() {
-      var elementFunds = findByClass(element, 'LeaderboardItem__amount');
+      let elementFunds = findByClass(element, 'LeaderboardItem__amount');
       expect(elementFunds).not.toBeNull();
     });
 
     it('renders a name', function() {
-      var elementName = findByClass(element, 'LeaderboardItem__name');
+      let elementName = findByClass(element, 'LeaderboardItem__name');
       expect(elementName).not.toBeNull();
     });
 
     it('renders a rank', function() {
-      var elementRank = findByClass(element, 'LeaderboardItem__rank');
+      let elementRank = findByClass(element, 'LeaderboardItem__rank');
       expect(elementRank).not.toBeNull();
     });
   });
 
   describe('Render image option', function() {
-    var leaderboardItem;
-    var element;
-    var elementImg;
+    let leaderboardItem;
+    let element;
+    let elementImg;
 
     it('renders a profile image if set to true', function() {
       leaderboardItem = <LeaderboardItem renderImage={ true } />;
@@ -65,9 +65,9 @@ describe('LeaderboardItem', function() {
   });
 
   describe('Render charity name option', function() {
-    var leaderboardItem;
-    var element;
-    var elementCharity;
+    let leaderboardItem;
+    let element;
+    let elementCharity;
 
     it('renders a charity name if present', function() {
       leaderboardItem = <LeaderboardItem charityName='foo' />;

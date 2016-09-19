@@ -1,10 +1,8 @@
-"use strict";
-
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import { render } from 'react-dom';
 
 function renderModal(component, options) {
-  var div = document.createElement('div');
+  let div = document.createElement('div');
   document.body.appendChild(div);
 
   options.onClose = function() {
@@ -12,7 +10,7 @@ function renderModal(component, options) {
     document.body.removeChild(div);
   };
 
-  ReactDOM.render(React.createFactory(component)(options), div);
+  render(React.createFactory(component)(options), div);
 }
 
-module.exports = renderModal;
+export default renderModal;

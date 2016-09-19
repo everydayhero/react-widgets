@@ -1,11 +1,9 @@
-'use strict';
+jest.disableAutomock();
 
-jest.autoMockOff();
-
-var React            = require('react');
-var LeaderboardEmpty = require('../');
-var campaigns        = require('../../../../api/campaigns');
-var TestUtils        = require('react-addons-test-utils');
+import React from 'react';
+import LeaderboardEmpty from '../';
+import campaigns from '../../../../api/campaigns';
+import TestUtils from 'react-addons-test-utils';
 
 var mockCampaignResponse = {
   campaign: {

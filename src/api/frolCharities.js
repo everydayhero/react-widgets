@@ -15,19 +15,17 @@ function getCharities(callback) {
   }
 
   getJSONP(url, function(data) {
-    let transformedData = [];
-    let entries = data.feed.entry;
-
-    for (let i = 0; i < entries.length; i++) {
-      transformedData.push({
-        name: entries[i].gsx$name.$t,
-        frolId: entries[i].gsx$frolid.$t,
-        slug: entries[i].gsx$slug.$t,
-        description: entries[i].gsx$description.$t,
-        logoUrl: entries[i].gsx$logourl.$t,
-        url: entries[i].gsx$url.$t
-      });
-    }
+    const entries = data.feed.entry;
+    const transformedData = entries.map(entry => {
+      return {
+        name: entry.gsx$name.$t,
+        frolId: entry.gsx$frolid.$t,
+        slug: entry.gsx$slug.$t,
+        description: entry.gsx$description.$t,
+        logoUrl: entry.gsx$logourl.$t,
+        url: entry.gsx$url.$t
+      };
+    });
 
     cachedResult = transformedData;
     callback(transformedData);

@@ -27,6 +27,7 @@ export default React.createClass({
     initialSort: React.PropTypes.oneOf(['amount', 'distance']),
     currencyFormat: React.PropTypes.string,
     distanceFormat: React.PropTypes.string,
+    target: React.PropTypes.string,
     i18n: React.PropTypes.object
   },
 
@@ -165,7 +166,8 @@ export default React.createClass({
             isoCode={ d.isoCode }
             amount={ formattedAmount }
             meters={ formattedMeters }
-            imgSrc={ d.imgSrc } />
+            imgSrc={ d.imgSrc }
+            target={ this.props.target } />
         );
       }
     }.bind(this));

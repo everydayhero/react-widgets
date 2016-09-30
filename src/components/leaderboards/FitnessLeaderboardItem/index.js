@@ -7,7 +7,7 @@ export default React.createClass({
     return (
       <tr className="FitnessLeaderboardItem">
         <td className="FitnessLeaderboardItem__fundraiser">
-          <a href={ this.props.url }>
+          <a href={ this.props.url } target={this.props.target}>
             <img className="FitnessLeaderboardItem__image" src={ this.props.imgSrc } />
             <div className="FitnessLeaderboardItem__name">{ this.props.name }</div>
           </a>

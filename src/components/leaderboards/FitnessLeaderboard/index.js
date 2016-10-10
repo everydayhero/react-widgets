@@ -19,6 +19,7 @@ export default React.createClass({
     charityUid: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
     type: React.PropTypes.oneOf(['team', 'individual']),
+    fitnessTypes: React.PropTypes.array,
     limit: React.PropTypes.number,
     pageSize: React.PropTypes.number,
     unit: React.PropTypes.oneOf(['km', 'miles']),
@@ -34,6 +35,7 @@ export default React.createClass({
   getDefaultProps: function() {
     return {
       type: 'individual',
+      fitnessTypes: ['gym', 'run', 'sport'],
       limit: 100,
       pageSize: 5,
       unit: 'miles',
@@ -117,8 +119,8 @@ export default React.createClass({
   },
 
   combineActivityData: function(fitnessActivity) {
-    return _.reduce(fitnessActivity, function(sum, n) {
-      return sum += n.distance_in_meters;
+    return _.reduce(this.props.fitnessTypes, function(sum, fitnessType) {
+      return sum += fitnessActivity[fitnessType] ? fitnessActivity[fitnessType].distance_in_meters : 0;
     }, 0);
   },
 

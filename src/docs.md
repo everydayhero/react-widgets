@@ -1272,6 +1272,9 @@ Country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'. Required by `camp
 `type` (string)<br>
 Set a type of either `'team'` or `'individual'`. Set to `'individual'` by default.
 
+`fitnessTypes` (array)<br>
+Fitness activites to aggregate. Options are `gym`, `run`, and `sport`. All three are selected by default.
+
 `limit` (number)<br>
 Set to `100` by default. Determines how many results should be fetched via the everdayhero leaderboards API endpoint.
 

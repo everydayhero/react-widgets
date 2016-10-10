@@ -1,13 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import jsdom from 'jsdom';
 
 import TotalCustomMetric from '../';
 import campaigns from  '../../../../api/campaigns';
-
-const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
-global.document = doc;
-global.window = doc.defaultView;
 
 describe('TotalCustomMetric', () => {
   beforeEach(() => {
@@ -18,7 +13,7 @@ describe('TotalCustomMetric', () => {
     campaigns.find.restore();
   });
 
-  const defaultElement = <TotalCustomMetric campaignUid="au-123" i18n={{title: 'Units'}} />;
+  const defaultElement = <TotalCustomMetric campaignUid="au-123" i18n={{ title: 'Units' }} />;
 
   describe('default props', () => {
     const mountedElement = mount(defaultElement);

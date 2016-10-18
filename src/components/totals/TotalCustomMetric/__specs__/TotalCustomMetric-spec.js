@@ -6,7 +6,9 @@ import campaigns from  '../../../../api/campaigns';
 
 describe('TotalCustomMetric', () => {
   beforeEach(() => {
-    sinon.stub(campaigns, 'find');
+    sinon.stub(campaigns, 'find', (_uid, cb) => cb(
+      { campaign: { custom_metric_total: { custom_metric: { amount: 100 }}}}
+    ));
   });
 
   afterEach(() => {

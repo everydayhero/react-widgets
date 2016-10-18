@@ -237,7 +237,7 @@ export default React.createClass({
     if (this.props.onSelect) {
       this.props.onSelect(res);
     } else {
-      window.location = res.url;
+      window.location = res.url || res.get_started_url;
     }
   },
 

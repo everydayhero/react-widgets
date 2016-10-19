@@ -1,6 +1,8 @@
 jest.disableAutomock();
 jest.mock('../../../../api/address');
 
+jest.useFakeTimers();
+
 import address from '../../../../api/address';
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';

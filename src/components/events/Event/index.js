@@ -56,7 +56,7 @@ export default React.createClass({
 
   timeout: function() {
     var component = this;
-    setTimeout(function() { component.deactivate(); }, 3000);
+    setTimeout(function() { component.deactivate(); }, 2500);
   },
 
   deactivate: function() {

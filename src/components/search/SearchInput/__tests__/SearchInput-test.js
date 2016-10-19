@@ -1,5 +1,7 @@
 jest.disableAutomock();
 
+jest.useFakeTimers();
+
 import React from 'react';
 import SearchInput from '../';
 import TestUtils from 'react-addons-test-utils';

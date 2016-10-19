@@ -1,6 +1,8 @@
 jest.disableAutomock();
 jest.mock('../../../../api/frolCharities');
 
+jest.useFakeTimers();
+
 import charities from '../../../../api/frolCharities';
 
 const charity = {

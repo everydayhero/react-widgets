@@ -1,6 +1,8 @@
 jest.disableAutomock();
 jest.mock('../../../../api/charities');
 
+jest.useFakeTimers();
+
 import charities from '../../../../api/charities';
 const donateUrl = 'http://donate.url/';
 const fundraiseUrl = 'http://fundraise.url/';

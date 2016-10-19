@@ -5,15 +5,15 @@ import FitnessLeaderboard from '../';
 import campaigns from  '../../../../api/campaigns';
 
 describe('FitnessLeaderboard', () => {
-  beforeEach(() => {
-    sinon.stub(campaigns, 'leaderboard')
-  });
-
-  afterEach(() => {
-    campaigns.leaderboard.restore();
-  });
-
   describe('fitness activity aggregation', () => {
+    before(() => {
+      sinon.stub(campaigns, 'leaderboard')
+    });
+
+    after(() => {
+      campaigns.leaderboard.restore();
+    });
+
     const distances = {
       gym: {
         distance_in_meters: 1,

@@ -5,12 +5,16 @@ import * as getJSONP from '../../lib/getJSONP';
 describe('campaigns', () => {
   const callback = sinon.spy();
 
-  beforeEach(() => {
+  before(() => {
     sinon.stub(getJSONP, 'default');
   });
 
-  afterEach(() => {
+  after(() => {
     getJSONP.default.restore();
+  })
+
+  afterEach(() => {
+    getJSONP.default.reset();
     callback.reset();
   });
 
@@ -96,11 +100,11 @@ describe('campaigns', () => {
       });
 
       it('does not fetch results', () => {
-        getJSONP.default.should.have.callCount(0);
+        expect(getJSONP.default).to.not.have.been.called;
       });
 
       it('defers callback with empty results', () => {
-        getJSONP.default.should.have.callCount(0);
+        expect(getJSONP.default).to.not.have.been.called;
         expect(_.defer).to.have.been.calledWith(
           callback,
           { campaigns: [] }

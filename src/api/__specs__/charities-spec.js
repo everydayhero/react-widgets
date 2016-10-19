@@ -13,6 +13,7 @@ describe('charities', () => {
   };
 
   beforeEach(() => {
+    callback.reset();
     sinon.stub(getJSONP, 'default');
   });
 

@@ -2,4 +2,4 @@
 
 set -eux
 
-docker-compose -f .buildkite/docker-compose.yml run widgets npm run test-units
+docker-compose -f .buildkite/docker-compose.yml run widgets npm run test

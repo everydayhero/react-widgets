@@ -4,14 +4,17 @@ import * as getJSONP from '../../lib/getJSONP';
 
 describe('campaigns', () => {
   const callback = sinon.spy();
+  let clock = null;
 
   before(() => {
     sinon.stub(getJSONP, 'default');
+    clock = sinon.useFakeTimers();
   });
 
   after(() => {
     getJSONP.default.restore();
-  })
+    clock.restore();
+  });
 
   afterEach(() => {
     getJSONP.default.reset();

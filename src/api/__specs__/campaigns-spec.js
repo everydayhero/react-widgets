@@ -14,12 +14,6 @@ describe('campaigns', () => {
   })
 
   afterEach(() => {
-    try{
-      getJSONP.default.reset();
-    }catch(e){
-      console.error("Failed to reset jsonp, likely timeout issues", e.message);
-      sinon.stub(getJSONP, 'default');
-    }
     callback.reset();
   });
 

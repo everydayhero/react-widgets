@@ -3,7 +3,7 @@ import charities from '../charities';
 import * as getJSONP from '../../lib/getJSONP';
 
 describe('charities', () => {
-  let callback;
+  const callback = sinon.spy();
   const data = {
     au: { country_code: 'au', uid: 'au-123', slug: 'bar' },
     ie: { country_code: 'ie', uid: 'ie-123', slug: 'bar' },
@@ -13,7 +13,7 @@ describe('charities', () => {
   };
 
   beforeEach(() => {
-    callback = sinon.spy();
+    callback.reset();
     sinon.stub(getJSONP, 'default');
   });
 

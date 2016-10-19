@@ -11,14 +11,24 @@ describe('charities', () => {
     uk: { country_code: 'uk', uid: 'gb-123', slug: 'bar' },
     us: { country_code: 'us', uid: 'us-123', slug: 'bar' },
   };
+  let clock = null;
 
-  beforeEach(() => {
-    callback.reset();
+  before(() => {
+    clock = sinon.useFakeTimers();
     sinon.stub(getJSONP, 'default');
   });
 
-  afterEach(() => {
+  after(() => {
     getJSONP.default.restore();
+    clock.restore();
+  });
+
+  beforeEach(() => {
+    callback.reset();
+  });
+
+  afterEach(() => {
+    getJSONP.default.reset();
   });
 
   describe('find', () => {

@@ -10,8 +10,13 @@ steps:
 
   - type: "waiter"
 
-  - name: ":pill:"
-    command: ".buildkite/bin/test"
+  - name: ":pill: Spec Tests"
+    command: ".buildkite/bin/test-spec"
+    agents:
+      queue: native
+
+  - name: ":pill: Unit Tests"
+    command: ".buildkite/bin/test-units"
     agents:
       queue: native
 

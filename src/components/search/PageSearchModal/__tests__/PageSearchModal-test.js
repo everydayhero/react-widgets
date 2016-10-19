@@ -1,6 +1,8 @@
 jest.disableAutomock();
 jest.mock('../../../../api/pages');
 
+jest.useFakeTimers();
+
 import pages from '../../../../api/pages';
 import React from 'react';
 import { mount } from 'enzyme';

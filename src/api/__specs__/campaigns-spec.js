@@ -14,6 +14,7 @@ describe('campaigns', () => {
   })
 
   afterEach(() => {
+    getJSONP.default.reset();
     callback.reset();
   });
 

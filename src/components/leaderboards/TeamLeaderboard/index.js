@@ -148,9 +148,11 @@ export default React.createClass({
       'TeamLeaderboard--empty': !state.boardData.length
     })
 
-    var content = state.isLoading ? this.renderLoadingState :
-                  state.boardData.length ? this.renderLeaderboardItems :
-                  this.renderEmptyState
+    var content = state.isLoading
+      ? this.renderLoadingState
+      : state.boardData.length
+      ? this.renderLeaderboardItems
+      : this.renderEmptyState
 
     return (
       <div className={classes} style={customStyle}>

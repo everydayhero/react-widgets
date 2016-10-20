@@ -143,9 +143,11 @@ export default React.createClass({
       'Leaderboard--empty': !state.boardData.length
     })
 
-    let content = state.isLoading ? this.renderLoadingState :
-                  state.boardData.length ? this.renderLeaderboardItems :
-                  this.renderEmptyState
+    let content = state.isLoading
+      ? this.renderLoadingState
+      : state.boardData.length
+      ? this.renderLeaderboardItems
+      : this.renderEmptyState
 
     return (
       <div className={classes} style={customStyle}>

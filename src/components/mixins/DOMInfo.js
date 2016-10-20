@@ -61,17 +61,17 @@ export default {
     this.setSizeAndDevice()
   }, 100, { trailing: true }),
 
-  getChildrenWidth (min_width, count) {
-    let child_count = Math.min(count, this.getChildCountFromWidth(min_width))
-    return this.getChildWidth(child_count)
+  getChildrenWidth (minWidth, count) {
+    let childCount = Math.min(count, this.getChildCountFromWidth(minWidth))
+    return this.getChildWidth(childCount)
   },
 
   getChildWidth (count) {
     return Math.floor(10000 / Math.max(1, count)) * 0.01 + '%'
   },
 
-  getChildCountFromWidth (min_width) {
-    return Math.max(1, Math.floor(this.getComponentWidth() / min_width))
+  getChildCountFromWidth (minWidth) {
+    return Math.max(1, Math.floor(this.getComponentWidth() / minWidth))
   },
 
   getDeviceFallback (device, obj) {

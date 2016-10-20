@@ -49,9 +49,9 @@ export default React.createClass({
     pages.findByCampaign(props.campaignUid, props.page_type, props.limit, props.page, this.processData)
   },
 
-  processData: function (page_data) {
-    var locations = _.map(page_data.pages, function (value, i) {
-      var page = page_data.pages[i]
+  processData: function (pageData) {
+    var locations = _.map(pageData.pages, function (value, i) {
+      var page = pageData.pages[i]
 
       return {
         location: page.coordinate

@@ -36,25 +36,25 @@ export default React.createClass({
 
   renderRaisedAmount: function () {
     var page = this.props.result
-    var raised_amount = page.amount && page.target_cents >= 0 &&
+    var raisedAmount = page.amount && page.target_cents >= 0 &&
       this.tm('raised_amount', {
         currency: page.amount.currency.symbol,
         amount: page.amount.cents / 100,
         target: page.target_cents / 100
       })
 
-    return !!raised_amount && <div className='AggregateSearchResultPage__amount'>{ raised_amount }</div>
+    return !!raisedAmount && <div className='AggregateSearchResultPage__amount'>{ raisedAmount }</div>
   },
 
   renderRaisedFor: function () {
     var page = this.props.result
-    var raised_for =
+    var raisedFor =
       this.tm(pagesAPI.isGivePage(page) ? 'raised_for_charity' : 'raised_for_charity_through_campaign', {
         charity: page.charity.name,
         campaign: page.campaign.name
       })
 
-    return <div className='AggregateSearchResultPage__for'>{ raised_for }</div>
+    return <div className='AggregateSearchResultPage__for'>{ raisedFor }</div>
   },
 
   render: function () {

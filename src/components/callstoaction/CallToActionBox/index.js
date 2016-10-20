@@ -58,9 +58,9 @@ export default React.createClass({
 
   renderContent: function () {
     var slug = this.state.slug
-    var country_code = this.state.country_code
+    var countryCode = this.state.country_code
     var registrationUrl = this.props.registrationUrl
-    var campaignUrl = 'https://' + slug + '.everydayhero.com/' + country_code + '/'
+    var campaignUrl = 'https://' + slug + '.everydayhero.com/' + countryCode + '/'
     var signInUrl = campaignUrl + 'sign-in'
     var getStartedUrl = campaignUrl + 'get-started'
 

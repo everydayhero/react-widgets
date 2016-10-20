@@ -120,7 +120,7 @@ export default React.createClass({
 
   combineActivityData: function (fitnessActivity) {
     return _.reduce(this.props.fitnessTypes, function (sum, fitnessType) {
-      return sum += fitnessActivity[fitnessType] ? fitnessActivity[fitnessType].distance_in_meters : 0
+      return sum + (fitnessActivity[fitnessType] ? fitnessActivity[fitnessType].distance_in_meters : 0)
     }, 0)
   },
 

@@ -60,7 +60,7 @@ export default {
     let pages = []
     if (result.results) {
       pages = result.results.map(function (object) {
-        return object = object.page
+        return object.page
       })
     } else {
       // Static Leaderboard

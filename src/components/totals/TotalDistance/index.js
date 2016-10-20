@@ -66,7 +66,7 @@ export default React.createClass({
 
   combineActivityData: function (fitnessActivity) {
     return _.reduce(fitnessActivity, function (sum, n) {
-      return sum += n.distance_in_meters
+      return sum + n.distance_in_meters
     }, 0)
   },
 

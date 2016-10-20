@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default React.createClass({
   displayName: 'LeaderboardItem',
@@ -15,47 +15,47 @@ export default React.createClass({
     charityName: React.PropTypes.string
   },
 
-  renderProfileImage: function() {
+  renderProfileImage: function () {
     if (this.props.renderImage) {
       return (
-        <div className="LeaderboardItem__image">
-          <img src={ this.props.imgSrc } />
+        <div className='LeaderboardItem__image'>
+          <img src={this.props.imgSrc} />
         </div>
-      );
+      )
     }
   },
 
-  renderCharityName: function() {
+  renderCharityName: function () {
     if (this.props.charityName) {
       return (
-        <div className="LeaderboardItem__charity">
+        <div className='LeaderboardItem__charity'>
           { this.props.charityName }
         </div>
-      );
+      )
     }
   },
 
-  render: function() {
-    var style = { width: this.props.width };
+  render: function () {
+    var style = { width: this.props.width }
 
     return (
-      <a href={ this.props.url } className="LeaderboardItem" style={ style }>
-        <div className="LeaderboardItem__skin">
+      <a href={this.props.url} className='LeaderboardItem' style={style}>
+        <div className='LeaderboardItem__skin'>
           { this.renderProfileImage() }
-          <div className="LeaderboardItem__content">
-            <div className="LeaderboardItem__name">
+          <div className='LeaderboardItem__content'>
+            <div className='LeaderboardItem__name'>
               { this.props.name }
             </div>
-            <div className="LeaderboardItem__amount">
+            <div className='LeaderboardItem__amount'>
               { this.props.amount }
             </div>
             { this.renderCharityName() }
           </div>
-          <div className="LeaderboardItem__rank">
+          <div className='LeaderboardItem__rank'>
             { this.props.rank }
           </div>
         </div>
       </a>
-    );
+    )
   }
-});
+})

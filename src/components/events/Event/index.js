@@ -1,10 +1,10 @@
-import React from 'react';
-import I18n from '../../mixins/I18n';
-import CallToActionButton from '../../callstoaction/CallToActionButton';
-import numeral from 'numbro';
+import React from 'react'
+import I18n from '../../mixins/I18n'
+import CallToActionButton from '../../callstoaction/CallToActionButton'
+import numeral from 'numbro'
 
-function cssUrl(url) {
-  return url ? 'url(' + url + ')' : 'none';
+function cssUrl (url) {
+  return url ? 'url(' + url + ')' : 'none'
 }
 
 export default React.createClass({
@@ -22,10 +22,10 @@ export default React.createClass({
     centsRaised: React.PropTypes.number,
     currencySymbol: React.PropTypes.string,
     width: React.PropTypes.string.isRequired,
-    i18n: React.PropTypes.object,
+    i18n: React.PropTypes.object
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       defaultI18n: {
         joinLabel: 'Join Event',
@@ -36,40 +36,40 @@ export default React.createClass({
         raisedLabel: 'Raised',
         months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       }
-    };
+    }
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       activeClass: ''
-    };
+    }
   },
 
-  activate: function() {
-    this.setState({ activeClass: 'active' });
+  activate: function () {
+    this.setState({ activeClass: 'active' })
   },
 
-  activateAndTimeout: function() {
-    this.activate();
-    this.timeout();
+  activateAndTimeout: function () {
+    this.activate()
+    this.timeout()
   },
 
-  timeout: function() {
-    var component = this;
-    setTimeout(function() { component.deactivate(); }, 2500);
+  timeout: function () {
+    var component = this
+    setTimeout(function () { component.deactivate() }, 2500)
   },
 
-  deactivate: function() {
-    this.setState({ activeClass: '' });
+  deactivate: function () {
+    this.setState({ activeClass: '' })
   },
 
-  eventStyles: function() {
+  eventStyles: function () {
     return {
       width: this.props.width
-    };
+    }
   },
 
-  renderCallToAction: function() {
+  renderCallToAction: function () {
     var donateUrl = this.props.donateUrl
     var getStartedUrl = this.props.getStartedUrl
     var supporterCount = this.props.supporterCount
@@ -81,30 +81,30 @@ export default React.createClass({
     var formattedRasied = numeral((centsRaised || 0) / 100).format('(' + currencySymbol + '0a)')
 
     return (
-      <div className="Event__calls-to-action">
+      <div className='Event__calls-to-action'>
         { !!getStartedUrl &&
-          <div className="Event__call-to-action">
-            <div className="Event__call-to-action-stat">
+          <div className='Event__call-to-action'>
+            <div className='Event__call-to-action-stat'>
               { supporterCount } { this.t('supportersLabel') }
             </div>
             <CallToActionButton
-              kind="secondary"
+              kind='secondary'
               reverse
-              href={ getStartedUrl }
-              className="Event__block-button">
+              href={getStartedUrl}
+              className='Event__block-button'>
               { joinLabel }
             </CallToActionButton>
           </div> }
         { !!donateUrl &&
-          <div className="Event__call-to-action">
-            <div className="Event__call-to-action-stat">
+          <div className='Event__call-to-action'>
+            <div className='Event__call-to-action-stat'>
               { formattedRasied } { this.t('raisedLabel') }
             </div>
             <CallToActionButton
-              kind="secondary"
+              kind='secondary'
               reverse
-              href={ donateUrl }
-              className="Event__block-button">
+              href={donateUrl}
+              className='Event__block-button'>
               { donateLabel }
             </CallToActionButton>
           </div> }
@@ -112,34 +112,34 @@ export default React.createClass({
     )
   },
 
-  render: function() {
-    var props = this.props;
-    var date = props.date;
-    var bg = cssUrl(props.backgroundImageUrl);
-    var blur = cssUrl(props.backgroundBlurUrl);
-    var t = this.t;
+  render: function () {
+    var props = this.props
+    var date = props.date
+    var bg = cssUrl(props.backgroundImageUrl)
+    var blur = cssUrl(props.backgroundBlurUrl)
+    var t = this.t
 
     return (
-      <div className="Event" style={ this.eventStyles() }
-        onTouchStart={ this.activateAndTimeout }
-        onTouchCancel={ this.deactivate }
-        onMouseEnter={ this.activate }
-        onMouseLeave={ this.deactivate }>
-        <div className={ 'Event__base ' + this.state.activeClass } style={{ backgroundImage: bg }}>
-          <div className="Event__blur" style={{ backgroundImage: blur }}></div>
-          <div className="Event__gradient"></div>
-          <ul className="Event__date DateBox">
-            <li className="DateBox__day" >
+      <div className='Event' style={this.eventStyles()}
+        onTouchStart={this.activateAndTimeout}
+        onTouchCancel={this.deactivate}
+        onMouseEnter={this.activate}
+        onMouseLeave={this.deactivate}>
+        <div className={'Event__base ' + this.state.activeClass} style={{ backgroundImage: bg }}>
+          <div className='Event__blur' style={{ backgroundImage: blur }} />
+          <div className='Event__gradient' />
+          <ul className='Event__date DateBox'>
+            <li className='DateBox__day' >
               { date.getDate() }
             </li>
-            <li className="DateBox__month-year">
+            <li className='DateBox__month-year'>
               { t('months')[date.getMonth()] } { date.getFullYear() }
             </li>
           </ul>
-          <a className="Event__name" href={ props.campaignUrl }>{ props.name }</a>
+          <a className='Event__name' href={props.campaignUrl}>{ props.name }</a>
           { this.renderCallToAction() }
         </div>
       </div>
-    );
+    )
   }
-});
+})

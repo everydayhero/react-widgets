@@ -1,7 +1,7 @@
-import React from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
-import cx from 'classnames';
-import FlagIcon from '../../helpers/FlagIcon';
+import React from 'react'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
+import cx from 'classnames'
+import FlagIcon from '../../helpers/FlagIcon'
 
 export default React.createClass({
   displayName: 'CountrySelectItem',
@@ -15,31 +15,31 @@ export default React.createClass({
     onClick: React.PropTypes.func
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       focused: false,
       country: { name: 'Country Missing', iso: 'XX' }
-    };
+    }
   },
 
-  handleClick: function() {
-    this.props.onClick(this.props.country);
+  handleClick: function () {
+    this.props.onClick(this.props.country)
   },
 
-  handleMouse: function() {
-    this.props.onMouseEnter(this.props.index);
+  handleMouse: function () {
+    this.props.onMouseEnter(this.props.index)
   },
 
-  render: function() {
+  render: function () {
     var classes = cx({
       'CountrySelectItem': true,
       'CountrySelectItem--focused': this.props.focused
-    });
+    })
     return (
-      <div className={ classes } onMouseEnter={ this.handleMouse } onClick={ this.handleClick }>
-        <FlagIcon className="CountrySelectItem__flag" country={ this.props.country.iso } />
+      <div className={classes} onMouseEnter={this.handleMouse} onClick={this.handleClick}>
+        <FlagIcon className='CountrySelectItem__flag' country={this.props.country.iso} />
         { this.props.country.name }
       </div>
-    );
+    )
   }
-});
+})

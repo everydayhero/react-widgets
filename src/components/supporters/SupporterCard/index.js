@@ -1,6 +1,6 @@
-import React from 'react';
-import SupporterCardGiveNow from '../SupporterCardGiveNow';
-import Footprint from '../../footprint/Footprint';
+import React from 'react'
+import SupporterCardGiveNow from '../SupporterCardGiveNow'
+import Footprint from '../../footprint/Footprint'
 
 export default React.createClass({
   displayName: 'SupporterCard',
@@ -18,36 +18,36 @@ export default React.createClass({
     eventName: React.PropTypes.string
   },
 
-  render: function() {
-    var props = this.props;
+  render: function () {
+    var props = this.props
     var style = {
       width: props.width
-    };
+    }
 
     return (
-      <div className="SupporterCardWrapper" style={ style }>
-        <div className="SupporterCard">
+      <div className='SupporterCardWrapper' style={style}>
+        <div className='SupporterCard'>
           <Footprint
-            data={ props.footprint }
+            data={props.footprint}
             compact
-            size={ 140 }
-            userImage={ props.image }
-            userName={ props.name }
-            userUrl={ props.url } />
+            size={140}
+            userImage={props.image}
+            userName={props.name}
+            userUrl={props.url} />
 
-          <a href={ props.url } className="SupporterCard__userDetails">
-            <div className="SupporterCard__name">{ props.name }</div>
-            { props.charityName && <div className="SupporterCard__charity">For <strong>{ props.charityName }</strong></div> }
-            { props.eventName && <div className="SupporterCard__event">Through <strong>{ props.eventName }</strong></div> }
+          <a href={props.url} className='SupporterCard__userDetails'>
+            <div className='SupporterCard__name'>{ props.name }</div>
+            { props.charityName && <div className='SupporterCard__charity'>For <strong>{ props.charityName }</strong></div> }
+            { props.eventName && <div className='SupporterCard__event'>Through <strong>{ props.eventName }</strong></div> }
           </a>
 
           <SupporterCardGiveNow
-            url={ props.url }
-            target={ props.target }
-            current={ props.current }
+            url={props.url}
+            target={props.target}
+            current={props.current}
             i18n={{ currency: props.currency }} />
         </div>
       </div>
-    );
+    )
   }
-});
+})

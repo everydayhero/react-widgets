@@ -1,10 +1,10 @@
-jest.disableAutomock();
+jest.disableAutomock()
 
-import Leaderboard from '../Leaderboard';
+import Leaderboard from '../Leaderboard'
 
-describe('LeaderboardMixin', function() {
-  describe('getLeaderboard', function() {
-    it('should remove pages with amount equals 0', function() {
+describe('LeaderboardMixin', function () {
+  describe('getLeaderboard', function () {
+    it('should remove pages with amount equals 0', function () {
       let pages = [
         {
           id: 1,
@@ -21,11 +21,11 @@ describe('LeaderboardMixin', function() {
           }
         },
         { amount: { cents: 0 }}
-      ];
-      let leaderboard = Leaderboard.getLeaderboard(pages);
+      ]
+      let leaderboard = Leaderboard.getLeaderboard(pages)
 
-      expect(leaderboard.length).toEqual(1);
-      expect(leaderboard[0].amount).toEqual(99);
-    });
-  });
-});
+      expect(leaderboard.length).toEqual(1)
+      expect(leaderboard[0].amount).toEqual(99)
+    })
+  })
+})

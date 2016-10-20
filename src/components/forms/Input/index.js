@@ -1,8 +1,8 @@
-import React from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
-import cx from 'classnames';
-import I18nMixin from '../../mixins/I18n';
-import Icon from '../../helpers/Icon';
+import React from 'react'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
+import cx from 'classnames'
+import I18nMixin from '../../mixins/I18n'
+import Icon from '../../helpers/Icon'
 
 export default React.createClass({
   displayName: 'Input',
@@ -34,7 +34,7 @@ export default React.createClass({
     animateLabel: React.PropTypes.bool
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       autoComplete: false,
       autoCorrect: false,
@@ -60,146 +60,146 @@ export default React.createClass({
         name: 'input',
         label: 'Input'
       }
-    };
+    }
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       error: this.props.error,
       focused: false,
       valid: false,
       value: this.props.value,
       waiting: false
-    };
+    }
   },
 
-  componentDidMount: function() {
-    var node = this.refs.input;
+  componentDidMount: function () {
+    var node = this.refs.input
     if (this.props.autoFocus) {
-      node.focus();
-      node.selectionStart = node.selectionEnd = node.value.length;
+      node.focus()
+      node.selectionStart = node.selectionEnd = node.value.length
     }
     if (this.props.autoSelect) {
-      node.select();
+      node.select()
     }
     if (this.props.value && !this.props.disabled && this.props.validate) {
-      this.validate();
+      this.validate()
     }
   },
 
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps: function (nextProps) {
     if (nextProps.value !== this.state.value) {
-      this.setState({ value: nextProps.value });
+      this.setState({ value: nextProps.value })
     }
     if (nextProps.error !== this.state.error) {
-      this.setState({ error: nextProps.error });
+      this.setState({ error: nextProps.error })
     }
   },
 
-  handleChange: function(e) {
+  handleChange: function (e) {
     var value = (this.props.readOnly || this.props.disabled) ? this.state.value
               : this.props.mask ? this.props.mask(e.target.value)
-              : e.target.value;
+              : e.target.value
 
     this.setState({
       error: false,
       valid: false,
       value: value
-    });
+    })
     if (this.props.output) {
-      this.props.output(value);
+      this.props.output(value)
     }
   },
 
-  setValue: function(value) {
+  setValue: function (value) {
     if (this.props.disabled) {
-      return false;
+      return false
     }
     this.setState({
       error: false,
       valid: false,
       value: value
-    }, this.handleBlur);
+    }, this.handleBlur)
   },
 
-  handleFocus: function() {
-    this.setState({ focused: true });
+  handleFocus: function () {
+    this.setState({ focused: true })
     if (this.props.modal) {
       this.props.modal({
         element: this,
         value: this.state.value,
         callback: this.setValue
-      });
+      })
     }
   },
 
-  handleBlur: function() {
-    this.setState({ focused: false });
-    this.validate();
+  handleBlur: function () {
+    this.setState({ focused: false })
+    this.validate()
   },
 
-  handleKeyUp: function(e) {
-    if(e.key === 'Enter' && this.props.onEnter) {
-      this.props.onEnter(this.state.value);
+  handleKeyUp: function (e) {
+    if (e.key === 'Enter' && this.props.onEnter) {
+      this.props.onEnter(this.state.value)
     }
   },
 
-  setValid: function(valid) {
+  setValid: function (valid) {
     this.setState({
       error: !valid,
       valid: valid,
       waiting: false
-    });
+    })
   },
 
-  validate: function() {
-    var props = this.props;
-    var value = this.state.value;
+  validate: function () {
+    var props = this.props
+    var value = this.state.value
     if (props.required) {
-      this.setValid(value && !!value.trim());
+      this.setValid(value && !!value.trim())
     }
     if (props.validate) {
-      this.setState({ waiting: true });
-      props.validate(value, this.setValid);
+      this.setState({ waiting: true })
+      props.validate(value, this.setValid)
     }
   },
 
-  getIcon: function() {
-    var props = this.props;
-    var state = this.state;
-    var icon  = !props.showIcon ? false
+  getIcon: function () {
+    var props = this.props
+    var state = this.state
+    var icon = !props.showIcon ? false
                : state.waiting ? 'refresh'
                : state.valid ? 'check'
                : state.error ? 'times'
                : props.disabled ? 'minus'
                : props.icon ? props.icon
                : (props.required && !state.value) ? 'caret-left'
-               : false;
+               : false
 
-    return icon;
+    return icon
   },
 
-  renderIcon: function() {
-    var icon = this.getIcon();
-    return icon && <Icon icon={ icon } className="Input__icon" fixedWidth />;
+  renderIcon: function () {
+    var icon = this.getIcon()
+    return icon && <Icon icon={icon} className='Input__icon' fixedWidth />
   },
 
-  renderMessage: function(bool) {
+  renderMessage: function (bool) {
     return bool && (
-      <div className="Input__message">
+      <div className='Input__message'>
         { this.state.error ? this.t('error') : this.t('hint') }
       </div>
-    );
+    )
   },
 
-  render: function() {
-    var props = this.props;
-    var state = this.state;
-    var t = this.t;
-    var width = props.width;
-    var spacing = props.spacing;
-    var enabled = !props.disabled;
-    var hasValue = !!state.value && !!state.value.trim();
+  render: function () {
+    var props = this.props
+    var state = this.state
+    var t = this.t
+    var width = props.width
+    var spacing = props.spacing
+    var enabled = !props.disabled
+    var hasValue = !!state.value && !!state.value.trim()
     var classes = cx({
       'Input': true,
       'Input--hasValue': hasValue,
@@ -215,36 +215,36 @@ export default React.createClass({
       'Input--tight': spacing === 'tight',
       'Input--loose': spacing === 'loose',
       'Input--hasIcon': this.getIcon()
-    });
+    })
 
     var labelClasses = cx({
       'Input__label': true,
       'Input__label--empty-blur': !state.focused && props.animateLabel && !hasValue
-    });
+    })
 
     return (
-      <div className={ classes }>
-        <label className={ labelClasses } htmlFor={ t('name') }>
-          <span className="label__text"> { t('label') } </span>
+      <div className={classes}>
+        <label className={labelClasses} htmlFor={t('name')}>
+          <span className='label__text'> { t('label') } </span>
           <input
-            autoComplete={ props.autoComplete ? 'on' : 'off' }
-            autoCorrect={ props.autoCorrect ? 'on' : 'off' }
-            spellCheck={ props.spellCheck ? 'on' : 'off' }
-            className="Input__input"
-            disabled={ props.disabled }
-            id={ t('name') }
-            name={ t('name') }
-            onBlur={ enabled && this.handleBlur }
-            onChange={ enabled && this.handleChange }
-            onFocus={ enabled && this.handleFocus }
-            onKeyUp={ enabled && this.handleKeyUp }
-            ref="input"
-            type={ props.type }
-            value={ state.value } />
+            autoComplete={props.autoComplete ? 'on' : 'off'}
+            autoCorrect={props.autoCorrect ? 'on' : 'off'}
+            spellCheck={props.spellCheck ? 'on' : 'off'}
+            className='Input__input'
+            disabled={props.disabled}
+            id={t('name')}
+            name={t('name')}
+            onBlur={enabled && this.handleBlur}
+            onChange={enabled && this.handleChange}
+            onFocus={enabled && this.handleFocus}
+            onKeyUp={enabled && this.handleKeyUp}
+            ref='input'
+            type={props.type}
+            value={state.value} />
           { this.renderIcon() }
         </label>
         { this.renderMessage(t('error') || t('hint')) }
       </div>
-    );
+    )
   }
-});
+})

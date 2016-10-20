@@ -1,4 +1,4 @@
-let noop = function() {};
+let noop = function () {}
 
 if (typeof window.console === 'undefined') {
   window.console = {
@@ -8,7 +8,7 @@ if (typeof window.console === 'undefined') {
     debug: noop,
     info: noop,
     trace: noop
-  };
+  }
 }
 
-export default window.console;
+export default window.console

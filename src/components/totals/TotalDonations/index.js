@@ -1,8 +1,8 @@
-import React from 'react';
-import I18nMixin from '../../mixins/I18n';
-import totals from '../../../api/totals';
-import Icon from '../../helpers/Icon';
-import numeral from 'numbro';
+import React from 'react'
+import I18nMixin from '../../mixins/I18n'
+import totals from '../../../api/totals'
+import Icon from '../../helpers/Icon'
+import numeral from 'numbro'
 
 export default React.createClass({
   displayName: 'TotalDonations',
@@ -24,7 +24,7 @@ export default React.createClass({
     i18n: React.PropTypes.object
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       campaignUid: null,
       campaignUids: null,
@@ -40,53 +40,53 @@ export default React.createClass({
       defaultI18n: {
         title: 'Donations'
       }
-    };
+    }
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       isLoading: false,
       total: 0
-    };
+    }
   },
 
-  onSuccess: function(result) {
+  onSuccess: function (result) {
     this.setState({
       isLoading: false,
       total: this.state.total + result.total_amount_cents.count
-    });
+    })
   },
 
-  componentWillMount: function() {
-    this.loadTotals();
+  componentWillMount: function () {
+    this.loadTotals()
   },
 
-  setUids: function() {
-    var campaignUids = [];
+  setUids: function () {
+    var campaignUids = []
 
     if (this.props.campaignUid) {
-      campaignUids.push(this.props.campaignUid);
+      campaignUids.push(this.props.campaignUid)
     } else {
-      campaignUids = this.props.campaignUids;
+      campaignUids = this.props.campaignUids
     }
 
-    return campaignUids;
+    return campaignUids
   },
 
-  loadTotals: function() {
-    this.setState({ isLoading: true });
+  loadTotals: function () {
+    this.setState({ isLoading: true })
 
-    var props        = this.props;
-    var campaignUids = props.campaignUid || props.campaignUids;
-    var charityUids  = props.charityUid || props.charityUids;
-    var groupValues  = props.groupValue || props.groupValues;
+    var props = this.props
+    var campaignUids = props.campaignUid || props.campaignUids
+    var charityUids = props.charityUid || props.charityUids
+    var groupValues = props.groupValue || props.groupValues
 
-    var options = {};
+    var options = {}
     if (props.startAt) {
-      options.start = props.startAt;
+      options.start = props.startAt
     }
     if (props.endAt) {
-      options.end = props.endAt;
+      options.end = props.endAt
     }
 
     if (campaignUids && charityUids) {
@@ -94,60 +94,60 @@ export default React.createClass({
         campaignUids: campaignUids,
         charityUids: charityUids,
         groupValues: groupValues
-      }, this.onSuccess, options);
+      }, this.onSuccess, options)
     } else if (campaignUids) {
       totals.findByCampaigns({
         campaignUids: campaignUids,
         groupValues: groupValues
-      }, this.onSuccess, options);
+      }, this.onSuccess, options)
     } else if (charityUids) {
       totals.findByCharities({
         charityUids: charityUids,
         groupValues: groupValues
-      }, this.onSuccess, options);
+      }, this.onSuccess, options)
     }
   },
 
-  renderTotal: function() {
-    var totalDonations = this.state.total + this.props.offset;
-    var formattedTotal = numeral(totalDonations).format(this.props.format);
-    var title          = this.t('title');
+  renderTotal: function () {
+    var totalDonations = this.state.total + this.props.offset
+    var formattedTotal = numeral(totalDonations).format(this.props.format)
+    var title = this.t('title')
 
     if (this.state.isLoading) {
-      return <Icon className="TotalDonations__loading" icon="refresh" />;
+      return <Icon className='TotalDonations__loading' icon='refresh' />
     }
 
     return (
       <div>
-        <div className="TotalDonations__total">{ formattedTotal }</div>
-        <div className="TotalDonations__title">{ title }</div>
+        <div className='TotalDonations__total'>{ formattedTotal }</div>
+        <div className='TotalDonations__title'>{ title }</div>
       </div>
-    );
+    )
   },
 
-  renderIcon: function() {
-    var renderIcon = this.props.renderIcon;
+  renderIcon: function () {
+    var renderIcon = this.props.renderIcon
 
     if (renderIcon === true) {
-      renderIcon = 'life-saver';
+      renderIcon = 'life-saver'
     }
 
     if (renderIcon) {
-      return <Icon className="TotalDonations__icon" icon={ renderIcon } />;
+      return <Icon className='TotalDonations__icon' icon={renderIcon} />
     }
   },
 
-  render: function() {
+  render: function () {
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
-    };
+    }
 
     return (
-      <div className="TotalDonations" style={ customStyle }>
+      <div className='TotalDonations' style={customStyle}>
         { this.renderIcon() }
         { this.renderTotal() }
       </div>
-    );
+    )
   }
-});
+})

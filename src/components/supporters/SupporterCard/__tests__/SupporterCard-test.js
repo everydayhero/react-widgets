@@ -1,12 +1,12 @@
-jest.disableAutomock();
+jest.disableAutomock()
 
-import React from 'react';
-import TestUtils from 'react-addons-test-utils';
-var findByClass   = TestUtils.findRenderedDOMComponentWithClass;
-import SupporterCard from '../';
+import React from 'react'
+import TestUtils from 'react-addons-test-utils'
+var findByClass = TestUtils.findRenderedDOMComponentWithClass
+import SupporterCard from '../'
 
-describe('SupporterCard', function() {
-  var element;
+describe('SupporterCard', function () {
+  var element
   var props = {
     footprint: [],
     image: 'blah.png',
@@ -16,25 +16,25 @@ describe('SupporterCard', function() {
     current: 1234,
     currency: '$',
     width: 300
-  };
+  }
 
-  beforeEach(function() {
-    element = TestUtils.renderIntoDocument(<SupporterCard { ...props }/>);
-  });
+  beforeEach(function () {
+    element = TestUtils.renderIntoDocument(<SupporterCard {...props} />)
+  })
 
-  it('renders', function() {
-    expect(element).not.toBeNull();
-  });
+  it('renders', function () {
+    expect(element).not.toBeNull()
+  })
 
-  it('contains a SupporterCard element', function() {
-    expect(findByClass(element, 'SupporterCard')).not.toBeNull();
-  });
+  it('contains a SupporterCard element', function () {
+    expect(findByClass(element, 'SupporterCard')).not.toBeNull()
+  })
 
-  it('contains a Footprint element', function() {
-    expect(findByClass(element, 'Footprint')).not.toBeNull();
-  });
+  it('contains a Footprint element', function () {
+    expect(findByClass(element, 'Footprint')).not.toBeNull()
+  })
 
-  it('contains a SupporterCardGiveNow element', function() {
-    expect(findByClass(element, 'SupporterCardGiveNow')).not.toBeNull();
-  });
-});
+  it('contains a SupporterCardGiveNow element', function () {
+    expect(findByClass(element, 'SupporterCardGiveNow')).not.toBeNull()
+  })
+})

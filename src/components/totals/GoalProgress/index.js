@@ -1,7 +1,7 @@
-import React from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
-import Icon from '../../helpers/Icon';
-import numeral from 'numbro';
+import React from 'react'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
+import Icon from '../../helpers/Icon'
+import numeral from 'numbro'
 
 export default React.createClass({
   displayName: 'GoalProgress',
@@ -14,61 +14,61 @@ export default React.createClass({
     total: React.PropTypes.number.isRequired
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       progress: this.getProgress()
-    };
+    }
   },
 
-  componentDidUpdate: function() {
-    this.setState({ progress: this.getProgress() });
+  componentDidUpdate: function () {
+    this.setState({ progress: this.getProgress() })
   },
 
-  getProgress: function() {
-    var props = this.props;
-    return props.goal > 0 ? Math.min(props.total / props.goal, 1) : 0;
+  getProgress: function () {
+    var props = this.props
+    return props.goal > 0 ? Math.min(props.total / props.goal, 1) : 0
   },
 
-  renderProgressBar: function() {
-    var progress = this.state.progress;
-    var offsetWidth = numeral(progress).format('0%');
-    var style = { width: offsetWidth || '100%' };
+  renderProgressBar: function () {
+    var progress = this.state.progress
+    var offsetWidth = numeral(progress).format('0%')
+    var style = { width: offsetWidth || '100%' }
 
     return progress > 0 && (
-      <div className="GoalProgress__bar" >
-        <div className="GoalProgress__barFill" style={ style }></div>
+      <div className='GoalProgress__bar' >
+        <div className='GoalProgress__barFill' style={style} />
       </div>
-    );
+    )
   },
 
-  renderIcon: function() {
-    var classes = 'GoalProgress__icon';
+  renderIcon: function () {
+    var classes = 'GoalProgress__icon'
     if (this.state.progress === 1) {
-      classes += '--achieved';
+      classes += '--achieved'
     }
 
     return (
-      <Icon icon="trophy" className={ classes } />
-    );
+      <Icon icon='trophy' className={classes} />
+    )
   },
 
-  renderText: function() {
+  renderText: function () {
     return (
-      <div className="GoalProgress__text">
+      <div className='GoalProgress__text'>
         { this.props.text }
       </div>
-    );
+    )
   },
 
-  render: function() {
+  render: function () {
     return (
-      <div className="GoalProgress">
+      <div className='GoalProgress'>
         { this.renderIcon() }
-        <div className="GoalProgress__area">
+        <div className='GoalProgress__area'>
           { this.renderProgressBar() }
           { this.renderText() }
         </div>
       </div>
-    );
+    )
   }
-});
+})

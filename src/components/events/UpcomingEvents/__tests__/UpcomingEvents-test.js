@@ -1,11 +1,11 @@
-jest.disableAutomock();
-jest.mock('../../../../api/campaigns');
+jest.disableAutomock()
+jest.mock('../../../../api/campaigns')
 
-import React from 'react';
-import UpcomingEvents from '../';
-import campaign from '../../../../api/campaigns';
-import TestUtils from 'react-addons-test-utils';
-var scryByClass    = TestUtils.scryRenderedDOMComponentsWithClass;
+import React from 'react'
+import UpcomingEvents from '../'
+import campaign from '../../../../api/campaigns'
+import TestUtils from 'react-addons-test-utils'
+var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass
 
 var campaigns = [{
   id: 1,
@@ -33,43 +33,43 @@ var campaigns = [{
     cents: 0,
     currency: { symbol: '$' }
   }
-}];
+}]
 
-describe('UpcomingEvents', function() {
-  describe('component', function() {
-    var translation  = { emptyLabel: 'Nothing to see here!' };
-    var element;
+describe('UpcomingEvents', function () {
+  describe('component', function () {
+    var translation = { emptyLabel: 'Nothing to see here!' }
+    var element
 
-    beforeEach(function() {
-      campaign.findByCharity.mockClear();
-      var events = <UpcomingEvents charityUid="au-1234" charitySlug="au-1234-slug" i18n={ translation } />;
-      element = TestUtils.renderIntoDocument(events);
-    });
+    beforeEach(function () {
+      campaign.findByCharity.mockClear()
+      var events = <UpcomingEvents charityUid='au-1234' charitySlug='au-1234-slug' i18n={translation} />
+      element = TestUtils.renderIntoDocument(events)
+    })
 
-    it('renders', function() {
-      expect(element).not.toBeNull();
-    });
+    it('renders', function () {
+      expect(element).not.toBeNull()
+    })
 
-    it('renders events when results are returned', function() {
-      element.onEventLoad({ campaigns: campaigns });
+    it('renders events when results are returned', function () {
+      element.onEventLoad({ campaigns: campaigns })
 
-      var events = scryByClass(element, 'Event');
-      expect(events.length).toBe(campaigns.length);
-    });
+      var events = scryByClass(element, 'Event')
+      expect(events.length).toBe(campaigns.length)
+    })
 
-    it('sorts events by display_start_date', function() {
-      element.onEventLoad({ campaigns: campaigns });
+    it('sorts events by display_start_date', function () {
+      element.onEventLoad({ campaigns: campaigns })
 
-      expect(scryByClass(element, 'Event__name')[0].textContent).toContain('Bar');
-      expect(scryByClass(element, 'Event__name')[1].textContent).toContain('Foo');
-    });
+      expect(scryByClass(element, 'Event__name')[0].textContent).toContain('Bar')
+      expect(scryByClass(element, 'Event__name')[1].textContent).toContain('Foo')
+    })
 
-    it('loads campaigns for given charity', function() {
-      var options = { status: 'active', sortBy: 'start_at', excludeCharities: true, excludePages: true, excludeBau: true };
-      expect(campaign.findByCharity).toBeCalledWith('au-1234', 1, null, jasmine.any(Function), options);
+    it('loads campaigns for given charity', function () {
+      var options = { status: 'active', sortBy: 'start_at', excludeCharities: true, excludePages: true, excludeBau: true }
+      expect(campaign.findByCharity).toBeCalledWith('au-1234', 1, null, jasmine.any(Function), options)
 
-      var callback = campaign.findByCharity.mock.calls[0][3];
-      callback({ campaigns: [] });
-    });
-  });
-});
+      var callback = campaign.findByCharity.mock.calls[0][3]
+      callback({ campaigns: [] })
+    })
+  })
+})

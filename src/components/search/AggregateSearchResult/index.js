@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default React.createClass({
   displayName: 'AggregateSearchResult',
@@ -8,15 +8,15 @@ export default React.createClass({
     onSelect: React.PropTypes.func
   },
 
-  handleClick: function() {
-    this.props.onSelect(this.props.result);
+  handleClick: function () {
+    this.props.onSelect(this.props.result)
   },
 
-  render: function() {
+  render: function () {
     return (
-      <div className="AggregateSearchResult" onClick={ this.handleClick }>
+      <div className='AggregateSearchResult' onClick={this.handleClick}>
         { this.props.children }
       </div>
-    );
+    )
   }
-});
+})

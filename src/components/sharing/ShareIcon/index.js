@@ -1,6 +1,6 @@
-import React from 'react';
-import Icon from '../../helpers/Icon';
-import openPopup from '../../../lib/openPopup';
+import React from 'react'
+import Icon from '../../helpers/Icon'
+import openPopup from '../../../lib/openPopup'
 
 export default React.createClass({
   displayName: 'ShareIcon',
@@ -10,22 +10,22 @@ export default React.createClass({
     url: React.PropTypes.string.isRequired
   },
 
-  handleClick: function() {
+  handleClick: function () {
     var popUpConfig = {
       toolbar: 0,
       status: 0,
       width: 640,
       height: 320
-    };
+    }
 
-    openPopup(this.props.url, popUpConfig);
+    openPopup(this.props.url, popUpConfig)
   },
 
-  render: function() {
+  render: function () {
     return (
-      <div className={ 'ShareIcon ShareIcon__' + this.props.name } onClick={ this.handleClick }>
-        <Icon icon={ this.props.icon } />
+      <div className={'ShareIcon ShareIcon__' + this.props.name} onClick={this.handleClick}>
+        <Icon icon={this.props.icon} />
       </div>
-    );
+    )
   }
-});
+})

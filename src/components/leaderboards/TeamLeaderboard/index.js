@@ -1,17 +1,17 @@
-import _ from 'lodash';
-import React from 'react';
-import cx from 'classnames';
-import I18nMixin from '../../mixins/I18n';
-import DOMInfoMixin from '../../mixins/DOMInfo';
-import LeaderboardMixin from '../../mixins/Leaderboard';
-import Icon from '../../helpers/Icon';
-import LeaderboardItem from '../LeaderboardItem';
-import TeamLeaderboardItem from '../TeamLeaderboardItem';
-import LeaderboardEmpty from '../LeaderboardEmpty';
-import numeral from 'numbro';
-import addEventListener from '../../../lib/addEventListener';
-import removeEventListener from '../../../lib/removeEventListener';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import _ from 'lodash'
+import React from 'react'
+import cx from 'classnames'
+import I18nMixin from '../../mixins/I18n'
+import DOMInfoMixin from '../../mixins/DOMInfo'
+import LeaderboardMixin from '../../mixins/Leaderboard'
+import Icon from '../../helpers/Icon'
+import LeaderboardItem from '../LeaderboardItem'
+import TeamLeaderboardItem from '../TeamLeaderboardItem'
+import LeaderboardEmpty from '../LeaderboardEmpty'
+import numeral from 'numbro'
+import addEventListener from '../../../lib/addEventListener'
+import removeEventListener from '../../../lib/removeEventListener'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 export default React.createClass({
   mixins: [I18nMixin, DOMInfoMixin, LeaderboardMixin],
@@ -35,7 +35,7 @@ export default React.createClass({
     onHasContent: React.PropTypes.func
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       limit: 48,
       pageSize: 12,
@@ -54,63 +54,63 @@ export default React.createClass({
         emptyText: 'There are no teams for this campaign yet. Be the first and create one now!',
         emptyButtonText: 'Start a team'
       }
-    };
+    }
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       isLoading: false,
       boardData: [],
       currentPage: 1,
-      childWidth: '',
-    };
+      childWidth: ''
+    }
   },
 
-  componentWillMount: function() {
-    this.loadLeaderboard('team');
+  componentWillMount: function () {
+    this.loadLeaderboard('team')
   },
 
-  componentDidMount: function() {
-    addEventListener('resize', this.setChildWidth);
-    this.setChildWidth();
+  componentDidMount: function () {
+    addEventListener('resize', this.setChildWidth)
+    this.setChildWidth()
   },
 
-  componentWillUnmount: function() {
-    removeEventListener('resize', this.setChildWidth);
+  componentWillUnmount: function () {
+    removeEventListener('resize', this.setChildWidth)
   },
 
-  setChildWidth: _.debounce(function() {
+  setChildWidth: _.debounce(function () {
     this.setState({
       childWidth: this.getChildrenWidth(this.props.childWidth, this.props.pageSize)
-    });
+    })
   }, 100, { trailing: true }),
 
-  renderLoadingState: function() {
-    return <Icon className="TeamLeaderboard__loading" icon="refresh" />;
+  renderLoadingState: function () {
+    return <Icon className='TeamLeaderboard__loading' icon='refresh' />
   },
 
-  renderEmptyState: function() {
-    var emptyText       = this.t('emptyText');
-    var emptyButtonText = this.t('emptyButtonText');
+  renderEmptyState: function () {
+    var emptyText = this.t('emptyText')
+    var emptyButtonText = this.t('emptyButtonText')
 
-    return <LeaderboardEmpty emptyText={ emptyText } emptyButtonText={ emptyButtonText } { ...this.props } />;
+    return <LeaderboardEmpty emptyText={emptyText} emptyButtonText={emptyButtonText} {...this.props} />
   },
 
-  renderLeaderboardItems: function() {
-    var currentPage = this.state.currentPage - 1;
-    var board = this.state.boardData[currentPage];
+  renderLeaderboardItems: function () {
+    var currentPage = this.state.currentPage - 1
+    var board = this.state.boardData[currentPage]
 
     return (
       <ReactCSSTransitionGroup
-        transitionName="TeamLeaderboard__animation"
-        component="ol"
-        className="TeamLeaderboard__items">
+        transitionName='TeamLeaderboard__animation'
+        component='ol'
+        className='TeamLeaderboard__items'>
         {
-          board.map(function(item) {
-            var formattedAmount = this.formatAmount(item.amount);
-            var formattedRank = numeral(item.rank).format('0o');
+          board.map(function (item) {
+            var formattedAmount = this.formatAmount(item.amount)
+            var formattedRank = numeral(item.rank).format('0o')
 
-            var El = this.props.altTemplate ? TeamLeaderboardItem : LeaderboardItem;
+            var El = this.props.altTemplate ? TeamLeaderboardItem : LeaderboardItem
             var props = {
               key: item.id,
               name: item.name,
@@ -125,39 +125,39 @@ export default React.createClass({
               width: this.state.childWidth,
               charityName: this.props.showCharity && item.charityName ? item.charityName : null,
               renderImage: this.props.renderImage
-            };
+            }
 
-            return <El { ...props } />;
+            return <El {...props} />
           }, this)
         }
       </ReactCSSTransitionGroup>
-    );
+    )
   },
 
-  render: function() {
-    var state       = this.state;
-    var heading     = this.t('heading');
+  render: function () {
+    var state = this.state
+    var heading = this.t('heading')
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
-    };
+    }
 
     var classes = cx({
       'TeamLeaderboard': true,
       'TeamLeaderboard--loading': state.isLoading,
       'TeamLeaderboard--empty': !state.boardData.length
-    });
+    })
 
     var content = state.isLoading ? this.renderLoadingState :
                   state.boardData.length ? this.renderLeaderboardItems :
-                  this.renderEmptyState;
+                  this.renderEmptyState
 
     return (
-      <div className={ classes } style={ customStyle }>
-        <h3 className="TeamLeaderboard__heading">{ heading }</h3>
+      <div className={classes} style={customStyle}>
+        <h3 className='TeamLeaderboard__heading'>{ heading }</h3>
         { content() }
         { this.renderPaging() }
       </div>
-    );
+    )
   }
-});
+})

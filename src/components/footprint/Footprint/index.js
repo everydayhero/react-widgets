@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import cx from 'classnames';
-import _ from 'lodash';
-import tweenState from 'react-tween-state';
-import addEventListener from '../../../lib/addEventListener';
-import removeEventListener from '../../../lib/removeEventListener';
-import I18nMixin from '../../mixins/I18n';
-import FootprintGroup from '../FootprintGroup';
-import FootprintTile from '../FootprintTile';
-import FootprintTip from '../FootprintTip';
-import FootprintTipLine from '../FootprintTipLine';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import cx from 'classnames'
+import _ from 'lodash'
+import tweenState from 'react-tween-state'
+import addEventListener from '../../../lib/addEventListener'
+import removeEventListener from '../../../lib/removeEventListener'
+import I18nMixin from '../../mixins/I18n'
+import FootprintGroup from '../FootprintGroup'
+import FootprintTile from '../FootprintTile'
+import FootprintTip from '../FootprintTip'
+import FootprintTipLine from '../FootprintTipLine'
 
 export default React.createClass({
   displayName: 'Footprint',
@@ -29,7 +29,7 @@ export default React.createClass({
     onMetricClick: React.PropTypes.func
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       userUrl: '#',
       userImage: '',
@@ -38,8 +38,8 @@ export default React.createClass({
       size: 144,
       offset: 2,
       ratio: 0.85,
-      onAvatarClick: function() {},
-      onMetricClick: function() {},
+      onAvatarClick: function () {},
+      onMetricClick: function () {},
       defaultI18n: {
         community: {
           cause_engagement: {
@@ -82,22 +82,22 @@ export default React.createClass({
           }
         }
       }
-    };
+    }
   },
 
-  getInitialState: function() {
-    var radius = this.props.size / 2;
+  getInitialState: function () {
+    var radius = this.props.size / 2
     return {
       min: radius * this.props.ratio - this.props.offset,
       max: radius - this.props.offset,
       metric: null,
       tip: false,
       compact: this.props.compact
-    };
+    }
   },
 
-  processData: function() {
-    var data = this.props.data.map(function(metric, index) {
+  processData: function () {
+    var data = this.props.data.map(function (metric, index) {
       return {
         id: index,
         key: metric.key,
@@ -106,73 +106,73 @@ export default React.createClass({
         percentile: metric.percentile,
         name: this.t(metric.group + '.' + metric.key + '.title'),
         description: this.t(metric.group + '.' + metric.key + '.description')
-      };
-    }.bind(this));
+      }
+    }.bind(this))
 
     this.setState({
       data: data,
       arc: data.length > 0 ? Math.PI * 2 / data.length : 0
-    });
+    })
   },
 
-  componentWillReceiveProps: function() {
-    this.processData();
+  componentWillReceiveProps: function () {
+    this.processData()
   },
 
-  componentWillMount: function() {
-    this.processData();
-    addEventListener('touchstart', this.setCompact);
+  componentWillMount: function () {
+    this.processData()
+    addEventListener('touchstart', this.setCompact)
   },
 
-  componentWillUnmount: function() {
-    removeEventListener('touchstart', this.setCompact);
+  componentWillUnmount: function () {
+    removeEventListener('touchstart', this.setCompact)
   },
 
-  tween: function(state, value) {
+  tween: function (state, value) {
     this.tweenState(state, {
       easing: tweenState.easingTypes.easeOutQuad,
       delay: 160,
       duration: 320,
       endValue: value
-    });
+    })
   },
 
-  setCompact: function(e) {
-    if (!this.state.compact) this.setState({ compact: true });
+  setCompact: function (e) {
+    if (!this.state.compact) this.setState({ compact: true })
     if (!ReactDOM.findDOMNode(this).contains(e.target)) {
-      this.setMetric(null);
-      this.showTip(false);
+      this.setMetric(null)
+      this.showTip(false)
     }
   },
 
-  shrinkCenter: _.debounce(function(bool) {
-    var min = (this.props.size / 2) * this.props.ratio - this.props.offset;
-    var scale = this.state.compact ? 0.75 : 0.6;
+  shrinkCenter: _.debounce(function (bool) {
+    var min = (this.props.size / 2) * this.props.ratio - this.props.offset
+    var scale = this.state.compact ? 0.75 : 0.6
     if (bool) {
-      this.tween('min', min * scale);
+      this.tween('min', min * scale)
     } else {
-      this.tween('min', min);
+      this.tween('min', min)
     }
   }, 160),
 
-  setMetric: function(metric) {
-    this.shrinkCenter(!!metric);
-    this.setState({ metric: metric });
+  setMetric: function (metric) {
+    this.shrinkCenter(!!metric)
+    this.setState({ metric: metric })
   },
 
-  showTip: function(bool, length, angle) {
-    this.setState({ tip: !length ? bool : { length: length, angle: angle }});
+  showTip: function (bool, length, angle) {
+    this.setState({ tip: !length ? bool : { length: length, angle: angle }})
   },
 
-  centerTouch: function() {
-    this.sectorClick(this.state.metric);
+  centerTouch: function () {
+    this.sectorClick(this.state.metric)
   },
 
-  sectorClick: function(metric) {
-    this.props.onMetricClick(metric);
+  sectorClick: function (metric) {
+    this.props.onMetricClick(metric)
   },
 
-  getOptions: function() {
+  getOptions: function () {
     return {
       min: this.getTweeningValue('min'),
       max: this.state.max,
@@ -180,71 +180,71 @@ export default React.createClass({
       arc: this.state.arc,
       size: this.props.size,
       compact: this.state.compact
-    };
+    }
   },
 
-  renderGroups: function() {
-    var options = this.getOptions();
-    return _.map(_.uniq(_.map(this.state.data, 'group')), function(d, i) {
-      var metrics = _.filter(this.state.data, { 'group': d });
+  renderGroups: function () {
+    var options = this.getOptions()
+    return _.map(_.uniq(_.map(this.state.data, 'group')), function (d, i) {
+      var metrics = _.filter(this.state.data, { 'group': d })
       return (<FootprintGroup
-        index={ i }
-        key={ i + d }
-        id={ this.props.userName.replace(/\W/g, '') }
-        name={ d }
-        active = { _.includes(metrics, this.state.metric) }
-        current={ this.state.metric }
-        data={ metrics }
-        options={ options }
-        onShowTip={ this.showTip }
-        onHover={ this.setMetric }
-        onClick={ this.sectorClick } />);
-    }.bind(this));
+        index={i}
+        key={i + d}
+        id={this.props.userName.replace(/\W/g, '')}
+        name={d}
+        active={_.includes(metrics, this.state.metric)}
+        current={this.state.metric}
+        data={metrics}
+        options={options}
+        onShowTip={this.showTip}
+        onHover={this.setMetric}
+        onClick={this.sectorClick} />)
+    }.bind(this))
   },
 
-  renderTip: function(bool) {
+  renderTip: function (bool) {
     return bool && (
       <FootprintTip
-        key={ 'tip' + this.state.tip.angle }
-        metric={ this.state.metric }
-        length={ this.state.tip.length }
-        angle={ this.state.tip.angle } />
-    );
+        key={'tip' + this.state.tip.angle}
+        metric={this.state.metric}
+        length={this.state.tip.length}
+        angle={this.state.tip.angle} />
+    )
   },
 
-  renderGraph: function(diameter, tip) {
+  renderGraph: function (diameter, tip) {
     return (
-      <svg width={ this.props.size } height={ this.props.size }>
+      <svg width={this.props.size} height={this.props.size}>
         { this.renderGroups() }
-        { tip && <FootprintTipLine key={ 'line' + this.state.tip.angle } length={ this.state.tip.length } angle={ this.state.tip.angle } /> }
+        { tip && <FootprintTipLine key={'line' + this.state.tip.angle} length={this.state.tip.length} angle={this.state.tip.angle} /> }
       </svg>
-    );
+    )
   },
 
-  render: function() {
-    var showTip = !!this.state.metric && !!this.state.tip && !this.state.compact;
-    var diameter = this.getTweeningValue('min') * 2 - this.props.offset;
+  render: function () {
+    var showTip = !!this.state.metric && !!this.state.tip && !this.state.compact
+    var diameter = this.getTweeningValue('min') * 2 - this.props.offset
     var classes = cx({
       'Footprint': true,
       'Footprint--hover': !!this.state.metric,
       'Footprint--compact': this.state.compact
-    });
+    })
 
     return (
-      <div className={ classes } style={{ width: this.props.size, height: this.props.size }}>
+      <div className={classes} style={{ width: this.props.size, height: this.props.size }}>
         { this.renderGraph(diameter, showTip) }
         { this.renderTip(showTip) }
         <FootprintTile
-          diameter={ diameter }
-          compact={ this.state.compact }
-          metric={ this.state.metric }
-          url={ this.props.userUrl }
-          name={ this.props.userName }
-          avatar={ this.props.userImage }
-          offset={ this.props.offset }
-          onTouch={ this.centerTouch }
-          onClick={ this.onAvatarClick } />
+          diameter={diameter}
+          compact={this.state.compact}
+          metric={this.state.metric}
+          url={this.props.userUrl}
+          name={this.props.userName}
+          avatar={this.props.userImage}
+          offset={this.props.offset}
+          onTouch={this.centerTouch}
+          onClick={this.onAvatarClick} />
       </div>
-    );
+    )
   }
-});
+})

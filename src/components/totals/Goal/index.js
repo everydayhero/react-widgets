@@ -1,7 +1,7 @@
-import React from 'react';
-import I18nMixin from '../../mixins/I18n';
-import Icon from '../../helpers/Icon';
-import numeral from 'numbro';
+import React from 'react'
+import I18nMixin from '../../mixins/I18n'
+import Icon from '../../helpers/Icon'
+import numeral from 'numbro'
 
 export default React.createClass({
   mixins: [I18nMixin],
@@ -16,7 +16,7 @@ export default React.createClass({
     i18n: React.PropTypes.object
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       campaignUid: '',
       renderIcon: true,
@@ -30,50 +30,50 @@ export default React.createClass({
         symbol: '$',
         suffix: ''
       }
-    };
+    }
   },
 
-  renderTotal: function() {
-    var title  = this.t('title');
-    var symbol = this.t('symbol');
-    var suffix = this.t('suffix');
-    var goal   = this.props.goal;
+  renderTotal: function () {
+    var title = this.t('title')
+    var symbol = this.t('symbol')
+    var suffix = this.t('suffix')
+    var goal = this.props.goal
 
-    if (this.props.handleCents) goal = goal / 100;
+    if (this.props.handleCents) goal = goal / 100
 
-    var formattedTotal = symbol + numeral(goal).format(this.props.format);
+    var formattedTotal = symbol + numeral(goal).format(this.props.format)
 
     return (
       <div>
-        <div className="Goal__total">{ formattedTotal + suffix }</div>
-        <div className="Goal__title">{ title }</div>
+        <div className='Goal__total'>{ formattedTotal + suffix }</div>
+        <div className='Goal__title'>{ title }</div>
       </div>
-    );
+    )
   },
 
-  renderIcon: function() {
-    var renderIcon = this.props.renderIcon;
+  renderIcon: function () {
+    var renderIcon = this.props.renderIcon
 
     if (renderIcon === true) {
-      renderIcon = 'dollar';
+      renderIcon = 'dollar'
     }
 
     if (renderIcon) {
-      return <Icon className="Goal__icon" icon={ renderIcon } />;
+      return <Icon className='Goal__icon' icon={renderIcon} />
     }
   },
 
-  render: function() {
+  render: function () {
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
-    };
+    }
 
     return (
-      <div className="Goal" style={ customStyle }>
+      <div className='Goal' style={customStyle}>
         { this.renderIcon() }
         { this.renderTotal() }
       </div>
-    );
+    )
   }
-});
+})

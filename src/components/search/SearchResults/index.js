@@ -1,7 +1,7 @@
-import _ from 'lodash';
-import React from 'react';
-import SearchResult from '../SearchResult';
-import I18nMixin from '../../mixins/I18n';
+import _ from 'lodash'
+import React from 'react'
+import SearchResult from '../SearchResult'
+import I18nMixin from '../../mixins/I18n'
 
 export default React.createClass({
   displayName: 'SearchResults',
@@ -15,7 +15,7 @@ export default React.createClass({
     selectAction: React.PropTypes.string
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       results: null,
       resultComponent: SearchResult,
@@ -23,34 +23,34 @@ export default React.createClass({
         selectAction: 'Select',
         emptyLabel: 'No results'
       }
-    };
+    }
   },
 
-  getResults: function() {
+  getResults: function () {
     if (this.props.results && _.isEmpty(this.props.results)) {
-      return <p className="SearchResults--empty">{ this.t('emptyLabel') }</p>;
+      return <p className='SearchResults--empty'>{ this.t('emptyLabel') }</p>
     }
 
-    var props = this.props;
-    var Result = props.resultComponent;
-    var selectAction = props.selectAction || this.t('selectAction');
+    var props = this.props
+    var Result = props.resultComponent
+    var selectAction = props.selectAction || this.t('selectAction')
 
-    return _.map(this.props.results || [], function(result) {
+    return _.map(this.props.results || [], function (result) {
       return (
         <Result
-          key={ result.id }
-          onSelect={ props.onSelect }
-          result={ result }
-          selectAction={ selectAction } />
-      );
-    });
+          key={result.id}
+          onSelect={props.onSelect}
+          result={result}
+          selectAction={selectAction} />
+      )
+    })
   },
 
-  render: function() {
+  render: function () {
     return (
-      <div className="SearchResults">
+      <div className='SearchResults'>
         { this.getResults() }
       </div>
-    );
+    )
   }
-});
+})

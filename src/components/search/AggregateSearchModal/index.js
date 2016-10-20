@@ -1,33 +1,33 @@
-import _ from 'lodash';
-import async from 'async';
-import React from 'react';
-import cx from 'classnames';
-import I18n from '../../mixins/I18n';
-import Input from '../../forms/Input';
-import Icon from '../../helpers/Icon';
-import Overlay from '../../helpers/Overlay';
+import _ from 'lodash'
+import async from 'async'
+import React from 'react'
+import cx from 'classnames'
+import I18n from '../../mixins/I18n'
+import Input from '../../forms/Input'
+import Icon from '../../helpers/Icon'
+import Overlay from '../../helpers/Overlay'
 
-import campaigns from '../../../api/campaigns';
-import charities from '../../../api/charities';
-import pages from '../../../api/pages';
-import all from '../../../api/search';
+import campaigns from '../../../api/campaigns'
+import charities from '../../../api/charities'
+import pages from '../../../api/pages'
+import all from '../../../api/search'
 
-import AggregateSearchResultCampaign from '../AggregateSearchResultCampaign';
-import AggregateSearchResultCharity from '../AggregateSearchResultCharity';
-import AggregateSearchResultPage from '../AggregateSearchResultPage';
+import AggregateSearchResultCampaign from '../AggregateSearchResultCampaign'
+import AggregateSearchResultCharity from '../AggregateSearchResultCharity'
+import AggregateSearchResultPage from '../AggregateSearchResultPage'
 
 var searchAPI = {
   campaigns: campaigns.search,
   charities: charities.search,
   pages: pages.search,
   all: all.aggregate
-};
+}
 
 var resultTypes = {
   campaign: AggregateSearchResultCampaign,
   charity: AggregateSearchResultCharity,
   page: AggregateSearchResultPage
-};
+}
 
 export default React.createClass({
   displayName: 'AggregateSearchModal',
@@ -50,7 +50,7 @@ export default React.createClass({
     charityUuids: React.PropTypes.array
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       autoFocus: true,
       searchTerm: '',
@@ -87,52 +87,52 @@ export default React.createClass({
       searchType: 'all',
       charityUids: [],
       charityUuids: []
-    };
+    }
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       searchTerm: this.props.searchTerm,
-      cancelSearch: function() {},
-      cancelSearchCounts: function() {},
+      cancelSearch: function () {},
+      cancelSearchCounts: function () {},
       results: null,
       isSearching: false,
       filter: this.props.searchType,
       counts: {}
-    };
-  },
-
-  componentDidMount: function() {
-    if (this.state.searchTerm) {
-      this.search();
-      this.searchCounts();
     }
   },
 
-  componentWillUnmount: function() {
-    this.state.cancelSearch();
-    this.state.cancelSearchCounts();
+  componentDidMount: function () {
+    if (this.state.searchTerm) {
+      this.search()
+      this.searchCounts()
+    }
   },
 
-  inputChanged: function(searchTerm) {
-    this.state.cancelSearch();
-    this.state.cancelSearchCounts();
-    this.setState({ searchTerm: searchTerm }, this.delayedSearch);
+  componentWillUnmount: function () {
+    this.state.cancelSearch()
+    this.state.cancelSearchCounts()
   },
 
-  delayedSearch: _.debounce(function() {
+  inputChanged: function (searchTerm) {
+    this.state.cancelSearch()
+    this.state.cancelSearchCounts()
+    this.setState({ searchTerm: searchTerm }, this.delayedSearch)
+  },
+
+  delayedSearch: _.debounce(function () {
     if (this.isMounted()) {
       if (this.state.searchTerm) {
-        this.search();
-        this.searchCounts();
+        this.search()
+        this.searchCounts()
       } else {
-        this.clearResults();
+        this.clearResults()
       }
     }
   }, 300),
 
-  search: function(page) {
-    this.state.cancelSearch();
+  search: function (page) {
+    this.state.cancelSearch()
 
     var cancelSearch = searchAPI[this.state.filter]({
       country: this.props.country,
@@ -142,34 +142,34 @@ export default React.createClass({
       minimumScore: this.props.minimumScore[this.state.filter] || this.props.minimumScore.other,
       charityUids: this.props.charityUids,
       charityUuids: this.props.charityUuids
-    }, this.updateResults);
+    }, this.updateResults)
 
     this.setState({
       results: page > 1 ? this.state.results : [],
       isSearching: true,
       searchPage: page || 1,
       cancelSearch: cancelSearch
-    });
+    })
   },
 
-  clearResults: function() {
+  clearResults: function () {
     this.setState({
       results: null,
       isSearching: false,
       counts: {}
-    });
+    })
   },
 
-  updateResults: function(data) {
+  updateResults: function (data) {
     if (data) {
-      var pagination = data.meta.pagination;
-      var results = data[this.state.filter] || data.results;
+      var pagination = data.meta.pagination
+      var results = data[this.state.filter] || data.results
 
       if (!pagination.first_page) {
-        results = this.state.results.concat(results);
-        results = _.uniq(results, function(result) {
-          return result._type + result.id;
-        });
+        results = this.state.results.concat(results)
+        results = _.uniq(results, function (result) {
+          return result._type + result.id
+        })
       }
 
       this.setState({
@@ -177,23 +177,23 @@ export default React.createClass({
         isSearching: false,
         lastPage: pagination.last_page,
         currentPage: pagination.current_page
-      });
+      })
 
       if (this.refs.body && pagination.current_page === 1) {
-        this.refs.body.scrollTop = 0;
+        this.refs.body.scrollTop = 0
       }
     } else {
-      this.search(this.state.searchPage);
+      this.search(this.state.searchPage)
     }
   },
 
-  searchCounts: function() {
-    var cancel = false;
+  searchCounts: function () {
+    var cancel = false
 
     this.setState({
       counts: {},
-      cancelSearchCounts: function() { cancel = true; }
-    });
+      cancelSearchCounts: function () { cancel = true }
+    })
 
     var searchParams = {
       country: this.props.country,
@@ -203,161 +203,161 @@ export default React.createClass({
       minimumScore: this.props.minimumScore.other,
       charityUids: this.props.charityUids,
       charityUuids: this.props.charityUuids
-    };
+    }
 
-    var types = this.props.searchType === 'all' ? ['campaigns', 'charities', 'pages'] : [this.props.searchType];
+    var types = this.props.searchType === 'all' ? ['campaigns', 'charities', 'pages'] : [this.props.searchType]
 
-    async.map(types, function(type, callback) {
-      searchAPI[type](searchParams, function(data) {
-        callback(data ? null : 'error', data && data.meta.pagination.count);
-      });
-    }, function(error, results) {
+    async.map(types, function (type, callback) {
+      searchAPI[type](searchParams, function (data) {
+        callback(data ? null : 'error', data && data.meta.pagination.count)
+      })
+    }, function (error, results) {
       if (!cancel) {
-        this.updateCounts(error ? null : _.zipObject(types, results));
+        this.updateCounts(error ? null : _.zipObject(types, results))
       }
-    }.bind(this));
+    }.bind(this))
   },
 
-  updateCounts: function(counts) {
+  updateCounts: function (counts) {
     if (counts) {
-      this.setState({ counts: counts });
+      this.setState({ counts: counts })
     } else {
-      var timer = setTimeout(this.searchCounts, 2500);
-      this.setState({ cancelSearchCounts: function() { clearTimeout(timer); } });
+      var timer = setTimeout(this.searchCounts, 2500)
+      this.setState({ cancelSearchCounts: function () { clearTimeout(timer) } })
     }
   },
 
-  setFilter: function(filter) {
-    this.setState({ filter: filter }, this.search);
+  setFilter: function (filter) {
+    this.setState({ filter: filter }, this.search)
   },
 
-  handleSelect: function(res) {
-    this.props.onClose();
+  handleSelect: function (res) {
+    this.props.onClose()
 
     if (this.props.onSelect) {
-      this.props.onSelect(res);
+      this.props.onSelect(res)
     } else {
-      window.location = res.url || res.get_started_url;
+      window.location = res.url || res.get_started_url
     }
   },
 
-  renderFilters: function() {
-    var searchType = this.props.searchType;
-    var filterTypes = this.t('filterTypes');
-    var filters = searchType === 'all' ? filterTypes : _.pick(filterTypes, searchType);
+  renderFilters: function () {
+    var searchType = this.props.searchType
+    var filterTypes = this.t('filterTypes')
+    var filters = searchType === 'all' ? filterTypes : _.pick(filterTypes, searchType)
 
-    var categories = _.map(filters, function(name, type) {
-      var selected = (type == this.state.filter);
+    var categories = _.map(filters, function (name, type) {
+      var selected = (type == this.state.filter)
       var classes = cx({
         'AggregateSearchModal__filters__type': true,
         'AggregateSearchModal__filters__type--selected': selected
-      });
+      })
 
-      var onClick = _.size(filters) > 1 && this.setFilter.bind(this, selected ? 'all' : type);
-      var count = this.state.counts[type];
-      var numResults = count >= 0 ? this.t('numResults', { count: count }) : this.t('searching');
+      var onClick = _.size(filters) > 1 && this.setFilter.bind(this, selected ? 'all' : type)
+      var count = this.state.counts[type]
+      var numResults = count >= 0 ? this.t('numResults', { count: count }) : this.t('searching')
 
       return (
-        <div className={ classes } key={ type } onClick={ onClick }>
-          { selected && <Icon icon="chevron-right" /> }
-          <div className="AggregateSearchModal__filters__type__name">{ name }</div>
-          <div className="AggregateSearchModal__filters__type__results">{ numResults }</div>
+        <div className={classes} key={type} onClick={onClick}>
+          { selected && <Icon icon='chevron-right' /> }
+          <div className='AggregateSearchModal__filters__type__name'>{ name }</div>
+          <div className='AggregateSearchModal__filters__type__results'>{ numResults }</div>
         </div>
-      );
-    }.bind(this));
+      )
+    }.bind(this))
 
     return this.state.results && (
-      <div className="AggregateSearchModal__filters">
+      <div className='AggregateSearchModal__filters'>
         { categories }
       </div>
-    );
+    )
   },
 
-  renderEmpty: function() {
+  renderEmpty: function () {
     return _.isEmpty(this.state.results) && (
-      <p className="AggregateSearchModal__footer AggregateSearchModal__footer--empty">
+      <p className='AggregateSearchModal__footer AggregateSearchModal__footer--empty'>
         { this.t(this.state.filter, { scope: 'emptyLabel' }) }
       </p>
-    );
+    )
   },
 
-  renderLoading: function() {
+  renderLoading: function () {
     return this.state.isSearching && (
-      <p className="AggregateSearchModal__footer AggregateSearchModal__footer--loading">
-        { this.t('searching') }<Icon icon="refresh"/>
+      <p className='AggregateSearchModal__footer AggregateSearchModal__footer--loading'>
+        { this.t('searching') }<Icon icon='refresh' />
       </p>
-    );
+    )
   },
 
-  renderLoadMore: function() {
+  renderLoadMore: function () {
     return !this.state.lastPage && (
-      <p className="AggregateSearchModal__footer">
-        <a href="#" onClick={ this.search.bind(this, this.state.currentPage + 1) }>{ this.t('loadMore') }</a>
+      <p className='AggregateSearchModal__footer'>
+        <a href='#' onClick={this.search.bind(this, this.state.currentPage + 1)}>{ this.t('loadMore') }</a>
       </p>
-    );
+    )
   },
 
-  renderNoMore: function() {
+  renderNoMore: function () {
     return (
-      <p className="AggregateSearchModal__footer">{ this.t('noMore') }</p>
-    );
+      <p className='AggregateSearchModal__footer'>{ this.t('noMore') }</p>
+    )
   },
 
-  renderFooter: function() {
-    return this.renderLoading() || this.renderEmpty() || this.renderLoadMore() || this.renderNoMore();
+  renderFooter: function () {
+    return this.renderLoading() || this.renderEmpty() || this.renderLoadMore() || this.renderNoMore()
   },
 
-  getResults: function() {
-    return _.map(this.state.results, function(result) {
-      var El = resultTypes[result._type];
-      return El && <El key={ result._type + result.id } result={ result } onSelect={ this.handleSelect } />;
-    }.bind(this));
+  getResults: function () {
+    return _.map(this.state.results, function (result) {
+      var El = resultTypes[result._type]
+      return El && <El key={result._type + result.id} result={result} onSelect={this.handleSelect} />
+    }.bind(this))
   },
 
-  renderResults: function() {
+  renderResults: function () {
     return this.state.results && (
-      <div className="AggregateSearchModal__results">
+      <div className='AggregateSearchModal__results'>
         { this.getResults() }
         { this.renderFooter() }
       </div>
-    );
+    )
   },
 
-  renderCloseButton: function() {
+  renderCloseButton: function () {
     return (
-      <div className="AggregateSearchModal__close" onClick={ this.props.onClose }>&times;</div>
-    );
+      <div className='AggregateSearchModal__close' onClick={this.props.onClose}>&times;</div>
+    )
   },
 
-  renderInput: function() {
+  renderInput: function () {
     return (
       <Input
-        className="AggregateSearchModal__input"
-        spacing="compact"
-        autoFocus={ this.props.autoFocus }
+        className='AggregateSearchModal__input'
+        spacing='compact'
+        autoFocus={this.props.autoFocus}
         i18n={{ label: this.t('inputLabel'), name: 'aggregate_search_input' }}
-        output={ this.inputChanged }
+        output={this.inputChanged}
         showIcon
-        icon={ this.state.isSearching ? 'refresh' : '' }
-        value={ this.state.searchTerm } />
-    );
+        icon={this.state.isSearching ? 'refresh' : ''}
+        value={this.state.searchTerm} />
+    )
   },
 
-  render: function() {
+  render: function () {
     return (
-      <Overlay className="AggregateSearchModal__overlay" onClose={ this.props.onClose } showCloseButton={ false }>
-        <div className="AggregateSearchModal__header">
-          <span className="AggregateSearchModal__title">{ this.t('title') }</span>
+      <Overlay className='AggregateSearchModal__overlay' onClose={this.props.onClose} showCloseButton={false}>
+        <div className='AggregateSearchModal__header'>
+          <span className='AggregateSearchModal__title'>{ this.t('title') }</span>
           { this.renderCloseButton() }
           { this.renderInput() }
           { this.renderFilters() }
         </div>
-        <div ref="body" className="AggregateSearchModal__body">
-          <div className="AggregateSearchModal__content">
+        <div ref='body' className='AggregateSearchModal__body'>
+          <div className='AggregateSearchModal__content'>
             { this.renderResults() }
           </div>
         </div>
       </Overlay>
-    );
+    )
   }
-});
+})

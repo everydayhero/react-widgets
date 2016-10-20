@@ -248,4 +248,4 @@ export default [
   { name: 'Yemen', iso: 'YE' },
   { name: 'Zambia', iso: 'ZM' },
   { name: 'Zimbabwe', iso: 'ZW' }
-];
+]

@@ -1,17 +1,17 @@
-import React from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
-import cx from 'classnames';
-import I18nMixin from '../../mixins/I18n';
-import _ from 'lodash';
-import Input from '../../forms/Input';
-import CountrySelect from '../CountrySelect';
-import countryList from '../CountrySelect/countries';
-import AddressStatus from '../AddressStatus';
-import AddressListing from '../AddressListing';
-import AddressBreakdown from '../AddressBreakdown';
-import addressAPI from '../../../api/address';
-import addEventListener from '../../../lib/addEventListener';
-import removeEventListener from '../../../lib/removeEventListener';
+import React from 'react'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
+import cx from 'classnames'
+import I18nMixin from '../../mixins/I18n'
+import _ from 'lodash'
+import Input from '../../forms/Input'
+import CountrySelect from '../CountrySelect'
+import countryList from '../CountrySelect/countries'
+import AddressStatus from '../AddressStatus'
+import AddressListing from '../AddressListing'
+import AddressBreakdown from '../AddressBreakdown'
+import addressAPI from '../../../api/address'
+import addEventListener from '../../../lib/addEventListener'
+import removeEventListener from '../../../lib/removeEventListener'
 
 export default React.createClass({
   displayName: 'AddressLookup',
@@ -30,7 +30,7 @@ export default React.createClass({
     i18n: React.PropTypes.object
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       address: null,
       prefix: '',
@@ -38,8 +38,8 @@ export default React.createClass({
       required: true,
       country: 'AU',
       spacing: 'loose',
-      output: function() {},
-      validate: function() {},
+      output: function () {},
+      validate: function () {},
       defaultI18n: {
         inputLabel: 'Street Address',
         inputLabelUK: 'Postcode',
@@ -47,14 +47,14 @@ export default React.createClass({
         resetButton: 'Clear and search again',
         emptyError: 'Please enter an address'
       }
-    };
+    }
   },
 
-  getInitialState: function() {
-    var iso = this.props.country === 'UK' ? 'UK' : this.props.country;
-    var country = _.find(countryList, { iso: iso });
-    var lookupEnabled = this.props.country !== 'IE';
-    var customEntry = !lookupEnabled && !this.props.address;
+  getInitialState: function () {
+    var iso = this.props.country === 'UK' ? 'UK' : this.props.country
+    var country = _.find(countryList, { iso: iso })
+    var lookupEnabled = this.props.country !== 'IE'
+    var customEntry = !lookupEnabled && !this.props.address
     return {
       lookupEnabled: lookupEnabled,
       focusOnMount: false,
@@ -69,48 +69,48 @@ export default React.createClass({
       error: false,
       emptyPrompt: 'Sorry, we could\'t find that address',
       fauxFocus: 0,
-      cancelSearch: function() {},
-      cancelFind: function() {}
-    };
+      cancelSearch: function () {},
+      cancelFind: function () {}
+    }
   },
 
-  componentWillUpdate: function(nextProps, nextState) {
-    if (nextState.showDropdown) addEventListener('keydown', this.keyHandler);
-    if (!nextState.showDropdown) removeEventListener('keydown', this.keyHandler);
+  componentWillUpdate: function (nextProps, nextState) {
+    if (nextState.showDropdown) addEventListener('keydown', this.keyHandler)
+    if (!nextState.showDropdown) removeEventListener('keydown', this.keyHandler)
   },
 
-  componentWillUnmount: function() {
-    removeEventListener('keydown', this.keyHandler);
+  componentWillUnmount: function () {
+    removeEventListener('keydown', this.keyHandler)
   },
 
-  keyHandler: function(e) {
-    var key = e.keyCode || e.which;
-    var i = this.state.fauxFocus;
-    var list = this.state.addressList;
+  keyHandler: function (e) {
+    var key = e.keyCode || e.which
+    var i = this.state.fauxFocus
+    var list = this.state.addressList
     if (key === 40) {
-      e.preventDefault();
-      i = (i + 1) % list.length;
-      return this.setFauxFocus(i);
+      e.preventDefault()
+      i = (i + 1) % list.length
+      return this.setFauxFocus(i)
     }
     if (key === 38) {
-      e.preventDefault();
-      i = i <= 0 ? list.length - 1 : i - 1;
-      return this.setFauxFocus(i);
+      e.preventDefault()
+      i = i <= 0 ? list.length - 1 : i - 1
+      return this.setFauxFocus(i)
     }
     if (e.keyCode === 9) {
-      return this.setFauxFocus(-1);
+      return this.setFauxFocus(-1)
     }
     if (key === 13 && i >= 0) {
-      e.preventDefault();
-      this.getAddress(list[i].id);
+      e.preventDefault()
+      this.getAddress(list[i].id)
     }
   },
 
-  setFauxFocus: function(i) {
-    this.setState({ fauxFocus: i });
+  setFauxFocus: function (i) {
+    this.setState({ fauxFocus: i })
   },
 
-  chooseCountry: function() {
+  chooseCountry: function () {
     this.setState({
       choosingCountry: true,
       input: '',
@@ -118,29 +118,29 @@ export default React.createClass({
       address: null,
       loading: false,
       error: null
-    });
+    })
   },
 
-  setCountry: function(country) {
+  setCountry: function (country) {
     this.setState({
       country: country || this.state.country,
       choosingCountry: false,
       focusOnMount: !!country
-    });
+    })
   },
 
-  setInput: function(input) {
+  setInput: function (input) {
     this.setState({
       focusOnMount: false,
       loading: false,
       input: input,
       error: null,
       addressList: []
-    });
-    this.getList(input);
+    })
+    this.getList(input)
   },
 
-  reset: function() {
+  reset: function () {
     this.setState({
       loading: false,
       input: '',
@@ -149,26 +149,26 @@ export default React.createClass({
       custom: null,
       showDropdown: false,
       focusOnMount: true
-    }, this.resetComplete);
+    }, this.resetComplete)
   },
 
-  resetComplete: function() {
-    this.output();
-    this.validate('', this.props.validate);
+  resetComplete: function () {
+    this.output()
+    this.validate('', this.props.validate)
   },
 
-  setCustom: function(key) {
-    return function(value) {
-      var custom = this.state.custom || _.clone(this.state.address);
-      custom[key] = value;
-      custom.paf_validated = false;
+  setCustom: function (key) {
+    return function (value) {
+      var custom = this.state.custom || _.clone(this.state.address)
+      custom[key] = value
+      custom.paf_validated = false
       this.setState({
         custom: (_.isEqual(custom, this.state.address)) ? null : custom
-      }, this.output);
-    }.bind(this);
+      }, this.output)
+    }.bind(this)
   },
 
-  getEmptyAddress: function(country) {
+  getEmptyAddress: function (country) {
     return {
       street_address: '',
       extended_address: '',
@@ -177,61 +177,61 @@ export default React.createClass({
       region: '',
       country_name: country.name,
       paf_validated: false
-    };
+    }
   },
 
-  setManualEntry: function() {
+  setManualEntry: function () {
     this.setState({
       addressList: [],
       error: false,
       custom: this.getEmptyAddress(this.state.country)
-    });
+    })
   },
 
-  output: function() {
-    this.props.output(this.state.custom || this.state.address);
+  output: function () {
+    this.props.output(this.state.custom || this.state.address)
   },
 
   isPAFLookup: function () {
-    return this.state.country.iso === 'UK';
+    return this.state.country.iso === 'UK'
   },
 
   isGoogleLookup: function () {
-    return !this.isPAFLookup();
+    return !this.isPAFLookup()
   },
 
-  getList: _.debounce(function(input) {
-    var minChars = this.isPAFLookup() ? 5 : 7;
-    this.state.cancelSearch();
+  getList: _.debounce(function (input) {
+    var minChars = this.isPAFLookup() ? 5 : 7
+    this.state.cancelSearch()
     if (input.length >= minChars) {
       this.setState({
         loading: true,
         addressList: [],
         cancelSearch: addressAPI.search(input, this.state.country.iso, this.setList)
-      });
+      })
     }
   }, 250, { trailing: true }),
 
-  getAddress: function(id) {
-    this.state.cancelFind();
+  getAddress: function (id) {
+    this.state.cancelFind()
     this.setState({
       loading: true,
       cancelFind: addressAPI.find(id, this.state.country.iso, this.setAddress)
-    });
+    })
   },
 
-  setList: function(list) {
+  setList: function (list) {
     this.setState({
       error: false,
       addressList: (list && list.addresses) || [],
       showDropdown: true,
       loading: false
-    });
+    })
   },
 
-  setAddress: function(address) {
+  setAddress: function (address) {
     if (this.validate(address && address.address, this.setError)) {
-      address.address.paf_validated = this.isPAFLookup();
+      address.address.paf_validated = this.isPAFLookup()
       this.setState({
         error: false,
         address: address.address,
@@ -239,192 +239,192 @@ export default React.createClass({
         showDropdown: false,
         loading: false,
         focusOnMount: true
-      }, this.output);
+      }, this.output)
     }
-    this.props.validate(address);
+    this.props.validate(address)
   },
 
-  setError: function(bool) {
+  setError: function (bool) {
     this.setState({
       error: !bool,
       showDropdown: !bool,
       addressList: [],
       address: null,
       loading: false
-    });
+    })
   },
 
-  validate: function(val, callback) {
-    var bool = _.isEmpty(val);
-    callback(!bool);
-    return !bool;
+  validate: function (val, callback) {
+    var bool = _.isEmpty(val)
+    callback(!bool)
+    return !bool
   },
 
   validateSearch: _.debounce(function () {
-    var address = this.state.address || this.state.custom;
+    var address = this.state.address || this.state.custom
     if (this.props.required &&
         !this.state.choosingCountry &&
         !address) {
       this.setState({
         showDropdown: true,
         error: true
-      });
+      })
     }
   }, 250),
 
-  renderListing: function() {
+  renderListing: function () {
     if (!this.state.addressList.length) {
       return (
-        <div className="AddressListing">
+        <div className='AddressListing'>
           <em>{ this.state.emptyPrompt }</em>
         </div>
-      );
+      )
     }
 
-    return this.state.addressList.map(function(d, i) {
+    return this.state.addressList.map(function (d, i) {
       return (
         <AddressListing
-          key={ d.id + i }
-          index={ i }
-          focused={ i === this.state.fauxFocus }
-          onMouseEnter={ this.setFauxFocus }
-          id={ d.id }
-          label={ d.label }
-          onClick={ this.getAddress }/>
-      );
-    }, this);
+          key={d.id + i}
+          index={i}
+          focused={i === this.state.fauxFocus}
+          onMouseEnter={this.setFauxFocus}
+          id={d.id}
+          label={d.label}
+          onClick={this.getAddress} />
+      )
+    }, this)
   },
 
-  renderStatus: function(bool) {
+  renderStatus: function (bool) {
     return bool && (
       <AddressStatus
-        loading={ this.state.loading }
-        error={ !!this.state.error }
-        success={ !!this.state.addressList.length } />
-    );
+        loading={this.state.loading}
+        error={!!this.state.error}
+        success={!!this.state.addressList.length} />
+    )
   },
 
-  renderCountry: function(bool) {
+  renderCountry: function (bool) {
     return bool && (
       <CountrySelect
-        ref="countrySelect"
-        prefix={ this.props.prefix }
-        selected={ this.state.country }
-        open={ this.state.choosingCountry }
-        onOpen={ this.chooseCountry }
-        onChange={ this.setCountry } />
-    );
+        ref='countrySelect'
+        prefix={this.props.prefix}
+        selected={this.state.country}
+        open={this.state.choosingCountry}
+        onOpen={this.chooseCountry}
+        onChange={this.setCountry} />
+    )
   },
 
-  renderInput: function(bool) {
+  renderInput: function (bool) {
     return bool && (
       <Input
-        key={ this.t('inputLabel') }
-        ref={ 'lookup' }
+        key={this.t('inputLabel')}
+        ref={'lookup'}
         i18n={{
           name: this.props.prefix + 'lookup',
           label: this.t('inputLabel' + this.state.country.iso) || this.t('inputLabel')
         }}
-        error={ this.state.error }
-        validate={ this.validateSearch }
-        value={ this.state.input }
-        spacing={ 'compact' }
-        autoFocus={ this.state.focusOnMount }
-        output={ this.setInput } />
-    );
+        error={this.state.error}
+        validate={this.validateSearch}
+        value={this.state.input}
+        spacing={'compact'}
+        autoFocus={this.state.focusOnMount}
+        output={this.setInput} />
+    )
   },
 
-  renderDropdown: function() {
+  renderDropdown: function () {
     var classes = cx({
       'AddressLookup__list': true,
       'AddressLookup__list-google': this.isGoogleLookup()
-    });
-    var hasAddress = !!this.state.address || !!this.state.custom;
+    })
+    var hasAddress = !!this.state.address || !!this.state.custom
     return this.state.showDropdown && !hasAddress && (
-      <div className={ classes }>
-        <div className="AddressLookup__scroll-container">
+      <div className={classes}>
+        <div className='AddressLookup__scroll-container'>
           { this.renderListing() }
         </div>
 
-        <div className="AddressLookup__manual-wrapper">
+        <div className='AddressLookup__manual-wrapper'>
           { this.renderManualButton() }
         </div>
       </div>
-    );
+    )
   },
 
-  renderResetButton: function(address) {
+  renderResetButton: function (address) {
     return address && this.state.lookupEnabled && (
-      <div className="AddressLookup__reset-wrapper">
+      <div className='AddressLookup__reset-wrapper'>
         <button
-          className="AddressLookup__reset hui-Button hui-Button--primary-borderless hui-Button--hasIcon hui-Button--iconLeft"
-          tabIndex="0"
-          onClick={ this.reset }
-          onKeyPress={ this.reset }>
-          <span className="hui-IconWrapper hui-Button__icon">
-            <i className="hui-Icon fa fa-remove" />
+          className='AddressLookup__reset hui-Button hui-Button--primary-borderless hui-Button--hasIcon hui-Button--iconLeft'
+          tabIndex='0'
+          onClick={this.reset}
+          onKeyPress={this.reset}>
+          <span className='hui-IconWrapper hui-Button__icon'>
+            <i className='hui-Icon fa fa-remove' />
           </span>
-          <span className="hui-Button__label AddressLookup__reset-label">
+          <span className='hui-Button__label AddressLookup__reset-label'>
             { this.t('resetButton') }
           </span>
         </button>
       </div>
-    );
+    )
   },
 
-  renderManualButton: function() {
+  renderManualButton: function () {
     return (
       <button
-        className="hui-Button hui-Button--secondary AddressLookup__manual"
-        tabIndex="0"
-        onClick={ this.setManualEntry }
-        onKeyPress={ this.setManualEntry }>
+        className='hui-Button hui-Button--secondary AddressLookup__manual'
+        tabIndex='0'
+        onClick={this.setManualEntry}
+        onKeyPress={this.setManualEntry}>
 
-        <span className="hui-Button__label AddressLookup__manual-label">
+        <span className='hui-Button__label AddressLookup__manual-label'>
           { this.t('manualEntryButton') }
         </span>
       </button>
-    );
+    )
   },
 
-  renderAddress: function(address) {
-    var props = this.props;
-    var state = this.state;
+  renderAddress: function (address) {
+    var props = this.props
+    var state = this.state
 
     return address && (
       <AddressBreakdown
-        validate={ props.validate }
-        autoFocus={ state.focusOnMount }
-        prefix={ props.prefix }
-        validations={ props.validations }
-        required={ props.required }
-        address={ address }
-        region={ state.country }
-        spacing={ props.spacing }
-        onCountryChange={ this.setCountry }
-        onChange={ this.setCustom } />
-    );
+        validate={props.validate}
+        autoFocus={state.focusOnMount}
+        prefix={props.prefix}
+        validations={props.validations}
+        required={props.required}
+        address={address}
+        region={state.country}
+        spacing={props.spacing}
+        onCountryChange={this.setCountry}
+        onChange={this.setCustom} />
+    )
   },
 
   renderError: function () {
-    return(
+    return (
         this.state.error &&
-          <div className="AddressLookup__error">
+          <div className='AddressLookup__error'>
             { this.t('emptyError') }
           </div>
-    );
+    )
   },
 
-  render: function() {
-    var address = this.state.custom || this.state.address;
+  render: function () {
+    var address = this.state.custom || this.state.address
     var classes = cx({
       'AddressLookup': true,
       'AddressLookup--compact': this.props.spacing === 'compact',
       'AddressLookup--tight': this.props.spacing === 'tight',
       'AddressLookup--loose': this.props.spacing === 'loose'
-    });
+    })
     return (
-      <div className={ classes }>
+      <div className={classes}>
         { this.renderCountry(!address) }
         { this.renderStatus(!this.state.choosingCountry) }
         { this.renderInput(!address && !this.state.choosingCountry) }
@@ -433,6 +433,6 @@ export default React.createClass({
         { this.renderAddress(address) }
         { this.renderError() }
       </div>
-    );
+    )
   }
-});
+})

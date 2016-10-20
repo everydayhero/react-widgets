@@ -1,9 +1,9 @@
-function ready(f) {
+function ready (f) {
   if (document.readyState == 'complete') {
-    f();
+    f()
   } else {
-    setTimeout(ready.bind(null, f), 9);
+    setTimeout(ready.bind(null, f), 9)
   }
 }
 
-export default ready;
+export default ready

@@ -1,13 +1,13 @@
-jest.disableAutomock();
+jest.disableAutomock()
 
-import React from 'react';
-import PromoCharitiesResults from '../';
-import TestUtils from 'react-addons-test-utils';
-var findByClass           = TestUtils.findRenderedDOMComponentWithClass;
-var scryByClass           = TestUtils.scryRenderedDOMComponentsWithClass;
+import React from 'react'
+import PromoCharitiesResults from '../'
+import TestUtils from 'react-addons-test-utils'
+var findByClass = TestUtils.findRenderedDOMComponentWithClass
+var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass
 
-describe('PromoCharitiesResults', function() {
-  var mockFunction = jest.genMockFunction();
+describe('PromoCharitiesResults', function () {
+  var mockFunction = jest.genMockFunction()
   var contents = [
     {
       category: 'test tab 1',
@@ -29,21 +29,21 @@ describe('PromoCharitiesResults', function() {
       slug: 'test-slug-2',
       country_code: 'au'
     }
-  ];
+  ]
 
-  it('renders all charities results', function() {
-    var promoCharitiesResults = <PromoCharitiesResults content={ contents } loaded fetchUrl={ mockFunction } />;
-    var element = TestUtils.renderIntoDocument(promoCharitiesResults);
-    var resultsElement = findByClass(element, 'PromoCharitiesResults');
-    var resultElements = scryByClass(element, 'PromoCharitiesResult');
+  it('renders all charities results', function () {
+    var promoCharitiesResults = <PromoCharitiesResults content={contents} loaded fetchUrl={mockFunction} />
+    var element = TestUtils.renderIntoDocument(promoCharitiesResults)
+    var resultsElement = findByClass(element, 'PromoCharitiesResults')
+    var resultElements = scryByClass(element, 'PromoCharitiesResult')
 
-    expect(resultsElement).toBeDefined();
-    expect(resultElements.length).toBe(contents.length);
-  });
+    expect(resultsElement).toBeDefined()
+    expect(resultElements.length).toBe(contents.length)
+  })
 
-  it('renders a loading icon', function() {
-    var promoCharitiesResults = <PromoCharitiesResults content={ contents } loaded={ false }/>;
-    var element = TestUtils.renderIntoDocument(promoCharitiesResults);
-    findByClass(element, 'PromoCharitiesResults__loading');
-  });
-});
+  it('renders a loading icon', function () {
+    var promoCharitiesResults = <PromoCharitiesResults content={contents} loaded={false} />
+    var element = TestUtils.renderIntoDocument(promoCharitiesResults)
+    findByClass(element, 'PromoCharitiesResults__loading')
+  })
+})

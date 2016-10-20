@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'
 
 export default React.createClass({
   displayName: 'FundraiserImage',
 
-  render: function() {
+  render: function () {
     return (
-      <a href={ this.props.pageUrl } title={ this.props.imgTitle } className="FundraiserImage">
-        <img src={ this.props.imgSrc } alt={ this.props.imgTitle } />
+      <a href={this.props.pageUrl} title={this.props.imgTitle} className='FundraiserImage'>
+        <img src={this.props.imgSrc} alt={this.props.imgTitle} />
       </a>
-    );
+    )
   }
-});
+})

@@ -1,8 +1,8 @@
-import _ from 'lodash';
-import React from 'react';
-import I18nMixin from '../../mixins/I18n';
-import pages from '../../../api/pages';
-import Icon from '../../helpers/Icon';
+import _ from 'lodash'
+import React from 'react'
+import I18nMixin from '../../mixins/I18n'
+import pages from '../../../api/pages'
+import Icon from '../../helpers/Icon'
 
 export default React.createClass({
   mixins: [I18nMixin],
@@ -17,7 +17,7 @@ export default React.createClass({
     i18n: React.PropTypes.object
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       campaignUid: '',
       region: '',
@@ -29,60 +29,60 @@ export default React.createClass({
         heading: 'Program Reach',
         legend: 'Supporters'
       }
-    };
+    }
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       isLoading: false,
       pointData: []
-    };
+    }
   },
 
-  componentWillMount: function() {
+  componentWillMount: function () {
     this.setState({
       isLoading: true
-    });
+    })
 
-    var props = this.props;
+    var props = this.props
 
-    pages.findByCampaign(props.campaignUid, props.page_type, props.limit, props.page, this.processData);
+    pages.findByCampaign(props.campaignUid, props.page_type, props.limit, props.page, this.processData)
   },
 
-  processData: function(page_data) {
-    var locations = _.map(page_data.pages, function(value, i) {
-      var page = page_data.pages[i];
+  processData: function (page_data) {
+    var locations = _.map(page_data.pages, function (value, i) {
+      var page = page_data.pages[i]
 
       return {
         location: page.coordinate
-      };
-    });
+      }
+    })
 
-    this.onSuccess(locations);
+    this.onSuccess(locations)
   },
 
-  onSuccess: function(locations) {
+  onSuccess: function (locations) {
     this.setState({
       isLoading: false,
       pointData: locations
-    });
+    })
 
-    window.drawMarkersMap = (function() {
-      var google = window.google;
+    window.drawMarkersMap = function () {
+      var google = window.google
 
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'Lat');
-      data.addColumn('number', 'Long');
-      data.addColumn('number', 'Value');
+      var data = new google.visualization.DataTable()
+      data.addColumn('number', 'Lat')
+      data.addColumn('number', 'Long')
+      data.addColumn('number', 'Value')
 
       if (!this.state.isLoading) {
-        _.each(this.state.pointData, function(d) {
+        _.each(this.state.pointData, function (d) {
           if (d.location) {
             data.addRows([
-              [d.location.lat,d.location.lon,0]
-            ]);
+              [d.location.lat, d.location.lon, 0]
+            ])
           }
-        });
+        })
       }
 
       var options = {
@@ -91,48 +91,47 @@ export default React.createClass({
         resolution: 'provinces',
         legend: 'none',
         enableRegionInteractivity: 'false',
-        sizeAxis: { minSize: 5,  maxSize: 5 },
-        colorAxis: { minValue: 1, maxValue: 1,  colors: [this.props.color] },
+        sizeAxis: { minSize: 5, maxSize: 5 },
+        colorAxis: { minValue: 1, maxValue: 1, colors: [this.props.color] },
         tooltip: { trigger: 'none' }
-      };
+      }
 
       var chart = new google.visualization.GeoChart(
         document.getElementById('map')
-      );
-      chart.draw(data, options);
+      )
+      chart.draw(data, options)
+    }.bind(this)
 
-    }).bind(this);
-
-    var s = document.createElement('script');
-    s.src = 'https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["geochart"],"callback":"drawMarkersMap"}]}';
-    document.getElementsByTagName('head')[0].appendChild(s);
+    var s = document.createElement('script')
+    s.src = 'https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["geochart"],"callback":"drawMarkersMap"}]}'
+    document.getElementsByTagName('head')[0].appendChild(s)
   },
 
-  renderMap: function() {
+  renderMap: function () {
     if (this.state.isLoading) {
-      return <Icon className="Map__loading" icon="refresh" />;
+      return <Icon className='Map__loading' icon='refresh' />
     } else {
-      return <div className="Map__map" id="map"></div>;
+      return <div className='Map__map' id='map' />
     }
   },
 
-  render: function() {
-    var heading = this.t('heading');
-    var legend = this.t('legend');
+  render: function () {
+    var heading = this.t('heading')
+    var legend = this.t('legend')
     var keyStyle = {
       backgroundColor: this.props.color
-    };
+    }
 
     return (
-      <div className={ "Map" }>
-        <h3 className="Map__heading">{ heading }</h3>
-        <div className="Map__legend">
-          <p><span className="Map__legend-key" style={ keyStyle }></span>  { legend }</p>
+      <div className={'Map'}>
+        <h3 className='Map__heading'>{ heading }</h3>
+        <div className='Map__legend'>
+          <p><span className='Map__legend-key' style={keyStyle} />                                { legend }</p>
         </div>
-        <div className="Map__content">
+        <div className='Map__content'>
           { this.renderMap() }
         </div>
       </div>
-    );
+    )
   }
-});
+})

@@ -1,10 +1,10 @@
-import React from 'react';
-import SearchModal from '../SearchModal';
-import CharitySearchResult from '../CharitySearchResult';
-import I18nMixin from '../../mixins/I18n';
-import frol from '../../../api/frolCharities';
+import React from 'react'
+import SearchModal from '../SearchModal'
+import CharitySearchResult from '../CharitySearchResult'
+import I18nMixin from '../../mixins/I18n'
+import frol from '../../../api/frolCharities'
 
-const apis = { frol };
+const apis = { frol }
 
 export default React.createClass({
   displayName: 'CharitySearchModalFROL',
@@ -19,7 +19,7 @@ export default React.createClass({
     api: React.PropTypes.oneOf(['frol'])
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       action: 'visit',
       autoFocus: true,
@@ -34,10 +34,10 @@ export default React.createClass({
       },
       pageSize: 10,
       api: 'frol'
-    };
+    }
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       cancelRequest: null,
       results: null,
@@ -46,42 +46,42 @@ export default React.createClass({
         count: 0,
         page: 1,
         pageSize: 1,
-        totalPages: 0,
+        totalPages: 0
       }
-    };
+    }
   },
 
-  componentDidMount: function() {
-    this.search('', 1);
+  componentDidMount: function () {
+    this.search('', 1)
   },
 
-  pageChanged: function(page) {
-    this.search(this.state.searchTerm, page);
+  pageChanged: function (page) {
+    this.search(this.state.searchTerm, page)
   },
 
-  inputChanged: function(searchTerm) {
-    this.search(searchTerm, 1);
+  inputChanged: function (searchTerm) {
+    this.search(searchTerm, 1)
   },
 
-  search: function(searchTerm, page) {
+  search: function (searchTerm, page) {
     if (this.state.cancelRequest) {
-      this.state.cancelRequest();
+      this.state.cancelRequest()
     }
 
     var cancelRequest = apis[this.props.api].search({
       searchTerm: searchTerm,
       page: page || 1,
       pageSize: this.props.pageSize
-    }, this.updateResults);
+    }, this.updateResults)
 
     this.setState({
       searchTerm: searchTerm,
       isSearching: true,
       cancelRequest: cancelRequest
-    });
+    })
   },
 
-  updateResults: function(results) {
+  updateResults: function (results) {
     if (results) {
       this.setState({
         cancelRequest: null,
@@ -93,46 +93,46 @@ export default React.createClass({
           pageSize: this.props.pageSize,
           totalPages: results.meta.pagination.total_pages
         }
-      });
+      })
     } else {
-      this.setState(this.getInitialState());
+      this.setState(this.getInitialState())
     }
   },
 
-  selectHandler: function(result) {
-    window.location = result.charity.url;
+  selectHandler: function (result) {
+    window.location = result.charity.url
   },
 
-  selectAction: function() {
-    return this.t(this.props.action + 'Action');
+  selectAction: function () {
+    return this.t(this.props.action + 'Action')
   },
 
-  getResults: function() {
-    var results = this.state.results;
+  getResults: function () {
+    var results = this.state.results
 
-    return results && results.map(function(charity) {
+    return results && results.map(function (charity) {
       return {
         id: charity.id,
         charity: charity,
         url: charity.url
-      };
-    });
+      }
+    })
   },
 
-  render: function() {
+  render: function () {
     return (
       <SearchModal
-        autoFocus={ this.props.autoFocus }
-        i18n={ this.getI18n() }
-        isSearching={ this.state.isSearching }
-        onClose={ this.props.onClose }
-        onInputChange={ this.inputChanged }
-        onPageChange={ this.pageChanged }
-        onSelect={ this.selectHandler }
-        pagination={ this.state.pagination }
-        results={ this.getResults() }
-        resultComponent={ CharitySearchResult }
-        selectAction={ this.selectAction() } />
-    );
+        autoFocus={this.props.autoFocus}
+        i18n={this.getI18n()}
+        isSearching={this.state.isSearching}
+        onClose={this.props.onClose}
+        onInputChange={this.inputChanged}
+        onPageChange={this.pageChanged}
+        onSelect={this.selectHandler}
+        pagination={this.state.pagination}
+        results={this.getResults()}
+        resultComponent={CharitySearchResult}
+        selectAction={this.selectAction()} />
+    )
   }
-});
+})

@@ -1,7 +1,7 @@
-import React from 'react';
-import Icon from '../../helpers/Icon';
-import I18n from '../../mixins/I18n';
-import AggregateSearchResult from '../AggregateSearchResult';
+import React from 'react'
+import Icon from '../../helpers/Icon'
+import I18n from '../../mixins/I18n'
+import AggregateSearchResult from '../AggregateSearchResult'
 
 export default React.createClass({
   displayName: 'AggregateSearchResultCampaign',
@@ -13,7 +13,7 @@ export default React.createClass({
     onSelect: React.PropTypes.func
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       defaultI18n: {
         numSupporters: {
@@ -26,62 +26,62 @@ export default React.createClass({
         },
         months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       }
-    };
+    }
   },
 
   renderDate: function () {
-    var campaign = this.props.result;
+    var campaign = this.props.result
     if (!campaign.display_start_at) {
       return (
-        <div className="AggregateSearchResultCampaign__date">
-          <Icon icon="heart-o" className="AggregateSearchResultCampaign__icon" />
+        <div className='AggregateSearchResultCampaign__date'>
+          <Icon icon='heart-o' className='AggregateSearchResultCampaign__icon' />
         </div>
-      );
+      )
     }
 
-    var date = new Date(campaign.display_start_at);
+    var date = new Date(campaign.display_start_at)
     return (
-      <ul className="AggregateSearchResultCampaign__date">
+      <ul className='AggregateSearchResultCampaign__date'>
         <li>{ date.getDate() }</li>
         <li>{ this.t('months')[date.getMonth()] }</li>
         <li>{ date.getFullYear() }</li>
       </ul>
-    );
+    )
   },
 
   renderNumSupporters: function () {
-    var campaign = this.props.result;
+    var campaign = this.props.result
     return campaign.page_count >= 20 && (
-      <span className="AggregateSearchResultCampaign__supporters">
+      <span className='AggregateSearchResultCampaign__supporters'>
         { this.t('numSupporters', { count: campaign.page_count }) }
       </span>
-    );
+    )
   },
 
   renderNumCharities: function () {
-    var campaign = this.props.result;
+    var campaign = this.props.result
     return campaign.charity_count >= 0 && (
-      <span className="AggregateSearchResultCampaign__charities">
+      <span className='AggregateSearchResultCampaign__charities'>
         { this.t('numCharities', { count: campaign.charity_count }) }
       </span>
-    );
+    )
   },
 
-  render: function() {
-    var campaign = this.props.result;
+  render: function () {
+    var campaign = this.props.result
 
     return (
-      <AggregateSearchResult onSelect={ this.props.onSelect } result={ campaign }>
+      <AggregateSearchResult onSelect={this.props.onSelect} result={campaign}>
         { this.renderDate() }
-        <div className="AggregateSearchResultCampaign__content">
-          <div className="AggregateSearchResultCampaign__header">{ campaign.name }</div>
-          <div className="AggregateSearchResultCampaign__subheader">
+        <div className='AggregateSearchResultCampaign__content'>
+          <div className='AggregateSearchResultCampaign__header'>{ campaign.name }</div>
+          <div className='AggregateSearchResultCampaign__subheader'>
             { this.renderNumSupporters() }
             { this.renderNumCharities() }
           </div>
-          <p className="AggregateSearchResultCampaign__description">{ campaign.description }</p>
+          <p className='AggregateSearchResultCampaign__description'>{ campaign.description }</p>
         </div>
       </AggregateSearchResult>
-    );
+    )
   }
-});
+})

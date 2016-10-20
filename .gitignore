@@ -1,6 +1,5 @@
 /node_modules
 /public/
-/src/scss/_version.scss
 .awspublish-shared-scripts
 .DS_Store
 npm-debug.log

@@ -103,5 +103,15 @@
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/enzyme/"
     ]
+  },
+  "standard": {
+    "env": ["mocha"],
+    "globals": [
+      "expect",
+      "chai",
+      "jest",
+      "jasmine",
+      "sinon"
+    ]
   }
 }

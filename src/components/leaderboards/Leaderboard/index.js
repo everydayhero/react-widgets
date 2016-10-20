@@ -105,26 +105,26 @@ export default React.createClass({
         className='Leaderboard__items'
         transitionName='Leaderboard__animation'
         component='ol'>
-          {
-            board.map(function (item) {
-              let formattedAmount = this.formatAmount(item.amount)
-              let formattedRank = numeral(item.rank).format('0o')
+        {
+          board.map(function (item) {
+            let formattedAmount = this.formatAmount(item.amount)
+            let formattedRank = numeral(item.rank).format('0o')
 
-              return (
-                <LeaderboardItem
-                  key={item.id}
-                  rank={formattedRank}
-                  name={item.name}
-                  charityName={this.props.showCharity && item.charityName ? item.charityName : null}
-                  url={item.url}
-                  isoCode={item.isoCode}
-                  amount={formattedAmount}
-                  imgSrc={item.medImgSrc}
-                  width={this.state.childWidth}
-                  renderImage={this.props.renderImage} />
-              )
-            }, this)
-          }
+            return (
+              <LeaderboardItem
+                key={item.id}
+                rank={formattedRank}
+                name={item.name}
+                charityName={this.props.showCharity && item.charityName ? item.charityName : null}
+                url={item.url}
+                isoCode={item.isoCode}
+                amount={formattedAmount}
+                imgSrc={item.medImgSrc}
+                width={this.state.childWidth}
+                renderImage={this.props.renderImage} />
+            )
+          }, this)
+        }
       </ReactCSSTransitionGroup>
     )
   },

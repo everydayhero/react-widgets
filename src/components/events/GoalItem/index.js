@@ -17,7 +17,7 @@ export default React.createClass({
         <div className='CampaignGoal__item'>
           <div className='CampaignGoal__bar' style={{ height: (percentage * 3) + 'px' }} />
         </div>
-          <div className='CampaignGoal__title'>{ this.props.name }</div>
+        <div className='CampaignGoal__title'>{ this.props.name }</div>
       </div>
     )
   }

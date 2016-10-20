@@ -247,7 +247,7 @@ export default React.createClass({
     var filters = searchType === 'all' ? filterTypes : _.pick(filterTypes, searchType)
 
     var categories = _.map(filters, function (name, type) {
-      var selected = (type == this.state.filter)
+      var selected = (type === this.state.filter)
       var classes = cx({
         'AggregateSearchModal__filters__type': true,
         'AggregateSearchModal__filters__type--selected': selected

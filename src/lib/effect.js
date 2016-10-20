@@ -71,7 +71,7 @@ function blurCanvas (canvas, ctx, width, height, radius) {
   let stack = stackStart
   for (i = 1; i < div; i++) {
     stack = stack.next = new BlurStack()
-    if (i == radiusPlus1) stackEnd = stack
+    if (i === radiusPlus1) stackEnd = stack
   }
   stack.next = stackStart
   let stackIn = null

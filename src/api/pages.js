@@ -48,6 +48,6 @@ export default {
 
   isGivePage (page) {
     return page.campaign.uid &&
-      page.campaign.uid == campaigns.giveCampaignUid(page.country_code)
+      page.campaign.uid === campaigns.giveCampaignUid(page.country_code)
   }
 }

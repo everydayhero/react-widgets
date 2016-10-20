@@ -78,7 +78,7 @@ export default React.createClass({
   },
 
   fetchUrl: function (charity) {
-    if (this.props.action == 'custom') {
+    if (this.props.action === 'custom') {
       return
     } else {
       return charities[this.props.action + 'Url'](charity, null) || charity.url
@@ -86,7 +86,7 @@ export default React.createClass({
   },
 
   selectHandler: function (charity) {
-    if (this.props.action == 'custom') {
+    if (this.props.action === 'custom') {
       this.props.onSelect(charity)
     } else {
       document.location = this.fetchUrl(charity)

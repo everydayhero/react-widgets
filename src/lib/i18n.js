@@ -18,7 +18,7 @@ function translate (i18n, key, params) {
   let value = scope && lookup(i18n, scope + separator + key) || lookup(i18n, key)
 
   if (params && params.count !== undefined && _.isObject(value)) {
-    let pluralisation = params.count == 1 ? 'one' : 'other'
+    let pluralisation = params.count === 1 ? 'one' : 'other'
     value = value[pluralisation]
   }
 

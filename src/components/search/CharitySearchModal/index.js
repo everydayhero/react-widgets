@@ -59,7 +59,7 @@ export default React.createClass({
 
   getCampaignUid: function () {
     var campaign = this.props.campaignUid
-    if (!campaign && this.props.action == 'fundraise') {
+    if (!campaign && this.props.action === 'fundraise') {
       campaign = campaignsAPI.giveCampaignUid(this.props.country)
     }
     return campaign

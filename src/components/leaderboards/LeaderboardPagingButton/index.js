@@ -15,7 +15,7 @@ export default React.createClass({
     var classes
     var iconName
 
-    if (this.props.type == 'next') {
+    if (this.props.type === 'next') {
       classes = cx({
         'LeaderboardPagingButton__next': true,
         'LeaderboardPagingButton__next--active': currentPage < pageCount

@@ -55,7 +55,7 @@ describe('SearchInput', function () {
     var button = findByClass(element, 'CallToActionButton')
     var inputNode = findByClass(element, 'Input__input')
 
-    TestUtils.Simulate.change(inputNode, { target: { value: 'bar' }})
+    TestUtils.Simulate.change(inputNode, { target: { value: 'bar' } })
     TestUtils.Simulate.mouseUp(button)
 
     expect(submittedValue).toBe('bar')
@@ -64,7 +64,7 @@ describe('SearchInput', function () {
   it('clears the search input on submit', function () {
     var inputNode = findByClass(element, 'Input__input')
 
-    TestUtils.Simulate.change(inputNode, { target: { value: 'bar' }})
+    TestUtils.Simulate.change(inputNode, { target: { value: 'bar' } })
     TestUtils.Simulate.keyUp(inputNode, { key: 'Enter' })
 
     expect(inputNode.value).toBe('')

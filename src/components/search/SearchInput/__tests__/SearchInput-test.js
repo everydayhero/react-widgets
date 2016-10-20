@@ -55,7 +55,7 @@ describe('SearchInput', function () {
     let component = <SearchInput onChange={callback} />
     let element = TestUtils.renderIntoDocument(component)
     let input = findByTag(element, 'input')
-    TestUtils.Simulate.change(input, { target: { value: 'foo' }})
+    TestUtils.Simulate.change(input, { target: { value: 'foo' } })
 
     expect(callback).not.toBeCalled()
 
@@ -69,8 +69,8 @@ describe('SearchInput', function () {
     let component = <SearchInput onChange={callback} />
     let element = TestUtils.renderIntoDocument(component)
     let input = findByTag(element, 'input')
-    TestUtils.Simulate.change(input, { target: { value: 'foo' }})
-    TestUtils.Simulate.change(input, { target: { value: 'bar' }})
+    TestUtils.Simulate.change(input, { target: { value: 'foo' } })
+    TestUtils.Simulate.change(input, { target: { value: 'bar' } })
 
     expect(callback).not.toBeCalled()
 

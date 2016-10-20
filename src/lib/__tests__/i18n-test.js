@@ -12,7 +12,7 @@ describe('i18n', function () {
   })
 
   it('returns undefined for partially missing complex key', function () {
-    expect(i18n.t({ foo: {}}, 'foo.bar')).toBeUndefined()
+    expect(i18n.t({ foo: {} }, 'foo.bar')).toBeUndefined()
   })
 
   it('returns undefined for non object complex key', function () {
@@ -24,7 +24,7 @@ describe('i18n', function () {
   })
 
   it('translates complex key', function () {
-    expect(i18n.t({ foo: { bar: 'blah' }}, 'foo.bar')).toBe('blah')
+    expect(i18n.t({ foo: { bar: 'blah' } }, 'foo.bar')).toBe('blah')
   })
 
   it('interpolates params', function () {
@@ -35,7 +35,7 @@ describe('i18n', function () {
 
   it('accepts optional scope', function () {
     expect(
-      i18n.t({ foo: { bar: 'blah' }}, 'bar', { scope: 'foo' })
+      i18n.t({ foo: { bar: 'blah' } }, 'bar', { scope: 'foo' })
     ).toBe('blah')
   })
 
@@ -47,11 +47,11 @@ describe('i18n', function () {
 
   it('accepts a count param', function () {
     expect(
-      i18n.t({ bar: { one: 'bar', other: 'bars' }}, 'bar', { count: 1 })
+      i18n.t({ bar: { one: 'bar', other: 'bars' } }, 'bar', { count: 1 })
     ).toBe('bar')
 
     expect(
-      i18n.t({ bar: { one: 'bar', other: 'bars' }}, 'bar', { count: 2 })
+      i18n.t({ bar: { one: 'bar', other: 'bars' } }, 'bar', { count: 2 })
     ).toBe('bars')
   })
 })

@@ -161,7 +161,7 @@ export default React.createClass({
   },
 
   showTip: function (bool, length, angle) {
-    this.setState({ tip: !length ? bool : { length: length, angle: angle }})
+    this.setState({ tip: !length ? bool : { length: length, angle: angle } })
   },
 
   centerTouch: function () {

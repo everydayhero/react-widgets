@@ -43,7 +43,7 @@ describe('Input', function () {
   it('will not alter input when readOnly', function () {
     var element = TestUtils.renderIntoDocument(<Input value='oldValue' readOnly />)
     var input = findByClass(element, 'Input__input')
-    TestUtils.Simulate.change(input, { target: { value: 'newValue' }})
+    TestUtils.Simulate.change(input, { target: { value: 'newValue' } })
     expect(input.value).toBe('oldValue')
   })
 
@@ -55,7 +55,7 @@ describe('Input', function () {
     var element = TestUtils.renderIntoDocument(<Input value='oldValue' disabled modal={modal} mask={mask} output={output} validate={validate} />)
     var input = findByClass(element, 'Input__input')
     TestUtils.Simulate.focus(input)
-    TestUtils.Simulate.change(input, { target: { value: 'newValue' }})
+    TestUtils.Simulate.change(input, { target: { value: 'newValue' } })
     TestUtils.Simulate.blur(input)
     expect(modal).not.toBeCalled()
     expect(output).not.toBeCalled()
@@ -81,7 +81,7 @@ describe('Input', function () {
     var output = jest.genMockFunction()
     var element = TestUtils.renderIntoDocument(<Input value='oldValue' output={output} />)
     var input = findByClass(element, 'Input__input')
-    TestUtils.Simulate.change(input, { target: { value: 'newValue' }})
+    TestUtils.Simulate.change(input, { target: { value: 'newValue' } })
     expect(output).lastCalledWith('newValue')
   })
 
@@ -89,7 +89,7 @@ describe('Input', function () {
     var mask = jest.genMockFunction().mockReturnValue('newValue--masked')
     var element = TestUtils.renderIntoDocument(<Input value='oldValue' mask={mask} />)
     var input = findByClass(element, 'Input__input')
-    TestUtils.Simulate.change(input, { target: { value: 'newValue' }})
+    TestUtils.Simulate.change(input, { target: { value: 'newValue' } })
     expect(mask).lastCalledWith('newValue')
     expect(input.value).toBe('newValue--masked')
   })
@@ -109,7 +109,7 @@ describe('Input', function () {
     var validate = jest.genMockFunction()
     var element = TestUtils.renderIntoDocument(<Input required validate={validate} />)
     var input = findByClass(element, 'Input__input')
-    TestUtils.Simulate.change(input, { target: { value: 'testValue' }})
+    TestUtils.Simulate.change(input, { target: { value: 'testValue' } })
     TestUtils.Simulate.blur(input)
     expect(validate).lastCalledWith('testValue', element.setValid)
     var setValidCallback = validate.mock.calls[0][1]

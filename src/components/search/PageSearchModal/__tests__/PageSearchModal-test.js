@@ -72,7 +72,7 @@ describe('Rendering', function () {
     const element = mount(pageSearchModal)
     const input = element.find('input')
 
-    input.simulate('change', { target: { value: 'foo' }})
+    input.simulate('change', { target: { value: 'foo' } })
     jest.runAllTimers()
 
     const resultElements = element.find('.SearchResult')
@@ -102,7 +102,7 @@ describe('ID Handling', function () {
     const element = mount(pageSearchModal)
     const input = element.find('input')
 
-    input.simulate('change', { target: { value: 'foo' }})
+    input.simulate('change', { target: { value: 'foo' } })
     jest.runAllTimers()
 
     expect(pages.search.mock.calls.length).toEqual(1)
@@ -122,7 +122,7 @@ describe('ID Handling', function () {
     const element = mount(pageSearchModal)
     const input = element.find('input')
 
-    input.simulate('change', { target: { value: 'foo' }})
+    input.simulate('change', { target: { value: 'foo' } })
     jest.runAllTimers()
 
     expect(pages.search.mock.calls.length).toEqual(1)
@@ -164,7 +164,7 @@ describe('Searching', function () {
     const element = mount(pageSearchModal)
     const input = element.find('input')
 
-    input.simulate('change', { target: { value: 'foo' }})
+    input.simulate('change', { target: { value: 'foo' } })
     jest.runAllTimers()
 
     expect(pages.search).lastCalledWith(query, element.instance().updateResults)
@@ -184,7 +184,7 @@ describe('Searching', function () {
     const element = mount(pageSearchModal)
     const input = element.find('input')
 
-    input.simulate('change', { target: { value: 'foo' }})
+    input.simulate('change', { target: { value: 'foo' } })
     jest.runAllTimers()
 
     var nextPageButton = element.find('.SearchPagination__button--right')
@@ -207,7 +207,7 @@ describe('Searching', function () {
 
     expect(element.state('isSearching')).toBeFalsy()
 
-    input.simulate('change', { target: { value: 'foo' }})
+    input.simulate('change', { target: { value: 'foo' } })
     jest.runAllTimers()
 
     expect(element.state('isSearching')).toBeTruthy()

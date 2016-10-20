@@ -50,7 +50,7 @@ describe('Amount', function () {
     const element = mount(<Amount />)
     const input = element.find({ type: 'text' })
 
-    input.simulate('change', { target: { value: 123 }})
+    input.simulate('change', { target: { value: 123 } })
 
     expect(element.state('custom')).toBe(123)
     expect(element.state('preset')).toBe(null)
@@ -64,7 +64,7 @@ describe('Amount', function () {
     expect(callback).lastCalledWith(700)
 
     const input = element.find({ type: 'text' })
-    input.simulate('change', { target: { value: 123 }})
+    input.simulate('change', { target: { value: 123 } })
     expect(callback).lastCalledWith(123)
 
     const select = element.find({ value: 1500 })

@@ -79,7 +79,7 @@ export default {
 
       sortedPages = _.slice(sortedPages, 0, limit)
 
-      return callback({ leaderboard: { pages: sortedPages }})
+      return callback({ leaderboard: { pages: sortedPages } })
     })
 
     var storePages = function (result) {

@@ -42,7 +42,7 @@ describe('AddressLookup', function () {
     var countrySelect = findByClass(element, 'CountrySelect__toggle')
     TestUtils.Simulate.click(countrySelect)
     var input = findByClass(element, 'Input__input')
-    TestUtils.Simulate.change(input, { target: { value: 'king' }})
+    TestUtils.Simulate.change(input, { target: { value: 'king' } })
     jest.runAllTimers()
     var country = findByClass(element, 'CountrySelectItem--focused')
     TestUtils.Simulate.click(country)
@@ -68,11 +68,11 @@ describe('AddressLookup', function () {
   it('UK postcode search requires at least 5 chars', function () {
     var element = TestUtils.renderIntoDocument(<AddressLookup country='UK' />)
     var input = findByClass(element, 'Input__input')
-    TestUtils.Simulate.change(input, { target: { value: '1234' }})
+    TestUtils.Simulate.change(input, { target: { value: '1234' } })
     jest.runAllTimers()
     expect(address.search).not.toBeCalled()
 
-    TestUtils.Simulate.change(input, { target: { value: '12345' }})
+    TestUtils.Simulate.change(input, { target: { value: '12345' } })
     jest.runAllTimers()
     expect(address.search).lastCalledWith('12345', 'UK', jasmine.any(Function))
   })
@@ -80,11 +80,11 @@ describe('AddressLookup', function () {
   it('Address search requires at least 7 chars', function () {
     var element = TestUtils.renderIntoDocument(<AddressLookup country='US' />)
     var input = findByClass(element, 'Input__input')
-    TestUtils.Simulate.change(input, { target: { value: '123456' }})
+    TestUtils.Simulate.change(input, { target: { value: '123456' } })
     jest.runAllTimers()
     expect(address.search).not.toBeCalled()
 
-    TestUtils.Simulate.change(input, { target: { value: '1234567' }})
+    TestUtils.Simulate.change(input, { target: { value: '1234567' } })
     jest.runAllTimers()
     expect(address.search).lastCalledWith('1234567', 'US', jasmine.any(Function))
   })
@@ -92,7 +92,7 @@ describe('AddressLookup', function () {
   it('returns a list of addresses', function () {
     var element = TestUtils.renderIntoDocument(<AddressLookup />)
     var input = findByClass(element, 'Input__input')
-    TestUtils.Simulate.change(input, { target: { value: 'TestAddress' }})
+    TestUtils.Simulate.change(input, { target: { value: 'TestAddress' } })
     jest.runAllTimers()
     expect(address.search).lastCalledWith('TestAddress', 'AU', jasmine.any(Function))
 
@@ -107,7 +107,7 @@ describe('AddressLookup', function () {
   it('address listing has google class for logo styling', function () {
     var element = TestUtils.renderIntoDocument(<AddressLookup />)
     var input = findByClass(element, 'Input__input')
-    TestUtils.Simulate.change(input, { target: { value: 'TestAddress' }})
+    TestUtils.Simulate.change(input, { target: { value: 'TestAddress' } })
     jest.runAllTimers()
 
     var callback = address.search.mock.calls[0][2]
@@ -163,7 +163,7 @@ describe('AddressLookup', function () {
       expect(streetAddress.value).toBe('1 Place Pl')
       expect(locality.value).toBe('Sydney')
 
-      TestUtils.Simulate.change(streetAddress, { target: { value: '2 SomeOther St' }})
+      TestUtils.Simulate.change(streetAddress, { target: { value: '2 SomeOther St' } })
       jest.runAllTimers()
       expect(pafValidated.value).toBe('false')
       expect(element.state.custom).not.toBeNull()

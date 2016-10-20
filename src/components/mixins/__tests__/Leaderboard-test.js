@@ -20,7 +20,7 @@ describe('LeaderboardMixin', function () {
             medium_image_url: ''
           }
         },
-        { amount: { cents: 0 }}
+        { amount: { cents: 0 } }
       ]
       let leaderboard = Leaderboard.getLeaderboard(pages)
 

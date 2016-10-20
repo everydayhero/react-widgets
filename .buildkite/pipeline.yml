@@ -10,6 +10,13 @@ steps:
 
   - type: "waiter"
 
+  - name: ":mag: Lint"
+    command: ".buildkite/bin/lint"
+    agents:
+      queue: elastic
+
+  - type: "waiter"
+
   - name: ":pill: Spec Tests"
     command: ".buildkite/bin/test-spec"
     agents:

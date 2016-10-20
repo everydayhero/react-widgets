@@ -161,7 +161,7 @@ export default React.createClass({
   },
 
   showTip: function(bool, length, angle) {
-    this.setState({ tip: !length ? bool : { length: length, angle: angle } });
+    this.setState({ tip: !length ? bool : { length: length, angle: angle }});
   },
 
   centerTouch: function() {
@@ -187,7 +187,7 @@ export default React.createClass({
     var options = this.getOptions();
     return _.map(_.uniq(_.map(this.state.data, 'group')), function(d, i) {
       var metrics = _.filter(this.state.data, { 'group': d });
-      return <FootprintGroup
+      return (<FootprintGroup
         index={ i }
         key={ i + d }
         id={ this.props.userName.replace(/\W/g, '') }
@@ -198,7 +198,7 @@ export default React.createClass({
         options={ options }
         onShowTip={ this.showTip }
         onHover={ this.setMetric }
-        onClick={ this.sectorClick } />;
+        onClick={ this.sectorClick } />);
     }.bind(this));
   },
 
@@ -225,9 +225,9 @@ export default React.createClass({
     var showTip = !!this.state.metric && !!this.state.tip && !this.state.compact;
     var diameter = this.getTweeningValue('min') * 2 - this.props.offset;
     var classes = cx({
-      "Footprint": true,
-      "Footprint--hover": !!this.state.metric,
-      "Footprint--compact": this.state.compact
+      'Footprint': true,
+      'Footprint--hover': !!this.state.metric,
+      'Footprint--compact': this.state.compact
     });
 
     return (

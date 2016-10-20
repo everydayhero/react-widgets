@@ -6,7 +6,7 @@ import CallToActionButton from '../CallToActionButton';
 
 export default React.createClass({
   mixins: [I18nMixin],
-  displayName: "CallToActionBox",
+  displayName: 'CallToActionBox',
   propTypes: {
     campaignUid: React.PropTypes.string.isRequired,
     registrationUrl: React.PropTypes.string.isRequired,
@@ -76,10 +76,10 @@ export default React.createClass({
     return (
       <div>
         <div className="CallToActionBox__title">{ title }</div>
-        <CallToActionButton kind="primary" reverse={ true } href={ registrationUrl } label={ registerLabel } />
+        <CallToActionButton kind="primary" reverse href={ registrationUrl } label={ registerLabel } />
         <hr />
         <p>Already Registered? <a href={ signInUrl } className="CallToActionBox__link">{ signInLabel }</a></p>
-        <CallToActionButton kind="primary" reverse={ true } href={ getStartedUrl } label={ getStartedLabel } />
+        <CallToActionButton kind="primary" reverse href={ getStartedUrl } label={ getStartedLabel } />
       </div>
     );
   },

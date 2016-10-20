@@ -6,7 +6,7 @@ import numeral from 'numbro';
 
 export default React.createClass({
   mixins: [I18nMixin],
-  displayName: "TotalCharities",
+  displayName: 'TotalCharities',
   propTypes: {
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
@@ -87,7 +87,7 @@ export default React.createClass({
     let renderIcon = this.props.renderIcon;
 
     if (renderIcon === true) {
-      renderIcon = "heart";
+      renderIcon = 'heart';
     }
 
     if (renderIcon) {

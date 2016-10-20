@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default React.createClass({
-  displayName: "PromoCharitiesResult",
+  displayName: 'PromoCharitiesResult',
   propTypes: {
     actionLabel: React.PropTypes.string,
     onSelect: React.PropTypes.func,

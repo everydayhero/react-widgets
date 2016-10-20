@@ -5,7 +5,7 @@ import TestUtils from 'react-addons-test-utils';
 import Input from '../';
 var findByClass     = TestUtils.findRenderedDOMComponentWithClass;
 var scryByClass     = TestUtils.scryRenderedDOMComponentsWithClass;
-import {findRenderedDOMComponentWithAttribute as findByAttribute} from '../../../../test/helpers/scryRenderedDOMComponentsWithAttribute';
+import { findRenderedDOMComponentWithAttribute as findByAttribute } from '../../../../test/helpers/scryRenderedDOMComponentsWithAttribute';
 
 describe('Input', function() {
   it('renders an input', function() {

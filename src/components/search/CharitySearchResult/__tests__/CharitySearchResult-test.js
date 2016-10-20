@@ -37,7 +37,7 @@ describe('CharitySearchResult', function() {
   });
 
   it('does not render merchant name if contained in name', function() {
-    var result = { charity: { name: 'Foo Bar' } };
+    var result = { charity: { name: 'Foo Bar' }};
     var searchResult = <CharitySearchResult result={ result } />;
     var component = TestUtils.renderIntoDocument(searchResult);
     var header = findByClass(component, 'CharitySearchResult__header');
@@ -46,7 +46,7 @@ describe('CharitySearchResult', function() {
   });
 
   it('does not render merchant name ignores case and punctuation', function() {
-    var result = { charity: { name: '{Foo}?' } };
+    var result = { charity: { name: '{Foo}?' }};
     var searchResult = <CharitySearchResult result={ result } />;
     var component = TestUtils.renderIntoDocument(searchResult);
     var header = findByClass(component, 'CharitySearchResult__header');
@@ -55,8 +55,8 @@ describe('CharitySearchResult', function() {
   });
 
   it('includes charity logo if exist', function() {
-    var result = { charity: { name: 'Foo', logo_url: 'blah' } };
-    var searchResult = <CharitySearchResult result={ result } selectAction='Blah' />;
+    var result = { charity: { name: 'Foo', logo_url: 'blah' }};
+    var searchResult = <CharitySearchResult result={ result } selectAction="Blah" />;
     var component = TestUtils.renderIntoDocument(searchResult);
     var logo = findByClass(component, 'CharitySearchResult__logo');
     var avatar = scryByClass(component, 'CharitySearchResult__avatar');
@@ -66,8 +66,8 @@ describe('CharitySearchResult', function() {
   });
 
   it('includes default charity avatar if no logo', function() {
-    var result = { charity: { name: 'Foo' } };
-    var searchResult = <CharitySearchResult result={ result } selectAction='Blah' />;
+    var result = { charity: { name: 'Foo' }};
+    var searchResult = <CharitySearchResult result={ result } selectAction="Blah" />;
     var component = TestUtils.renderIntoDocument(searchResult);
     var avatar = findByClass(component, 'CharitySearchResult__avatar');
     var logo = scryByClass(component, 'CharitySearchResult__logo');
@@ -77,7 +77,7 @@ describe('CharitySearchResult', function() {
   });
 
   it('includes selectAction', function() {
-    var searchResult = <CharitySearchResult result={ result } selectAction='Blah' />;
+    var searchResult = <CharitySearchResult result={ result } selectAction="Blah" />;
     var component = TestUtils.renderIntoDocument(searchResult);
     var action = findByClass(component, 'CharitySearchResult__actions');
 

@@ -35,29 +35,29 @@ describe('FundsRaised', function() {
     });
 
     it('handles a single campaign id', function() {
-      expect(totals.findByCampaigns).toBeCalledWith({campaignUids: "us-22"}, element.onSuccess, {});
+      expect(totals.findByCampaigns).toBeCalledWith({ campaignUids: 'us-22' }, element.onSuccess, {});
     });
   });
 
   describe('Handle multiple campaign uids', function() {
     beforeEach(function() {
       totals.findByCampaigns.mockClear();
-      element = TestUtils.renderIntoDocument(<EntityGoalProgress campaignUid={ ["us-22", "us-24", "us-19"] } />);
+      element = TestUtils.renderIntoDocument(<EntityGoalProgress campaignUid={ ['us-22', 'us-24', 'us-19'] } />);
     });
 
     it('finds a total for multiple campaigns', function() {
-      expect(totals.findByCampaigns).toBeCalledWith({campaignUids: ["us-22", "us-24", "us-19"]}, element.onSuccess, {});
+      expect(totals.findByCampaigns).toBeCalledWith({ campaignUids: ['us-22', 'us-24', 'us-19'] }, element.onSuccess, {});
     });
   });
 
   describe('Handle multiple charity uids', function() {
     beforeEach(function() {
       totals.findByCharities.mockClear();
-      element = TestUtils.renderIntoDocument(<EntityGoalProgress charityUid={ ["xx-11", "xx-22", "xx-33"] } />);
+      element = TestUtils.renderIntoDocument(<EntityGoalProgress charityUid={ ['xx-11', 'xx-22', 'xx-33'] } />);
     });
 
     it('finds a total for multiple charities', function() {
-      expect(totals.findByCharities).toBeCalledWith({charityUids: ["xx-11", "xx-22", "xx-33"]}, element.onSuccess, {});
+      expect(totals.findByCharities).toBeCalledWith({ charityUids: ['xx-11', 'xx-22', 'xx-33'] }, element.onSuccess, {});
     });
   });
 
@@ -68,7 +68,7 @@ describe('FundsRaised', function() {
     });
 
     it('finds a total for a charity within a campaign', function() {
-      expect(totals.findByAll).toBeCalledWith({charityUids: "xx-11", campaignUids: "us-22"}, element.onSuccess, {});
+      expect(totals.findByAll).toBeCalledWith({ charityUids: 'xx-11', campaignUids: 'us-22' }, element.onSuccess, {});
     });
   });
 
@@ -112,7 +112,7 @@ describe('FundsRaised', function() {
 
     it('handles a startAt property', function() {
       expect(totals.findByCharities.mock.calls.length).toEqual(1);
-      expect(totals.findByCharities).toBeCalledWith({charityUids: "au-31"}, element.onSuccess, {start:'2015-01-01'});
+      expect(totals.findByCharities).toBeCalledWith({ charityUids: 'au-31' }, element.onSuccess, { start: '2015-01-01' });
     });
   });
 
@@ -128,7 +128,7 @@ describe('FundsRaised', function() {
 
     it('handles a endAt property', function() {
       expect(totals.findByCharities.mock.calls.length).toEqual(1);
-      expect(totals.findByCharities).toBeCalledWith({charityUids: "au-24"}, element.onSuccess, {end:'2015-06-01'});
+      expect(totals.findByCharities).toBeCalledWith({ charityUids: 'au-24' }, element.onSuccess, { end: '2015-06-01' });
     });
   });
 

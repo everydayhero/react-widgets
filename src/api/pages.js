@@ -43,7 +43,7 @@ export default {
     params = Object.assign({}, { page: 1, pageSize: 10 }, params);
     params.searchTerm = encodeURIComponent(params.searchTerm);
 
-    return getJSONP(routes.get('searchPages', params), callback, {timeout: 10000});
+    return getJSONP(routes.get('searchPages', params), callback, { timeout: 10000 });
   },
 
   isGivePage(page) {

@@ -61,7 +61,7 @@ describe('FundsRaised', function() {
 
     it('handles a single campaign id', function() {
       expect(totals.findByCampaigns.mock.calls.length).toEqual(1);
-      expect(totals.findByCampaigns).toBeCalledWith({campaignUids: "us-22"}, element.onSuccess, {});
+      expect(totals.findByCampaigns).toBeCalledWith({ campaignUids: 'us-22' }, element.onSuccess, {});
     });
   });
 
@@ -77,7 +77,7 @@ describe('FundsRaised', function() {
 
     it('handles a single page id', function() {
       expect(totals.findByPages.mock.calls.length).toEqual(1);
-      expect(totals.findByPages).toBeCalledWith("848751", element.onSuccess, {});
+      expect(totals.findByPages).toBeCalledWith('848751', element.onSuccess, {});
     });
   });
 
@@ -93,7 +93,7 @@ describe('FundsRaised', function() {
 
     it('handles a single charity id', function() {
       expect(totals.findByCharities.mock.calls.length).toEqual(1);
-      expect(totals.findByCharities).toBeCalledWith({charityUids: "au-31"}, element.onSuccess, {});
+      expect(totals.findByCharities).toBeCalledWith({ charityUids: 'au-31' }, element.onSuccess, {});
     });
   });
 
@@ -103,13 +103,13 @@ describe('FundsRaised', function() {
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
-      fundsRaised = <FundsRaised charityUids={ ["au-27", "au-28"] } />;
+      fundsRaised = <FundsRaised charityUids={ ['au-27', 'au-28'] } />;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
 
     it('handles multiple charity ids', function() {
       expect(totals.findByCharities.mock.calls.length).toEqual(1);
-      expect(totals.findByCharities).toBeCalledWith({charityUids: ["au-27", "au-28"]}, element.onSuccess, {});
+      expect(totals.findByCharities).toBeCalledWith({ charityUids: ['au-27', 'au-28'] }, element.onSuccess, {});
     });
   });
 
@@ -119,13 +119,13 @@ describe('FundsRaised', function() {
 
     beforeEach(function() {
       totals.findByAll.mockClear();
-      fundsRaised = <FundsRaised charityUids={ ["au-27", "au-28"] } campaignUids={ ["us-22"] } />;
+      fundsRaised = <FundsRaised charityUids={ ['au-27', 'au-28'] } campaignUids={ ['us-22'] } />;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
 
     it('handles multiple charity and campaign Ids', function() {
       expect(totals.findByAll.mock.calls.length).toEqual(1);
-      expect(totals.findByAll).toBeCalledWith({charityUids: ["au-27", "au-28"], campaignUids: ["us-22"]}, element.onSuccess, {});
+      expect(totals.findByAll).toBeCalledWith({ charityUids: ['au-27', 'au-28'], campaignUids: ['us-22'] }, element.onSuccess, {});
     });
   });
 
@@ -135,13 +135,13 @@ describe('FundsRaised', function() {
 
     beforeEach(function() {
       totals.findByCampaigns.mockClear();
-      fundsRaised = <FundsRaised campaignUids={ ["us-22", "us-24"] } />;
+      fundsRaised = <FundsRaised campaignUids={ ['us-22', 'us-24'] } />;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
 
     it('handles a multiple campaign ids', function() {
       expect(totals.findByCampaigns.mock.calls.length).toEqual(1);
-      expect(totals.findByCampaigns).toBeCalledWith({campaignUids: ["us-22", "us-24"]}, element.onSuccess, {});
+      expect(totals.findByCampaigns).toBeCalledWith({ campaignUids: ['us-22', 'us-24'] }, element.onSuccess, {});
     });
   });
 
@@ -236,7 +236,7 @@ describe('FundsRaised', function() {
 
     it('handles a startAt property', function() {
       expect(totals.findByCharities.mock.calls.length).toEqual(1);
-      expect(totals.findByCharities).toBeCalledWith({charityUids: "au-31"}, element.onSuccess, {start:'2015-01-01'});
+      expect(totals.findByCharities).toBeCalledWith({ charityUids: 'au-31' }, element.onSuccess, { start: '2015-01-01' });
     });
   });
 
@@ -252,7 +252,7 @@ describe('FundsRaised', function() {
 
     it('handles a endAt property', function() {
       expect(totals.findByCharities.mock.calls.length).toEqual(1);
-      expect(totals.findByCharities).toBeCalledWith({charityUids: "au-31"}, element.onSuccess, {end:'2015-06-01'});
+      expect(totals.findByCharities).toBeCalledWith({ charityUids: 'au-31' }, element.onSuccess, { end: '2015-06-01' });
     });
   });
 
@@ -262,13 +262,13 @@ describe('FundsRaised', function() {
 
     beforeEach(function() {
       totals.findByCharities.mockClear();
-      fundsRaised = <FundsRaised charityUid="au-31" groupValues={["ABC"]}/>;
+      fundsRaised = <FundsRaised charityUid="au-31" groupValues={['ABC']}/>;
       element = TestUtils.renderIntoDocument(fundsRaised);
     });
 
     it('fetches data with a group value specified', function() {
       expect(totals.findByCharities.mock.calls.length).toEqual(1);
-      expect(totals.findByCharities).toBeCalledWith({charityUids: "au-31", groupValues:["ABC"]}, element.onSuccess, {});
+      expect(totals.findByCharities).toBeCalledWith({ charityUids: 'au-31', groupValues: ['ABC'] }, element.onSuccess, {});
     });
   });
 

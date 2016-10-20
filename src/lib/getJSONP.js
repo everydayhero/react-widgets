@@ -21,7 +21,7 @@ function getJSONP(url, callback, options) {
   let requestHandler = function(error, data) {
     if (error) {
       if (retries-- > 0) {
-        cancelRequest = jsonp(url, {timeout: timeout}, requestHandler);
+        cancelRequest = jsonp(url, { timeout: timeout }, requestHandler);
       } else {
         callback(null);
       }
@@ -31,7 +31,7 @@ function getJSONP(url, callback, options) {
     }
   };
 
-  cancelRequest = jsonp(url, {timeout: timeout}, requestHandler);
+  cancelRequest = jsonp(url, { timeout: timeout }, requestHandler);
 
   const cancelCallback = function() {
     cancelRequest();

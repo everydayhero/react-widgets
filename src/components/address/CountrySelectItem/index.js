@@ -4,7 +4,7 @@ import cx from 'classnames';
 import FlagIcon from '../../helpers/FlagIcon';
 
 export default React.createClass({
-  displayName: "CountrySelectItem",
+  displayName: 'CountrySelectItem',
 
   mixins: [PureRenderMixin],
 

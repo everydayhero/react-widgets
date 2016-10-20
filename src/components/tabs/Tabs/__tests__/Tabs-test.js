@@ -10,12 +10,12 @@ describe('Tabs', function() {
 
   let data = [
     {
-      "label": "foo",
-      "content": "blah"
+      'label': 'foo',
+      'content': 'blah'
     },
     {
-      "label": "bar",
-      "content": "<p>Dummy html <strong>content</strong>.</p>"
+      'label': 'bar',
+      'content': '<p>Dummy html <strong>content</strong>.</p>'
     }
   ];
 
@@ -94,7 +94,7 @@ describe('Tabs', function() {
     });
 
     it('collapses when collapse property = true', function() {
-      tabs = <Tabs children={ data } collapse={ true } />;
+      tabs = <Tabs children={ data } collapse />;
       component = TestUtils.renderIntoDocument(tabs);
 
       let tabsElement = findByClass(component, 'Tabs');

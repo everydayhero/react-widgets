@@ -7,7 +7,7 @@ import FundraiserImage from '../FundraiserImage';
 
 export default React.createClass({
   mixins: [I18nMixin],
-  displayName: "RecentFundraisers",
+  displayName: 'RecentFundraisers',
   propTypes: {
     campaignUid: React.PropTypes.oneOfType([
       React.PropTypes.string,
@@ -64,11 +64,11 @@ export default React.createClass({
       return <Icon className="RecentFundraisers__loading" icon="refresh" />;
     } else {
       return this.state.pageResults.map(function(d) {
-        return <FundraiserImage
+        return (<FundraiserImage
           key={ d.id }
           pageUrl={ d.url }
           imgSrc={ d.image.large_image_url }
-          imgTitle={ d.name } />;
+          imgTitle={ d.name } />);
       });
     }
   },

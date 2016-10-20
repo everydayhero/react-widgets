@@ -36,8 +36,8 @@ export default React.createClass({
       stroke: 'black'
     };
     var classes = cx({
-      "FootprintSector": true,
-      "FootprintSector--active": this.props.active
+      'FootprintSector': true,
+      'FootprintSector--active': this.props.active
     });
 
     return (
@@ -55,7 +55,7 @@ export default React.createClass({
 
         <path className="FootprintDummy" d={ this.props.dummy.path.print() } style={{ mask: 'url(#' + maskID + ')' }}/>
 
-        <path className={ "FootprintMetric FootprintMetric--" + this.props.name } d={ this.props.sector.path.print() } style={{ mask: 'url(#' + maskID + ')' }}/>
+        <path className={ 'FootprintMetric FootprintMetric--' + this.props.name } d={ this.props.sector.path.print() } style={{ mask: 'url(#' + maskID + ')' }}/>
       </g>
     );
   }

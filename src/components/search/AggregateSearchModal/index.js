@@ -223,7 +223,7 @@ export default React.createClass({
       this.setState({ counts: counts });
     } else {
       var timer = setTimeout(this.searchCounts, 2500);
-      this.setState({ cancelSearchCounts: function() { clearTimeout(timer); }});
+      this.setState({ cancelSearchCounts: function() { clearTimeout(timer); } });
     }
   },
 

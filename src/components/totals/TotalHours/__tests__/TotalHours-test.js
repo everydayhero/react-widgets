@@ -16,7 +16,7 @@ describe('TotalDistance', function() {
 
     beforeEach(function() {
       campaigns.findByUids.mockClear();
-      totalHours = <TotalHours campaignUids={ ["us-22", "us-24"] } />;
+      totalHours = <TotalHours campaignUids={ ['us-22', 'us-24'] } />;
       element = TestUtils.renderIntoDocument(totalHours);
     });
 
@@ -30,13 +30,13 @@ describe('TotalDistance', function() {
     });
 
     it('renders a loading icon', function() {
-      element.setState({isLoading: true});
+      element.setState({ isLoading: true });
       findByClass(element, 'TotalHours__loading');
     });
 
     it('loads data for multiple campaigns', function() {
       expect(campaigns.findByUids.mock.calls.length).toEqual(1);
-      expect(campaigns.findByUids).toBeCalledWith(["us-22", "us-24"], element.onSuccess);
+      expect(campaigns.findByUids).toBeCalledWith(['us-22', 'us-24'], element.onSuccess);
     });
   });
 
@@ -52,7 +52,7 @@ describe('TotalDistance', function() {
 
     it('handles loads data for a single campaign', function() {
       expect(campaigns.findByUids.mock.calls.length).toEqual(1);
-      expect(campaigns.findByUids).toBeCalledWith(["us-22"], element.onSuccess);
+      expect(campaigns.findByUids).toBeCalledWith(['us-22'], element.onSuccess);
     });
   });
 

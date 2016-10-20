@@ -6,7 +6,7 @@ export default React.createClass({
 
   propTypes: {
     className: React.PropTypes.string,
-    country:   React.PropTypes.string.isRequired,
+    country: React.PropTypes.string.isRequired,
   },
 
   render: function() {

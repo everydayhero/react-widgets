@@ -62,7 +62,7 @@ describe('charities', () => {
 
     describe('with empty array', () => {
       before(() => {
-        sinon.stub(_, "defer", () => {});
+        sinon.stub(_, 'defer', () => {});
       });
 
       beforeEach(() => {

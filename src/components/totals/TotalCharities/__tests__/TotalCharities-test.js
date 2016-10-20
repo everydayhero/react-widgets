@@ -16,7 +16,7 @@ describe('TotalCharities', function() {
 
     beforeEach(function() {
       charities.findByCampaign.mockClear();
-      totalCharities = <TotalCharities campaignUids={ ["us-22", "us-24"] } />;
+      totalCharities = <TotalCharities campaignUids={ ['us-22', 'us-24'] } />;
       element = TestUtils.renderIntoDocument(totalCharities);
     });
 
@@ -51,7 +51,7 @@ describe('TotalCharities', function() {
 
     it('check that a campaign id is present', function() {
       expect(charities.findByCampaign.mock.calls.length).toEqual(1);
-      expect(charities.findByCampaign).toBeCalledWith(["us-22", "us-24"], 1, 1, element.onSuccess);
+      expect(charities.findByCampaign).toBeCalledWith(['us-22', 'us-24'], 1, 1, element.onSuccess);
     });
   });
 

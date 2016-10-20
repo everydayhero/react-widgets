@@ -66,7 +66,7 @@ describe('CharitySearchModal', function() {
     let charitySearchModal = <CharitySearchModal autoFocus={ false } country="xy" />;
     let element = TestUtils.renderIntoDocument(charitySearchModal);
     let input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
+    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
     jest.runAllTimers();
 
     expect(charities.search.mock.calls.length).toEqual(2);
@@ -98,7 +98,7 @@ describe('CharitySearchModal', function() {
     expect(element.state.isSearching).toBeFalsy();
 
     let input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
+    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
     jest.runAllTimers();
 
     expect(element.state.isSearching).toBeTruthy();

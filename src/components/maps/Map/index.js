@@ -6,7 +6,7 @@ import Icon from '../../helpers/Icon';
 
 export default React.createClass({
   mixins: [I18nMixin],
-  displayName: "Map",
+  displayName: 'Map',
   propTypes: {
     campaignUid: React.PropTypes.string.isRequired,
     region: React.PropTypes.string.isRequired,

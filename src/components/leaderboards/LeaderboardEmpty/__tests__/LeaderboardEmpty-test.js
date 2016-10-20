@@ -38,7 +38,7 @@ describe('Generating a get started URL', function() {
   });
 
   it('sets to a generic sign up URL if there are multiple campaign ids', function() {
-    var component = <LeaderboardEmpty campaignUids={ ["abc-123", 'xyz-456'] } />;
+    var component = <LeaderboardEmpty campaignUids={ ['abc-123', 'xyz-456'] } />;
     var element = TestUtils.renderIntoDocument(component);
     expect(campaigns.find.mock.calls.length).toBe(1);
     expect(element.state.getStartedUrl).toEqual('https://everydayhero.com/us/sign-up');

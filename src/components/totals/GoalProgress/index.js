@@ -4,7 +4,7 @@ import Icon from '../../helpers/Icon';
 import numeral from 'numbro';
 
 export default React.createClass({
-  displayName: "GoalProgress",
+  displayName: 'GoalProgress',
 
   mixins: [PureRenderMixin],
 
@@ -42,9 +42,9 @@ export default React.createClass({
   },
 
   renderIcon: function() {
-    var classes = "GoalProgress__icon";
+    var classes = 'GoalProgress__icon';
     if (this.state.progress === 1) {
-      classes += "--achieved";
+      classes += '--achieved';
     }
 
     return (

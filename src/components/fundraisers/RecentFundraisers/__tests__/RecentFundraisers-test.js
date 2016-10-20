@@ -63,7 +63,7 @@ describe('RecentFundraisers', function() {
     });
 
     it('renders a custom heading', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       let heading = findByClass(element, 'RecentFundraisers__heading');
 
       expect(heading.textContent).toBe(translation.heading);

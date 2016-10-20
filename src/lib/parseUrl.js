@@ -1,10 +1,10 @@
 const urlRegExp = new RegExp(
-  "^(https?):\\/\\/" +                    // protocol
-  "([\\w-]+(?:\\.[\\w-]+)*(?::\\d+)?)" +  // hostname
-  "(\\/[^?#]*)?" +                        // path
-  "(?:\\?([^#]*))?" +                     // query
-  "(?:#(.*))?",                           // bookmark
-  "i"
+  '^(https?):\\/\\/' +                    // protocol
+  '([\\w-]+(?:\\.[\\w-]+)*(?::\\d+)?)' +  // hostname
+  '(\\/[^?#]*)?' +                        // path
+  '(?:\\?([^#]*))?' +                     // query
+  '(?:#(.*))?',                           // bookmark
+  'i'
 );
 
 function parseUrl(url) {

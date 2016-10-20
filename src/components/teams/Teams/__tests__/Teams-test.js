@@ -58,7 +58,7 @@ describe('Teams', function() {
     });
 
     it('renders a custom heading', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       let heading = findByClass(element, 'Teams__heading');
 
       expect(heading.textContent).toBe(translation.heading);

@@ -45,37 +45,37 @@ export default React.createClass({
     var bodyClasses = 'SearchModal__body';
 
     var input =
-      <SearchInput
-        className='SearchModal__input'
+      (<SearchInput
+        className="SearchModal__input"
         autoFocus={ props.autoFocus }
         label={ this.t('title') }
         onChange={ props.onInputChange }
         isSearching= { props.isSearching }
-        searchTerm={ this.props.searchTerm } />;
+        searchTerm={ this.props.searchTerm } />);
 
     var pagination = false;
     if (props.pagination && props.pagination.totalPages > 1) {
       bodyClasses = bodyClasses + ' SearchModal__body--paginated';
       pagination =
-        <SearchPagination
+        (<SearchPagination
           onChange={ props.onPageChange }
           count={ props.pagination.count }
           page={ props.pagination.page }
           pageSize={ props.pagination.pageSize }
-          totalPages={ props.pagination.totalPages } />;
+          totalPages={ props.pagination.totalPages } />);
     }
 
     var results =
-      <SearchResults
+      (<SearchResults
         i18n={ this.getI18n() }
         onSelect={ props.onSelect }
         results={ props.results }
         resultComponent={ props.resultComponent }
-        selectAction={ props.selectAction } />;
+        selectAction={ props.selectAction } />);
 
     return (
       <Overlay onClose={ props.onClose }>
-        <div className='SearchModal__header'>
+        <div className="SearchModal__header">
           { input }
           { pagination }
         </div>

@@ -36,7 +36,7 @@ describe('TeamLeaderboardItem', function() {
     let elementCharity;
 
     it('renders a charity name if present', function() {
-      let teamLeaderboardItem = <TeamLeaderboardItem charityName='foo' />;
+      let teamLeaderboardItem = <TeamLeaderboardItem charityName="foo" />;
       element = TestUtils.renderIntoDocument(teamLeaderboardItem);
       elementCharity = findByClass(element, 'LeaderboardItem__charity');
       expect(elementCharity).not.toBeNull();

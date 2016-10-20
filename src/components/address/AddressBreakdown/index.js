@@ -7,7 +7,7 @@ import Select from '../../forms/Select';
 import countryList from '../CountrySelect/countries';
 
 export default React.createClass({
-  displayName: "AddressBreakdown",
+  displayName: 'AddressBreakdown',
 
   mixins: [I18nMixin, PureRenderMixin],
 
@@ -184,8 +184,8 @@ export default React.createClass({
           spacing={ 'tight' }
           output={ onChange('postal_code') } />
         { props.children }
-        <input type="hidden" name={ props.prefix + "country_iso" } value={ iso } />
-        <input type="hidden" name={ props.prefix + "paf_validated" } value={ address.paf_validated } />
+        <input type="hidden" name={ props.prefix + 'country_iso' } value={ iso } />
+        <input type="hidden" name={ props.prefix + 'paf_validated' } value={ address.paf_validated } />
       </div>
     );
   }

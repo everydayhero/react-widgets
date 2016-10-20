@@ -7,7 +7,7 @@ import Team from '../Team';
 
 export default React.createClass({
   mixins: [I18nMixin],
-  displayName: "Teams",
+  displayName: 'Teams',
   propTypes: {
     campaignUid: React.PropTypes.oneOfType([
       React.PropTypes.string,

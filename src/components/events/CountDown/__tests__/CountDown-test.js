@@ -29,7 +29,7 @@ describe('CountDown', function() {
 
   describe('component configurable', function() {
     let component;
-    let date = moment().add(10, 'days').format("YYYY-MM-DD");
+    let date = moment().add(10, 'days').format('YYYY-MM-DD');
     let linkUrl = 'http://www.google.com/';
 
     beforeEach(function() {
@@ -46,8 +46,8 @@ describe('CountDown', function() {
   describe('when the event date is in the future', function() {
     let countDown;
     let component;
-    let linkUrl = "http://everydayhero.com/";
-    let date    = moment().add(10, 'days').format("YYYY-MM-DD");
+    let linkUrl = 'http://everydayhero.com/';
+    let date    = moment().add(10, 'days').format('YYYY-MM-DD');
 
     beforeEach(function() {
       countDown = <CountDown date={ date } linkUrl={ linkUrl } />;
@@ -56,7 +56,7 @@ describe('CountDown', function() {
 
     it('renders days', function() {
       let element = findByClass(component, 'CountDown__days');
-      expect(element.textContent).toBe("10");
+      expect(element.textContent).toBe('10');
     });
 
     it('renders a string using past tense', function() {
@@ -73,8 +73,8 @@ describe('CountDown', function() {
   describe('when the event date is in the past', function() {
     let countDown;
     let component;
-    let linkUrl = "http://everydayhero.com/";
-    let date    = moment().subtract(10, 'days').format("YYYY-MM-DD");
+    let linkUrl = 'http://everydayhero.com/';
+    let date    = moment().subtract(10, 'days').format('YYYY-MM-DD');
 
     beforeEach(function() {
       countDown = <CountDown date={ date } linkUrl={ linkUrl } />;
@@ -83,7 +83,7 @@ describe('CountDown', function() {
 
     it('renders days', function() {
       let element = findByClass(component, 'CountDown__days');
-      expect(element.textContent).toBe("10");
+      expect(element.textContent).toBe('10');
     });
 
     it('renders a string using past tense', function() {

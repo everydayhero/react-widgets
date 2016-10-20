@@ -12,7 +12,7 @@ describe('TabDrawer', function() {
   var callback = jest.genMockFunction();
 
   beforeEach(function() {
-    tabDrawer = <TabDrawer onClick={ callback } onKeyDown={ callback } label={ 'barbaz' } index={ 1 } active={ true } />;
+    tabDrawer = <TabDrawer onClick={ callback } onKeyDown={ callback } label={ 'barbaz' } index={ 1 } active />;
     component = TestUtils.renderIntoDocument(tabDrawer);
     element   = findByClass(component, 'TabDrawer');
   });

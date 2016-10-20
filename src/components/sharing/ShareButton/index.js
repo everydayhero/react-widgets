@@ -10,26 +10,26 @@ import removeEventListener from '../../../lib/removeEventListener';
 
 var serviceConfigs = [
   {
-    name: "facebook",
-    url: "http://www.facebook.com/sharer.php?u={url}"
+    name: 'facebook',
+    url: 'http://www.facebook.com/sharer.php?u={url}'
   },
   {
-    name: "twitter",
-    url: "https://twitter.com/share?url={url}&text={title}"
+    name: 'twitter',
+    url: 'https://twitter.com/share?url={url}&text={title}'
   },
   {
-    name: "googleplus",
-    url: "https://plus.google.com/share?url={url}",
-    icon: "google-plus"
+    name: 'googleplus',
+    url: 'https://plus.google.com/share?url={url}',
+    icon: 'google-plus'
   },
   {
-    name: "pinterest",
-    url: "https://pinterest.com/pin/create/bookmarklet/?media={img}&url={url}&description={title}"
+    name: 'pinterest',
+    url: 'https://pinterest.com/pin/create/bookmarklet/?media={img}&url={url}&description={title}'
   }
 ];
 
 export default React.createClass({
-  displayName: "ShareButton",
+  displayName: 'ShareButton',
   mixins: [I18nMixin],
   propTypes: {
     buttons: React.PropTypes.array,
@@ -77,9 +77,9 @@ export default React.createClass({
 
   formatServiceUrls: function(services) {
     var urlParams = {
-      "url": this.props.shareUrl,
-      "title": this.props.shareTitle,
-      "img": this.props.shareImage
+      'url': this.props.shareUrl,
+      'title': this.props.shareTitle,
+      'img': this.props.shareImage
     };
 
     return _.map(services, function(service) {

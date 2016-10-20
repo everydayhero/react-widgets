@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '../../helpers/Icon';
 
 export default React.createClass({
-  displayName: "TabDrawer",
+  displayName: 'TabDrawer',
   propTypes: {
     onClick: React.PropTypes.func.isRequired,
     onKeyDown: React.PropTypes.func.isRequired,
@@ -30,14 +30,14 @@ export default React.createClass({
   },
 
   render: function() {
-    var active = this.props.active ? " TabDrawer--active" : '';
+    var active = this.props.active ? ' TabDrawer--active' : '';
 
     return (
       <a
-        href={ "#" + this.props.tabId }
+        href={ '#' + this.props.tabId }
         onClick={ this.handleClick }
         onKeyDown={ this.handleKeyDown }
-        className={ "TabDrawer" + active }
+        className={ 'TabDrawer' + active }
         role="tab"
         id={ this.props.tabId }
         aria-selected={ this.props.active }

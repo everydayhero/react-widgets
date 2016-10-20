@@ -4,7 +4,7 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import SearchInput from '../';
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-import {findRenderedDOMComponentWithAttribute as findByAttribute} from '../../../../test/helpers/scryRenderedDOMComponentsWithAttribute';
+import { findRenderedDOMComponentWithAttribute as findByAttribute } from '../../../../test/helpers/scryRenderedDOMComponentsWithAttribute';
 
 describe('SearchInput', function() {
 

@@ -16,7 +16,7 @@
     "moment": "^2.10.2",
     "numbro": "^1.7.1",
     "paths-js": "^0.4.3",
-    "react": "^0.14.8",
+    "react": "^15.2.1",
     "react-addons-css-transition-group": "^0.14.7",
     "react-addons-pure-render-mixin": "^0.14.7",
     "react-addons-test-utils": "^0.14.7",

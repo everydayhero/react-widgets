@@ -179,6 +179,8 @@ function processMarkdown () {
   var template = fs.readFileSync('./src/README-template.html', 'utf8')
 
   function end (error, res) {
+    if (error) throw error
+
     var templateArray = template.split('{{content}}')
     var readme = templateArray[0] + res.text + templateArray[1]
     fs.writeFile('./public/README-' + pkg.version + '.html', readme, 'utf8', function (err) {

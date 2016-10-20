@@ -8,7 +8,6 @@ var replace = require('gulp-replace')
 var pkg = require('./package')
 var request = require('superagent')
 var fs = require('fs')
-var babel = require('gulp-babel')
 
 // stylesheets
 var sass = require('gulp-sass')
@@ -19,7 +18,6 @@ var minifyCss = require('gulp-cssnano')
 // javascripts
 var browserify = require('browserify')
 var watchify = require('watchify')
-var babelify = require('babelify')
 var uglify = require('gulp-uglify')
 var eslint = require('gulp-eslint')
 var buffer = require('vinyl-buffer')

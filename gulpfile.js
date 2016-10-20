@@ -19,7 +19,6 @@ var minifyCss = require('gulp-cssnano')
 var browserify = require('browserify')
 var watchify = require('watchify')
 var uglify = require('gulp-uglify')
-var eslint = require('gulp-eslint')
 var buffer = require('vinyl-buffer')
 var source = require('vinyl-source-stream')
 
@@ -75,15 +74,7 @@ gulp.task('styles', function () {
     .pipe(gulp.dest('public'))
 })
 
-gulp.task('lint', function () {
-  return gulp
-    .src(['src/**/*.js'])
-    .pipe(eslint({ quiet: true }))
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-})
-
-gulp.task('scripts', ['lint'], function () {
+gulp.task('scripts', function () {
   var bundler = browserify({
     entries: ['./src/widgets.js'],
     standalone: 'edh.widgets',
@@ -109,7 +100,6 @@ gulp.task('scripts', ['lint'], function () {
     bundler = watchify(bundler)
 
     bundler.on('update', function () {
-      gulp.start('lint')
       rebundle()
     })
 

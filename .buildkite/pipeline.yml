@@ -10,15 +10,22 @@ steps:
 
   - type: "waiter"
 
+  - name: ":mag: Lint"
+    command: ".buildkite/bin/lint"
+    agents:
+      queue: elastic
+
+  - type: "waiter"
+
   - name: ":pill: Spec Tests"
     command: ".buildkite/bin/test-spec"
     agents:
-      queue: native
+      queue: elastic
 
   - name: ":pill: Unit Tests"
     command: ".buildkite/bin/test-units"
     agents:
-      queue: native
+      queue: elastic
 
   - name: ":rocket: Publish"
     type: "manual"
@@ -29,7 +36,7 @@ steps:
   - name: ":package: Deploy"
     command: "./.buildkite/bin/deploy"
     agents:
-      queue: native
+      queue: elastic
     branches: master
 
   - type: "waiter"
@@ -37,5 +44,5 @@ steps:
   - name: ":loudspeaker:"
     command: "./.buildkite/bin/announce"
     agents:
-      queue: native
+      queue: elastic
     branches: master

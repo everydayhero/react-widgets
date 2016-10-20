@@ -1,11 +1,12 @@
 'use strict'
 
+var path = require('path')
 var express = require('express')
 var app = express()
 var compression = require('compression')
 var morgan = require('morgan')
 
-var staticPath = __dirname + '/public/'
+var staticPath = path.join(__dirname, '/public/')
 var port = Number(7500)
 var pkg = require('./package.json')
 

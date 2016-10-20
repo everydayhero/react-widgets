@@ -126,7 +126,7 @@ export default React.createClass({
       <div className={'Map'}>
         <h3 className='Map__heading'>{ heading }</h3>
         <div className='Map__legend'>
-          <p><span className='Map__legend-key' style={keyStyle} />                                { legend }</p>
+          <p><span className='Map__legend-key' style={keyStyle} />{ legend }</p>
         </div>
         <div className='Map__content'>
           { this.renderMap() }

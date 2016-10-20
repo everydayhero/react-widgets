@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default React.createClass({
-  displayName: "TabPanel",
+  displayName: 'TabPanel',
   propTypes: {
     content: React.PropTypes.oneOfType([
       React.PropTypes.array,
@@ -19,14 +19,14 @@ export default React.createClass({
   },
 
   render: function() {
-    var active = this.props.active ? " TabPanel--active" : '';
+    var active = this.props.active ? ' TabPanel--active' : '';
     var props = {
-      className: "TabPanel" + active,
-      role: "tabpanel",
-      "aria-labelledby": this.props.labelledBy
+      className: 'TabPanel' + active,
+      role: 'tabpanel',
+      'aria-labelledby': this.props.labelledBy
     };
 
-    if (typeof this.props.content === "object") {
+    if (typeof this.props.content === 'object') {
       return <div { ...props }>{ this.props.content }</div>;
     }
 

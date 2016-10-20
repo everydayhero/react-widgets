@@ -49,15 +49,15 @@ export default React.createClass({
     var isLastPage = this.props.page >= this.props.totalPages;
 
     return (
-      <div className='SearchPagination'>
+      <div className="SearchPagination">
         <div className="SearchPagination__counter">
           <span className="SearchPagination__current">{ from } - { to } </span>
           <span className="SearchPagination__count">of { this.getCount() }</span>
         </div>
-        <button type="button" className='SearchPagination__button--left' onClick={ this.onPageLeft } disabled={ isFirstPage }>
+        <button type="button" className="SearchPagination__button--left" onClick={ this.onPageLeft } disabled={ isFirstPage }>
           <Icon icon="chevron-left"/>
         </button>
-        <button type="button" className='SearchPagination__button--right' onClick={ this.onPageRight } disabled={ isLastPage }>
+        <button type="button" className="SearchPagination__button--right" onClick={ this.onPageRight } disabled={ isLastPage }>
           <Icon icon="chevron-right"/>
         </button>
       </div>

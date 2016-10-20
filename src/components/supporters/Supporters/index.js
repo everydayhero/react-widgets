@@ -93,7 +93,7 @@ export default React.createClass({
     var width = this.getChildWidth(count);
 
     return _.map(_.take(pages, Math.max(count, 2)), function(page) {
-      return <SupporterCard
+      return (<SupporterCard
         key={ page.id }
         footprint={ page.owner_footprint }
         width={ width }
@@ -104,7 +104,7 @@ export default React.createClass({
         eventName={ !props.hideEventName ? page.campaign_name : '' }
         target={ page.target_cents / 100 }
         current={ page.amount.cents / 100 }
-        currency={ page.amount.currency.symbol } />;
+        currency={ page.amount.currency.symbol } />);
     });
   },
 

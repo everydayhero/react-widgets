@@ -25,7 +25,7 @@ describe('AggregateSearchModal', function() {
   });
 
   it('renders an empty state if no results can be found', function() {
-    element.setState({ isSearching: false, results: {} });
+    element.setState({ isSearching: false, results: {}});
     findByClass(element, 'AggregateSearchModal__footer--empty');
   });
 

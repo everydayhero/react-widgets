@@ -25,8 +25,8 @@ describe('FundraiserImage', function() {
     let fundraiserImage;
     let element;
     let props = {
-      pageUrl: "http://everydayhero.com/us",
-      imgTitle: "Wonderful Person"
+      pageUrl: 'http://everydayhero.com/us',
+      imgTitle: 'Wonderful Person'
     };
 
     beforeEach(function() {

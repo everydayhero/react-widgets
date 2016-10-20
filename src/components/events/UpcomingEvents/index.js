@@ -126,12 +126,12 @@ export default React.createClass({
   },
 
   renderButton: function() {
-    return <Button
+    return (<Button
       kind="primary"
       label={ this.t(this.state.showAll ? 'show_less' : 'show_all') }
       icon={ this.state.showAll ? 'chevron-up' : 'chevron-down' }
       className="UpcomingEvents__showAllButton"
-      onClick={ this.setShowAll }/>
+      onClick={ this.setShowAll }/>)
   },
 
   render: function() {

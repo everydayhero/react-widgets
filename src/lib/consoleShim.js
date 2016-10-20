@@ -1,6 +1,6 @@
 let noop = function() {};
 
-if (typeof window.console === "undefined") {
+if (typeof window.console === 'undefined') {
   window.console = {
     log: noop,
     warn: noop,

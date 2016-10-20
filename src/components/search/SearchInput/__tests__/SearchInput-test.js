@@ -33,14 +33,14 @@ describe('SearchInput', function() {
   });
 
   it('show processing twirler when QueryInProgress', function() {
-    let component = <SearchInput isSearching={ true } />;
+    let component = <SearchInput isSearching />;
     let element = TestUtils.renderIntoDocument(component);
 
     findByClass(element, 'SearchInput__progressSpinner');
   });
 
   it('auto focuses on autoFocus', function() {
-    let component = <SearchInput autoFocus={ true } />;
+    let component = <SearchInput autoFocus />;
     let element = TestUtils.renderIntoDocument(component);
     let input = findByTag(element, 'input');
 
@@ -55,7 +55,7 @@ describe('SearchInput', function() {
     let component = <SearchInput onChange={ callback } />;
     let element = TestUtils.renderIntoDocument(component);
     let input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
+    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
 
     expect(callback).not.toBeCalled();
 
@@ -69,8 +69,8 @@ describe('SearchInput', function() {
     let component = <SearchInput onChange={ callback } />;
     let element = TestUtils.renderIntoDocument(component);
     let input = findByTag(element, 'input');
-    TestUtils.Simulate.change(input, { target: { value: 'foo' } });
-    TestUtils.Simulate.change(input, { target: { value: 'bar' } });
+    TestUtils.Simulate.change(input, { target: { value: 'foo' }});
+    TestUtils.Simulate.change(input, { target: { value: 'bar' }});
 
     expect(callback).not.toBeCalled();
 

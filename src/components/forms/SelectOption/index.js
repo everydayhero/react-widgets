@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import cx from 'classnames';
 
 export default React.createClass({
-  displayName: "SelectOption",
+  displayName: 'SelectOption',
 
   mixins: [PureRenderMixin],
 
@@ -28,8 +28,8 @@ export default React.createClass({
 
   render: function() {
     var classes = cx({
-      "SelectOption": true,
-      "SelectOption--focused": this.props.focused
+      'SelectOption': true,
+      'SelectOption--focused': this.props.focused
     });
 
     return (

@@ -22,14 +22,14 @@ describe('Goal', function() {
     });
 
     it('renders a default total', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       let total = findByClass(element, 'Goal__total');
 
       expect(total.textContent).toContain('$0');
     });
 
     it('renders a default title', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       let title = findByClass(element, 'Goal__title');
 
       expect(title.textContent).toBe('Goal');

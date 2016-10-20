@@ -50,7 +50,7 @@ describe('LeaderboardItem', function() {
     let elementImg;
 
     it('renders a profile image if set to true', function() {
-      leaderboardItem = <LeaderboardItem renderImage={ true } />;
+      leaderboardItem = <LeaderboardItem renderImage />;
       element = TestUtils.renderIntoDocument(leaderboardItem);
       elementImg = scryByClass(element, 'LeaderboardItem__image');
       expect(elementImg.length).toEqual(1);
@@ -70,7 +70,7 @@ describe('LeaderboardItem', function() {
     let elementCharity;
 
     it('renders a charity name if present', function() {
-      leaderboardItem = <LeaderboardItem charityName='foo' />;
+      leaderboardItem = <LeaderboardItem charityName="foo" />;
       element = TestUtils.renderIntoDocument(leaderboardItem);
       elementCharity = scryByClass(element, 'LeaderboardItem__charity');
       expect(elementCharity.length).toEqual(1);

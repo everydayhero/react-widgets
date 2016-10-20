@@ -56,7 +56,7 @@ describe('multiple campaignUids', function() {
 
   beforeEach(function() {
     campaigns.leaderboardByUids.mockClear();
-    supporters = <Supporters campaignUids={ ["us-22", "us-19"] } />;
+    supporters = <Supporters campaignUids={ ['us-22', 'us-19'] } />;
     TestUtils.renderIntoDocument(supporters);
   });
 

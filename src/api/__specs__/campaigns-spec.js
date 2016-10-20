@@ -91,7 +91,7 @@ describe('campaigns', () => {
 
     describe('with empty array', () => {
       before(() => {
-        sinon.stub(_, "defer", () => {});
+        sinon.stub(_, 'defer', () => {});
       });
 
       beforeEach(() => {
@@ -103,11 +103,11 @@ describe('campaigns', () => {
       });
 
       it('does not fetch results', () => {
-        expect(getJSONP.default).to.not.have.been.called;
+        expect(getJSONP.default).to.have.callCount(0);
       });
 
       it('defers callback with empty results', () => {
-        expect(getJSONP.default).to.not.have.been.called;
+        expect(getJSONP.default).to.not.have.callCount(1);
         expect(_.defer).to.have.been.calledWith(
           callback,
           { campaigns: [] }

@@ -4,7 +4,7 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import Select from '../';
 var findByClass = TestUtils.findRenderedDOMComponentWithClass;
-import {findRenderedDOMComponentWithAttribute as findByAttribute} from '../../../../test/helpers/scryRenderedDOMComponentsWithAttribute';
+import { findRenderedDOMComponentWithAttribute as findByAttribute } from '../../../../test/helpers/scryRenderedDOMComponentsWithAttribute';
 
 var i18n = {
   name: 'test_Select',
@@ -40,27 +40,27 @@ describe('Select', function() {
     expect(optionList).toBeDefined();
   });
 
-  it("will not execute methods when disabled", function() {
+  it('will not execute methods when disabled', function() {
     var output = jest.genMockFunction();
-    var element = TestUtils.renderIntoDocument(<Select value="oldValue" disabled={ true } output={ output } options={ options } />);
+    var element = TestUtils.renderIntoDocument(<Select value="oldValue" disabled output={ output } options={ options } />);
     var selectInput = findByClass(element, 'Input__input');
     TestUtils.Simulate.focus(selectInput);
-    TestUtils.Simulate.change(selectInput, { target: { value: 'newValue' } });
+    TestUtils.Simulate.change(selectInput, { target: { value: 'newValue' }});
     TestUtils.Simulate.blur(selectInput);
     expect(output).not.toBeCalled();
     expect(selectInput.value).toBe('oldValue');
   });
 
-  it("will execute output function on option selected", function() {
+  it('will execute output function on option selected', function() {
     var output = jest.genMockFunction();
     var element = TestUtils.renderIntoDocument(<Select options={ options } output={ output } />);
     var selectInput = findByClass(element, 'Input__input');
-    TestUtils.Simulate.change(selectInput, { target: { value: 'option3' } });
+    TestUtils.Simulate.change(selectInput, { target: { value: 'option3' }});
     var option3 = findByClass(element, 'SelectOption--focused');
     TestUtils.Simulate.click(option3);
     expect(output).lastCalledWith('option3', { name: 'option3' });
 
-    TestUtils.Simulate.change(selectInput, { target: { value: '2' } });
+    TestUtils.Simulate.change(selectInput, { target: { value: '2' }});
     var option2 = findByClass(element, 'SelectOption--focused');
     TestUtils.Simulate.click(option2);
     expect(output).lastCalledWith('option2', { name: 'option2' });

@@ -15,7 +15,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default React.createClass({
   mixins: [I18nMixin, DOMInfoMixin, LeaderboardMixin],
-  displayName: "TeamLeaderboard",
+  displayName: 'TeamLeaderboard',
   propTypes: {
     campaignSlug: React.PropTypes.string,
     campaignUid: React.PropTypes.string,

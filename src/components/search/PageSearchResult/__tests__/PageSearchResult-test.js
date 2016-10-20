@@ -44,7 +44,7 @@ describe('it renders a result', function() {
   });
 
   it('includes selectAction', function() {
-    var searchResult = <PageSearchResult result={ result } selectAction='Blah' />;
+    var searchResult = <PageSearchResult result={ result } selectAction="Blah" />;
     var component = TestUtils.renderIntoDocument(searchResult);
     var action = findByClass(component, 'PageSearchResult__actions');
 

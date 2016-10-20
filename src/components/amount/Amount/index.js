@@ -4,7 +4,7 @@ import AmountInput from '../AmountInput';
 import AmountRadio from '../AmountRadio';
 
 export default React.createClass({
-  displayName: "Amount",
+  displayName: 'Amount',
 
   propTypes: {
     label: React.PropTypes.string,

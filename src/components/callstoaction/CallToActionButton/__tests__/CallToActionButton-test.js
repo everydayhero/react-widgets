@@ -19,7 +19,7 @@ describe('CallToActionButton', function() {
       };
 
       component = TestUtils.renderIntoDocument(
-        <CallToActionButton kind='cta' label='Get Started' icon='chevron-right' onClick={ onClick }/>
+        <CallToActionButton kind="cta" label="Get Started" icon="chevron-right" onClick={ onClick }/>
       );
     });
 
@@ -38,7 +38,7 @@ describe('CallToActionButton', function() {
   describe('primary', function() {
     beforeEach(function() {
       component = TestUtils.renderIntoDocument(
-        <CallToActionButton kind='primary' label='Get Started' icon='chevron-right'/>
+        <CallToActionButton kind="primary" label="Get Started" icon="chevron-right"/>
       );
     });
 
@@ -50,7 +50,7 @@ describe('CallToActionButton', function() {
   describe('secondary', function() {
     beforeEach(function() {
       component = TestUtils.renderIntoDocument(
-        <CallToActionButton kind='secondary' label='Get Started' icon='chevron-right'/>
+        <CallToActionButton kind="secondary" label="Get Started" icon="chevron-right"/>
       );
     });
 
@@ -62,7 +62,7 @@ describe('CallToActionButton', function() {
   describe('tertiary', function() {
     beforeEach(function() {
       component = TestUtils.renderIntoDocument(
-        <CallToActionButton kind='tertiary' label='Get Started' icon='chevron-right'/>
+        <CallToActionButton kind="tertiary" label="Get Started" icon="chevron-right"/>
       );
     });
 
@@ -74,7 +74,7 @@ describe('CallToActionButton', function() {
   describe('href', function() {
     beforeEach(function() {
       component = TestUtils.renderIntoDocument(
-        <CallToActionButton kind='cta' label='Get Started' icon='chevron-right' href="http://foo" />
+        <CallToActionButton kind="cta" label="Get Started" icon="chevron-right" href="http://foo" />
       );
     });
 
@@ -86,7 +86,7 @@ describe('CallToActionButton', function() {
   describe('reverse', function() {
     beforeEach(function() {
       component = TestUtils.renderIntoDocument(
-        <CallToActionButton kind='cta' label='Get Started' icon='chevron-right' reverse={ true } />
+        <CallToActionButton kind="cta" label="Get Started" icon="chevron-right" reverse />
       );
     });
 
@@ -98,7 +98,7 @@ describe('CallToActionButton', function() {
   describe('thin', function() {
     beforeEach(function() {
       component = TestUtils.renderIntoDocument(
-        <CallToActionButton kind='cta' label='Get Started' icon='chevron-right' thin={ true } />
+        <CallToActionButton kind="cta" label="Get Started" icon="chevron-right" thin />
       );
     });
 
@@ -110,7 +110,7 @@ describe('CallToActionButton', function() {
   describe('iconLeft', function() {
     beforeEach(function() {
       component = TestUtils.renderIntoDocument(
-        <CallToActionButton kind='cta' label='Get Started' icon='chevron-right' iconLeft={ true } />
+        <CallToActionButton kind="cta" label="Get Started" icon="chevron-right" iconLeft />
       );
     });
 
@@ -123,7 +123,7 @@ describe('CallToActionButton', function() {
 
     beforeEach(function() {
       component = TestUtils.renderIntoDocument(
-        <CallToActionButton kind='cta' label='Get Started' icon='chevron-right' disabled={ true } />
+        <CallToActionButton kind="cta" label="Get Started" icon="chevron-right" disabled />
       );
     });
 
@@ -136,7 +136,7 @@ describe('CallToActionButton', function() {
 
     beforeEach(function() {
       component = TestUtils.renderIntoDocument(
-        <CallToActionButton kind='cta' label='Get Started' border={ false } />
+        <CallToActionButton kind="cta" label="Get Started" border={ false } />
       );
     });
 

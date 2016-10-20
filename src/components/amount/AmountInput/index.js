@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 
 export default React.createClass({
-  displayName: "AmountInput",
+  displayName: 'AmountInput',
 
   propTypes: {
     amount: React.PropTypes.number,
@@ -21,7 +21,7 @@ export default React.createClass({
   getInitialState: function() {
     return {
       focused: false,
-      type: "text"
+      type: 'text'
     };
   },
 

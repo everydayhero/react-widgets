@@ -108,13 +108,13 @@ export default React.createClass({
   renderOptions: function() {
     var key = this.props.labelKey;
     return this.props.options.map(function(d, i) {
-      return <SelectOption
+      return (<SelectOption
         key={ d[key] + i }
         index={ i }
         focused={ i === this.state.fauxFocus }
         option={ d }
         label={ d[key] }
-        onSelect={ this.props.onSelect }/>;
+        onSelect={ this.props.onSelect }/>);
     }, this);
   },
 

@@ -5,7 +5,7 @@ import numeral from 'numbro';
 
 export default React.createClass({
   mixins: [I18nMixin],
-  displayName: "Goal",
+  displayName: 'Goal',
   propTypes: {
     goal: React.PropTypes.number,
     renderIcon: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
@@ -55,7 +55,7 @@ export default React.createClass({
     var renderIcon = this.props.renderIcon;
 
     if (renderIcon === true) {
-      renderIcon = "dollar";
+      renderIcon = 'dollar';
     }
 
     if (renderIcon) {

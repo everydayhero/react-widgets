@@ -29,7 +29,7 @@ export default React.createClass({
         <div className="SupporterCard">
           <Footprint
             data={ props.footprint }
-            compact={ true }
+            compact
             size={ 140 }
             userImage={ props.image }
             userName={ props.name }

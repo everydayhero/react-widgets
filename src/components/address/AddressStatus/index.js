@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Icon from '../../helpers/Icon';
 
 export default React.createClass({
-  displayName: "AddressStatus",
+  displayName: 'AddressStatus',
 
   mixins: [PureRenderMixin],
 
@@ -30,7 +30,7 @@ export default React.createClass({
 
   render: function() {
     var status = this.getStatus();
-    var classes = "AddressStatus AddressStatus--" + status;
+    var classes = 'AddressStatus AddressStatus--' + status;
     var icons = {
       error: 'times',
       loading: 'refresh',

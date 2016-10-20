@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default React.createClass({
-  displayName: "Tab",
+  displayName: 'Tab',
   propTypes: {
     onClick: React.PropTypes.func.isRequired,
     onKeyDown: React.PropTypes.func.isRequired,
@@ -21,13 +21,13 @@ export default React.createClass({
   },
 
   render: function() {
-    var active = this.props.active ? " Tab--active" : '';
+    var active = this.props.active ? ' Tab--active' : '';
 
     return (
       <div
         onClick={ this.handleClick }
         onKeyDown={ this.handleKeyDown }
-        className={ "Tab" + active }
+        className={ 'Tab' + active }
         role="tab"
         id={ this.props.tabId }
         aria-selected={ this.props.active }

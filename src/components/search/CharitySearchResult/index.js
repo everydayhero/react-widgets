@@ -32,8 +32,8 @@ export default React.createClass({
       );
     } else {
       logo = (
-        <div className='CharitySearchResult__avatar'>
-          <Icon icon='heart-o' fixedWidth={ true } />
+        <div className="CharitySearchResult__avatar">
+          <Icon icon="heart-o" fixedWidth />
         </div>
       );
     }
@@ -41,14 +41,14 @@ export default React.createClass({
     return (
       <SearchResult onSelect={ props.onSelect } result={ result }>
         { logo }
-        <div className='CharitySearchResult__content'>
-          <div className='CharitySearchResult__header'>{ charity.name }</div>
-          <p className='CharitySearchResult__description'>{ charity.description }</p>
-          <div className='CharitySearchResult__footer'>{ location }</div>
+        <div className="CharitySearchResult__content">
+          <div className="CharitySearchResult__header">{ charity.name }</div>
+          <p className="CharitySearchResult__description">{ charity.description }</p>
+          <div className="CharitySearchResult__footer">{ location }</div>
         </div>
-        <div className='CharitySearchResult__actions'>
+        <div className="CharitySearchResult__actions">
           { props.selectAction }
-          <Icon icon="arrow-right" fixedWidth={ true } />
+          <Icon icon="arrow-right" fixedWidth />
         </div>
       </SearchResult>
     );

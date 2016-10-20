@@ -25,12 +25,12 @@ export default React.createClass({
     var x = this.props.length * Math.cos(this.props.angle);
     var y = this.props.length * Math.sin(this.props.angle);
     var classes = cx({
-      "FootprintTip": true,
-      "FootprintTip--topRight": x > 0 && y < 0,
-      "FootprintTip--bottomRight": x > 0 && y > 0,
-      "FootprintTip--bottomLeft": x < 0 && y > 0,
-      "FootprintTip--topLeft": x < 0 && y < 0,
-      "FootprintTip--show": this.state.show
+      'FootprintTip': true,
+      'FootprintTip--topRight': x > 0 && y < 0,
+      'FootprintTip--bottomRight': x > 0 && y > 0,
+      'FootprintTip--bottomLeft': x < 0 && y > 0,
+      'FootprintTip--topLeft': x < 0 && y < 0,
+      'FootprintTip--show': this.state.show
     });
 
     return (

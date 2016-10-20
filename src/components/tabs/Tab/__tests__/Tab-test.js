@@ -12,7 +12,7 @@ describe('Tab', function() {
   var callback = jest.genMockFunction();
 
   beforeEach(function() {
-    tab = <Tab onClick={ callback } onKeyDown={ callback } label={ 'foobar' } index={ 1 } active={ true } />;
+    tab = <Tab onClick={ callback } onKeyDown={ callback } label={ 'foobar' } index={ 1 } active />;
     component = TestUtils.renderIntoDocument(tab);
     element = findByClass(component, 'Tab');
   });

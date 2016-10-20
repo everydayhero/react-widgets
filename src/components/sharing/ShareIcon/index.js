@@ -3,7 +3,7 @@ import Icon from '../../helpers/Icon';
 import openPopup from '../../../lib/openPopup';
 
 export default React.createClass({
-  displayName: "ShareIcon",
+  displayName: 'ShareIcon',
   propTypes: {
     name: React.PropTypes.oneOf(['facebook', 'twitter', 'googleplus', 'pinterest']).isRequired,
     icon: React.PropTypes.string.isRequired,

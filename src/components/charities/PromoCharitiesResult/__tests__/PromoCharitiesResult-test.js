@@ -6,13 +6,13 @@ import TestUtils from 'react-addons-test-utils';
 var findByClass          = TestUtils.findRenderedDOMComponentWithClass;
 
 var result = {
-  category:     'test tab 1',
-  id:           'au-1',
-  name:         'test charity 1',
-  description:  'test description 1',
-  url:          'http://test-url.com/1',
-  logo_url:     'http://test-image-url.com/1',
-  slug:         'test-slug-1',
+  category: 'test tab 1',
+  id: 'au-1',
+  name: 'test charity 1',
+  description: 'test description 1',
+  url: 'http://test-url.com/1',
+  logo_url: 'http://test-image-url.com/1',
+  slug: 'test-slug-1',
   country_code: 'au'
 };
 
@@ -48,7 +48,7 @@ describe('Component behaviour when clicked or tapped', function(){
 
 describe('Component optional values', function() {
   it('renders the charity title when showCharity is true', function() {
-    var promoCharitiesResult = <PromoCharitiesResult result={ result } showCharityTitle={ true } />;
+    var promoCharitiesResult = <PromoCharitiesResult result={ result } showCharityTitle />;
     var component = TestUtils.renderIntoDocument(promoCharitiesResult);
     var title = findByClass(component, 'PromoCharitiesResult__title');
 

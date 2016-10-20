@@ -16,7 +16,7 @@ describe('TotalCalories', function() {
 
     beforeEach(function() {
       campaigns.findByUids.mockClear();
-      totalCalories = <TotalCalories campaignUids={ ["us-22", "us-24"] } />;
+      totalCalories = <TotalCalories campaignUids={ ['us-22', 'us-24'] } />;
       element = TestUtils.renderIntoDocument(totalCalories);
     });
 
@@ -36,7 +36,7 @@ describe('TotalCalories', function() {
 
     it('handles multiple campaign uids', function() {
       expect(campaigns.findByUids.mock.calls.length).toEqual(1);
-      expect(campaigns.findByUids).toBeCalledWith(["us-22", "us-24"], element.onSuccess);
+      expect(campaigns.findByUids).toBeCalledWith(['us-22', 'us-24'], element.onSuccess);
     });
   });
 
@@ -52,7 +52,7 @@ describe('TotalCalories', function() {
 
     it('handles a sinlge campaign uid', function() {
       expect(campaigns.findByUids.mock.calls.length).toEqual(1);
-      expect(campaigns.findByUids).toBeCalledWith(["us-22"], element.onSuccess);
+      expect(campaigns.findByUids).toBeCalledWith(['us-22'], element.onSuccess);
     });
   });
 

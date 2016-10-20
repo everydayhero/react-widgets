@@ -80,7 +80,7 @@ export default React.createClass({
         start: start,
         end: end
       }, this);
-      return <FootprintSector
+      return (<FootprintSector
         key={ this.props.id + '_' + d.id}
         index={ d.id }
         id={ this.props.id }
@@ -92,7 +92,7 @@ export default React.createClass({
         dummy={ dummy }
         offset={ this.props.options.offset }
         onHover={ this.props.onHover }
-        onClick={ this.props.onClick } />;
+        onClick={ this.props.onClick } />);
     }, this);
   },
 
@@ -100,8 +100,8 @@ export default React.createClass({
     var radius = this.props.options.size / 2;
     var centerGraph = 'translate(' + radius + ',' + radius + ')';
     var classes = cx({
-      "FootprintGroup": true,
-      "FootprintGroup--active": this.props.active
+      'FootprintGroup': true,
+      'FootprintGroup--active': this.props.active
     });
 
     return (

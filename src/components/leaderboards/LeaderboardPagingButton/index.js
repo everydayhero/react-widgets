@@ -15,20 +15,20 @@ export default React.createClass({
     var classes;
     var iconName;
 
-    if (this.props.type == "next") {
+    if (this.props.type == 'next') {
       classes = cx({
-        "LeaderboardPagingButton__next": true,
-        "LeaderboardPagingButton__next--active": currentPage < pageCount
+        'LeaderboardPagingButton__next': true,
+        'LeaderboardPagingButton__next--active': currentPage < pageCount
       });
 
-      iconName = "caret-right";
+      iconName = 'caret-right';
     } else {
       classes = cx({
-        "LeaderboardPagingButton__prev": true,
-        "LeaderboardPagingButton__prev--active": currentPage > 1
+        'LeaderboardPagingButton__prev': true,
+        'LeaderboardPagingButton__prev--active': currentPage > 1
       });
 
-      iconName = "caret-left";
+      iconName = 'caret-left';
     }
 
     return (

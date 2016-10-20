@@ -116,11 +116,11 @@ export default React.createClass({
     var key = this.props.labelKey;
     var value = this.state.value;
     var selected = _.findIndex(options, function(option) { return option[key] === value; });
-    return <SelectOptions
+    return (<SelectOptions
       options={ options }
       labelKey={ key }
       selected={ selected >= 0 ? selected : value ? 0 : -1 }
-      onSelect={ this.selectHandler } />;
+      onSelect={ this.selectHandler } />);
   },
 
   render: function() {

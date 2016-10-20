@@ -39,7 +39,7 @@ describe('PromoCharities', function() {
   describe('custom behaviour for PromoCharities', function() {
     let promoCharities;
     let element;
-    let tabsData = [{category: 'Tab One', charityUids: ['au-1']}];
+    let tabsData = [{ category: 'Tab One', charityUids: ['au-1'] }];
     let translation = {
       heading: 'Featured Charities',
       subheading: 'Pick a tab'

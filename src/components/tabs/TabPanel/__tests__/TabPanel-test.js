@@ -11,7 +11,7 @@ describe('TabPanel', function() {
   var element;
 
   beforeEach(function() {
-    tabPanel = <TabPanel content="Hello world!" active={ true } index={ 1 } labelledBy="tab-1" />;
+    tabPanel = <TabPanel content="Hello world!" active index={ 1 } labelledBy="tab-1" />;
     component = TestUtils.renderIntoDocument(tabPanel);
     element   = findByClass(component, 'TabPanel');
   });

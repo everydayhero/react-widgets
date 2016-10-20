@@ -25,8 +25,8 @@ describe('Team', function() {
     let team;
     let element;
     let props = {
-      pageUrl: "http://everydayhero.com/us",
-      title: "Wonderful Team"
+      pageUrl: 'http://everydayhero.com/us',
+      title: 'Wonderful Team'
     };
 
     beforeEach(function() {

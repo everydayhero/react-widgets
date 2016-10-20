@@ -21,11 +21,11 @@ export default React.createClass({
       backgroundImage: 'url(' + this.props.avatar + ')',
       borderWidth: this.props.offset
     };
-    return <a href={ this.props.url }
+    return (<a href={ this.props.url }
       className="FootprintAvatar"
       title={ this.props.name }
       style={ avatarStyle }
-      onClick={ this.props.onClick }></a>;
+      onClick={ this.props.onClick }></a>);
   },
 
   renderData: function() {
@@ -59,8 +59,8 @@ export default React.createClass({
       marginTop: -diameter / 2
     };
     var tileClasses = cx({
-      "FootprintTile": true,
-      "FootprintTile--flip": !!this.props.metric
+      'FootprintTile': true,
+      'FootprintTile--flip': !!this.props.metric
     });
 
     return (

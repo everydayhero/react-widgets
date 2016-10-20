@@ -9,7 +9,7 @@ import TestUtils from 'react-addons-test-utils';
 import AddressLookup from '../';
 const scryByClass = TestUtils.scryRenderedDOMComponentsWithClass;
 const findByClass = TestUtils.findRenderedDOMComponentWithClass;
-import {findRenderedDOMComponentWithAttribute as findByAttribute} from '../../../../test/helpers/scryRenderedDOMComponentsWithAttribute';
+import { findRenderedDOMComponentWithAttribute as findByAttribute } from '../../../../test/helpers/scryRenderedDOMComponentsWithAttribute';
 var addressSearchResult = { addresses: [
   { id: '123', label: 'TestAddressListing' }
 ] };

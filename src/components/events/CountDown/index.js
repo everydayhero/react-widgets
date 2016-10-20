@@ -21,14 +21,14 @@ export default React.createClass({
       format: '0,0',
       defaultI18n: {
         link_text: 'Register',
-        finished: "This event has now finished.",
+        finished: 'This event has now finished.',
         past_tense: {
-          one: "day ago",
-          other: "days ago"
+          one: 'day ago',
+          other: 'days ago'
         },
         future_tense: {
-          one: "day to go",
-          other: "days to go"
+          one: 'day to go',
+          other: 'days to go'
         }
       }
     };
@@ -39,7 +39,7 @@ export default React.createClass({
 
     if (linkUrl && !isFinished) {
       return (
-        <CallToActionButton href={ linkUrl } kind="primary" thin={ true } className="CountDown__link">
+        <CallToActionButton href={ linkUrl } kind="primary" thin className="CountDown__link">
           { this.t('link_text') }
         </CallToActionButton>
       );
@@ -55,7 +55,7 @@ export default React.createClass({
   render: function() {
     var props        = this.props;
     var today        = moment().startOf('day');
-    var eventDay     = moment(props.date, "YYYY-MM-DD");
+    var eventDay     = moment(props.date, 'YYYY-MM-DD');
     var days         = Math.ceil(eventDay.diff(today, 'days', true));
     var isFinished   = days < 0;
     var daysAbsolute = Math.abs(days);

@@ -60,14 +60,14 @@ describe('CallToActionBox', function() {
     });
 
     it('renders a custom heading', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       let title = findByClass(element, 'CallToActionBox__title');
 
       expect(title.textContent).toBe(translation.title);
     });
 
     it('renders a custom heading', function() {
-      element.setState({isLoading: false});
+      element.setState({ isLoading: false });
       let signInLabel = findByClass(element, 'CallToActionBox__link');
 
       expect(signInLabel.textContent).toBe(translation.signInLabel);

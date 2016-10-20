@@ -194,8 +194,8 @@ export default React.createClass({
           <thead>
             <tr>
               <FitnessLeaderboardColHead name="Fundraiser" />
-              <FitnessLeaderboardColHead name={ raisedTitle } sort="amount" onClick={ this.sortLeaderboard } active={ this.state.currentSort === "amount" } />
-              <FitnessLeaderboardColHead name={ distanceTitle } sort="distance" onClick={ this.sortLeaderboard } active={ this.state.currentSort === "distance" } />
+              <FitnessLeaderboardColHead name={ raisedTitle } sort="amount" onClick={ this.sortLeaderboard } active={ this.state.currentSort === 'amount' } />
+              <FitnessLeaderboardColHead name={ distanceTitle } sort="distance" onClick={ this.sortLeaderboard } active={ this.state.currentSort === 'distance' } />
             </tr>
           </thead>
           <tbody>

@@ -33,11 +33,11 @@ describe('FitnessLeaderboardColHead', function() {
       var element = findByClass(component, 'FitnessLeaderboardColHead');
       TestUtils.Simulate.click(element);
 
-      expect(callback).toBeCalledWith("amount");
+      expect(callback).toBeCalledWith('amount');
     });
 
     it('renders a caret if the element is active', function() {
-      var leaderboard = <TestWrapper active={ true } />;
+      var leaderboard = <TestWrapper active />;
       var component   = TestUtils.renderIntoDocument(leaderboard);
       var element     = findByClass(component, 'FitnessLeaderboardColHead__icon');
 

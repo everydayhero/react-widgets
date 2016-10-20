@@ -43,6 +43,6 @@ describe('Share Icon component', function() {
     var element = ReactDOM.findDOMNode(component);
     TestUtils.Simulate.click(element);
 
-    expect(openPopup).lastCalledWith("http://mock-url.com/", popUpConfig);
+    expect(openPopup).lastCalledWith('http://mock-url.com/', popUpConfig);
   });
 });

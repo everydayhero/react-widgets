@@ -3,8 +3,4 @@
 var fs = require('fs')
 var pkg = require('../package')
 
-console.log('Writing version sass var')
-
 fs.writeFileSync('./src/scss/_version.scss', '$ehw-version: "-' + pkg.version + '";')
-
-console.log('Wrote version sass var')

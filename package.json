@@ -92,7 +92,7 @@
     "start": "node server.js",
     "dev": "npm run build-dev && npm run start & npm run watch",
     "deploy-assets": "bin/deploy_assets",
-    "install": "bin/write-version-sass-var"
+    "version": "bin/write-version-sass-var && git add src/scss/_version.scss"
   },
   "jest": {
     "moduleFileExtensions": [

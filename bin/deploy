@@ -8,5 +8,6 @@ node_modules/.bin/gulp deploy_assets
 
 # Publish to npm
 echo -e "$NPM_USER\n$NPM_PASS\n$NPM_EMAIL" | npm login
+node_modules/.bin/gulp clean
 node_modules/.bin/gulp transpile
 npm publish dist

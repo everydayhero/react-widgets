@@ -1,8 +1,8 @@
-import _ from 'lodash';
-import format from '../lib/format';
-import parseUrl from '../lib/parseUrl';
+import _ from 'lodash'
+import format from '../lib/format'
+import parseUrl from '../lib/parseUrl'
 
-const defaultBaseUrl = 'https://everydayhero.com';
+const defaultBaseUrl = 'https://everydayhero.com'
 const baseRoutes = {
   donate: '{protocol}://{campaignSlug}.{hostname}/{country}/{charitySlug}/donate',
   fundraise: '{protocol}://{campaignSlug}.{hostname}/{country}/{charitySlug}/get-started',
@@ -25,53 +25,53 @@ const baseRoutes = {
   address: '{baseUrl}/api/v2/addresses/{country}/{id}.jsonp',
   searchAddresses: '{baseUrl}/api/v2/addresses.jsonp?country_code={country}&q={searchTerm}',
   totals: '{baseUrl}/api/v2/search/totals.jsonp?charity_id[]={charityUid}&campaign_id[]={campaignUid}&group_value[]={groupValue}&page_id[]={page}&start_at={start}&end_at={end}&kind={type}&country_code={country}'
-};
-let routes = {};
+}
+let routes = {}
 
-function removeEmptyQueryParams(url) {
-  return url.replace(/\w+(?:\W+|)=(&|$)/g, '').replace(/(\?|&)$/, '');
+function removeEmptyQueryParams (url) {
+  return url.replace(/\w+(?:\W+|)=(&|$)/g, '').replace(/(\?|&)$/, '')
 }
 
-function getRoute(name, params) {
-  let route = routes[name];
+function getRoute (name, params) {
+  let route = routes[name]
   if (!route) {
-    return;
+    return
   }
 
-  params = _.mapValues(params, function(value) {
+  params = _.mapValues(params, function (value) {
     if (_.isArray(value)) {
-      return value.join(',');
+      return value.join(',')
     }
-    return value == null ? '' : value;
-  });
+    return value == null ? '' : value
+  })
 
-  route = format(route, params, true);
-  route = removeEmptyQueryParams(route);
+  route = format(route, params, true)
+  route = removeEmptyQueryParams(route)
 
-  return route;
+  return route
 }
 
-function setBaseUrl(baseUrl) {
-  const splitUrl = parseUrl(baseUrl);
+function setBaseUrl (baseUrl) {
+  const splitUrl = parseUrl(baseUrl)
   if (!splitUrl) {
-    console.error('Invalid base URL "' + baseUrl + '", expected URL such as "http://server.com" or "http://localhost:3000".');
-    return false;
+    console.error('Invalid base URL "' + baseUrl + '", expected URL such as "http://server.com" or "http://localhost:3000".')
+    return false
   }
 
   const params = {
     protocol: splitUrl.protocol,
     hostname: splitUrl.hostname,
     baseUrl: baseUrl
-  };
+  }
 
-  routes = _.mapValues(baseRoutes, function(url) {
-    return format(url, params);
-  });
+  routes = _.mapValues(baseRoutes, function (url) {
+    return format(url, params)
+  })
 }
 
-setBaseUrl(defaultBaseUrl);
+setBaseUrl(defaultBaseUrl)
 
 export default {
   get: getRoute,
   setBaseUrl: setBaseUrl
-};
+}

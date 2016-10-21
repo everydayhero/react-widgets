@@ -1,56 +1,56 @@
-import React from 'react';
-import Input from '../../forms/Input';
-import ShareIcon from '../ShareIcon';
+import React from 'react'
+import Input from '../../forms/Input'
+import ShareIcon from '../ShareIcon'
 
 export default React.createClass({
   displayName: 'ShareBox',
 
-  renderShareIcons: function() {
-    return this.props.services.map(function(service) {
+  renderShareIcons: function () {
+    return this.props.services.map(function (service) {
       return (
         <ShareIcon
-          key={ service.name }
-          name={ service.name }
-          icon={ service.icon || service.name }
-          url={ service.url } />
-      );
-    }, this);
+          key={service.name}
+          name={service.name}
+          icon={service.icon || service.name}
+          url={service.url} />
+      )
+    }, this)
   },
 
-  renderServiceButtons: function() {
+  renderServiceButtons: function () {
     if (this.props.services.length !== 0) {
       return (
         <div>
-          <div className="ShareBox__divider">
+          <div className='ShareBox__divider'>
             <span>Or</span>
           </div>
-          <div className="ShareBox__services">
+          <div className='ShareBox__services'>
             <label>Share via</label>
-            <div className="ShareBox__icons">
+            <div className='ShareBox__icons'>
               { this.renderShareIcons() }
             </div>
           </div>
         </div>
-      );
+      )
     }
   },
 
-  render: function() {
-    var shareLinkLabel = this.props.shareLinkLabel;
+  render: function () {
+    var shareLinkLabel = this.props.shareLinkLabel
 
     return (
-      <div className="ShareBox">
+      <div className='ShareBox'>
         <Input
           readOnly
           autoSelect
-          type="url"
-          icon="link"
-          value={ this.props.shareUrl }
+          type='url'
+          icon='link'
+          value={this.props.shareUrl}
           i18n={{ label: shareLinkLabel }}
-          spacing="compact" />
+          spacing='compact' />
 
         { this.renderServiceButtons() }
       </div>
-    );
+    )
   }
-});
+})

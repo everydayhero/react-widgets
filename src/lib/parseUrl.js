@@ -5,10 +5,10 @@ const urlRegExp = new RegExp(
   '(?:\\?([^#]*))?' +                     // query
   '(?:#(.*))?',                           // bookmark
   'i'
-);
+)
 
-function parseUrl(url) {
-  var match = url.match(urlRegExp);
+function parseUrl (url) {
+  var match = url.match(urlRegExp)
 
   return !match ? null : {
     protocol: match[1],
@@ -16,7 +16,7 @@ function parseUrl(url) {
     path: match[3] || '/',
     query: match[4],
     bookmark: match[5]
-  };
+  }
 }
 
-export default parseUrl;
+export default parseUrl

@@ -1,25 +1,25 @@
-import React from 'react';
-import Icon from '../../helpers/Icon';
+import React from 'react'
+import Icon from '../../helpers/Icon'
 
 export default React.createClass({
   displayName: 'FitnessLeaderboardColHead',
 
-  handleClick: function() {
-    this.props.onClick(this.props.sort);
+  handleClick: function () {
+    this.props.onClick(this.props.sort)
   },
 
-  renderIcon: function() {
+  renderIcon: function () {
     if (this.props.active === true) {
-      return <Icon className="FitnessLeaderboardColHead__icon" icon="caret-down" />;
+      return <Icon className='FitnessLeaderboardColHead__icon' icon='caret-down' />
     }
   },
 
-  render: function() {
+  render: function () {
     return (
-      <td className="FitnessLeaderboardColHead" onClick={ this.handleClick }>
+      <td className='FitnessLeaderboardColHead' onClick={this.handleClick}>
         { this.props.name }
         { this.renderIcon() }
       </td>
-    );
+    )
   }
-});
+})

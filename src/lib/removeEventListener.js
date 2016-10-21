@@ -1,14 +1,14 @@
-const IS_CLIENT = typeof window !== 'undefined';
+const IS_CLIENT = typeof window !== 'undefined'
 
-export default function removeEventListener(eventName, handler, el) {
-  if (!IS_CLIENT) return;
+export default function removeEventListener (eventName, handler, el) {
+  if (!IS_CLIENT) return
 
-  el = el || window;
+  el = el || window
   if (el.removeEventListener) {
-    el.removeEventListener(eventName, handler);
+    el.removeEventListener(eventName, handler)
   } else {
-    el.detachEvent('on' + eventName, function() {
-      handler.call(el);
-    });
+    el.detachEvent('on' + eventName, function () {
+      handler.call(el)
+    })
   }
 }

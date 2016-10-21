@@ -1,5 +1,5 @@
-import React from 'react';
-import cx from 'classnames';
+import React from 'react'
+import cx from 'classnames'
 
 export default React.createClass({
   displayName: 'FootprintSector',
@@ -16,47 +16,47 @@ export default React.createClass({
     onClick: React.PropTypes.func
   },
 
-  handleClick: function() {
-    this.props.onClick(this.props.metric);
+  handleClick: function () {
+    this.props.onClick(this.props.metric)
   },
 
-  handleEnter: function() {
-    this.props.onHover(this.props.metric);
+  handleEnter: function () {
+    this.props.onHover(this.props.metric)
   },
 
-  handleLeave: function() {
-    this.props.onHover(null);
+  handleLeave: function () {
+    this.props.onHover(null)
   },
 
-  render: function() {
-    var maskID = 'mask' + this.props.index + this.props.id;
+  render: function () {
+    var maskID = 'mask' + this.props.index + this.props.id
     var maskStyle = {
       fill: 'white',
       strokeWidth: this.props.offset,
       stroke: 'black'
-    };
+    }
     var classes = cx({
       'FootprintSector': true,
       'FootprintSector--active': this.props.active
-    });
+    })
 
     return (
-      <g className={ classes }
-        onMouseEnter={ this.handleEnter }
-        onMouseLeave={ this.handleLeave }
-        onTouchStart={ this.handleEnter }
-        onClick={ this.handleClick } >
+      <g className={classes}
+        onMouseEnter={this.handleEnter}
+        onMouseLeave={this.handleLeave}
+        onTouchStart={this.handleEnter}
+        onClick={this.handleClick} >
 
         <defs>
-          <mask id={ maskID } x="0" y="0" width="100" height="100" >
-            <path className="FootprintMask" d={ this.props.dummy.path.print() } style={ maskStyle } />
+          <mask id={maskID} x='0' y='0' width='100' height='100' >
+            <path className='FootprintMask' d={this.props.dummy.path.print()} style={maskStyle} />
           </mask>
         </defs>
 
-        <path className="FootprintDummy" d={ this.props.dummy.path.print() } style={{ mask: 'url(#' + maskID + ')' }}/>
+        <path className='FootprintDummy' d={this.props.dummy.path.print()} style={{ mask: 'url(#' + maskID + ')' }} />
 
-        <path className={ 'FootprintMetric FootprintMetric--' + this.props.name } d={ this.props.sector.path.print() } style={{ mask: 'url(#' + maskID + ')' }}/>
+        <path className={'FootprintMetric FootprintMetric--' + this.props.name} d={this.props.sector.path.print()} style={{ mask: 'url(#' + maskID + ')' }} />
       </g>
-    );
+    )
   }
-});
+})

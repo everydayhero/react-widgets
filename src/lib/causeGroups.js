@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash'
 
 const causeGroups = [
   {
@@ -48,18 +48,18 @@ const causeGroups = [
       'unknown'
     ]
   }
-];
+]
 
 export default {
   all: causeGroups,
 
   findByName (name) {
-    return _.find(causeGroups, 'name', name);
+    return _.find(causeGroups, 'name', name)
   },
 
   findByCause (cause) {
-    return _.find(causeGroups, function(causeGroup) {
-      return _.includes(causeGroup.causes, cause);
-    });
+    return _.find(causeGroups, function (causeGroup) {
+      return _.includes(causeGroup.causes, cause)
+    })
   }
-};
+}

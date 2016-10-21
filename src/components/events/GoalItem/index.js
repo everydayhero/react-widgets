@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default React.createClass({
   displayName: 'CampaignGoalItem',
@@ -9,16 +9,16 @@ export default React.createClass({
     count: React.PropTypes.number.isRequired
   },
 
-  render: function() {
-    var percentage = Math.max(Math.min(this.props.count / this.props.goal * 100, 100), 0);
+  render: function () {
+    var percentage = Math.max(Math.min(this.props.count / this.props.goal * 100, 100), 0)
 
     return (
-      <div className="CampaignGoal__container">
-        <div className="CampaignGoal__item">
-          <div className="CampaignGoal__bar" style={ { height: (percentage * 3) + 'px' } } ></div>
+      <div className='CampaignGoal__container'>
+        <div className='CampaignGoal__item'>
+          <div className='CampaignGoal__bar' style={{ height: (percentage * 3) + 'px' }} />
         </div>
-          <div className="CampaignGoal__title">{ this.props.name }</div>
+        <div className='CampaignGoal__title'>{ this.props.name }</div>
       </div>
     )
   }
-});
+})

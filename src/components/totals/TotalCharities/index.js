@@ -1,8 +1,8 @@
-import React from 'react';
-import I18nMixin from '../../mixins/I18n';
-import charities from '../../../api/charities';
-import Icon from '../../helpers/Icon';
-import numeral from 'numbro';
+import React from 'react'
+import I18nMixin from '../../mixins/I18n'
+import charities from '../../../api/charities'
+import Icon from '../../helpers/Icon'
+import numeral from 'numbro'
 
 export default React.createClass({
   mixins: [I18nMixin],
@@ -17,7 +17,7 @@ export default React.createClass({
     i18n: React.PropTypes.object
   },
 
-  getDefaultProps() {
+  getDefaultProps () {
     return {
       campaignUid: '',
       campaignUids: [],
@@ -28,84 +28,84 @@ export default React.createClass({
       defaultI18n: {
         title: 'Non Profits'
       }
-    };
+    }
   },
 
-  getInitialState() {
+  getInitialState () {
     return {
       isLoading: false,
       total: 0
-    };
+    }
   },
 
-  componentWillMount() {
-    this.loadCharities();
+  componentWillMount () {
+    this.loadCharities()
   },
 
-  setUids() {
-    let campaignUids = [];
+  setUids () {
+    let campaignUids = []
 
     if (this.props.campaignUid) {
-      campaignUids.push(this.props.campaignUid);
+      campaignUids.push(this.props.campaignUid)
     } else {
-      campaignUids = this.props.campaignUids;
+      campaignUids = this.props.campaignUids
     }
 
-    return campaignUids;
+    return campaignUids
   },
 
-  loadCharities() {
-    this.setState({ isLoading: true });
-    charities.findByCampaign(this.setUids(), 1, 1, this.onSuccess);
+  loadCharities () {
+    this.setState({ isLoading: true })
+    charities.findByCampaign(this.setUids(), 1, 1, this.onSuccess)
   },
 
-  onSuccess(result) {
+  onSuccess (result) {
     this.setState({
       isLoading: false,
       total: result.meta.count
-    });
+    })
   },
 
-  renderTotal() {
-    let totalCharities = this.state.total;
-    let formattedTotal = numeral(totalCharities).format(this.props.format);
-    let title = this.t('title');
+  renderTotal () {
+    let totalCharities = this.state.total
+    let formattedTotal = numeral(totalCharities).format(this.props.format)
+    let title = this.t('title')
 
     if (this.state.isLoading) {
-      return <Icon className="TotalCharities__loading" icon="refresh" />;
+      return <Icon className='TotalCharities__loading' icon='refresh' />
     } else {
       return (
         <div>
-          <div className="TotalCharities__total">{ formattedTotal }</div>
-          <div className="TotalCharities__title">{ title }</div>
+          <div className='TotalCharities__total'>{ formattedTotal }</div>
+          <div className='TotalCharities__title'>{ title }</div>
         </div>
-      );
+      )
     }
   },
 
-  renderIcon() {
-    let renderIcon = this.props.renderIcon;
+  renderIcon () {
+    let renderIcon = this.props.renderIcon
 
     if (renderIcon === true) {
-      renderIcon = 'heart';
+      renderIcon = 'heart'
     }
 
     if (renderIcon) {
-      return <Icon className="TotalCharities__icon" icon={ renderIcon } />;
+      return <Icon className='TotalCharities__icon' icon={renderIcon} />
     }
   },
 
-  render() {
+  render () {
     let customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
-    };
+    }
 
     return (
-      <div className={ "TotalCharities" } style={ customStyle }>
+      <div className={'TotalCharities'} style={customStyle}>
         { this.renderIcon() }
         { this.renderTotal() }
       </div>
-    );
+    )
   }
-});
+})

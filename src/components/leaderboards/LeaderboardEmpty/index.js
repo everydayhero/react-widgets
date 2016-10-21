@@ -1,6 +1,6 @@
-import React from 'react';
-import campaigns from '../../../api/campaigns';
-import CallToActionButton from '../../callstoaction/CallToActionButton';
+import React from 'react'
+import campaigns from '../../../api/campaigns'
+import CallToActionButton from '../../callstoaction/CallToActionButton'
 
 export default React.createClass({
   displayName: 'LeaderboardEmpty',
@@ -9,47 +9,47 @@ export default React.createClass({
     emptyButtonText: React.PropTypes.string.isRequired
   },
 
-  componentWillMount: function() {
-    this.fetchGetStartedUrl();
+  componentWillMount: function () {
+    this.fetchGetStartedUrl()
   },
 
-  fetchGetStartedUrl: function() {
-    var props            = this.props;
-    var slug             = props.campaignSlug;
-    var country          = props.country;
-    var campaignUid      = this.props.campaignUid || this.props.campaignUids[0];
-    var isSingleCampaign = !!props.campaignUid && !this.props.campaignUids;
+  fetchGetStartedUrl: function () {
+    var props = this.props
+    var slug = props.campaignSlug
+    var country = props.country
+    var campaignUid = this.props.campaignUid || this.props.campaignUids[0]
+    var isSingleCampaign = !!props.campaignUid && !this.props.campaignUids
 
     if (country && slug) {
-      this.setGetStartedUrl(slug, country, isSingleCampaign);
+      this.setGetStartedUrl(slug, country, isSingleCampaign)
     } else {
-      this.setState({ isLoading: true });
-      campaigns.find(campaignUid, function(res) {
-        this.setGetStartedUrl(res.campaign.slug, res.campaign.country_code, isSingleCampaign);
-      }.bind(this));
+      this.setState({ isLoading: true })
+      campaigns.find(campaignUid, function (res) {
+        this.setGetStartedUrl(res.campaign.slug, res.campaign.country_code, isSingleCampaign)
+      }.bind(this))
     }
   },
 
-  setGetStartedUrl: function(slug, country, singleCampaign) {
-    var getStartedUrl = 'https://' + slug + '.everydayhero.com/' + country + '/get-started';
-    var genericUrl = 'https://everydayhero.com/' + country + '/sign-up';
+  setGetStartedUrl: function (slug, country, singleCampaign) {
+    var getStartedUrl = 'https://' + slug + '.everydayhero.com/' + country + '/get-started'
+    var genericUrl = 'https://everydayhero.com/' + country + '/sign-up'
 
     this.setState({
       isLoading: false,
-      getStartedUrl: slug && country && singleCampaign ?  getStartedUrl : genericUrl
-    });
+      getStartedUrl: slug && country && singleCampaign ? getStartedUrl : genericUrl
+    })
   },
 
-  render: function() {
+  render: function () {
     return (
-      <div className="LeaderboardEmpty">
-        <p className="LeaderboardEmpty__content">
+      <div className='LeaderboardEmpty'>
+        <p className='LeaderboardEmpty__content'>
           { this.props.emptyText }
         </p>
-        <CallToActionButton kind="secondary" href={ this.state.getStartedUrl } className="LeaderboardEmpty__cta">
+        <CallToActionButton kind='secondary' href={this.state.getStartedUrl} className='LeaderboardEmpty__cta'>
           { this.props.emptyButtonText }
         </CallToActionButton>
       </div>
-    );
+    )
   }
-});
+})

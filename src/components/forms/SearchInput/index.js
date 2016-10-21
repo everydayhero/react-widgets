@@ -1,8 +1,8 @@
-import React from 'react';
-import Icon from '../../helpers/Icon';
-import Input from '../Input';
-import I18nMixin from '../../mixins/I18n';
-import Button from '../../callstoaction/CallToActionButton';
+import React from 'react'
+import Icon from '../../helpers/Icon'
+import Input from '../Input'
+import I18nMixin from '../../mixins/I18n'
+import Button from '../../callstoaction/CallToActionButton'
 
 export default React.createClass({
   displayName: 'SearchInput',
@@ -19,7 +19,7 @@ export default React.createClass({
     i18n: React.PropTypes.object
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       autoFocus: false,
       autoSelect: false,
@@ -31,58 +31,58 @@ export default React.createClass({
         name: 'searchInput',
         label: 'Search'
       }
-    };
+    }
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       value: this.props.value || ''
-    };
+    }
   },
 
-  componentDidMount: function() {
-    this.setState({ value: this.props.value });
+  componentDidMount: function () {
+    this.setState({ value: this.props.value })
   },
 
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps: function (nextProps) {
     if (nextProps.value) {
-      this.setState({ value: nextProps.value || '' });
+      this.setState({ value: nextProps.value || '' })
     }
   },
 
-  handleChange: function(value) {
-    this.setState({ value: value });
+  handleChange: function (value) {
+    this.setState({ value: value })
   },
 
-  handleSubmit: function() {
+  handleSubmit: function () {
     if (this.props.onSubmit) {
-      this.props.onSubmit(this.state.value);
-      this.setState({ value: '' });
+      this.props.onSubmit(this.state.value)
+      this.setState({ value: '' })
     }
   },
 
-  render: function() {
-    var props = this.props;
-    var state = this.state;
-    var i18n  = { name: this.t('name'), label: this.t('label') };
+  render: function () {
+    var props = this.props
+    var state = this.state
+    var i18n = { name: this.t('name'), label: this.t('label') }
 
     return (
-      <div className="ehw-SearchInput">
-        <div className="ehw-SearchInput__input">
+      <div className='ehw-SearchInput'>
+        <div className='ehw-SearchInput__input'>
           <Input {...props}
-            ref="input"
-            value={ state.value }
-            output={ this.handleChange }
-            onEnter={ this.handleSubmit }
-            i18n={ i18n }
-            spacing="compact" />
+            ref='input'
+            value={state.value}
+            output={this.handleChange}
+            onEnter={this.handleSubmit}
+            i18n={i18n}
+            spacing='compact' />
         </div>
-        <div className="ehw-SearchInput__button">
-          <Button onClick={ this.handleSubmit } kind="primary">
-            <Icon icon="search" className="ehw-SearchInput__icon" fixedWidth />
+        <div className='ehw-SearchInput__button'>
+          <Button onClick={this.handleSubmit} kind='primary'>
+            <Icon icon='search' className='ehw-SearchInput__icon' fixedWidth />
           </Button>
         </div>
       </div>
-    );
+    )
   }
-});
+})

@@ -1,9 +1,9 @@
-import _ from 'lodash';
-import React from 'react';
-import I18nMixin from '../../mixins/I18n';
-import pages from '../../../api/pages';
-import Icon from '../../helpers/Icon';
-import Team from '../Team';
+import _ from 'lodash'
+import React from 'react'
+import I18nMixin from '../../mixins/I18n'
+import pages from '../../../api/pages'
+import Icon from '../../helpers/Icon'
+import Team from '../Team'
 
 export default React.createClass({
   mixins: [I18nMixin],
@@ -21,7 +21,7 @@ export default React.createClass({
     i18n: React.PropTypes.object
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       campaignUid: null,
       page: 1,
@@ -33,73 +33,73 @@ export default React.createClass({
         heading: 'Teams',
         emptyLabel: 'No teams to display.'
       }
-    };
+    }
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       isLoading: false,
       hasResults: false,
       pageResults: []
-    };
+    }
   },
 
-  componentWillMount: function() {
-    this.loadPages();
+  componentWillMount: function () {
+    this.loadPages()
   },
 
-  loadPages: function() {
-    this.setState({ isLoading: true });
+  loadPages: function () {
+    this.setState({ isLoading: true })
 
-    var props = this.props;
-    pages.findByCampaign(props.campaignUid, props.type, props.pageSize, props.page, this.onSuccess);
+    var props = this.props
+    pages.findByCampaign(props.campaignUid, props.type, props.pageSize, props.page, this.onSuccess)
   },
 
-  onSuccess: function(result) {
+  onSuccess: function (result) {
     this.setState({
       isLoading: false,
       pageResults: result.pages
     },
 
-    function() {
+    function () {
       if (!_.isEmpty(this.state.pageResults)) {
-        this.setState({ hasResults: true });
+        this.setState({ hasResults: true })
       }
-    }.bind(this));
+    }.bind(this))
   },
 
-  renderTeam: function() {
-    var emptyLabel = this.t('emptyLabel');
+  renderTeam: function () {
+    var emptyLabel = this.t('emptyLabel')
 
     if (this.state.isLoading) {
-      return <Icon className="Teams__loading" icon="refresh" />;
+      return <Icon className='Teams__loading' icon='refresh' />
     }
 
     if (this.state.hasResults) {
-      return this.state.pageResults.map(function(d) {
+      return this.state.pageResults.map(function (d) {
         return (
-          <Team key={ d.id } pageUrl={ d.url } imgSrc={ d.image.large_image_url } title={ d.name } />
-        );
-      });
+          <Team key={d.id} pageUrl={d.url} imgSrc={d.image.large_image_url} title={d.name} />
+        )
+      })
     }
 
-    return <p className="Teams__empty-label">{ emptyLabel }</p>;
+    return <p className='Teams__empty-label'>{ emptyLabel }</p>
   },
 
-  render: function() {
-    var heading = this.t('heading');
+  render: function () {
+    var heading = this.t('heading')
     var customStyle = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.textColor
-    };
+    }
 
     return (
-      <div className="Teams" style={ customStyle }>
-        <h3 className="Teams__heading">{ heading }</h3>
-        <div className="Teams__content">
+      <div className='Teams' style={customStyle}>
+        <h3 className='Teams__heading'>{ heading }</h3>
+        <div className='Teams__content'>
           { this.renderTeam() }
         </div>
       </div>
-    );
+    )
   }
-});
+})

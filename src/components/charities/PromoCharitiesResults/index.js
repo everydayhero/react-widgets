@@ -1,6 +1,6 @@
-import React from 'react';
-import Icon from '../../helpers/Icon';
-import PromoCharitiesResult from '../PromoCharitiesResult';
+import React from 'react'
+import Icon from '../../helpers/Icon'
+import PromoCharitiesResult from '../PromoCharitiesResult'
 
 export default React.createClass({
   displayName: 'PromoCharitiesResults',
@@ -13,29 +13,29 @@ export default React.createClass({
     showCharityTitle: React.PropTypes.bool
   },
 
-  renderCharityResults: function() {
+  renderCharityResults: function () {
     if (this.props.loaded) {
-      return this.props.content.map(function(d) {
+      return this.props.content.map(function (d) {
         return (
           <PromoCharitiesResult
-            key={ d.id }
-            result={ d }
-            onSelect={ this.props.onSelect }
-            actionLabel={ this.props.actionLabel }
-            showCharityTitle={ this.props.showCharityTitle }
-            url={ this.props.fetchUrl(d) } />
-        );
-      }, this);
+            key={d.id}
+            result={d}
+            onSelect={this.props.onSelect}
+            actionLabel={this.props.actionLabel}
+            showCharityTitle={this.props.showCharityTitle}
+            url={this.props.fetchUrl(d)} />
+        )
+      }, this)
     }
 
-    return <Icon className="PromoCharitiesResults__loading" icon="refresh" />;
+    return <Icon className='PromoCharitiesResults__loading' icon='refresh' />
   },
 
-  render: function() {
+  render: function () {
     return (
-      <div className="PromoCharitiesResults">
+      <div className='PromoCharitiesResults'>
         { this.renderCharityResults() }
       </div>
-    );
+    )
   }
-});
+})

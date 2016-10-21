@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default React.createClass({
   displayName: 'Tab',
@@ -12,29 +12,29 @@ export default React.createClass({
     controls: React.PropTypes.string.isRequired
   },
 
-  handleClick: function() {
-    this.props.onClick(this.props.index);
+  handleClick: function () {
+    this.props.onClick(this.props.index)
   },
 
-  handleKeyDown: function(event) {
-    this.props.onKeyDown(event, this.props.index);
+  handleKeyDown: function (event) {
+    this.props.onKeyDown(event, this.props.index)
   },
 
-  render: function() {
-    var active = this.props.active ? ' Tab--active' : '';
+  render: function () {
+    var active = this.props.active ? ' Tab--active' : ''
 
     return (
       <div
-        onClick={ this.handleClick }
-        onKeyDown={ this.handleKeyDown }
-        className={ 'Tab' + active }
-        role="tab"
-        id={ this.props.tabId }
-        aria-selected={ this.props.active }
-        aria-controls={ this.props.controls }
-        tabIndex="0">
+        onClick={this.handleClick}
+        onKeyDown={this.handleKeyDown}
+        className={'Tab' + active}
+        role='tab'
+        id={this.props.tabId}
+        aria-selected={this.props.active}
+        aria-controls={this.props.controls}
+        tabIndex='0'>
         { this.props.label }
       </div>
-    );
+    )
   }
-});
+})

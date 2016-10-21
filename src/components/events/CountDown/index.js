@@ -1,8 +1,8 @@
-import React from 'react';
-import moment from 'moment';
-import numeral from 'numbro';
-import I18nMixin from '../../mixins/I18n';
-import CallToActionButton from '../../callstoaction/CallToActionButton';
+import React from 'react'
+import moment from 'moment'
+import numeral from 'numbro'
+import I18nMixin from '../../mixins/I18n'
+import CallToActionButton from '../../callstoaction/CallToActionButton'
 
 export default React.createClass({
   displayName: 'CountDown',
@@ -14,7 +14,7 @@ export default React.createClass({
     i18n: React.PropTypes.object
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       date: null,
       linkUrl: null,
@@ -31,46 +31,46 @@ export default React.createClass({
           other: 'days to go'
         }
       }
-    };
-  },
-
-  renderLink: function(isFinished) {
-    var linkUrl = this.props.linkUrl;
-
-    if (linkUrl && !isFinished) {
-      return (
-        <CallToActionButton href={ linkUrl } kind="primary" thin className="CountDown__link">
-          { this.t('link_text') }
-        </CallToActionButton>
-      );
-    } else if (linkUrl && isFinished) {
-      return (
-        <div className="CountDown__finished">
-          { this.t('finished') }
-        </div>
-      );
     }
   },
 
-  render: function() {
-    var props        = this.props;
-    var today        = moment().startOf('day');
-    var eventDay     = moment(props.date, 'YYYY-MM-DD');
-    var days         = Math.ceil(eventDay.diff(today, 'days', true));
-    var isFinished   = days < 0;
-    var daysAbsolute = Math.abs(days);
-    var label        = this.t(isFinished ? 'past_tense' : 'future_tense', { count: daysAbsolute });
+  renderLink: function (isFinished) {
+    var linkUrl = this.props.linkUrl
+
+    if (linkUrl && !isFinished) {
+      return (
+        <CallToActionButton href={linkUrl} kind='primary' thin className='CountDown__link'>
+          { this.t('link_text') }
+        </CallToActionButton>
+      )
+    } else if (linkUrl && isFinished) {
+      return (
+        <div className='CountDown__finished'>
+          { this.t('finished') }
+        </div>
+      )
+    }
+  },
+
+  render: function () {
+    var props = this.props
+    var today = moment().startOf('day')
+    var eventDay = moment(props.date, 'YYYY-MM-DD')
+    var days = Math.ceil(eventDay.diff(today, 'days', true))
+    var isFinished = days < 0
+    var daysAbsolute = Math.abs(days)
+    var label = this.t(isFinished ? 'past_tense' : 'future_tense', { count: daysAbsolute })
 
     return (
-      <div className="CountDown">
-        <div className="CountDown__days">
+      <div className='CountDown'>
+        <div className='CountDown__days'>
           { numeral(daysAbsolute).format(props.format) }
         </div>
-        <div className="CountDown__label">
+        <div className='CountDown__label'>
           { label }
         </div>
         { this.renderLink(isFinished) }
       </div>
-    );
+    )
   }
-});
+})

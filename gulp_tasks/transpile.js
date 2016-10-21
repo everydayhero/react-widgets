@@ -25,7 +25,7 @@ gulp.task('transpile-js', function () {
 gulp.task('transpile-scss', function () {
   return gulp
     .src(['src/**/*.{scss,sass}', 'common.scss', 'assets.scss'])
-    .pipe(gulp.dest(destination))
+    .pipe(gulp.dest(destination + '/src'))
 })
 
 gulp.task('copy-images', function () {

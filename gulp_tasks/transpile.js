@@ -4,12 +4,12 @@ var clean = require('gulp-clean')
 
 var destination = 'dist'
 
-gulp.task('transpile', ['build-transpile'], function () {
+gulp.task('clean', function () {
   return gulp.src(destination + '/src', {read: false})
     .pipe(clean())
 })
 
-gulp.task('build-transpile', ['transpile-js', 'transpile-scss', 'copy-images', 'copy-bin-stubs'], function () {
+gulp.task('transpile', ['transpile-js', 'transpile-scss', 'copy-images', 'copy-bin-stubs'], function () {
   return gulp.src(['package.json', 'README.md', 'index.html']).pipe(gulp.dest(destination))
 })
 

@@ -12,7 +12,7 @@
     "highlight.js": "^9.2.0",
     "hui": "git://github.com/everydayhero/hui#v1.1.23",
     "jsonp": "webmodules/jsonp",
-    "lodash": "^4.5.1",
+    "lodash": "^4.14.0",
     "moment": "^2.10.2",
     "numbro": "^1.7.1",
     "paths-js": "^0.4.3",

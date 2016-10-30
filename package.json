@@ -59,7 +59,7 @@
     "morgan": "~1.7.0",
     "react-page-objects": "~0.5.1",
     "simple-spinner": "~0.0.2",
-    "sinon": "^1.17.3",
+    "sinon": "^1.17.5",
     "sinon-chai": "^2.8.0",
     "standard": "^8.4.0",
     "superagent": "~1.8.2",

@@ -6,6 +6,8 @@ import campaigns from '../../../api/campaigns'
 import charities from '../../../api/charities'
 import SupporterCard from '../SupporterCard'
 
+const pagesLength = 20
+
 export default React.createClass({
   displayName: 'Supporters',
 
@@ -74,13 +76,13 @@ export default React.createClass({
 
   loadPages: function () {
     var endpoint = this.getEndpoint()
-    var cancelLoad = endpoint('individual', 20 + this.props.exclusions.length, this.onSuccess, { includePages: true, includeFootprint: true })
+    var cancelLoad = endpoint('individual', pagesLength + this.props.exclusions.length, this.onSuccess, { includePages: true, includeFootprint: true })
     this.setState({ cancelLoad: cancelLoad })
   },
 
   onSuccess: function (result) {
     var pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : []
-    pages = pages.filter(page => this.props.exclusions.indexOf(page.id) === -1)
+    pages = pages.filter(page => this.props.exclusions.indexOf(page.id) === -1).slice(0, pagesLength)
 
     this.setState({
       pages: pages

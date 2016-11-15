@@ -18,6 +18,7 @@ export default React.createClass({
     charitySlug: React.PropTypes.string,
     charityUid: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
+    exclusions: React.PropTypes.array,
     hideCharityName: React.PropTypes.bool,
     hideEventName: React.PropTypes.bool,
     i18n: React.PropTypes.object
@@ -27,6 +28,7 @@ export default React.createClass({
     return {
       hideCharityName: false,
       hideEventName: false,
+      exclusions: [],
       defaultI18n: {
         title: 'Our Top Supporters'
       }
@@ -72,12 +74,13 @@ export default React.createClass({
 
   loadPages: function () {
     var endpoint = this.getEndpoint()
-    var cancelLoad = endpoint('individual', 20, this.onSuccess, { includePages: true, includeFootprint: true })
+    var cancelLoad = endpoint('individual', 20 + this.props.exclusions.length, this.onSuccess, { includePages: true, includeFootprint: true })
     this.setState({ cancelLoad: cancelLoad })
   },
 
   onSuccess: function (result) {
     var pages = result && result.leaderboard && result.leaderboard.pages ? result.leaderboard.pages : []
+    pages = pages.filter(page => this.props.exclusions.indexOf(page.id) === -1)
 
     this.setState({
       pages: pages

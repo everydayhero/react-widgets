@@ -1350,6 +1350,9 @@ Charity slug to filter results by charity. Requires `country`.
 `country` (string)
 Country code of region, either 'au', 'ie', 'nz', 'uk' or 'us'. Required by `campaignSlug` and `charitySlug`.
 
+`exclusions` (array)
+Array of Page IDs to exlude from the results.
+
 `limit` (number)
 Number of supporter cards to show. Default is 6.
 

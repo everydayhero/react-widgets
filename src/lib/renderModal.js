@@ -1,12 +1,12 @@
 import React from 'react'
-import { render } from 'react-dom'
+import { render, unmountComponentAtNode } from 'react-dom'
 
 function renderModal (component, options) {
   let div = document.createElement('div')
   document.body.appendChild(div)
 
   options.onClose = function () {
-    React.unmountComponentAtNode(div)
+    unmountComponentAtNode(div)
     document.body.removeChild(div)
   }
 

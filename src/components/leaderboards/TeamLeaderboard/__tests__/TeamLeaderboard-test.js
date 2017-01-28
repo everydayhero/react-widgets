@@ -98,14 +98,28 @@ describe('TeamLeaderboard', function () {
       let leaderboard = <TeamLeaderboard campaignUid='au-0' />
       let element = TestUtils.renderIntoDocument(leaderboard)
 
-      expect(element.formatAmount(100000)).toEqual('$1 k')
+      expect(element.formatAmount(100000, '$')).toEqual('$1 k')
     })
 
     it('renders a different format if given acceptable numeral.js string', function () {
       let leaderboard = <TeamLeaderboard campaignUid='au-0' currencyFormat='0.00' />
       let element = TestUtils.renderIntoDocument(leaderboard)
 
-      expect(element.formatAmount(100000)).toEqual('$1000.00')
+      expect(element.formatAmount(100000, '$')).toEqual('$1000.00')
+    })
+
+    it('uses a custom symbol string if set', function () {
+      let leaderboard = <TeamLeaderboard campaignUid='au-0' i18n={{ symbol: 'AUD ' }} />
+      let element = TestUtils.renderIntoDocument(leaderboard)
+
+      expect(element.formatAmount(1000000, '$')).toEqual('AUD 10 k')
+    })
+
+    it('can use an empty string for a custom symbol', function () {
+      let leaderboard = <TeamLeaderboard campaignUid='au-0' i18n={{ symbol: '' }} />
+      let element = TestUtils.renderIntoDocument(leaderboard)
+
+      expect(element.formatAmount(1000000, '$')).toEqual('10 k')
     })
   })
 

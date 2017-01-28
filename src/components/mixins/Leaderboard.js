@@ -95,6 +95,7 @@ export default {
           name: page.name,
           url: page.url,
           isoCode: page.amount.currency.iso_code,
+          symbol: page.amount.currency.symbol,
           amount: page.amount.cents,
           totalMembers: (page.team_member_uids && page.team_member_uids.length) ? page.team_member_uids.length : null,
           imgSrc: page.image.large_image_url,
@@ -131,8 +132,10 @@ export default {
     return pagedLeaderboard
   },
 
-  formatAmount (amount) {
-    return this.t('symbol') + numeral(amount / 100).format(this.props.currencyFormat)
+  formatAmount (amount, defaultSymbol = '') {
+    const symbolTranslation = this.t('symbol')
+    const prefix = _.isString(symbolTranslation) ? symbolTranslation : defaultSymbol
+    return prefix + numeral(amount / 100).format(this.props.currencyFormat)
   },
 
   prevPage () {

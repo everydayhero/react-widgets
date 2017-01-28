@@ -49,7 +49,6 @@ export default React.createClass({
       defaultI18n: {
         raisedTitle: 'Raised',
         membersTitle: 'Members',
-        symbol: '$',
         heading: 'Top Teams',
         emptyText: 'There are no teams for this campaign yet. Be the first and create one now!',
         emptyButtonText: 'Start a team'
@@ -107,7 +106,7 @@ export default React.createClass({
         className='TeamLeaderboard__items'>
         {
           board.map(function (item) {
-            var formattedAmount = this.formatAmount(item.amount)
+            var formattedAmount = this.formatAmount(item.amount, item.symbol)
             var formattedRank = numeral(item.rank).format('0o')
 
             var El = this.props.altTemplate ? TeamLeaderboardItem : LeaderboardItem

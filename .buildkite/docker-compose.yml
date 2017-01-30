@@ -1,5 +1,5 @@
 widgets:
-  image: quay.io/everydayhero/edh-widgets:${BUILDKITE_COMMIT}
+  image: everydayhero/edh-widgets:${BUILDKITE_COMMIT}
   environment:
     - AWS_KEY
     - AWS_SECRET

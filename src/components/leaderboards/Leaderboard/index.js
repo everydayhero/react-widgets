@@ -49,7 +49,6 @@ export default React.createClass({
       groupValue: '',
       groupValues: [],
       defaultI18n: {
-        symbol: '$',
         heading: 'Top Individuals',
         emptyText: 'There are no individual supporters for this campaign yet. Be the first and register now!',
         emptyButtonText: 'Register'
@@ -107,7 +106,7 @@ export default React.createClass({
         component='ol'>
         {
           board.map(function (item) {
-            let formattedAmount = this.formatAmount(item.amount)
+            let formattedAmount = this.formatAmount(item.amount, item.symbol)
             let formattedRank = numeral(item.rank).format('0o')
 
             return (

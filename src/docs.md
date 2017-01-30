@@ -1068,12 +1068,14 @@ Displays an individuals leaderboard sorted by funds raised (highest first) for a
 
 ```js
 {
-  symbol: '$',
+  symbol: undefined,
   heading: 'Top Individuals',
   emptyText: 'There are no individual supporters for this campaign yet. Be the first and register now!',
   emptyButtonText: 'Register'
 }
 ```
+
+Note: The symbol translation above is undefined by default. It can be set to a custom `string` to override the default regional currency symbol.
 
 `campaignUid` (string)<br>
 Define a campaign uid to filter results by campaign.
@@ -1163,12 +1165,14 @@ Displays a team leaderboard sorted by funds raised (highest first) for a campaig
 {
   raisedTitle: 'Raised',
   membersTitle: 'Members',
-  symbol: '$',
+  symbol: undefined,
   heading: 'Top Teams',
   emptyText: 'There are no teams for this campaign yet. Be the first and create one now!',
   emptyButtonText: 'Start a team'
 }
 ```
+
+Note: The symbol translation above is undefined by default. It can be set to a custom `string` to override the default regional currency symbol.
 
 `campaignUid` (string)<br>
 Campaign uid to filter results by campaign.

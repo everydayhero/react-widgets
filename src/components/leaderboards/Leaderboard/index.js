@@ -7,6 +7,7 @@ import LeaderboardMixin from '../../mixins/Leaderboard'
 import Icon from '../../helpers/Icon'
 import LeaderboardItem from '../LeaderboardItem'
 import LeaderboardEmpty from '../LeaderboardEmpty'
+import LeaderboardFailed from '../LeaderboardFailed'
 import numeral from 'numbro'
 import addEventListener from '../../../lib/addEventListener'
 import removeEventListener from '../../../lib/removeEventListener'
@@ -51,7 +52,8 @@ export default React.createClass({
       defaultI18n: {
         heading: 'Top Individuals',
         emptyText: 'There are no individual supporters for this campaign yet. Be the first and register now!',
-        emptyButtonText: 'Register'
+        emptyButtonText: 'Register',
+        failedText: 'Unable to load leaderboard. Try back later.'
       }
     }
   },
@@ -59,6 +61,7 @@ export default React.createClass({
   getInitialState () {
     return {
       isLoading: false,
+      failedToLoad: false,
       boardData: [],
       currentPage: 1,
       childWidth: this.props.childWidth
@@ -128,6 +131,10 @@ export default React.createClass({
     )
   },
 
+  renderFailedState () {
+    return <LeaderboardFailed text={this.t('failedText')} />
+  },
+
   render () {
     let state = this.state
     let heading = this.t('heading')
@@ -142,7 +149,9 @@ export default React.createClass({
       'Leaderboard--empty': !state.boardData.length
     })
 
-    let content = state.isLoading
+    let content = state.failedToLoad
+      ? this.renderFailedState
+      : state.isLoading
       ? this.renderLoadingState
       : state.boardData.length
       ? this.renderLeaderboardItems

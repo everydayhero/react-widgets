@@ -57,6 +57,15 @@ export default {
   },
 
   processLeaderboard (result) {
+    if (!result) {
+      this.setState({
+        isLoading: false,
+        failedToLoad: true
+      })
+
+      return
+    }
+
     let pages = []
     if (result.results) {
       pages = result.results.map(function (object) {

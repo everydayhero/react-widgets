@@ -8,6 +8,7 @@ import Icon from '../../helpers/Icon'
 import LeaderboardItem from '../LeaderboardItem'
 import TeamLeaderboardItem from '../TeamLeaderboardItem'
 import LeaderboardEmpty from '../LeaderboardEmpty'
+import LeaderboardFailed from '../LeaderboardFailed'
 import numeral from 'numbro'
 import addEventListener from '../../../lib/addEventListener'
 import removeEventListener from '../../../lib/removeEventListener'
@@ -51,7 +52,8 @@ export default React.createClass({
         membersTitle: 'Members',
         heading: 'Top Teams',
         emptyText: 'There are no teams for this campaign yet. Be the first and create one now!',
-        emptyButtonText: 'Start a team'
+        emptyButtonText: 'Start a team',
+        failedText: 'Unable to load leaderboard. Try back later.'
       }
     }
   },
@@ -133,6 +135,10 @@ export default React.createClass({
     )
   },
 
+  renderFailedState () {
+    return <LeaderboardFailed text={this.t('failedText')} />
+  },
+
   render: function () {
     var state = this.state
     var heading = this.t('heading')
@@ -147,7 +153,9 @@ export default React.createClass({
       'TeamLeaderboard--empty': !state.boardData.length
     })
 
-    var content = state.isLoading
+    var content = state.failedToLoad
+      ? this.renderFailedState
+      : state.isLoading
       ? this.renderLoadingState
       : state.boardData.length
       ? this.renderLeaderboardItems

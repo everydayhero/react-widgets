@@ -2,7 +2,6 @@ import React from 'react'
 import classnames from 'classnames'
 
 const content = (loading, number, label) => {
-  if (loading) return <span />
   return (
     <div>
       <span className='CampaignSummaryStat__number' key='number'>

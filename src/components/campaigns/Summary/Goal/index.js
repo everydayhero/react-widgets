@@ -7,6 +7,7 @@ const Goal = ({ loading, goal, currencySymbol, numberFormat }) => {
 
   return (
     <Stat
+      type='alt'
       loading={loading}
       number={formattedGoal}
       label='Goal' />
@@ -16,7 +17,7 @@ const Goal = ({ loading, goal, currencySymbol, numberFormat }) => {
 Goal.displayName = 'CampaignSummaryGoal'
 
 Goal.propTypes = {
-  goal: React.PropTypes.string.isRequired,
+  goal: React.PropTypes.number.isRequired,
   currencySymbol: React.PropTypes.string,
   numberFormat: React.PropTypes.string.isRequired,
   loading: React.PropTypes.bool.isRequired

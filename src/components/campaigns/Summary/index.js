@@ -110,7 +110,7 @@ class CampaignSummary extends React.Component {
     const fundsRaisedAmount = this.state.fundsRaised.amount
 
     return (
-      <div key='campaignSummary' className='CampaignSummery'>
+      <div key='campaignSummary' className='CampaignSummary'>
         <GoalProgress
           goal={goal}
           fundsRaisedAmount={fundsRaisedAmount} />

@@ -1,22 +1,28 @@
 import React from 'react'
+import classnames from 'classnames'
 
 const content = (loading, number, label) => {
-  if (loading) return <span />
   return (
     <div>
       <span className='CampaignSummaryStat__number' key='number'>
         {`${number} `}
       </span>
-      <span className='CampaignSummaryStat__stat' key='stat'>
+      <span className='CampaignSummaryStat__label' key='label'>
         {label}
       </span>
     </div>
   )
 }
 
-const Stat = ({ loading, number, label }) => {
+const Stat = ({ loading, number, label, type }) => {
+  const classNames = classnames({
+    'CampaignSummaryStat': true,
+    'CampaignSummaryStat--loading': loading,
+    'CampaignSummaryStat--notLoading': !loading,
+    [`CampaignSummaryStat--${type}`]: type
+  })
   return (
-    <div className={`CampaignSummaryStat CampaignSummaryStat--${loading ? 'loading' : 'notLoading'}`}>
+    <div className={classNames}>
       {content(loading, number, label)}
     </div>
   )

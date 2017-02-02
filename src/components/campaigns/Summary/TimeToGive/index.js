@@ -7,7 +7,7 @@ const remainingtTimeToGive = function (donationEndTime, unit) {
 }
 
 const TimeToGive = ({ donationEndTime }) => {
-  if (remainingtTimeToGive(donationEndTime) <= 0) return <span />
+  if (remainingtTimeToGive(donationEndTime) <= 0) return <span className='CampaignSummaryTimeToGive CampaignSummaryTimeToGive--none' />
   const daysLeft = remainingtTimeToGive(donationEndTime, 'days')
   const plural = daysLeft > 1
   return (

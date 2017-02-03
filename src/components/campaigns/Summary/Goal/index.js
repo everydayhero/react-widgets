@@ -3,7 +3,7 @@ import numbro from 'numbro'
 import Stat from '../Stat'
 
 const Goal = ({ loading, goal, currencySymbol, numberFormat }) => {
-  const formattedGoal = numbro(goal).format(currencySymbol + numberFormat)
+  const formattedGoal = currencySymbol && currencySymbol + numbro(goal).format(numberFormat)
 
   return (
     <Stat

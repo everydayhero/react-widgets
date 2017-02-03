@@ -5,7 +5,7 @@ const content = (loading, number, label) => {
   return (
     <div>
       <span className='CampaignSummaryStat__number' key='number'>
-        {`${number} `}
+        {number && `${number} `}
       </span>
       <span className='CampaignSummaryStat__label' key='label'>
         {label}

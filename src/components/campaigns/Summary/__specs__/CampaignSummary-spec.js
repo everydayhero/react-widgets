@@ -114,8 +114,8 @@ describe('CampaignSummary', () => {
         it('renders FundsRaised components with different numberFormats', () => {
           const wrapper = mount(<CampaignSummary campaignUid='au-123' />)
           const components = wrapper.find(FundsRaised)
-          expect(components.at(0).text()).to.equal('9,876,543 raised')
-          expect(components.at(1).text()).to.equal('9.9m raised')
+          expect(components.at(0).text()).to.equal('R9,876,543 raised')
+          expect(components.at(1).text()).to.equal('R9.9m raised')
         })
       })
 
@@ -142,8 +142,8 @@ describe('CampaignSummary', () => {
         it('renders Goal components with different numberFormats', () => {
           const wrapper = mount(<CampaignSummary goal={666000}campaignUid='au-123' />)
           const components = wrapper.find(Goal)
-          expect(components.at(0).text()).to.equal('666,000 Goal')
-          expect(components.at(1).text()).to.equal('666k Goal')
+          expect(components.at(0).text()).to.equal('R666,000 Goal')
+          expect(components.at(1).text()).to.equal('R666k Goal')
         })
       })
     })

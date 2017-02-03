@@ -5,7 +5,7 @@ import Stat from '../Stat'
 const FundsRaised = ({ loading, fundsRaised, numberFormat }) => {
   const { currency, amount } = fundsRaised
 
-  const fundsRaisedFormatted = currency && numbro(amount).format(currency + numberFormat)
+  const fundsRaisedFormatted = currency && currency + numbro(amount).format(numberFormat)
 
   return (
     <Stat

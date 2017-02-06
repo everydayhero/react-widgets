@@ -3,11 +3,12 @@ import numbro from 'numbro'
 import Stat from '../Stat'
 
 const NumberOfDonations = ({ loading, total, numberFormat }) => {
+  const plural = total !== 1 ? 's' : ''
   return (
     <Stat
       loading={loading}
       number={numbro(total).format(numberFormat)}
-      label='donations' />
+      label={`donation${plural}`} />
   )
 }
 

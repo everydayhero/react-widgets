@@ -42,7 +42,6 @@ export default React.createClass({
 
   handleClick: function (e) {
     if (this.props.onClick) {
-      e.preventDefault()
       this.props.onClick(e)
     }
   },
@@ -75,8 +74,8 @@ export default React.createClass({
         to={href}
         params={props.params}
         href={href}
-        onMouseUp={!href && this.handleClick}
-        onTouchStart={!href && this.handleClick}>
+        onMouseUp={this.handleClick}
+        onTouchStart={this.handleClick}>
         <Icon className='CallToActionButton__icon' icon={props.icon} />
         <span className='CallToActionButton__label'>
           { props.label || props.children }

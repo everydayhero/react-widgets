@@ -19,7 +19,12 @@ describe('CallToActionButton', function () {
       }
 
       component = TestUtils.renderIntoDocument(
-        <CallToActionButton kind='cta' label='Get Started' icon='chevron-right' onClick={onClick} />
+        <CallToActionButton
+          kind='cta'
+          label='Get Started'
+          icon='chevron-right'
+          onClick={onClick}
+          href='https://everydayhero.com/' />
       )
     })
 
@@ -28,7 +33,7 @@ describe('CallToActionButton', function () {
     })
 
     it('handles click events', function () {
-      var node = scryByTag(component, 'button')[0]
+      var node = scryByTag(component, 'a')[0]
       TestUtils.Simulate.mouseUp(node)
 
       expect(clicked).toBe(true)

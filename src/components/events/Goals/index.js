@@ -46,9 +46,9 @@ export default React.createClass({
 
   renderCampaigns: function () {
     return (
-      this.state.campaigns.map(function (campaign) {
+      this.state.campaigns.map(function (campaign, index) {
         return (
-          <CampaignGoalItem name={campaign.name} goal={campaign.goal} count={campaign.count} />
+          <CampaignGoalItem key={index} name={campaign.name} goal={campaign.goal} count={campaign.count} />
         )
       })
     )

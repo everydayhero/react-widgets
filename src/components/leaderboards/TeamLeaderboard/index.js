@@ -104,6 +104,8 @@ export default React.createClass({
     return (
       <ReactCSSTransitionGroup
         transitionName='TeamLeaderboard__animation'
+        transitionEnterTimeout={666}
+        transitionLeaveTimeout={100}
         component='ol'
         className='TeamLeaderboard__items'>
         {

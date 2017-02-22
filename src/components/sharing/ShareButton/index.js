@@ -126,7 +126,10 @@ export default React.createClass({
           { this.renderIcon() }
           <span className='ShareButton__label'>{ buttonLabel }</span>
         </div>
-        <ReactCSSTransitionGroup transitionName='ShareButton__transition' transitionEnter={false}>
+        <ReactCSSTransitionGroup
+          transitionName='ShareButton__transition'
+          transitionLeaveTimeout={300}
+          transitionEnter={false}>
           { this.renderShareBox() }
         </ReactCSSTransitionGroup>
       </div>

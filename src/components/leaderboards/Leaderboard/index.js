@@ -106,6 +106,8 @@ export default React.createClass({
       <ReactCSSTransitionGroup
         className='Leaderboard__items'
         transitionName='Leaderboard__animation'
+        transitionEnterTimeout={666}
+        transitionLeaveTimeout={100}
         component='ol'>
         {
           board.map(function (item) {

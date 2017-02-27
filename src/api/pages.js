@@ -2,6 +2,7 @@ import routes from './routes'
 import getJSONP from '../lib/getJSONP'
 import campaigns from './campaigns'
 import paramJoin from '../lib/paramJoin'
+import staticLeaderboard from './routes/staticLeaderboard'
 
 export default {
   find (pageId, callback, options) {
@@ -49,5 +50,9 @@ export default {
   isGivePage (page) {
     return page.campaign.uid &&
       page.campaign.uid === campaigns.giveCampaignUid(page.country_code)
+  },
+
+  staticLeaderboard (id) {
+    return staticLeaderboard(id)
   }
 }

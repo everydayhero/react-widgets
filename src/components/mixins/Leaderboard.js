@@ -120,7 +120,7 @@ export default {
     let rank = 1
     let prevItem = null
 
-    _.forEach(leaderboard, function (item, i) {
+    return _.forEach(leaderboard, function (item, i) {
       if (prevItem && item.amount !== prevItem.amount) {
         rank = i + 1
       }

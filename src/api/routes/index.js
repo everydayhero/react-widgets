@@ -1,8 +1,12 @@
 import _ from 'lodash'
-import format from '../lib/format'
-import parseUrl from '../lib/parseUrl'
+import format from '../../lib/format'
+import parseUrl from '../../lib/parseUrl'
+import axios from 'axios'
 
 const defaultBaseUrl = 'https://everydayhero.com'
+
+const client = axios.create({baseURL: defaultBaseUrl})
+
 const baseRoutes = {
   donate: '{protocol}://{campaignSlug}.{hostname}/{country}/{charitySlug}/donate',
   fundraise: '{protocol}://{campaignSlug}.{hostname}/{country}/{charitySlug}/get-started',
@@ -73,5 +77,6 @@ setBaseUrl(defaultBaseUrl)
 
 export default {
   get: getRoute,
-  setBaseUrl: setBaseUrl
+  setBaseUrl,
+  client
 }

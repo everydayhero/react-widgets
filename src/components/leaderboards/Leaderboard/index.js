@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import React from 'react'
 import cx from 'classnames'
+import fetchStaticLeaderboard from '../../../api/routes/staticLeaderboard'
 import I18nMixin from '../../mixins/I18n'
 import DOMInfoMixin from '../../mixins/DOMInfo'
 import LeaderboardMixin from '../../mixins/Leaderboard'
@@ -24,6 +25,7 @@ export default React.createClass({
     charityUid: React.PropTypes.string,
     groupValues: React.PropTypes.array,
     groupValue: React.PropTypes.string,
+    leaderboardId: React.PropTypes.string,
     country: React.PropTypes.oneOf(['au', 'ie', 'nz', 'uk', 'us']),
     limit: React.PropTypes.number,
     pageSize: React.PropTypes.number,
@@ -69,7 +71,19 @@ export default React.createClass({
   },
 
   componentWillMount () {
-    this.loadLeaderboard('individual')
+    if (this.props.leaderboardId) {
+      fetchStaticLeaderboard({
+        id: this.props.leaderboardId
+      }).then((pages) => {
+        this.setState({
+          boardData: this.paginateLeaderboard(pages),
+          resultCount: pages.length,
+          isLoading: false
+        })
+      })
+    } else {
+      this.loadLeaderboard('individual')
+    }
   },
 
   componentDidMount () {
@@ -124,7 +138,7 @@ export default React.createClass({
                 isoCode={item.isoCode}
                 amount={formattedAmount}
                 imgSrc={item.medImgSrc}
-                width={this.state.childWidth}
+                width={String(this.state.childWidth)}
                 renderImage={this.props.renderImage} />
             )
           }, this)

@@ -6,7 +6,7 @@ export default React.createClass({
   displayName: 'LeaderboardEmpty',
   propTypes: {
     emptyText: React.PropTypes.string.isRequired,
-    emptyButtonText: React.PropTypes.string.isRequired
+    emptyButtonText: React.PropTypes.string
   },
 
   componentWillMount: function () {
@@ -14,19 +14,25 @@ export default React.createClass({
   },
 
   fetchGetStartedUrl: function () {
-    var props = this.props
-    var slug = props.campaignSlug
-    var country = props.country
-    var campaignUid = this.props.campaignUid || this.props.campaignUids[0]
-    var isSingleCampaign = !!props.campaignUid && !this.props.campaignUids
+    const {
+      campaignSlug,
+      country,
+      campaignUid,
+      campaignUids
+    } = this.props
 
-    if (country && slug) {
-      this.setGetStartedUrl(slug, country, isSingleCampaign)
-    } else {
+    const uid = campaignUid || (campaignUids && campaignUids[0])
+    const isSingleCampaign = !!campaignUid && !campaignUids
+
+    if (country && campaignSlug) {
+      this.setGetStartedUrl(campaignSlug, country, isSingleCampaign)
+    } else if (uid) {
       this.setState({ isLoading: true })
       campaigns.find(campaignUid, function (res) {
         this.setGetStartedUrl(res.campaign.slug, res.campaign.country_code, isSingleCampaign)
       }.bind(this))
+    } else {
+      this.setGetStartedUrl(null, country)
     }
   },
 

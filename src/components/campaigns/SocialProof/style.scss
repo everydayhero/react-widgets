@@ -1,0 +1,34 @@
+.CampaignSocialProof {
+  display: inline-block;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.7em;
+}
+
+.CampaignSocialProof__photosContainer {
+  padding-left: 30px;
+}
+
+.CampaignSocialProof__photo {
+  width: 48px;
+  height: 48px;
+  background-color: white;
+  border-radius: 100%;
+  display: inline-block;
+  padding: 2px;
+  margin-left: -30px;
+}
+
+.CampaignSocialProof__photo img,
+.CampaignSocialProof__photo div {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-color: $ehw-grey;
+}
+
+.CampaignSocialProof__subtitle--loading {
+  height: 1em;
+  background-color: $ehw-grey;
+  border-radius: 1em;
+}

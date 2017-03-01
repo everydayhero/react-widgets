@@ -16,6 +16,7 @@ import CallToActionBox from './components/callstoaction/CallToActionBox'
 import CallToActionButton from './components/callstoaction/CallToActionButton'
 import CampaignGoals from './components/events/Goals'
 import CampaignSummary from './components/campaigns/Summary'
+import CampaignSocialProof from './components/campaigns/SocialProof'
 import CountDown from './components/events/CountDown'
 import EntityGoalProgress from './components/totals/EntityGoalProgress'
 import Event from './components/events/Event'
@@ -57,6 +58,7 @@ const widgets = {
   CallToActionButton,
   CampaignGoals,
   CampaignSummary,
+  CampaignSocialProof,
   CountDown,
   EntityGoalProgress,
   Event,

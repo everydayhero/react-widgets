@@ -230,10 +230,13 @@
       </div>
     </div>
   </div>
-
   <div class="panel">
     <h3 class="title">Campaign Summary</h3>
     <div id="CampaignSummaryExample">Loading...</div>
+  </div>
+  <div class="panel">
+    <h3 class="title">Campaign Social Proof</h3>
+    <div id="CampaignSocialProofExample">Loading...</div>
   </div>
 
   <script>
@@ -435,6 +438,9 @@
       name: 'Campaign 3',
       goal: 8000
     }]})
+    edh.widgets.renderWidget('CampaignSocialProofExample', 'CampaignSocialProof', {
+      campaignUid: 'au-9674'
+    })
     edh.widgets.renderWidget('CampaignSummaryExample', 'CampaignSummary', {
       campaignUid: 'au-9674',
       goal: 4469283*2

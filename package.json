@@ -59,6 +59,7 @@
     "morgan": "~1.7.0",
     "react-addons-test-utils": "^15.5.1",
     "react-page-objects": "~0.5.1",
+    "react-test-renderer": "^15.5.4",
     "simple-spinner": "~0.0.2",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",

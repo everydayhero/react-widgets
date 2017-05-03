@@ -5,27 +5,26 @@ steps:
   - name: ":docker:"
     command: ".buildkite/bin/build"
     agents:
-      docker: builder
-      queue: native
+      queue: build
 
   - type: "waiter"
 
   - name: ":mag: Lint"
     command: ".buildkite/bin/lint"
     agents:
-      queue: elastic
+      queue: default
 
   - type: "waiter"
 
   - name: ":pill: Spec Tests"
     command: ".buildkite/bin/test-spec"
     agents:
-      queue: elastic
+      queue: default
 
   - name: ":pill: Unit Tests"
     command: ".buildkite/bin/test-units"
     agents:
-      queue: elastic
+      queue: default
 
   - name: ":rocket: Publish"
     type: "manual"
@@ -36,7 +35,7 @@ steps:
   - name: ":package: Deploy"
     command: "./.buildkite/bin/deploy"
     agents:
-      queue: elastic
+      queue: default
     branches: master
 
   - type: "waiter"
@@ -44,5 +43,5 @@ steps:
   - name: ":loudspeaker:"
     command: "./.buildkite/bin/announce"
     agents:
-      queue: elastic
+      queue: default
     branches: master

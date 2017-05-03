@@ -2,6 +2,7 @@ jest.disableAutomock()
 jest.mock('../../../../api/totals')
 
 import React from 'react'
+import ReactDOM from 'react-dom'
 import sinon from 'sinon'
 import EntityGoalProgress from '../'
 import totals from '../../../../api/totals'
@@ -156,14 +157,14 @@ describe('FundsRaised', function () {
       element = TestUtils.renderIntoDocument(<EntityGoalProgress goal={15000000} />)
       element.onSuccess({ isLoading: false, total_amount_cents: { sum: 100000 }, goal: 15000000 })
       let text = findByClass(element, 'GoalProgress__text')
-      expect(text.getDOMNode().textContent).toContain('$1,000 raised of $150,000 goal')
+      expect(ReactDOM.findDOMNode(text).textContent).toContain('$1,000 raised of $150,000 goal')
     })
 
     it('renders with a custom offset', function () {
       element = TestUtils.renderIntoDocument(<EntityGoalProgress goal={15000000} offset={200000} />)
       element.onSuccess({ isLoading: false, total_amount_cents: { sum: 300000 }, goal: 15000000 })
       let text = findByClass(element, 'GoalProgress__text')
-      expect(text.getDOMNode().textContent).toContain('$5,000 raised of $150,000 goal')
+      expect(ReactDOM.findDOMNode(text).textContent).toContain('$5,000 raised of $150,000 goal')
     })
   })
 

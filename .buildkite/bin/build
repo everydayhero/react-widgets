@@ -2,5 +2,5 @@
 
 set -eux
 
-docker build --pull --tag "quay.io/everydayhero/edh-widgets:${BUILDKITE_COMMIT}" .
-docker push "quay.io/everydayhero/edh-widgets:${BUILDKITE_COMMIT}"
+docker build --pull --tag "everydayhero/edh-widgets:${BUILDKITE_COMMIT}" .
+docker push "everydayhero/edh-widgets:${BUILDKITE_COMMIT}"

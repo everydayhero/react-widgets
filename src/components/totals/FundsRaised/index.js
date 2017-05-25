@@ -10,6 +10,8 @@ export default React.createClass({
   propTypes: {
     campaignUid: React.PropTypes.string,
     campaignUids: React.PropTypes.array,
+    teamId: React.PropTypes.string,
+    teamIds: React.PropTypes.array,
     pageId: React.PropTypes.string,
     pageIds: React.PropTypes.array,
     charityUid: React.PropTypes.string,
@@ -30,6 +32,8 @@ export default React.createClass({
     return {
       campaignUid: null,
       campaignUids: null,
+      teamId: null,
+      teamIds: null,
       pageId: null,
       pageIds: null,
       charityUid: null,
@@ -66,6 +70,7 @@ export default React.createClass({
     var campaignUids = props.campaignUid || props.campaignUids
     var charityUids = props.charityUid || props.charityUids
     var pageIds = props.pageId || props.pageIds
+    var teamIds = props.teamId || props.teamIds
 
     var options = {}
 
@@ -76,8 +81,9 @@ export default React.createClass({
     if (props.endAt) {
       options.end = props.endAt
     }
-
-    if (pageIds) {
+    if (teamIds) {
+      totals.findByTeams(teamIds, this.onSuccess, options)
+    } else if (pageIds) {
       totals.findByPages(pageIds, this.onSuccess, options)
     } else if (charityUids && campaignUids) {
       totals.findByAll({

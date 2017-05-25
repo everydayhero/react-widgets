@@ -350,8 +350,14 @@ Group values to filter results by multiple groups.
 `pageId` (string) <br>
 Page id to filter results by page.
 
-`pageId` (array) <br>
+`pageIds` (array) <br>
 Page ids to filter results by multiple pages.
+
+`teamId` (string) <br>
+Team id to filter results by team.
+
+`teamIds` (array) <br>
+Team ids to filter results by multiple teams.
 
 `charityUid` (string)<br>
 Charity uid to filter results by charity.

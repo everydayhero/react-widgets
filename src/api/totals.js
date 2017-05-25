@@ -12,6 +12,13 @@ export default {
     return getJSONP(routes.get('totals', mergedParams), callback)
   },
 
+  findByTeams (teamIds, callback, options) {
+    teamIds = paramJoin(teamIds, '&team_id[]=')
+    let params = _.merge({ teamId: teamIds }, options)
+
+    return getJSONP(routes.get('totals', params), callback)
+  },
+
   findByPages (pageIds, callback, options) {
     pageIds = paramJoin(pageIds, '&page_id[]=')
     let params = _.merge({ page: pageIds }, options)

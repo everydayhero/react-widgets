@@ -17,7 +17,7 @@ describe('totals', () => {
       totals.findByCampaigns({ campaignUids: 'us-22' }, callback)
 
       expect(getJSONP.default).to.have.been.calledWith(
-        'https://everydayhero.com/api/v2/search/totals.jsonp?campaign_id[]=us-22',
+        'https://everydayhero.com/api/v2/search/totals.jsonp?campaign_ids=us-22',
         callback
       )
     })
@@ -26,7 +26,7 @@ describe('totals', () => {
       totals.findByCampaigns({ campaignUids: ['xx-123', 'yy-123'] }, callback)
 
       expect(getJSONP.default).to.have.been.calledWith(
-        'https://everydayhero.com/api/v2/search/totals.jsonp?campaign_id[]=xx-123&campaign_id[]=yy-123',
+        'https://everydayhero.com/api/v2/search/totals.jsonp?campaign_ids=xx-123,yy-123',
         callback
       )
     })
@@ -37,7 +37,7 @@ describe('totals', () => {
       totals.findByPages('848751', callback)
 
       expect(getJSONP.default).to.have.been.calledWith(
-        'https://everydayhero.com/api/v2/search/totals.jsonp?page_id[]=848751',
+        'https://everydayhero.com/api/v2/search/totals.jsonp?page_ids=848751',
         callback
       )
     })
@@ -48,7 +48,7 @@ describe('totals', () => {
       totals.findByCharities({ charityUids: 'au-31' }, callback)
 
       expect(getJSONP.default).to.have.been.calledWith(
-        'https://everydayhero.com/api/v2/search/totals.jsonp?charity_id[]=au-31',
+        'https://everydayhero.com/api/v2/search/totals.jsonp?charity_ids=au-31',
         callback
       )
     })
@@ -62,7 +62,7 @@ describe('totals', () => {
       }, callback)
 
       expect(getJSONP.default).to.have.been.calledWith(
-        'https://everydayhero.com/api/v2/search/totals.jsonp?charity_id[]=au-31&group_value[]=SchoolName',
+        'https://everydayhero.com/api/v2/search/totals.jsonp?charity_ids=au-31&group_values=SchoolName',
         callback
       )
     })
@@ -74,7 +74,7 @@ describe('totals', () => {
       }, callback)
 
       expect(getJSONP.default).to.have.been.calledWith(
-        'https://everydayhero.com/api/v2/search/totals.jsonp?charity_id[]=au-31&group_value[]=SchoolName&group_value[]=ABC',
+        'https://everydayhero.com/api/v2/search/totals.jsonp?charity_ids=au-31&group_values=SchoolName,ABC',
         callback
       )
     })

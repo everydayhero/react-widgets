@@ -28,7 +28,7 @@ const baseRoutes = {
 
   address: '{baseUrl}/api/v2/addresses/{country}/{id}.jsonp',
   searchAddresses: '{baseUrl}/api/v2/addresses.jsonp?country_code={country}&q={searchTerm}',
-  totals: '{baseUrl}/api/v2/search/totals.jsonp?charity_id[]={charityUid}&campaign_id[]={campaignUid}&group_value[]={groupValue}&team_id[]={teamId}&page_id[]={page}&start_at={start}&end_at={end}&kind={type}&country_code={country}'
+  totals: '{baseUrl}/api/v2/search/totals.jsonp?charity_ids={charityUid}&campaign_ids={campaignUid}&group_values={groupValue}&team_ids={teamId}&page_ids={page}&start_at={start}&end_at={end}&kind={type}&country_code={country}'
 }
 let routes = {}
 

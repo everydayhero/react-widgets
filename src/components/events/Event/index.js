@@ -130,10 +130,16 @@ export default React.createClass({
           <div className='Event__gradient' />
           <ul className='Event__date DateBox'>
             <li className='DateBox__day' >
-              { date.getDate() }
+              {/* Heroix/NFP does *not* store dates with Timezone information. This means the 'utc' date we receive
+                  is actually the date as selected by the user in NFP or Heroix when configuring the campaign. If
+                  we don't use getUTCDate javascript will helpfully convert to the browser's locale, meaning in the US
+                  they see dates one day earlier than they selected when configuring the campaign.
+               */
+              }
+              { date.getUTCDate() }
             </li>
             <li className='DateBox__month-year'>
-              { t('months')[date.getMonth()] } { date.getFullYear() }
+              { t('months')[date.getUTCMonth()] } { date.getUTCFullYear() }
             </li>
           </ul>
           <a className='Event__name' href={props.campaignUrl}>{ props.name }</a>

@@ -138,13 +138,13 @@ gulp.task('docs', function () {
 })
 
 gulp.task('deploy_assets', ['build'], function () {
-  if (!process.env.AWS_KEY || !process.env.AWS_SECRET) {
+  if (!process.env.WIDGETS_AWS_KEY || !process.env.WIDGETS_AWS_SECRET) {
     console.error('ERROR: No AWS credentials found.')
     return
   }
   var publisher = awspublish.create({
-    accessKeyId: process.env.AWS_KEY,
-    secretAccessKey: process.env.AWS_SECRET,
+    accessKeyId: process.env.WIDGETS_AWS_KEY,
+    secretAccessKey: process.env.WIDGETS_AWS_SECRET,
     params: {
       Bucket: 'shared-scripts'
     }

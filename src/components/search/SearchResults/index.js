@@ -12,6 +12,7 @@ export default React.createClass({
     onSelect: React.PropTypes.func,
     results: React.PropTypes.arrayOf(React.PropTypes.object),
     resultComponent: React.PropTypes.func.isRequired,
+    resultComponentProps: React.PropTypes.object,
     selectAction: React.PropTypes.string
   },
 
@@ -33,6 +34,7 @@ export default React.createClass({
 
     var props = this.props
     var Result = props.resultComponent
+    var resultComponentProps = props.resultComponentProps
     var selectAction = props.selectAction || this.t('selectAction')
 
     return _.map(this.props.results || [], function (result) {
@@ -41,7 +43,8 @@ export default React.createClass({
           key={result.id}
           onSelect={props.onSelect}
           result={result}
-          selectAction={selectAction} />
+          selectAction={selectAction}
+          {...resultComponentProps} />
       )
     })
   },

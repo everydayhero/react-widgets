@@ -9,7 +9,14 @@ export default React.createClass({
   propTypes: {
     onSelect: React.PropTypes.func,
     result: React.PropTypes.object.isRequired,
-    selectAction: React.PropTypes.string.isRequired
+    selectAction: React.PropTypes.string.isRequired,
+    showSupporterName: React.PropTypes.bool
+  },
+
+  getDefaultProps: function () {
+    return {
+      showSupporterName: true
+    }
   },
 
   render: function () {
@@ -24,7 +31,7 @@ export default React.createClass({
         </div>
         <div className='PageSearchResult__content'>
           <div className='PageSearchResult__header'>
-            { page.name } <span className='PageSearchResult__subheader'> – { page.supporter.name }</span>
+            { page.name } {props.showSupporterName && <span className='PageSearchResult__subheader'> – { page.supporter.name }</span>}
           </div>
           <p className='PageSearchResult__description'>{ page.charity.name }</p>
           <div className='PageSearchResult__footer'>{ campaignName }</div>

@@ -21,6 +21,7 @@ export default React.createClass({
     pagination: React.PropTypes.object,
     results: React.PropTypes.arrayOf(React.PropTypes.object),
     resultComponent: React.PropTypes.func.isRequired,
+    resultComponentProps: React.PropTypes.object,
     selectAction: React.PropTypes.string,
     searchTerm: React.PropTypes.string
   },
@@ -71,6 +72,7 @@ export default React.createClass({
         onSelect={props.onSelect}
         results={props.results}
         resultComponent={props.resultComponent}
+        resultComponentProps={props.resultComponentProps}
         selectAction={props.selectAction} />)
 
     return (

@@ -21,6 +21,7 @@ export default React.createClass({
     resizeCallback: React.PropTypes.func,
     pageType: React.PropTypes.oneOf(['all', 'team', 'user']),
     groupValues: React.PropTypes.array,
+    showSupporterName: React.PropTypes.bool,
     searchTerm: React.PropTypes.string
   },
 
@@ -148,6 +149,7 @@ export default React.createClass({
         pagination={this.state.pagination}
         results={this.state.results}
         resultComponent={PageSearchResult}
+        resultComponentProps={{ showSupporterName: this.props.showSupporterName }}
         searchTerm={this.props.searchTerm} />
     )
   }

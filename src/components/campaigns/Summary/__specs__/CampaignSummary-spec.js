@@ -16,6 +16,7 @@ describe('CampaignSummary', () => {
     const campaignsResult = {
       campaign: {
         finish_at: '2019-02-15T00:00:00.000+00:00',
+        display_finish_at: '2019-02-13T00:00:00.000+00:00',
         funds_raised: {
           cents: 987654321,
           currency: {symbol: 'R'}
@@ -59,7 +60,7 @@ describe('CampaignSummary', () => {
         expect(state.fundsRaised.currency).to.equal('R')
         expect(
           state.donationEndTime.toString()
-        ).to.equal(moment('2019-02-15T00:00:00.000+00:00').toString())
+        ).to.equal(moment('2019-02-13T00:00:00.000+00:00').toString())
       })
     })
 
@@ -125,7 +126,7 @@ describe('CampaignSummary', () => {
         expect(
           props.donationEndTime.toString()
         ).to.equal(
-          moment('2019-02-15T00:00:00.000+00:00').toString()
+          moment('2019-02-13T00:00:00.000+00:00').toString()
         )
       })
 

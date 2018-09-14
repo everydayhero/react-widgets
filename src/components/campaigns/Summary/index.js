@@ -58,7 +58,7 @@ class CampaignSummary extends React.Component {
     this.setState({
       fundsRaised,
       loadingCampaign: false,
-      donationEndTime: moment(campaign.finish_at)
+      donationEndTime: moment(campaign.display_finish_at)
     })
   }
 

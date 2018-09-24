@@ -33,7 +33,7 @@ steps:
   - type: "waiter"
 
   - name: ":package: Deploy"
-    command: "./.buildkite/bin/deploy"
+    command: "bin/only-for-version-releases ./.buildkite/bin/deploy"
     agents:
       queue: default
     branches: master
@@ -41,7 +41,7 @@ steps:
   - type: "waiter"
 
   - name: ":loudspeaker:"
-    command: "./.buildkite/bin/announce"
+    command: "bin/only-for-version-releases ./.buildkite/bin/announce"
     agents:
       queue: default
     branches: master

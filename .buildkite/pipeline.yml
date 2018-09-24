@@ -36,7 +36,7 @@ steps:
     command: "bin/only-for-version-releases ./.buildkite/bin/deploy"
     agents:
       queue: default
-    branches: master
+#    branches: master
 
   - type: "waiter"
 

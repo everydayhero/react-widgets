@@ -3,6 +3,8 @@ widgets:
   environment:
     - AWS_KEY
     - AWS_SECRET
+    - WIDGETS_AWS_KEY
+    - WIDGETS_AWS_SECRET
     - NPM_USER
     - NPM_PASS
     - NPM_EMAIL

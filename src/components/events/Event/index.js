@@ -133,14 +133,16 @@ module.exports = React.createClass({
         <div className={ 'Event__base ' + this.state.activeClass } style={{ backgroundImage: bg }}>
           <div className="Event__blur" style={{ backgroundImage: blur }}></div>
           <div className="Event__gradient"></div>
-          <ul className="Event__date DateBox">
-            <li className="DateBox__day" >
-              { date.getDate() }
-            </li>
-            <li className="DateBox__month-year">
-              { t('months')[date.getMonth()] } { date.getFullYear() }
-            </li>
-          </ul>
+          {props.date &&
+            <ul className="Event__date DateBox">
+              <li className="DateBox__day">                 
+                {date.getUTCDate()}
+              </li>
+              <li className="DateBox__month-year">
+                {t('months')[date.getUTCMonth()]} {date.getUTCFullYear()}
+              </li>
+            </ul>
+          }
           <a className="Event__name" href={ props.campaignUrl }>{ props.name }</a>
           { this.renderCallToAction() }
         </div>

@@ -1,0 +1,47 @@
+---
+steps:
+  - type: "waiter"
+
+  - name: ":docker:"
+    command: ".buildkite/bin/build"
+    agents:
+      queue: build
+
+  - type: "waiter"
+
+  - name: ":mag: Lint"
+    command: ".buildkite/bin/lint"
+    agents:
+      queue: default
+
+  - type: "waiter"
+
+  - name: ":pill: Spec Tests"
+    command: ".buildkite/bin/test-spec"
+    agents:
+      queue: default
+
+  - name: ":pill: Unit Tests"
+    command: ".buildkite/bin/test-units"
+    agents:
+      queue: default
+
+  - name: ":rocket: Publish"
+    type: "manual"
+    branches: master
+
+  - type: "waiter"
+
+  - name: ":package: Deploy"
+    command: "bin/only-for-version-releases ./.buildkite/bin/deploy"
+    agents:
+      queue: default
+    branches: master
+
+  - type: "waiter"
+
+  - name: ":loudspeaker:"
+    command: "bin/only-for-version-releases ./.buildkite/bin/announce"
+    agents:
+      queue: default
+    branches: master

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -eux
+
+docker build --pull --tag "everydayhero/edh-widgets:${BUILDKITE_COMMIT}" .
+docker push "everydayhero/edh-widgets:${BUILDKITE_COMMIT}"

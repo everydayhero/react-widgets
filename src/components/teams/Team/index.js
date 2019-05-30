@@ -5,7 +5,7 @@ export default React.createClass({
 
   render: function () {
     return (
-      <a href={this.props.pageUrl} title={this.props.title} className='Team'>
+      <a href={this.props.pageUrl} target='_top' title={this.props.title} className='Team'>
         <div className='Team__skin'>
           <img src={this.props.imgSrc} alt={this.props.title} />
           <p>{ this.props.title }</p>

@@ -78,7 +78,7 @@ export default React.createClass({
         <div className='CallToActionBox__title'>{ title }</div>
         <CallToActionButton kind='primary' reverse href={registrationUrl} label={registerLabel} />
         <hr />
-        <p>Already Registered? <a href={signInUrl} className='CallToActionBox__link'>{ signInLabel }</a></p>
+        <p>Already Registered? <a href={signInUrl} target='_top' className='CallToActionBox__link'>{ signInLabel }</a></p>
         <CallToActionButton kind='primary' reverse href={getStartedUrl} label={getStartedLabel} />
       </div>
     )

@@ -35,7 +35,7 @@ export default React.createClass({
             userName={props.name}
             userUrl={props.url} />
 
-          <a href={props.url} className='SupporterCard__userDetails'>
+          <a href={props.url} target='_top' className='SupporterCard__userDetails'>
             <div className='SupporterCard__name'>{ props.name }</div>
             { props.charityName && <div className='SupporterCard__charity'>For <strong>{ props.charityName }</strong></div> }
             { props.eventName && <div className='SupporterCard__event'>Through <strong>{ props.eventName }</strong></div> }

@@ -12,7 +12,14 @@ export default React.createClass({
     amount: React.PropTypes.string.isRequired,
     width: React.PropTypes.string.isRequired,
     renderImage: React.PropTypes.bool.isRequired,
-    charityName: React.PropTypes.string
+    charityName: React.PropTypes.string,
+    target: React.PropTypes.oneOf(['_top', '_parent', '_self', '_blank'])
+  },
+
+  getDefaultProps: function () {
+    return {
+      target: '_top'
+    }
   },
 
   renderProfileImage: function () {
@@ -39,7 +46,7 @@ export default React.createClass({
     var style = { width: this.props.width }
 
     return (
-      <a href={this.props.url} className='LeaderboardItem' style={style}>
+      <a href={this.props.url} target={this.props.target} className='LeaderboardItem' style={style}>
         <div className='LeaderboardItem__skin'>
           { this.renderProfileImage() }
           <div className='LeaderboardItem__content'>

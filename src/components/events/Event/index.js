@@ -22,11 +22,13 @@ export default React.createClass({
     centsRaised: React.PropTypes.number,
     currencySymbol: React.PropTypes.string,
     width: React.PropTypes.string.isRequired,
+    target: React.PropTypes.oneOf(['_top', '_parent', '_self', '_blank']),
     i18n: React.PropTypes.object
   },
 
   getDefaultProps: function () {
     return {
+      target: '_top',
       defaultI18n: {
         joinLabel: 'Join Event',
         donateLabel: 'Give Now',
@@ -91,6 +93,7 @@ export default React.createClass({
               kind='secondary'
               reverse
               href={getStartedUrl}
+              target={this.props.target}
               className='Event__block-button'>
               { joinLabel }
             </CallToActionButton>
@@ -104,6 +107,7 @@ export default React.createClass({
               kind='secondary'
               reverse
               href={donateUrl}
+              target={this.props.target}
               className='Event__block-button'>
               { donateLabel }
             </CallToActionButton>
@@ -144,7 +148,7 @@ export default React.createClass({
               </li>
             </ul>
           }
-          <a className='Event__name' href={props.campaignUrl}>{ props.name }</a>
+          <a className='Event__name' target={props.target} href={props.campaignUrl}>{ props.name }</a>
           { this.renderCallToAction() }
         </div>
       </div>

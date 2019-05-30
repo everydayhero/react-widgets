@@ -5,7 +5,7 @@ export default React.createClass({
 
   render: function () {
     return (
-      <a href={this.props.pageUrl} title={this.props.imgTitle} className='FundraiserImage'>
+      <a href={this.props.pageUrl} target='_top' title={this.props.imgTitle} className='FundraiserImage'>
         <img src={this.props.imgSrc} alt={this.props.imgTitle} />
       </a>
     )

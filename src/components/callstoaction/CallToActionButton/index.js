@@ -17,6 +17,7 @@ export default React.createClass({
     thin: React.PropTypes.bool,
     iconLeft: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
+    target: React.PropTypes.oneOf(['_top', '_parent', '_self', '_blank']),
     onClick: React.PropTypes.func
   },
 
@@ -27,6 +28,7 @@ export default React.createClass({
       type: 'button',
       className: '',
       href: null,
+      target: '_top',
       disabled: false,
       thin: false,
       reverse: false,
@@ -74,6 +76,7 @@ export default React.createClass({
         to={href}
         params={props.params}
         href={href}
+        target={props.target}
         onMouseUp={this.handleClick}
         onTouchStart={this.handleClick}>
         <Icon className='CallToActionButton__icon' icon={props.icon} />

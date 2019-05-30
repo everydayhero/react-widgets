@@ -13,7 +13,14 @@ export default React.createClass({
     raisedTitle: React.PropTypes.string.isRequired,
     membersTitle: React.PropTypes.string.isRequired,
     width: React.PropTypes.string.isRequired,
-    charityName: React.PropTypes.string
+    charityName: React.PropTypes.string,
+    target: React.PropTypes.oneOf(['_top', '_parent', '_self', '_blank'])
+  },
+
+  getDefaultProps: function () {
+    return {
+      target: '_top'
+    }
   },
 
   renderCharityName: function () {
@@ -34,7 +41,7 @@ export default React.createClass({
     return (
       <li className='TeamLeaderboard__items-item' style={style}>
         <div className='TeamLeaderboard__items-skin'>
-          <a href={this.props.url} className='TeamLeaderboard__items-image'>
+          <a href={this.props.url} target={this.props.target} className='TeamLeaderboard__items-image'>
             <img src={this.props.imgSrc} />
           </a>
           <div className='TeamLeaderboard__items-content'>

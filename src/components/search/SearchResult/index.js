@@ -19,7 +19,7 @@ export default React.createClass({
     return (
       <a href={props.result.url || '#'}
         className='SearchResult'
-        target='_parent'
+        target='_top'
         onClick={clickHandler}>
         { props.children }
       </a>

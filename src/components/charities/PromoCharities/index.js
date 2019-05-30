@@ -89,7 +89,7 @@ export default React.createClass({
     if (this.props.action === 'custom') {
       this.props.onSelect(charity)
     } else {
-      document.location = this.fetchUrl(charity)
+      window.top.location.href = this.fetchUrl(charity)
     }
   },
 

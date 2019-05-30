@@ -3,6 +3,12 @@ import React from 'react'
 export default React.createClass({
   displayName: 'FitnessLeaderboardItem',
 
+  getDefaultProps: function () {
+    return {
+      target: '_top'
+    }
+  },
+
   render: function () {
     return (
       <tr className='FitnessLeaderboardItem'>

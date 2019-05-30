@@ -22,6 +22,7 @@ export default React.createClass({
       borderWidth: this.props.offset
     }
     return (<a href={this.props.url}
+      target='_top'
       className='FootprintAvatar'
       title={this.props.name}
       style={avatarStyle}

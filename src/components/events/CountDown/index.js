@@ -39,7 +39,7 @@ export default React.createClass({
 
     if (linkUrl && !isFinished) {
       return (
-        <CallToActionButton href={linkUrl} kind='primary' thin className='CountDown__link'>
+        <CallToActionButton href={linkUrl} target='_top' kind='primary' thin className='CountDown__link'>
           { this.t('link_text') }
         </CallToActionButton>
       )

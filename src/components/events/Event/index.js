@@ -119,6 +119,9 @@ export default React.createClass({
   render: function () {
     var props = this.props
     var date = props.date
+    if (date) {
+      date = new Date(date)
+    }
     var bg = cssUrl(props.backgroundImageUrl)
     var blur = cssUrl(props.backgroundBlurUrl)
     var t = this.t
@@ -132,7 +135,7 @@ export default React.createClass({
         <div className={'Event__base ' + this.state.activeClass} style={{ backgroundImage: bg }}>
           <div className='Event__blur' style={{ backgroundImage: blur }} />
           <div className='Event__gradient' />
-          {props.date &&
+          {date &&
             <ul className='Event__date DateBox'>
               <li className='DateBox__day'>
                 {/* Heroix/NFP does *not* store dates with Timezone information. This means the 'utc' date we receive

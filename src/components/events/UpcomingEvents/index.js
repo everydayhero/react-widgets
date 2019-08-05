@@ -111,7 +111,7 @@ export default React.createClass({
       var props = {
         key: e.id,
         name: e.name,
-        date: e.display_start_at ? new Date(e.display_start_at) : null,
+        date: e.display_start_at,
         campaignUrl: e.url,
         donateUrl: e.donate_url,
         getStartedUrl: e.get_started_url,

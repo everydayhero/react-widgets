@@ -55,7 +55,6 @@
     "jest-cli": "^16.0.0",
     "jshint-stylish": "~2.2.0",
     "mocha": "^3.0.1",
-    "mockrequire": "git://github.com/benoneal/mockrequire#290b6ff",
     "morgan": "~1.7.0",
     "react-addons-test-utils": "^15.5.1",
     "react-page-objects": "~0.5.1",

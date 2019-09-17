@@ -202,7 +202,8 @@ export default React.createClass({
       pageSize: 1,
       minimumScore: this.props.minimumScore.other,
       charityUids: this.props.charityUids,
-      charityUuids: this.props.charityUuids
+      charityUuids: this.props.charityUuids,
+      include_expired: this.props.include_expired
     }
 
     var types = this.props.searchType === 'all' ? ['campaigns', 'charities', 'pages'] : [this.props.searchType]

@@ -9,7 +9,7 @@ describe('LeaderboardPaging', function () {
   describe('component defaults', function () {
     let leaderboardPaging
     let component
-    let callback = jest.genMockFunction()
+    let callback = jest.fn(() => {})
 
     beforeEach(function () {
       leaderboardPaging = <LeaderboardPaging nextPage={callback} prevPage={callback} currentPage={1} pageCount={4} />

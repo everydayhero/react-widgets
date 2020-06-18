@@ -1,7 +1,7 @@
 jest.disableAutomock()
 jest.mock('../../../../api/address')
 
-jest.useFakeTimers()
+jest.useFakeTimers('modern')
 
 import address from '../../../../api/address'
 import React from 'react'
@@ -142,7 +142,7 @@ describe('AddressLookup', function () {
     beforeEach(function () {
       address.find.mockClear()
       address.search.mockClear()
-      validate = jest.genMockFunction()
+      validate = jest.fn(() => {})
 
       element = TestUtils.renderIntoDocument(<AddressLookup validate={validate} country={'UK'} />)
       element.setList(addressSearchResult)
@@ -187,7 +187,7 @@ describe('AddressLookup', function () {
   })
 
   it('allows you to reset the address', function () {
-    var validate = jest.genMockFunction()
+    var validate = jest.fn(() => {})
     var element = TestUtils.renderIntoDocument(<AddressLookup validate={validate} address={addressFindResult.address} />)
     var resetButton = findByClass(element, 'AddressLookup__reset')
     TestUtils.Simulate.click(resetButton)

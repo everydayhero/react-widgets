@@ -1,13 +1,13 @@
 'use strict'
+const jsdom = require('jsdom')
+const { JSDOM } = jsdom
 // Via http://www.asbjornenge.com/wwc/testing_react_components.html
-module.exports = (markup, options) => {
+module.exports = function (markup) {
   if (typeof document !== 'undefined') return
-  var jsdom = require('jsdom').jsdom
-  global.document = jsdom(markup || '', options)
-  global.window = document.defaultView
+  const dom = new JSDOM(markup || '')
+  global.document = dom.window.document
+  global.window = dom.window
   global.navigator = {
     userAgent: 'node.js'
   }
-  // ... add whatever browser globals your tests might need ...
 }
-

@@ -23,7 +23,7 @@ class TestWrapper extends React.Component {
 describe('FitnessLeaderboardColHead', function () {
   describe('Default behaviour', function () {
     it('calls a function onclick', function () {
-      var callback = jest.genMockFunction()
+      var callback = jest.fn(() => {})
       var component = TestUtils.renderIntoDocument(
         <TestWrapper
           onClick={callback}

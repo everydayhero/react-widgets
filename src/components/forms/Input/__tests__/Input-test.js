@@ -48,10 +48,10 @@ describe('Input', function () {
   })
 
   it('will not execute methods when disabled', function () {
-    var modal = jest.genMockFunction()
-    var output = jest.genMockFunction()
-    var mask = jest.genMockFunction()
-    var validate = jest.genMockFunction()
+    var modal = jest.fn(() => {})
+    var output = jest.fn(() => {})
+    var mask = jest.fn(() => {})
+    var validate = jest.fn(() => {})
     var element = TestUtils.renderIntoDocument(<Input value='oldValue' disabled modal={modal} mask={mask} output={output} validate={validate} />)
     var input = findByClass(element, 'Input__input')
     TestUtils.Simulate.focus(input)
@@ -65,7 +65,7 @@ describe('Input', function () {
   })
 
   it('will execute modal function on focus', function () {
-    var modal = jest.genMockFunction()
+    var modal = jest.fn(() => {})
     var element = TestUtils.renderIntoDocument(<Input value='testValue' modal={modal} />)
     var input = findByClass(element, 'Input__input')
     TestUtils.Simulate.focus(input)
@@ -78,7 +78,7 @@ describe('Input', function () {
   })
 
   it('will execute output function on change', function () {
-    var output = jest.genMockFunction()
+    var output = jest.fn(() => {})
     var element = TestUtils.renderIntoDocument(<Input value='oldValue' output={output} />)
     var input = findByClass(element, 'Input__input')
     TestUtils.Simulate.change(input, { target: { value: 'newValue' } })
@@ -86,7 +86,7 @@ describe('Input', function () {
   })
 
   it('will execute mask function on change', function () {
-    var mask = jest.genMockFunction().mockReturnValue('newValue--masked')
+    var mask = jest.fn(() => {}).mockReturnValue('newValue--masked')
     var element = TestUtils.renderIntoDocument(<Input value='oldValue' mask={mask} />)
     var input = findByClass(element, 'Input__input')
     TestUtils.Simulate.change(input, { target: { value: 'newValue' } })
@@ -95,8 +95,8 @@ describe('Input', function () {
   })
 
   it('will execute validate function, but not set state as invalid on blur if not required', function () {
-    var validate = jest.genMockFunction()
-    var setValid = jest.genMockFunction()
+    var validate = jest.fn(() => {})
+    var setValid = jest.fn(() => {})
     var element = TestUtils.renderIntoDocument(<Input required={false} validate={validate} />)
     element.setValid = setValid
     var input = findByClass(element, 'Input__input')
@@ -106,7 +106,7 @@ describe('Input', function () {
   })
 
   it('will execute validate function on blur if required', function () {
-    var validate = jest.genMockFunction()
+    var validate = jest.fn(() => {})
     var element = TestUtils.renderIntoDocument(<Input required validate={validate} />)
     var input = findByClass(element, 'Input__input')
     TestUtils.Simulate.change(input, { target: { value: 'testValue' } })
@@ -120,7 +120,7 @@ describe('Input', function () {
   })
 
   it('will execute validate function on load if has value', function () {
-    var validate = jest.genMockFunction()
+    var validate = jest.fn(() => {})
     var element = TestUtils.renderIntoDocument(<Input required value='testValue' validate={validate} />)
     expect(validate).lastCalledWith('testValue', element.setValid)
     var setValidCallback = validate.mock.calls[0][1]

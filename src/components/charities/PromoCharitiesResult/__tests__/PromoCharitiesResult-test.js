@@ -29,7 +29,7 @@ describe('PromoCharitiesResult component default rendering', function () {
 })
 
 describe('Component behaviour when clicked or tapped', function () {
-  var callback = jest.genMockFunction()
+  var callback = jest.fn(() => {})
   var promoCharitiesResult = <PromoCharitiesResult result={result} onSelect={callback} />
   var component = TestUtils.renderIntoDocument(promoCharitiesResult)
   var link = findByClass(component, 'PromoCharitiesResult__link')

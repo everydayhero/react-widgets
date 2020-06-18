@@ -1,7 +1,7 @@
 jest.disableAutomock()
 jest.mock('../../../../api/pages')
 
-jest.useFakeTimers()
+jest.useFakeTimers('modern')
 
 import pages from '../../../../api/pages'
 import React from 'react'
@@ -219,8 +219,8 @@ describe('Searching', function () {
   })
 
   it('allows custom callback on page select', function () {
-    const onClose = jest.genMockFunction()
-    const callback = jest.genMockFunction()
+    const onClose = jest.fn(() => {})
+    const callback = jest.fn(() => {})
     const pageSearchModal = (
       <PageSearchModal
         autoFocus={false}
@@ -238,8 +238,8 @@ describe('Searching', function () {
   })
 
   it('calls onClose on page select', function () {
-    const onClose = jest.genMockFunction()
-    const callback = jest.genMockFunction()
+    const onClose = jest.fn(() => {})
+    const callback = jest.fn(() => {})
     const pageSearchModal = (
       <PageSearchModal
         autoFocus={false}

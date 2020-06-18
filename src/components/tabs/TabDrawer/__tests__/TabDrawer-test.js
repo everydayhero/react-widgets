@@ -7,9 +7,9 @@ var findByClass = TestUtils.findRenderedDOMComponentWithClass
 
 describe('TabDrawer', function () {
   var tabDrawer
-  var component
-  var element
-  var callback = jest.genMockFunction()
+  var component, element
+
+  var callback = jest.fn(() => {})
 
   beforeEach(function () {
     tabDrawer = <TabDrawer onClick={callback} onKeyDown={callback} label={'barbaz'} index={1} active />

@@ -9,7 +9,7 @@ var findByClass = TestUtils.findRenderedDOMComponentWithClass
 describe('LeaderboardPagingButton', function () {
   var leaderboardPagingButton
   var component
-  var callback = jest.genMockFunction()
+  var callback = jest.fn(() => {})
 
   var prevActiveClass = 'LeaderboardPagingButton__prev--active'
   var nextActiveClass = 'LeaderboardPagingButton__next--active'

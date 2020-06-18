@@ -25,7 +25,7 @@ describe('SearchResult', function () {
   })
 
   it('calls onSelect callback on click if given, with the event click object', function () {
-    var callback = jest.genMockFunction()
+    var callback = jest.fn(() => {})
     var searchResult = <Result result={result} onSelect={callback} />
     var component = TestUtils.renderIntoDocument(searchResult)
     var element = findByClass(component, 'SearchResult')

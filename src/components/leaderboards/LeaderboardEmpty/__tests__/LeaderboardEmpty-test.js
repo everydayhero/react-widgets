@@ -14,7 +14,7 @@ var mockCampaignResponse = {
 
 describe('Generating a get started URL', function () {
   beforeEach(function () {
-    campaigns.find = jest.genMockFunction().mockImplementation(function (id, callback) {
+    campaigns.find = jest.fn(() => {}).mockImplementation(function (id, callback) {
       callback(mockCampaignResponse)
     })
   })

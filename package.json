@@ -16,10 +16,9 @@
     "moment": "^2.10.2",
     "numbro": "^1.7.1",
     "paths-js": "^0.4.3",
-    "react": "^15.6.2",
+    "hero-ui": "^5.8.10",
     "react-addons-css-transition-group": "^15.5.2",
     "react-addons-pure-render-mixin": "^15.5.2",
-    "react-dom": "^15.6.2",
     "react-tween-state": "0.1.5",
     "remarkable": "^1.6.0"
   },
@@ -72,8 +71,7 @@
   },
   "peerDependencies": {
     "react": "^15.6.2",
-    "react-dom": "^15.6.2",
-    "hero-ui": "^5.8.10"
+    "react-dom": "^15.6.2"
   },
   "repository": {
     "type": "git",

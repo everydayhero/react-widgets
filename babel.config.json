@@ -1,0 +1,16 @@
+{
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": "> 0.25%, not dead, ie >= 11",
+        "useBuiltIns": "usage",
+        "corejs": "3.6"
+      }
+    ],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "@babel/plugin-transform-object-assign"
+  ]
+}

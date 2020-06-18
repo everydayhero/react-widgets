@@ -1,7 +1,7 @@
 jest.disableAutomock()
 jest.mock('../../../../api/charities')
 
-jest.useFakeTimers()
+jest.useFakeTimers('modern')
 
 import charities from '../../../../api/charities'
 const donateUrl = 'http://donate.url/'
@@ -145,7 +145,7 @@ describe('CharitySearchModal', function () {
   })
 
   it('links to charity url for default visit action', function () {
-    let onClose = jest.genMockFunction()
+    let onClose = jest.fn(() => {})
     let charitySearchModal = <CharitySearchModal autoFocus={false} onClose={onClose} />
     let element = TestUtils.renderIntoDocument(charitySearchModal)
     element.setState({ results: [charity] })
@@ -156,7 +156,7 @@ describe('CharitySearchModal', function () {
   })
 
   it('links to fundraise url for fundraise action', function () {
-    let onClose = jest.genMockFunction()
+    let onClose = jest.fn(() => {})
     let charitySearchModal = <CharitySearchModal autoFocus={false} action='fundraise' onClose={onClose} />
     let element = TestUtils.renderIntoDocument(charitySearchModal)
     element.setState({ results: [charity] })
@@ -168,7 +168,7 @@ describe('CharitySearchModal', function () {
   })
 
   it('links to donate url for donate action', function () {
-    let onClose = jest.genMockFunction()
+    let onClose = jest.fn(() => {})
     let charitySearchModal = <CharitySearchModal autoFocus={false} action='donate' onClose={onClose} />
     let element = TestUtils.renderIntoDocument(charitySearchModal)
     element.setState({ results: [charity] })
@@ -180,8 +180,8 @@ describe('CharitySearchModal', function () {
   })
 
   it('calls custom onSelect callback on charity select', function () {
-    let onClose = jest.genMockFunction()
-    let callback = jest.genMockFunction()
+    let onClose = jest.fn(() => {})
+    let callback = jest.fn(() => {})
     let charitySearchModal = <CharitySearchModal autoFocus={false} action='custom' onClose={onClose} onSelect={callback} />
     let element = TestUtils.renderIntoDocument(charitySearchModal)
     element.setState({ results: [charity] })
@@ -193,8 +193,8 @@ describe('CharitySearchModal', function () {
   })
 
   it('calls onClose on charity select when onSelect callback given', function () {
-    let onClose = jest.genMockFunction()
-    let callback = jest.genMockFunction()
+    let onClose = jest.fn(() => {})
+    let callback = jest.fn(() => {})
     let charitySearchModal = <CharitySearchModal autoFocus={false} action='custom' onClose={onClose} onSelect={callback} />
     let element = TestUtils.renderIntoDocument(charitySearchModal)
     element.setState({ results: [charity] })

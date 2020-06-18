@@ -1,7 +1,7 @@
 jest.disableAutomock()
 jest.mock('../../../../api/frolCharities')
 
-jest.useFakeTimers()
+jest.useFakeTimers('modern')
 
 import charities from '../../../../api/frolCharities'
 
@@ -105,7 +105,7 @@ describe('CharitySearchModal', function () {
   })
 
   it('links to charity url for default visit action', function () {
-    let onClose = jest.genMockFunction()
+    let onClose = jest.fn(() => {})
     let charitySearchModal = <CharitySearchModal autoFocus={false} onClose={onClose} />
     let element = TestUtils.renderIntoDocument(charitySearchModal)
     element.setState({ results: [charity] })

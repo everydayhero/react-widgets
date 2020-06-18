@@ -47,7 +47,7 @@ describe('AggregateSearchModal', function () {
 
 describe('Selecting results', function () {
   it('renders selectable results', function () {
-    var onSelect = jest.genMockFunction()
+    var onSelect = jest.fn(() => {})
     var element = TestUtils.renderIntoDocument(
       <AggregateSearchModal
         autoFocus={false}
@@ -98,8 +98,8 @@ describe('AggregateSearchModal with searchType prop set', function () {
 
 describe('AggregateSearchModal with custom onSelect function prop', function () {
   it('will call the provided custom function and close the modal', function () {
-    var mockSelect = jest.genMockFunction()
-    var mockClose = jest.genMockFunction()
+    var mockSelect = jest.fn(() => {})
+    var mockClose = jest.fn(() => {})
     searchModal = <AggregateSearchModal autoFocus={false} onSelect={mockSelect} onClose={mockClose} />
     var component = TestUtils.renderIntoDocument(searchModal)
 

@@ -1,2 +1,2 @@
 --require test/helpers/common.js
---compilers js:babel-core/register
+--compilers js:@babel/register

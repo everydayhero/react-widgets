@@ -185,7 +185,7 @@ describe('FundsRaised', function () {
     })
 
     it('calls a callback function after data is fetched', function () {
-      let cb = jest.genMockFunction()
+      let cb = jest.fn(() => {})
       element = TestUtils.renderIntoDocument(<EntityGoalProgress charityUid='au-24' goal={15000000} onLoad={function (res) { cb(res) }} />)
       expect(cb.mock.calls.length).toBe(1)
     })

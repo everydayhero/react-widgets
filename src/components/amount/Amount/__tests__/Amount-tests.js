@@ -59,7 +59,7 @@ describe('Amount', function () {
   })
 
   it('exposes selected value through callback', function () {
-    const callback = jest.genMockFunction()
+    const callback = jest.fn(() => {})
     const element = mount(<Amount output={callback} />)
     expect(callback).lastCalledWith(700)
 

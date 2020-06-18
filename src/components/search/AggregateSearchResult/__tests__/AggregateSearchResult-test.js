@@ -17,7 +17,7 @@ describe('AggregateSearchResult', function () {
   })
 
   it('calls onSelect on click', function () {
-    var callback = jest.genMockFunction()
+    var callback = jest.fn(() => {})
     var searchResult = <Result result={result} onSelect={callback} />
     var component = TestUtils.renderIntoDocument(searchResult)
     var element = findByClass(component, 'AggregateSearchResult')

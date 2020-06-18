@@ -9,7 +9,7 @@ describe('Tab', function () {
   var tab
   var component
   var element
-  var callback = jest.genMockFunction()
+  var callback = jest.fn(() => {})
 
   beforeEach(function () {
     tab = <Tab onClick={callback} onKeyDown={callback} label={'foobar'} index={1} active />

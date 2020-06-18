@@ -7,7 +7,7 @@ var findByClass = TestUtils.findRenderedDOMComponentWithClass
 var scryByClass = TestUtils.scryRenderedDOMComponentsWithClass
 
 describe('PromoCharitiesResults', function () {
-  var mockFunction = jest.genMockFunction()
+  var mockFunction = jest.fn(() => {})
   var contents = [
     {
       category: 'test tab 1',

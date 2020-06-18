@@ -41,7 +41,7 @@ describe('Select', function () {
   })
 
   it('will not execute methods when disabled', function () {
-    var output = jest.genMockFunction()
+    var output = jest.fn(() => {})
     var element = TestUtils.renderIntoDocument(<Select value='oldValue' disabled output={output} options={options} />)
     var selectInput = findByClass(element, 'Input__input')
     TestUtils.Simulate.focus(selectInput)
@@ -52,7 +52,7 @@ describe('Select', function () {
   })
 
   it('will execute output function on option selected', function () {
-    var output = jest.genMockFunction()
+    var output = jest.fn(() => {})
     var element = TestUtils.renderIntoDocument(<Select options={options} output={output} />)
     var selectInput = findByClass(element, 'Input__input')
     TestUtils.Simulate.change(selectInput, { target: { value: 'option3' } })

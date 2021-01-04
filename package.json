@@ -7,7 +7,7 @@
   "main": "src/widgets.js",
   "dependencies": {
     "async": "^1.5.2",
-    "axios": "^0.15.3",
+    "axios": "^0.21.1",
     "classnames": "^2.2.4",
     "es5-shim": "~4.5.5",
     "highlight.js": "^9.2.0",

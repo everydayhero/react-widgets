@@ -35,7 +35,7 @@
     "compression": "~1.6.1",
     "core-js": "^3.6.5",
     "enzyme": "^2.4.1",
-    "express": "~4.14.0",
+    "express": "~4.17.3",
     "gulp": "~3.9.1",
     "gulp-autoprefixer": "~3.1.0",
     "gulp-awspublish": "~3.2.0",

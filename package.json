@@ -54,7 +54,7 @@
     "jest-cli": "^26.0.1",
     "jsdom": "^16.2.2",
     "jshint-stylish": "~2.2.0",
-    "mocha": "^3.0.1",
+    "mocha": "^10.2.0",
     "morgan": "~1.7.0",
     "react-addons-test-utils": "^15.5.1",
     "react-page-objects": "~0.5.1",
